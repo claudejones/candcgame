@@ -1,0 +1,29 @@
+# Hazard Specification
+
+Status: initial recovery of established hazard production/gameplay rules.
+
+## Stage pacing pattern
+Established stage hazard pacing:
+- Warmup: 0–10%
+- Establish: 10–30%
+- Develop: 30–55%
+- Pressure: 55–75%
+- Signature: 75–85%
+- Finish: 85–90%
+
+Established constraints include maximum visible hazards of 2 and reaction lead around 2.2 seconds in the legacy baseline. Stage signatures are intentionally unique; do not rewrite North America signatures during structural migration.
+
+## Hazard classes
+Ground hazards may be stationary or moving and are calibrated with visual scale, ground offset, crop/frame settings and collision geometry. Flying hazards support HIGH/LOW placement.
+
+## Source asset policy
+Do not normalize hazard canvases merely because sheets have different source dimensions. Repair/regenerate only when source structure prevents clean integration: bad gutters, unstable animation anchors, contaminated crop, unusable frame layout, or incomplete animation.
+
+## Flying flock contract
+Every creature in a multi-creature flock must visibly animate across the complete cycle. Each creature requires explicit pose change, stable body anchor and readable wing silhouette. Maintain stable aggregate collision footprint. Prefer two creatures to a three-creature formation with a static/hidden member.
+
+## Collision QA
+The QA harness may latch an individual spawned hazard's bounds red after collision until that instance exits. This is diagnostic state only and does not alter collision mechanics.
+
+## Migration
+Preserve current hazard timing, placement patterns, crop/calibration values, collision geometry and stage signatures while externalizing assets/configuration.
