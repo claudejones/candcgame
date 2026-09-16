@@ -1,0 +1,51 @@
+# Stage Manifest
+
+Total campaign scope: 7 continents x 3 stages = 21 stages.
+
+## North America — integrated legacy baseline
+- NA01 — Desert
+- NA02 — Pines / Mountains / Stream
+- NA03 — City / New York
+
+Known landscape families:
+- NA01: DISTANT mesas; MID desert; GROUND desert
+- NA02: DISTANT mountains; MID pines; GROUND trail; gap water/stream assets
+- NA03: DISTANT NYC; MID city; GROUND city
+
+## South America — integrated legacy baseline
+- SA01 — Amazon Rainforest
+- SA02 — Andes Mountains
+- SA03 — Rio de Janeiro
+
+Known approved hazards include macaws, Andean flamingo, and tropical parakeets. SA02 village/mid correction and ground seam correction were incorporated during QA.
+
+## Europe — assets produced and integrated for QA
+- EU01 — Greece / Santorini
+  - DISTANT Greece
+  - MID Greece
+  - GROUND Greece
+  - market crate/basket obstacle
+  - rolling barrel
+  - Aegean gulls
+- EU02 — France / Paris
+  - DISTANT Paris
+  - MID Paris
+  - GROUND Paris
+  - cafe table/chairs
+  - bicycle
+  - European swallows
+- EU03 — Spain / Barcelona
+  - DISTANT Barcelona
+  - MID Barcelona
+  - GROUND Barcelona
+  - mosaic bench
+  - cast-iron drinking fountain
+  - Mediterranean bats
+
+## Remaining continents
+Four continents / 12 stages remain to be specified and produced. Their exact stage identities/themes must be taken from an approved product/stage specification once recovered or explicitly approved; do not invent them from memory.
+
+## Current landscape audit scope
+27 landscape assets across NA01–NA03, SA01–SA03 and EU01–EU03: FAR/DISTANT + MID + GROUND for each stage.
+
+Each is to be classified KEEP / REPAIR / REGENERATE against `WORLD_RENDERING_SPEC.md` before further landscape production.
