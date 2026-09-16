@@ -15,6 +15,21 @@ LAB25Q is the current reference/test-harness baseline. It introduced transparent
 - Uploaded collection: 63 files = 1 LAB25Q HTML + 60 PNG game assets + 2 `.DS_Store` metadata files.
 - All 27 current NA/SA/EU landscape PNGs are accounted for.
 
+## Landscape audit checkpoint — COMPLETE
+Technical audit recorded in `docs/LANDSCAPE_AUDIT.md` using GitHub Actions run `35131578854`.
+
+Current production dispositions:
+- KEEP: 21 landscape assets
+- REPAIR: 6 landscape assets
+- REGENERATE: 0 landscape assets
+
+Repair candidates:
+- NA02 MID + GROUND
+- EU01 MID + GROUND
+- EU02 MID + GROUND
+
+All nine FAR layers are fully opaque foundations and remain KEEP. South America remains intact subject to production-composition visual regression QA. EU03 remains intact unless the production logical harness exposes an actual composition failure.
+
 ## Completed content
 - Game scope: 7 continents x 3 stages = 21 stages.
 - North America stages and South America stages have been integrated and extensively calibrated in the legacy harness.
@@ -23,25 +38,21 @@ LAB25Q is the current reference/test-harness baseline. It introduced transparent
 - Persistent-red collision QA behavior is established in the current harness.
 
 ## Current workstream
-Repository migration and source-of-truth recovery.
+Incremental repository migration from the preserved LAB25Q harness to external production assets/configuration/modules.
 
-The project is moving from a large self-contained HTML test harness with embedded image data to a mobile-first web application with external assets, configuration, source modules, and repository-based specifications.
-
-## Important finding under active review
-The original production world specification used a logical 480x270 presentation with `GROUND_BASELINE_Y = 205`, approximately 65 logical pixels below the running surface, wide seamless DISTANT/MID layers, and short repeating GROUND pieces. Later QA integration evolved to a 960x540 harness and 2048x682 authored-world geometry. These are implementation/history facts that must be reconciled deliberately; the later QA geometry must not silently overwrite the intended production specification.
-
-LAB25Q removal of the legacy synthetic board color exposed insufficient authored vertical coverage/overlap in some world assets. Landscape production requirements are formalized in `WORLD_RENDERING_SPEC.md` around layer responsibility and adequate independent positioning range.
+The original production world specification uses a logical 480x270 presentation with `GROUND_BASELINE_Y = 205`. Later QA integration used a 960x540 harness and larger authored-world source geometry. The technical audit confirms that file dimensions/source rows alone cannot determine production acceptance; coordinated composition at the canonical logical baseline is the next gate.
 
 ## Exact next approved step
-1. Reconcile LAB25Q implementation details with repository specifications and record any conflicts/legacy-only behavior.
-2. Establish the organized production directory skeleton without changing production behavior or modifying archived originals.
-3. Audit the 27 existing NA/SA/EU landscape assets against the finalized landscape contract.
-4. Classify each landscape asset KEEP / REPAIR / REGENERATE before altering any landscape art.
-5. Only after specification/audit approval, begin incremental migration from embedded assets/configuration to external production assets/modules.
+1. Establish a production logical world-composition QA harness at 480x270 with `GROUND_BASELINE_Y=205`, transparent backing, FAR/MID/GROUND isolation, and overscan/coverage visualization.
+2. Load the 21 KEEP landscape assets as external files without altering their archived originals.
+3. Visually regression-test the nine stage sets at the canonical production composition.
+4. Confirm or revise the six REPAIR dispositions from actual production composition evidence.
+5. Only then repair flagged landscape artwork one file at a time under the approval gate.
+6. Continue incremental migration of external configuration/modules after world composition is stable.
 
 ## Do not do yet
 - No wholesale LAB25Q rewrite.
-- No landscape regeneration until the asset audit is complete.
 - No destructive asset cleanup or renaming of originals.
 - No canvas-height change as a workaround for incomplete world-layer coverage.
+- No landscape regeneration; the audit currently identifies zero REGENERATE assets.
 - Do not treat `G1D_DUCK_ATLAS.png` as current production state; G1D is Slide under the current locked specification.
