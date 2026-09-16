@@ -5,54 +5,45 @@ Last updated: 2026-09-16
 ## Current reference baseline
 `archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html`
 
-LAB25Q is the current reference/test-harness baseline. It introduced transparent board backing and transient FAR/CLOUDS/MID/GROUND isolation controls. It exposed previously hidden world-layer coverage problems. It is not yet the final production architecture.
+LAB25Q remains the behavioral reference/test-harness baseline. It is preserved unchanged and is now being structurally extracted into modular code.
 
 ## Preservation checkpoint — COMPLETE
 - Exact LAB25Q Git blob preserved under `archive/LAB25Q/`.
-- Entire uploaded asset source tree preserved unchanged under `assets-original/current-generated/` using the original Git tree/blob objects.
-- Original `/incoming` ingestion remains intact for provenance.
+- Original uploaded assets preserved unchanged under `assets-original/current-generated/`.
+- `/incoming` remains intact for provenance.
 - Inventory recorded in `docs/ASSET_INVENTORY.md`.
-- Uploaded collection: 63 files = 1 LAB25Q HTML + 60 PNG game assets + 2 `.DS_Store` metadata files.
+- 63 uploaded files accounted for: 1 LAB25Q HTML + 60 PNG assets + 2 `.DS_Store` files.
 - All 27 current NA/SA/EU landscape PNGs are accounted for.
 
-## Landscape audit checkpoint — COMPLETE
-Technical audit recorded in `docs/LANDSCAPE_AUDIT.md` using GitHub Actions run `35131578854`.
+## Landscape analysis checkpoint — COMPLETE
+The technical alpha/content audit established that the current landscape family is not internally standardized even where outer PNG dimensions are similar. The previous KEEP/REPAIR disposition was useful diagnostic history but is no longer the production replacement plan.
 
-Current production dispositions:
-- KEEP: 21 landscape assets
-- REPAIR: 6 landscape assets
-- REGENERATE: 0 landscape assets
+Explicit decision 2026-09-16: regenerate all 27 existing NA/SA/EU landscape layers against a new unified geometry + alpha + overscan contract, then use that validated contract for the remaining 36 landscape layers.
 
-Repair candidates:
-- NA02 MID + GROUND
-- EU01 MID + GROUND
-- EU02 MID + GROUND
+## Modular extraction checkpoint — IN PROGRESS
+- `src/legacy/lab25q/source.inspect.js` now exposes the LAB25Q JavaScript without giant embedded image payloads, making the actual implementation inspectable.
+- `src/legacy/lab25q/source.css` preserves extracted LAB25Q styling for migration reference.
+- Initial modular configuration has begun under `src/js/config/`.
+- `docs/MODULAR_MIGRATION_PLAN.md` is the active migration plan.
 
-All nine FAR layers are fully opaque foundations and remain KEEP. South America remains intact subject to production-composition visual regression QA. EU03 remains intact unless the production logical harness exposes an actual composition failure.
-
-## Completed content
-- Game scope: 7 continents x 3 stages = 21 stages.
-- North America stages and South America stages have been integrated and extensively calibrated in the legacy harness.
-- Europe EU01 Greece/Santorini, EU02 Paris, EU03 Barcelona assets have been produced and integrated for QA.
-- Character state atlases and shared gameplay systems have established approved baselines.
-- Persistent-red collision QA behavior is established in the current harness.
+Recovered LAB25Q implementation facts include a 960×540 QA canvas, cloud Y=0 / scale=.65 / opacity=.75, source-world contract 2048×682 with MID source baseline 621 and GROUND surface 393, plus historical per-stage world and character-grounding offsets. These are implementation evidence, not the new universal landscape contract.
 
 ## Current workstream
-Incremental repository migration from the preserved LAB25Q harness to external production assets/configuration/modules.
+Rebuild the full LAB25Q QA harness as modular production-oriented code while preserving validated gameplay behavior. Recover the real START RUN execution path, HUD, controls, player state/rendering, world renderer, cloud behavior, hazards, progression and QA controls rather than approximating them.
 
-The original production world specification uses a logical 480x270 presentation with `GROUND_BASELINE_Y = 205`. Later QA integration used a 960x540 harness and larger authored-world source geometry. The technical audit confirms that file dimensions/source rows alone cannot determine production acceptance; coordinated composition at the canonical logical baseline is the next gate.
+In parallel, finalize the unified landscape generation specification. The contract must define not only source dimensions but functional alpha/content geometry, running-surface anchor, required FAR/MID/GROUND coverage, intentional overlap/overscan and technical tolerances suitable for AI-generated artwork.
 
-## Exact next approved step
-1. Establish a production logical world-composition QA harness at 480x270 with `GROUND_BASELINE_Y=205`, transparent backing, FAR/MID/GROUND isolation, and overscan/coverage visualization.
-2. Load the 21 KEEP landscape assets as external files without altering their archived originals.
-3. Visually regression-test the nine stage sets at the canonical production composition.
-4. Confirm or revise the six REPAIR dispositions from actual production composition evidence.
-5. Only then repair flagged landscape artwork one file at a time under the approval gate.
-6. Continue incremental migration of external configuration/modules after world composition is stable.
+## Exact next steps
+1. Complete LAB25Q source extraction and map the START RUN dependency chain.
+2. Extract HUD, controls, player, renderer/world, hazards/progression and QA controls into dedicated modules under `src/js/`.
+3. Build `qa/full-harness/` from those real modules and verify parity against archived LAB25Q.
+4. Lock the unified landscape pixel/alpha/overscan contract and automated acceptance checks.
+5. Regenerate the 27 NA/SA/EU landscape assets as the contract-validation batch, preserving originals under `assets-original/`.
+6. Validate each regenerated layer technically, then validate all nine stages in the full harness with one universal world geometry and one character ground anchor.
+7. Use the proven contract for the remaining 36 landscape assets.
 
-## Do not do yet
-- No wholesale LAB25Q rewrite.
-- No destructive asset cleanup or renaming of originals.
-- No canvas-height change as a workaround for incomplete world-layer coverage.
-- No landscape regeneration; the audit currently identifies zero REGENERATE assets.
-- Do not treat `G1D_DUCK_ATLAS.png` as current production state; G1D is Slide under the current locked specification.
+## Guardrails
+- Archived LAB25Q and `assets-original/` remain immutable.
+- Structural modularization must preserve gameplay behavior unless a separate explicit decision changes it.
+- G1D is Slide, not Duck.
+- Do not reintroduce per-stage geometry as the target solution for newly standardized landscapes.
