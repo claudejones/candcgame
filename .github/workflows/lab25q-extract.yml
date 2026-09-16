@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Extract LAB25Q source map
         run: |
+          echo 'LAB25Q extraction v2'
           python3 - <<'PY'
           from pathlib import Path
           import re, hashlib
@@ -22,7 +23,6 @@ jobs:
           styles=re.findall(r'<style[^>]*>(.*?)</style>',s,re.I|re.S)
           scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.I|re.S)
           css='\n\n/* ---- source style block ---- */\n'.join(styles)
-          # Preserve exact textual JS blocks but strip giant data URLs into manifest tokens for inspectability.
           data=[]
           def repl(m):
               raw=m.group(0); token=f'__LAB25Q_EMBEDDED_DATA_{len(data):04d}__'
