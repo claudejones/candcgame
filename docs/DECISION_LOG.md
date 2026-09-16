@@ -1,0 +1,24 @@
+# Decision Log
+
+Append-only record of important locked project decisions. Newer explicit decisions supersede older conflicting decisions, but history remains visible.
+
+## 2026-09-16 — Repository becomes primary source of truth
+The `candcgame` repository is the primary persistent authority for production requirements and current status across ChatGPT conversations. AI sessions must begin with `AGENTS.md` and `docs/CURRENT_STATUS.md`, then read task-specific specifications. Conversation memory is secondary when a locked repository specification exists.
+
+## 2026-09-16 — Preserve before migration
+LAB25Q and supplied original assets must be preserved before architectural cleanup. Migration from the embedded legacy harness to external assets/modules is incremental, with behavioral comparison against the preserved baseline. No wholesale rewrite is authorized by the migration decision.
+
+## 2026-09-16 — Synthetic world backing removed
+World appearance must not depend on a stage/continent synthetic backing color. LAB25Q changed the legacy board backing to transparent and added transient layer-isolation QA. This exposed incomplete authored world coverage that had previously been concealed.
+
+## 2026-09-16 — Landscape responsibility clarified
+FAR, MID and GROUND each require sufficient vertical coverage for their own visual responsibility and useful overlap/calibration room. FAR must provide valid scenery behind intentional MID transparency. MID cannot be undersized such that GROUND must be pushed unnaturally upward to hide a gap. GROUND must provide sufficient depth below the running surface. Y calibration positions good artwork; it is not a substitute for repairing deficient artwork.
+
+## Earlier established production geometry — recovered 2026-09-16
+The intended production composition established a logical 480x270 viewport, canonical `GROUND_BASELINE_Y = 205`, approximately 65 logical pixels of depth below the running surface, approximately 960-wide repeating DISTANT/MID presentation layers, and approximately 240x65 repeating GROUND tiles. Later LAB integration used a 960x540 QA canvas and 2048x682 authored-world geometry. These must be reconciled deliberately rather than assuming the later QA implementation replaced the earlier production contract.
+
+## Continent production workflow
+Complete/approve all assets for all three stages of a continent before continent integration. Then perform full end-to-end QA/calibration. Remaining stages follow: stage spec -> vision mockup -> individual assets under approval gate -> continent integration -> QA.
+
+## Flying flock animation contract
+Every constituent bird/creature in a multi-creature flying hazard must visibly animate across the full cycle with stable body anchors and readable independent wing silhouettes. Prefer fewer creatures over accepting a partially static flock member.
