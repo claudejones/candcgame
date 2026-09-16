@@ -10,28 +10,29 @@ const stages={
  EU02:{name:'EU02 Paris',base:'EU-assets/',far:'EU02_BG_DISTANT_PARIS.png',mid:'EU02_BG_MID_PARIS.png',ground:'EU02_GROUND_PARIS.png'},
  EU03:{name:'EU03 Barcelona',base:'EU-assets/',far:'EU03_BG_DISTANT_BARCELONA.png',mid:'EU03_BG_MID_BARCELONA.png',ground:'EU03_GROUND_BARCELONA.png'}
 };
-const W=480,H=270,BASELINE=205;
-const $=id=>document.getElementById(id), world=$('world'),overlay=$('overlay'),ctx=world.getContext('2d'),ox=overlay.getContext('2d');
+const W=480,H=270,BASELINE=205,MID_BASE_SOURCE_Y=621,GROUND_SURFACE_SOURCE_Y=393;
+const $=id=>document.getElementById(id),world=$('world'),overlay=$('overlay'),ctx=world.getContext('2d'),ox=overlay.getContext('2d');
 ctx.imageSmoothingEnabled=false;ox.imageSmoothingEnabled=false;
 const cache=new Map();
 function load(src){if(cache.has(src))return cache.get(src);const p=new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error(src));i.src=src});cache.set(src,p);return p}
 function src(s,f){return ROOT+s.base+s[f]}
-function drawCover(img,y=0){const scale=W/img.width;const h=img.height*scale;ctx.drawImage(img,0,y,W,h);return {x:0,y,w:W,h,scale}}
-function drawGround(img,surfaceY){const scale=W/img.width;const h=img.height*scale;
- // Ground source files contain transparent space above terrain. Align first nontransparent source row is deliberately NOT guessed here.
- // Instead expose a surface control and fit full source width, so QA can reveal whether source geometry can satisfy baseline without distortion.
- const y=surfaceY-h*0.55;ctx.drawImage(img,0,y,W,h);return {x:0,y,w:W,h,scale};}
+function fitWidth(img){const scale=W/img.width;return {scale,w:W,h:img.height*scale}}
+function drawAt(img,y){const b=fitWidth(img);ctx.drawImage(img,0,y,b.w,b.h);return {x:0,y,...b}}
+function anchoredY(img,sourceY,targetY,offset=0){return targetY-sourceY*(W/img.width)+offset}
 async function render(){const key=$('stage').value,s=stages[key];ctx.clearRect(0,0,W,H);ox.clearRect(0,0,W,H);$('readout').textContent='Loading '+s.name+'…';
  try{const [far,mid,ground]=await Promise.all([load(src(s,'far')),load(src(s,'mid')),load(src(s,'ground'))]);let boxes=[];
- if($('farOn').checked)boxes.push(['FAR',drawCover(far,+$('farY').value)]);
- if($('midOn').checked)boxes.push(['MID',drawCover(mid,+$('midY').value)]);
- if($('groundOn').checked)boxes.push(['GROUND',drawGround(ground,+$('groundY').value)]);
+ const farY=+$('farY').value;
+ const midY=anchoredY(mid,MID_BASE_SOURCE_Y,BASELINE,+$('midY').value);
+ const groundY=anchoredY(ground,GROUND_SURFACE_SOURCE_Y,+$('groundY').value,0);
+ if($('farOn').checked)boxes.push(['FAR',drawAt(far,farY)]);
+ if($('midOn').checked)boxes.push(['MID',drawAt(mid,midY)]);
+ if($('groundOn').checked)boxes.push(['GROUND',drawAt(ground,groundY)]);
  if($('guides').checked){ox.save();ox.strokeStyle='#ff3b30';ox.lineWidth=1;ox.beginPath();ox.moveTo(0,BASELINE+.5);ox.lineTo(W,BASELINE+.5);ox.stroke();ox.fillStyle='#ff3b30';ox.font='8px monospace';ox.fillText('GROUND_BASELINE_Y=205',4,BASELINE-3);ox.restore()}
  if($('overscan').checked){const colors=['#00e5ff','#ff4df0','#ffe66d'];boxes.forEach(([n,b],i)=>{ox.save();ox.strokeStyle=colors[i];ox.setLineDash([4,3]);ox.strokeRect(b.x+.5,b.y+.5,b.w-1,b.h-1);ox.fillStyle=colors[i];ox.font='8px monospace';ox.fillText(n,4,10+i*10);ox.restore()})}
  const dims=`FAR ${far.width}×${far.height} | MID ${mid.width}×${mid.height} | GROUND ${ground.width}×${ground.height}`;
- const placements=boxes.map(([n,b])=>`${n}: y=${b.y.toFixed(1)} h=${b.h.toFixed(1)} scale=${b.scale.toFixed(4)}`).join('\n');
- $('readout').textContent=`${key} — ${s.name}\n${dims}\n${placements}\n\nRED = canonical player ground baseline. Checkerboard visible inside frame = authored layers do not cover that pixel.`;
- }catch(e){$('readout').innerHTML=`<span class="warn">Asset load failed: ${e.message}. Serve the repository through a local/web server; do not open this file as an isolated download.</span>`}}
+ const placements=boxes.map(([n,b])=>`${n}: drawY=${b.y.toFixed(1)} renderedH=${b.h.toFixed(1)} scale=${b.scale.toFixed(4)}`).join('\n');
+ $('readout').textContent=`${key} — ${s.name}\n${dims}\n${placements}\n\nReconciliation anchors: MID sourceY 621 → logical Y205; GROUND sourceY 393 → selected logical surface Y (${$('groundY').value}). FAR begins at selected Y.\nRED = canonical player ground baseline. Checkerboard visible inside frame = no authored layer covers that pixel.`;
+ }catch(e){$('readout').innerHTML=`<span class="warn">Asset load failed: ${e.message}. Serve the repository through a web/local server; do not open this HTML as an isolated download.</span>`}}
 Object.entries(stages).forEach(([k,s])=>{const o=document.createElement('option');o.value=k;o.textContent=s.name;$('stage').appendChild(o)});
 ['stage','farY','midY','groundY','farOn','midOn','groundOn','guides','overscan'].forEach(id=>$(id).addEventListener('input',render));
 $('reset').onclick=()=>{$('farY').value=0;$('midY').value=0;$('groundY').value=205;$('farOn').checked=$('midOn').checked=$('groundOn').checked=$('guides').checked=true;$('overscan').checked=false;render()};
