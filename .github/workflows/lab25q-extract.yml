@@ -1,0 +1,56 @@
+name: LAB25Q source extraction
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/lab25q-extract.yml'
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract LAB25Q source map
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, hashlib
+          p=Path('archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html')
+          s=p.read_text(errors='replace')
+          out=Path('src/legacy/lab25q'); out.mkdir(parents=True,exist_ok=True)
+          styles=re.findall(r'<style[^>]*>(.*?)</style>',s,re.I|re.S)
+          scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.I|re.S)
+          css='\n\n/* ---- source style block ---- */\n'.join(styles)
+          # Preserve exact textual JS blocks but strip giant data URLs into manifest tokens for inspectability.
+          data=[]
+          def repl(m):
+              raw=m.group(0); token=f'__LAB25Q_EMBEDDED_DATA_{len(data):04d}__'
+              data.append((token,len(raw),hashlib.sha256(raw.encode()).hexdigest()))
+              return repr(token)
+          js='\n\n// ---- source script block ----\n'.join(scripts)
+          inspect_js=re.sub(r"(['\"]data:image/[^;]+;base64,[A-Za-z0-9+/=]+['\"])",repl,js)
+          (out/'source.css').write_text(css)
+          (out/'source.inspect.js').write_text(inspect_js)
+          terms=['START RUN','Start Run','startRun','start run','progress-track','progress-marker','UI_STAGE_PROGRESS_PATH','UI_LIFE_HEART','NA_CLOUD_LAYER','class Game','class Player','requestAnimationFrame','pause','SLIDE','JUMP']
+          lines=s.splitlines()
+          report=['# LAB25Q Extraction Map','',f'- Source bytes: {len(s):,}',f'- Style blocks: {len(styles)}',f'- Inline script blocks: {len(scripts)}',f'- Embedded image data URLs stripped from inspectable JS: {len(data)}','']
+          report+=['## Embedded data manifest','']+[f'- `{t}` — {n:,} chars — sha256 `{h}`' for t,n,h in data]
+          for term in terms:
+              hits=[i for i,l in enumerate(lines) if term.lower() in l.lower()]
+              report += ['',f'## `{term}`',f'Hits: {len(hits)}','']
+              for i in hits[:12]:
+                  a=max(0,i-3); b=min(len(lines),i+4)
+                  report.append(f'### line {i+1}')
+                  report.append('```html')
+                  report.extend(lines[a:b])
+                  report.append('```')
+          Path('docs/LAB25Q_EXTRACTION_MAP.md').write_text('\n'.join(report))
+          PY
+      - name: Commit extraction map
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/legacy/lab25q/source.css src/legacy/lab25q/source.inspect.js docs/LAB25Q_EXTRACTION_MAP.md
+          git diff --cached --quiet || git commit -m 'Extract inspectable LAB25Q source map'
+          git push
