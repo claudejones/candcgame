@@ -1,55 +1,16 @@
-import { LEGACY_WORLD_CONFIG, UNIFIED_WORLD_TARGET } from './config/worlds.js';
-
-export class WorldRenderer {
-  constructor(ctx, assets, {mode='legacy'}={}) {
-    this.ctx=ctx; this.assets=assets; this.mode=mode; this.scroll=0;
-    this.visibility={far:true,clouds:true,mid:true,ground:true};
-  }
-  setLayerVisibility(next){ Object.assign(this.visibility,next); }
-  update(dt,{paused=false}={}){
-    if(!paused) this.scroll += 120*dt;
-  }
-  render(stageKey){
-    if(this.mode==='legacy') return this.renderLegacy(stageKey);
-    return this.renderUnified(stageKey);
-  }
-  renderLegacy(stageKey){
-    const p=LEGACY_WORLD_CONFIG.profiles[stageKey];
-    if(!p) throw new Error(`Unknown stage ${stageKey}`);
-    // Legacy geometry remains available for parity testing only.
-    this.drawLayer(p.farKey,p.farY,p.farScale,0);
-    if(this.visibility.clouds) this.drawClouds();
-    if(this.visibility.mid) this.drawLayer(p.midKey,p.midYOffset,p.midScale,p.midParallax);
-    if(this.visibility.ground) this.drawLayer(p.groundKey,p.groundYOffset,p.groundScale,p.groundParallax);
-  }
-  renderUnified(stageKey){
-    // Target path: regenerated landscapes share one geometry; no per-stage Y/scale correction.
-    const base=this.assets.worlds?.[stageKey];
-    if(!base) return;
-    if(this.visibility.far) this.drawImageCover(base.far,0);
-    if(this.visibility.clouds) this.drawClouds();
-    if(this.visibility.mid) this.drawImageCover(base.mid,0);
-    if(this.visibility.ground) this.drawImageCover(base.ground,0);
-  }
-  drawLayer(key,y=0,scale=1,parallax=0){
-    if(key==='far' && !this.visibility.far) return;
-    const img=this.assets[key]; if(!img) return;
-    const canvas=this.ctx.canvas, w=canvas.width*scale, h=img.height*(w/img.width);
-    let x=-(this.scroll*parallax)%w;
-    for(;x<canvas.width;x+=w) this.ctx.drawImage(img,x,y,w,h);
-  }
-  drawImageCover(img,y=0){
-    if(!img) return; const c=this.ctx.canvas, w=c.width, h=img.height*(w/img.width);
-    this.ctx.drawImage(img,0,y,w,h);
-  }
-  drawClouds(){
-    const img=this.assets.clouds; if(!img) return;
-    const c=LEGACY_WORLD_CONFIG.worldContract, canvas=this.ctx.canvas;
-    const w=canvas.width*c.cloudScale, h=img.height*(w/img.width);
-    const x=-(this.scroll*(c.cloudSpeed/120))%w;
-    this.ctx.save(); this.ctx.globalAlpha=c.cloudOpacity;
-    this.ctx.drawImage(img,x,c.cloudY,w,h); this.ctx.drawImage(img,x+w,c.cloudY,w,h); this.ctx.restore();
-  }
+import {LEGACY_WORLD_CONFIG,UNIFIED_WORLD_TARGET} from './config/worlds.js';
+export class WorldRenderer{
+ constructor(ctx,assets,{mode='legacy'}={}){this.ctx=ctx;this.assets=assets;this.mode=mode;this.worldX=0;this.cloudX=0;this.visibility={far:true,clouds:true,mid:true,ground:true};this.lastRenderedSurfaceY=0;}
+ setLayerVisibility(v){Object.assign(this.visibility,v)}
+ update(dt,{paused=false,worldScrolls=true}={}){if(!paused&&worldScrolls)this.worldX+=120*dt;this.cloudX+=LEGACY_WORLD_CONFIG.worldContract.cloudSpeed*dt;}
+ tileFull(img,offsetX,drawY,scale,alpha=1){if(!img)return;const W=this.ctx.canvas.width,dw=img.width*scale,dh=img.height*scale;let x=-((((offsetX)%dw)+dw)%dw);this.ctx.save();this.ctx.globalAlpha=alpha;for(;x<W;x+=dw)this.ctx.drawImage(img,Math.round(x),Math.round(drawY),Math.ceil(dw),Math.ceil(dh));this.ctx.restore();}
+ render(stage){this.ctx.clearRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);return this.mode==='legacy'?this.renderLegacy(stage):this.renderUnified(stage)}
+ renderLegacy(stage){const p=LEGACY_WORLD_CONFIG.profiles[stage],wc=LEGACY_WORLD_CONFIG.worldContract,W=this.ctx.canvas.width,base=W/wc.sourceW;if(!p)return;
+  if(this.visibility.far)this.tileFull(this.assets[p.farKey],0,p.farY,base*p.farScale,1);
+  if(this.visibility.clouds&&p.clouds!==false)this.tileFull(this.assets.clouds,this.cloudX,wc.cloudY,base*wc.cloudScale,wc.cloudOpacity);
+  const midScale=base*p.midScale,midY=p.seamY-wc.midBaselineSourceY*midScale+p.midYOffset;if(this.visibility.mid)this.tileFull(this.assets[p.midKey],this.worldX*p.midParallax,midY,midScale,1);
+  const gScale=base*p.groundScale,gY=p.seamY-wc.groundSurfaceSourceY*gScale+p.groundYOffset;this.lastRenderedSurfaceY=gY+wc.groundSurfaceSourceY*gScale;if(this.visibility.ground)this.tileFull(this.assets[p.groundKey],this.worldX*p.groundParallax,gY,gScale,1);
+ }
+ renderUnified(stage){const w=this.assets.worlds?.[stage];if(!w)return;const c=this.ctx.canvas,W=c.width,H=c.height,base=W/UNIFIED_WORLD_TARGET.sourceCanvas.w,surface=UNIFIED_WORLD_TARGET.runningSurfaceY*2; if(this.visibility.far)this.tileFull(w.far,0,0,base,1);if(this.visibility.clouds)this.tileFull(this.assets.clouds,this.cloudX,0,base*.65,.75);if(this.visibility.mid)this.tileFull(w.mid,this.worldX*.2,0,base,1);const gy=surface-393*base;this.lastRenderedSurfaceY=surface;if(this.visibility.ground)this.tileFull(w.ground,this.worldX,gy,base,1);}
 }
-
-export { UNIFIED_WORLD_TARGET };
+export{UNIFIED_WORLD_TARGET};
