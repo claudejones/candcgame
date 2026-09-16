@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>C&C World Composition QA</title>
 <style>
-:root{font-family:system-ui,-apple-system,sans-serif;color:#e8edf2;background:#101419}*{box-sizing:border-box}body{margin:0;padding:16px}.app{max-width:1180px;margin:auto}.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-bottom:12px}.group{display:grid;gap:4px;font-size:12px}.checks{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;margin-bottom:10px}select,input[type=number]{background:#1b222a;color:#fff;border:1px solid #46515c;border-radius:6px;padding:7px;width:112px}button{background:#26313b;color:#fff;border:1px solid #52606d;border-radius:6px;padding:7px 10px}.frameWrap{background:repeating-conic-gradient(#262d34 0 25%,#1c2228 0 50%) 50%/16px 16px;padding:20px;overflow:auto;border:1px solid #46515c}.frame{position:relative;width:min(960px,100%);aspect-ratio:16/9;margin:auto;background:transparent;box-shadow:0 0 0 1px #76818c}.frame canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}.readout{margin-top:12px;padding:10px;background:#171d23;border:1px solid #39434d;border-radius:6px;font:12px ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}.note{font-size:13px;color:#b9c3cc;margin:8px 0 12px}.warn{color:#ffd166}.section{font-size:12px;color:#8fa0ae;width:100%;margin-top:2px}.surface{border-left:3px solid #ff3b30;padding-left:10px}
+:root{font-family:system-ui,-apple-system,sans-serif;color:#e8edf2;background:#101419}*{box-sizing:border-box}body{margin:0;padding:16px}.app{max-width:1180px;margin:auto}.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-bottom:12px}.group{display:grid;gap:4px;font-size:12px}.checks{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;margin-bottom:10px}select,input[type=number]{background:#1b222a;color:#fff;border:1px solid #46515c;border-radius:6px;padding:7px;width:112px}button{background:#26313b;color:#fff;border:1px solid #52606d;border-radius:6px;padding:7px 10px}.frameWrap{background:#080b0e;padding:24px;overflow:auto;border:1px solid #46515c}.frame{position:relative;width:min(960px,100%);aspect-ratio:16/9;margin:auto;background:repeating-conic-gradient(#2b333b 0 25%,#20272e 0 50%) 50%/16px 16px;outline:3px solid #d5dde5;outline-offset:0;overflow:hidden}.frame::after{content:'GAME VIEWPORT 480×270';position:absolute;right:6px;bottom:5px;color:#d5dde5;background:#101419cc;padding:2px 5px;font:10px ui-monospace,SFMono-Regular,Menlo,monospace;pointer-events:none}.frame canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}.readout{margin-top:12px;padding:10px;background:#171d23;border:1px solid #39434d;border-radius:6px;font:12px ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}.note{font-size:13px;color:#b9c3cc;margin:8px 0 12px}.warn{color:#ffd166}.section{font-size:12px;color:#8fa0ae;width:100%;margin-top:2px}.surface{border-left:3px solid #ff3b30;padding-left:10px}
 </style>
 </head>
 <body><main class="app">
-<h1>World Composition QA — 480×270</h1>
-<p class="note">Calibration mode. Transparent backing. Adjust each layer independently to find its natural production composition. The red line remains the canonical player baseline at Y=205. Checkerboard visible inside the frame means no authored layer covers that pixel.</p>
+<h1>World Composition QA — Canonical 480×270 Test</h1>
+<p class="note"><strong>This harness is testing the current 480×270 / baseline Y205 specification; it is not assuming that specification must survive.</strong> Checkerboard exists only inside the game viewport and means an uncovered game pixel. The solid near-black area outside the white viewport border is not part of the game.</p>
 <div class="toolbar">
 <label class="group">Stage<select id="stage"></select></label>
 <button id="reset">Reset stage</button>
-<div class="section">Independent calibration — Y is logical draw position; Scale is relative to width-fit (1.00 = source width fitted to 480).</div>
+<div class="section">Independent calibration — Y is logical draw position; Scale is relative to width-fit (1.00 = source width fitted to 480). Use this to test whether the existing assets can satisfy the canonical geometry without unnatural scaling/placement.</div>
 <label class="group">FAR Y<input id="farY" type="number" value="0" step="1"></label>
 <label class="group">FAR Scale<input id="farScale" type="number" value="1" step="0.01" min="0.25" max="3"></label>
 <label class="group">MID Y<input id="midY" type="number" value="0" step="1"></label>
@@ -29,5 +29,5 @@
 <div class="frameWrap"><div class="frame"><canvas id="world" width="480" height="270"></canvas><canvas id="overlay" width="480" height="270"></canvas></div></div>
 <div id="readout" class="readout">Loading…</div>
 </main>
-<script src="world-composition.js?v=4"></script>
+<script src="world-composition.js?v=5"></script>
 </body></html>
