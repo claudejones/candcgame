@@ -43,11 +43,19 @@ jobs:
           grep -q 'syncToRuntime' src/js/dev/hazard-editor.js
           grep -q 'STATE / SOURCE CROP' src/js/dev/character-editor.js
           grep -q 'RUNTIME MONITOR' src/js/dev/runtime-monitor.js
-          grep -q 'SELECTED HAZARD PASS' src/js/dev/test-mode.js
+          grep -q 'data-type="interaction"' src/js/dev/test-mode.js
+          grep -q 'data-type="game"' src/js/dev/test-mode.js
+          grep -q 'Character and hazard share one interaction pass' src/js/dev/test-mode.js
           grep -q 'HIGH — SLIDE' src/js/dev/test-mode.js
           grep -q 'LOW — JUMP' src/js/dev/test-mode.js
           grep -q 'STEP FRAME' src/js/dev/test-mode.js
-          grep -q 'FULL 90-SECOND COURSE' src/js/dev/test-mode.js
+          grep -q '<h3>GAME TEST</h3>' src/js/dev/test-mode.js
+          ! grep -q 'FULL 90-SECOND COURSE' src/js/dev/test-mode.js
+          grep -q 'function endInteraction()' src/js/dev/test-mode.js
+          grep -q 'function endGame()' src/js/dev/test-mode.js
+          grep -q 'e.target.blur()' src/js/dev/test-mode.js
+          grep -q 'test-type-switch' src/dev.html
+          grep -q 'test-section h3' src/dev.html
           grep -q 'setCollisionBounds(collision)' src/js/dev/test-mode.js
           grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
           grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
