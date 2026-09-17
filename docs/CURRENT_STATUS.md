@@ -3,11 +3,9 @@
 Last updated: 2026-09-17
 
 ## Production baseline
-Phase 6 is complete and user-verified. Phase 7 establishes the production authoring architecture before Phase 8 landscape regeneration.
+Phase 6 is complete and user-verified. Phase 7 production authoring architecture is implemented through 7M; final CI/deployment acceptance is pending.
 
-Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game-config.js`, `src/js/game-runtime.js`, with semantic assets under `assets/`.
-
-Phase 7 development modules include mode shell, Asset Navigator, isolated/local design draft, Contextual Inspector, Landscape Editor, Hazard/Atlas Editor, Character Editor, Runtime Monitor and focused Test controls. Production remains `src/game.html` with production bootstrap only.
+Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game-config.js`, `src/js/game-runtime.js`, with semantic assets under `assets/`. Production remains `src/game.html` with production bootstrap only.
 
 ## Migration status
 - Phase 0–6: COMPLETE / user verified where applicable
@@ -15,45 +13,42 @@ Phase 7 development modules include mode shell, Asset Navigator, isolated/local 
 - Phase 7B canonical configuration schema: COMPLETE / CI accepted
 - Phase 7C modular application shell/bootstrap split: COMPLETE / CI accepted
 - Phase 7D Design Asset Navigator: COMPLETE / CI accepted
-- Phase 7E Contextual Inspector framework: COMPLETE / CI accepted (run #78)
+- Phase 7E Contextual Inspector: COMPLETE / CI accepted (run #78)
 - Phase 7F Landscape editor: COMPLETE / CI accepted (run #98)
 - Phase 7G Hazard/atlas editor: COMPLETE / CI accepted (run #122)
 - Phase 7H Character editor: COMPLETE / CI accepted (run #122)
 - Phase 7I Runtime Monitor: COMPLETE / CI accepted (run #122)
-- Phase 7J Test mode: IMPLEMENTED / combined 7J-7K CI acceptance pending
-- Phase 7K Game mode: IMPLEMENTED / combined 7J-7K CI acceptance pending
+- Phase 7J Test mode: COMPLETE / CI accepted (run #134)
+- Phase 7K Game mode: COMPLETE / CI accepted (run #134)
+- Phase 7L persistence/import/export finalization: IMPLEMENTED
+- Phase 7M final regression/CI/deployment: CI acceptance pending
 
 ## Coordinate/config authority
 Canonical logical viewport: `960 x 540`. Canonical production ground surface: `GROUND_SURFACE_Y = 410`. Canonical asset vocabulary: `SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> GAMEPLAY ANCHOR -> COLLISION`.
 
 Legacy stage `seamY` and landscape offsets remain compatibility/calibration evidence only and are not canonical gameplay-coordinate authority.
 
-## Design persistence and export
-All Design-mode saves persist only to browser `localStorage` under `cc-world-design-config-v1`. No Design save writes to Git or production configuration. Stage authoring uses SAVE STAGE; global character authoring uses SAVE CHARACTER. Valid locally saved canonical drafts are restored on reload.
+## Design persistence / portability
+All Design saves remain browser-local only under `cc-world-design-config-v1`; browser authoring never writes Git or production source. SAVE STAGE and SAVE CHARACTER remain scoped actions, and SAVE ALL LOCAL persists the complete current authoring draft.
 
-Design supports EXPORT STAGE and EXPORT GAME CONFIG. Full-game export contains schema version, coordinate contract, global character authoring values and all current stage drafts, including current unsaved values.
+EXPORT STAGE remains available. EXPORT GAME CONFIG creates the complete portable canonical authoring payload. IMPORT GAME CONFIG validates schema version, 960x540 viewport, ground Y=410, all nine current stages and canonical schema invariants before replacing and persisting the local draft. Invalid/incompatible imports are rejected rather than partially applied.
 
-## Phase 7G-7I accepted block
-Production CI run #122 completed successfully against `f9fb15e1b0437639d25bea66fb67d2b0dd736496`. Hazard/atlas editing, character editing and Runtime Monitor therefore pass the combined structural/schema/parity checkpoint.
+## Mode architecture
+DESIGN contains authoring tools. TEST exposes focused stage/character/run/reset/unlimited-lives/collision/ground-guide validation controls. Development GAME hides Design/Test authoring panels around the same renderer. Production `src/game.html` has GAME as its only mode and cannot reference development modules under CI guards.
 
-## Phase 7J Test mode
-Development TEST mode now exposes only focused validation controls around the shared runtime: stage, character, Run, Reset, Unlimited Lives, collision bounds and ground guide. It does not expose Design authoring controls. It uses the same iframe renderer/configuration rather than a second gameplay implementation.
-
-## Phase 7K Game mode
-Development GAME view remains a clean shared-renderer view with development authoring/test panels hidden. The separate production entry remains `src/game.html`, whose production bootstrap declares GAME as its only mode. Production CI explicitly rejects development/Test module references from `src/game.html` and the production bootstrap.
+## Final Phase 7 regression guard
+Production CI checks the production/development dependency boundary, syntax for every runtime/dev module, no Base64 runtime assets, canonical 960x540/Y410 authority, all nine stage compatibility mappings, hazard counts, non-negative crop, Gaudí bench source-region baseline, approved Constance Slide crop and preserved Phase 6 gameplay constants (Slide .75, recovery 1.10, invulnerability 2.00, flying 68/18, maxVisible 2, reactionLead 2.20, characterX 220, worldSpeed 120).
 
 ## Known deferred calibration/content work
-- landscape FAR/MID/GROUND geometry/alignment regeneration
-- final character grounding/positioning after landscape correction
-- hazard visual size/position calibration after landscape correction
-- hazard/player collision hitbox calibration after landscape correction
+- Phase 8 landscape FAR/MID/GROUND regeneration against the universal production contract
+- final character grounding after each corrected landscape
+- hazard visual size/position after each corrected landscape
+- collision/hitbox calibration after each corrected landscape
 - historical Slide 0.75s versus production-spec 0.70s reconciliation
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-After the combined 7J-7K CI/regression checkpoint passes, complete 7L persistence/finalization + 7M regression/CI/deployment as the final Phase 7 block.
-
-Do not begin Phase 8 landscape regeneration until Phase 7 is accepted.
+Wait for the final 7L-7M CI checkpoint. If successful, verify deployment and user-test the completed Phase 7 Design/Test/Game architecture. Phase 8 landscape regeneration begins only after that acceptance.
 
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.
