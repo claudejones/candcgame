@@ -5,17 +5,25 @@ Last updated: 2026-09-17
 ## Production baseline
 Phase 6 is complete and user-verified. Phase 7 establishes the production authoring architecture before Phase 8 landscape regeneration.
 
-Active application source:
+Active shared Phase 6 runtime source:
 - `src/index.html`
 - `src/css/game.css`
 - `src/js/game-config.js`
 - `src/js/game-runtime.js`
 - external semantic assets under `assets/`
 
-Phase 7 schema/architecture source:
+Phase 7 application entries:
+- `src/game.html` — production GAME entry
+- `src/dev.html` — development/QA DESIGN / TEST / GAME entry
+- `src/js/bootstrap/production-bootstrap.js`
+- `src/js/bootstrap/development-bootstrap.js`
+- `src/js/dev/mode-shell.js`
 - `src/js/config-schema.js`
+
+Phase 7 architecture authority:
 - `docs/PHASE7A_COORDINATE_AUDIT.md`
 - `docs/PHASE7B_CANONICAL_CONFIG_SCHEMA.md`
+- `docs/PHASE7C_BOOTSTRAP_IMPLEMENTATION.md`
 - `docs/WORLD_RENDERING_SPEC.md`
 - `docs/PHASE7_AUTHORING_ARCHITECTURE_EXECUTION_SPEC.md`
 
@@ -30,8 +38,9 @@ The historical LAB25Q harness remains preserved unchanged under `archive/LAB25Q/
 - Phase 5 configuration extraction: COMPLETE / user verified
 - Phase 6 production naming/cleanup: COMPLETE / user verified
 - Phase 7A coordinate and viewport contract: COMPLETE
-- Phase 7B canonical configuration schema: IMPLEMENTED / CI validation pending
-- Phase 7C modular application shell/bootstrap split: NEXT after 7B CI acceptance
+- Phase 7B canonical configuration schema: COMPLETE / CI accepted
+- Phase 7C modular application shell/bootstrap split: IMPLEMENTED / CI acceptance pending
+- Phase 7D Design Asset Navigator: NEXT after 7C CI acceptance
 
 Production source contains no Base64/data-image assets. Historical migration evidence remains in `archive/` and Git history.
 
@@ -45,18 +54,16 @@ Legacy stage `seamY` and landscape offsets remain calibration evidence only. The
 ## Phase 7B configuration architecture
 `src/js/config-schema.js` defines and validates the Phase 7B compatibility/canonical view without mutating the live Phase 6 `GAME_CONFIG` or renderer.
 
-The schema separates:
-- authored production configuration;
-- legacy Phase 6 compatibility calibration;
-- transient runtime state;
-- development/QA state.
-
-Canonical asset vocabulary:
-`SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> GAMEPLAY ANCHOR -> COLLISION`.
+The schema separates authored production configuration, legacy Phase 6 compatibility calibration, transient runtime state, and development/QA state. Canonical asset vocabulary is `SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> GAMEPLAY ANCHOR -> COLLISION`.
 
 All canonical character, hazard and finish gameplay anchors resolve from Y=410. Legacy seams/surfaces remain explicitly representable so the nine existing stages can still be regression-tested without artwork changes while later Phase 7 gates migrate the renderer/application shell.
 
-Phase 7B intentionally does not force the live Phase 6 renderer onto Y=410. That would alter the user-verified presentation before the compatibility/bootstrap migration is ready.
+## Phase 7C application boundary
+`src/game.html` is the production entry and loads the production bootstrap only. `src/dev.html` is the development/QA entry and loads the development bootstrap plus the development-only mode shell.
+
+Both entries mount the same preserved `src/index.html` runtime host, so 7C does not duplicate renderer/configuration logic. Development mode switching changes shell state without recreating the mounted runtime. Production CI now asserts that the production entry/bootstrap cannot reference the development bootstrap, `src/js/dev/**`, or the mode shell.
+
+This is a transitional host boundary. Legacy QA responsibilities still present inside the preserved Phase 6 runtime are progressively extracted by later Phase 7 gates; final consumer GAME shell/package pruning remains a Phase 7K/7M responsibility.
 
 ## Known deferred calibration/content work
 - landscape FAR/MID/GROUND geometry/alignment regeneration
@@ -67,7 +74,7 @@ Phase 7B intentionally does not force the live Phase 6 renderer onto Y=410. That
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-After Phase 7B CI acceptance, proceed to Phase 7C: establish production and development/QA bootstraps around the same renderer/configuration while proving that Design/Test authoring code is absent from the production dependency graph.
+After 7C CI acceptance, proceed to Phase 7D: implement the Design Asset Navigator while keeping selected authoring asset state independent from gameplay/runtime state.
 
 Do not begin Phase 8 landscape regeneration until Phase 7 is accepted.
 
