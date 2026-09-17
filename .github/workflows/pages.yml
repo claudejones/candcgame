@@ -24,13 +24,13 @@ jobs:
       - name: Checkout exact approved QA build
         uses: actions/checkout@v4
         with:
-          ref: 728aede63bfac8072b6a0bf9d8ff72e11618ed51
+          ref: 4716949a27fd0340d818c91d06e97339987755a2
 
       - name: Record deployed source SHA
         run: |
           set -euo pipefail
           ACTUAL_SHA="$(git rev-parse HEAD)"
-          EXPECTED_SHA="728aede63bfac8072b6a0bf9d8ff72e11618ed51"
+          EXPECTED_SHA="4716949a27fd0340d818c91d06e97339987755a2"
           echo "Deploying source SHA: $ACTUAL_SHA"
           test "$ACTUAL_SHA" = "$EXPECTED_SHA"
 
@@ -46,7 +46,7 @@ jobs:
           fi
           cp -R assets _site/assets
           touch _site/.nojekyll
-          printf '%s\n' '728aede63bfac8072b6a0bf9d8ff72e11618ed51' > _site/DEPLOYED_SOURCE_SHA.txt
+          printf '%s\n' '4716949a27fd0340d818c91d06e97339987755a2' > _site/DEPLOYED_SOURCE_SHA.txt
           echo "Pages bundle contents:"
           du -sh _site
 
