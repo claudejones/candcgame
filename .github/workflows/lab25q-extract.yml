@@ -22,37 +22,45 @@ jobs:
           out=Path('src/legacy/lab25q'); out.mkdir(parents=True,exist_ok=True)
           parity=Path('qa/lab25q-faithful'); parity.mkdir(parents=True,exist_ok=True)
           assets=parity/'assets'; assets.mkdir(parents=True,exist_ok=True)
+          for old in assets.glob('embedded_*.*'): old.unlink()
 
           styles=re.findall(r'<style[^>]*>(.*?)</style>',s,re.I|re.S)
           scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.I|re.S)
           css='\n\n/* ---- source style block ---- */\n'.join(styles)
           js='\n\n// ---- source script block ----\n'.join(scripts)
+
+          pat=re.compile(r"(['\"]?)(data:image/([^;]+);base64,([A-Za-z0-9+/=]+))\1")
+          extmap={'png':'png','jpeg':'jpg','jpg':'jpg','webp':'webp','gif':'gif'}
+          manifest=[]
+
+          def externalize(text, context):
+              def repl(m):
+                  i=len(manifest); mime=m.group(3); payload=m.group(4); raw=m.group(2)
+                  ext=extmap.get(mime.lower(),'bin')
+                  p=assets/f'embedded_{i:04d}.{ext}'
+                  p.write_bytes(base64.b64decode(payload))
+                  rel=f'./assets/{p.name}'
+                  token=f'__LAB25Q_EMBEDDED_DATA_{i:04d}__'
+                  manifest.append((token,context,rel,hashlib.sha256(raw.encode()).hexdigest()))
+                  quote=m.group(1)
+                  return f'{quote}{rel}{quote}' if quote else rel
+              return pat.sub(repl,text)
+
+          # Externalize CSS first and JS second. This preserves each source block exactly
+          # except for data-image URLs, including the three HUD/CSS image variables.
+          external_css=externalize(css,'css')
+          external_js=externalize(js,'js')
           (out/'source.css').write_text(css)
 
-          data=[]
-          pat=re.compile(r"(['\"])(data:image/([^;]+);base64,([A-Za-z0-9+/=]+))\1")
+          # Inspectable JS keeps deterministic tokens instead of data payloads.
+          inspect_i=0
           def inspect_repl(m):
-              token=f'__LAB25Q_EMBEDDED_DATA_{len(data):04d}__'
-              raw=m.group(2); mime=m.group(3); payload=m.group(4)
-              data.append((token,mime,payload,hashlib.sha256(raw.encode()).hexdigest()))
+              global inspect_i
+              token=f'__LAB25Q_JS_EMBEDDED_DATA_{inspect_repl.i:04d}__'; inspect_repl.i+=1
               return repr(token)
+          inspect_repl.i=0
           inspect_js=pat.sub(inspect_repl,js)
           (out/'source.inspect.js').write_text(inspect_js)
-
-          extmap={'png':'png','jpeg':'jpg','jpg':'jpg','webp':'webp','gif':'gif'}
-          asset_paths={}
-          for i,(token,mime,payload,h) in enumerate(data):
-              ext=extmap.get(mime.lower(),'bin')
-              p=assets/f'embedded_{i:04d}.{ext}'
-              p.write_bytes(base64.b64decode(payload))
-              asset_paths[token]=f'./assets/{p.name}'
-
-          def external_repl(m):
-              token=f'__LAB25Q_EMBEDDED_DATA_{external_repl.i:04d}__'
-              external_repl.i+=1
-              return repr(asset_paths[token])
-          external_repl.i=0
-          external_js=pat.sub(external_repl,js)
 
           body_match=re.search(r'<body([^>]*)>(.*?)</body>',s,re.I|re.S)
           if not body_match: raise SystemExit('LAB25Q body not found')
@@ -62,13 +70,13 @@ jobs:
           head=head_match.group(1) if head_match else ''
           head=re.sub(r'<style[^>]*>.*?</style>','',head,flags=re.I|re.S)
           head=re.sub(r'<script(?![^>]*\bsrc=)[^>]*>.*?</script>','',head,flags=re.I|re.S)
-          (parity/'lab25q.css').write_text(css)
+          (parity/'lab25q.css').write_text(external_css)
           (parity/'lab25q.js').write_text(external_js)
           html='<!doctype html><html><head>'+head+'<link rel="stylesheet" href="./lab25q.css"></head><body'+body_attrs+'>'+body+'<script src="./lab25q.js"></script></body></html>'
           (parity/'index.html').write_text(html)
 
-          report=['# LAB25Q Faithful Extraction','',f'- Source bytes: {len(s):,}',f'- Style blocks: {len(styles)}',f'- Inline script blocks: {len(scripts)}',f'- Embedded images externalized: {len(data)}','', '## Contract','', '- DOM/body copied from archived LAB25Q.', '- CSS copied from archived LAB25Q.', '- JavaScript copied from archived LAB25Q.', '- Only embedded data-image URLs are replaced with external files.', '- No HUD, control-center, gameplay, hazard, calibration, or QA redesign is permitted in this parity build.','', '## Embedded image manifest','']
-          report += [f'- `{token}` -> `{asset_paths[token]}` — sha256(data-url) `{h}`' for token,_,_,h in data]
+          report=['# LAB25Q Faithful Extraction','',f'- Source bytes: {len(s):,}',f'- Style blocks: {len(styles)}',f'- Inline script blocks: {len(scripts)}',f'- Embedded images externalized: {len(manifest)}','', '## Contract','', '- DOM/body copied from archived LAB25Q.', '- CSS copied from archived LAB25Q; only embedded data-image URLs are replaced with external files.', '- JavaScript copied from archived LAB25Q; only embedded data-image URLs are replaced with external files.', '- No HUD, Control Center, gameplay, hazard, calibration, or QA redesign is permitted in this parity build.','', '## Embedded image manifest','']
+          report += [f'- `{token}` ({context}) -> `{rel}` — sha256(data-url) `{h}`' for token,context,rel,h in manifest]
           Path('docs/LAB25Q_EXTRACTION_MAP.md').write_text('\n'.join(report))
           PY
       - name: Validate faithful extraction
@@ -83,7 +91,7 @@ jobs:
           failures=[]
           if not html or not css or not js: failures.append('generated HTML/CSS/JS must be non-empty')
           for marker in ['gameplay-hud','qaFarToggle','saveLocalConfig']:
-              if marker in src and marker not in html and marker not in js:
+              if marker in src and marker not in html and marker not in js and marker not in css:
                   failures.append(f'source marker missing after extraction: {marker}')
           if 'CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE' in src and 'CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE' not in js:
               failures.append('local QA checkpoint key missing')
@@ -91,8 +99,8 @@ jobs:
           generated_assets=len(list(Path('qa/lab25q-faithful/assets').glob('embedded_*.*')))
           if generated_assets != src_data:
               failures.append(f'embedded asset count mismatch: source={src_data} generated={generated_assets}')
-          if 'data:image/' in js:
-              failures.append('embedded data URL remains in external JS')
+          if 'data:image/' in js or 'data:image/' in css:
+              failures.append('embedded data URL remains in external CSS/JS')
           if failures:
               print('\n'.join('FAIL: '+x for x in failures)); sys.exit(1)
           print(f'Faithful LAB25Q extraction validated: {generated_assets} images externalized; source UI/QA markers preserved.')
