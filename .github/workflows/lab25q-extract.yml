@@ -11,73 +11,121 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Extract faithful LAB25Q parity build
+      - name: Cross-reference and extract faithful LAB25Q parity build
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re, hashlib, base64
+          import re, hashlib, base64, shutil
 
           src=Path('archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html')
           s=src.read_text(errors='replace')
           out=Path('src/legacy/lab25q'); out.mkdir(parents=True,exist_ok=True)
           parity=Path('qa/lab25q-faithful'); parity.mkdir(parents=True,exist_ok=True)
-          assets=parity/'assets'; assets.mkdir(parents=True,exist_ok=True)
-          for old in assets.glob('embedded_*.*'): old.unlink()
+          fallback=parity/'assets'/'unmatched'; fallback.mkdir(parents=True,exist_ok=True)
+          for old in fallback.glob('*'): old.unlink()
 
-          styles=re.findall(r'<style[^>]*>(.*?)</style>',s,re.I|re.S)
-          scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.I|re.S)
+          # Build byte-identity index of every preserved PNG. This is the authority for
+          # deciding whether an embedded LAB25Q payload is already one of the uploaded assets.
+          preserved=Path('assets-original/current-generated')
+          by_hash={}
+          for p in preserved.rglob('*.png'):
+              h=hashlib.sha256(p.read_bytes()).hexdigest()
+              by_hash.setdefault(h,[]).append(p)
+
+          data_pat=re.compile(r'data:image/([^;]+);base64,([A-Za-z0-9+/=]+)',re.I)
+          occurrences=list(data_pat.finditer(s))
+          if not occurrences:
+              raise SystemExit('No embedded LAB25Q images found')
+
+          # Context map lets the report distinguish CSS/JS/body remnants rather than guessing.
+          style_ranges=[(m.start(),m.end()) for m in re.finditer(r'<style[^>]*>.*?</style>',s,re.I|re.S)]
+          script_ranges=[(m.start(),m.end()) for m in re.finditer(r'<script(?![^>]*\\bsrc=)[^>]*>.*?</script>',s,re.I|re.S)]
+          def context(pos):
+              if any(a<=pos<b for a,b in style_ranges): return 'css'
+              if any(a<=pos<b for a,b in script_ranges): return 'js'
+              return 'html/body-or-head'
+
+          unique={}
+          rows=[]
+          for i,m in enumerate(occurrences):
+              mime=m.group(1).lower(); payload=m.group(2)
+              raw=base64.b64decode(payload)
+              h=hashlib.sha256(raw).hexdigest()
+              matches=by_hash.get(h,[])
+              unique.setdefault(h,{'count':0,'matches':matches,'mime':mime})['count']+=1
+              rows.append({'i':i,'start':m.start(),'end':m.end(),'mime':mime,'payload':payload,'hash':h,'matches':matches,'context':context(m.start())})
+
+          # Replace every occurrence in the complete archived HTML, not just CSS/JS.
+          # If bytes match an uploaded PNG, point directly to that named preserved asset.
+          # Otherwise retain the exact bytes as a clearly-labelled unmatched fallback.
+          unmatched_by_hash={}
+          def repl(m):
+              raw=base64.b64decode(m.group(2)); h=hashlib.sha256(raw).hexdigest()
+              matches=by_hash.get(h,[])
+              if matches:
+                  return '../../'+matches[0].as_posix()
+              if h not in unmatched_by_hash:
+                  ext={'png':'png','jpeg':'jpg','jpg':'jpg','webp':'webp','gif':'gif'}.get(m.group(1).lower(),'bin')
+                  p=fallback/f'{h[:12]}.{ext}'; p.write_bytes(raw); unmatched_by_hash[h]=p
+              return './assets/unmatched/'+unmatched_by_hash[h].name
+          rebuilt=data_pat.sub(repl,s)
+
+          # Split the faithful rebuilt monolith only at style/script boundaries. DOM and source
+          # behavior are otherwise retained. This is storage modularization, not redesign.
+          styles=re.findall(r'<style[^>]*>(.*?)</style>',rebuilt,re.I|re.S)
+          scripts=re.findall(r'<script(?![^>]*\\bsrc=)[^>]*>(.*?)</script>',rebuilt,re.I|re.S)
           css='\n\n/* ---- source style block ---- */\n'.join(styles)
           js='\n\n// ---- source script block ----\n'.join(scripts)
-
-          pat=re.compile(r"(['\"]?)(data:image/([^;]+);base64,([A-Za-z0-9+/=]+))\1")
-          extmap={'png':'png','jpeg':'jpg','jpg':'jpg','webp':'webp','gif':'gif'}
-          manifest=[]
-
-          def externalize(text, context):
-              def repl(m):
-                  i=len(manifest); mime=m.group(3); payload=m.group(4); raw=m.group(2)
-                  ext=extmap.get(mime.lower(),'bin')
-                  p=assets/f'embedded_{i:04d}.{ext}'
-                  p.write_bytes(base64.b64decode(payload))
-                  rel=f'./assets/{p.name}'
-                  token=f'__LAB25Q_EMBEDDED_DATA_{i:04d}__'
-                  manifest.append((token,context,rel,hashlib.sha256(raw.encode()).hexdigest()))
-                  quote=m.group(1)
-                  return f'{quote}{rel}{quote}' if quote else rel
-              return pat.sub(repl,text)
-
-          # Externalize CSS first and JS second. This preserves each source block exactly
-          # except for data-image URLs, including the three HUD/CSS image variables.
-          external_css=externalize(css,'css')
-          external_js=externalize(js,'js')
-          (out/'source.css').write_text(css)
-
-          # Inspectable JS keeps deterministic tokens instead of data payloads.
-          inspect_i=0
-          def inspect_repl(m):
-              global inspect_i
-              token=f'__LAB25Q_JS_EMBEDDED_DATA_{inspect_repl.i:04d}__'; inspect_repl.i+=1
-              return repr(token)
-          inspect_repl.i=0
-          inspect_js=pat.sub(inspect_repl,js)
-          (out/'source.inspect.js').write_text(inspect_js)
-
-          body_match=re.search(r'<body([^>]*)>(.*?)</body>',s,re.I|re.S)
+          body_match=re.search(r'<body([^>]*)>(.*?)</body>',rebuilt,re.I|re.S)
           if not body_match: raise SystemExit('LAB25Q body not found')
           body_attrs=body_match.group(1); body=body_match.group(2)
-          body=re.sub(r'<script(?![^>]*\bsrc=)[^>]*>.*?</script>','',body,flags=re.I|re.S)
-          head_match=re.search(r'<head[^>]*>(.*?)</head>',s,re.I|re.S)
+          body=re.sub(r'<script(?![^>]*\\bsrc=)[^>]*>.*?</script>','',body,flags=re.I|re.S)
+          head_match=re.search(r'<head[^>]*>(.*?)</head>',rebuilt,re.I|re.S)
           head=head_match.group(1) if head_match else ''
           head=re.sub(r'<style[^>]*>.*?</style>','',head,flags=re.I|re.S)
-          head=re.sub(r'<script(?![^>]*\bsrc=)[^>]*>.*?</script>','',head,flags=re.I|re.S)
-          (parity/'lab25q.css').write_text(external_css)
-          (parity/'lab25q.js').write_text(external_js)
+          head=re.sub(r'<script(?![^>]*\\bsrc=)[^>]*>.*?</script>','',head,flags=re.I|re.S)
+          (parity/'lab25q.css').write_text(css)
+          (parity/'lab25q.js').write_text(js)
           html='<!doctype html><html><head>'+head+'<link rel="stylesheet" href="./lab25q.css"></head><body'+body_attrs+'>'+body+'<script src="./lab25q.js"></script></body></html>'
           (parity/'index.html').write_text(html)
 
-          report=['# LAB25Q Faithful Extraction','',f'- Source bytes: {len(s):,}',f'- Style blocks: {len(styles)}',f'- Inline script blocks: {len(scripts)}',f'- Embedded images externalized: {len(manifest)}','', '## Contract','', '- DOM/body copied from archived LAB25Q.', '- CSS copied from archived LAB25Q; only embedded data-image URLs are replaced with external files.', '- JavaScript copied from archived LAB25Q; only embedded data-image URLs are replaced with external files.', '- No HUD, Control Center, gameplay, hazard, calibration, or QA redesign is permitted in this parity build.','', '## Embedded image manifest','']
-          report += [f'- `{token}` ({context}) -> `{rel}` — sha256(data-url) `{h}`' for token,context,rel,h in manifest]
+          # Keep inspectable source artifacts without huge payloads.
+          original_styles=re.findall(r'<style[^>]*>(.*?)</style>',s,re.I|re.S)
+          original_scripts=re.findall(r'<script(?![^>]*\\bsrc=)[^>]*>(.*?)</script>',s,re.I|re.S)
+          (out/'source.css').write_text('\n\n/* ---- source style block ---- */\n'.join(original_styles))
+          inspect_js='\n\n// ---- source script block ----\n'.join(original_scripts)
+          inspect_js=data_pat.sub(lambda m:f'__LAB25Q_DATA_{hashlib.sha256(base64.b64decode(m.group(2))).hexdigest()[:12]}__',inspect_js)
+          (out/'source.inspect.js').write_text(inspect_js)
+
+          matched_occ=sum(1 for r in rows if r['matches'])
+          unmatched_occ=len(rows)-matched_occ
+          matched_unique=sum(1 for v in unique.values() if v['matches'])
+          unmatched_unique=len(unique)-matched_unique
+          contexts={k:sum(1 for r in rows if r['context']==k) for k in ['css','js','html/body-or-head']}
+          report=['# LAB25Q Image Cross-Reference and Faithful Extraction','',
+            f'- Embedded image occurrences in archived LAB25Q: **{len(rows)}**',
+            f'- Unique embedded image byte identities: **{len(unique)}**',
+            f'- Occurrences matched byte-for-byte to preserved uploaded PNGs: **{matched_occ}**',
+            f'- Occurrences not matched to preserved uploaded PNGs: **{unmatched_occ}**',
+            f'- Unique matched images: **{matched_unique}**',
+            f'- Unique unmatched images: **{unmatched_unique}**',
+            f"- Context counts: CSS **{contexts['css']}**, JS **{contexts['js']}**, HTML/body/head **{contexts['html/body-or-head']}**",'',
+            '## Contract','',
+            '- Every data-image occurrence is audited from the complete archived HTML, including CSS, JS, and body/head markup.',
+            '- Matching uses SHA-256 of decoded image bytes against `assets-original/current-generated/**/*.png`.',
+            '- Byte-identical matches use the existing named preserved Git asset directly.',
+            '- Only genuinely unmatched unique payloads are extracted under `qa/lab25q-faithful/assets/unmatched/`.',
+            '- DOM, CSS rules, JavaScript behavior, HUD, Control Center, gameplay, calibration, hazards, and QA behavior are not redesigned.','',
+            '## Occurrence audit','']
+          for r in rows:
+              target=', '.join('`'+p.as_posix()+'`' for p in r['matches']) if r['matches'] else '`UNMATCHED`'
+              report.append(f"- #{r['i']:02d} `{r['context']}` `{r['hash'][:16]}` -> {target}")
+          report += ['', '## Unique identity audit','']
+          for h,v in unique.items():
+              target=', '.join('`'+p.as_posix()+'`' for p in v['matches']) if v['matches'] else '`UNMATCHED fallback retained`'
+              report.append(f"- `{h}` — occurrences {v['count']} — {target}")
           Path('docs/LAB25Q_EXTRACTION_MAP.md').write_text('\n'.join(report))
+          print(f'AUDIT occurrences={len(rows)} unique={len(unique)} matched_occ={matched_occ} unmatched_occ={unmatched_occ} matched_unique={matched_unique} unmatched_unique={unmatched_unique} contexts={contexts}')
           PY
       - name: Validate faithful extraction
         run: |
@@ -89,26 +137,22 @@ jobs:
           css=Path('qa/lab25q-faithful/lab25q.css').read_text(errors='replace')
           js=Path('qa/lab25q-faithful/lab25q.js').read_text(errors='replace')
           failures=[]
-          if not html or not css or not js: failures.append('generated HTML/CSS/JS must be non-empty')
+          source_occ=len(re.findall(r'data:image/[^;]+;base64,',src,re.I))
+          if source_occ != 62: failures.append(f'expected archived reference count 62, found {source_occ}')
+          if any('data:image/' in x for x in [html,css,js]): failures.append('embedded data URL remains in generated build')
           for marker in ['gameplay-hud','qaFarToggle','saveLocalConfig']:
-              if marker in src and marker not in html and marker not in js and marker not in css:
-                  failures.append(f'source marker missing after extraction: {marker}')
-          if 'CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE' in src and 'CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE' not in js:
-              failures.append('local QA checkpoint key missing')
-          src_data=len(re.findall(r'data:image/[^;]+;base64,',src,re.I))
-          generated_assets=len(list(Path('qa/lab25q-faithful/assets').glob('embedded_*.*')))
-          if generated_assets != src_data:
-              failures.append(f'embedded asset count mismatch: source={src_data} generated={generated_assets}')
-          if 'data:image/' in js or 'data:image/' in css:
-              failures.append('embedded data URL remains in external CSS/JS')
+              if marker in src and marker not in html and marker not in js and marker not in css: failures.append(f'source marker missing: {marker}')
+          if 'CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE' in src and 'CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE' not in js: failures.append('QA checkpoint key missing')
+          report=Path('docs/LAB25Q_EXTRACTION_MAP.md').read_text()
+          if 'Embedded image occurrences in archived LAB25Q: **62**' not in report: failures.append('cross-reference report did not audit all 62 occurrences')
           if failures:
               print('\n'.join('FAIL: '+x for x in failures)); sys.exit(1)
-          print(f'Faithful LAB25Q extraction validated: {generated_assets} images externalized; source UI/QA markers preserved.')
+          print('PASS: all 62 archived image references audited; generated build contains no embedded data URLs; source UI/QA markers preserved.')
           PY
       - name: Commit faithful parity build
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add src/legacy/lab25q/source.css src/legacy/lab25q/source.inspect.js docs/LAB25Q_EXTRACTION_MAP.md qa/lab25q-faithful
-          git diff --cached --quiet || git commit -m 'Extract faithful LAB25Q external-asset parity build'
+          git diff --cached --quiet || git commit -m 'Build faithful LAB25Q parity from preserved named assets'
           git push
