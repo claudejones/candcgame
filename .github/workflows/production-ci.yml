@@ -22,6 +22,7 @@ jobs:
           test -f src/css/game.css
           test -f src/css/mode-shell.css
           test -f src/css/asset-navigator.css
+          test -f src/css/contextual-inspector.css
           test -f src/js/game-config.js
           test -f src/js/game-runtime.js
           test -f src/js/config-schema.js
@@ -29,6 +30,8 @@ jobs:
           test -f src/js/bootstrap/development-bootstrap.js
           test -f src/js/dev/mode-shell.js
           test -f src/js/dev/asset-navigator.js
+          test -f src/js/dev/design-draft.js
+          test -f src/js/dev/contextual-inspector.js
           test ! -e src/js/lab25q.js
           test ! -e src/js/lab25q-config.js
           test ! -e src/js/lab25q-runtime.js
@@ -40,17 +43,21 @@ jobs:
           grep -q './js/bootstrap/development-bootstrap.js' src/dev.html
           grep -q './js/dev/mode-shell.js' src/dev.html
           grep -q './js/dev/asset-navigator.js' src/dev.html
-          grep -q './css/asset-navigator.css' src/dev.html
-          grep -q 'PHASE 7C • QA' src/js/dev/mode-shell.js
+          grep -q './js/dev/design-draft.js' src/dev.html
+          grep -q './js/dev/contextual-inspector.js' src/dev.html
+          grep -q './css/contextual-inspector.css' src/dev.html
+          grep -q 'window.CC_DESIGN_SELECTION' src/js/dev/asset-navigator.js
+          grep -q 'window.CC_DESIGN_DRAFT' src/js/dev/design-draft.js
+          grep -q 'SOURCE REGION' src/js/dev/contextual-inspector.js
+          grep -q 'FINE CROP' src/js/dev/contextual-inspector.js
+          grep -q 'SAVE STAGE' src/js/dev/contextual-inspector.js
+          grep -q 'EXPORT' src/js/dev/contextual-inspector.js
           grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
           grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
-          grep -q 'window.CC_DESIGN_SELECTION' src/js/dev/asset-navigator.js
-          grep -q 'Authoring selection only' src/js/dev/asset-navigator.js
-          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator' src/game.html
-          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator' src/js/bootstrap/production-bootstrap.js
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft' src/game.html
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft' src/js/bootstrap/production-bootstrap.js
           grep -q 'window.GAME_CONFIG=' src/js/game-config.js
           grep -q 'const CONFIG=window.GAME_CONFIG;' src/js/game-runtime.js
-          grep -q 'PHASE 6 • QA' src/index.html
           ! grep -R -nE 'LAB25Q_CONFIG|data:image/' src
           grep -q 'slideDuration:0.75' src/js/game-config.js
           grep -q 'recoveryDuration:1.10' src/js/game-config.js
@@ -72,6 +79,8 @@ jobs:
           node --check src/js/bootstrap/development-bootstrap.js
           node --check src/js/dev/mode-shell.js
           node --check src/js/dev/asset-navigator.js
+          node --check src/js/dev/design-draft.js
+          node --check src/js/dev/contextual-inspector.js
           node <<'NODE'
           const fs=require('fs'),vm=require('vm');
           const context={window:{}}; vm.createContext(context);
@@ -82,8 +91,8 @@ jobs:
           schema.validateLegacyConfig(config);
           const view=schema.buildCompatibilityView(config);
           schema.validateCanonicalView(view);
-          if(schema.GROUND_SURFACE_Y!==410) throw new Error('7B ground surface invariant failed');
-          if(Object.keys(view.stages).length!==9) throw new Error('7B stage compatibility count failed');
+          if(schema.GROUND_SURFACE_Y!==410) throw new Error('ground surface invariant failed');
+          if(Object.keys(view.stages).length!==9) throw new Error('stage compatibility count failed');
           for(const [id,stage] of Object.entries(view.stages)){
             const p=config.worldProfiles[id];
             if(stage.compatibility.legacyRenderedSurfaceY!==p.seamY+p.groundYOffset) throw new Error(`Legacy surface parity failed: ${id}`);
