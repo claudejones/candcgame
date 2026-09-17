@@ -1,0 +1,40 @@
+name: Production CI
+
+on:
+  push:
+    branches: [main, modular-parity-validation]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate production structure and parity guards
+        run: |
+          set -euo pipefail
+          test -f src/index.html
+          test -f src/css/game.css
+          test -f src/js/game-config.js
+          test -f src/js/game-runtime.js
+          test ! -e src/js/lab25q.js
+          test ! -e src/js/lab25q-config.js
+          test ! -e src/js/lab25q-runtime.js
+          test ! -e src/css/lab25q.css
+          grep -q './css/game.css' src/index.html
+          grep -q './js/game-config.js' src/index.html
+          grep -q './js/game-runtime.js' src/index.html
+          grep -q 'window.GAME_CONFIG=' src/js/game-config.js
+          grep -q 'const CONFIG=window.GAME_CONFIG;' src/js/game-runtime.js
+          grep -q 'PHASE 6 • QA' src/index.html
+          ! grep -R -nE 'LAB25Q_CONFIG|data:image/' src
+          grep -q 'slideDuration:0.75' src/js/game-config.js
+          grep -q 'recoveryDuration:1.10' src/js/game-config.js
+          grep -q 'invulnerabilityDuration:2.00' src/js/game-config.js
+          grep -q 'characterX:220' src/js/game-config.js
+          grep -q 'worldSpeed:120' src/js/game-config.js
+          node --check src/js/game-config.js
+          node --check src/js/game-runtime.js
