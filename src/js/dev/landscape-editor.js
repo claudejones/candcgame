@@ -18,12 +18,15 @@
     cfg.worldContract.showGuides=state.guides;
     setLayer(doc,"qaFarToggle",state.far);setLayer(doc,"qaCloudsToggle",state.clouds);setLayer(doc,"qaMidToggle",state.mid);setLayer(doc,"qaGroundToggle",state.ground);
   }
-  function mount(){
-    if(document.getElementById("phase7LandscapeTools"))return;const nav=document.getElementById("phase7AssetNavigator");if(!nav)return;
-    const tools=document.createElement("section");tools.id="phase7LandscapeTools";tools.className="landscape-tools";const h=document.createElement("div");h.className="asset-nav-section-title";h.textContent="LANDSCAPE VIEW";tools.appendChild(h);
+  function ensureTools(){
+    if(window.CC_APP.mode!=="design"||document.getElementById("phase7LandscapeTools"))return;
+    const nav=document.getElementById("phase7AssetNavigator");if(!nav)return;const tools=document.createElement("section");tools.id="phase7LandscapeTools";tools.className="landscape-tools";
+    const h=document.createElement("div");h.className="asset-nav-section-title";h.textContent="LANDSCAPE VIEW";tools.appendChild(h);
     for(const key of ["far","clouds","mid","ground","guides"]){const label=document.createElement("label");label.className="landscape-toggle";const input=document.createElement("input");input.type="checkbox";input.checked=state[key];input.onchange=()=>{state[key]=input.checked;apply();};label.append(input,document.createTextNode(key.toUpperCase()));tools.appendChild(label);}
-    nav.appendChild(tools);frame()?.addEventListener("load",apply);window.CC_DESIGN_SELECTION.onChange(apply);window.CC_DESIGN_DRAFT.onChange(apply);window.CC_APP.onModeChange(apply);apply();
+    nav.appendChild(tools);
   }
-  window.CC_LANDSCAPE_EDITOR=Object.freeze({get layers(){return{...state};},refresh:apply});
+  function refresh(){ensureTools();apply();}
+  function mount(){frame()?.addEventListener("load",refresh);window.CC_DESIGN_SELECTION.onChange(refresh);window.CC_DESIGN_DRAFT.onChange(apply);window.CC_APP.onModeChange(refresh);refresh();}
+  window.CC_LANDSCAPE_EDITOR=Object.freeze({get layers(){return{...state};},refresh});
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount,{once:true});else mount();
 })();
