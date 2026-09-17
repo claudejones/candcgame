@@ -24,4 +24,5 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add docs/LAB25Q_PHASE0_SOURCE_MANIFEST.md
           git diff --cached --quiet || git commit -m 'Document LAB25Q Phase 0 exact source manifest'
-          git push
+          git pull --rebase origin modular-parity-validation
+          git push origin HEAD:modular-parity-validation
