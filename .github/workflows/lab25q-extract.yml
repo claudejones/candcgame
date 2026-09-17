@@ -1,4 +1,4 @@
-name: LAB25Q source extraction
+name: LAB25Q mechanical source extraction
 on:
   workflow_dispatch:
   push:
@@ -11,101 +11,119 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build faithful LAB25Q with current named assets
+      - name: Rebuild one clean source tree directly from archived LAB25Q
         run: |
           python3 - <<'PY'
           from pathlib import Path
           import re, shutil
 
-          src=Path('archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html')
-          s=src.read_text(errors='replace')
-          parity=Path('qa/lab25q-faithful'); parity.mkdir(parents=True,exist_ok=True)
-          shutil.rmtree(parity/'assets',ignore_errors=True)
-          root='../../assets-original/current-generated/'
+          source = Path('archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html')
+          html = source.read_text(errors='strict')
 
-          # LAB25Q contains 62 embedded image occurrences. Their order is stable in the
-          # preserved reference. The current named uploaded assets are production authority;
-          # embedded bytes are historical snapshots and are never retained as fallbacks.
-          rel=[
-            'HUD/UI_LIFE_HEART.png','HUD/UI_STAGE_PROGRESS_CLAUDE_CONSTANCE.png','HUD/UI_STAGE_PROGRESS_PATH.png',
-            'EU-assets/EU01_BG_DISTANT_GREECE.png','EU-assets/EU01_BG_MID_GREECE.png','EU-assets/EU01_GROUND_GREECE.png','EU-assets/EU01_OBJECT_ATLAS_CRATE.png','EU-assets/EU01_HAZARD_ROLLING_BARREL.png','EU-assets/EU01_HAZARD_AEGEAN_GULLS.png',
-            'EU-assets/EU02_BG_DISTANT_PARIS.png','EU-assets/EU02_BG_MID_PARIS.png','EU-assets/EU02_GROUND_PARIS.png','EU-assets/EU02_OBJECT_ATLAS.png','EU-assets/EU02_HAZARD_SWALLOWS.png',
-            'EU-assets/EU03_BG_DISTANT_BARCELONA.png','EU-assets/EU03_BG_MID_BARCELONA.png','EU-assets/EU03_GROUND_BARCELONA.png','EU-assets/EU03_OBJECT_ATLAS.png','EU-assets/EU03_HAZARD_BATS.png',
-            'SA-assets/SA01_BG_DISTANT_AMAZON.png','SA-assets/SA01_BG_MID_AMAZON.png','SA-assets/SA01_GROUND_AMAZON.png','SA-assets/SA01_OBJECT_ATLAS.png','SA-assets/SA01_HAZARD_MACAWS.png',
-            'SA-assets/SA02_BG_DISTANT_ANDES.png','SA-assets/SA02_BG_MID_ANDES.png','SA-assets/SA02_GROUND_ANDES.png','SA-assets/SA02_OBJECT_ATLAS.png','SA-assets/SA02_HAZARD_ANDEAN_FLAMINGO.png',
-            'SA-assets/SA03_BG_DISTANT_RIO.png','SA-assets/SA03_BG_MID_RIO.png','SA-assets/SA03_GROUND_RIO.png','SA-assets/SA03_OBJECT_ATLAS.png','SA-assets/SA03_HAZARD_TROPICAL_PARAKEETS.png',
-            'NA_STAGE_FINISH_MARKER.png','NA-assets/NA01_HAZARD_ATLAS.png','NA-assets/NA01_HAZARD_VULTURE.png','NA-assets/NA02_HAZARD_ATLAS.png','NA-assets/NA02_HAZARD_EAGLE.png','NA-assets/NA03_HAZARD_ATLAS.png','NA-assets/NA03_HAZARD_PIGEONS.png',
-            'characer-states/G1A_RUN_CYCLE_ATLAS.png','characer-states/G1B_IDLE_ATLAS.png','characer-states/G1C_JUMP_ATLAS.png','characer-states/G1D_SLIDE_ATLAS.png','characer-states/G1E_HIT_ATLAS.png','characer-states/G1F_CELEBRATE_ATLAS.png','characer-states/FX_STUN_STARS_ATLAS.png',
-            'NA-assets/NA01_BG_DISTANT_MESAS.png','NA-assets/NA01_BG_MID_DESERT.png','NA-assets/NA01_GROUND_DESERT.png',
-            'NA-assets/NA02_BG_DISTANT_MOUNTAINS.png','NA-assets/NA02_BG_MID_PINES.png','NA-assets/NA02_GROUND_TRAIL.png',
-            'NA-assets/NA03_BG_DISTANT_NYC.png','NA-assets/NA03_BG_MID_CITY.png','NA-assets/NA03_GROUND_CITY.png',
-            'NA-assets/NA01_BG_DISTANT_MESAS.png','NA_CLOUD_LAYER.png',
-            'NA-assets/NA01_HAZARD_ATLAS.png','NA-assets/NA02_HAZARD_ATLAS.png','NA-assets/NA03_HAZARD_ATLAS.png'
+          # Remove superseded implementations. Preservation areas are never touched.
+          shutil.rmtree('src', ignore_errors=True)
+          shutil.rmtree('qa', ignore_errors=True)
+          for p in Path('assets').rglob('.DS_Store'):
+              p.unlink()
+
+          out = Path('src')
+          (out/'css').mkdir(parents=True)
+          (out/'js').mkdir(parents=True)
+
+          # Current named assets are authoritative. Occurrence order is locked to archived LAB25Q.
+          rel = [
+            'hud/UI_LIFE_HEART.png','hud/UI_STAGE_PROGRESS_CLAUDE_CONSTANCE.png','hud/UI_STAGE_PROGRESS_PATH.png',
+            'worlds/europe/EU01_BG_DISTANT_GREECE.png','worlds/europe/EU01_BG_MID_GREECE.png','worlds/europe/EU01_GROUND_GREECE.png','worlds/europe/EU01_OBJECT_ATLAS_CRATE.png','worlds/europe/EU01_HAZARD_ROLLING_BARREL.png','worlds/europe/EU01_HAZARD_AEGEAN_GULLS.png',
+            'worlds/europe/EU02_BG_DISTANT_PARIS.png','worlds/europe/EU02_BG_MID_PARIS.png','worlds/europe/EU02_GROUND_PARIS.png','worlds/europe/EU02_OBJECT_ATLAS.png','worlds/europe/EU02_HAZARD_SWALLOWS.png',
+            'worlds/europe/EU03_BG_DISTANT_BARCELONA.png','worlds/europe/EU03_BG_MID_BARCELONA.png','worlds/europe/EU03_GROUND_BARCELONA.png','worlds/europe/EU03_OBJECT_ATLAS.png','worlds/europe/EU03_HAZARD_BATS.png',
+            'worlds/south-america/SA01_BG_DISTANT_AMAZON.png','worlds/south-america/SA01_BG_MID_AMAZON.png','worlds/south-america/SA01_GROUND_AMAZON.png','worlds/south-america/SA01_OBJECT_ATLAS.png','worlds/south-america/SA01_HAZARD_MACAWS.png',
+            'worlds/south-america/SA02_BG_DISTANT_ANDES.png','worlds/south-america/SA02_BG_MID_ANDES.png','worlds/south-america/SA02_GROUND_ANDES.png','worlds/south-america/SA02_OBJECT_ATLAS.png','worlds/south-america/SA02_HAZARD_ANDEAN_FLAMINGO.png',
+            'worlds/south-america/SA03_BG_DISTANT_RIO.png','worlds/south-america/SA03_BG_MID_RIO.png','worlds/south-america/SA03_GROUND_RIO.png','worlds/south-america/SA03_OBJECT_ATLAS.png','worlds/south-america/SA03_HAZARD_TROPICAL_PARAKEETS.png',
+            'shared/NA_STAGE_FINISH_MARKER.png','worlds/north-america/NA01_HAZARD_ATLAS.png','worlds/north-america/NA01_HAZARD_VULTURE.png','worlds/north-america/NA02_HAZARD_ATLAS.png','worlds/north-america/NA02_HAZARD_EAGLE.png','worlds/north-america/NA03_HAZARD_ATLAS.png','worlds/north-america/NA03_HAZARD_PIGEONS.png',
+            'characters/G1A_RUN_CYCLE_ATLAS.png','characters/G1B_IDLE_ATLAS.png','characters/G1C_JUMP_ATLAS.png','characters/G1D_SLIDE_ATLAS.png','characters/G1E_HIT_ATLAS.png','characters/G1F_CELEBRATE_ATLAS.png','characters/FX_STUN_STARS_ATLAS.png',
+            'worlds/north-america/NA01_BG_DISTANT_MESAS.png','worlds/north-america/NA01_BG_MID_DESERT.png','worlds/north-america/NA01_GROUND_DESERT.png',
+            'worlds/north-america/NA02_BG_DISTANT_MOUNTAINS.png','worlds/north-america/NA02_BG_MID_PINES.png','worlds/north-america/NA02_GROUND_TRAIL.png',
+            'worlds/north-america/NA03_BG_DISTANT_NYC.png','worlds/north-america/NA03_BG_MID_CITY.png','worlds/north-america/NA03_GROUND_CITY.png',
+            'worlds/north-america/NA01_BG_DISTANT_MESAS.png','shared/NA_CLOUD_LAYER.png',
+            'worlds/north-america/NA01_HAZARD_ATLAS.png','worlds/north-america/NA02_HAZARD_ATLAS.png','worlds/north-america/NA03_HAZARD_ATLAS.png'
           ]
-          pat=re.compile(r'data:image/[^;]+;base64,[A-Za-z0-9+/=]+',re.I)
-          occ=list(pat.finditer(s))
-          if len(occ)!=62 or len(rel)!=62:
-              raise SystemExit(f'LAB25Q image contract mismatch: source={len(occ)} map={len(rel)}')
-          missing=[p for p in rel if not Path('assets-original/current-generated',p).is_file()]
-          if missing: raise SystemExit('Missing named assets: '+', '.join(missing))
-          it=iter(root+p for p in rel)
-          rebuilt=pat.sub(lambda m:next(it),s)
+          image_pat = re.compile(r'data:image/[^;]+;base64,[A-Za-z0-9+/=]+', re.I)
+          occurrences = list(image_pat.finditer(html))
+          if len(occurrences) != 62 or len(rel) != 62:
+              raise SystemExit(f'Image contract mismatch: source={len(occurrences)} map={len(rel)}')
+          missing = [p for p in sorted(set(rel)) if not Path('assets',p).is_file()]
+          if missing:
+              raise SystemExit('Missing current named assets:\n' + '\n'.join(missing))
+          paths = iter('../assets/' + p for p in rel)
+          html = image_pat.sub(lambda m: next(paths), html)
 
-          styles=re.findall(r'<style[^>]*>(.*?)</style>',rebuilt,re.I|re.S)
-          scripts=re.findall(r'<script(?![^>]*\\bsrc=)[^>]*>(.*?)</script>',rebuilt,re.I|re.S)
-          css='\n\n/* ---- source style block ---- */\n'.join(styles)
-          js='\n\n// ---- source script block ----\n'.join(scripts)
-          body_match=re.search(r'<body([^>]*)>(.*?)</body>',rebuilt,re.I|re.S)
-          if not body_match: raise SystemExit('LAB25Q body not found')
-          body_attrs,body=body_match.group(1),body_match.group(2)
-          body=re.sub(r'<script(?![^>]*\\bsrc=)[^>]*>.*?</script>','',body,flags=re.I|re.S)
-          head_match=re.search(r'<head[^>]*>(.*?)</head>',rebuilt,re.I|re.S)
-          head=head_match.group(1) if head_match else ''
-          head=re.sub(r'<style[^>]*>.*?</style>','',head,flags=re.I|re.S)
-          head=re.sub(r'<script(?![^>]*\\bsrc=)[^>]*>.*?</script>','',head,flags=re.I|re.S)
-          (parity/'lab25q.css').write_text(css)
-          (parity/'lab25q.js').write_text(js)
-          (parity/'index.html').write_text('<!doctype html><html><head>'+head+'<link rel="stylesheet" href="./lab25q.css"></head><body'+body_attrs+'>'+body+'<script src="./lab25q.js"></script></body></html>')
+          # Mechanical externalization: replace each inline STYLE/SCRIPT exactly where it occurs.
+          # Do not concatenate or move scripts: preserving source position preserves execution timing.
+          style_n = 0
+          script_n = 0
+          token_pat = re.compile(r'<style(?P<sa>[^>]*)>(?P<css>.*?)</style>|<script(?P<ja>(?![^>]*\\bsrc=)[^>]*)>(?P<js>.*?)</script>', re.I|re.S)
+          def externalize(m):
+              global style_n, script_n
+              if m.group('css') is not None:
+                  style_n += 1
+                  name = f'lab25q-{style_n:02d}.css'
+                  (out/'css'/name).write_text(m.group('css'))
+                  return f'<link rel="stylesheet" href="./css/{name}">'
+              script_n += 1
+              name = f'lab25q-{script_n:02d}.js'
+              (out/'js'/name).write_text(m.group('js'))
+              return f'<script src="./js/{name}"></script>'
+          rebuilt = token_pat.sub(externalize, html)
+          (out/'index.html').write_text(rebuilt)
 
-          report=['# LAB25Q Named Asset Map','',
-            '- Archived LAB25Q image occurrences: **62**',
-            '- Generated embedded/base64 images: **0**',
-            '- Anonymous fallback images: **0**',
-            '- Asset authority: `assets-original/current-generated/` (current named uploaded assets)',
-            '- Archived LAB25Q remains immutable.','',
-            '## Reference map','']
-          for i,p in enumerate(rel): report.append(f'- #{i:02d} -> `{p}`')
-          report += ['', '## Historical-only entries still present in LAB25Q code','',
-            '- The earlier duplicate `far` property is mapped to the current `NA01_BG_DISTANT_MESAS.png`; the later `far` property still wins exactly as in LAB25Q.',
-            '- `na01Objects`, `na02Objects`, and `na03Objects` are mapped to the current named NA hazard atlases. They are retained for parity until dead-code removal is separately verified.',
-            '- `G1D_DUCK_ATLAS.png` is not referenced; Slide maps to current `G1D_SLIDE_ATLAS.png`.']
-          Path('docs/LAB25Q_EXTRACTION_MAP.md').write_text('\n'.join(report))
+          Path('docs/LAB25Q_EXTRACTION_MAP.md').write_text(
+              '# LAB25Q Mechanical Extraction\n\n'
+              f'- Source: `{source}`\n'
+              f'- Embedded image occurrences replaced: **{len(rel)}**\n'
+              f'- External CSS blocks: **{style_n}**\n'
+              f'- External JavaScript blocks: **{script_n}**\n'
+              '- HTML/DOM order: preserved from LAB25Q.\n'
+              '- CSS block order/content: preserved; only externalized.\n'
+              '- JavaScript block order/content: preserved; only externalized.\n'
+              '- Asset authority: `assets/` current named files.\n'
+              '- `archive/` and `assets-original/`: untouched.\n'
+              '- Superseded `qa/` builds and previous `src/` shell: removed.\n\n'
+              '## Image map\n\n' + '\n'.join(f'- #{i:02d} → `assets/{p}`' for i,p in enumerate(rel)) + '\n'
+          )
+          print(f'Extracted LAB25Q mechanically: {style_n} CSS blocks, {script_n} JS blocks, 62 image references.')
           PY
-      - name: Validate named-asset extraction
+
+      - name: Validate structural parity and repository cleanup
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re,sys
-          files=[Path('qa/lab25q-faithful/index.html'),Path('qa/lab25q-faithful/lab25q.css'),Path('qa/lab25q-faithful/lab25q.js')]
-          text='\n'.join(p.read_text(errors='replace') for p in files)
+          import re, sys
+          src = Path('archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html').read_text(errors='strict')
+          built = Path('src/index.html').read_text(errors='strict')
           fail=[]
-          if 'data:image/' in text: fail.append('embedded data URL remains')
-          if 'assets/unmatched' in text: fail.append('anonymous fallback reference remains')
-          if Path('qa/lab25q-faithful/assets').exists(): fail.append('anonymous fallback directory remains')
-          for marker in ['gameplay-hud','qaFarToggle','saveLocalConfig','CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE']:
-              if marker not in text: fail.append('missing LAB25Q marker: '+marker)
-          refs=set(re.findall(r'\.\./\.\./assets-original/current-generated/[^\"\'\)\s]+',text))
-          for ref in refs:
-              disk=Path(ref.replace('../../','',1))
-              if not disk.is_file(): fail.append('broken asset ref: '+ref)
+          if Path('qa').exists(): fail.append('superseded qa directory remains')
+          if 'data:image/' in built: fail.append('embedded image remains in generated HTML')
+          if 'assets-original/' in built: fail.append('runtime still references preservation assets')
+          if 'assets/unmatched' in built: fail.append('anonymous fallback reference remains')
+          for p in Path('src').rglob('*'):
+              if p.is_file() and p.suffix in ('.js','.css','.html'):
+                  t=p.read_text(errors='replace')
+                  if 'data:image/' in t: fail.append(f'embedded image remains: {p}')
+          for marker in ['gameplay-hud','debugPanel','tunerPanel','gameplayActions','qaFarToggle','saveLocalConfig','CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE']:
+              if marker not in (built + '\n' + '\n'.join(p.read_text(errors='replace') for p in Path('src/js').glob('*.js'))):
+                  fail.append('missing LAB25Q marker: '+marker)
+          # Exact non-payload DOM token counts must survive.
+          for token in ['id="game"','id="debugPanel"','id="tunerPanel"','class="tuner collapsed"','id="gameSlideBtn"','id="gamePauseBtn"','id="gameJumpBtn"']:
+              if built.count(token) != src.count(token): fail.append('DOM parity count mismatch: '+token)
           if fail:
-              print('\n'.join('FAIL: '+x for x in fail));sys.exit(1)
-          print(f'PASS: named-asset LAB25Q build; {len(refs)} unique current asset files referenced; zero embedded/fallback images.')
+              print('\n'.join('FAIL: '+x for x in fail)); sys.exit(1)
+          print('PASS: one clean LAB25Q-derived source tree; DOM markers preserved; no embedded/fallback/preservation asset references.')
           PY
-      - name: Commit named-asset parity build
+
+      - name: Commit clean LAB25Q-derived source tree
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add -A qa/lab25q-faithful docs/LAB25Q_EXTRACTION_MAP.md
-          git diff --cached --quiet || git commit -m 'Build LAB25Q against current named assets only'
+          git add -A src qa assets docs/LAB25Q_EXTRACTION_MAP.md
+          git diff --cached --quiet || git commit -m 'Replace experimental shells with mechanical LAB25Q extraction'
           git push
