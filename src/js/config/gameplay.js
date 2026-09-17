@@ -5,7 +5,8 @@ export const GAMEPLAY_CONFIG={
  state:{run:{frames:4,fps:9,scroll:true},idle:{frames:2,fps:1.4,scroll:false},jump:{frames:3,fps:0,scroll:true},slide:{frames:2,fps:10,scroll:true},hit:{frames:3,fps:0,scroll:false},celebrate:{frames:4,fps:6,scroll:false}},
  cropInsets:{claude:{slide:[{l:0,r:0,t:0,b:0},{l:0,r:0,t:0,b:0}]},constance:{slide:[{l:0,r:0,t:0,b:0},{l:55,r:0,t:0,b:0}]}},
  jump:{launch:-402,gravity:825},
- actions:{slideDuration:.75,productionSlideDuration:.70},
+ // Approved production decision supersedes LAB25Q's historical .75 implementation value.
+ actions:{slideDuration:.70,legacyLab25QSlideDuration:.75},
  hitRecovery:{recoveryDuration:1.10,invulnerabilityDuration:2,showStars:true},
  footOffset:{claude:19,constance:20},
  star:{cell:{w:240,h:150},fps:10,scale:{claude:.36,constance:.34},yOffset:{claude:4,constance:4}},
