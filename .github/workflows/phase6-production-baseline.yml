@@ -73,7 +73,7 @@ jobs:
                     grep -q 'window.GAME_CONFIG' src/js/game-config.js
                     grep -q 'const CONFIG=window.GAME_CONFIG' src/js/game-runtime.js
                     ! grep -R -n 'LAB25Q_CONFIG\|data:image/' src
-                    grep -q 'slideDuration:.75' src/js/game-config.js
+                    grep -q 'slideDuration:0.75' src/js/game-config.js
                     grep -q 'recoveryDuration:1.10,invulnerabilityDuration:2.00' src/js/game-config.js
                     grep -q 'canvas:{w:960,h:540}' src/js/game-config.js
                     grep -q 'PHASE 6 • QA' src/index.html
@@ -147,7 +147,7 @@ jobs:
           grep -q './css/game.css' src/index.html && grep -q './js/game-config.js' src/index.html && grep -q './js/game-runtime.js' src/index.html
           grep -q 'window.GAME_CONFIG' src/js/game-config.js && grep -q 'const CONFIG=window.GAME_CONFIG' src/js/game-runtime.js
           ! grep -R -n 'LAB25Q_CONFIG\|data:image/' src
-          grep -q 'slideDuration:.75' src/js/game-config.js
+          grep -q 'slideDuration:0.75' src/js/game-config.js
           grep -q 'recoveryDuration:1.10,invulnerabilityDuration:2.00' src/js/game-config.js
           grep -q 'canvas:{w:960,h:540}' src/js/game-config.js
           grep -q 'PHASE 6 • QA' src/index.html
