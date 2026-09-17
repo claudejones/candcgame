@@ -7,7 +7,7 @@ Phase 6 is complete and user-verified. Phase 7 establishes the production author
 
 Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game-config.js`, `src/js/game-runtime.js`, with semantic assets under `assets/`.
 
-Phase 7 development modules now include mode shell, Asset Navigator, isolated/local design draft, Contextual Inspector, Landscape Editor, Hazard/Atlas Editor, Character Editor and Runtime Monitor. Production remains `src/game.html` with production bootstrap only.
+Phase 7 development modules include mode shell, Asset Navigator, isolated/local design draft, Contextual Inspector, Landscape Editor, Hazard/Atlas Editor, Character Editor, Runtime Monitor and focused Test controls. Production remains `src/game.html` with production bootstrap only.
 
 ## Migration status
 - Phase 0–6: COMPLETE / user verified where applicable
@@ -17,10 +17,11 @@ Phase 7 development modules now include mode shell, Asset Navigator, isolated/lo
 - Phase 7D Design Asset Navigator: COMPLETE / CI accepted
 - Phase 7E Contextual Inspector framework: COMPLETE / CI accepted (run #78)
 - Phase 7F Landscape editor: COMPLETE / CI accepted (run #98)
-- Phase 7G Hazard/atlas editor: IMPLEMENTED / combined 7G-7I CI checkpoint pending
-- Phase 7H Character editor: IMPLEMENTED / combined 7G-7I CI checkpoint pending
-- Phase 7I Runtime Monitor: IMPLEMENTED / combined 7G-7I CI checkpoint pending
-- Phase 7J + 7K Test/Game runtime modes: NEXT after combined checkpoint acceptance
+- Phase 7G Hazard/atlas editor: COMPLETE / CI accepted (run #122)
+- Phase 7H Character editor: COMPLETE / CI accepted (run #122)
+- Phase 7I Runtime Monitor: COMPLETE / CI accepted (run #122)
+- Phase 7J Test mode: IMPLEMENTED / combined 7J-7K CI acceptance pending
+- Phase 7K Game mode: IMPLEMENTED / combined 7J-7K CI acceptance pending
 
 ## Coordinate/config authority
 Canonical logical viewport: `960 x 540`. Canonical production ground surface: `GROUND_SURFACE_Y = 410`. Canonical asset vocabulary: `SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> GAMEPLAY ANCHOR -> COLLISION`.
@@ -32,21 +33,14 @@ All Design-mode saves persist only to browser `localStorage` under `cc-world-des
 
 Design supports EXPORT STAGE and EXPORT GAME CONFIG. Full-game export contains schema version, coordinate contract, global character authoring values and all current stage drafts, including current unsaved values.
 
-## Phase 7F Landscape Editor
-Landscape visibility/isolation covers FAR, CLOUDS, MID, GROUND and guides. Scale, Offset Y and Parallax draft changes preview live against the isolated iframe runtime. Canonical Offset X remains saved/exported but is not faked through legacy world scroll.
+## Phase 7G-7I accepted block
+Production CI run #122 completed successfully against `f9fb15e1b0437639d25bea66fb67d2b0dd736496`. Hazard/atlas editing, character editing and Runtime Monitor therefore pass the combined structural/schema/parity checkpoint.
 
-## Phase 7G Hazard/Atlas Editor
-Hazard authoring preserves existing atlas files. The Contextual Inspector exposes source rectangle X/Y/W/H separately from non-negative fine crop L/R/T/B, scale, X/Y placement or ground adjustment, and collision W/H/X/Y. A Full Atlas view renders the complete atlas with the active source rectangle outlined.
+## Phase 7J Test mode
+Development TEST mode now exposes only focused validation controls around the shared runtime: stage, character, Run, Reset, Unlimited Lives, collision bounds and ground guide. It does not expose Design authoring controls. It uses the same iframe renderer/configuration rather than a second gameplay implementation.
 
-The isolated Design iframe receives temporary hazard preview values only. Source rectangle changes therefore allow assets such as the Gaudí Mosaic Bench to reveal artwork beyond the old source boundary without negative crop or splitting the atlas. Collision bounds are enabled in the Design preview. Parent `GAME_CONFIG` remains unchanged.
-
-## Phase 7H Character Editor
-Character authoring supports Claude/Constance and Idle/Run/Jump/Slide/Hit/Celebrate state selection. Global character master scale, per-state scale, render offsets and collision geometry are stored in the local Design draft; stage-specific grounding remains stage-scoped.
-
-The selected character/state atlas cell is shown with crop bounds. Existing per-frame crop data, including the approved Constance Slide frame-2 left crop, is preserved. Character crop/collision diagnostics are enabled only in the isolated Design preview; approved atlases are unchanged.
-
-## Phase 7I Runtime Monitor
-A collapsible Runtime Monitor observes the shared iframe without writing configuration. It reports build identifier, stage, character/state/frame, canonical/rendered ground information, world/time status, selected hazard/collision status, spawn phase/counts and last runtime event. It is hidden in GAME mode.
+## Phase 7K Game mode
+Development GAME view remains a clean shared-renderer view with development authoring/test panels hidden. The separate production entry remains `src/game.html`, whose production bootstrap declares GAME as its only mode. Production CI explicitly rejects development/Test module references from `src/game.html` and the production bootstrap.
 
 ## Known deferred calibration/content work
 - landscape FAR/MID/GROUND geometry/alignment regeneration
@@ -57,7 +51,7 @@ A collapsible Runtime Monitor observes the shared iframe without writing configu
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-After the combined 7G-7I CI/regression checkpoint passes, proceed as one execution block with Phase 7J Test mode + Phase 7K Game mode. Then complete 7L persistence/finalization + 7M regression/CI/deployment as the final Phase 7 block.
+After the combined 7J-7K CI/regression checkpoint passes, complete 7L persistence/finalization + 7M regression/CI/deployment as the final Phase 7 block.
 
 Do not begin Phase 8 landscape regeneration until Phase 7 is accepted.
 
