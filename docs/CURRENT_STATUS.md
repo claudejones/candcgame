@@ -3,7 +3,7 @@
 Last updated: 2026-09-17
 
 ## Production baseline
-Phase 6 production naming/cleanup was deployed and user-verified. Phase 7 is now the active production-authoring architecture phase; asset regeneration does not begin until Phase 7 is accepted.
+Phase 6 is complete and user-verified. Phase 7 establishes the production authoring architecture before Phase 8 landscape regeneration.
 
 Active application source:
 - `src/index.html`
@@ -12,54 +12,68 @@ Active application source:
 - `src/js/game-runtime.js`
 - external semantic assets under `assets/`
 
+Phase 7 schema/architecture source:
+- `src/js/config-schema.js`
+- `docs/PHASE7A_COORDINATE_AUDIT.md`
+- `docs/PHASE7B_CANONICAL_CONFIG_SCHEMA.md`
+- `docs/WORLD_RENDERING_SPEC.md`
+- `docs/PHASE7_AUTHORING_ARCHITECTURE_EXECUTION_SPEC.md`
+
 The historical LAB25Q harness remains preserved unchanged under `archive/LAB25Q/` as behavioral/provenance evidence. It is not an active runtime dependency. `assets-original/` remains immutable.
 
-## Migration / architecture status
+## Migration status
 - Phase 0 inventory: COMPLETE
 - Phase 1 HTML/CSS/JS extraction: COMPLETE / user verified
 - Phase 2 semantic asset mapping: COMPLETE
 - Phase 3 asset classification: COMPLETE
 - Phase 4 external asset migration: COMPLETE / user verified across all 9 current stages
 - Phase 5 configuration extraction: COMPLETE / user verified
-- Phase 6 production naming/cleanup: COMPLETE / deployed and user verified
+- Phase 6 production naming/cleanup: COMPLETE / user verified
 - Phase 7A coordinate and viewport contract: COMPLETE
-- Phase 7B canonical configuration schema: NEXT
+- Phase 7B canonical configuration schema: IMPLEMENTED / CI validation pending
+- Phase 7C modular application shell/bootstrap split: NEXT after 7B CI acceptance
 
-Production source contains no Base64/data-image assets. Active production filenames/config identity no longer use LAB25Q migration terminology.
+Production source contains no Base64/data-image assets. Historical migration evidence remains in `archive/` and Git history.
 
-## Phase 7A locked coordinate contract
-Authoritative documents:
-- `docs/WORLD_RENDERING_SPEC.md`
-- `docs/PHASE7A_COORDINATE_AUDIT.md`
-- `docs/PHASE7_AUTHORING_ARCHITECTURE_EXECUTION_SPEC.md`
+## Phase 7A coordinate authority
+Canonical logical viewport: `960 x 540`.
+Canonical production ground surface: `GROUND_SURFACE_Y = 410`.
+This is the exact 2x mapping of the recovered 480x270 / Y=205 production composition. Browser/device scaling is presentation-only.
 
-Locked production geometry:
-- logical viewport: 960x540
-- world top/bottom: 0 / 540
-- `GROUND_SURFACE_Y = 410`
-- terrain/depth below surface: 130 px
-- browser/device scaling is presentation-only
-- FAR normally starts at Y=0
-- FAR/MID/GROUND overlap in one coordinate system and use deliberate overscan
-- character feet, hazards and finish marker derive from the canonical surface
+Legacy stage `seamY` and landscape offsets remain calibration evidence only. They are not canonical gameplay-coordinate authority.
 
-The 410 surface is the exact 2x reconciliation of the recovered original 480x270 / baseline-205 composition. Current Phase 6 stage seam/offset values remain compatibility evidence only.
+## Phase 7B configuration architecture
+`src/js/config-schema.js` defines and validates the Phase 7B compatibility/canonical view without mutating the live Phase 6 `GAME_CONFIG` or renderer.
 
-## Phase 7B objective
-Create the canonical saved-authoring schema and separate it from transient runtime/QA state. Artwork placement and gameplay anchoring must become separate concepts. Existing nine stages must remain representable through compatibility mapping while the final production model no longer requires stage-specific world seams.
+The schema separates:
+- authored production configuration;
+- legacy Phase 6 compatibility calibration;
+- transient runtime state;
+- development/QA state.
 
-Atlas/sprite-sheet strategy remains. Asset transforms follow SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> COLLISION.
+Canonical asset vocabulary:
+`SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> GAMEPLAY ANCHOR -> COLLISION`.
+
+All canonical character, hazard and finish gameplay anchors resolve from Y=410. Legacy seams/surfaces remain explicitly representable so the nine existing stages can still be regression-tested without artwork changes while later Phase 7 gates migrate the renderer/application shell.
+
+Phase 7B intentionally does not force the live Phase 6 renderer onto Y=410. That would alter the user-verified presentation before the compatibility/bootstrap migration is ready.
 
 ## Known deferred calibration/content work
-- Phase 8 landscape FAR/MID/GROUND regeneration against the locked contract
+- landscape FAR/MID/GROUND geometry/alignment regeneration
 - final character grounding/positioning after landscape correction
 - hazard visual size/position calibration after landscape correction
 - hazard/player collision hitbox calibration after landscape correction
-- historical Slide 0.75s versus production-spec 0.70s reconciliation
+- historical LAB25Q Slide 0.75s versus production-spec 0.70s reconciliation
 - cold first-load optimization / staged asset loading
+
+## Next production step
+After Phase 7B CI acceptance, proceed to Phase 7C: establish production and development/QA bootstraps around the same renderer/configuration while proving that Design/Test authoring code is absent from the production dependency graph.
+
+Do not begin Phase 8 landscape regeneration until Phase 7 is accepted.
 
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.
 - Approved character/hazard/shared assets are not regenerated, resized, normalized, or replaced for convenience.
-- Phase 7 structural work preserves approved Phase 6 gameplay unless a separate explicit decision changes it.
+- Structural changes preserve the user-approved Phase 6 behavior unless a separate explicit decision changes gameplay.
+- Legacy Phase 6 calibration values remain evidence until replacement assets are authored.
 - G1D is Slide, not Duck.
