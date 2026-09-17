@@ -26,16 +26,42 @@ jobs:
         with:
           ref: modular-parity-validation
 
+      - name: Build lightweight Pages bundle
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+
+          # Runtime QA build.
+          cp -R src _site/src
+
+          # Visual asset-comparison QA page, when present.
+          if [ -d qa/asset-compare ]; then
+            mkdir -p _site/qa
+            cp -R qa/asset-compare _site/qa/asset-compare
+          fi
+
+          # Current named assets are required by both the runtime and comparison page.
+          cp -R assets _site/assets
+
+          # GitHub Pages should serve these files as-is.
+          touch _site/.nojekyll
+
+          echo "Pages bundle contents:"
+          du -sh _site
+          find _site -maxdepth 3 -type f | sort | head -200
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload repository as Pages artifact
+      - name: Upload lightweight Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-# Main is the approved Pages deployment gateway. Current target: LAB25Q Phase 4 HUD Gate A.
+# Main is the approved Pages deployment gateway. It intentionally excludes
+# archive/, assets-original/, docs/, workflows, and other repository-only files.
