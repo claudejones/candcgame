@@ -10,11 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate Phase 7 production and authoring architecture
+      - name: Validate Phase 7 final integration
         run: |
           set -euo pipefail
-          for f in src/index.html src/game.html src/dev.html src/css/game.css src/js/game-config.js src/js/game-runtime.js src/js/config-schema.js src/js/bootstrap/production-bootstrap.js src/js/bootstrap/development-bootstrap.js; do test -f "$f"; done
-          for f in mode-shell asset-navigator design-draft contextual-inspector landscape-editor hazard-editor character-editor runtime-monitor test-mode; do test -f "src/js/dev/$f.js"; grep -q "./js/dev/$f.js" src/dev.html; done
+          for f in src/index.html src/game.html src/dev.html src/css/game.css src/js/game-config.js src/js/game-runtime.js src/js/config-schema.js src/js/runtime-host-api.js src/js/game-host-ui.js src/js/bootstrap/production-bootstrap.js src/js/bootstrap/development-bootstrap.js; do test -f "$f"; done
+          for f in mode-shell asset-navigator design-draft contextual-inspector landscape-editor hazard-editor character-editor finish-marker-editor runtime-monitor test-mode; do test -f "src/js/dev/$f.js"; grep -q "./js/dev/$f.js" src/dev.html; done
+          grep -q 'PHASE 7 • QA' src/js/runtime-host-api.js
+          ! grep -R -nE 'PHASE 7G.?7I|PHASE 7J.?7K' src/js/dev
+          grep -q 'phase7HostedRuntimeStyle' src/js/runtime-host-api.js
+          grep -q '.debug,.tuner,.tuner-tab,.status,.legend,.build-id' src/js/runtime-host-api.js
+          grep -q 'setCollisionBounds' src/js/runtime-host-api.js
+          grep -q 'characterQA.showCollisionBounds' src/js/runtime-host-api.js
+          grep -q 'objectQA.showBounds' src/js/runtime-host-api.js
+          grep -q 'phase7GameStart' src/js/game-host-ui.js
+          grep -q 'startRun' src/js/game-host-ui.js
+          grep -q 'FINISH MARKER PREVIEW' src/js/dev/finish-marker-editor.js
+          grep -q 'NA_STAGE_FINISH_MARKER.png' src/js/dev/finish-marker-editor.js
           grep -q 'cc-world-design-config-v1' src/js/dev/design-draft.js
           grep -q 'saveAll' src/js/dev/design-draft.js
           grep -q 'importGame' src/js/dev/design-draft.js
@@ -26,17 +37,14 @@ jobs:
           grep -q 'STATE / SOURCE CROP' src/js/dev/character-editor.js
           grep -q 'RUNTIME MONITOR' src/js/dev/runtime-monitor.js
           grep -q 'TEST MODE' src/js/dev/test-mode.js
-          grep -q 'Unlimited Lives' src/js/dev/test-mode.js
           grep -q 'COLLISION BOUNDS' src/js/dev/test-mode.js
-          grep -q 'GROUND GUIDE' src/js/dev/test-mode.js
+          grep -q 'setCollisionBounds(collision)' src/js/dev/test-mode.js
           grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
-          grep -q 'phase: "7K"' src/js/bootstrap/production-bootstrap.js
           grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
-          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|runtime-monitor|test-mode' src/game.html
-          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|runtime-monitor|test-mode' src/js/bootstrap/production-bootstrap.js
-          grep -q './css/game.css' src/index.html
-          grep -q './js/game-config.js' src/index.html
-          grep -q './js/game-runtime.js' src/index.html
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|finish-marker-editor|runtime-monitor|test-mode' src/game.html
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|finish-marker-editor|runtime-monitor|test-mode' src/js/bootstrap/production-bootstrap.js
+          grep -q './js/runtime-host-api.js' src/game.html
+          grep -q './js/game-host-ui.js' src/game.html
           ! grep -R -nE 'LAB25Q_CONFIG|data:image/' src
           grep -q 'slideDuration:0.75' src/js/game-config.js
           grep -q 'recoveryDuration:1.10' src/js/game-config.js
@@ -50,8 +58,7 @@ jobs:
           grep -q 'canvas:{w:960,h:540}' src/js/game-config.js
           grep -q 'slide:\[{l:0,r:0,t:0,b:0},{l:55,r:0,t:0,b:0}\]' src/js/game-config.js
           grep -q 'GROUND_SURFACE_Y = 410' docs/WORLD_RENDERING_SPEC.md
-          grep -q 'displayScale = min(availableWidth / 960, availableHeight / 540)' docs/WORLD_RENDERING_SPEC.md
-          for f in src/js/game-config.js src/js/config-schema.js src/js/game-runtime.js src/js/bootstrap/production-bootstrap.js src/js/bootstrap/development-bootstrap.js src/js/dev/*.js; do node --check "$f"; done
+          for f in src/js/game-config.js src/js/config-schema.js src/js/game-runtime.js src/js/runtime-host-api.js src/js/game-host-ui.js src/js/bootstrap/*.js src/js/dev/*.js; do node --check "$f"; done
           node <<'NODE'
           const fs=require('fs'),vm=require('vm');const context={window:{}};vm.createContext(context);vm.runInContext(fs.readFileSync('src/js/game-config.js','utf8'),context);vm.runInContext(fs.readFileSync('src/js/config-schema.js','utf8'),context);const s=context.window.GAME_SCHEMA,c=context.window.GAME_CONFIG;s.validateLegacyConfig(c);const v=s.buildCompatibilityView(c);s.validateCanonicalView(v);if(s.GROUND_SURFACE_Y!==410)throw Error('ground surface');if(Object.keys(v.stages).length!==9)throw Error('stage count');for(const[id,stage]of Object.entries(v.stages)){const p=c.worldProfiles[id];if(stage.compatibility.legacyRenderedSurfaceY!==p.seamY+p.groundYOffset)throw Error(`surface ${id}`);if(stage.hazards.length!==c.objectQA.defs[id].length)throw Error(`hazards ${id}`);for(const h of stage.hazards)if(Object.values(h.crop).some(n=>n<0))throw Error(`crop ${id}`);}const b=v.stages.eu03.hazards[0];if(b.name!=="Gaudí Mosaic Bench"||b.atlas.sourceRegion.w!==1086)throw Error('Gaudi baseline');if(c.actions.slideDuration!==.75||c.hitRecovery.recoveryDuration!==1.10||c.hitRecovery.invulnerabilityDuration!==2.00)throw Error('gameplay parity');
           NODE
