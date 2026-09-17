@@ -12,12 +12,27 @@
   // Phase 7 hosts call only this API so the legacy DOM IDs never leak into host modules.
   function startRun(){return click("spawnStart");}
   function resetRun(){const w=win(),sp=w?.GAME_CONFIG?.spawnDirector;if(sp?.failed)click("exitRunBtn");return click("spawnReset");}
+  function jump(){return click("gameJumpBtn");}
+  function slide(){return click("gameSlideBtn");}
+  function togglePause(){return click("gamePauseBtn");}
   function setCollisionBounds(on){const w=win();if(!w?.GAME_CONFIG)return false;w.GAME_CONFIG.objectQA.showBounds=!!on;w.GAME_CONFIG.characterQA.showCollisionBounds=!!on;return true;}
   function setGroundGuide(on){const w=win();if(!w?.GAME_CONFIG)return false;w.GAME_CONFIG.worldContract.showGuides=!!on;return true;}
   function setWorldLayers(layers){const d=doc();if(!d)return;for(const [key,id] of Object.entries({far:"qaFarToggle",clouds:"qaCloudsToggle",mid:"qaMidToggle",ground:"qaGroundToggle"})){if(typeof layers[key]!=="boolean")continue;const b=d.getElementById(id);if(b&&b.classList.contains("active")!==layers[key])b.click();}}
   function getState(){const w=win(),d=doc(),cfg=w?.GAME_CONFIG;if(!cfg||!d)return null;const text=id=>d.getElementById(id)?.textContent?.trim()||"—",stage=cfg.activeWorld,profile=cfg.worldProfiles?.[stage],idx=cfg.objectQA?.activeIndex?.[stage]||0,h=cfg.objectQA?.defs?.[stage]?.[idx],sp=cfg.spawnDirector||{};return{build:BUILD_LABEL,stage,stageLabel:profile?.label||stage,character:text("characterLabel"),characterState:text("stateLabel"),frame:text("frameLabel"),renderedSurface:text("worldRenderedSurface"),scroll:text("scrollLabel"),hazard:h?.name||"—",collision:text("objectCollisionState"),spawnTime:text("spawnTime"),spawnPhase:text("spawnPhase"),activeCount:sp.active?.length??0,cleared:sp.cleared??0,hits:sp.hits??0,lastEvent:sp.lastEvent||"—",runEnabled:!!sp.enabled,runPaused:!!sp.paused,runFailed:!!sp.failed,runFinished:!!sp.finished};}
+  function keyboardAllowed(){const tag=document.activeElement?.tagName;return !["INPUT","SELECT","TEXTAREA","BUTTON"].includes(tag);}
+  function handleKeydown(e){
+    if(!keyboardAllowed()||e.repeat)return;
+    const key=e.code||e.key;
+    if(key!=="ArrowUp"&&key!=="ArrowDown"&&key!=="Space"&&key!==" ")return;
+    const state=getState();if(!state?.runEnabled)return;
+    e.preventDefault();
+    if(key==="ArrowUp")jump();
+    else if(key==="ArrowDown")slide();
+    else togglePause();
+  }
   function refresh(){suppressLegacyChrome();}
-  const api=Object.freeze({BUILD_LABEL,frame,win,doc,refresh,setStage,setCharacter,setCharacterState,startRun,resetRun,setCollisionBounds,setGroundGuide,setWorldLayers,getState});
+  const api=Object.freeze({BUILD_LABEL,frame,win,doc,refresh,setStage,setCharacter,setCharacterState,startRun,resetRun,jump,slide,togglePause,setCollisionBounds,setGroundGuide,setWorldLayers,getState});
   window.CC_RUNTIME_API=api;
+  window.addEventListener("keydown",handleKeydown,{passive:false});
   window.addEventListener("DOMContentLoaded",()=>{frame()?.addEventListener("load",refresh);refresh();});
 })();
