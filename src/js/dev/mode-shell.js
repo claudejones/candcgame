@@ -16,7 +16,7 @@
 
     const build = document.createElement("span");
     build.className = "phase7-build-id";
-    build.textContent = "PHASE 7C • QA";
+    build.textContent = "PHASE 7J–7K • QA";
     shell.appendChild(build);
 
     for(const mode of window.CC_APP.build.modes){
