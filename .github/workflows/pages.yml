@@ -21,35 +21,36 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout LAB25Q parity-validation build
+      - name: Checkout exact approved QA build
         uses: actions/checkout@v4
         with:
-          ref: modular-parity-validation
+          # Phase 4 runtime is commit 6132b5e; this later commit changes only
+          # development-branch deployment policy and preserves that runtime exactly.
+          ref: 2fd5275756ba305078dcd29287478b7537bde92e
+
+      - name: Record deployed source SHA
+        run: |
+          set -euo pipefail
+          ACTUAL_SHA="$(git rev-parse HEAD)"
+          EXPECTED_SHA="2fd5275756ba305078dcd29287478b7537bde92e"
+          echo "Deploying source SHA: $ACTUAL_SHA"
+          test "$ACTUAL_SHA" = "$EXPECTED_SHA"
 
       - name: Build lightweight Pages bundle
         run: |
           set -euo pipefail
           rm -rf _site
           mkdir -p _site
-
-          # Runtime QA build.
           cp -R src _site/src
-
-          # Visual asset-comparison QA page, when present.
           if [ -d qa/asset-compare ]; then
             mkdir -p _site/qa
             cp -R qa/asset-compare _site/qa/asset-compare
           fi
-
-          # Current named assets are required by both the runtime and comparison page.
           cp -R assets _site/assets
-
-          # GitHub Pages should serve these files as-is.
           touch _site/.nojekyll
-
+          printf '%s\n' '2fd5275756ba305078dcd29287478b7537bde92e' > _site/DEPLOYED_SOURCE_SHA.txt
           echo "Pages bundle contents:"
           du -sh _site
-          find _site -maxdepth 3 -type f | sort | head -200
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -63,5 +64,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-# Main is the approved Pages deployment gateway. It intentionally excludes
-# archive/, assets-original/, docs/, workflows, and other repository-only files.
+# Main is the only automatic Pages deployment gateway.
+# Each QA deployment pins one exact source commit and publishes only the lightweight runtime bundle.
