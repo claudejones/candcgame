@@ -36,12 +36,19 @@ Phase 6 remains behavior-preserving. Landscape regeneration, grounding, hazard s
 ## 2026-09-17 — Phase 7 production authoring architecture
 Phase 7 precedes landscape regeneration and establishes the authoring architecture. `docs/PHASE7_AUTHORING_ARCHITECTURE_EXECUTION_SPEC.md` is its step-by-step execution authority.
 
-The canonical runtime coordinate system is 960x540. Device/browser scaling is presentation-only; gameplay geometry remains in canonical coordinates. FAR, MID and GROUND overlap in the same viewport. A single fixed production ground surface is to be locked in Phase 7A and becomes the vertical anchor from which character feet, grounded hazards and finish markers derive.
+The canonical runtime coordinate system is 960x540. Device/browser scaling is presentation-only; gameplay geometry remains in canonical coordinates. FAR, MID and GROUND overlap in the same viewport. The fixed production ground surface becomes the vertical anchor from which character feet, grounded/flying hazards and finish markers derive.
 
 The production landscape rule is locked in `docs/WORLD_RENDERING_SPEC.md`: FAR normally renders from Y=0 and owns complete skyline/top coverage; FAR/MID/GROUND use deliberate overscan and overlap; source anchors map deterministically into the canonical viewport; offsets calibrate correctly authored artwork rather than conceal missing coverage.
 
 Design, Test and Game modes use the same renderer/configuration but different modular application shells. The packaged production game must exclude Design/Test authoring and QA modules. A development bootstrap may attach those modules; the production bootstrap imports only production runtime/game modules.
 
-Atlas/sprite-sheet assets remain the preferred strategy where related assets or animation frames naturally belong together. The authoring model is SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> COLLISION. Source rectangles are editable/inspectable, including a full-atlas view; crop cannot reveal pixels outside the selected source rectangle. Numeric authoring controls provide direct numeric entry plus increment/decrement stepping for precision.
+Atlas/sprite-sheet assets remain preferred where related assets or animation frames naturally belong together. The authoring model is SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> COLLISION. Source rectangles are editable/inspectable, including a full-atlas view; crop cannot reveal pixels outside the selected source rectangle. Numeric authoring controls provide direct numeric entry plus increment/decrement stepping for precision.
 
-Phase 6 calibration settings remain evidence until replacement assets are authored. Phase 8 landscape regeneration cannot begin until Phase 7 authoring architecture and the fixed ground-surface contract are accepted.
+Phase 6 calibration settings remain evidence until replacement assets are authored. Phase 8 landscape regeneration cannot begin until Phase 7 authoring architecture is accepted.
+
+## 2026-09-17 — Phase 7A canonical ground surface locked
+`GROUND_SURFACE_Y = 410` is the canonical production surface in the 960x540 logical viewport. This is the exact 2x mapping of the recovered original 480x270 production composition with baseline 205, preserving the original 130-pixel-equivalent terrain depth below the surface. It is not derived by averaging legacy stage offsets.
+
+The Phase 6 renderer currently makes effective ground surface equal to `seamY + groundYOffset`, causing stage-specific visual calibration to move gameplay anchors. Phase 7B must separate visual landscape transforms from canonical gameplay anchoring. The final model derives character foot, grounded hazard foot, flying clearance and finish marker from 410 plus/minus their explicit adjustments and does not require stage-specific world seams.
+
+Responsive display scales the 960x540 viewport uniformly and converts pointer/touch coordinates back into logical coordinates. Browser/CSS dimensions never become gameplay coordinates. Detailed dependency evidence is preserved in `docs/PHASE7A_COORDINATE_AUDIT.md`.
