@@ -39,8 +39,8 @@ The historical LAB25Q harness remains preserved unchanged under `archive/LAB25Q/
 - Phase 6 production naming/cleanup: COMPLETE / user verified
 - Phase 7A coordinate and viewport contract: COMPLETE
 - Phase 7B canonical configuration schema: COMPLETE / CI accepted
-- Phase 7C modular application shell/bootstrap split: IMPLEMENTED / CI acceptance pending
-- Phase 7D Design Asset Navigator: NEXT after 7C CI acceptance
+- Phase 7C modular application shell/bootstrap split: COMPLETE / CI accepted
+- Phase 7D Design Asset Navigator: NEXT
 
 Production source contains no Base64/data-image assets. Historical migration evidence remains in `archive/` and Git history.
 
@@ -61,7 +61,7 @@ All canonical character, hazard and finish gameplay anchors resolve from Y=410. 
 ## Phase 7C application boundary
 `src/game.html` is the production entry and loads the production bootstrap only. `src/dev.html` is the development/QA entry and loads the development bootstrap plus the development-only mode shell.
 
-Both entries mount the same preserved `src/index.html` runtime host, so 7C does not duplicate renderer/configuration logic. Development mode switching changes shell state without recreating the mounted runtime. Production CI now asserts that the production entry/bootstrap cannot reference the development bootstrap, `src/js/dev/**`, or the mode shell.
+Both entries mount the same preserved `src/index.html` runtime host, so 7C does not duplicate renderer/configuration logic. Development mode switching changes shell state without recreating the mounted runtime. Production CI asserts that the production entry/bootstrap cannot reference the development bootstrap, `src/js/dev/**`, or the mode shell. CI run #53 on commit `4f7dd06726053a936c92cc2fb8fea5b88341ac3d` completed successfully.
 
 This is a transitional host boundary. Legacy QA responsibilities still present inside the preserved Phase 6 runtime are progressively extracted by later Phase 7 gates; final consumer GAME shell/package pruning remains a Phase 7K/7M responsibility.
 
@@ -74,7 +74,7 @@ This is a transitional host boundary. Legacy QA responsibilities still present i
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-After 7C CI acceptance, proceed to Phase 7D: implement the Design Asset Navigator while keeping selected authoring asset state independent from gameplay/runtime state.
+Proceed to Phase 7D: implement the Design Asset Navigator while keeping selected authoring asset state independent from gameplay/runtime state.
 
 Do not begin Phase 8 landscape regeneration until Phase 7 is accepted.
 
