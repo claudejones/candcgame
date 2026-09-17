@@ -21,7 +21,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout modular parity QA build
+      - name: Checkout clean LAB25Q-derived build
         uses: actions/checkout@v4
         with:
           ref: modular-parity-validation
@@ -38,4 +38,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-# Pages deployment must be initiated from main; the job checks out the QA branch above.
+# Pages deployment is initiated from main; deployed content is the QA branch above.
