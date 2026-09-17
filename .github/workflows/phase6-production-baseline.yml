@@ -1,0 +1,193 @@
+name: Phase 6 production baseline migration
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: modular-parity-validation
+          fetch-depth: 0
+
+      - name: Verify approved Phase 5 parent
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "ed073ea1c69c9f12599db03ecdc854366fab2c47" || test "$(git rev-parse HEAD)" = "ed073ea1c69c9f12599db03ecdc854366fab2c47"
+
+      - name: Establish production naming and remove dead runtime
+        run: |
+          set -euo pipefail
+          mv src/css/lab25q.css src/css/game.css
+          mv src/js/lab25q-config.js src/js/game-config.js
+          mv src/js/lab25q-runtime.js src/js/game-runtime.js
+          rm src/js/lab25q.js
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('src/js/game-config.js')
+          s=p.read_text().replace('window.LAB25Q_CONFIG','window.GAME_CONFIG')
+          p.write_text(s)
+          p=Path('src/js/game-runtime.js')
+          s=p.read_text().replace('window.LAB25Q_CONFIG','window.GAME_CONFIG')
+          p.write_text(s)
+          p=Path('src/index.html')
+          s=p.read_text()
+          s=s.replace('<title>LAB25Q — WORLD VISUAL OWNERSHIP QA</title>','<title>Claude & Constance Around the World — QA</title>')
+          s=s.replace('./css/lab25q.css','./css/game.css').replace(" data-lab25q-style-attrs=''",'')
+          s=s.replace('<b>LAB25I — SA QA SYSTEMS + ASSET FIX</b><br>','<b>CLAUDE & CONSTANCE — PRODUCTION QA</b><br><span class="build-id">PHASE 6 • QA</span><br>')
+          s=s.replace('LAB25P preserves the validated North America and South America baseline and integrates the approved normalized Europe EU01–EU03 world layers while retaining the shared global cloud layer. ','The production QA baseline contains the validated North America, South America, and Europe stages while retaining the shared global cloud layer. ')
+          s=s.replace('<div class="status" id="status">LAB25P: Normalized Europe World Integration QA — EU01 Greece, EU02 Paris, EU03 Barcelona.</div>','<div class="status" id="status">Production QA baseline — Phase 6.</div>')
+          s=s.replace('./js/lab25q-config.js','./js/game-config.js').replace('./js/lab25q-runtime.js','./js/game-runtime.js')
+          p.write_text(s)
+          p=Path('src/css/game.css')
+          p.write_text(p.read_text()+"\n.build-id{display:inline-block;margin:3px 0 5px;padding:2px 6px;border:1px solid currentColor;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:.08em;opacity:.8}\n")
+          PY
+
+      - name: Remove completed migration workflows
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/lab25q-*.yml
+          rm -f .github/workflows/phase6-production-baseline.yml
+
+      - name: Add production CI
+        run: |
+          cat > .github/workflows/production-ci.yml <<'YAML'
+          name: Production CI
+          on:
+            push:
+              branches: [main, modular-parity-validation]
+            pull_request:
+          permissions:
+            contents: read
+          jobs:
+            validate:
+              runs-on: ubuntu-latest
+              steps:
+                - uses: actions/checkout@v4
+                - name: Production structure and parity guards
+                  run: |
+                    set -euo pipefail
+                    test -f src/index.html
+                    test -f src/css/game.css
+                    test -f src/js/game-config.js
+                    test -f src/js/game-runtime.js
+                    test ! -e src/js/lab25q.js
+                    test ! -e src/js/lab25q-config.js
+                    test ! -e src/js/lab25q-runtime.js
+                    test ! -e src/css/lab25q.css
+                    grep -q './css/game.css' src/index.html
+                    grep -q './js/game-config.js' src/index.html
+                    grep -q './js/game-runtime.js' src/index.html
+                    grep -q 'window.GAME_CONFIG' src/js/game-config.js
+                    grep -q 'const CONFIG=window.GAME_CONFIG' src/js/game-runtime.js
+                    ! grep -R -n 'LAB25Q_CONFIG\|data:image/' src
+                    grep -q 'slideDuration:.75' src/js/game-config.js
+                    grep -q 'recoveryDuration:1.10,invulnerabilityDuration:2.00' src/js/game-config.js
+                    grep -q 'canvas:{w:960,h:540}' src/js/game-config.js
+                    grep -q 'PHASE 6 • QA' src/index.html
+                - name: Verify referenced local runtime files
+                  run: |
+                    python3 - <<'PY'
+                    from pathlib import Path
+                    import re
+                    html=Path('src/index.html').read_text()
+                    for rel in re.findall(r'(?:src|href)="(\./(?:js|css)/[^"]+)"',html):
+                        p=Path('src')/rel[2:]
+                        assert p.exists(), f'Missing referenced file: {p}'
+                    PY
+          YAML
+
+      - name: Update repository status and decision history
+        run: |
+          cat > docs/CURRENT_STATUS.md <<'MD'
+          # Current Status
+
+          Last updated: 2026-09-17
+
+          ## Production baseline
+          Phase 5 was user-verified across the deployed QA build. Phase 6 establishes the production-named source baseline from that approved behavior.
+
+          Live application source is under `src/` and uses:
+          - `src/index.html`
+          - `src/css/game.css`
+          - `src/js/game-config.js`
+          - `src/js/game-runtime.js`
+          - external semantic assets under `assets/`
+
+          The historical LAB25Q harness remains preserved unchanged under `archive/LAB25Q/` as behavioral/provenance evidence. It is not a production runtime dependency. `assets-original/` also remains immutable.
+
+          ## Migration status
+          - Phase 0 inventory: COMPLETE
+          - Phase 1 HTML/CSS/JS extraction: COMPLETE / user verified
+          - Phase 2 semantic asset mapping: COMPLETE
+          - Phase 3 asset classification: COMPLETE
+          - Phase 4 external asset migration: COMPLETE / user verified across all 9 current stages
+          - Phase 5 configuration extraction: COMPLETE / user verified
+          - Phase 6 production baseline cleanup: IMPLEMENTED / awaiting deployed user regression approval
+
+          Production source contains no Base64/data-image assets. Completed one-time LAB25Q migration workflows and duplicate legacy runtime files have been removed from the active codebase; historical source remains in `archive/`.
+
+          ## Known deferred calibration/content work
+          These are intentionally not Phase 6 structural changes:
+          - landscape FAR/MID/GROUND geometry/alignment regeneration
+          - final character grounding/positioning after landscape correction
+          - hazard visual size/position calibration after landscape correction
+          - hazard/player collision hitbox calibration after landscape correction
+          - historical LAB25Q Slide 0.75s versus production-spec 0.70s reconciliation
+          - cold first-load optimization / staged asset loading
+
+          ## Next production step after Phase 6 approval
+          Begin landscape regeneration using the locked universal landscape contract. For each finalized stage, perform final character grounding, hazard size/position, then collision/hitbox calibration.
+
+          ## Guardrails
+          - `archive/` and `assets-original/` remain immutable.
+          - Approved character/hazard/shared assets are not regenerated, resized, normalized, or replaced for convenience.
+          - Structural changes preserve the user-approved Phase 5 behavior unless a separate explicit decision changes gameplay.
+          - G1D is Slide, not Duck.
+          MD
+          cat >> docs/DECISION_LOG.md <<'MD'
+
+          ## 2026-09-17 — Phase 6 production naming and cleanup
+          - Production source must not use LAB25Q as its active application/module identity. LAB25Q is historical reference terminology reserved for the archived harness and migration history.
+          - Active runtime names are `game-config.js`, `game-runtime.js`, and `game.css`; the active configuration global is `window.GAME_CONFIG`.
+          - Duplicate/dead migration runtime files and completed one-time LAB25Q migration workflows are removed from the active codebase after their work is complete. Preserved history remains under `archive/` and in Git history.
+          - QA builds expose a visible phase identifier so screenshots and regression reports can identify the tested build family.
+          - Phase 6 is behavior-preserving; landscape, grounding, hazard sizing/positioning, hitbox calibration, Slide timing reconciliation, and load optimization remain separate follow-on work.
+          MD
+
+      - name: Phase 6 structural QA
+        run: |
+          set -euo pipefail
+          test -f src/index.html
+          test -f src/css/game.css
+          test -f src/js/game-config.js
+          test -f src/js/game-runtime.js
+          test ! -e src/js/lab25q.js
+          test ! -e src/js/lab25q-config.js
+          test ! -e src/js/lab25q-runtime.js
+          test ! -e src/css/lab25q.css
+          grep -q './css/game.css' src/index.html
+          grep -q './js/game-config.js' src/index.html
+          grep -q './js/game-runtime.js' src/index.html
+          grep -q 'window.GAME_CONFIG' src/js/game-config.js
+          grep -q 'const CONFIG=window.GAME_CONFIG' src/js/game-runtime.js
+          ! grep -R -n 'LAB25Q_CONFIG\|data:image/' src
+          grep -q 'slideDuration:.75' src/js/game-config.js
+          grep -q 'recoveryDuration:1.10,invulnerabilityDuration:2.00' src/js/game-config.js
+          grep -q 'canvas:{w:960,h:540}' src/js/game-config.js
+          grep -q 'PHASE 6 • QA' src/index.html
+          git diff --check
+
+      - name: Commit Phase 6 production baseline
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Phase 6 establish production baseline'
+          git push origin HEAD:modular-parity-validation
