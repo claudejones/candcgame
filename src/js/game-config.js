@@ -1,5 +1,5 @@
 "use strict";
-window.LAB25Q_CONFIG={
+window.GAME_CONFIG={
  canvas:{w:960,h:540},
  activeWorld:"sa01",
  worldProfiles:{

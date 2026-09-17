@@ -2,7 +2,7 @@
 (() => {
 "use strict";
 
-const CONFIG=window.LAB25Q_CONFIG;
+const CONFIG=window.GAME_CONFIG;
 
 for(const p of Object.values(CONFIG.worldProfiles)){p.characterGrounding=p.characterGrounding||{claude:0,constance:0};}
 for(const list of Object.values(CONFIG.objectQA.defs)){for(const d of list){d.crop=d.crop||{l:0,r:0,t:0,b:0};}}
