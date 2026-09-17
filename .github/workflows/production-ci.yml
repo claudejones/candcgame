@@ -19,6 +19,12 @@ jobs:
           ! grep -R -nE 'PHASE 7G.?7I|PHASE 7J.?7K' src/js/dev
           grep -q 'phase7HostedRuntimeStyle' src/js/runtime-host-api.js
           grep -q '.debug,.tuner,.tuner-tab,.status,.legend,.build-id' src/js/runtime-host-api.js
+          grep -q 'function startRun(){return click("spawnStart");}' src/js/runtime-host-api.js
+          grep -q 'return click("spawnReset")' src/js/runtime-host-api.js
+          grep -q 'id="spawnStart"' src/index.html
+          grep -q 'id="spawnReset"' src/index.html
+          ! grep -q 'runStageBtn' src/js/runtime-host-api.js
+          ! grep -q 'resetStageBtn' src/js/runtime-host-api.js
           grep -q 'setCollisionBounds' src/js/runtime-host-api.js
           grep -q 'characterQA.showCollisionBounds' src/js/runtime-host-api.js
           grep -q 'objectQA.showBounds' src/js/runtime-host-api.js
