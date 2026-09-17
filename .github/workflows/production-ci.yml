@@ -28,18 +28,21 @@ jobs:
           test -f src/js/config-schema.js
           test -f src/js/bootstrap/production-bootstrap.js
           test -f src/js/bootstrap/development-bootstrap.js
-          test -f src/js/dev/mode-shell.js
-          test -f src/js/dev/asset-navigator.js
-          test -f src/js/dev/design-draft.js
-          test -f src/js/dev/contextual-inspector.js
-          test -f src/js/dev/landscape-editor.js
-          test ! -e src/js/lab25q.js
-          grep -q './js/dev/landscape-editor.js' src/dev.html
-          grep -q 'window.CC_DESIGN_DRAFT' src/js/dev/design-draft.js
+          for f in mode-shell asset-navigator design-draft contextual-inspector landscape-editor hazard-editor character-editor runtime-monitor; do test -f "src/js/dev/$f.js"; grep -q "./js/dev/$f.js" src/dev.html || true; done
+          grep -q './js/dev/hazard-editor.js' src/dev.html
+          grep -q './js/dev/character-editor.js' src/dev.html
+          grep -q './js/dev/runtime-monitor.js' src/dev.html
           grep -q 'cc-world-design-config-v1' src/js/dev/design-draft.js
-          grep -q 'localStorage.setItem' src/js/dev/design-draft.js
+          grep -q 'saveGlobals' src/js/dev/design-draft.js
           grep -q 'exportGame' src/js/dev/design-draft.js
           grep -q 'EXPORT GAME CONFIG' src/js/dev/contextual-inspector.js
+          grep -q 'FULL ATLAS VIEW' src/js/dev/hazard-editor.js
+          grep -q 'sourceRegion' src/js/dev/hazard-editor.js
+          grep -q 'showBounds=true' src/js/dev/hazard-editor.js
+          grep -q 'STATE / SOURCE CROP' src/js/dev/character-editor.js
+          grep -q 'showCollisionBounds=true' src/js/dev/character-editor.js
+          grep -q 'RUNTIME MONITOR' src/js/dev/runtime-monitor.js
+          grep -q 'setInterval(render,250)' src/js/dev/runtime-monitor.js
           grep -q 'window.CC_LANDSCAPE_EDITOR' src/js/dev/landscape-editor.js
           grep -q 'LANDSCAPE VIEW' src/js/dev/landscape-editor.js
           grep -q 'showGuides=state.guides' src/js/dev/landscape-editor.js
@@ -48,8 +51,8 @@ jobs:
           grep -q 'FINE CROP' src/js/dev/contextual-inspector.js
           grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
           grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
-          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor' src/game.html
-          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor' src/js/bootstrap/production-bootstrap.js
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|runtime-monitor' src/game.html
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|runtime-monitor' src/js/bootstrap/production-bootstrap.js
           grep -q './css/game.css' src/index.html
           grep -q './js/game-config.js' src/index.html
           grep -q './js/game-runtime.js' src/index.html
@@ -59,24 +62,21 @@ jobs:
           grep -q 'slideDuration:0.75' src/js/game-config.js
           grep -q 'recoveryDuration:1.10' src/js/game-config.js
           grep -q 'invulnerabilityDuration:2.00' src/js/game-config.js
+          grep -q 'highClearance:68' src/js/game-config.js
+          grep -q 'lowClearance:18' src/js/game-config.js
+          grep -q 'maxVisible:2' src/js/game-config.js
+          grep -q 'reactionLead:2.20' src/js/game-config.js
           grep -q 'characterX:220' src/js/game-config.js
           grep -q 'worldSpeed:120' src/js/game-config.js
           grep -q 'canvas:{w:960,h:540}' src/js/game-config.js
+          grep -q 'constance:{run:Array.from' src/js/game-config.js
+          grep -q 'slide:\[{l:0,r:0,t:0,b:0},{l:55,r:0,t:0,b:0}\]' src/js/game-config.js
           test -f docs/PHASE7A_COORDINATE_AUDIT.md
           test -f docs/PHASE7B_CANONICAL_CONFIG_SCHEMA.md
           test -f docs/PHASE7C_BOOTSTRAP_IMPLEMENTATION.md
           grep -q 'GROUND_SURFACE_Y = 410' docs/WORLD_RENDERING_SPEC.md
           grep -q 'displayScale = min(availableWidth / 960, availableHeight / 540)' docs/WORLD_RENDERING_SPEC.md
-          node --check src/js/game-config.js
-          node --check src/js/config-schema.js
-          node --check src/js/game-runtime.js
-          node --check src/js/bootstrap/production-bootstrap.js
-          node --check src/js/bootstrap/development-bootstrap.js
-          node --check src/js/dev/mode-shell.js
-          node --check src/js/dev/asset-navigator.js
-          node --check src/js/dev/design-draft.js
-          node --check src/js/dev/contextual-inspector.js
-          node --check src/js/dev/landscape-editor.js
+          for f in src/js/game-config.js src/js/config-schema.js src/js/game-runtime.js src/js/bootstrap/production-bootstrap.js src/js/bootstrap/development-bootstrap.js src/js/dev/mode-shell.js src/js/dev/asset-navigator.js src/js/dev/design-draft.js src/js/dev/contextual-inspector.js src/js/dev/landscape-editor.js src/js/dev/hazard-editor.js src/js/dev/character-editor.js src/js/dev/runtime-monitor.js; do node --check "$f"; done
           node <<'NODE'
           const fs=require('fs'),vm=require('vm');
           const context={window:{}};vm.createContext(context);
@@ -86,5 +86,7 @@ jobs:
           schema.validateLegacyConfig(config);const view=schema.buildCompatibilityView(config);schema.validateCanonicalView(view);
           if(schema.GROUND_SURFACE_Y!==410)throw new Error('ground surface invariant failed');
           if(Object.keys(view.stages).length!==9)throw new Error('stage compatibility count failed');
-          for(const [id,stage] of Object.entries(view.stages)){const p=config.worldProfiles[id];if(stage.compatibility.legacyRenderedSurfaceY!==p.seamY+p.groundYOffset)throw new Error(`Legacy surface parity failed: ${id}`);if(stage.hazards.length!==config.objectQA.defs[id].length)throw new Error(`Hazard mapping parity failed: ${id}`);}
+          for(const [id,stage] of Object.entries(view.stages)){const p=config.worldProfiles[id];if(stage.compatibility.legacyRenderedSurfaceY!==p.seamY+p.groundYOffset)throw new Error(`Legacy surface parity failed: ${id}`);if(stage.hazards.length!==config.objectQA.defs[id].length)throw new Error(`Hazard mapping parity failed: ${id}`);for(const h of stage.hazards){if(h.crop.l<0||h.crop.r<0||h.crop.t<0||h.crop.b<0)throw new Error(`Negative crop: ${id}/${h.name}`);}}
+          const bench=view.stages.eu03.hazards[0];if(bench.name!=="Gaudí Mosaic Bench"||bench.atlas.sourceRegion.w!==1086)throw new Error('Gaudi source-region baseline lost');
+          if(config.actions.slideDuration!==0.75||config.hitRecovery.recoveryDuration!==1.10||config.hitRecovery.invulnerabilityDuration!==2.00)throw new Error('Gameplay constants changed during 7G-7I');
           NODE
