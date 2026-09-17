@@ -24,15 +24,13 @@ jobs:
       - name: Checkout exact approved QA build
         uses: actions/checkout@v4
         with:
-          # Phase 4 runtime is commit 6132b5e; this later commit changes only
-          # development-branch deployment policy and preserves that runtime exactly.
-          ref: 2fd5275756ba305078dcd29287478b7537bde92e
+          ref: 86353bf6cc66c85147db5a226354adbed6ea6e1f
 
       - name: Record deployed source SHA
         run: |
           set -euo pipefail
           ACTUAL_SHA="$(git rev-parse HEAD)"
-          EXPECTED_SHA="2fd5275756ba305078dcd29287478b7537bde92e"
+          EXPECTED_SHA="86353bf6cc66c85147db5a226354adbed6ea6e1f"
           echo "Deploying source SHA: $ACTUAL_SHA"
           test "$ACTUAL_SHA" = "$EXPECTED_SHA"
 
@@ -48,7 +46,7 @@ jobs:
           fi
           cp -R assets _site/assets
           touch _site/.nojekyll
-          printf '%s\n' '2fd5275756ba305078dcd29287478b7537bde92e' > _site/DEPLOYED_SOURCE_SHA.txt
+          printf '%s\n' '86353bf6cc66c85147db5a226354adbed6ea6e1f' > _site/DEPLOYED_SOURCE_SHA.txt
           echo "Pages bundle contents:"
           du -sh _site
 
@@ -65,4 +63,4 @@ jobs:
         uses: actions/deploy-pages@v4
 
 # Main is the only automatic Pages deployment gateway.
-# Each QA deployment pins one exact source commit and publishes only the lightweight runtime bundle.
+# Each QA deployment pins one exact validated source commit and publishes only the lightweight runtime bundle.
