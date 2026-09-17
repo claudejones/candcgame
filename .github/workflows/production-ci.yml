@@ -36,5 +36,10 @@ jobs:
           grep -q 'invulnerabilityDuration:2.00' src/js/game-config.js
           grep -q 'characterX:220' src/js/game-config.js
           grep -q 'worldSpeed:120' src/js/game-config.js
+          grep -q 'canvas:{w:960,h:540}' src/js/game-config.js
+          test -f docs/PHASE7A_COORDINATE_AUDIT.md
+          grep -q 'GROUND_SURFACE_Y = 410' docs/WORLD_RENDERING_SPEC.md
+          grep -q 'GROUND_SURFACE_Y = 410' docs/PHASE7A_COORDINATE_AUDIT.md
+          grep -q 'displayScale = min(availableWidth / 960, availableHeight / 540)' docs/WORLD_RENDERING_SPEC.md
           node --check src/js/game-config.js
           node --check src/js/game-runtime.js
