@@ -1,147 +1,78 @@
-# LAB25Q Image Cross-Reference and Faithful Extraction
+# LAB25Q Named Asset Map
 
-- Embedded image occurrences in archived LAB25Q: **62**
-- Unique embedded image byte identities: **62**
-- Occurrences matched byte-for-byte to preserved uploaded PNGs: **27**
-- Occurrences not matched to preserved uploaded PNGs: **35**
-- Unique matched images: **27**
-- Unique unmatched images: **35**
-- Context counts: CSS **0**, JS **59**, HTML/body/head **3**
+- Archived LAB25Q image occurrences: **62**
+- Generated embedded/base64 images: **0**
+- Anonymous fallback images: **0**
+- Asset authority: `assets-original/current-generated/` (current named uploaded assets)
+- Archived LAB25Q remains immutable.
 
-## Contract
+## Reference map
 
-- Every data-image occurrence is audited from the complete archived HTML, including CSS, JS, and body/head markup.
-- Matching uses SHA-256 of decoded image bytes against `assets-original/current-generated/**/*.png`.
-- Byte-identical matches use the existing named preserved Git asset directly.
-- Only genuinely unmatched unique payloads are extracted under `qa/lab25q-faithful/assets/unmatched/`.
-- DOM, CSS rules, JavaScript behavior, HUD, Control Center, gameplay, calibration, hazards, and QA behavior are not redesigned.
+- #00 -> `HUD/UI_LIFE_HEART.png`
+- #01 -> `HUD/UI_STAGE_PROGRESS_CLAUDE_CONSTANCE.png`
+- #02 -> `HUD/UI_STAGE_PROGRESS_PATH.png`
+- #03 -> `EU-assets/EU01_BG_DISTANT_GREECE.png`
+- #04 -> `EU-assets/EU01_BG_MID_GREECE.png`
+- #05 -> `EU-assets/EU01_GROUND_GREECE.png`
+- #06 -> `EU-assets/EU01_OBJECT_ATLAS_CRATE.png`
+- #07 -> `EU-assets/EU01_HAZARD_ROLLING_BARREL.png`
+- #08 -> `EU-assets/EU01_HAZARD_AEGEAN_GULLS.png`
+- #09 -> `EU-assets/EU02_BG_DISTANT_PARIS.png`
+- #10 -> `EU-assets/EU02_BG_MID_PARIS.png`
+- #11 -> `EU-assets/EU02_GROUND_PARIS.png`
+- #12 -> `EU-assets/EU02_OBJECT_ATLAS.png`
+- #13 -> `EU-assets/EU02_HAZARD_SWALLOWS.png`
+- #14 -> `EU-assets/EU03_BG_DISTANT_BARCELONA.png`
+- #15 -> `EU-assets/EU03_BG_MID_BARCELONA.png`
+- #16 -> `EU-assets/EU03_GROUND_BARCELONA.png`
+- #17 -> `EU-assets/EU03_OBJECT_ATLAS.png`
+- #18 -> `EU-assets/EU03_HAZARD_BATS.png`
+- #19 -> `SA-assets/SA01_BG_DISTANT_AMAZON.png`
+- #20 -> `SA-assets/SA01_BG_MID_AMAZON.png`
+- #21 -> `SA-assets/SA01_GROUND_AMAZON.png`
+- #22 -> `SA-assets/SA01_OBJECT_ATLAS.png`
+- #23 -> `SA-assets/SA01_HAZARD_MACAWS.png`
+- #24 -> `SA-assets/SA02_BG_DISTANT_ANDES.png`
+- #25 -> `SA-assets/SA02_BG_MID_ANDES.png`
+- #26 -> `SA-assets/SA02_GROUND_ANDES.png`
+- #27 -> `SA-assets/SA02_OBJECT_ATLAS.png`
+- #28 -> `SA-assets/SA02_HAZARD_ANDEAN_FLAMINGO.png`
+- #29 -> `SA-assets/SA03_BG_DISTANT_RIO.png`
+- #30 -> `SA-assets/SA03_BG_MID_RIO.png`
+- #31 -> `SA-assets/SA03_GROUND_RIO.png`
+- #32 -> `SA-assets/SA03_OBJECT_ATLAS.png`
+- #33 -> `SA-assets/SA03_HAZARD_TROPICAL_PARAKEETS.png`
+- #34 -> `NA_STAGE_FINISH_MARKER.png`
+- #35 -> `NA-assets/NA01_HAZARD_ATLAS.png`
+- #36 -> `NA-assets/NA01_HAZARD_VULTURE.png`
+- #37 -> `NA-assets/NA02_HAZARD_ATLAS.png`
+- #38 -> `NA-assets/NA02_HAZARD_EAGLE.png`
+- #39 -> `NA-assets/NA03_HAZARD_ATLAS.png`
+- #40 -> `NA-assets/NA03_HAZARD_PIGEONS.png`
+- #41 -> `characer-states/G1A_RUN_CYCLE_ATLAS.png`
+- #42 -> `characer-states/G1B_IDLE_ATLAS.png`
+- #43 -> `characer-states/G1C_JUMP_ATLAS.png`
+- #44 -> `characer-states/G1D_SLIDE_ATLAS.png`
+- #45 -> `characer-states/G1E_HIT_ATLAS.png`
+- #46 -> `characer-states/G1F_CELEBRATE_ATLAS.png`
+- #47 -> `characer-states/FX_STUN_STARS_ATLAS.png`
+- #48 -> `NA-assets/NA01_BG_DISTANT_MESAS.png`
+- #49 -> `NA-assets/NA01_BG_MID_DESERT.png`
+- #50 -> `NA-assets/NA01_GROUND_DESERT.png`
+- #51 -> `NA-assets/NA02_BG_DISTANT_MOUNTAINS.png`
+- #52 -> `NA-assets/NA02_BG_MID_PINES.png`
+- #53 -> `NA-assets/NA02_GROUND_TRAIL.png`
+- #54 -> `NA-assets/NA03_BG_DISTANT_NYC.png`
+- #55 -> `NA-assets/NA03_BG_MID_CITY.png`
+- #56 -> `NA-assets/NA03_GROUND_CITY.png`
+- #57 -> `NA-assets/NA01_BG_DISTANT_MESAS.png`
+- #58 -> `NA_CLOUD_LAYER.png`
+- #59 -> `NA-assets/NA01_HAZARD_ATLAS.png`
+- #60 -> `NA-assets/NA02_HAZARD_ATLAS.png`
+- #61 -> `NA-assets/NA03_HAZARD_ATLAS.png`
 
-## Occurrence audit
+## Historical-only entries still present in LAB25Q code
 
-- #00 `html/body-or-head` `d939cac48f688dc3` -> `assets-original/current-generated/HUD/UI_LIFE_HEART.png`
-- #01 `html/body-or-head` `af71848d5a51c1a6` -> `assets-original/current-generated/HUD/UI_STAGE_PROGRESS_CLAUDE_CONSTANCE.png`
-- #02 `html/body-or-head` `b79fe64f8aab88e6` -> `UNMATCHED`
-- #03 `js` `946a5f0e62e385df` -> `UNMATCHED`
-- #04 `js` `840788e0f3a8b9bc` -> `UNMATCHED`
-- #05 `js` `0c23da5680ad4162` -> `assets-original/current-generated/EU-assets/EU01_GROUND_GREECE.png`
-- #06 `js` `adf7bcbb77269f58` -> `assets-original/current-generated/EU-assets/EU01_OBJECT_ATLAS_CRATE.png`
-- #07 `js` `45d99d6695dbbea6` -> `assets-original/current-generated/EU-assets/EU01_HAZARD_ROLLING_BARREL.png`
-- #08 `js` `3ca1806c55bc2ba3` -> `assets-original/current-generated/EU-assets/EU01_HAZARD_AEGEAN_GULLS.png`
-- #09 `js` `b6d4df71a0ffd216` -> `UNMATCHED`
-- #10 `js` `3fc1479aaec35d9f` -> `UNMATCHED`
-- #11 `js` `c85dbda3b69a9985` -> `assets-original/current-generated/EU-assets/EU02_GROUND_PARIS.png`
-- #12 `js` `dacff4c9f563fcc8` -> `assets-original/current-generated/EU-assets/EU02_OBJECT_ATLAS.png`
-- #13 `js` `46f61d2b9402104a` -> `assets-original/current-generated/EU-assets/EU02_HAZARD_SWALLOWS.png`
-- #14 `js` `e737c72d3fb6e56f` -> `UNMATCHED`
-- #15 `js` `c588740ea22b91fd` -> `UNMATCHED`
-- #16 `js` `2f190d5c9289c824` -> `UNMATCHED`
-- #17 `js` `4b4f2339135cc5ce` -> `assets-original/current-generated/EU-assets/EU03_OBJECT_ATLAS.png`
-- #18 `js` `b120f497aa9ece6c` -> `assets-original/current-generated/EU-assets/EU03_HAZARD_BATS.png`
-- #19 `js` `ec67c22f694074e3` -> `assets-original/current-generated/SA-assets/SA01_BG_DISTANT_AMAZON.png`
-- #20 `js` `18a076bd6e5f6b40` -> `assets-original/current-generated/SA-assets/SA01_BG_MID_AMAZON.png`
-- #21 `js` `a06aebacfcbda49d` -> `assets-original/current-generated/SA-assets/SA01_GROUND_AMAZON.png`
-- #22 `js` `42d8d4716c300193` -> `assets-original/current-generated/SA-assets/SA01_OBJECT_ATLAS.png`
-- #23 `js` `f81707f86a6a50d3` -> `assets-original/current-generated/SA-assets/SA01_HAZARD_MACAWS.png`
-- #24 `js` `2e8a0575bb264941` -> `assets-original/current-generated/SA-assets/SA02_BG_DISTANT_ANDES.png`
-- #25 `js` `57f7c0a08635b456` -> `UNMATCHED`
-- #26 `js` `685e95d468087d08` -> `UNMATCHED`
-- #27 `js` `6cb36aa6b0064e91` -> `assets-original/current-generated/SA-assets/SA02_OBJECT_ATLAS.png`
-- #28 `js` `0e9be349eb606ebf` -> `assets-original/current-generated/SA-assets/SA02_HAZARD_ANDEAN_FLAMINGO.png`
-- #29 `js` `b66dfce3fc557217` -> `assets-original/current-generated/SA-assets/SA03_BG_DISTANT_RIO.png`
-- #30 `js` `b67ce0460d7eadfb` -> `UNMATCHED`
-- #31 `js` `9d78ea0aa46ed528` -> `assets-original/current-generated/SA-assets/SA03_GROUND_RIO.png`
-- #32 `js` `e105981782bbc1b4` -> `assets-original/current-generated/SA-assets/SA03_OBJECT_ATLAS.png`
-- #33 `js` `80695c0d62d5a40a` -> `assets-original/current-generated/SA-assets/SA03_HAZARD_TROPICAL_PARAKEETS.png`
-- #34 `js` `e4f9ff9c57bd72d8` -> `assets-original/current-generated/NA_STAGE_FINISH_MARKER.png`
-- #35 `js` `2411b97f53511de8` -> `assets-original/current-generated/NA-assets/NA01_HAZARD_ATLAS.png`
-- #36 `js` `668a1896ad90bc47` -> `UNMATCHED`
-- #37 `js` `6ecb5b5056efe14c` -> `assets-original/current-generated/NA-assets/NA02_HAZARD_ATLAS.png`
-- #38 `js` `0e0b6ce692745087` -> `UNMATCHED`
-- #39 `js` `2f314d83decbaa6a` -> `assets-original/current-generated/NA-assets/NA03_HAZARD_ATLAS.png`
-- #40 `js` `f6c53a3709ed762a` -> `UNMATCHED`
-- #41 `js` `b7cb1ca55534f888` -> `UNMATCHED`
-- #42 `js` `e5474445e4972ee5` -> `UNMATCHED`
-- #43 `js` `e61cd64ed6a02f5d` -> `UNMATCHED`
-- #44 `js` `8999fccbd67ca4b3` -> `UNMATCHED`
-- #45 `js` `35aff27ddc45fce6` -> `UNMATCHED`
-- #46 `js` `e47dc17a1576c86e` -> `UNMATCHED`
-- #47 `js` `58f02c3044c1dc4b` -> `UNMATCHED`
-- #48 `js` `a9bd3f950b14c256` -> `UNMATCHED`
-- #49 `js` `2f41d18f1fd57842` -> `UNMATCHED`
-- #50 `js` `965ea347c71ffa79` -> `UNMATCHED`
-- #51 `js` `44aad168df94012c` -> `UNMATCHED`
-- #52 `js` `510d097d930f3296` -> `UNMATCHED`
-- #53 `js` `f63efd1cfb2b4c6e` -> `UNMATCHED`
-- #54 `js` `2c4096491bc1ec39` -> `UNMATCHED`
-- #55 `js` `b59b85d3bcd47749` -> `UNMATCHED`
-- #56 `js` `2ccd7e35d0e6a324` -> `UNMATCHED`
-- #57 `js` `c7ead06b4f6f52a9` -> `UNMATCHED`
-- #58 `js` `545d77eeac1eae9c` -> `UNMATCHED`
-- #59 `js` `a71adc55a4b03d50` -> `UNMATCHED`
-- #60 `js` `2a930457555b09dc` -> `UNMATCHED`
-- #61 `js` `498c799fff47a98f` -> `UNMATCHED`
-
-## Unique identity audit
-
-- `d939cac48f688dc37a9bcaa5b87af21fcfa24375182c6bb2e70334a6fd47094f` — occurrences 1 — `assets-original/current-generated/HUD/UI_LIFE_HEART.png`
-- `af71848d5a51c1a68bb2641c977c76d73a0888b70506bc066f1bd51ddff01497` — occurrences 1 — `assets-original/current-generated/HUD/UI_STAGE_PROGRESS_CLAUDE_CONSTANCE.png`
-- `b79fe64f8aab88e6d478edfa8f2351eda44b2916b92576f505b1e578d7903831` — occurrences 1 — `UNMATCHED fallback retained`
-- `946a5f0e62e385df8d13466433c3df572d6d453599e3df0750c78259b4f53aa0` — occurrences 1 — `UNMATCHED fallback retained`
-- `840788e0f3a8b9bc664baba7e78b3b302e451485fda0434da92943edd776af7a` — occurrences 1 — `UNMATCHED fallback retained`
-- `0c23da5680ad416256eb4b836abe3413a95c8784e62c8c16fdc9d1a65d706f08` — occurrences 1 — `assets-original/current-generated/EU-assets/EU01_GROUND_GREECE.png`
-- `adf7bcbb77269f589b04792e75064baedb8e058687961e3e9cf173163fcaed77` — occurrences 1 — `assets-original/current-generated/EU-assets/EU01_OBJECT_ATLAS_CRATE.png`
-- `45d99d6695dbbea66324b14a3d94c51899e5dbc5a511ac77a5eb10062ecdc78d` — occurrences 1 — `assets-original/current-generated/EU-assets/EU01_HAZARD_ROLLING_BARREL.png`
-- `3ca1806c55bc2ba321a3b830e45df668614e5da7c0d2b143e1ae1023bfd031d9` — occurrences 1 — `assets-original/current-generated/EU-assets/EU01_HAZARD_AEGEAN_GULLS.png`
-- `b6d4df71a0ffd21615a1422520c5b7e58a4ad7c05007dd4d8192ea2a914d6fe0` — occurrences 1 — `UNMATCHED fallback retained`
-- `3fc1479aaec35d9fd3c2b2e929bd8e90591223f42bb6e8d6865d28d177814ccb` — occurrences 1 — `UNMATCHED fallback retained`
-- `c85dbda3b69a9985ff9eeb76e9b05ac0a81d4181c2bdbed38a90144b6ca70f39` — occurrences 1 — `assets-original/current-generated/EU-assets/EU02_GROUND_PARIS.png`
-- `dacff4c9f563fcc8827f976eb5b48df1e4d7165f5aa3b20b1efe0de2609ac14f` — occurrences 1 — `assets-original/current-generated/EU-assets/EU02_OBJECT_ATLAS.png`
-- `46f61d2b9402104a38371370c97744e12123b84adaf11d8f5bfd34b52751a800` — occurrences 1 — `assets-original/current-generated/EU-assets/EU02_HAZARD_SWALLOWS.png`
-- `e737c72d3fb6e56f975528cc9f6654da4e6cf4cc5c8c605f82d3e0102df96185` — occurrences 1 — `UNMATCHED fallback retained`
-- `c588740ea22b91fd6d322b74d8cf30495cdc1fac4655eacee1c136fe81e41e74` — occurrences 1 — `UNMATCHED fallback retained`
-- `2f190d5c9289c824b767852888e48554c7999dc4d980df0bb3336f0836201799` — occurrences 1 — `UNMATCHED fallback retained`
-- `4b4f2339135cc5ce4f3f47c0c4450837a60c792e8a16ecc5e91311cac9628fab` — occurrences 1 — `assets-original/current-generated/EU-assets/EU03_OBJECT_ATLAS.png`
-- `b120f497aa9ece6ce22dde71e8bfdb62fb0ffafbaf305d52e4c3a52698bd6ee4` — occurrences 1 — `assets-original/current-generated/EU-assets/EU03_HAZARD_BATS.png`
-- `ec67c22f694074e31ca9e5d898e81f13b9d11fc8710dd7064aefeb30027fe0e4` — occurrences 1 — `assets-original/current-generated/SA-assets/SA01_BG_DISTANT_AMAZON.png`
-- `18a076bd6e5f6b407e20cefe4fff8188d89a72ea66b03f78773b3f100f9f4241` — occurrences 1 — `assets-original/current-generated/SA-assets/SA01_BG_MID_AMAZON.png`
-- `a06aebacfcbda49d58f1a31d2f3c24a67490d398d4d5eb21f1aaf58e325790e8` — occurrences 1 — `assets-original/current-generated/SA-assets/SA01_GROUND_AMAZON.png`
-- `42d8d4716c300193f9de2e005f177f50b9c462eca99f7f944b12dd55283cd118` — occurrences 1 — `assets-original/current-generated/SA-assets/SA01_OBJECT_ATLAS.png`
-- `f81707f86a6a50d3a25f4c8928a84151d739f9242275d4716a572d06998ca689` — occurrences 1 — `assets-original/current-generated/SA-assets/SA01_HAZARD_MACAWS.png`
-- `2e8a0575bb264941fdc4a722d231fdee363a074aa9631158f063088f0f1ae4a9` — occurrences 1 — `assets-original/current-generated/SA-assets/SA02_BG_DISTANT_ANDES.png`
-- `57f7c0a08635b456ee480c3d9eaaeca53c7a4c58d6d685b080a8df2d0755c814` — occurrences 1 — `UNMATCHED fallback retained`
-- `685e95d468087d08739b4f4cddf775f879b88b4c59938920e7529ffc6b8ebee4` — occurrences 1 — `UNMATCHED fallback retained`
-- `6cb36aa6b0064e91ea0062d93687f5b936499764ef0462eb067cb3ef21699c75` — occurrences 1 — `assets-original/current-generated/SA-assets/SA02_OBJECT_ATLAS.png`
-- `0e9be349eb606ebf5cb736ad55c8acbe2895174abbde6598ef3985ae6245a5a0` — occurrences 1 — `assets-original/current-generated/SA-assets/SA02_HAZARD_ANDEAN_FLAMINGO.png`
-- `b66dfce3fc557217be24698e2fc0da166402d9382bc9578a1a8d90d41f88cf5e` — occurrences 1 — `assets-original/current-generated/SA-assets/SA03_BG_DISTANT_RIO.png`
-- `b67ce0460d7eadfb412d263a4e0f1d27e17cf5a0a6681a1d1edbf4973034d8d6` — occurrences 1 — `UNMATCHED fallback retained`
-- `9d78ea0aa46ed528b9192c513c54851184136ed29611373fa04cbda287f9955a` — occurrences 1 — `assets-original/current-generated/SA-assets/SA03_GROUND_RIO.png`
-- `e105981782bbc1b475a0c821f8397d46ce9f77029c9f99ca8bbd8b0daa017579` — occurrences 1 — `assets-original/current-generated/SA-assets/SA03_OBJECT_ATLAS.png`
-- `80695c0d62d5a40afda3a09bcdb313f82cfe8d84875271295df74ecf98eda542` — occurrences 1 — `assets-original/current-generated/SA-assets/SA03_HAZARD_TROPICAL_PARAKEETS.png`
-- `e4f9ff9c57bd72d8c7cbf13b264febe319e6fd504dc30db121afbd732f6c5792` — occurrences 1 — `assets-original/current-generated/NA_STAGE_FINISH_MARKER.png`
-- `2411b97f53511de8e6c9b8a22013d47e7a6129fd501417d5cd7e391be5bdaad2` — occurrences 1 — `assets-original/current-generated/NA-assets/NA01_HAZARD_ATLAS.png`
-- `668a1896ad90bc474a6e77edf7c14463185b584505839af09f625be7511ad3c3` — occurrences 1 — `UNMATCHED fallback retained`
-- `6ecb5b5056efe14cbc4905ad006be75295a6f860f65a64bcbff2eddb49087f61` — occurrences 1 — `assets-original/current-generated/NA-assets/NA02_HAZARD_ATLAS.png`
-- `0e0b6ce6927450878bae9e83f6b7a13a761c9233e8432648fcfe054a52cac10f` — occurrences 1 — `UNMATCHED fallback retained`
-- `2f314d83decbaa6a63e4c7dd0394c775b365fcc13bc78c6352b6595e14136897` — occurrences 1 — `assets-original/current-generated/NA-assets/NA03_HAZARD_ATLAS.png`
-- `f6c53a3709ed762af29531b971ea1af8b04c67e89840eca2a31cb175d1e68cef` — occurrences 1 — `UNMATCHED fallback retained`
-- `b7cb1ca55534f888e4802c7c55892fc4ebfafc5d601ec5e7926d18ffa4322037` — occurrences 1 — `UNMATCHED fallback retained`
-- `e5474445e4972ee5f22603653782fcbef23e96ca0da847a9de59ca20a74c411d` — occurrences 1 — `UNMATCHED fallback retained`
-- `e61cd64ed6a02f5d3fe69773759d1c3fbc6c2dd6ba670d7ee824ed1a9a7c0d63` — occurrences 1 — `UNMATCHED fallback retained`
-- `8999fccbd67ca4b303ef815970347c84e77cb920bacb541fb3baae3814381bda` — occurrences 1 — `UNMATCHED fallback retained`
-- `35aff27ddc45fce6ab2b2d99fc79fd93ac54226d29a26bf70310c8d5876b7f8a` — occurrences 1 — `UNMATCHED fallback retained`
-- `e47dc17a1576c86ecf45ed71ff4c6900b90a6159918bb70e38c0db807f7d8673` — occurrences 1 — `UNMATCHED fallback retained`
-- `58f02c3044c1dc4b7098bfc5a3f8d053c45ed6722262d85419bacf173e1a3cf0` — occurrences 1 — `UNMATCHED fallback retained`
-- `a9bd3f950b14c25673c8470bf13b582aa1b39d4cbcffd22fcfbe1761a2fe1079` — occurrences 1 — `UNMATCHED fallback retained`
-- `2f41d18f1fd578424fd3386fe19aed1169fe4f21b9a7ae552bd97fcee9c295e5` — occurrences 1 — `UNMATCHED fallback retained`
-- `965ea347c71ffa79601f0316a48d54e2a5a578aab45074244541576f15878a7e` — occurrences 1 — `UNMATCHED fallback retained`
-- `44aad168df94012cf6d4a2afe9c366d62c0a4c7a91ab07891e81736200ba7148` — occurrences 1 — `UNMATCHED fallback retained`
-- `510d097d930f3296ad7d789b85d2ba52be7796edc5c9d9576e16f0e48c8340f0` — occurrences 1 — `UNMATCHED fallback retained`
-- `f63efd1cfb2b4c6e8798153e73edca8008e5158212e44a78ebe255478bf3a577` — occurrences 1 — `UNMATCHED fallback retained`
-- `2c4096491bc1ec39549732c07c3013969d8bf8d5de651b548b7d724d80d02f30` — occurrences 1 — `UNMATCHED fallback retained`
-- `b59b85d3bcd477499333f14d090f04fb2f74de55ecbc4b9b34c929a79a466697` — occurrences 1 — `UNMATCHED fallback retained`
-- `2ccd7e35d0e6a324245f4fb37711de897cefd38c50985a3829f5dd715f362851` — occurrences 1 — `UNMATCHED fallback retained`
-- `c7ead06b4f6f52a983ec584b8b5e2afddf5db0a7d881faf6d19b8219c97e747b` — occurrences 1 — `UNMATCHED fallback retained`
-- `545d77eeac1eae9c8025b640f9eaf7eeae2f434caff289b0ec4b80b82044ef5b` — occurrences 1 — `UNMATCHED fallback retained`
-- `a71adc55a4b03d50660ff1161427752bb9f2cedb9bb1be19630187e70236df05` — occurrences 1 — `UNMATCHED fallback retained`
-- `2a930457555b09dc30de0025ec53ceb31b123e1f271f27855f7a6abeec4539e6` — occurrences 1 — `UNMATCHED fallback retained`
-- `498c799fff47a98f43442d249f5e366a0317036a693d95074a762d3a5b86ec41` — occurrences 1 — `UNMATCHED fallback retained`
+- The earlier duplicate `far` property is mapped to the current `NA01_BG_DISTANT_MESAS.png`; the later `far` property still wins exactly as in LAB25Q.
+- `na01Objects`, `na02Objects`, and `na03Objects` are mapped to the current named NA hazard atlases. They are retained for parity until dead-code removal is separately verified.
+- `G1D_DUCK_ATLAS.png` is not referenced; Slide maps to current `G1D_SLIDE_ATLAS.png`.
