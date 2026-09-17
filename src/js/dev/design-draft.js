@@ -1,68 +1,18 @@
 (() => {
   "use strict";
-  if(!window.CC_APP?.isDevelopment) throw new Error("Design draft store requires development bootstrap");
-  if(!window.GAME_SCHEMA) throw new Error("Design draft store requires GAME_SCHEMA");
-
-  const STORAGE_KEY="cc-world-design-config-v1";
-  const clone=value=>JSON.parse(JSON.stringify(value));
-  const canonical=window.GAME_SCHEMA.buildCompatibilityView(window.GAME_CONFIG);
-  const defaults=clone(canonical.stages);
-  const defaultGlobals={
-    character:{
-      masterScale:clone(window.GAME_CONFIG.masterScale),
-      stateScale:clone(window.GAME_CONFIG.stateScale),
-      renderOffsetX:clone(window.GAME_CONFIG.renderOffsetX),
-      renderOffsetY:clone(window.GAME_CONFIG.renderOffsetY),
-      cropInsets:clone(window.GAME_CONFIG.cropInsets),
-      collision:clone(window.GAME_CONFIG.objectQA.characterCollision)
-    }
-  };
-  const listeners=new Set();
-  const dirty=new Set();
-  let globalsDirty=false;
-
-  function loadSaved(){
-    try{
-      const raw=localStorage.getItem(STORAGE_KEY); if(!raw) return {stages:clone(defaults),globals:clone(defaultGlobals)};
-      const parsed=JSON.parse(raw); if(parsed?.schemaVersion!==canonical.schemaVersion || !parsed?.stages) return {stages:clone(defaults),globals:clone(defaultGlobals)};
-      const merged=clone(defaults);
-      for(const id of window.GAME_SCHEMA.STAGE_IDS) if(parsed.stages[id]) merged[id]=parsed.stages[id];
-      return {stages:merged,globals:parsed.globals?parsed.globals:clone(defaultGlobals)};
-    }catch(error){ console.warn("Ignoring invalid local design config",error); return {stages:clone(defaults),globals:clone(defaultGlobals)}; }
-  }
-  const loaded=loadSaved();
-  let savedStages=loaded.stages, savedGlobals=clone(loaded.globals);
-  let drafts=clone(savedStages), globals=clone(savedGlobals);
-
-  function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify({schemaVersion:canonical.schemaVersion,coordinateContract:canonical.coordinateContract,globals:savedGlobals,stages:savedStages}));}
-  function assertStage(stageId){if(!drafts[stageId])throw new Error(`Unknown draft stage: ${stageId}`);}
-  function parts(path){return Array.isArray(path)?path:String(path).split(".").filter(Boolean);}
-  function getAt(root,path){return parts(path).reduce((value,key)=>value?.[key],root);}
-  function setAt(root,path,value){const p=parts(path);let target=root;for(let i=0;i<p.length-1;i++)target=target[p[i]];target[p[p.length-1]]=value;}
-  function same(a,b){return JSON.stringify(a)===JSON.stringify(b);}
-  function notify(stageId){listeners.forEach(fn=>fn({stageId,dirty:stageId?dirty.has(stageId):false,globalsDirty,dirtyCount:dirty.size+(globalsDirty?1:0)}));}
-  function recalc(stageId){if(same(drafts[stageId],savedStages[stageId]))dirty.delete(stageId);else dirty.add(stageId);notify(stageId);}
-  function recalcGlobals(){globalsDirty=!same(globals,savedGlobals);notify(null);}
-
-  const api={
-    storageKey:STORAGE_KEY,
-    getStage(stageId){assertStage(stageId);return drafts[stageId];},
-    getValue(stageId,path){assertStage(stageId);return getAt(drafts[stageId],path);},
-    setValue(stageId,path,value){assertStage(stageId);setAt(drafts[stageId],path,value);recalc(stageId);},
-    getGlobals(){return globals;},
-    getGlobalValue(path){return getAt(globals,path);},
-    setGlobalValue(path,value){setAt(globals,path,value);recalcGlobals();},
-    isDirty(stageId){return dirty.has(stageId);},
-    get globalsDirty(){return globalsDirty;},
-    get dirtyCount(){return dirty.size+(globalsDirty?1:0);},
-    revert(stageId){assertStage(stageId);drafts[stageId]=clone(savedStages[stageId]);dirty.delete(stageId);notify(stageId);},
-    revertGlobals(){globals=clone(savedGlobals);globalsDirty=false;notify(null);},
-    saveStage(stageId){assertStage(stageId);savedStages[stageId]=clone(drafts[stageId]);persist();dirty.delete(stageId);notify(stageId);return clone(savedStages[stageId]);},
-    saveGlobals(){savedGlobals=clone(globals);persist();globalsDirty=false;notify(null);return clone(savedGlobals);},
-    exportStage(stageId){assertStage(stageId);return JSON.stringify({schemaVersion:canonical.schemaVersion,coordinateContract:canonical.coordinateContract,stageId,stage:clone(drafts[stageId])},null,2);},
-    exportGame(){return JSON.stringify({schemaVersion:canonical.schemaVersion,coordinateContract:canonical.coordinateContract,globals:clone(globals),stages:clone(drafts)},null,2);},
-    clearLocalSaves(){localStorage.removeItem(STORAGE_KEY);savedStages=clone(defaults);savedGlobals=clone(defaultGlobals);drafts=clone(defaults);globals=clone(defaultGlobals);dirty.clear();globalsDirty=false;notify(null);},
-    onChange(fn){listeners.add(fn);return()=>listeners.delete(fn);}
-  };
+  if(!window.CC_APP?.isDevelopment)throw new Error("Design draft store requires development bootstrap");
+  if(!window.GAME_SCHEMA)throw new Error("Design draft store requires GAME_SCHEMA");
+  const STORAGE_KEY="cc-world-design-config-v1",clone=v=>JSON.parse(JSON.stringify(v));
+  const canonical=window.GAME_SCHEMA.buildCompatibilityView(window.GAME_CONFIG),defaults=clone(canonical.stages);
+  const defaultGlobals={character:{masterScale:clone(window.GAME_CONFIG.masterScale),stateScale:clone(window.GAME_CONFIG.stateScale),renderOffsetX:clone(window.GAME_CONFIG.renderOffsetX),renderOffsetY:clone(window.GAME_CONFIG.renderOffsetY),cropInsets:clone(window.GAME_CONFIG.cropInsets),collision:clone(window.GAME_CONFIG.objectQA.characterCollision)}};
+  const listeners=new Set(),dirty=new Set();let globalsDirty=false;
+  const validPayload=p=>p&&p.schemaVersion===canonical.schemaVersion&&p.coordinateContract?.viewport?.width===960&&p.coordinateContract?.viewport?.height===540&&p.coordinateContract?.groundSurfaceY===410&&p.stages;
+  function loadSaved(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return{stages:clone(defaults),globals:clone(defaultGlobals)};const p=JSON.parse(raw);if(!validPayload(p))return{stages:clone(defaults),globals:clone(defaultGlobals)};const merged=clone(defaults);for(const id of window.GAME_SCHEMA.STAGE_IDS)if(p.stages[id])merged[id]=p.stages[id];return{stages:merged,globals:p.globals||clone(defaultGlobals)};}catch(e){console.warn("Ignoring invalid local design config",e);return{stages:clone(defaults),globals:clone(defaultGlobals)};}}
+  const loaded=loadSaved();let savedStages=loaded.stages,savedGlobals=clone(loaded.globals),drafts=clone(savedStages),globals=clone(savedGlobals);
+  function payload(stages=drafts,g=globals){return{schemaVersion:canonical.schemaVersion,coordinateContract:canonical.coordinateContract,globals:clone(g),stages:clone(stages)};}
+  function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(payload(savedStages,savedGlobals)));}
+  function assertStage(id){if(!drafts[id])throw new Error(`Unknown draft stage: ${id}`);}function parts(p){return Array.isArray(p)?p:String(p).split(".").filter(Boolean);}function getAt(r,p){return parts(p).reduce((v,k)=>v?.[k],r);}function setAt(r,p,v){const a=parts(p);let t=r;for(let i=0;i<a.length-1;i++)t=t[a[i]];t[a[a.length-1]]=v;}const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+  function notify(id){listeners.forEach(fn=>fn({stageId:id,dirty:id?dirty.has(id):false,globalsDirty,dirtyCount:dirty.size+(globalsDirty?1:0)}));}function recalc(id){same(drafts[id],savedStages[id])?dirty.delete(id):dirty.add(id);notify(id);}function recalcGlobals(){globalsDirty=!same(globals,savedGlobals);notify(null);}
+  const api={storageKey:STORAGE_KEY,getStage(id){assertStage(id);return drafts[id];},getValue(id,p){assertStage(id);return getAt(drafts[id],p);},setValue(id,p,v){assertStage(id);setAt(drafts[id],p,v);recalc(id);},getGlobals(){return globals;},getGlobalValue(p){return getAt(globals,p);},setGlobalValue(p,v){setAt(globals,p,v);recalcGlobals();},isDirty:id=>dirty.has(id),get globalsDirty(){return globalsDirty;},get dirtyCount(){return dirty.size+(globalsDirty?1:0);},revert(id){assertStage(id);drafts[id]=clone(savedStages[id]);dirty.delete(id);notify(id);},revertGlobals(){globals=clone(savedGlobals);globalsDirty=false;notify(null);},saveStage(id){assertStage(id);savedStages[id]=clone(drafts[id]);persist();dirty.delete(id);notify(id);return clone(savedStages[id]);},saveGlobals(){savedGlobals=clone(globals);persist();globalsDirty=false;notify(null);return clone(savedGlobals);},saveAll(){savedStages=clone(drafts);savedGlobals=clone(globals);persist();dirty.clear();globalsDirty=false;notify(null);return payload(savedStages,savedGlobals);},exportStage(id){assertStage(id);return JSON.stringify({schemaVersion:canonical.schemaVersion,coordinateContract:canonical.coordinateContract,stageId:id,stage:clone(drafts[id])},null,2);},exportGame(){return JSON.stringify(payload(),null,2);},importGame(text,{save=true}={}){const p=typeof text==="string"?JSON.parse(text):text;if(!validPayload(p))throw new Error("Incompatible game config export");const next=clone(defaults);for(const id of window.GAME_SCHEMA.STAGE_IDS){if(!p.stages[id])throw new Error(`Imported game config missing ${id}`);next[id]=clone(p.stages[id]);}window.GAME_SCHEMA.validateCanonicalView({schemaVersion:p.schemaVersion,coordinateContract:p.coordinateContract,stages:next});drafts=next;globals=clone(p.globals||defaultGlobals);if(save){savedStages=clone(drafts);savedGlobals=clone(globals);persist();dirty.clear();globalsDirty=false;}else{for(const id of window.GAME_SCHEMA.STAGE_IDS)recalc(id);recalcGlobals();}notify(null);return payload();},clearLocalSaves(){localStorage.removeItem(STORAGE_KEY);savedStages=clone(defaults);savedGlobals=clone(defaultGlobals);drafts=clone(defaults);globals=clone(defaultGlobals);dirty.clear();globalsDirty=false;notify(null);},onChange(fn){listeners.add(fn);return()=>listeners.delete(fn);}};
   window.CC_DESIGN_DRAFT=Object.freeze(api);
 })();
