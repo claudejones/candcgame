@@ -18,6 +18,7 @@ Phase 7 application entries:
 - `src/js/bootstrap/production-bootstrap.js`
 - `src/js/bootstrap/development-bootstrap.js`
 - `src/js/dev/mode-shell.js`
+- `src/js/dev/asset-navigator.js`
 - `src/js/config-schema.js`
 
 Phase 7 architecture authority:
@@ -40,7 +41,8 @@ The historical LAB25Q harness remains preserved unchanged under `archive/LAB25Q/
 - Phase 7A coordinate and viewport contract: COMPLETE
 - Phase 7B canonical configuration schema: COMPLETE / CI accepted
 - Phase 7C modular application shell/bootstrap split: COMPLETE / CI accepted
-- Phase 7D Design Asset Navigator: NEXT
+- Phase 7D Design Asset Navigator: IMPLEMENTED / CI acceptance pending
+- Phase 7E Contextual Inspector framework: NEXT after 7D CI acceptance
 
 Production source contains no Base64/data-image assets. Historical migration evidence remains in `archive/` and Git history.
 
@@ -59,11 +61,16 @@ The schema separates authored production configuration, legacy Phase 6 compatibi
 All canonical character, hazard and finish gameplay anchors resolve from Y=410. Legacy seams/surfaces remain explicitly representable so the nine existing stages can still be regression-tested without artwork changes while later Phase 7 gates migrate the renderer/application shell.
 
 ## Phase 7C application boundary
-`src/game.html` is the production entry and loads the production bootstrap only. `src/dev.html` is the development/QA entry and loads the development bootstrap plus the development-only mode shell.
+`src/game.html` is the production entry and loads the production bootstrap only. `src/dev.html` is the development/QA entry and loads the development bootstrap plus development-only modules.
 
-Both entries mount the same preserved `src/index.html` runtime host, so 7C does not duplicate renderer/configuration logic. Development mode switching changes shell state without recreating the mounted runtime. Production CI asserts that the production entry/bootstrap cannot reference the development bootstrap, `src/js/dev/**`, or the mode shell. CI run #53 on commit `4f7dd06726053a936c92cc2fb8fea5b88341ac3d` completed successfully.
+Both entries mount the same preserved `src/index.html` runtime host, so the shell architecture does not duplicate renderer/configuration logic. Development mode switching changes shell state without recreating the mounted runtime. Production CI asserts that the production entry/bootstrap cannot reference development modules.
 
-This is a transitional host boundary. Legacy QA responsibilities still present inside the preserved Phase 6 runtime are progressively extracted by later Phase 7 gates; final consumer GAME shell/package pruning remains a Phase 7K/7M responsibility.
+## Phase 7D Design Asset Navigator
+The development DESIGN mode now includes a development-only Asset Navigator. It provides continent and stage navigation across the nine current stages and selection categories for Landscape (FAR/MID/GROUND), each configured Hazard, Character, Finish Marker and Stage/Global.
+
+Navigator selection is held in `window.CC_DESIGN_SELECTION`, separate from `GAME_CONFIG`, the iframe runtime and gameplay state. Selecting a continent, stage or asset therefore does not mutate the active gameplay stage or saved configuration. The navigator is hidden outside DESIGN mode and is excluded from the production GAME dependency graph.
+
+7D intentionally does not implement editing controls. Contextual editing, draft/dirty/revert/save/export behavior begins in 7E.
 
 ## Known deferred calibration/content work
 - landscape FAR/MID/GROUND geometry/alignment regeneration
@@ -74,7 +81,7 @@ This is a transitional host boundary. Legacy QA responsibilities still present i
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-Proceed to Phase 7D: implement the Design Asset Navigator while keeping selected authoring asset state independent from gameplay/runtime state.
+After 7D CI acceptance, proceed to Phase 7E: Contextual Inspector framework and draft configuration infrastructure.
 
 Do not begin Phase 8 landscape regeneration until Phase 7 is accepted.
 
