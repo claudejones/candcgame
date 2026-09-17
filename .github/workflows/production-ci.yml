@@ -21,12 +21,14 @@ jobs:
           test -f src/dev.html
           test -f src/css/game.css
           test -f src/css/mode-shell.css
+          test -f src/css/asset-navigator.css
           test -f src/js/game-config.js
           test -f src/js/game-runtime.js
           test -f src/js/config-schema.js
           test -f src/js/bootstrap/production-bootstrap.js
           test -f src/js/bootstrap/development-bootstrap.js
           test -f src/js/dev/mode-shell.js
+          test -f src/js/dev/asset-navigator.js
           test ! -e src/js/lab25q.js
           test ! -e src/js/lab25q-config.js
           test ! -e src/js/lab25q-runtime.js
@@ -37,11 +39,15 @@ jobs:
           grep -q './js/bootstrap/production-bootstrap.js' src/game.html
           grep -q './js/bootstrap/development-bootstrap.js' src/dev.html
           grep -q './js/dev/mode-shell.js' src/dev.html
+          grep -q './js/dev/asset-navigator.js' src/dev.html
+          grep -q './css/asset-navigator.css' src/dev.html
           grep -q 'PHASE 7C • QA' src/js/dev/mode-shell.js
           grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
           grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
-          ! grep -qE 'js/dev/|development-bootstrap|mode-shell' src/game.html
-          ! grep -qE 'js/dev/|development-bootstrap|mode-shell' src/js/bootstrap/production-bootstrap.js
+          grep -q 'window.CC_DESIGN_SELECTION' src/js/dev/asset-navigator.js
+          grep -q 'Authoring selection only' src/js/dev/asset-navigator.js
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator' src/game.html
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator' src/js/bootstrap/production-bootstrap.js
           grep -q 'window.GAME_CONFIG=' src/js/game-config.js
           grep -q 'const CONFIG=window.GAME_CONFIG;' src/js/game-runtime.js
           grep -q 'PHASE 6 • QA' src/index.html
@@ -65,6 +71,7 @@ jobs:
           node --check src/js/bootstrap/production-bootstrap.js
           node --check src/js/bootstrap/development-bootstrap.js
           node --check src/js/dev/mode-shell.js
+          node --check src/js/dev/asset-navigator.js
           node <<'NODE'
           const fs=require('fs'),vm=require('vm');
           const context={window:{}}; vm.createContext(context);
