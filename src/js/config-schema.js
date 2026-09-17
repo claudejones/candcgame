@@ -5,143 +5,15 @@
   const GROUND_SURFACE_Y = 410;
   const STAGE_IDS = Object.freeze(["na01","na02","na03","sa01","sa02","sa03","eu01","eu02","eu03"]);
 
-  const finite = (value, label) => {
-    if (!Number.isFinite(value)) throw new Error(`Invalid numeric config: ${label}`);
-    return value;
-  };
-  const nonNegative = (value, label) => {
-    finite(value, label);
-    if (value < 0) throw new Error(`Negative config not allowed: ${label}`);
-    return value;
-  };
-  const crop = value => ({
-    l: nonNegative(value?.l ?? 0, "crop.l"),
-    r: nonNegative(value?.r ?? 0, "crop.r"),
-    t: nonNegative(value?.t ?? 0, "crop.t"),
-    b: nonNegative(value?.b ?? 0, "crop.b")
-  });
-  const collision = value => ({
-    w: finite(value?.w ?? value?.cw, "collision.w"),
-    h: finite(value?.h ?? value?.ch, "collision.h"),
-    x: finite(value?.x ?? value?.cx ?? 0, "collision.x"),
-    y: finite(value?.y ?? value?.cy ?? 0, "collision.y")
-  });
-
-  function legacySurface(profile) {
-    return finite(profile.seamY, "legacy.seamY") + finite(profile.groundYOffset, "legacy.groundYOffset");
-  }
-
-  function landscapeFromLegacy(profile, contract) {
-    const baseScale = VIEWPORT.w / finite(contract.sourceW, "worldContract.sourceW");
-    return {
-      far: {
-        source: { key: profile.farKey },
-        transform: { scale: baseScale * profile.farScale, offsetX: 0, offsetY: profile.farY, parallax: 0 }
-      },
-      mid: {
-        source: { key: profile.midKey, anchorY: contract.midBaselineSourceY },
-        transform: { scale: baseScale * profile.midScale, offsetX: 0, offsetY: profile.midYOffset, parallax: profile.midParallax },
-        legacyTargetY: profile.seamY
-      },
-      ground: {
-        source: { key: profile.groundKey, anchorY: contract.groundSurfaceSourceY },
-        transform: { scale: baseScale * profile.groundScale, offsetX: 0, offsetY: profile.groundYOffset, parallax: profile.groundParallax },
-        legacyTargetY: profile.seamY,
-        legacyRenderedSurfaceY: legacySurface(profile)
-      }
-    };
-  }
-
-  function hazardFromLegacy(def) {
-    const sourceRegion = def.rect
-      ? { x:def.rect.x, y:def.rect.y, w:def.rect.w, h:def.rect.h }
-      : { x:0, y:0, w:def.frameW, h:def.frameH };
-    return {
-      name: def.name,
-      kind: def.kind,
-      atlas: { key:def.atlasKey, sourceRegion, frames:def.frames ?? 1 },
-      crop: crop(def.crop),
-      transform: { scale:finite(def.scale,"hazard.scale"), offsetX:0, offsetY:0 },
-      gameplayAnchor: def.kind === "ground"
-        ? { type:"ground", surfaceY:GROUND_SURFACE_Y, adjustmentY:finite(def.groundOffset ?? 0,"hazard.groundOffset") }
-        : { type:"flight", surfaceY:GROUND_SURFACE_Y },
-      collision: collision(def)
-    };
-  }
-
-  function buildCompatibilityView(config) {
-    validateLegacyConfig(config);
-    const stages = {};
-    for (const id of STAGE_IDS) {
-      const profile = config.worldProfiles[id];
-      stages[id] = {
-        id,
-        label: profile.label,
-        landscape: landscapeFromLegacy(profile, config.worldContract),
-        character: {
-          grounding: { ...profile.characterGrounding },
-          canonicalSurfaceY: GROUND_SURFACE_Y
-        },
-        hazards: config.objectQA.defs[id].map(hazardFromLegacy),
-        finish: {
-          transform: { scale:config.finish.stages[id].scale, offsetX:config.finish.stages[id].xOffset, offsetY:0 },
-          gameplayAnchor: { type:"ground", surfaceY:GROUND_SURFACE_Y, adjustmentY:config.finish.stages[id].groundOffset }
-        },
-        compatibility: {
-          legacySeamY: profile.seamY,
-          legacyRenderedSurfaceY: legacySurface(profile)
-        }
-      };
-    }
-    return {
-      schemaVersion: "7B.1",
-      coordinateContract: { viewport:{...VIEWPORT}, groundSurfaceY:GROUND_SURFACE_Y },
-      stages
-    };
-  }
-
-  function validateLegacyConfig(config) {
-    if (!config) throw new Error("GAME_CONFIG missing");
-    if (config.canvas?.w !== VIEWPORT.w || config.canvas?.h !== VIEWPORT.h) throw new Error("Canonical viewport must remain 960x540");
-    for (const id of STAGE_IDS) {
-      const p = config.worldProfiles?.[id];
-      if (!p) throw new Error(`Missing world profile: ${id}`);
-      finite(p.seamY, `${id}.seamY`);
-      finite(p.groundYOffset, `${id}.groundYOffset`);
-      if (!config.objectQA?.defs?.[id]) throw new Error(`Missing hazard definitions: ${id}`);
-      if (!config.finish?.stages?.[id]) throw new Error(`Missing finish configuration: ${id}`);
-      for (const d of config.objectQA.defs[id]) {
-        crop(d.crop);
-        collision(d);
-      }
-    }
-    return true;
-  }
-
-  function validateCanonicalView(view) {
-    if (view.coordinateContract?.viewport?.w !== 960 || view.coordinateContract?.viewport?.h !== 540) throw new Error("Canonical view viewport mismatch");
-    if (view.coordinateContract?.groundSurfaceY !== GROUND_SURFACE_Y) throw new Error("Canonical ground surface mismatch");
-    for (const id of STAGE_IDS) {
-      const stage = view.stages?.[id];
-      if (!stage) throw new Error(`Canonical stage missing: ${id}`);
-      if (stage.character.canonicalSurfaceY !== GROUND_SURFACE_Y) throw new Error(`Character anchor mismatch: ${id}`);
-      if (stage.finish.gameplayAnchor.surfaceY !== GROUND_SURFACE_Y) throw new Error(`Finish anchor mismatch: ${id}`);
-      for (const h of stage.hazards) {
-        if (h.gameplayAnchor.surfaceY !== GROUND_SURFACE_Y) throw new Error(`Hazard anchor mismatch: ${id}/${h.name}`);
-        crop(h.crop);
-      }
-    }
-    return true;
-  }
-
-  window.GAME_SCHEMA = Object.freeze({
-    schemaVersion:"7B.1",
-    VIEWPORT,
-    GROUND_SURFACE_Y,
-    STAGE_IDS,
-    legacySurface,
-    buildCompatibilityView,
-    validateLegacyConfig,
-    validateCanonicalView
-  });
+  const finite = (value, label) => { if (!Number.isFinite(value)) throw new Error(`Invalid numeric config: ${label}`); return value; };
+  const nonNegative = (value, label) => { finite(value,label); if(value<0)throw new Error(`Negative config not allowed: ${label}`); return value; };
+  const crop = value => ({l:nonNegative(value?.l??0,"crop.l"),r:nonNegative(value?.r??0,"crop.r"),t:nonNegative(value?.t??0,"crop.t"),b:nonNegative(value?.b??0,"crop.b")});
+  const collision = value => ({w:finite(value?.w??value?.cw,"collision.w"),h:finite(value?.h??value?.ch,"collision.h"),x:finite(value?.x??value?.cx??0,"collision.x"),y:finite(value?.y??value?.cy??0,"collision.y")});
+  function legacySurface(profile){return finite(profile.seamY,"legacy.seamY")+finite(profile.groundYOffset,"legacy.groundYOffset");}
+  function landscapeFromLegacy(profile,contract){const baseScale=VIEWPORT.w/finite(contract.sourceW,"worldContract.sourceW");return{far:{source:{key:profile.farKey},transform:{scale:baseScale*profile.farScale,offsetX:0,offsetY:profile.farY,parallax:0}},mid:{source:{key:profile.midKey,anchorY:contract.midBaselineSourceY},transform:{scale:baseScale*profile.midScale,offsetX:0,offsetY:profile.midYOffset,parallax:profile.midParallax},legacyTargetY:profile.seamY},ground:{source:{key:profile.groundKey,anchorY:contract.groundSurfaceSourceY},transform:{scale:baseScale*profile.groundScale,offsetX:0,offsetY:profile.groundYOffset,parallax:profile.groundParallax},legacyTargetY:profile.seamY,legacyRenderedSurfaceY:legacySurface(profile)}};}
+  function hazardFromLegacy(def){const sourceRegion=def.rect?{x:def.rect.x,y:def.rect.y,w:def.rect.w,h:def.rect.h}:{x:0,y:0,w:def.frameW,h:def.frameH},frames=def.frames??1,base=crop(def.crop),frameCrops=Array.from({length:frames},(_,i)=>crop(def.frameCrops?.[i]??base));return{name:def.name,kind:def.kind,atlas:{key:def.atlasKey,sourceRegion,frames},animation:{fps:finite(def.fps??8,"hazard.animation.fps"),frameCrops},crop:base,transform:{scale:finite(def.scale,"hazard.scale"),offsetX:0,offsetY:0},gameplayAnchor:def.kind==="ground"?{type:"ground",surfaceY:GROUND_SURFACE_Y,adjustmentY:finite(def.groundOffset??0,"hazard.groundOffset")}:{type:"flight",surfaceY:GROUND_SURFACE_Y},collision:collision(def)};}
+  function buildCompatibilityView(config){validateLegacyConfig(config);const stages={};for(const id of STAGE_IDS){const profile=config.worldProfiles[id];stages[id]={id,label:profile.label,landscape:landscapeFromLegacy(profile,config.worldContract),character:{grounding:{...profile.characterGrounding},canonicalSurfaceY:GROUND_SURFACE_Y},hazards:config.objectQA.defs[id].map(hazardFromLegacy),finish:{transform:{scale:config.finish.stages[id].scale,offsetX:config.finish.stages[id].xOffset,offsetY:0},gameplayAnchor:{type:"ground",surfaceY:GROUND_SURFACE_Y,adjustmentY:config.finish.stages[id].groundOffset}},compatibility:{legacySeamY:profile.seamY,legacyRenderedSurfaceY:legacySurface(profile)}};}return{schemaVersion:"7B.2",coordinateContract:{viewport:{...VIEWPORT},groundSurfaceY:GROUND_SURFACE_Y},stages};}
+  function validateLegacyConfig(config){if(!config)throw new Error("GAME_CONFIG missing");if(config.canvas?.w!==VIEWPORT.w||config.canvas?.h!==VIEWPORT.h)throw new Error("Canonical viewport must remain 960x540");for(const id of STAGE_IDS){const p=config.worldProfiles?.[id];if(!p)throw new Error(`Missing world profile: ${id}`);finite(p.seamY,`${id}.seamY`);finite(p.groundYOffset,`${id}.groundYOffset`);if(!config.objectQA?.defs?.[id])throw new Error(`Missing hazard definitions: ${id}`);if(!config.finish?.stages?.[id])throw new Error(`Missing finish configuration: ${id}`);for(const d of config.objectQA.defs[id]){crop(d.crop);collision(d);if(d.frameCrops)for(const c of d.frameCrops)crop(c);}}return true;}
+  function validateCanonicalView(view){if(view.coordinateContract?.viewport?.w!==960||view.coordinateContract?.viewport?.h!==540)throw new Error("Canonical view viewport mismatch");if(view.coordinateContract?.groundSurfaceY!==GROUND_SURFACE_Y)throw new Error("Canonical ground surface mismatch");for(const id of STAGE_IDS){const stage=view.stages?.[id];if(!stage)throw new Error(`Canonical stage missing: ${id}`);if(stage.character.canonicalSurfaceY!==GROUND_SURFACE_Y)throw new Error(`Character anchor mismatch: ${id}`);if(stage.finish.gameplayAnchor.surfaceY!==GROUND_SURFACE_Y)throw new Error(`Finish anchor mismatch: ${id}`);for(const h of stage.hazards){if(h.gameplayAnchor.surfaceY!==GROUND_SURFACE_Y)throw new Error(`Hazard anchor mismatch: ${id}/${h.name}`);crop(h.crop);const frames=h.atlas.frames??1;if(h.animation?.frameCrops?.length!==frames)throw new Error(`Hazard frame crop count mismatch: ${id}/${h.name}`);for(const c of h.animation.frameCrops)crop(c);finite(h.animation.fps,`hazard.animation.fps ${id}/${h.name}`);}}return true;}
+  window.GAME_SCHEMA=Object.freeze({schemaVersion:"7B.2",VIEWPORT,GROUND_SURFACE_Y,STAGE_IDS,legacySurface,buildCompatibilityView,validateLegacyConfig,validateCanonicalView});
 })();
