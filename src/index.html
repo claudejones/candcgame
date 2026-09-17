@@ -1,1 +1,229 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Claude & Constance — Modular LAB25Q Parity Harness</title><link rel="stylesheet" href="./css/game.css"><link rel="stylesheet" href="./css/qa.css"></head><body><main class="wrap"><section class="board"><canvas id="game" width="960" height="540"></canvas><div class="gameplay-hud" id="gameplayHud"><div class="hud-panel"><div class="health-block"><div class="hud-kicker">LIVES</div><div class="life-hud" id="lifeHud"><span class="life-heart full active"></span><span class="life-heart full"></span><span class="life-heart full"></span></div></div><div class="progress-hud"><div class="stage-title" id="stageTitle">SA 1 — AMAZON RAINFOREST</div><div class="progress-track"><img class="progress-path" src="../assets/hud/UI_STAGE_PROGRESS_PATH.png" alt=""><span class="progress-marker claude" id="progressMarker"></span></div></div></div></div><div class="gameplay-actions" id="controls"><button id="gameSlideBtn" data-action="slide">SLIDE</button><button id="gamePauseBtn" data-action="pause">PAUSE</button><button id="gameJumpBtn" data-action="jump">JUMP</button></div></section><section class="qa-panel" id="qa"><fieldset><label>Stage <select data-qa="stage"><option value="na01">NA01</option><option value="na02">NA02</option><option value="na03">NA03</option><option value="sa01" selected>SA01</option><option value="sa02">SA02</option><option value="sa03">SA03</option><option value="eu01">EU01</option><option value="eu02">EU02</option><option value="eu03">EU03</option></select></label><label>Character <select data-qa="character"><option value="claude">Claude</option><option value="constance">Constance</option></select></label></fieldset><fieldset><label><input type="checkbox" data-layer="far" checked> FAR</label><label><input type="checkbox" data-layer="clouds" checked> CLOUDS</label><label><input type="checkbox" data-layer="mid" checked> MID</label><label><input type="checkbox" data-layer="ground" checked> GROUND</label></fieldset><fieldset><label><input type="checkbox" data-qa="bounds"> Hazard bounds</label><label><input type="checkbox" data-qa="unlimited"> Unlimited lives</label><button data-qa-action="restart">Restart run</button></fieldset><p class="qa-note">Parity branch: LAB25Q gameplay director, HUD/action presentation and preserved external assets. QA state remains isolated from production configuration.</p></section></main><script type="module" src="./js/main.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LAB25Q — WORLD VISUAL OWNERSHIP QA</title>
+<link rel="stylesheet" href="./css/lab25q-01.css">
+</head>
+<body>
+<div class="wrap">
+<div class="board">
+<canvas id="game" width="960" height="540"></canvas>
+<div class="gameplay-hud hidden" id="gameplayHud" style="--heart-sprite:url('../assets/hud/UI_LIFE_HEART.png');--character-sprite:url('../assets/hud/UI_STAGE_PROGRESS_CLAUDE_CONSTANCE.png')"><div class="hud-panel"><div class="health-block"><div class="hud-kicker">HEALTH</div><div class="life-hud lives-3" id="lifeHud"><span class="life-heart full"></span><span class="life-heart full"></span><span class="life-heart full active"></span></div></div><div class="progress-hud"><div class="stage-title" id="stageHudTitle">NORTH AMERICA • STAGE 1</div><div class="progress-track"><img class="progress-path" src="../assets/hud/UI_STAGE_PROGRESS_PATH.png" alt=""><div class="progress-marker claude" id="progressMarker"></div></div></div></div></div></div></div>
+<div class="gameplay-actions" id="gameplayActions"><button id="gameSlideBtn" aria-label="Slide">SLIDE</button><button id="gamePauseBtn" aria-label="Pause game">PAUSE</button><button id="gameJumpBtn" aria-label="Jump">JUMP</button></div>
+<div class="run-fail" id="runFail"><div class="run-fail-card">RUN FAILED<small>Choose how you want to continue testing.</small><div class="run-fail-actions"><button id="retryRunBtn">TRY AGAIN</button><button id="exitRunBtn" class="secondary">EXIT RUN</button></div></div></div>
+<div class="debug" id="debugPanel">
+<button class="debug-toggle" id="debugToggle" aria-expanded="true" aria-label="Collapse QA info">−</button>
+<div class="debug-body">
+<b>LAB25I — SA QA SYSTEMS + ASSET FIX</b><br>
+Character: <span id="characterLabel">CLAUDE</span><br>
+State: <span id="stateLabel">RUN</span><br>
+Frame: <span id="frameLabel">1 / 4</span><br>
+Run size: LOCKED / APPROVED<br>
+Crop: COMPONENT-AWARE<br>
+Runtime cell: 700×700<br>
+Master Scale: <span id="masterScaleLabel">0.185</span><br>
+State Size: <span id="stateScaleLabel">1.000</span><br>
+Effective Scale: <span id="effectiveScaleLabel">0.1850</span><br>
+Ground anchor: EXPLICIT FOOT<br>
+World scroll: <span id="scrollLabel">ON</span><br>
+Stars Y Offset: <span id="starYOffsetLabel">0</span> px
+</div>
+</div>
+<div class="tuner collapsed" id="tunerPanel">
+  <button class="panel-close" id="panelClose" aria-label="Close control center">×</button>
+  <div class="tuner-title">CONTROL CENTER — QA / PRODUCTION CONFIG</div>
+
+  <div class="control-section" data-default-open="true">
+    <div class="control-label">1. CONTENT + TEST SUBJECT</div>
+    <div class="tuner-note">Choose the content once. Every stage-aware system below follows this master context.</div>
+    <div class="cc-summary">
+      <div class="cc-chip"><b>STAGE</b><span id="navStageLabel">NA 1 — DESERT</span></div>
+      <div class="cc-chip"><b>HAZARD</b><span id="objectLabel">—</span></div>
+    </div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">CONTENT</div>
+      <select id="continentSelect" class="tuner-select" disabled><option value="north-america">North America</option><option value="south-america">South America</option><option value="europe">Europe</option></select>
+      <select id="stageSelect" class="tuner-select"><option value="na01">NA 1 — Desert</option><option value="na02">NA 2 — Pines / Mountains</option><option value="na03">NA 3 — City</option><option value="sa01">SA 1 — Amazon Rainforest</option><option value="sa02">SA 2 — Andes Mountains</option><option value="sa03">SA 3 — Rio de Janeiro</option><option value="eu01">EU 1 — Greece / Santorini</option><option value="eu02">EU 2 — France / Paris</option><option value="eu03">EU 3 — Spain / Barcelona</option></select>
+    </div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">CHARACTER</div>
+      <div class="tuner-buttons"><button id="characterBtn">Switch to Constance</button></div>
+    </div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">HAZARD</div>
+      <select id="hazardSelect" class="tuner-select"></select>
+      <div class="tuner-grid" style="margin-top:7px"><span>Type</span><span class="value" id="hazardTypeValue">—</span></div>
+    </div>
+  </div>
+
+  <div class="control-section" data-default-open="true">
+    <div class="control-label">2. QUICK TEST</div>
+    <div class="cc-primary">
+      <div class="cc-subtitle">PLAYER RESPONSE</div>
+      <div class="tuner-buttons">
+        <button id="quickRunBtn" class="action active">Run</button>
+        <button id="quickJumpBtn" class="action">Jump</button>
+        <button id="quickSlideBtn" class="action">Slide</button>
+      </div>
+      <div class="cc-subtitle" style="margin-top:10px">HAZARD PASS</div>
+      <div class="tuner-buttons">
+        <button id="hazardPlayBtn">▶ Play Pass</button>
+        <button id="hazardPauseBtn">Ⅱ Pause Pass</button>
+        <button id="objectResetPass">↺ Reset Pass</button>
+      </div>
+      <div id="flyingQuickControls" style="display:none">
+        <div class="cc-subtitle" style="margin-top:10px">FLYING BEHAVIOR</div>
+        <select id="flightModeSelect" class="tuner-select"><option value="high">HIGH — SLIDE</option><option value="low">LOW — JUMP</option></select>
+        <div class="cc-live">The same bird asset is reused at different altitudes. HIGH tests slide clearance; LOW tests jump clearance.</div>
+      </div>
+      <div class="tuner-grid" style="margin-top:10px">
+        <span>Collision</span><span class="value" id="objectCollisionState">CLEAR</span>
+        <span>Visual scale</span><span class="value" id="objectScaleValue">—</span>
+      </div>
+    </div>
+    <div class="cc-help">Normal test flow: select Stage → Hazard → Run/Jump/Slide → Play Pass. In ALL CHARACTER STATES, Jump honors Pause: paused = inspect airborne frames; running = full physics jump. Detailed tuning stays in Advanced sections.</div>
+  </div>
+
+  <div class="control-section">
+    <div class="control-label">3. ADVANCED — CHARACTER</div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">TEST MODE + PLAYBACK</div>
+      <div class="tuner-buttons"><button id="calibrationModeBtn" class="active">Calibration Mode: ON</button><button id="pauseBtn">Pause</button><button id="slowBtn">Slow Motion</button><button id="stepBtn">Next Frame</button></div>
+    </div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">ALL CHARACTER STATES</div>
+      <div class="tuner-buttons"><button data-state="run" class="action active">Run</button><button data-state="idle" class="action">Idle</button><button data-state="jump" class="action">Jump</button><button data-state="slide" class="action">Slide</button><button data-state="hit" class="action">Hit</button><button data-state="celebrate" class="action">Celebrate</button><button id="runBtn">Return to Run</button></div>
+      <div class="tuner-buttons"><button id="starsBtn">Stun Stars: Auto</button></div>
+    </div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">CURRENT STATE SIZE</div>
+      <div class="tuner-grid"><span>Current</span><span class="value" id="tuneTarget">CLAUDE / RUN</span><span>Size setting</span><span class="value" id="tuneScale">1.000</span></div>
+      <div class="tuner-buttons"><button id="sizeSmaller">Smaller</button><button id="sizeLarger">Larger</button><button id="sizeReset">Reset</button><button id="fineSmaller">-0.005</button><button id="fineLarger">+0.005</button></div>
+    </div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">CHARACTER SOURCE CROP — PER FRAME</div>
+      <div class="tuner-note">Trim unwanted pixels from the selected character + state + animation frame without moving or rescaling the sprite. Use this for atlas-edge contamination. Collision remains independent.</div>
+      <div class="tuner-grid"><span>Profile</span><span class="value" id="cropProfile">CLAUDE / RUN / FRAME 1</span><span>Left inset</span><span class="value" id="cropLeftValue">0 px</span><span>Right inset</span><span class="value" id="cropRightValue">0 px</span><span>Top inset</span><span class="value" id="cropTopValue">0 px</span><span>Bottom inset</span><span class="value" id="cropBottomValue">0 px</span></div>
+      <div class="tuner-buttons"><button id="cropLeftMore">Crop Left +5</button><button id="cropLeftLess">Crop Left −5</button><button id="cropRightMore">Crop Right +5</button><button id="cropRightLess">Crop Right −5</button></div>
+      <div class="tuner-buttons"><button id="cropTopMore">Crop Top +5</button><button id="cropTopLess">Crop Top −5</button><button id="cropBottomMore">Crop Bottom +5</button><button id="cropBottomLess">Crop Bottom −5</button></div>
+      <div class="tuner-buttons"><button id="cropReset">Reset This Frame Crop</button><button id="cropBoundsToggle">Crop Bounds: OFF</button><button id="charCollisionBoundsToggle">Collision Bounds: OFF</button><button id="copyCropProfile">Copy Crop Profile</button></div>
+      <div class="cc-live">“+” trims farther inward on that side. “−” restores source area. Remaining pixels stay in their original gameplay position; the image is not stretched.</div>
+    </div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">STUN STARS</div>
+      <div class="tuner-grid"><span>Star size</span><span class="value" id="tuneStarScale">0.56</span><span>Vertical position</span><span class="value" id="tuneStarY">0 px</span></div>
+      <div class="tuner-buttons"><button id="starSmaller">Smaller</button><button id="starLarger">Larger</button><button id="starUp">Move Up</button><button id="starDown">Move Down</button></div>
+    </div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">JUMP PHYSICS</div>
+      <div class="tuner-grid"><span>Jump power</span><span class="value" id="jumpPowerValue">322</span><span>Gravity</span><span class="value" id="jumpGravityValue">825</span></div>
+      <div class="tuner-buttons"><button id="jumpLower">Lower Jump</button><button id="jumpHigher">Higher Jump</button><button id="gravityLower">Slower Fall</button><button id="gravityHigher">Faster Fall</button><button id="playFullJump">Play Full Jump</button></div>
+    </div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">SLIDE TIMING</div>
+      <div class="tuner-grid"><span>Auto-return duration</span><span class="value" id="slideDurationValue">0.75 s</span></div>
+      <div class="tuner-buttons"><button id="slideDurationDown">Shorter −0.05</button><button id="slideDurationUp">Longer +0.05</button></div>
+      <div class="cc-live">Gameplay Slide is a timed action. Pressing Slide again while already slideing restarts the timer. Manual Slide in ALL CHARACTER STATES remains persistent for frame/collider calibration.</div>
+    </div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">STATE-AWARE CHARACTER HITBOX</div>
+      <div class="tuner-grid"><span>Profile</span><span class="value" id="charHitboxProfile">CLAUDE / RUN</span><span>Width</span><span class="value" id="charHitboxW">—</span><span>Height</span><span class="value" id="charHitboxH">—</span><span>X offset</span><span class="value" id="charHitboxX">—</span><span>Vertical bias</span><span class="value" id="charHitboxY">—</span></div>
+      <div class="tuner-buttons"><button id="charBoxNarrow">Width −</button><button id="charBoxWide">Width +</button><button id="charBoxShort">Height −</button><button id="charBoxTall">Height +</button></div>
+      <div class="tuner-buttons"><button id="charBoxLeft">Box ←</button><button id="charBoxRight">Box →</button><button id="charBoxUp">Bias ↑</button><button id="charBoxDown">Bias ↓</button><button id="copyCharHitbox">Copy Hitbox Profile</button></div>
+    </div>
+  </div>
+
+  <div class="control-section">
+    <div class="control-label">4. ADVANCED — WORLD / LANDSCAPE</div>
+    <div class="tuner-note">Stage is inherited from Content. These controls preserve the locked North America landscape calibration while allowing precise QA adjustment.</div>
+    <div class="tuner-grid" style="margin-top:8px"><span>Current stage</span><span class="value" id="worldLabel">NA 1 — DESERT</span><span>Stage seam Y</span><span class="value" id="worldSeamY">408</span><span>Rendered ground</span><span class="value" id="worldRenderedSurface">408</span><span>Claude foot</span><span class="value" id="claudeFootValue">16</span><span>Constance foot</span><span class="value" id="constanceFootValue">20</span></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">STAGE SEAM</div><div class="tuner-buttons"><button id="seamUp">Seam Up</button><button id="seamDown">Seam Down</button><button id="guidesToggle">Show Calibration Guides</button></div></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">DISTANT</div><div class="tuner-grid"><span>Y</span><span class="value" id="farYValue">0</span><span>Scale</span><span class="value" id="farScaleValue">1.00</span></div><div class="tuner-buttons"><button id="farUp">Y −</button><button id="farDown">Y +</button><button id="farSmaller">Scale −</button><button id="farLarger">Scale +</button></div></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">MIDGROUND</div><div class="tuner-grid"><span>Y offset</span><span class="value" id="midYValue">0</span><span>Scale</span><span class="value" id="worldMidScale">1.00</span><span>Parallax</span><span class="value" id="worldMidParallax">0.20</span></div><div class="tuner-buttons"><button id="midUp">Y −</button><button id="midDown">Y +</button><button id="midScaleLess">Scale −</button><button id="midScaleMore">Scale +</button><button id="midParallaxLess">Parallax −</button><button id="midParallaxMore">Parallax +</button></div></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">GROUND</div><div class="tuner-grid"><span>Y offset</span><span class="value" id="groundYValue">0</span><span>Scale</span><span class="value" id="worldGroundScale">1.00</span><span>Parallax</span><span class="value" id="worldGroundParallax">1.00</span></div><div class="tuner-buttons"><button id="groundUp">Y −</button><button id="groundDown">Y +</button><button id="groundScaleLess">Scale −</button><button id="groundScaleMore">Scale +</button><button id="groundParallaxLess">Parallax −</button><button id="groundParallaxMore">Parallax +</button></div></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">GLOBAL CHARACTER GROUNDING</div><div class="cc-live">These are editable global Claude/Constance foot anchors and apply to every stage.</div><div class="tuner-grid"><span>Claude global</span><span class="value" id="claudeGlobalFootValue">19</span><span>Constance global</span><span class="value" id="constanceGlobalFootValue">20</span></div><div class="tuner-buttons"><button id="claudeFootUp">Claude Up</button><button id="claudeFootDown">Claude Down</button><button id="constanceFootUp">Constance Up</button><button id="constanceFootDown">Constance Down</button></div></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">STAGE CHARACTER GROUNDING OVERRIDE</div><div class="cc-live">Stage-only correction added to the global foot anchor. Defaults to 0 and does not affect other stages.</div><div class="tuner-grid"><span>Claude stage</span><span class="value" id="claudeStageFootValue">0</span><span>Constance stage</span><span class="value" id="constanceStageFootValue">0</span></div><div class="tuner-buttons"><button id="claudeStageFootUp">Claude Stage Up</button><button id="claudeStageFootDown">Claude Stage Down</button><button id="constanceStageFootUp">Constance Stage Up</button><button id="constanceStageFootDown">Constance Stage Down</button></div></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">SHARED CLOUD LAYER</div><div class="tuner-grid"><span>Speed</span><span class="value" id="cloudSpeedValue">8</span><span>Y</span><span class="value" id="cloudYValue">0</span><span>Scale</span><span class="value" id="cloudScaleValue">0.65</span><span>Opacity</span><span class="value" id="cloudOpacityValue">0.75</span></div><div class="tuner-buttons"><button id="cloudSlower">Slower</button><button id="cloudFaster">Faster</button><button id="cloudUp">Up</button><button id="cloudDown">Down</button><button id="cloudSmaller">Smaller</button><button id="cloudLarger">Larger</button><button id="cloudFainter">Fainter</button><button id="cloudStronger">Stronger</button></div></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">WORLD LAYER VISIBILITY — QA ONLY</div><div class="tuner-note">Temporary render isolation only. These switches are not saved or exported.</div><div class="tuner-buttons"><button id="qaFarToggle" class="active">FAR ON</button><button id="qaCloudsToggle" class="active">CLOUDS ON</button><button id="qaMidToggle" class="active">MID ON</button><button id="qaGroundToggle" class="active">GROUND ON</button><button id="qaLayersAllOn">ALL ON</button></div><div class="tuner-grid" style="margin-top:8px"><span>World backing</span><span class="value" id="worldBackingAssertion">TRANSPARENT</span></div></div>
+
+<div class="cc-subgroup"><div class="cc-subtitle">PROFILE OUTPUT</div><div class="tuner-buttons"><button id="copyWorldProfile">Copy Current Profile</button><button id="worldReset">Reset Current Stage</button></div></div>
+  </div>
+
+  <div class="control-section">
+    <div class="control-label">5. ADVANCED — HAZARD CONFIG</div>
+    <div class="tuner-note">Grounded hazards now keep their own visual grounding correction. Flying behavior remains shared globally. Selecting a different ground hazard loads that hazard’s saved ground offset without changing the others.</div>
+    <div class="tuner-grid" style="margin-top:8px"><span>Screen X (QA only)</span><span class="value" id="objectXValue">—</span><span>Selected hazard ground offset</span><span class="value" id="objectGroundOffsetValue">—</span></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">HAZARD SELECTION</div><div class="tuner-buttons"><button id="objectPrev">Previous Hazard</button><button id="objectNext">Next Hazard</button></div></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">PLACEMENT + SCALE</div><div class="tuner-buttons"><button id="objectLeft">QA X −</button><button id="objectRight">QA X +</button><button id="objectUp">Ground ↑</button><button id="objectDown">Ground ↓</button><button id="objectSmaller">Scale −</button><button id="objectLarger">Scale +</button></div><div class="cc-live" id="groundOffsetScopeNote">Ground offset is saved on the selected grounded hazard only.</div></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">VISUAL SOURCE CROP</div><div class="cc-live">Crop the selected hazard artwork without editing its atlas. Values are source pixels and save per hazard.</div><div class="tuner-grid"><span>L / R / T / B</span><span class="value" id="hazardCropValue">0 / 0 / 0 / 0</span></div><div class="tuner-buttons"><button id="hazardCropLeftLess">L −</button><button id="hazardCropLeftMore">L +</button><button id="hazardCropRightLess">R −</button><button id="hazardCropRightMore">R +</button><button id="hazardCropTopLess">T −</button><button id="hazardCropTopMore">T +</button><button id="hazardCropBottomLess">B −</button><button id="hazardCropBottomMore">B +</button></div></div>
+    <div id="flyingControls" class="cc-subgroup" style="display:none"><div class="cc-subtitle">FLYING TUNING</div><div class="tuner-grid"><span>Altitude</span><span class="value" id="flightAltitudeValue">—</span><span>Speed</span><span class="value" id="flightSpeedValue">150</span><span>Animation</span><span class="value" id="flightFPSValue">8 FPS</span></div><div class="tuner-buttons"><button id="flightUp">Altitude ↑</button><button id="flightDown">Altitude ↓</button><button id="flightSlower">Speed −</button><button id="flightFaster">Speed +</button><button id="flightFPSDown">FPS −</button><button id="flightFPSUp">FPS +</button></div></div>
+    <div class="cc-subgroup"><div class="cc-subtitle">HAZARD COLLISION BOX</div><div class="tuner-grid"><span>Width</span><span class="value" id="collisionWidthValue">—</span><span>Height</span><span class="value" id="collisionHeightValue">—</span><span>X offset</span><span class="value" id="collisionXValue">—</span><span>Y offset</span><span class="value" id="collisionYValue">—</span></div><div class="tuner-buttons"><button id="collisionNarrower">Width −</button><button id="collisionWider">Width +</button><button id="collisionShorter">Height −</button><button id="collisionTaller">Height +</button></div><div class="tuner-buttons"><button id="collisionLeft">Box ←</button><button id="collisionRight">Box →</button><button id="collisionUp">Box ↑</button><button id="collisionDown">Box ↓</button></div></div>
+    <button id="objectScrollToggle" style="display:none">Scroll Hazard: OFF</button>
+  </div>
+
+  <div class="control-section" data-default-open="true">
+    <div class="control-label">6. 90-SECOND PATTERN DIRECTOR</div>
+    <div class="tuner-note">Runs a learnable 90-second course assembled from physics-safe authored pattern families. The same stage seed reproduces the same sequence. Flying hazards can use SLOW / NORMAL / FAST speed classes.</div>
+    <div class="cc-subgroup"><div class="cc-subtitle">RUN CONTROL</div>
+      <div class="tuner-buttons"><button id="spawnStart">Start Run</button><button id="spawnPause">Pause Run</button><button id="spawnReset">Reset Run</button><button id="unlimitedLivesToggle">QA Unlimited Lives: OFF</button></div>
+      <div class="tuner-grid"><span>Time remaining</span><span class="value" id="spawnTime">1:30</span><span>Lives</span><span class="value" id="spawnLives">3 / 3</span><span>Phase</span><span class="value" id="spawnPhase">READY</span><span>Active hazards</span><span class="value" id="spawnActive">0</span><span>Cleared</span><span class="value" id="spawnCleared">0</span><span>Hits</span><span class="value" id="spawnHits">0</span><span>Last event</span><span class="value" id="spawnEvent">Ready</span></div>
+    </div>
+    <div class="cc-subgroup"><div class="cc-subtitle">GLOBAL STAGE PACING</div>
+      <div class="tuner-grid"><span>Stage duration</span><span class="value" id="stageDurationValue">90 s</span><span>Starting lives</span><span class="value" id="startingLivesValue">3</span><span>Finish release</span><span class="value" id="finishReleaseValue">5 s</span><span>Max reaction queue</span><span class="value" id="maxVisibleValue">2</span></div>
+      <div class="tuner-buttons"><button id="durationDown">Duration −</button><button id="durationUp">Duration +</button><button id="livesDown">Lives −</button><button id="livesUp">Lives +</button><button id="releaseDown">Release −</button><button id="releaseUp">Release +</button></div><div class="tuner-note">Visual Queue Contract: Max reaction queue limits how many hazard arrivals can demand timing decisions inside the reaction-lead window. Distant hazards may still be visible while scrolling naturally into the stage.</div>
+    </div>
+    <div class="cc-subgroup"><div class="cc-subtitle">FLYING SPEED CLASSES</div>
+      <div class="tuner-note">Flyer motion contract: SLOW = 150 px/s minimum. LOW flyers use NORMAL or FAST only so Jump threats never hover near world speed.</div>
+      <div class="tuner-grid"><span>SLOW</span><span class="value" id="flySlowValue">130</span><span>NORMAL</span><span class="value" id="flyNormalValue">170</span><span>FAST</span><span class="value" id="flyFastValue">210</span></div>
+      <div class="tuner-buttons"><button id="slowDown">Slow −</button><button id="slowUp">Slow +</button><button id="normalDown">Normal −</button><button id="normalUp">Normal +</button><button id="fastDown">Fast −</button><button id="fastUp">Fast +</button></div>
+    </div>
+    <div class="cc-subgroup"><div class="cc-subtitle">FLYING ALTITUDE MIX — FLEXIBLE SLOTS</div>
+      <div class="tuner-note">Controls flexible bird-pattern selection only. Signature sequences remain authored and fixed. HIGH requires Slide; LOW requires Jump.</div>
+      <div class="tuner-grid"><span>HIGH / Slide</span><span class="value" id="flyHighMixValue">55%</span><span>LOW / Jump</span><span class="value" id="flyLowMixValue">45%</span></div>
+      <div class="tuner-buttons"><button id="highMixDown">More LOW</button><button id="highMixUp">More HIGH</button><button id="altitudeMixReset">Reset 55 / 45</button></div>
+    </div>
+    <div class="cc-subgroup"><div class="cc-subtitle">PATTERN QA</div>
+      <div class="tuner-grid"><span>Stage seed</span><span class="value" id="patternSeedValue">2309</span><span>Planned hazards</span><span class="value" id="plannedHazardsValue">—</span><span>Signature begins</span><span class="value" id="signatureStartValue">75 s</span></div>
+      <div class="tuner-buttons"><button id="seedDown">Seed −</button><button id="seedUp">Seed +</button><button id="rebuildPattern">Rebuild Pattern</button></div>
+      <div class="cc-live" id="patternSummary">Pattern course ready.</div>
+    </div>
+    <div class="cc-live">Use <b>Run / Jump / Slide</b> in Quick Test. Back-to-back patterns are intentional. Pattern timing is based on when each hazard reaches the player. Every hazard now begins fully off-screen right and scrolls naturally into view, so upcoming challenges are readable before they reach the reaction zone.</div>
+  </div>
+
+  <div class="control-section">
+    <div class="control-label">7. HIT / RECOVERY</div>
+    <div class="tuner-note">Shared player behavior. A collision triggers the approved Hit/Stunned state, a brief recovery lock, and an invulnerability window so one obstacle cannot score repeated hits.</div>
+    <div class="tuner-grid"><span>Recovery duration</span><span class="value" id="recoveryDuration">1.10 s</span><span>Invulnerability</span><span class="value" id="invulnDuration">2.00 s</span></div>
+    <div class="tuner-buttons"><button id="recoveryDown">Recovery −</button><button id="recoveryUp">Recovery +</button><button id="invulnDown">Invuln −</button><button id="invulnUp">Invuln +</button></div>
+  </div>
+
+  <div class="control-section">
+    <div class="control-label">8. STAGE END / FINISH MARKER</div>
+    <div class="tuner-note">Finish behavior is shared; visual placement is stored per stage. The marker enters during the global finish-release window and reaches the player at 0:00.</div>
+    <div class="tuner-grid"><span>Scale</span><span class="value" id="finishScale">0.25</span><span>Ground offset</span><span class="value" id="finishGround">0</span><span>X offset</span><span class="value" id="finishXOffset">0</span></div>
+    <div class="tuner-buttons"><button id="finishScaleDown">Scale −</button><button id="finishScaleUp">Scale +</button></div>
+    <div class="tuner-buttons"><button id="finishUp">Ground ↑</button><button id="finishDown">Ground ↓</button><button id="finishLeft">Marker ←</button><button id="finishRight">Marker →</button><button id="finishBoundsToggle">Trigger Bounds: OFF</button></div>
+  </div>
+
+  <div class="control-section">
+    <div class="control-label">9. DEBUG + OUTPUT</div>
+    <div class="cc-subgroup"><div class="cc-subtitle">VISUAL DEBUG</div><div class="tuner-buttons"><button id="objectBoundsToggle">Bounds: OFF</button></div></div>
+    <div class="cc-subgroup">
+      <div class="cc-subtitle">LOCAL CONFIG CHECKPOINT</div>
+      <div class="tuner-buttons"><button id="saveLocalConfig">Save Locally</button><button id="restoreLocalConfig">Restore Saved</button><button id="deleteLocalConfig">Delete Saved</button></div>
+      <div class="cc-live" id="localSaveStatus">No saved configuration.</div>
+    </div>
+    <div class="cc-subgroup"><div class="cc-subtitle">COPY / EXPORT</div><div class="tuner-buttons"><button id="copyObjectQA">Copy Selected Hazard Config</button><button id="copyCalibration">Copy Full QA Snapshot</button></div></div><div class="cc-live">LAB25P preserves the validated North America and South America baseline and integrates the approved normalized Europe EU01–EU03 world layers while retaining the shared global cloud layer. Use <b>Save Locally</b> as a crash/reload checkpoint from here forward.  <b>Copy Full QA Snapshot</b> remains the complete handoff for analysis and production.</div>
+    <div class="cc-live">Use the Copy controls after a configuration visually passes. They preserve the exact values needed for production implementation.</div>
+  </div>
+</div>
+<button class="tuner-tab" id="tunerToggle" aria-expanded="false">CONTROLS</button>
+</div>
+<div class="status" id="status">LAB25P: Normalized Europe World Integration QA — EU01 Greece, EU02 Paris, EU03 Barcelona.</div>
+<div class="legend">Run/Jump/Slide move the world. Idle/Hit/Celebrate stop it. Run is locked at 1.000; tune only the current non-Run state. Jump uses physics only.</div>
+</div>
+<script src="./js/lab25q-01.js"></script>
+</body>
+</html>
