@@ -17,10 +17,16 @@ jobs:
         run: |
           set -euo pipefail
           test -f src/index.html
+          test -f src/game.html
+          test -f src/dev.html
           test -f src/css/game.css
+          test -f src/css/mode-shell.css
           test -f src/js/game-config.js
           test -f src/js/game-runtime.js
           test -f src/js/config-schema.js
+          test -f src/js/bootstrap/production-bootstrap.js
+          test -f src/js/bootstrap/development-bootstrap.js
+          test -f src/js/dev/mode-shell.js
           test ! -e src/js/lab25q.js
           test ! -e src/js/lab25q-config.js
           test ! -e src/js/lab25q-runtime.js
@@ -28,6 +34,14 @@ jobs:
           grep -q './css/game.css' src/index.html
           grep -q './js/game-config.js' src/index.html
           grep -q './js/game-runtime.js' src/index.html
+          grep -q './js/bootstrap/production-bootstrap.js' src/game.html
+          grep -q './js/bootstrap/development-bootstrap.js' src/dev.html
+          grep -q './js/dev/mode-shell.js' src/dev.html
+          grep -q 'PHASE 7C • QA' src/js/dev/mode-shell.js
+          grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
+          grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell' src/game.html
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell' src/js/bootstrap/production-bootstrap.js
           grep -q 'window.GAME_CONFIG=' src/js/game-config.js
           grep -q 'const CONFIG=window.GAME_CONFIG;' src/js/game-runtime.js
           grep -q 'PHASE 6 • QA' src/index.html
@@ -40,6 +54,7 @@ jobs:
           grep -q 'canvas:{w:960,h:540}' src/js/game-config.js
           test -f docs/PHASE7A_COORDINATE_AUDIT.md
           test -f docs/PHASE7B_CANONICAL_CONFIG_SCHEMA.md
+          test -f docs/PHASE7C_BOOTSTRAP_IMPLEMENTATION.md
           grep -q 'GROUND_SURFACE_Y = 410' docs/WORLD_RENDERING_SPEC.md
           grep -q 'GROUND_SURFACE_Y = 410' docs/PHASE7A_COORDINATE_AUDIT.md
           grep -q 'displayScale = min(availableWidth / 960, availableHeight / 540)' docs/WORLD_RENDERING_SPEC.md
@@ -47,6 +62,9 @@ jobs:
           node --check src/js/game-config.js
           node --check src/js/config-schema.js
           node --check src/js/game-runtime.js
+          node --check src/js/bootstrap/production-bootstrap.js
+          node --check src/js/bootstrap/development-bootstrap.js
+          node --check src/js/dev/mode-shell.js
           node <<'NODE'
           const fs=require('fs'),vm=require('vm');
           const context={window:{}}; vm.createContext(context);
