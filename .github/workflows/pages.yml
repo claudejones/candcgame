@@ -21,7 +21,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout clean LAB25Q-derived build
+      - name: Checkout LAB25Q parity-validation build
         uses: actions/checkout@v4
         with:
           ref: modular-parity-validation
@@ -38,4 +38,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-# Pages deployment is initiated from main; deployed content is the QA branch above.
+# Main is the approved Pages deployment gateway. Current target: LAB25Q Phase 1 parity gate.
