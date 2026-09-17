@@ -1,16 +1,15 @@
-name: LAB25Q Phase 5 modularization
+name: Phase 6 production cleanup
 
 on:
   push:
     branches: ["modular-parity-validation"]
     paths: [".github/workflows/lab25q-phase5-modularize.yml"]
-  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  modularize:
+  cleanup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,100 +17,89 @@ jobs:
           ref: modular-parity-validation
           fetch-depth: 0
 
-      - name: Extract configuration module from proven Phase 4 runtime
+      - name: Verify approved Phase 5 baseline
         run: |
+          set -euo pipefail
+          test -f src/js/lab25q-config.js
+          test -f src/js/lab25q-runtime.js
+          test -f src/js/lab25q.js
+          test -f src/css/lab25q.css
+          grep -q 'window.LAB25Q_CONFIG' src/js/lab25q-config.js
+          grep -q 'const CONFIG=window.LAB25Q_CONFIG' src/js/lab25q-runtime.js
+          grep -q './js/lab25q-config.js' src/index.html
+          grep -q './js/lab25q-runtime.js' src/index.html
+          ! grep -q 'data:image/' src/index.html src/css/lab25q.css src/js/lab25q-config.js src/js/lab25q-runtime.js
+
+      - name: Rename production files and remove legacy duplicate
+        run: |
+          set -euo pipefail
+          mv src/css/lab25q.css src/css/game.css
+          mv src/js/lab25q-config.js src/js/game-config.js
+          mv src/js/lab25q-runtime.js src/js/game-runtime.js
+          rm src/js/lab25q.js
+
+          sed -i 's/window\.LAB25Q_CONFIG/window.GAME_CONFIG/g' src/js/game-config.js src/js/game-runtime.js
+          sed -i 's#\./css/lab25q\.css#./css/game.css#g' src/index.html
+          sed -i 's#\./js/lab25q-config\.js#./js/game-config.js#g' src/index.html
+          sed -i 's#\./js/lab25q-runtime\.js#./js/game-runtime.js#g' src/index.html
+
           python3 - <<'PY'
           from pathlib import Path
-          import re
-
-          js = Path('src/js/lab25q.js')
-          html = Path('src/index.html')
-          text = js.read_text()
-          token = 'const CONFIG='
-          start = text.index(token)
-          obj_start = start + len(token)
-          if text[obj_start] != '{':
-              raise SystemExit('CONFIG object start not found')
-
-          depth = 0
-          quote = None
-          esc = False
-          end = None
-          for i in range(obj_start, len(text)):
-              c = text[i]
-              if quote:
-                  if esc: esc = False
-                  elif c == '\\': esc = True
-                  elif c == quote: quote = None
-                  continue
-              if c in ('"', "'", '`'):
-                  quote = c
-              elif c == '{': depth += 1
-              elif c == '}':
-                  depth -= 1
-                  if depth == 0:
-                      end = i + 1
-                      break
-          if end is None or text[end] != ';':
-              raise SystemExit('CONFIG object end not found')
-          end += 1
-
-          original_decl = text[start:end]
-          obj = text[obj_start:end-1]
-          config_module = '"use strict";\nwindow.LAB25Q_CONFIG=' + obj + ';\n'
-          runtime = text[:start] + 'const CONFIG=window.LAB25Q_CONFIG;' + text[end:]
-
-          Path('src/js/lab25q-config.js').write_text(config_module)
-          Path('src/js/lab25q-runtime.js').write_text(runtime)
-
-          # Mechanical source-parity proof: substituting the one bridge binding back with
-          # the extracted declaration must reconstruct the exact Phase 4 runtime.
-          reconstructed = runtime.replace('const CONFIG=window.LAB25Q_CONFIG;', original_decl, 1)
-          assert reconstructed == text, 'runtime differs beyond CONFIG bridge'
-          assert ('window.LAB25Q_CONFIG=' + obj + ';') in config_module
-          assert 'data:image/' not in config_module + runtime
-
-          h = html.read_text()
-          pat = re.compile(r'<script\s+src=["\'](?:\./)?js/lab25q\.js["\']([^>]*)></script>')
-          m = pat.search(h)
-          if not m:
-              # Phase 1 preserved original script attributes, so accept any relative prefix.
-              pat = re.compile(r'<script\s+src=["\'][^"\']*lab25q\.js["\']([^>]*)></script>')
-              m = pat.search(h)
-          if not m:
-              raise SystemExit('lab25q script tag not found')
-          attrs = m.group(1)
-          replacement = '<script src="./js/lab25q-config.js"></script>\n<script src="./js/lab25q-runtime.js"' + attrs + '></script>'
-          html.write_text(h[:m.start()] + replacement + h[m.end():])
+          p=Path('src/index.html')
+          s=p.read_text()
+          marker='<div class="status" id="status">'
+          assert marker in s
+          s=s.replace(marker,'<div class="build-id" id="buildId">PHASE 6 • QA</div>\n'+marker,1)
+          p.write_text(s)
+          css=Path('src/css/game.css')
+          c=css.read_text()
+          c += '\n.build-id{font-size:10px;letter-spacing:.08em;opacity:.68;text-align:right;margin:4px 2px 0;font-weight:700;}\n'
+          css.write_text(c)
           PY
 
-      - name: Syntax and structural QA
+      - name: Remove completed migration-only workflows
         run: |
           set -euo pipefail
-          node --check src/js/lab25q-config.js
-          node --check src/js/lab25q-runtime.js
-          ! grep -R "data:image/" src/index.html src/css/lab25q.css src/js/lab25q-config.js src/js/lab25q-runtime.js
-          grep -q 'lab25q-config.js' src/index.html
-          grep -q 'lab25q-runtime.js' src/index.html
-          ! grep -q 'src=".*lab25q.js"' src/index.html
+          rm -f .github/workflows/lab25q-phase0-inventory.yml
+          rm -f .github/workflows/lab25q-phase1-build.yml
+          rm -f .github/workflows/lab25q-phase2-analysis.yml
+          rm -f .github/workflows/lab25q-phase4-combined.yml
+          rm -f .github/workflows/lab25q-phase4-hud-a.yml
+          rm -f .github/workflows/lab25q-phase4-hud-b.yml
+          rm -f .github/workflows/lab25q-phase4-qa-fix.yml
+          rm -f .github/workflows/lab25q-phase5-modularize.yml
 
-      - name: Record Phase 5 checkpoint
-        run: |
-          cat > docs/PHASE5_MODULARIZATION.md <<'EOF'
-          # Phase 5 Modularization Checkpoint
-
-          Phase 5 begins from user-verified Phase 4 commit `86353bf6cc66c85147db5a226354adbed6ea6e1f`.
-
-          Increment 1 extracts the complete `CONFIG` object into `src/js/lab25q-config.js`. The runtime remains otherwise source-identical and receives that same object through one explicit `window.LAB25Q_CONFIG` bridge. Automated QA reconstructs the original Phase 4 runtime from the two outputs and fails if any runtime source changed beyond that bridge.
-
-          No gameplay values, rendering behavior, timing, collision logic, grounding, hazard calibration, or asset references are changed. Known landscape, character-grounding, hazard sizing/positioning, and hitbox calibration issues remain deferred until landscape geometry is finalized.
-          EOF
-
-      - name: Commit Phase 5 increment
+      - name: Phase 6 structural QA
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/index.html src/js/lab25q-config.js src/js/lab25q-runtime.js docs/PHASE5_MODULARIZATION.md
-          git commit -m "Phase 5 extract LAB25Q configuration module"
+          test -f src/css/game.css
+          test -f src/js/game-config.js
+          test -f src/js/game-runtime.js
+          test ! -e src/css/lab25q.css
+          test ! -e src/js/lab25q-config.js
+          test ! -e src/js/lab25q-runtime.js
+          test ! -e src/js/lab25q.js
+          grep -q 'window.GAME_CONFIG=' src/js/game-config.js
+          grep -q 'const CONFIG=window.GAME_CONFIG;' src/js/game-runtime.js
+          grep -q './css/game.css' src/index.html
+          grep -q './js/game-config.js' src/index.html
+          grep -q './js/game-runtime.js' src/index.html
+          grep -q 'PHASE 6 • QA' src/index.html
+          ! grep -R -nE 'LAB25Q_CONFIG|src/(css|js)/lab25q|data:image/' src
+          ! grep -R -nE 'lab25q-(phase0|phase1|phase2|phase4|phase5)' .github/workflows || true
+          grep -q 'slideDuration:.75' src/js/game-config.js
+          grep -q 'recoveryDuration:1.10' src/js/game-config.js
+          grep -q 'invulnerabilityDuration:2.00' src/js/game-config.js
+          grep -q 'characterX:220' src/js/game-config.js
+          grep -q 'worldSpeed:120' src/js/game-config.js
+          node --check src/js/game-config.js
+          node --check src/js/game-runtime.js
+
+      - name: Commit Phase 6 production baseline
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m 'Phase 6 establish production runtime baseline'
           git push origin HEAD:modular-parity-validation
