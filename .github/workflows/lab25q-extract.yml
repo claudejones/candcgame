@@ -11,46 +11,89 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Extract LAB25Q source map
+      - name: Extract faithful LAB25Q parity build
         run: |
-          echo 'LAB25Q extraction v2'
           python3 - <<'PY'
           from pathlib import Path
-          import re, hashlib
-          p=Path('archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html')
-          s=p.read_text(errors='replace')
+          import re, hashlib, base64, json
+
+          src=Path('archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html')
+          s=src.read_text(errors='replace')
           out=Path('src/legacy/lab25q'); out.mkdir(parents=True,exist_ok=True)
+          parity=Path('qa/lab25q-faithful'); parity.mkdir(parents=True,exist_ok=True)
+          assets=parity/'assets'; assets.mkdir(parents=True,exist_ok=True)
+
           styles=re.findall(r'<style[^>]*>(.*?)</style>',s,re.I|re.S)
           scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.I|re.S)
           css='\n\n/* ---- source style block ---- */\n'.join(styles)
-          data=[]
-          def repl(m):
-              raw=m.group(0); token=f'__LAB25Q_EMBEDDED_DATA_{len(data):04d}__'
-              data.append((token,len(raw),hashlib.sha256(raw.encode()).hexdigest()))
-              return repr(token)
           js='\n\n// ---- source script block ----\n'.join(scripts)
-          inspect_js=re.sub(r"(['\"]data:image/[^;]+;base64,[A-Za-z0-9+/=]+['\"])",repl,js)
           (out/'source.css').write_text(css)
+
+          # Extract every embedded image in encounter order, preserving exact bytes.
+          data=[]
+          pat=re.compile(r"(['\"])(data:image/([^;]+);base64,([A-Za-z0-9+/=]+))\1")
+          def inspect_repl(m):
+              token=f'__LAB25Q_EMBEDDED_DATA_{len(data):04d}__'
+              raw=m.group(2); mime=m.group(3); payload=m.group(4)
+              data.append((token,mime,payload,hashlib.sha256(raw.encode()).hexdigest()))
+              return repr(token)
+          inspect_js=pat.sub(inspect_repl,js)
           (out/'source.inspect.js').write_text(inspect_js)
-          terms=['START RUN','Start Run','startRun','start run','progress-track','progress-marker','UI_STAGE_PROGRESS_PATH','UI_LIFE_HEART','NA_CLOUD_LAYER','class Game','class Player','requestAnimationFrame','pause','SLIDE','JUMP']
-          lines=s.splitlines()
-          report=['# LAB25Q Extraction Map','',f'- Source bytes: {len(s):,}',f'- Style blocks: {len(styles)}',f'- Inline script blocks: {len(scripts)}',f'- Embedded image data URLs stripped from inspectable JS: {len(data)}','']
-          report+=['## Embedded data manifest','']+[f'- `{t}` — {n:,} chars — sha256 `{h}`' for t,n,h in data]
-          for term in terms:
-              hits=[i for i,l in enumerate(lines) if term.lower() in l.lower()]
-              report += ['',f'## `{term}`',f'Hits: {len(hits)}','']
-              for i in hits[:12]:
-                  a=max(0,i-3); b=min(len(lines),i+4)
-                  report.append(f'### line {i+1}')
-                  report.append('```html')
-                  report.extend(lines[a:b])
-                  report.append('```')
+
+          extmap={'png':'png','jpeg':'jpg','jpg':'jpg','webp':'webp','gif':'gif'}
+          asset_paths={}
+          for i,(token,mime,payload,h) in enumerate(data):
+              ext=extmap.get(mime.lower(),'bin')
+              p=assets/f'embedded_{i:04d}.{ext}'
+              p.write_bytes(base64.b64decode(payload))
+              asset_paths[token]=f'./assets/{p.name}'
+
+          # Rebuild original inline JS byte-for-byte except data URLs -> external files.
+          idx=0
+          def external_repl(m):
+              nonlocal_idx=None
+              # encounter order is identical to inspect pass
+              token=f'__LAB25Q_EMBEDDED_DATA_{external_repl.i:04d}__'
+              external_repl.i+=1
+              return repr(asset_paths[token])
+          external_repl.i=0
+          external_js=pat.sub(external_repl,js)
+
+          # Preserve original body/DOM exactly; only externalize style and script blocks.
+          body_match=re.search(r'<body([^>]*)>(.*?)</body>',s,re.I|re.S)
+          if not body_match: raise SystemExit('LAB25Q body not found')
+          body_attrs=body_match.group(1); body=body_match.group(2)
+          body=re.sub(r'<script(?![^>]*\bsrc=)[^>]*>.*?</script>','',body,flags=re.I|re.S)
+          head_match=re.search(r'<head[^>]*>(.*?)</head>',s,re.I|re.S)
+          head=head_match.group(1) if head_match else ''
+          head=re.sub(r'<style[^>]*>.*?</style>','',head,flags=re.I|re.S)
+          head=re.sub(r'<script(?![^>]*\bsrc=)[^>]*>.*?</script>','',head,flags=re.I|re.S)
+          # Avoid duplicate charset/title churn; keep all other source head metadata.
+          (parity/'lab25q.css').write_text(css)
+          (parity/'lab25q.js').write_text(external_js)
+          html='<!doctype html><html><head>'+head+'<link rel="stylesheet" href="./lab25q.css"></head><body'+body_attrs+'>'+body+'<script src="./lab25q.js"></script></body></html>'
+          (parity/'index.html').write_text(html)
+
+          report=['# LAB25Q Faithful Extraction','',f'- Source bytes: {len(s):,}',f'- Style blocks: {len(styles)}',f'- Inline script blocks: {len(scripts)}',f'- Embedded images externalized: {len(data)}','', '## Contract','', '- DOM/body copied from archived LAB25Q.', '- CSS copied from archived LAB25Q.', '- JavaScript copied from archived LAB25Q.', '- Only embedded data-image URLs are replaced with external files.', '- No HUD, control-center, gameplay, hazard, calibration, or QA redesign is permitted in this parity build.','', '## Embedded image manifest','']
+          report += [f'- `{token}` -> `{asset_paths[token]}` — sha256(data-url) `{h}`' for token,_,_,h in data]
           Path('docs/LAB25Q_EXTRACTION_MAP.md').write_text('\n'.join(report))
           PY
-      - name: Commit extraction map
+      - name: Validate faithful extraction
+        run: |
+          test -s qa/lab25q-faithful/index.html
+          test -s qa/lab25q-faithful/lab25q.css
+          test -s qa/lab25q-faithful/lab25q.js
+          grep -q 'id="tuner"' qa/lab25q-faithful/index.html
+          grep -q 'gameplay-hud' qa/lab25q-faithful/index.html
+          grep -q 'qaFarToggle' qa/lab25q-faithful/index.html
+          grep -q 'saveLocalConfig' qa/lab25q-faithful/index.html
+          grep -q 'CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE' qa/lab25q-faithful/lab25q.js
+          ! grep -q 'data:image/' qa/lab25q-faithful/lab25q.js
+          echo "Faithful LAB25Q external-asset extraction validated"
+      - name: Commit faithful parity build
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add src/legacy/lab25q/source.css src/legacy/lab25q/source.inspect.js docs/LAB25Q_EXTRACTION_MAP.md
-          git diff --cached --quiet || git commit -m 'Extract inspectable LAB25Q source map'
+          git add src/legacy/lab25q/source.css src/legacy/lab25q/source.inspect.js docs/LAB25Q_EXTRACTION_MAP.md qa/lab25q-faithful
+          git diff --cached --quiet || git commit -m 'Extract faithful LAB25Q external-asset parity build'
           git push
