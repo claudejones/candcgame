@@ -22,3 +22,6 @@ Complete/approve all assets for all three stages of a continent before continent
 
 ## Flying flock animation contract
 Every constituent bird/creature in a multi-creature flying hazard must visibly animate across the full cycle with stable body anchors and readable independent wing silhouettes. Prefer fewer creatures over accepting a partially static flock member.
+
+## 2026-09-16 — LAB25Q externalization blueprint approved
+`docs/LAB25Q_EXTERNALIZATION_BLUEPRINT.md` is the execution authority for the LAB25Q migration. The archived LAB25Q is the sole behavioral/visual source baseline. First prove CSS/JavaScript externalization while retaining the exact embedded image bytes; then build a semantic asset manifest and replace current approved named assets incrementally with explicit geometry classification and parity checks. Positional/occurrence-order asset replacement is rejected. JavaScript modularization occurs only after external-asset parity. CI/deployment success alone is not parity approval.
