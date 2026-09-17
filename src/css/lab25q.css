@@ -52,7 +52,7 @@ button.action{min-width:88px} button.hold{touch-action:none}
 
 
 
-.gameplay-hud{position:absolute;inset:0;z-index:8;pointer-events:none;font-family:ui-monospace,monospace}.gameplay-hud.hidden{display:none}
+.gameplay-hud{--heart-sprite:url('../../assets/hud/UI_LIFE_HEART.png');--character-sprite:url('../../assets/hud/UI_STAGE_PROGRESS_CLAUDE_CONSTANCE.png');position:absolute;inset:0;z-index:8;pointer-events:none;font-family:ui-monospace,monospace}.gameplay-hud.hidden{display:none}
 .hud-panel{
 position:absolute;left:50%;top:max(10px,env(safe-area-inset-top));transform:translateX(-50%);
 width:min(68vw,700px);height:98px;
