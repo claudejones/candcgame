@@ -1,8 +1,8 @@
 name: Deploy QA site to GitHub Pages
 
+# Development branches do not deploy automatically.
+# Pages deployment is controlled from main, which pins the exact QA commit.
 on:
-  push:
-    branches: ["main", "modular-parity-validation"]
   workflow_dispatch:
 
 permissions:
@@ -24,13 +24,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Build lightweight Pages bundle
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+          cp -R src _site/src
+          if [ -d qa/asset-compare ]; then
+            mkdir -p _site/qa
+            cp -R qa/asset-compare _site/qa/asset-compare
+          fi
+          cp -R assets _site/assets
+          touch _site/.nojekyll
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload repository as Pages artifact
+      - name: Upload lightweight Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
