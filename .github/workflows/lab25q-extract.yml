@@ -11,74 +11,53 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Cross-reference and extract faithful LAB25Q parity build
+      - name: Build faithful LAB25Q with current named assets
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re, hashlib, base64, shutil
+          import re, shutil
 
           src=Path('archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html')
           s=src.read_text(errors='replace')
-          out=Path('src/legacy/lab25q'); out.mkdir(parents=True,exist_ok=True)
           parity=Path('qa/lab25q-faithful'); parity.mkdir(parents=True,exist_ok=True)
-          fallback=parity/'assets'/'unmatched'; fallback.mkdir(parents=True,exist_ok=True)
-          for old in fallback.glob('*'): old.unlink()
+          shutil.rmtree(parity/'assets',ignore_errors=True)
+          root='../../assets-original/current-generated/'
 
-          # Build byte-identity index of every preserved PNG. This is the authority for
-          # deciding whether an embedded LAB25Q payload is already one of the uploaded assets.
-          preserved=Path('assets-original/current-generated')
-          by_hash={}
-          for p in preserved.rglob('*.png'):
-              h=hashlib.sha256(p.read_bytes()).hexdigest()
-              by_hash.setdefault(h,[]).append(p)
+          # LAB25Q contains 62 embedded image occurrences. Their order is stable in the
+          # preserved reference. The current named uploaded assets are production authority;
+          # embedded bytes are historical snapshots and are never retained as fallbacks.
+          rel=[
+            'HUD/UI_LIFE_HEART.png','HUD/UI_STAGE_PROGRESS_CLAUDE_CONSTANCE.png','HUD/UI_STAGE_PROGRESS_PATH.png',
+            'EU-assets/EU01_BG_DISTANT_GREECE.png','EU-assets/EU01_BG_MID_GREECE.png','EU-assets/EU01_GROUND_GREECE.png','EU-assets/EU01_OBJECT_ATLAS_CRATE.png','EU-assets/EU01_HAZARD_ROLLING_BARREL.png','EU-assets/EU01_HAZARD_AEGEAN_GULLS.png',
+            'EU-assets/EU02_BG_DISTANT_PARIS.png','EU-assets/EU02_BG_MID_PARIS.png','EU-assets/EU02_GROUND_PARIS.png','EU-assets/EU02_OBJECT_ATLAS.png','EU-assets/EU02_HAZARD_SWALLOWS.png',
+            'EU-assets/EU03_BG_DISTANT_BARCELONA.png','EU-assets/EU03_BG_MID_BARCELONA.png','EU-assets/EU03_GROUND_BARCELONA.png','EU-assets/EU03_OBJECT_ATLAS.png','EU-assets/EU03_HAZARD_BATS.png',
+            'SA-assets/SA01_BG_DISTANT_AMAZON.png','SA-assets/SA01_BG_MID_AMAZON.png','SA-assets/SA01_GROUND_AMAZON.png','SA-assets/SA01_OBJECT_ATLAS.png','SA-assets/SA01_HAZARD_MACAWS.png',
+            'SA-assets/SA02_BG_DISTANT_ANDES.png','SA-assets/SA02_BG_MID_ANDES.png','SA-assets/SA02_GROUND_ANDES.png','SA-assets/SA02_OBJECT_ATLAS.png','SA-assets/SA02_HAZARD_ANDEAN_FLAMINGO.png',
+            'SA-assets/SA03_BG_DISTANT_RIO.png','SA-assets/SA03_BG_MID_RIO.png','SA-assets/SA03_GROUND_RIO.png','SA-assets/SA03_OBJECT_ATLAS.png','SA-assets/SA03_HAZARD_TROPICAL_PARAKEETS.png',
+            'NA_STAGE_FINISH_MARKER.png','NA-assets/NA01_HAZARD_ATLAS.png','NA-assets/NA01_HAZARD_VULTURE.png','NA-assets/NA02_HAZARD_ATLAS.png','NA-assets/NA02_HAZARD_EAGLE.png','NA-assets/NA03_HAZARD_ATLAS.png','NA-assets/NA03_HAZARD_PIGEONS.png',
+            'characer-states/G1A_RUN_CYCLE_ATLAS.png','characer-states/G1B_IDLE_ATLAS.png','characer-states/G1C_JUMP_ATLAS.png','characer-states/G1D_SLIDE_ATLAS.png','characer-states/G1E_HIT_ATLAS.png','characer-states/G1F_CELEBRATE_ATLAS.png','characer-states/FX_STUN_STARS_ATLAS.png',
+            'NA-assets/NA01_BG_DISTANT_MESAS.png','NA-assets/NA01_BG_MID_DESERT.png','NA-assets/NA01_GROUND_DESERT.png',
+            'NA-assets/NA02_BG_DISTANT_MOUNTAINS.png','NA-assets/NA02_BG_MID_PINES.png','NA-assets/NA02_GROUND_TRAIL.png',
+            'NA-assets/NA03_BG_DISTANT_NYC.png','NA-assets/NA03_BG_MID_CITY.png','NA-assets/NA03_GROUND_CITY.png',
+            'NA-assets/NA01_BG_DISTANT_MESAS.png','NA_CLOUD_LAYER.png',
+            'NA-assets/NA01_HAZARD_ATLAS.png','NA-assets/NA02_HAZARD_ATLAS.png','NA-assets/NA03_HAZARD_ATLAS.png'
+          ]
+          pat=re.compile(r'data:image/[^;]+;base64,[A-Za-z0-9+/=]+',re.I)
+          occ=list(pat.finditer(s))
+          if len(occ)!=62 or len(rel)!=62:
+              raise SystemExit(f'LAB25Q image contract mismatch: source={len(occ)} map={len(rel)}')
+          missing=[p for p in rel if not Path('assets-original/current-generated',p).is_file()]
+          if missing: raise SystemExit('Missing named assets: '+', '.join(missing))
+          it=iter(root+p for p in rel)
+          rebuilt=pat.sub(lambda m:next(it),s)
 
-          data_pat=re.compile(r'data:image/([^;]+);base64,([A-Za-z0-9+/=]+)',re.I)
-          occurrences=list(data_pat.finditer(s))
-          if not occurrences:
-              raise SystemExit('No embedded LAB25Q images found')
-
-          # Context map lets the report distinguish CSS/JS/body remnants rather than guessing.
-          style_ranges=[(m.start(),m.end()) for m in re.finditer(r'<style[^>]*>.*?</style>',s,re.I|re.S)]
-          script_ranges=[(m.start(),m.end()) for m in re.finditer(r'<script(?![^>]*\\bsrc=)[^>]*>.*?</script>',s,re.I|re.S)]
-          def context(pos):
-              if any(a<=pos<b for a,b in style_ranges): return 'css'
-              if any(a<=pos<b for a,b in script_ranges): return 'js'
-              return 'html/body-or-head'
-
-          unique={}
-          rows=[]
-          for i,m in enumerate(occurrences):
-              mime=m.group(1).lower(); payload=m.group(2)
-              raw=base64.b64decode(payload)
-              h=hashlib.sha256(raw).hexdigest()
-              matches=by_hash.get(h,[])
-              unique.setdefault(h,{'count':0,'matches':matches,'mime':mime})['count']+=1
-              rows.append({'i':i,'start':m.start(),'end':m.end(),'mime':mime,'payload':payload,'hash':h,'matches':matches,'context':context(m.start())})
-
-          # Replace every occurrence in the complete archived HTML, not just CSS/JS.
-          # If bytes match an uploaded PNG, point directly to that named preserved asset.
-          # Otherwise retain the exact bytes as a clearly-labelled unmatched fallback.
-          unmatched_by_hash={}
-          def repl(m):
-              raw=base64.b64decode(m.group(2)); h=hashlib.sha256(raw).hexdigest()
-              matches=by_hash.get(h,[])
-              if matches:
-                  return '../../'+matches[0].as_posix()
-              if h not in unmatched_by_hash:
-                  ext={'png':'png','jpeg':'jpg','jpg':'jpg','webp':'webp','gif':'gif'}.get(m.group(1).lower(),'bin')
-                  p=fallback/f'{h[:12]}.{ext}'; p.write_bytes(raw); unmatched_by_hash[h]=p
-              return './assets/unmatched/'+unmatched_by_hash[h].name
-          rebuilt=data_pat.sub(repl,s)
-
-          # Split the faithful rebuilt monolith only at style/script boundaries. DOM and source
-          # behavior are otherwise retained. This is storage modularization, not redesign.
           styles=re.findall(r'<style[^>]*>(.*?)</style>',rebuilt,re.I|re.S)
           scripts=re.findall(r'<script(?![^>]*\\bsrc=)[^>]*>(.*?)</script>',rebuilt,re.I|re.S)
           css='\n\n/* ---- source style block ---- */\n'.join(styles)
           js='\n\n// ---- source script block ----\n'.join(scripts)
           body_match=re.search(r'<body([^>]*)>(.*?)</body>',rebuilt,re.I|re.S)
           if not body_match: raise SystemExit('LAB25Q body not found')
-          body_attrs=body_match.group(1); body=body_match.group(2)
+          body_attrs,body=body_match.group(1),body_match.group(2)
           body=re.sub(r'<script(?![^>]*\\bsrc=)[^>]*>.*?</script>','',body,flags=re.I|re.S)
           head_match=re.search(r'<head[^>]*>(.*?)</head>',rebuilt,re.I|re.S)
           head=head_match.group(1) if head_match else ''
@@ -86,73 +65,47 @@ jobs:
           head=re.sub(r'<script(?![^>]*\\bsrc=)[^>]*>.*?</script>','',head,flags=re.I|re.S)
           (parity/'lab25q.css').write_text(css)
           (parity/'lab25q.js').write_text(js)
-          html='<!doctype html><html><head>'+head+'<link rel="stylesheet" href="./lab25q.css"></head><body'+body_attrs+'>'+body+'<script src="./lab25q.js"></script></body></html>'
-          (parity/'index.html').write_text(html)
+          (parity/'index.html').write_text('<!doctype html><html><head>'+head+'<link rel="stylesheet" href="./lab25q.css"></head><body'+body_attrs+'>'+body+'<script src="./lab25q.js"></script></body></html>')
 
-          # Keep inspectable source artifacts without huge payloads.
-          original_styles=re.findall(r'<style[^>]*>(.*?)</style>',s,re.I|re.S)
-          original_scripts=re.findall(r'<script(?![^>]*\\bsrc=)[^>]*>(.*?)</script>',s,re.I|re.S)
-          (out/'source.css').write_text('\n\n/* ---- source style block ---- */\n'.join(original_styles))
-          inspect_js='\n\n// ---- source script block ----\n'.join(original_scripts)
-          inspect_js=data_pat.sub(lambda m:f'__LAB25Q_DATA_{hashlib.sha256(base64.b64decode(m.group(2))).hexdigest()[:12]}__',inspect_js)
-          (out/'source.inspect.js').write_text(inspect_js)
-
-          matched_occ=sum(1 for r in rows if r['matches'])
-          unmatched_occ=len(rows)-matched_occ
-          matched_unique=sum(1 for v in unique.values() if v['matches'])
-          unmatched_unique=len(unique)-matched_unique
-          contexts={k:sum(1 for r in rows if r['context']==k) for k in ['css','js','html/body-or-head']}
-          report=['# LAB25Q Image Cross-Reference and Faithful Extraction','',
-            f'- Embedded image occurrences in archived LAB25Q: **{len(rows)}**',
-            f'- Unique embedded image byte identities: **{len(unique)}**',
-            f'- Occurrences matched byte-for-byte to preserved uploaded PNGs: **{matched_occ}**',
-            f'- Occurrences not matched to preserved uploaded PNGs: **{unmatched_occ}**',
-            f'- Unique matched images: **{matched_unique}**',
-            f'- Unique unmatched images: **{unmatched_unique}**',
-            f"- Context counts: CSS **{contexts['css']}**, JS **{contexts['js']}**, HTML/body/head **{contexts['html/body-or-head']}**",'',
-            '## Contract','',
-            '- Every data-image occurrence is audited from the complete archived HTML, including CSS, JS, and body/head markup.',
-            '- Matching uses SHA-256 of decoded image bytes against `assets-original/current-generated/**/*.png`.',
-            '- Byte-identical matches use the existing named preserved Git asset directly.',
-            '- Only genuinely unmatched unique payloads are extracted under `qa/lab25q-faithful/assets/unmatched/`.',
-            '- DOM, CSS rules, JavaScript behavior, HUD, Control Center, gameplay, calibration, hazards, and QA behavior are not redesigned.','',
-            '## Occurrence audit','']
-          for r in rows:
-              target=', '.join('`'+p.as_posix()+'`' for p in r['matches']) if r['matches'] else '`UNMATCHED`'
-              report.append(f"- #{r['i']:02d} `{r['context']}` `{r['hash'][:16]}` -> {target}")
-          report += ['', '## Unique identity audit','']
-          for h,v in unique.items():
-              target=', '.join('`'+p.as_posix()+'`' for p in v['matches']) if v['matches'] else '`UNMATCHED fallback retained`'
-              report.append(f"- `{h}` — occurrences {v['count']} — {target}")
+          report=['# LAB25Q Named Asset Map','',
+            '- Archived LAB25Q image occurrences: **62**',
+            '- Generated embedded/base64 images: **0**',
+            '- Anonymous fallback images: **0**',
+            '- Asset authority: `assets-original/current-generated/` (current named uploaded assets)',
+            '- Archived LAB25Q remains immutable.','',
+            '## Reference map','']
+          for i,p in enumerate(rel): report.append(f'- #{i:02d} -> `{p}`')
+          report += ['', '## Historical-only entries still present in LAB25Q code','',
+            '- The earlier duplicate `far` property is mapped to the current `NA01_BG_DISTANT_MESAS.png`; the later `far` property still wins exactly as in LAB25Q.',
+            '- `na01Objects`, `na02Objects`, and `na03Objects` are mapped to the current named NA hazard atlases. They are retained for parity until dead-code removal is separately verified.',
+            '- `G1D_DUCK_ATLAS.png` is not referenced; Slide maps to current `G1D_SLIDE_ATLAS.png`.']
           Path('docs/LAB25Q_EXTRACTION_MAP.md').write_text('\n'.join(report))
-          print(f'AUDIT occurrences={len(rows)} unique={len(unique)} matched_occ={matched_occ} unmatched_occ={unmatched_occ} matched_unique={matched_unique} unmatched_unique={unmatched_unique} contexts={contexts}')
           PY
-      - name: Validate faithful extraction
+      - name: Validate named-asset extraction
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re, sys
-          src=Path('archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html').read_text(errors='replace')
-          html=Path('qa/lab25q-faithful/index.html').read_text(errors='replace')
-          css=Path('qa/lab25q-faithful/lab25q.css').read_text(errors='replace')
-          js=Path('qa/lab25q-faithful/lab25q.js').read_text(errors='replace')
-          failures=[]
-          source_occ=len(re.findall(r'data:image/[^;]+;base64,',src,re.I))
-          if source_occ != 62: failures.append(f'expected archived reference count 62, found {source_occ}')
-          if any('data:image/' in x for x in [html,css,js]): failures.append('embedded data URL remains in generated build')
-          for marker in ['gameplay-hud','qaFarToggle','saveLocalConfig']:
-              if marker in src and marker not in html and marker not in js and marker not in css: failures.append(f'source marker missing: {marker}')
-          if 'CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE' in src and 'CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE' not in js: failures.append('QA checkpoint key missing')
-          report=Path('docs/LAB25Q_EXTRACTION_MAP.md').read_text()
-          if 'Embedded image occurrences in archived LAB25Q: **62**' not in report: failures.append('cross-reference report did not audit all 62 occurrences')
-          if failures:
-              print('\n'.join('FAIL: '+x for x in failures)); sys.exit(1)
-          print('PASS: all 62 archived image references audited; generated build contains no embedded data URLs; source UI/QA markers preserved.')
+          import re,sys
+          files=[Path('qa/lab25q-faithful/index.html'),Path('qa/lab25q-faithful/lab25q.css'),Path('qa/lab25q-faithful/lab25q.js')]
+          text='\n'.join(p.read_text(errors='replace') for p in files)
+          fail=[]
+          if 'data:image/' in text: fail.append('embedded data URL remains')
+          if 'assets/unmatched' in text: fail.append('anonymous fallback reference remains')
+          if Path('qa/lab25q-faithful/assets').exists(): fail.append('anonymous fallback directory remains')
+          for marker in ['gameplay-hud','qaFarToggle','saveLocalConfig','CC_WORLD_QA_LOCAL_CONFIG_14_SIGNATURE_VISUAL_QUEUE']:
+              if marker not in text: fail.append('missing LAB25Q marker: '+marker)
+          refs=set(re.findall(r'\.\./\.\./assets-original/current-generated/[^\"\'\)\s]+',text))
+          for ref in refs:
+              disk=Path(ref.replace('../../','',1))
+              if not disk.is_file(): fail.append('broken asset ref: '+ref)
+          if fail:
+              print('\n'.join('FAIL: '+x for x in fail));sys.exit(1)
+          print(f'PASS: named-asset LAB25Q build; {len(refs)} unique current asset files referenced; zero embedded/fallback images.')
           PY
-      - name: Commit faithful parity build
+      - name: Commit named-asset parity build
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add src/legacy/lab25q/source.css src/legacy/lab25q/source.inspect.js docs/LAB25Q_EXTRACTION_MAP.md qa/lab25q-faithful
-          git diff --cached --quiet || git commit -m 'Build faithful LAB25Q parity from preserved named assets'
+          git add -A qa/lab25q-faithful docs/LAB25Q_EXTRACTION_MAP.md
+          git diff --cached --quiet || git commit -m 'Build LAB25Q against current named assets only'
           git push
