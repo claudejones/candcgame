@@ -20,6 +20,7 @@ jobs:
           test -f src/css/game.css
           test -f src/js/game-config.js
           test -f src/js/game-runtime.js
+          test -f src/js/config-schema.js
           test ! -e src/js/lab25q.js
           test ! -e src/js/lab25q-config.js
           test ! -e src/js/lab25q-runtime.js
@@ -38,8 +39,29 @@ jobs:
           grep -q 'worldSpeed:120' src/js/game-config.js
           grep -q 'canvas:{w:960,h:540}' src/js/game-config.js
           test -f docs/PHASE7A_COORDINATE_AUDIT.md
+          test -f docs/PHASE7B_CANONICAL_CONFIG_SCHEMA.md
           grep -q 'GROUND_SURFACE_Y = 410' docs/WORLD_RENDERING_SPEC.md
           grep -q 'GROUND_SURFACE_Y = 410' docs/PHASE7A_COORDINATE_AUDIT.md
           grep -q 'displayScale = min(availableWidth / 960, availableHeight / 540)' docs/WORLD_RENDERING_SPEC.md
+          grep -q 'GROUND_SURFACE_Y = 410' docs/PHASE7B_CANONICAL_CONFIG_SCHEMA.md
           node --check src/js/game-config.js
+          node --check src/js/config-schema.js
           node --check src/js/game-runtime.js
+          node <<'NODE'
+          const fs=require('fs'),vm=require('vm');
+          const context={window:{}}; vm.createContext(context);
+          vm.runInContext(fs.readFileSync('src/js/game-config.js','utf8'),context);
+          vm.runInContext(fs.readFileSync('src/js/config-schema.js','utf8'),context);
+          const schema=context.window.GAME_SCHEMA;
+          const config=context.window.GAME_CONFIG;
+          schema.validateLegacyConfig(config);
+          const view=schema.buildCompatibilityView(config);
+          schema.validateCanonicalView(view);
+          if(schema.GROUND_SURFACE_Y!==410) throw new Error('7B ground surface invariant failed');
+          if(Object.keys(view.stages).length!==9) throw new Error('7B stage compatibility count failed');
+          for(const [id,stage] of Object.entries(view.stages)){
+            const p=config.worldProfiles[id];
+            if(stage.compatibility.legacyRenderedSurfaceY!==p.seamY+p.groundYOffset) throw new Error(`Legacy surface parity failed: ${id}`);
+            if(stage.hazards.length!==config.objectQA.defs[id].length) throw new Error(`Hazard mapping parity failed: ${id}`);
+          }
+          NODE
