@@ -18,7 +18,7 @@ jobs:
           ref: modular-parity-validation
           fetch-depth: 0
 
-      - name: Split proven Phase 4 runtime without changing execution order
+      - name: Extract configuration module from proven Phase 4 runtime
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -27,46 +27,73 @@ jobs:
           js = Path('src/js/lab25q.js')
           html = Path('src/index.html')
           text = js.read_text()
+          token = 'const CONFIG='
+          start = text.index(token)
+          obj_start = start + len(token)
+          if text[obj_start] != '{':
+              raise SystemExit('CONFIG object start not found')
 
-          # Phase 5 intentionally uses ordered classic scripts. Splitting occurs only at
-          # top-level declaration boundaries so the browser executes the exact same source
-          # statements in the exact same order and shared lexical bindings remain available.
-          marker = '\nclass AssetStore{'
-          if marker not in text:
-              raise SystemExit('AssetStore boundary not found')
-          config, runtime = text.split(marker, 1)
-          runtime = 'class AssetStore{' + runtime
+          depth = 0
+          quote = None
+          esc = False
+          end = None
+          for i in range(obj_start, len(text)):
+              c = text[i]
+              if quote:
+                  if esc: esc = False
+                  elif c == '\\': esc = True
+                  elif c == quote: quote = None
+                  continue
+              if c in ('"', "'", '`'):
+                  quote = c
+              elif c == '{': depth += 1
+              elif c == '}':
+                  depth -= 1
+                  if depth == 0:
+                      end = i + 1
+                      break
+          if end is None or text[end] != ';':
+              raise SystemExit('CONFIG object end not found')
+          end += 1
 
-          # Preserve the original IIFE strict-mode envelope across the ordered files:
-          # open it in config, close it in runtime. No statement is rewritten.
-          Path('src/js/lab25q-config.js').write_text(config)
+          original_decl = text[start:end]
+          obj = text[obj_start:end-1]
+          config_module = '"use strict";\nwindow.LAB25Q_CONFIG=' + obj + ';\n'
+          runtime = text[:start] + 'const CONFIG=window.LAB25Q_CONFIG;' + text[end:]
+
+          Path('src/js/lab25q-config.js').write_text(config_module)
           Path('src/js/lab25q-runtime.js').write_text(runtime)
 
-          h = html.read_text()
-          old = '<script src="js/lab25q.js"></script>'
-          new = '<script src="js/lab25q-config.js"></script>\n<script src="js/lab25q-runtime.js"></script>'
-          if old not in h:
-              raise SystemExit('lab25q script tag not found')
-          html.write_text(h.replace(old, new, 1))
+          # Mechanical source-parity proof: substituting the one bridge binding back with
+          # the extracted declaration must reconstruct the exact Phase 4 runtime.
+          reconstructed = runtime.replace('const CONFIG=window.LAB25Q_CONFIG;', original_decl, 1)
+          assert reconstructed == text, 'runtime differs beyond CONFIG bridge'
+          assert ('window.LAB25Q_CONFIG=' + obj + ';') in config_module
+          assert 'data:image/' not in config_module + runtime
 
-          # Mechanical parity assertion: concatenating modules must reproduce original JS
-          # byte-for-byte. This prevents accidental gameplay/config/render changes.
-          rebuilt = Path('src/js/lab25q-config.js').read_text() + Path('src/js/lab25q-runtime.js').read_text()
-          assert rebuilt == text, 'module concatenation differs from Phase 4 source'
-          assert 'data:image/' not in rebuilt, 'embedded image reintroduced'
+          h = html.read_text()
+          pat = re.compile(r'<script\s+src=["\'](?:\./)?js/lab25q\.js["\']([^>]*)></script>')
+          m = pat.search(h)
+          if not m:
+              # Phase 1 preserved original script attributes, so accept any relative prefix.
+              pat = re.compile(r'<script\s+src=["\'][^"\']*lab25q\.js["\']([^>]*)></script>')
+              m = pat.search(h)
+          if not m:
+              raise SystemExit('lab25q script tag not found')
+          attrs = m.group(1)
+          replacement = '<script src="./js/lab25q-config.js"></script>\n<script src="./js/lab25q-runtime.js"' + attrs + '></script>'
+          html.write_text(h[:m.start()] + replacement + h[m.end():])
           PY
 
       - name: Syntax and structural QA
         run: |
           set -euo pipefail
           node --check src/js/lab25q-config.js
-          # runtime is the continuation of the same IIFE, so syntax-check exact concatenation.
-          cat src/js/lab25q-config.js src/js/lab25q-runtime.js > /tmp/lab25q-rebuilt.js
-          node --check /tmp/lab25q-rebuilt.js
-          cmp -s /tmp/lab25q-rebuilt.js src/js/lab25q.js
+          node --check src/js/lab25q-runtime.js
           ! grep -R "data:image/" src/index.html src/css/lab25q.css src/js/lab25q-config.js src/js/lab25q-runtime.js
-          grep -q 'js/lab25q-config.js' src/index.html
-          grep -q 'js/lab25q-runtime.js' src/index.html
+          grep -q 'lab25q-config.js' src/index.html
+          grep -q 'lab25q-runtime.js' src/index.html
+          ! grep -q 'src=".*lab25q.js"' src/index.html
 
       - name: Record Phase 5 checkpoint
         run: |
@@ -75,9 +102,9 @@ jobs:
 
           Phase 5 begins from user-verified Phase 4 commit `86353bf6cc66c85147db5a226354adbed6ea6e1f`.
 
-          This increment is deliberately behavior-neutral. The proven monolithic runtime is split into ordered classic JavaScript files at a top-level declaration boundary. The workflow asserts that concatenating the modules reproduces `src/js/lab25q.js` byte-for-byte, so no gameplay statement, configuration value, renderer behavior, timing, collision logic, grounding, hazard calibration, or asset reference is changed by this increment.
+          Increment 1 extracts the complete `CONFIG` object into `src/js/lab25q-config.js`. The runtime remains otherwise source-identical and receives that same object through one explicit `window.LAB25Q_CONFIG` bridge. Automated QA reconstructs the original Phase 4 runtime from the two outputs and fails if any runtime source changed beyond that bridge.
 
-          Known landscape, character-grounding, hazard sizing/positioning, and hitbox calibration issues remain deferred until landscape geometry is finalized.
+          No gameplay values, rendering behavior, timing, collision logic, grounding, hazard calibration, or asset references are changed. Known landscape, character-grounding, hazard sizing/positioning, and hitbox calibration issues remain deferred until landscape geometry is finalized.
           EOF
 
       - name: Commit Phase 5 increment
@@ -86,5 +113,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/index.html src/js/lab25q-config.js src/js/lab25q-runtime.js docs/PHASE5_MODULARIZATION.md
-          git commit -m "Phase 5 split LAB25Q runtime into ordered modules"
+          git commit -m "Phase 5 extract LAB25Q configuration module"
           git push origin HEAD:modular-parity-validation
