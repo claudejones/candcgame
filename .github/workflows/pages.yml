@@ -37,3 +37,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+# Pages deployment must be initiated from main; the job checks out the QA branch above.
