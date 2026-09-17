@@ -1,0 +1,46 @@
+name: Modular parity smoke
+on:
+  push:
+    branches: [modular-parity-validation]
+  workflow_dispatch:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Syntax check modular JavaScript
+        run: |
+          find src/js -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Verify required preserved assets
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          required=[
+            'assets/characters/G1A_RUN_CYCLE_ATLAS.png','assets/characters/G1B_IDLE_ATLAS.png','assets/characters/G1C_JUMP_ATLAS.png','assets/characters/G1D_SLIDE_ATLAS.png','assets/characters/G1E_HIT_ATLAS.png','assets/characters/G1F_CELEBRATE_ATLAS.png','assets/characters/FX_STUN_STARS_ATLAS.png','assets/shared/NA_CLOUD_LAYER.png','assets/shared/NA_STAGE_FINISH_MARKER.png',
+            'assets/worlds/north-america/NA01_HAZARD_ATLAS.png','assets/worlds/north-america/NA01_HAZARD_VULTURE.png','assets/worlds/north-america/NA02_HAZARD_ATLAS.png','assets/worlds/north-america/NA02_HAZARD_EAGLE.png','assets/worlds/north-america/NA03_HAZARD_ATLAS.png','assets/worlds/north-america/NA03_HAZARD_PIGEONS.png',
+            'assets/worlds/south-america/SA01_OBJECT_ATLAS.png','assets/worlds/south-america/SA01_HAZARD_MACAWS.png','assets/worlds/south-america/SA02_OBJECT_ATLAS.png','assets/worlds/south-america/SA02_HAZARD_ANDEAN_FLAMINGO.png','assets/worlds/south-america/SA03_OBJECT_ATLAS.png','assets/worlds/south-america/SA03_HAZARD_TROPICAL_PARAKEETS.png',
+            'assets/worlds/europe/EU01_OBJECT_ATLAS_CRATE.png','assets/worlds/europe/EU01_HAZARD_ROLLING_BARREL.png','assets/worlds/europe/EU01_HAZARD_AEGEAN_GULLS.png','assets/worlds/europe/EU02_OBJECT_ATLAS.png','assets/worlds/europe/EU02_HAZARD_SWALLOWS.png','assets/worlds/europe/EU03_OBJECT_ATLAS.png','assets/worlds/europe/EU03_HAZARD_BATS.png'
+          ]
+          missing=[p for p in required if not Path(p).is_file()]
+          if missing: raise SystemExit('Missing required assets:\n'+'\n'.join(missing))
+          print(f'PASS: {len(required)} required preserved assets present')
+          PY
+      - name: Verify parity invariants
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          checks={
+            'src/js/config/gameplay.js':['slideDuration:.70','invulnerabilityDuration:2','highClearance:68','lowClearance:18','stageDuration:90'],
+            'src/js/config/worlds.js':['w: 960, h: 540','cloudY: 0','cloudScale: 0.65','cloudOpacity: 0.75'],
+            'src/js/hazards.js':['maxVisible','inst.hit' if False else 'i.hit',"this.player.enter('celebrate')"],
+            'src/js/world.js':['far','clouds','mid','ground']
+          }
+          for path,needles in checks.items():
+            text=Path(path).read_text()
+            for n in needles:
+              if n not in text: raise SystemExit(f'Invariant missing: {n} in {path}')
+          print('PASS: modular parity invariants present')
+          PY
