@@ -2,7 +2,7 @@ name: Deploy QA site to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "modular-parity-validation"]
   workflow_dispatch:
 
 permissions:
