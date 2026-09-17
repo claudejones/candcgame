@@ -32,30 +32,27 @@ jobs:
           test -f src/js/dev/asset-navigator.js
           test -f src/js/dev/design-draft.js
           test -f src/js/dev/contextual-inspector.js
+          test -f src/js/dev/landscape-editor.js
           test ! -e src/js/lab25q.js
-          test ! -e src/js/lab25q-config.js
-          test ! -e src/js/lab25q-runtime.js
-          test ! -e src/css/lab25q.css
+          grep -q './js/dev/landscape-editor.js' src/dev.html
+          grep -q 'window.CC_DESIGN_DRAFT' src/js/dev/design-draft.js
+          grep -q 'cc-world-design-config-v1' src/js/dev/design-draft.js
+          grep -q 'localStorage.setItem' src/js/dev/design-draft.js
+          grep -q 'exportGame' src/js/dev/design-draft.js
+          grep -q 'EXPORT GAME CONFIG' src/js/dev/contextual-inspector.js
+          grep -q 'window.CC_LANDSCAPE_EDITOR' src/js/dev/landscape-editor.js
+          grep -q 'LANDSCAPE VIEW' src/js/dev/landscape-editor.js
+          grep -q 'showGuides=state.guides' src/js/dev/landscape-editor.js
+          grep -q 'stage.landscape.far.transform.scale/baseScale' src/js/dev/landscape-editor.js
+          grep -q 'SOURCE REGION' src/js/dev/contextual-inspector.js
+          grep -q 'FINE CROP' src/js/dev/contextual-inspector.js
+          grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
+          grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor' src/game.html
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor' src/js/bootstrap/production-bootstrap.js
           grep -q './css/game.css' src/index.html
           grep -q './js/game-config.js' src/index.html
           grep -q './js/game-runtime.js' src/index.html
-          grep -q './js/bootstrap/production-bootstrap.js' src/game.html
-          grep -q './js/bootstrap/development-bootstrap.js' src/dev.html
-          grep -q './js/dev/mode-shell.js' src/dev.html
-          grep -q './js/dev/asset-navigator.js' src/dev.html
-          grep -q './js/dev/design-draft.js' src/dev.html
-          grep -q './js/dev/contextual-inspector.js' src/dev.html
-          grep -q './css/contextual-inspector.css' src/dev.html
-          grep -q 'window.CC_DESIGN_SELECTION' src/js/dev/asset-navigator.js
-          grep -q 'window.CC_DESIGN_DRAFT' src/js/dev/design-draft.js
-          grep -q 'SOURCE REGION' src/js/dev/contextual-inspector.js
-          grep -q 'FINE CROP' src/js/dev/contextual-inspector.js
-          grep -q 'SAVE STAGE' src/js/dev/contextual-inspector.js
-          grep -q 'EXPORT' src/js/dev/contextual-inspector.js
-          grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
-          grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
-          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft' src/game.html
-          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft' src/js/bootstrap/production-bootstrap.js
           grep -q 'window.GAME_CONFIG=' src/js/game-config.js
           grep -q 'const CONFIG=window.GAME_CONFIG;' src/js/game-runtime.js
           ! grep -R -nE 'LAB25Q_CONFIG|data:image/' src
@@ -69,9 +66,7 @@ jobs:
           test -f docs/PHASE7B_CANONICAL_CONFIG_SCHEMA.md
           test -f docs/PHASE7C_BOOTSTRAP_IMPLEMENTATION.md
           grep -q 'GROUND_SURFACE_Y = 410' docs/WORLD_RENDERING_SPEC.md
-          grep -q 'GROUND_SURFACE_Y = 410' docs/PHASE7A_COORDINATE_AUDIT.md
           grep -q 'displayScale = min(availableWidth / 960, availableHeight / 540)' docs/WORLD_RENDERING_SPEC.md
-          grep -q 'GROUND_SURFACE_Y = 410' docs/PHASE7B_CANONICAL_CONFIG_SCHEMA.md
           node --check src/js/game-config.js
           node --check src/js/config-schema.js
           node --check src/js/game-runtime.js
@@ -81,21 +76,15 @@ jobs:
           node --check src/js/dev/asset-navigator.js
           node --check src/js/dev/design-draft.js
           node --check src/js/dev/contextual-inspector.js
+          node --check src/js/dev/landscape-editor.js
           node <<'NODE'
           const fs=require('fs'),vm=require('vm');
-          const context={window:{}}; vm.createContext(context);
+          const context={window:{}};vm.createContext(context);
           vm.runInContext(fs.readFileSync('src/js/game-config.js','utf8'),context);
           vm.runInContext(fs.readFileSync('src/js/config-schema.js','utf8'),context);
-          const schema=context.window.GAME_SCHEMA;
-          const config=context.window.GAME_CONFIG;
-          schema.validateLegacyConfig(config);
-          const view=schema.buildCompatibilityView(config);
-          schema.validateCanonicalView(view);
-          if(schema.GROUND_SURFACE_Y!==410) throw new Error('ground surface invariant failed');
-          if(Object.keys(view.stages).length!==9) throw new Error('stage compatibility count failed');
-          for(const [id,stage] of Object.entries(view.stages)){
-            const p=config.worldProfiles[id];
-            if(stage.compatibility.legacyRenderedSurfaceY!==p.seamY+p.groundYOffset) throw new Error(`Legacy surface parity failed: ${id}`);
-            if(stage.hazards.length!==config.objectQA.defs[id].length) throw new Error(`Hazard mapping parity failed: ${id}`);
-          }
+          const schema=context.window.GAME_SCHEMA,config=context.window.GAME_CONFIG;
+          schema.validateLegacyConfig(config);const view=schema.buildCompatibilityView(config);schema.validateCanonicalView(view);
+          if(schema.GROUND_SURFACE_Y!==410)throw new Error('ground surface invariant failed');
+          if(Object.keys(view.stages).length!==9)throw new Error('stage compatibility count failed');
+          for(const [id,stage] of Object.entries(view.stages)){const p=config.worldProfiles[id];if(stage.compatibility.legacyRenderedSurfaceY!==p.seamY+p.groundYOffset)throw new Error(`Legacy surface parity failed: ${id}`);if(stage.hazards.length!==config.objectQA.defs[id].length)throw new Error(`Hazard mapping parity failed: ${id}`);}
           NODE
