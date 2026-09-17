@@ -2,7 +2,7 @@
   "use strict";
 
   const BUILD = Object.freeze({
-    phase: "7C",
+    phase: "7K",
     kind: "production",
     modes: Object.freeze(["game"])
   });
