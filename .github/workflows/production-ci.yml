@@ -25,6 +25,11 @@ jobs:
           grep -q 'id="spawnReset"' src/index.html
           ! grep -q 'runStageBtn' src/js/runtime-host-api.js
           ! grep -q 'resetStageBtn' src/js/runtime-host-api.js
+          grep -q 'function jump(){return click("gameJumpBtn");}' src/js/runtime-host-api.js
+          grep -q 'function slide(){return click("gameSlideBtn");}' src/js/runtime-host-api.js
+          grep -q 'function togglePause(){return click("gamePauseBtn");}' src/js/runtime-host-api.js
+          grep -q 'key!=="ArrowUp"&&key!=="ArrowDown"&&key!=="Space"' src/js/runtime-host-api.js
+          grep -q 'window.addEventListener("keydown",handleKeydown' src/js/runtime-host-api.js
           grep -q 'setCollisionBounds' src/js/runtime-host-api.js
           grep -q 'characterQA.showCollisionBounds' src/js/runtime-host-api.js
           grep -q 'objectQA.showBounds' src/js/runtime-host-api.js
