@@ -1,21 +1,3 @@
-import { QA_CONFIG } from './config/qa.js';
-
-export class QAHarness {
-  constructor(root,{renderer,game}={}){
-    this.root=root; this.renderer=renderer; this.game=game;
-    root?.addEventListener('change',e=>{
-      const layer=e.target.dataset.layer;
-      if(layer) renderer.world.setLayerVisibility({[layer]:e.target.checked});
-      if(e.target.dataset.qa==='stage') game.setStage(e.target.value);
-      if(e.target.dataset.qa==='character') game.setCharacter(e.target.value);
-    });
-  }
-  snapshot(){
-    return {
-      stage:this.game.stage,
-      character:this.game.player.character,
-      layers:{...this.renderer.world.visibility},
-      qa:QA_CONFIG
-    };
-  }
-}
+import{QA_CONFIG}from'./config/qa.js';
+export class QAHarness{constructor(root,{renderer,game}={}){this.root=root;this.renderer=renderer;this.game=game;root?.addEventListener('change',e=>{const layer=e.target.dataset.layer;if(layer)renderer.world.setLayerVisibility({[layer]:e.target.checked});if(e.target.dataset.qa==='stage')game.setStage(e.target.value);if(e.target.dataset.qa==='character')game.setCharacter(e.target.value);if(e.target.dataset.qa==='unlimited')game.gameplay.unlimitedLives=e.target.checked;if(e.target.dataset.qa==='bounds')game.qa.showHazardBounds=e.target.checked});root?.addEventListener('click',e=>{const a=e.target.closest('[data-qa-action]')?.dataset.qaAction;if(a==='restart')game.gameplay.start()});}
+ snapshot(){return{schema:'CC_MODULAR_PARITY_01',stage:this.game.stage,character:this.game.player.character,layers:{...this.renderer.world.visibility},gameplay:{elapsed:this.game.gameplay.elapsed,lives:this.game.gameplay.lives,hits:this.game.gameplay.hits,cleared:this.game.gameplay.cleared,plan:this.game.gameplay.plan},qa:{...QA_CONFIG,showHazardBounds:this.game.qa.showHazardBounds,unlimitedLives:this.game.gameplay.unlimitedLives}}}}
