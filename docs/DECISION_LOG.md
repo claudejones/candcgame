@@ -119,3 +119,9 @@ The repair is limited to feathering corresponding edge color continuity. It may 
 ## 2026-09-18 — NA02 complete candidate set enters integrated-stage QA
 
 Under the authorized stage-level trial, NA02 FAR, MID and GROUND were produced sequentially from their immutable repository references and passed internal dimension, alpha/layer-ownership, lower-depth and wrap/composite checks. The candidate files remain pending user approval as one integrated stage; internal QA does not individually approve them. Development-only integration uses the same 2172-pixel source width, canonical Y=410 surface and pilot FAR scale evidence as NA01. Character, hazard, collision and finish-marker calibration remain intentionally deferred.
+
+## 2026-09-18 — Generated landscape delivery strips non-pixel PNG metadata
+
+Phase 8 generated candidates must be browser-decodable before Git preservation and application integration. The initial NA02 files contained embedded provenance chunks that survived local image inspection but failed Chromium decoding after Pages delivery, causing the runtime's all-assets preload to abort. The three NA02 candidates were losslessly re-encoded with metadata stripped; pixel comparison reported zero changed pixels for every layer.
+
+This normalization changes file hashes but not approved visual content, geometry, dimensions, alpha ownership or asset status. Apply the same browser-decode check and metadata normalization to later generated landscape candidates before integration so one unreadable optional stage asset cannot block the development runtime.

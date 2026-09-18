@@ -84,7 +84,7 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 - Reference: `assets-original/current-generated/NA-assets/NA02_BG_DISTANT_MOUNTAINS.png`
 - Candidate: `assets/phase8-validation/north-america/NA02_BG_DISTANT_MOUNTAINS.png`
 - Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
-- Candidate SHA-256: `48ff18f3ebf83dd1abc8d8e1835b500d5a92f1308dafff5e89fa03b4f82404c0`
+- Candidate SHA-256: `259b8f38845a39ed81b77f711facab528bc09eb7900bb62c9346f52a33d00b58`
 - Layer directive: FAR
 - Stage lock: Preserve the bright blue sky, long snow-capped mountain chain, layered blue ridges and dark evergreen foothills. Retain the crisp alpine panorama and cool palette; do not add close trees, rocks, buildings or clouds.
 
@@ -93,7 +93,7 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 - Reference: `assets-original/current-generated/NA-assets/NA02_BG_MID_PINES.png`
 - Candidate: `assets/phase8-validation/north-america/NA02_BG_MID_PINES.png`
 - Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
-- Candidate SHA-256: `c31be54a9d85fc6a4111be3e6bc7900089d210468f7631e50536bb14622d8d79`
+- Candidate SHA-256: `cc4a6f43442963115f8b8c8bff73ce8dc2cfaab9428e9a16c49243d6876f5fd3`
 - Layer directive: MID
 - Stage lock: Preserve the irregular evergreen forest silhouette, varied pine heights, gray boulder clusters and low green shrubs. Increase coordinated lower coverage and overlap while retaining transparent openings; do not add mountains, sky, trail surface or stream water.
 
@@ -102,7 +102,7 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 - Reference: `assets-original/current-generated/NA-assets/NA02_GROUND_TRAIL.png`
 - Candidate: `assets/phase8-validation/north-america/NA02_GROUND_TRAIL.png`
 - Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
-- Candidate SHA-256: `bb8c4093f47b01d5ca5444b3099285f6383c7de065c1688d298a9be3a3197823`
+- Candidate SHA-256: `f6ada52c153667a5d7d8466c07da3e55d4d271faa1bf46dc5e0f46d732dfdc81`
 - Layer directive: GROUND
 - Stage lock: Preserve the compact brown dirt trail, exposed gray stones, darker soil body, mossy grass and low forest plants. Extend dependable terrain depth to the bottom and create compatible repeat edges. Do not include the separate gap-water asset or paint a permanent stream into this continuous ground layer.
 
