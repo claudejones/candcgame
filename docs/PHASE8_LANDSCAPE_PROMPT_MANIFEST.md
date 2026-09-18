@@ -119,9 +119,9 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA03_BG_MID_CITY.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_BG_MID_CITY.png`
-- Status: STANDALONE CANDIDATE USER-APPROVED — pending deployed integrated-stage user acceptance
-- Candidate SHA-256: `adc6a17a5a40b01ceead9b52219c48f4cfe35d90291a7398a8f1d9d96b0deb8a`
-- Source treatment: freshly generated at the required `2172x724` RGBA production canvas after deployed review showed the prior supplied composition could not achieve the desired foliage/sidewalk relationship at standard runtime `Y=0`. The approved standalone candidate uses restrained intermittent foundation shrubs, readable brownstone bases and taller street trees while retaining sufficient lower-edge coverage for the `Y=0` MID-to-GROUND overlap. No runtime MID offset is required.
+- Status: ALTERNATE STOREFRONT DIRECTION USER-APPROVED — pending deployed integrated-stage user acceptance
+- Candidate SHA-256: `9a6e14456bc351c18229c503d0827f5bbbf83f521a6f24bce25a2c7a7cf5ef14`
+- Source treatment: regenerated in the user-approved alternate neighborhood direction with brownstones, stoops, railings, restrained storefronts, mature trees and sparse planters. A deterministic lower-overscan correction preserves the approved composition through source Y=609, extends only its existing foundation/frontage pixels through Y=723, and normalizes the generated one-pixel width discrepancy to the required `2172x724` RGBA canvas. Rows Y=610–723 contain continuous authored MID coverage across the full width so runtime MID offset remains `Y=0`.
 - Layer directive: MID
 - Stage lock: Preserve the row of varied brick brownstones and apartment buildings, rooftop water tanks/chimneys, street trees and warm urban palette. Keep the recognizable neighborhood silhouette and transparent sky; do not include the distant skyline, playable sidewalk or hazards.
 
