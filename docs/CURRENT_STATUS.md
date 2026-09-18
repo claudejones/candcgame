@@ -5,7 +5,7 @@ Last updated: 2026-09-18
 ## Production baseline
 Phase 6 is complete and user-verified. Phase 7 production authoring architecture is complete and was visually accepted by the user on 2026-09-18. Phase 8 landscape pre-production is now authorized, subject to its existing asset-by-asset approval gates.
 
-Phase 8 validation production is active. `P8-NA01-FAR` is the first approved regenerated landscape asset; it is preserved under `assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png` pending completion and integration of the full NA01 stage set.
+Phase 8 validation production is active. `P8-NA01-FAR` and `P8-NA01-MID` are approved regenerated landscape assets, preserved under `assets/phase8-validation/north-america/` pending completion and integration of the full NA01 stage set.
 
 Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game-config.js`, `src/js/game-runtime.js`, with semantic assets under `assets/`. Production remains `src/game.html` with production bootstrap only.
 
@@ -52,7 +52,7 @@ Production CI checks the production/development dependency boundary, syntax for 
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-Generate and review `P8-NA01-MID` using its immutable Git source PNG plus the approved `P8-NA01-FAR` as attached references. Do not begin `P8-NA01-GROUND` until the MID asset passes technical QA and receives explicit user approval.
+Generate and review `P8-NA01-GROUND` using its immutable Git source PNG plus the approved `P8-NA01-FAR` and `P8-NA01-MID` as attached references. Do not integrate or promote the NA01 stage until GROUND passes technical QA, receives explicit user approval, and the complete canonical composite passes QA.
 
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.

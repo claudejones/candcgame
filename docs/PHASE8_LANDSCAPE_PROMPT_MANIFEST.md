@@ -65,6 +65,8 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA01_BG_MID_DESERT.png`
 - Candidate: `assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png`
+- Status: APPROVED 2026-09-18
+- Approved SHA-256: `e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4`
 - Layer directive: MID
 - Stage lock: Preserve the red sandstone buttes, smaller rock towers, scattered upright cacti, dry shrubs and warm orange-red desert palette. Retain the approved alternating tall/low silhouette and transparent sky openings; do not add a sky or distant horizon.
 

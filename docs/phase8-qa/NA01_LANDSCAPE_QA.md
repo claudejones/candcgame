@@ -20,8 +20,19 @@ Pilot status: IN PROGRESS
 
 ## P8-NA01-MID
 
-Status: NEXT ASSET GATE
+- Prompt: `P8-NA01-MID`
+- Immutable reference: `assets-original/current-generated/NA-assets/NA01_BG_MID_DESERT.png`
+- Approved validation asset: `assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png`
+- SHA-256: `e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4`
+- Dimensions: PASS — 2172x724
+- Alpha: PASS — genuine alpha, mean coverage 0.317834
+- FAR content baked into MID: PASS — none
+- Lower overlap coverage: PASS
+- Horizontal wrap: PASS — center-offset seam regeneration; wrap preview visually reviewed
+- FAR+MID composite: PASS for MID approval gate
+- Visual identity: APPROVED by user on 2026-09-18
+- Production promotion: BLOCKED until NA01 GROUND and full canonical composite are approved
 
 ## P8-NA01-GROUND
 
-Status: BLOCKED pending MID approval
+Status: NEXT ASSET GATE

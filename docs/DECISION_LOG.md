@@ -87,3 +87,8 @@ Generated candidates remain outside `assets-original/` and do not replace produc
 The user approved the final regenerated NA01 Desert FAR asset after visual-direction review and wrap-seam correction. The approved validation asset is `assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png`, SHA-256 `6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1`.
 
 The asset is 2172x724, fully opaque, preserves the approved NA01 American Southwest visual identity, and provides the complete FAR foundation. It remains a validation asset and is not promoted into the production world path until the full NA01 FAR/MID/GROUND set and composite are approved. The next asset gate is `P8-NA01-MID`.
+
+## 2026-09-18 — P8-NA01-MID approved
+The user approved the final regenerated NA01 Desert MID asset after isolated-layer, wrap-seam and approved-FAR composite review. The approved validation asset is `assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png`, SHA-256 `e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4`.
+
+The asset is 2172x724 with genuine alpha transparency, preserves the approved NA01 sandstone/cactus/shrub identity, coordinates with the approved FAR, and provides lower overlap without baking in FAR or playable GROUND content. It remains a validation asset pending the full NA01 set and composite gate. The next asset gate is `P8-NA01-GROUND`.
