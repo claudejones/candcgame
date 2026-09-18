@@ -62,6 +62,8 @@ Current pilot QA evidence: NA01's yellow legacy seam, red rendered GROUND surfac
 
 NA02 deployment recovery: the first integrated upload exposed that all three generated NA02 PNGs had been truncated by an intermediate Base64/text-output transfer limit. The intact local files were losslessly re-encoded at zero pixel difference during diagnosis, but metadata was not the root cause. Large assets now require a binary-safe GitHub transfer path, Production CI validates the complete PNG chunk/CRC/decompression/scanline structure, and validation-asset URLs use content-hash version keys so corrected binaries bypass stale browser/CDN responses.
 
+The NA03 corrected-asset deployment also exposed a development-host startup race: the outer mode shell could request legacy-style suppression while the shared-runtime iframe still had a document without a `<head>`, causing an `appendChild` exception and an intermittently unusable QA application. The host now defers that operation until the iframe head exists; the iframe load event then applies it normally.
+
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.
 - Approved character/hazard/shared assets are not regenerated, resized, normalized, or replaced for convenience.
