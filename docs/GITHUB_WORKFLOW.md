@@ -8,13 +8,15 @@ GitHub is the primary source of truth. Development, asset generation and visual 
 
 ## Normal change path
 
-1. Work is created and reviewed on `modular-parity-validation`.
-2. Required asset, visual and implementation approval gates remain in force.
-3. The exact approved QA snapshot is committed to `main`.
-4. `Production CI` runs automatically for that `main` push.
-5. If and only if that run succeeds, `Deploy QA site to GitHub Pages` starts automatically.
-6. The Pages workflow checks out `workflow_run.head_sha`, the exact SHA validated by Production CI, builds the lightweight QA bundle and publishes it.
-7. The deployed app and exact SHA are verified before requesting user testing.
+1. Internal generation and QA may replace working files directly under their final validation paths. Rejected iterations are not published or documented as production history.
+2. Once a complete stage passes internal technical and composite QA, create one integration commit on `modular-parity-validation` containing only its final assets, required runtime/configuration changes and compact QA evidence.
+3. Require successful `Production CI` for that exact development SHA.
+4. Promote the identical validated tree to `main` without force.
+5. `Production CI` runs automatically for that `main` push.
+6. If and only if that run succeeds, `Deploy QA site to GitHub Pages` starts automatically.
+7. The Pages workflow checks out `workflow_run.head_sha`, the exact SHA validated by Production CI, builds the lightweight QA bundle and publishes it.
+8. Verify the deployed app, asset hashes/cache keys and exact SHA, then request one integrated-stage user review.
+9. After approval, update final status, hashes and durable decisions once. A requested revision returns only the affected asset/configuration to internal QA.
 
 Development-branch CI never deploys Pages. Pull-request CI never deploys Pages. A failed or cancelled Production CI run never deploys Pages.
 
@@ -41,3 +43,11 @@ Before a QA build is called ready for testing, record or report:
 - the scope under test, including any development-only pilot flags.
 
 CI and deployment success establish artifact integrity and publication only. They do not constitute visual or gameplay acceptance.
+
+## Conversation and output discipline
+
+- Use one work conversation per stage whenever practical; start a fresh conversation after a completed deployed stage gate.
+- Read required authority files once at stage startup and use targeted reads afterward unless a file changes.
+- Keep tool output concise. Do not print complete unchanged specifications, large API responses or encoded binary content.
+- Report publication results and exceptions; do not narrate routine blob creation, polling or identical-tree promotion step by step.
+- Update `CURRENT_STATUS.md` as a concise operational checkpoint. Do not copy resolved troubleshooting history into every handoff.

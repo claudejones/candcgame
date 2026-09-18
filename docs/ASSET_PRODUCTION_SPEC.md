@@ -9,15 +9,16 @@
 
 ## Approval workflow
 For each remaining stage:
-1. Research and approve stage specification.
-2. Generate and approve stage vision mockup.
-3. Generate individual final assets one at a time under the approval gate.
-4. Technical QA each generated asset before visual lock.
-5. Complete all three stages for a continent.
-6. Integrate the entire continent.
-7. Run end-to-end QA/calibration.
+1. Confirm that the stage specification, immutable visual references and layer prompts are already locked. Ask the user only when a material visual direction is missing or conflicting.
+2. Generate FAR, MID and GROUND sequentially. The assistant may reject, replace and regenerate working validation assets without separate user approval.
+3. Run technical QA on each layer and inspect isolated, duplicated-wrap and canonical composite output internally.
+4. Stop iterating when the layers satisfy the contract and the integrated stage has no identified technical or visual defect. Do not optimize acceptable artwork merely because another variation is possible.
+5. Commit and deploy the internally accepted complete stage once through the exact-tree CI/Pages path.
+6. Present the deployed FAR/MID/GROUND stage in gameplay/test and Contextual Inspector for one user accept/revise decision.
+7. If revision is requested, replace only the responsible layer or configuration and repeat the integrated-stage gate. After approval, record final hashes and status once.
+8. After all three stages are approved, run a continent-level regression without reopening approved assets unless a concrete defect is found.
 
-Do not integrate partially completed continents unless an explicit decision changes this workflow.
+Working Phase 8 validation assets may be replaced directly under `assets/phase8-validation/`; Git history is the rollback mechanism. `assets-original/` remains immutable. Rejected candidates and review renders are temporary working material and are not committed by default.
 
 ## World assets
 Read `WORLD_RENDERING_SPEC.md` before producing or repairing any landscape.
