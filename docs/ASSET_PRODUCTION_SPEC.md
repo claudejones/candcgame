@@ -33,6 +33,10 @@ Critical principles:
 
 Technical QA is mandatory: dimensions/presentation ratio, alpha behavior, seams, anchors/baselines, coverage, overlap, visual scale, and layer responsibility.
 
+### Deterministic repeat-edge correction
+
+Image generation remains the primary authoring method. When an otherwise acceptable generated landscape fails only because corresponding left/right edge colors produce a visible vertical line during horizontal repetition, a deterministic edge correction is authorized. The correction may feather edge color continuity so the repeated background scrolls continuously, but it must not redesign landmarks, change canvas dimensions or alpha ownership, rescale the composition, move anchors, or conceal a broader structural defect. The corrected file must pass a duplicated wrap preview and retain the generated candidate as its visual source.
+
 ## Character atlases
 - Do not resize the approved source gameplay atlas itself as a content edit; the renderer reads real frame dimensions and scales selected frames into the world.
 - Target normal standing/running visible character height is approximately 58–66 logical pixels in the intended 480x270 presentation.

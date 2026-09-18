@@ -103,3 +103,19 @@ The asset is 2172x724 with genuine alpha above the terrain silhouette, source-sp
 The normal GitHub publication path is approval -> exact snapshot on `main` -> successful Production CI for that push SHA -> automatic Pages deployment of the same validated SHA. The Pages workflow is triggered by completion of `Production CI`, filters to successful `push` runs whose head branch is `main`, and explicitly checks out `workflow_run.head_sha`. Development-branch CI, pull-request CI, failed CI and cancelled CI do not deploy.
 
 Manual `workflow_dispatch` remains an emergency/recovery fallback. Rerunning an older workflow is not a substitute because it retains the older run's SHA. This automation removes routine interactive GitHub login from approved QA deployments without changing asset approvals, visual acceptance gates, main-branch control or the requirement to verify the deployed SHA and URL before user testing. Operational details are maintained in `docs/GITHUB_WORKFLOW.md`.
+
+## 2026-09-18 — NA02 tests a stage-level Phase 8 approval gate
+
+After reviewing the completed NA01 pilot, the user authorized an NA02 workflow test that moves the user-facing approval gate from each individual FAR/MID/GROUND generation to the complete integrated stage. NA02 must still be produced sequentially as FAR -> MID -> GROUND, use each immutable repository source as the direct image-generation reference, pass per-layer technical QA, preserve final candidates in Git and pass canonical composite/application QA before presentation.
+
+The assistant may iterate or reject intermediate NA02 candidates without separate user approval. None of the three NA02 layers is individually promoted as user-approved merely because it passes internal QA; the approval decision applies to the complete integrated NA02 stage. Existing asset locks, immutable originals, source-anchored prompts, GitHub CI/deployment and final visual acceptance remain required. Character, hazard, collision and finish-marker calibration may be deferred until landscape generation is complete, as explicitly requested by the user.
+
+## 2026-09-18 — Deterministic horizontal wrap repair authorized
+
+The user authorized a reusable deterministic seam correction when image generation produces an otherwise acceptable landscape whose only remaining defect is a visible left/right edge discontinuity during repetition. This correction exists specifically to ensure continuous backgrounds during endless horizontal scrolling.
+
+The repair is limited to feathering corresponding edge color continuity. It may not redesign or relocate landmarks, change dimensions or alpha ownership, rescale artwork, alter source anchors, or compensate for missing layer coverage. Every corrected candidate must be reviewed in a duplicated wrap preview and remains subject to the applicable technical, composite and final user-acceptance gates.
+
+## 2026-09-18 — NA02 complete candidate set enters integrated-stage QA
+
+Under the authorized stage-level trial, NA02 FAR, MID and GROUND were produced sequentially from their immutable repository references and passed internal dimension, alpha/layer-ownership, lower-depth and wrap/composite checks. The candidate files remain pending user approval as one integrated stage; internal QA does not individually approve them. Development-only integration uses the same 2172-pixel source width, canonical Y=410 surface and pilot FAR scale evidence as NA01. Character, hazard, collision and finish-marker calibration remain intentionally deferred.
