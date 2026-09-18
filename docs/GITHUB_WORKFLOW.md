@@ -30,7 +30,7 @@ Rerunning an older workflow run is not a valid way to publish a newer commit: a 
 
 Do not route PNG or other binary assets through shell-output capture, Base64 text relays or another interface that can truncate large outputs. Upload large binaries through a binary-safe Git/GitHub path, then confirm the committed blob matches the local file before promotion.
 
-Production CI runs `scripts/validate-phase8-pngs.js` over every integrated Phase 8 validation landscape. The validator checks PNG signatures, complete chunk boundaries, chunk CRC values, complete IDAT decompression, expected dimensions and exact pixel scanline length. A failed integrity check blocks `main` validation and therefore blocks automatic Pages deployment.
+Production CI reads `config/phase8-landscapes.json` and runs `scripts/validate-phase8-pngs.js` plus `scripts/phase8-stage-qa.py --all-integrated --check-only` over every Phase 8 stage marked `integrated` or `approved`. The checks cover PNG signatures, complete chunk boundaries, chunk CRC values, complete IDAT decompression, expected dimensions and pixel scanline length, layer alpha requirements, GROUND bottom coverage and canonical composite void detection. A failure blocks `main` validation and therefore blocks automatic Pages deployment.
 
 ## Required handoff evidence
 

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "canvas": {"width": 2172, "height": 724},
+  "viewport": {"width": 960, "height": 540, "groundSurfaceY": 410, "midBaselineSourceY": 621, "groundSurfaceSourceY": 393, "farScale": 1.25, "midScale": 1, "groundScale": 1},
+  "stages": {
+    "na01": {"label": "North America — Desert", "status": "approved", "layers": {
+      "far": {"reference": "assets-original/current-generated/NA-assets/NA01_BG_DISTANT_MESAS.png", "validation": "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true, "cacheKey": "6de84e69"},
+      "mid": {"reference": "assets-original/current-generated/NA-assets/NA01_BG_MID_DESERT.png", "validation": "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "cacheKey": "e00d7b47"},
+      "ground": {"reference": "assets-original/current-generated/NA-assets/NA01_GROUND_DESERT.png", "validation": "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393, "cacheKey": "3199a71e"}
+    }},
+    "na02": {"label": "North America — Pines / Mountains / Stream", "status": "approved", "layers": {
+      "far": {"reference": "assets-original/current-generated/NA-assets/NA02_BG_DISTANT_MOUNTAINS.png", "validation": "assets/phase8-validation/north-america/NA02_BG_DISTANT_MOUNTAINS.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true, "cacheKey": "259b8f38"},
+      "mid": {"reference": "assets-original/current-generated/NA-assets/NA02_BG_MID_PINES.png", "validation": "assets/phase8-validation/north-america/NA02_BG_MID_PINES.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "cacheKey": "cc4a6f43"},
+      "ground": {"reference": "assets-original/current-generated/NA-assets/NA02_GROUND_TRAIL.png", "validation": "assets/phase8-validation/north-america/NA02_GROUND_TRAIL.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393, "cacheKey": "f6ada52c"}
+    }},
+    "na03": {"label": "North America — City / New York", "status": "approved", "layers": {
+      "far": {"reference": "assets-original/current-generated/NA-assets/NA03_BG_DISTANT_NYC.png", "validation": "assets/phase8-validation/north-america/NA03_BG_DISTANT_NYC.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true, "cacheKey": "be8f72c6"},
+      "mid": {"reference": "assets-original/current-generated/NA-assets/NA03_BG_MID_CITY.png", "validation": "assets/phase8-validation/north-america/NA03_BG_MID_CITY.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "cacheKey": "9a6e1445"},
+      "ground": {"reference": "assets-original/current-generated/NA-assets/NA03_GROUND_CITY.png", "validation": "assets/phase8-validation/north-america/NA03_GROUND_CITY.png", "width": 2170, "height": 725, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393, "cacheKey": "095aa9cb"}
+    }},
+    "sa01": {"label": "South America — Amazon Rainforest", "status": "pending", "layers": {
+      "far": {"reference": "assets-original/current-generated/SA-assets/SA01_BG_DISTANT_AMAZON.png", "validation": "assets/phase8-validation/south-america/SA01_BG_DISTANT_AMAZON.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true},
+      "mid": {"reference": "assets-original/current-generated/SA-assets/SA01_BG_MID_AMAZON.png", "validation": "assets/phase8-validation/south-america/SA01_BG_MID_AMAZON.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true},
+      "ground": {"reference": "assets-original/current-generated/SA-assets/SA01_GROUND_AMAZON.png", "validation": "assets/phase8-validation/south-america/SA01_GROUND_AMAZON.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393}
+    }},
+    "sa02": {"label": "South America — Andes Mountains", "status": "pending", "layers": {
+      "far": {"reference": "assets-original/current-generated/SA-assets/SA02_BG_DISTANT_ANDES.png", "validation": "assets/phase8-validation/south-america/SA02_BG_DISTANT_ANDES.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true},
+      "mid": {"reference": "assets-original/current-generated/SA-assets/SA02_BG_MID_ANDES.png", "validation": "assets/phase8-validation/south-america/SA02_BG_MID_ANDES.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true},
+      "ground": {"reference": "assets-original/current-generated/SA-assets/SA02_GROUND_ANDES.png", "validation": "assets/phase8-validation/south-america/SA02_GROUND_ANDES.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393}
+    }},
+    "sa03": {"label": "South America — Rio de Janeiro", "status": "pending", "layers": {
+      "far": {"reference": "assets-original/current-generated/SA-assets/SA03_BG_DISTANT_RIO.png", "validation": "assets/phase8-validation/south-america/SA03_BG_DISTANT_RIO.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true},
+      "mid": {"reference": "assets-original/current-generated/SA-assets/SA03_BG_MID_RIO.png", "validation": "assets/phase8-validation/south-america/SA03_BG_MID_RIO.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true},
+      "ground": {"reference": "assets-original/current-generated/SA-assets/SA03_GROUND_RIO.png", "validation": "assets/phase8-validation/south-america/SA03_GROUND_RIO.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393}
+    }},
+    "eu01": {"label": "Europe — Greece / Santorini", "status": "pending", "layers": {
+      "far": {"reference": "assets-original/current-generated/EU-assets/EU01_BG_DISTANT_GREECE.png", "validation": "assets/phase8-validation/europe/EU01_BG_DISTANT_GREECE.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true},
+      "mid": {"reference": "assets-original/current-generated/EU-assets/EU01_BG_MID_GREECE.png", "validation": "assets/phase8-validation/europe/EU01_BG_MID_GREECE.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true},
+      "ground": {"reference": "assets-original/current-generated/EU-assets/EU01_GROUND_GREECE.png", "validation": "assets/phase8-validation/europe/EU01_GROUND_GREECE.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393}
+    }},
+    "eu02": {"label": "Europe — France / Paris", "status": "pending", "layers": {
+      "far": {"reference": "assets-original/current-generated/EU-assets/EU02_BG_DISTANT_PARIS.png", "validation": "assets/phase8-validation/europe/EU02_BG_DISTANT_PARIS.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true},
+      "mid": {"reference": "assets-original/current-generated/EU-assets/EU02_BG_MID_PARIS.png", "validation": "assets/phase8-validation/europe/EU02_BG_MID_PARIS.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true},
+      "ground": {"reference": "assets-original/current-generated/EU-assets/EU02_GROUND_PARIS.png", "validation": "assets/phase8-validation/europe/EU02_GROUND_PARIS.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393}
+    }},
+    "eu03": {"label": "Europe — Spain / Barcelona", "status": "pending", "layers": {
+      "far": {"reference": "assets-original/current-generated/EU-assets/EU03_BG_DISTANT_BARCELONA.png", "validation": "assets/phase8-validation/europe/EU03_BG_DISTANT_BARCELONA.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true},
+      "mid": {"reference": "assets-original/current-generated/EU-assets/EU03_BG_MID_BARCELONA.png", "validation": "assets/phase8-validation/europe/EU03_BG_MID_BARCELONA.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true},
+      "ground": {"reference": "assets-original/current-generated/EU-assets/EU03_GROUND_BARCELONA.png", "validation": "assets/phase8-validation/europe/EU03_GROUND_BARCELONA.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393}
+    }}
+  }
+}
