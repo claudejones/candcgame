@@ -22,6 +22,8 @@ jobs:
           grep -q 'function jump(){return click("gameJumpBtn");}' src/js/runtime-host-api.js
           grep -q 'function slide(){return click("gameSlideBtn");}' src/js/runtime-host-api.js
           grep -q 'function togglePause(){return click("gamePauseBtn");}' src/js/runtime-host-api.js
+          grep -q 'function interactionJump(){return click("quickJumpBtn");}' src/js/runtime-host-api.js
+          grep -q 'function interactionSlide(){return click("quickSlideBtn");}' src/js/runtime-host-api.js
           grep -q 'key!=="ArrowUp"&&key!=="ArrowDown"&&key!=="Space"' src/js/runtime-host-api.js
           grep -q 'setCollisionBounds' src/js/runtime-host-api.js
           grep -q 'characterQA.showCollisionBounds' src/js/runtime-host-api.js
@@ -54,6 +56,12 @@ jobs:
           grep -q 'function endInteraction()' src/js/dev/test-mode.js
           grep -q 'function endGame()' src/js/dev/test-mode.js
           grep -q 'e.target.blur()' src/js/dev/test-mode.js
+          grep -q 'CC_RUNTIME_API?.interactionJump()' src/js/dev/test-mode.js
+          grep -q 'CC_RUNTIME_API?.interactionSlide()' src/js/dev/test-mode.js
+          ! grep -q 'a==="jump")window.CC_RUNTIME_API?.jump()' src/js/dev/test-mode.js
+          ! grep -q 'a==="slide")window.CC_RUNTIME_API?.slide()' src/js/dev/test-mode.js
+          grep -q 'background:#0d1422' src/css/asset-navigator.css
+          grep -q 'background:#0d1422' src/css/contextual-inspector.css
           grep -q 'test-type-switch' src/dev.html
           grep -q 'test-section h3' src/dev.html
           grep -q 'setCollisionBounds(collision)' src/js/dev/test-mode.js
