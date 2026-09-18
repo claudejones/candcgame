@@ -153,3 +153,9 @@ The proxy-derived NA03 files and their hashes above are superseded and are not a
 - `NA03_BG_DISTANT_NYC.png`: SHA-256 `be8f72c6f523624c8022ba14e43715a1aede49b0119e875d8afa504c80333df6`
 - `NA03_BG_MID_CITY.png`: SHA-256 `3ea3319ab25c3a00a97c39af04d1cd5323443d6557bdd8d65acd2e759100e18b`
 - `NA03_GROUND_CITY.png`: SHA-256 `c91ddde03037a003e4b28d62ffa44c06965d0a3fdbe8de9ff3c304b1e2b1fe25`
+
+## 2026-09-18 — User-approved NA03 GROUND attachment supersedes reconstructed ZIP derivative
+
+The deployed ZIP-derived NA03 GROUND with SHA-256 `c91ddde03037a003e4b28d62ffa44c06965d0a3fdbe8de9ff3c304b1e2b1fe25` did not visually match the GROUND image the user had approved. The user explicitly identified the attached `NA03_GROUND_CITY(9).png` as the approved asset and directed that it replace the deployed derivative.
+
+The ordinary attachment transport exposed only a resized 2048x684 proxy, while the preserved ZIP contains the true 2170x725 source matching the user's approved artwork. The untouched ZIP original is preserved byte-for-byte as `assets/phase8-validation/north-america/NA03_GROUND_CITY.png`: 2170x725 RGBA, SHA-256 `095aa9cb85d4d36a2cb97f9a1d72bca8255c42abda836bfedfa6eeb893293b02`. It must not be resized, translated, regenerated or visually redesigned. Its explicit asset approval does not complete the NA03 stage gate; FAR, MID and GROUND together plus Contextual Inspector previews remain pending deployed user acceptance.

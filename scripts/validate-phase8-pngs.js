@@ -17,6 +17,10 @@ const ASSETS = [
   "assets/phase8-validation/north-america/NA03_GROUND_CITY.png"
 ];
 
+const EXPECTED_DIMENSIONS = {
+  "assets/phase8-validation/north-america/NA03_GROUND_CITY.png": [2170, 725]
+};
+
 const CRC_TABLE = Array.from({length:256},(_,n)=>{
   let c=n;
   for(let k=0;k<8;k++)c=(c&1)?0xedb88320^(c>>>1):c>>>1;
@@ -51,7 +55,8 @@ function validatePng(relative){
     offset=end;
   }
   if(!ihdr||!idat.length||!ended||offset!==data.length)throw new Error(`${relative}: incomplete PNG structure`);
-  if(ihdr.width!==2172||ihdr.height!==724)throw new Error(`${relative}: expected 2172x724, got ${ihdr.width}x${ihdr.height}`);
+  const [expectedWidth,expectedHeight]=EXPECTED_DIMENSIONS[relative]||[2172,724];
+  if(ihdr.width!==expectedWidth||ihdr.height!==expectedHeight)throw new Error(`${relative}: expected ${expectedWidth}x${expectedHeight}, got ${ihdr.width}x${ihdr.height}`);
   if(ihdr.compression!==0||ihdr.filter!==0||ihdr.interlace!==0)throw new Error(`${relative}: unsupported PNG encoding`);
   const channels={0:1,2:3,3:1,4:2,6:4}[ihdr.colorType];
   if(!channels)throw new Error(`${relative}: unsupported color type ${ihdr.colorType}`);

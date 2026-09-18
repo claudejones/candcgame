@@ -128,8 +128,9 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA03_GROUND_CITY.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_GROUND_CITY.png`
-- Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
-- Candidate SHA-256: `c91ddde03037a003e4b28d62ffa44c06965d0a3fdbe8de9ff3c304b1e2b1fe25`
+- Status: USER-SUPPLIED GROUND APPROVED — pending integrated-stage user acceptance
+- Candidate SHA-256: `095aa9cb85d4d36a2cb97f9a1d72bca8255c42abda836bfedfa6eeb893293b02`
+- Source dimensions: `2170x725` RGBA; preserved byte-for-byte from the ZIP original matching the user's approved attachment, without resizing, translation or reconstruction.
 - Layer directive: GROUND
 - Stage lock: Preserve the level gray sidewalk slabs, curb edge, dark masonry/substructure and occasional restrained weeds. Maintain a clean urban running surface and continuous depth; do not add buildings, road traffic, street props or hazards.
 
