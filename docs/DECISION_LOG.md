@@ -82,3 +82,8 @@ The production objective is one consistent authored geometry and one shared 960x
 The 27 validation-batch landscape generation jobs are defined in `docs/PHASE8_LANDSCAPE_PROMPT_MANIFEST.md`. Every generation must attach the exact immutable repository source PNG as its primary visual reference; mentioning a path in prompt text alone is insufficient. A shared geometry/layer contract plus a stage- and layer-specific lock preserves approved visual identity while correcting canvas geometry, anchors, coverage, overlap, alpha ownership and repeat seams.
 
 Generated candidates remain outside `assets-original/` and do not replace production assets until technical QA, canonical composite review and explicit user approval. Prompt approval never constitutes image approval.
+
+## 2026-09-18 — P8-NA01-FAR approved
+The user approved the final regenerated NA01 Desert FAR asset after visual-direction review and wrap-seam correction. The approved validation asset is `assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png`, SHA-256 `6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1`.
+
+The asset is 2172x724, fully opaque, preserves the approved NA01 American Southwest visual identity, and provides the complete FAR foundation. It remains a validation asset and is not promoted into the production world path until the full NA01 FAR/MID/GROUND set and composite are approved. The next asset gate is `P8-NA01-MID`.

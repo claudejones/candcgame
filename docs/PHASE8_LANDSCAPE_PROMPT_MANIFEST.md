@@ -56,6 +56,8 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA01_BG_DISTANT_MESAS.png`
 - Candidate: `assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png`
+- Status: APPROVED 2026-09-18
+- Approved SHA-256: `6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1`
 - Layer directive: FAR
 - Stage lock: Preserve the expansive saturated-blue desert sky, layered red-orange mesas and buttes, purple-blue atmospheric distance and warm arid plain. Keep the broad open American Southwest vista and horizon rhythm; do not add cities, close cacti, structures or clouds.
 

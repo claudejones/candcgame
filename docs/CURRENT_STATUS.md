@@ -5,6 +5,8 @@ Last updated: 2026-09-18
 ## Production baseline
 Phase 6 is complete and user-verified. Phase 7 production authoring architecture is complete and was visually accepted by the user on 2026-09-18. Phase 8 landscape pre-production is now authorized, subject to its existing asset-by-asset approval gates.
 
+Phase 8 validation production is active. `P8-NA01-FAR` is the first approved regenerated landscape asset; it is preserved under `assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png` pending completion and integration of the full NA01 stage set.
+
 Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game-config.js`, `src/js/game-runtime.js`, with semantic assets under `assets/`. Production remains `src/game.html` with production bootstrap only.
 
 ## Migration status
@@ -50,7 +52,7 @@ Production CI checks the production/development dependency boundary, syntax for 
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-Review and approve `docs/PHASE8_LANDSCAPE_EXECUTION_PLAN.md` and `docs/PHASE8_LANDSCAPE_PROMPT_MANIFEST.md`, then perform the read-only nine-stage composition baseline in the accepted Phase 7 renderer. Select the first complete-stage regeneration pilot and obtain explicit approval before generating its FAR asset from the Git-tracked source reference.
+Generate and review `P8-NA01-MID` using its immutable Git source PNG plus the approved `P8-NA01-FAR` as attached references. Do not begin `P8-NA01-GROUND` until the MID asset passes technical QA and receives explicit user approval.
 
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.
