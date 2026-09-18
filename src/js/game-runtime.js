@@ -1350,7 +1350,7 @@ class Lab{
  }
 }
 
-const store=new AssetStore({
+const ASSET_SOURCES={
  eu01Far:"../assets/worlds/europe/EU01_BG_DISTANT_GREECE.png",
  eu01Mid:"../assets/worlds/europe/EU01_BG_MID_GREECE.png",
  eu01Ground:"../assets/worlds/europe/EU01_GROUND_GREECE.png",
@@ -1411,7 +1411,9 @@ const store=new AssetStore({
  na01Objects:"../assets/worlds/north-america/NA01_OBJECT_ATLAS.png",
  na02Objects:"../assets/worlds/north-america/NA02_OBJECT_ATLAS.png",
  na03Objects:"../assets/worlds/north-america/NA03_OBJECT_ATLAS.png"
-});
+};
+window.CC_ASSET_SOURCES=Object.freeze({...ASSET_SOURCES});
+const store=new AssetStore(ASSET_SOURCES);
 
 store.load()
  .then(a=>new Lab(document.getElementById("game"),a).start())
