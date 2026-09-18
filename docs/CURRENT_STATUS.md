@@ -3,7 +3,7 @@
 Last updated: 2026-09-18
 
 ## Production baseline
-Phase 6 is complete and user-verified. Phase 7 production authoring architecture is complete and was visually accepted by the user on 2026-09-18. Phase 8 landscape pre-production is now authorized, subject to its existing asset-by-asset approval gates.
+Phase 6 is complete and user-verified. Phase 7 production authoring architecture is complete and was visually accepted by the user on 2026-09-18. Phase 8 landscape production now uses one integrated-stage user approval gate. FAR, MID and GROUND remain sequential internal production units, but their generation and technical iteration do not require separate user approvals when the stage direction and source references are already locked.
 
 Phase 8 validation production is active. North America is complete: the complete NA01, NA02 and NA03 FAR/MID/GROUND sets are approved Phase 8 landscape assets preserved under `assets/phase8-validation/north-america/`. All three stages passed their applicable deployed integrated-stage visual QA, including gameplay/test behavior, horizontal scrolling/repeat review and Contextual Inspector landscape previews. Packaged production remains on the preserved baseline while validation continues.
 
@@ -58,7 +58,7 @@ North America Phase 8 landscape validation is complete. NA01, NA02 and NA03 are 
 
 The first NA03 recovery deployment used image-attachment proxy copies that had been resized in transit. The later ZIP correction restored FAR and MID successfully, but its resized-and-translated GROUND derivative did not match the image the user had approved. GROUND now uses the untouched 2170x725 ZIP original that matches the user's approved attachment, SHA-256 `095aa9cb85d4d36a2cb97f9a1d72bca8255c42abda836bfedfa6eeb893293b02`, without resizing, translation or reconstruction. Deployed review proved that the preceding MID still required runtime `Y=16`. The approved replacement uses the alternate storefront/brownstone direction and deterministic lower overscan so authored frontage continues through the final source row at standard runtime `Y=0`. Its SHA-256 is `9a6e14456bc351c18229c503d0827f5bbbf83f521a6f24bce25a2c7a7cf5ef14`. The deployed complete-stage gate is accepted.
 
-Work is paused before South America so the user can ask a question. No South America production step is authorized by this closure alone.
+Before South America production begins, implement the documented workflow-support cleanup: ignored stage workspaces, stage-level automated landscape QA/composite output and a machine-readable Phase 8 asset registry. After that preparation is reviewed and validated, begin SA01 under the integrated-stage workflow. SA02 and SA03 follow one stage at a time, with a final South America continent regression after all three stage approvals.
 
 Current pilot QA evidence: NA01's yellow legacy seam, red rendered GROUND surface and cyan rendered MID base coincide at canonical Y=410, so the cyan guide (drawn last) visually covers the other two. This is expected alignment, not a missing ground guide. Legacy NA02 retains separated calibration values, so its three evidence lines remain visibly distinct.
 

@@ -1,6 +1,6 @@
 # Phase 8 Landscape Prompt Manifest
 
-Status: PRODUCTION PROMPT SET — North America complete; later jobs retain their current gates
+Status: PRODUCTION PROMPT SET — North America complete; integrated-stage approval workflow active
 Date: 2026-09-18  
 Scope: 27 validation-batch images for NA01–NA03, SA01–SA03 and EU01–EU03
 
@@ -11,8 +11,9 @@ For each job, the image-generation call must:
 1. Attach the exact `Reference` PNG through the image tool's referenced-image mechanism. A path written in prompt text is not a substitute for attaching the pixels.
 2. Use the complete Shared Contract below followed by the job's Stage Lock and Layer Prompt.
 3. Generate only the single requested layer. Do not generate a three-layer composite or contact sheet.
-4. Save the candidate outside `assets-original/`. Do not overwrite the current production asset before technical QA and explicit user acceptance.
-5. Present the candidate in isolation and in the canonical FAR+MID+GROUND renderer before promotion.
+4. Write the working result to its final `assets/phase8-validation/` path. Git preserves the prior known-good version for rollback; never overwrite `assets-original/`.
+5. Inspect the layer in isolation, in a duplicated horizontal wrap and in the canonical FAR+MID+GROUND composite. The assistant may reject or regenerate it internally.
+6. Publish only after the complete stage passes internal technical and composite QA. User approval applies to the deployed integrated stage, not to each intermediate layer.
 
 The immutable source image is the mandatory visual-identity authority. The prompt may correct geometry, coverage, alpha ownership, overscan and seams; it may not reinterpret the location, palette, landmarks or approved pixel-art language.
 
@@ -267,21 +268,21 @@ Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets pas
 - Layer directive: GROUND
 - Stage lock: Preserve the warm stone terrace, colorful undulating Gaudí-style mosaic balustrade, flower clusters, small pillars, vines and block-stone depth. Maintain a level playable edge and continuous bottom coverage; do not add buildings, palms, bench hazards or fountains.
 
-## Mandatory QA record per job
+## Mandatory QA record per stage
 
-Before a candidate can replace a production asset, record:
+Before a complete stage can be published for user review, record:
 
-- prompt ID and source Git commit;
-- attached reference path;
-- generated candidate path and checksum;
-- exact 2172x724 dimensions;
-- alpha mode and alpha bounds;
+- all three prompt IDs and source Git commit;
+- all three attached immutable reference paths;
+- final validation paths, SHA-256 values and Git blob SHAs;
+- expected dimensions, bit depth, color type and alpha bounds per layer;
 - FAR opacity or MID/GROUND intentional transparency;
 - GROUND surface evidence at source Y=393, pending pilot confirmation;
 - bottom coverage and transition-row coverage;
 - horizontal repeat/seam inspection;
-- isolated-layer screenshot;
+- isolated-layer and duplicated-wrap previews;
 - canonical composite screenshot at 960x540/Y410;
-- user disposition: REVISE or APPROVED.
+- internal disposition: READY TO DEPLOY or REVISE;
+- deployed user disposition: APPROVED or REVISE.
 
-Approval of a prompt is not approval of its generated image. Approval remains image-specific.
+Locked prompts and references authorize internal production but do not approve the resulting artwork. Final approval remains specific to the deployed integrated stage.
