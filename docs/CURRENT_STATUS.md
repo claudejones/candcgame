@@ -50,7 +50,7 @@ Production CI checks the production/development dependency boundary, syntax for 
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-Review and approve `docs/PHASE8_LANDSCAPE_EXECUTION_PLAN.md`, then perform its read-only nine-stage composition baseline in the accepted Phase 7 renderer. Select the first complete-stage regeneration pilot and obtain explicit approval before generating its FAR asset.
+Review and approve `docs/PHASE8_LANDSCAPE_EXECUTION_PLAN.md` and `docs/PHASE8_LANDSCAPE_PROMPT_MANIFEST.md`, then perform the read-only nine-stage composition baseline in the accepted Phase 7 renderer. Select the first complete-stage regeneration pilot and obtain explicit approval before generating its FAR asset from the Git-tracked source reference.
 
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.

@@ -77,3 +77,8 @@ The user reaffirmed the previously accepted 2026-09-16 Phase 8 decision: all 27 
 The validation sequence remains one complete stage first, with FAR, MID and GROUND generated and approved individually, followed by technical and full-renderer composite QA and any necessary contract refinement. After the pilot is accepted, regenerate the other eight existing stage sets. Only after all 27 validation layers pass may the contract be promoted to the remaining 36 layers for the other 12 stages.
 
 The production objective is one consistent authored geometry and one shared 960x540/Y410 renderer contract without stage-specific world Y/scale or character-grounding compensation. Approved themes, visual identities, references and original files remain preserved; regeneration standardizes geometry and layer responsibility rather than authorizing redesign.
+
+## 2026-09-18 — Phase 8 prompts and source references are Git-tracked
+The 27 validation-batch landscape generation jobs are defined in `docs/PHASE8_LANDSCAPE_PROMPT_MANIFEST.md`. Every generation must attach the exact immutable repository source PNG as its primary visual reference; mentioning a path in prompt text alone is insufficient. A shared geometry/layer contract plus a stage- and layer-specific lock preserves approved visual identity while correcting canvas geometry, anchors, coverage, overlap, alpha ownership and repeat seams.
+
+Generated candidates remain outside `assets-original/` and do not replace production assets until technical QA, canonical composite review and explicit user approval. Prompt approval never constitutes image approval.
