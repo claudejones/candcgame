@@ -74,6 +74,8 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA01_GROUND_DESERT.png`
 - Candidate: `assets/phase8-validation/north-america/NA01_GROUND_DESERT.png`
+- Status: APPROVED 2026-09-18
+- Approved SHA-256: `3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908`
 - Layer directive: GROUND
 - Stage lock: Preserve the flat reddish desert running surface, rounded red stone strata, sparse tufts, succulents and small dry plants. Maintain a readable level gameplay edge and dense rocky depth beneath it; do not introduce dunes, pavement or green forest terrain.
 

@@ -4,6 +4,14 @@
 
 const CONFIG=window.GAME_CONFIG;
 
+const PHASE8_PILOT=new URLSearchParams(window.location.search).get("phase8Pilot")==="na01";
+if(PHASE8_PILOT){
+ const p=CONFIG.worldProfiles.na01;
+ Object.assign(p,{sourceW:2172,seamY:410,farY:0,farScale:1.25,midYOffset:0,midScale:1,groundYOffset:0,groundScale:1,characterGrounding:{claude:0,constance:0}});
+ CONFIG.activeWorld="na01";
+}
+const worldSourceW=()=>CONFIG.worldProfiles[CONFIG.activeWorld]?.sourceW||CONFIG.worldContract.sourceW;
+
 for(const p of Object.values(CONFIG.worldProfiles)){p.characterGrounding=p.characterGrounding||{claude:0,constance:0};}
 for(const list of Object.values(CONFIG.objectQA.defs)){for(const d of list){d.crop=d.crop||{l:0,r:0,t:0,b:0};}}
 
@@ -117,7 +125,7 @@ class Scene{
  draw(){
    const c=this.ctx,W=CONFIG.canvas.w,p=this.profile(),wc=CONFIG.worldContract;
    c.clearRect(0,0,CONFIG.canvas.w,CONFIG.canvas.h);
-   const baseScale=W/wc.sourceW;
+   const baseScale=W/worldSourceW();
    const far=this.a[p.farKey];
    const farScale=baseScale*p.farScale;
    if(WORLD_LAYER_QA.far)this.tileFull(far,0,p.farY,farScale,1);
@@ -258,7 +266,7 @@ class CharacterMachine{
    const stateRenderY=(CONFIG.renderOffsetY?.[this.character]?.[this.state]||0);
    const dx=CONFIG.characterX-dw/2+stateRenderX;
    const p=CONFIG.worldProfiles[CONFIG.activeWorld];
-   const baseScale=CONFIG.canvas.w/CONFIG.worldContract.sourceW;
+   const baseScale=CONFIG.canvas.w/worldSourceW();
    const gScale=baseScale*p.groundScale;
    const gY=p.seamY-CONFIG.worldContract.groundSurfaceSourceY*gScale+p.groundYOffset;
    const renderedSurfaceY=gY+CONFIG.worldContract.groundSurfaceSourceY*gScale;
@@ -1245,7 +1253,7 @@ class Lab{
    const wp=CONFIG.worldProfiles[CONFIG.activeWorld];
    const p=wp;
    $("worldLabel").textContent=wp.label;
-   const baseScale=CONFIG.canvas.w/CONFIG.worldContract.sourceW;
+   const baseScale=CONFIG.canvas.w/worldSourceW();
    const gScale=baseScale*wp.groundScale;
    const gY=wp.seamY-CONFIG.worldContract.groundSurfaceSourceY*gScale+wp.groundYOffset;
    const renderedSurfaceY=gY+CONFIG.worldContract.groundSurfaceSourceY*gScale;
@@ -1387,15 +1395,15 @@ const store=new AssetStore({
  hit:"../assets/characters/G1E_HIT_ATLAS.png",
  celebrate:"../assets/characters/G1F_CELEBRATE_ATLAS.png",
  stars:"../assets/characters/FX_STUN_STARS_ATLAS.png",
- mid:"../assets/worlds/north-america/NA01_BG_MID_DESERT.png",
- ground:"../assets/worlds/north-america/NA01_GROUND_DESERT.png",
+ mid:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png":"../assets/worlds/north-america/NA01_BG_MID_DESERT.png",
+ ground:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA01_GROUND_DESERT.png":"../assets/worlds/north-america/NA01_GROUND_DESERT.png",
  na02Far:"../assets/worlds/north-america/NA02_BG_DISTANT_MOUNTAINS.png",
  na02Mid:"../assets/worlds/north-america/NA02_BG_MID_PINES.png",
  na02Ground:"../assets/worlds/north-america/NA02_GROUND_TRAIL.png",
  na03Far:"../assets/worlds/north-america/NA03_BG_DISTANT_NYC.png",
  na03Mid:"../assets/worlds/north-america/NA03_BG_MID_CITY.png",
  na03Ground:"../assets/worlds/north-america/NA03_GROUND_CITY.png",
- far:"../assets/worlds/north-america/NA01_BG_DISTANT_MESAS.png",
+ far:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png":"../assets/worlds/north-america/NA01_BG_DISTANT_MESAS.png",
  clouds:"../assets/shared/NA_CLOUD_LAYER.png"
 ,
  na01Objects:"../assets/worlds/north-america/NA01_OBJECT_ATLAS.png",

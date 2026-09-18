@@ -35,4 +35,25 @@ Pilot status: IN PROGRESS
 
 ## P8-NA01-GROUND
 
-Status: NEXT ASSET GATE
+- Prompt: `P8-NA01-GROUND`
+- Immutable reference: `assets-original/current-generated/NA-assets/NA01_GROUND_DESERT.png`
+- Approved validation asset: `assets/phase8-validation/north-america/NA01_GROUND_DESERT.png`
+- SHA-256: `3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908`
+- Dimensions: PASS — 2172x724
+- Alpha: PASS — genuine alpha above the terrain silhouette
+- Source surface anchor: PASS — Y=393
+- Lower terrain depth: PASS — continuous through source Y=723
+- Horizontal wrap: PASS — wrap preview visually reviewed
+- FAR+MID+GROUND source composite: PASS for the individual GROUND approval gate
+- Visual identity: APPROVED by user on 2026-09-18
+- Production promotion: BLOCKED pending canonical development-renderer QA and explicit full-stage acceptance
+
+## Canonical development integration
+
+Status: IN PROGRESS
+
+- Development app uses the three approved validation assets for NA01 only.
+- Pilot source width: 2172; source surface anchor: Y=393; canonical runtime surface: Y=410.
+- Initial pilot transforms: FAR Y=0 / scale=1.25; MID offset Y=0 / scale=1.00; GROUND offset Y=0 / scale=1.00. FAR 1.00 exposed a small void through low MID alpha; 1.25 closes the canonical 960x540 composite without changing asset pixels and remains subject to user visual acceptance.
+- Packaged production Game remains on the preserved 2048x682 NA01 baseline during this gate.
+- Required review: Design, Test and development Game modes; scrolling wrap; layer toggles; character grounding; hazards; finish marker; absence of canvas holes.

@@ -17,7 +17,7 @@
     {type:"stage", id:"stage", label:"Stage / Global"}
   ]);
 
-  let selection = Object.freeze({continentId:"south-america", stageId:"sa01", type:"landscape", assetId:"far", assetIndex:null});
+  let selection = Object.freeze({continentId:"north-america", stageId:"na01", type:"landscape", assetId:"far", assetIndex:null});
   const listeners = new Set();
 
   function stageData(stageId){

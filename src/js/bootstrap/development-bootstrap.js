@@ -6,6 +6,9 @@
   const requested = (params.get("mode") || "design").toLowerCase();
   let mode = VALID_MODES.includes(requested) ? requested : "design";
 
+  const pilot = window.GAME_CONFIG?.worldProfiles?.na01;
+  if (pilot) Object.assign(pilot, {sourceW:2172,seamY:410,farY:0,farScale:1.25,midYOffset:0,midScale:1,groundYOffset:0,groundScale:1,characterGrounding:{claude:0,constance:0}});
+
   const listeners = new Set();
   const notify = () => listeners.forEach(fn => fn(mode));
 
@@ -34,4 +37,12 @@
   window.CC_APP = Object.freeze(app);
   document.documentElement.dataset.appBuild = "development";
   document.documentElement.dataset.appMode = mode;
+  window.addEventListener("DOMContentLoaded", () => {
+    const frame = document.getElementById("sharedRuntime");
+    if (!frame) return;
+    const url = new URL(frame.src, window.location.href);
+    if (url.searchParams.get("phase8Pilot") === "na01") return;
+    url.searchParams.set("phase8Pilot", "na01");
+    frame.src = url;
+  }, {once:true});
 })();

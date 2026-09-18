@@ -5,7 +5,7 @@ Last updated: 2026-09-18
 ## Production baseline
 Phase 6 is complete and user-verified. Phase 7 production authoring architecture is complete and was visually accepted by the user on 2026-09-18. Phase 8 landscape pre-production is now authorized, subject to its existing asset-by-asset approval gates.
 
-Phase 8 validation production is active. `P8-NA01-FAR` and `P8-NA01-MID` are approved regenerated landscape assets, preserved under `assets/phase8-validation/north-america/` pending completion and integration of the full NA01 stage set.
+Phase 8 validation production is active. `P8-NA01-FAR`, `P8-NA01-MID` and `P8-NA01-GROUND` are approved regenerated landscape assets preserved under `assets/phase8-validation/north-america/`. The complete set is now integrated into the development app for canonical pilot QA; packaged production remains on the preserved baseline pending full-stage acceptance.
 
 Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game-config.js`, `src/js/game-runtime.js`, with semantic assets under `assets/`. Production remains `src/game.html` with production bootstrap only.
 
@@ -52,7 +52,7 @@ Production CI checks the production/development dependency boundary, syntax for 
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-Generate and review `P8-NA01-GROUND` using its immutable Git source PNG plus the approved `P8-NA01-FAR` and `P8-NA01-MID` as attached references. Do not integrate or promote the NA01 stage until GROUND passes technical QA, receives explicit user approval, and the complete canonical composite passes QA.
+Run the complete NA01 pilot in the development app across Design, Test and development Game modes. Validate layer composition, horizontal scrolling/repetition, Y=410 grounding, hazards, collision bounds and finish-marker placement. Do not promote the assets into the packaged production world path or continue to NA02 until the user accepts the integrated pilot and any required calibration is complete.
 
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.
