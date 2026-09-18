@@ -127,6 +127,8 @@ After all three stages are approved, run one continent-level regression. Do not 
 - Do not reread or print unchanged full documents repeatedly within the same stage.
 - Keep command, connector and CI output targeted and concise.
 - A handoff should identify only the current stage, exact Git baseline, final/working paths, unresolved defect and next operation.
+- Every stage or continent closeout must include the next fully completed, copy-ready conversation prompt. Resolve its stage ID, continent, asset names and scope from `config/phase8-landscapes.json` and current repository status. Do not emit placeholders or ask the user to populate template fields.
+- The workflow-support setup is project-wide and one-time. Do not repeat it for South America, Europe or another registered continent; maintain the existing registry and tools as stages advance.
 
 ## Validation sequence
 
