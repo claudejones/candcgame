@@ -1,8 +1,13 @@
 name: Deploy QA site to GitHub Pages
 
-# Development branches do not deploy automatically.
-# Pages deployment is controlled from main, which pins the exact QA commit.
+# Development branches do not deploy automatically. An approved snapshot first
+# lands on main, Production CI validates that exact push SHA, and only a
+# successful main push is then deployed. Manual dispatch remains an emergency
+# fallback and never replaces the approval/CI gate.
 on:
+  workflow_run:
+    workflows: ["Production CI"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -16,6 +21,11 @@ concurrency:
 
 jobs:
   deploy:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.conclusion == 'success')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -23,6 +33,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # workflow_run executes in the default-branch workflow context, so
+          # pin checkout explicitly to the SHA that Production CI validated.
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
 
       - name: Build lightweight Pages bundle
         run: |

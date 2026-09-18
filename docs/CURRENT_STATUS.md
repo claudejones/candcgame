@@ -7,6 +7,8 @@ Phase 6 is complete and user-verified. Phase 7 production authoring architecture
 
 Phase 8 validation production is active. `P8-NA01-FAR`, `P8-NA01-MID` and `P8-NA01-GROUND` are approved regenerated landscape assets preserved under `assets/phase8-validation/north-america/`. The complete set is now integrated into the development app for canonical pilot QA; packaged production remains on the preserved baseline pending full-stage acceptance.
 
+Approved QA snapshots now follow the automated GitHub path documented in `docs/GITHUB_WORKFLOW.md`: commit the exact accepted snapshot to `main`, require successful Production CI for that push SHA, then automatically deploy that same validated SHA to Pages. Development-branch and pull-request CI do not deploy. Manual Pages dispatch remains a recovery fallback only.
+
 Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game-config.js`, `src/js/game-runtime.js`, with semantic assets under `assets/`. Production remains `src/game.html` with production bootstrap only.
 
 ## Migration status
@@ -53,6 +55,8 @@ Production CI checks the production/development dependency boundary, syntax for 
 
 ## Next production step
 Run the complete NA01 pilot in the development app across Design, Test and development Game modes. Validate layer composition, horizontal scrolling/repetition, Y=410 grounding, hazards, collision bounds and finish-marker placement. Do not promote the assets into the packaged production world path or continue to NA02 until the user accepts the integrated pilot and any required calibration is complete.
+
+Current pilot QA evidence: NA01's yellow legacy seam, red rendered GROUND surface and cyan rendered MID base coincide at canonical Y=410, so the cyan guide (drawn last) visually covers the other two. This is expected alignment, not a missing ground guide. Legacy NA02 retains separated calibration values, so its three evidence lines remain visibly distinct.
 
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.
