@@ -127,3 +127,9 @@ Phase 8 generated candidates must be browser-decodable before Git preservation a
 The local NA02 candidates remained intact. They were losslessly re-encoded while the problem was being isolated, with zero changed pixels, but metadata was not the root cause; the binary transfer path was. Large image files must now use a binary-safe upload path and their committed copies must pass PNG signature, complete chunk boundaries, per-chunk CRC, full IDAT decompression, exact scanline length and filter-byte validation in Production CI. A dimensions-only check is insufficient.
 
 Validation-asset runtime URLs carry a short content-hash version key. When a candidate binary is replaced, its key changes with the documented SHA-256 so Pages and browser caches cannot retain an earlier failed or superseded response under the same path.
+
+## 2026-09-18 — NA02 integrated stage approved; NA03 authorized end to end
+
+After deployed Design and gameplay-run QA, the user approved the complete NA02 FAR, MID and GROUND set as one integrated stage and separately verified the landscape source previews added to the Contextual Inspector. The three NA02 validation assets are therefore visually accepted; deferred character, hazard, collision and finish-marker calibration remains outside this landscape approval.
+
+The successful NA02 stage-level workflow is authorized for NA03. Produce NA03 sequentially as FAR -> MID -> GROUND from the immutable repository references, perform internal per-layer technical and composite QA, preserve the final candidates in Git, integrate the complete stage into the development app, and present one deployed stage-level visual acceptance gate.
