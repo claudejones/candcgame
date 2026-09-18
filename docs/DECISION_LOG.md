@@ -197,3 +197,9 @@ Internal iterations do not require permanent status or decision-log updates. Fin
 The one-time workflow-support setup implements the streamlined Phase 8 process without changing approved artwork or gameplay. `config/phase8-landscapes.json` is the machine-readable authority for validation-stage paths, immutable references, expected geometry/layer properties, status and cache keys. The PNG integrity validator now reads that registry instead of maintaining a North America-only file list.
 
 `scripts/phase8-stage-qa.py <stage>` produces technical hashes and alpha/coverage evidence plus isolated-layer, duplicated-wrap and canonical 960x540/Y410 composite previews under the ignored `tmp/phase8-qa/` workspace. Production CI runs the registry-driven PNG and check-only stage validation for all entries marked `integrated` or `approved`. `assets/phase8-candidates/`, `tmp/` and Python cache files are ignored and remain uncommitted. North America was used to validate the automation; no accepted asset bytes or runtime behavior changed.
+
+## 2026-09-18 — Completed next-stage prompt required at closeout
+
+Every Phase 8 stage and continent closeout must give the user the next fully completed, copy-ready conversation prompt. The assistant resolves the next stage ID, continent, asset filenames, repository authority and scope from the current repository and `config/phase8-landscapes.json`. Placeholder templates or instructions requiring the user to fill in fields are not an acceptable handoff.
+
+The Phase 8 workflow-support setup is project-wide and one-time. It already registers the North America, South America and Europe validation stages. It is maintained as stages advance but is not rerun for each stage or continent.

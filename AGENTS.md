@@ -34,6 +34,7 @@ Do not promote temporary QA implementation details into production requirements 
 - Configuration/calibration is for positioning correctly authored assets, not compensating for defective artwork.
 - When a QA issue is reported: analyze -> state exact correction -> wait for explicit approval when the workflow calls for an approval gate -> modify -> provide a testable increment -> verify no unrelated regressions.
 - For Phase 8 landscapes, use the integrated-stage approval workflow in `docs/PHASE8_LANDSCAPE_EXECUTION_PLAN.md`. Internal layer generation, rejection, regeneration and technical QA do not require separate user approval when the stage specification and references are already locked.
+- At every Phase 8 stage or continent closeout, provide the user with the next fully completed, copy-ready conversation prompt. Populate the stage ID, continent, asset filenames, repository instructions and scope from the current repository and registry; never give the user placeholders or require them to fill in workflow fields.
 - Update `docs/CURRENT_STATUS.md` when the production baseline or next approved step changes.
 - Append important locked decisions to `docs/DECISION_LOG.md`; do not erase historical decisions.
 
