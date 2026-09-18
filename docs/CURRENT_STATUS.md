@@ -5,7 +5,7 @@ Last updated: 2026-09-18
 ## Production baseline
 Phase 6 is complete and user-verified. Phase 7 production authoring architecture is complete and was visually accepted by the user on 2026-09-18. Phase 8 landscape pre-production is now authorized, subject to its existing asset-by-asset approval gates.
 
-Phase 8 validation production is active. `P8-NA01-FAR`, `P8-NA01-MID` and `P8-NA01-GROUND` are approved regenerated landscape assets preserved under `assets/phase8-validation/north-america/`. The complete set is now integrated into the development app for canonical pilot QA; packaged production remains on the preserved baseline pending full-stage acceptance.
+Phase 8 validation production is active. The complete NA01 and NA02 FAR/MID/GROUND sets are approved regenerated landscape assets preserved under `assets/phase8-validation/north-america/`. NA02 passed deployed Design, gameplay-run and integrated-stage visual QA, including the new Contextual Inspector landscape previews. Packaged production remains on the preserved baseline while validation continues.
 
 Approved QA snapshots now follow the automated GitHub path documented in `docs/GITHUB_WORKFLOW.md`: commit the exact accepted snapshot to `main`, require successful Production CI for that push SHA, then automatically deploy that same validated SHA to Pages. Development-branch and pull-request CI do not deploy. Manual Pages dispatch remains a recovery fallback only.
 
@@ -54,7 +54,9 @@ Production CI checks the production/development dependency boundary, syntax for 
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-NA01 landscape composition and scaling are visually acceptable for continuing Phase 8; dependent character/hazard grounding and later configuration calibration are intentionally deferred until landscape generation is complete. The authorized NA02 FAR, MID and GROUND candidates have completed internal source QA and are integrated development-only under the Phase 8 pilot flag. Preserve them in Git, run deployed Design/Test/Game composite QA and present the complete NA02 stage for user visual acceptance. Do not treat the individual NA02 layers as user-approved before that stage-level decision.
+NA01 and NA02 landscape sets are approved. Dependent character/hazard grounding and later configuration calibration remain intentionally deferred until landscape generation is complete. The NA03 FAR/MID/GROUND set has completed internal reconstruction, PNG-integrity, geometry, wrap and source-composite QA and is pending complete-stage Git integration, deployed Design/Test/Game QA and one final user acceptance gate. It is not user-approved yet.
+
+The original NA03 generation outputs survived a conversation/workspace handoff, but the first normalized local candidates did not. The user explicitly authorized deterministic recovery from those surviving outputs. The reconstructed 2172x724 candidates now carry new documented hashes; the earlier uncommitted hashes remain historical evidence and must not be represented as the recovered bytes.
 
 Current pilot QA evidence: NA01's yellow legacy seam, red rendered GROUND surface and cyan rendered MID base coincide at canonical Y=410, so the cyan guide (drawn last) visually covers the other two. This is expected alignment, not a missing ground guide. Legacy NA02 retains separated calibration values, so its three evidence lines remain visibly distinct.
 

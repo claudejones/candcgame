@@ -83,8 +83,8 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA02_BG_DISTANT_MOUNTAINS.png`
 - Candidate: `assets/phase8-validation/north-america/NA02_BG_DISTANT_MOUNTAINS.png`
-- Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
-- Candidate SHA-256: `259b8f38845a39ed81b77f711facab528bc09eb7900bb62c9346f52a33d00b58`
+- Status: APPROVED 2026-09-18 — integrated-stage acceptance
+- Approved SHA-256: `259b8f38845a39ed81b77f711facab528bc09eb7900bb62c9346f52a33d00b58`
 - Layer directive: FAR
 - Stage lock: Preserve the bright blue sky, long snow-capped mountain chain, layered blue ridges and dark evergreen foothills. Retain the crisp alpine panorama and cool palette; do not add close trees, rocks, buildings or clouds.
 
@@ -92,8 +92,8 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA02_BG_MID_PINES.png`
 - Candidate: `assets/phase8-validation/north-america/NA02_BG_MID_PINES.png`
-- Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
-- Candidate SHA-256: `cc4a6f43442963115f8b8c8bff73ce8dc2cfaab9428e9a16c49243d6876f5fd3`
+- Status: APPROVED 2026-09-18 — integrated-stage acceptance
+- Approved SHA-256: `cc4a6f43442963115f8b8c8bff73ce8dc2cfaab9428e9a16c49243d6876f5fd3`
 - Layer directive: MID
 - Stage lock: Preserve the irregular evergreen forest silhouette, varied pine heights, gray boulder clusters and low green shrubs. Increase coordinated lower coverage and overlap while retaining transparent openings; do not add mountains, sky, trail surface or stream water.
 
@@ -101,8 +101,8 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA02_GROUND_TRAIL.png`
 - Candidate: `assets/phase8-validation/north-america/NA02_GROUND_TRAIL.png`
-- Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
-- Candidate SHA-256: `f6ada52c153667a5d7d8466c07da3e55d4d271faa1bf46dc5e0f46d732dfdc81`
+- Status: APPROVED 2026-09-18 — integrated-stage acceptance
+- Approved SHA-256: `f6ada52c153667a5d7d8466c07da3e55d4d271faa1bf46dc5e0f46d732dfdc81`
 - Layer directive: GROUND
 - Stage lock: Preserve the compact brown dirt trail, exposed gray stones, darker soil body, mossy grass and low forest plants. Extend dependable terrain depth to the bottom and create compatible repeat edges. Do not include the separate gap-water asset or paint a permanent stream into this continuous ground layer.
 
@@ -110,6 +110,8 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA03_BG_DISTANT_NYC.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_BG_DISTANT_NYC.png`
+- Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
+- Candidate SHA-256: `c91146de70b1c9b645ce58ef905e1fa6234100a2cc58fb08488454d036b6e2b8`
 - Layer directive: FAR
 - Stage lock: Preserve the blue-sky Manhattan waterfront panorama, recognizable Empire State Building emphasis, varied distant skyscrapers and blue water band. Retain the approved skyline density and scale; do not add close brownstones, street furniture, clouds or gameplay pavement.
 
@@ -117,6 +119,8 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA03_BG_MID_CITY.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_BG_MID_CITY.png`
+- Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
+- Candidate SHA-256: `b1a0be3d2e0589459641e0eda9ac60540792ad88a42c40805f54d9aba9e1dbba`
 - Layer directive: MID
 - Stage lock: Preserve the row of varied brick brownstones and apartment buildings, rooftop water tanks/chimneys, street trees and warm urban palette. Keep the recognizable neighborhood silhouette and transparent sky; do not include the distant skyline, playable sidewalk or hazards.
 
@@ -124,6 +128,8 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA03_GROUND_CITY.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_GROUND_CITY.png`
+- Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
+- Candidate SHA-256: `e1dd43725810ae44ac5fd9fa47698d90e0a9d8a1d5b3bae696c490ff12e49f3c`
 - Layer directive: GROUND
 - Stage lock: Preserve the level gray sidewalk slabs, curb edge, dark masonry/substructure and occasional restrained weeds. Maintain a clean urban running surface and continuous depth; do not add buildings, road traffic, street props or hazards.
 
