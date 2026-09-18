@@ -48,4 +48,4 @@ Four continents / 12 stages remain to be specified and produced. Their exact sta
 ## Current landscape audit scope
 27 landscape assets across NA01–NA03, SA01–SA03 and EU01–EU03: FAR/DISTANT + MID + GROUND for each stage.
 
-Each is to be classified KEEP / REPAIR / REGENERATE against `WORLD_RENDERING_SPEC.md` before further landscape production.
+All 27 are the Phase 8 regeneration validation batch under `LANDSCAPE_GENERATION_CONTRACT_V1.md`. The completed KEEP / REPAIR / REGENERATE audit remains technical and visual-reference evidence; it does not exempt a layer from standardized regeneration.

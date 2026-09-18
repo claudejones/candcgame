@@ -1,8 +1,8 @@
 name: Deploy QA site to GitHub Pages
 
+# Development branches do not deploy automatically.
+# Pages deployment is controlled from main, which pins the exact QA commit.
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -21,18 +21,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout exact approved QA build
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: dfd7cc94cbbd9b405427c6f5916a235e0d5fe167
-
-      - name: Record deployed source SHA
-        run: |
-          set -euo pipefail
-          ACTUAL_SHA="$(git rev-parse HEAD)"
-          EXPECTED_SHA="dfd7cc94cbbd9b405427c6f5916a235e0d5fe167"
-          echo "Deploying source SHA: $ACTUAL_SHA"
-          test "$ACTUAL_SHA" = "$EXPECTED_SHA"
 
       - name: Build lightweight Pages bundle
         run: |
@@ -46,9 +36,6 @@ jobs:
           fi
           cp -R assets _site/assets
           touch _site/.nojekyll
-          printf '%s\n' 'dfd7cc94cbbd9b405427c6f5916a235e0d5fe167' > _site/DEPLOYED_SOURCE_SHA.txt
-          echo "Pages bundle contents:"
-          du -sh _site
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -61,6 +48,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-# Main is the only automatic Pages deployment gateway.
-# Each QA deployment pins one exact validated source commit and publishes only the lightweight runtime bundle.

@@ -1,0 +1,97 @@
+name: Production CI
+on:
+  push:
+    branches: [main, modular-parity-validation]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Phase 7 final integration
+        run: |
+          set -euo pipefail
+          for f in src/index.html src/game.html src/dev.html src/css/game.css src/js/game-config.js src/js/game-runtime.js src/js/config-schema.js src/js/runtime-host-api.js src/js/game-host-ui.js src/js/bootstrap/production-bootstrap.js src/js/bootstrap/development-bootstrap.js; do test -f "$f"; done
+          for f in mode-shell asset-navigator design-draft contextual-inspector landscape-editor hazard-editor character-editor finish-marker-editor runtime-monitor test-mode; do test -f "src/js/dev/$f.js"; grep -q "./js/dev/$f.js" src/dev.html; done
+          grep -q 'PHASE 7 • QA' src/js/runtime-host-api.js
+          ! grep -R -nE 'PHASE 7G.?7I|PHASE 7J.?7K' src/js/dev
+          grep -q 'phase7HostedRuntimeStyle' src/js/runtime-host-api.js
+          grep -q 'function startRun(){return click("spawnStart");}' src/js/runtime-host-api.js
+          grep -q 'function jump(){return click("gameJumpBtn");}' src/js/runtime-host-api.js
+          grep -q 'function slide(){return click("gameSlideBtn");}' src/js/runtime-host-api.js
+          grep -q 'function togglePause(){return click("gamePauseBtn");}' src/js/runtime-host-api.js
+          grep -q 'function interactionJump(){return click("quickJumpBtn");}' src/js/runtime-host-api.js
+          grep -q 'function interactionSlide(){return click("quickSlideBtn");}' src/js/runtime-host-api.js
+          grep -q 'key!=="ArrowUp"&&key!=="ArrowDown"&&key!=="Space"' src/js/runtime-host-api.js
+          grep -q 'setCollisionBounds' src/js/runtime-host-api.js
+          grep -q 'characterQA.showCollisionBounds' src/js/runtime-host-api.js
+          grep -q 'objectQA.showBounds' src/js/runtime-host-api.js
+          grep -q 'setHazardIndex' src/js/runtime-host-api.js
+          grep -q 'playHazardPass' src/js/runtime-host-api.js
+          grep -q 'setFlightMode' src/js/runtime-host-api.js
+          grep -q 'stepPreviewFrame' src/js/runtime-host-api.js
+          grep -q 'phase7GameStart' src/js/game-host-ui.js
+          grep -q 'FINISH MARKER PREVIEW' src/js/dev/finish-marker-editor.js
+          grep -q 'cc-world-design-config-v1' src/js/dev/design-draft.js
+          grep -q 'sanitizeCrop' src/js/dev/design-draft.js
+          grep -q 'SAVE ALL LOCAL' src/js/dev/contextual-inspector.js
+          grep -q 'EXPORT GAME CONFIG' src/js/dev/contextual-inspector.js
+          grep -q 'FINE CROP — FRAME' src/js/dev/contextual-inspector.js
+          grep -q 'animation.frameCrops' src/js/dev/contextual-inspector.js
+          grep -q 'FULL ATLAS VIEW' src/js/dev/hazard-editor.js
+          grep -q 'FRAME ${activeFrame+1}' src/js/dev/hazard-editor.js
+          grep -q 'yellow = animation source • cyan = active frame' src/js/dev/hazard-editor.js
+          grep -q 'CROPPED FRAME PREVIEW' src/js/dev/hazard-editor.js
+          grep -q 'previewFrame' src/js/dev/hazard-editor.js
+          grep -q 'onpointerdown' src/js/dev/hazard-editor.js
+          grep -q 'Number.isInteger(d.previewFrame)' src/js/game-runtime.js
+          grep -q 'Hazard + collision bounds' src/js/dev/contextual-inspector.js
+          grep -q 'setCharacterCropBounds' src/js/runtime-host-api.js
+          grep -q 'min:0' src/js/dev/contextual-inspector.js
+          grep -q 'syncToRuntime' src/js/dev/hazard-editor.js
+          grep -q 'STATE / SOURCE CROP' src/js/dev/character-editor.js
+          grep -q 'RUNTIME MONITOR' src/js/dev/runtime-monitor.js
+          grep -q 'data-type="interaction"' src/js/dev/test-mode.js
+          grep -q 'data-type="game"' src/js/dev/test-mode.js
+          grep -q 'Character and hazard share one interaction pass' src/js/dev/test-mode.js
+          grep -q 'HIGH — SLIDE' src/js/dev/test-mode.js
+          grep -q 'LOW — JUMP' src/js/dev/test-mode.js
+          grep -q 'STEP FRAME' src/js/dev/test-mode.js
+          grep -q '<h3>GAME TEST</h3>' src/js/dev/test-mode.js
+          ! grep -q 'FULL 90-SECOND COURSE' src/js/dev/test-mode.js
+          grep -q 'function endInteraction()' src/js/dev/test-mode.js
+          grep -q 'function endGame()' src/js/dev/test-mode.js
+          grep -q 'e.target.blur()' src/js/dev/test-mode.js
+          grep -q 'CC_RUNTIME_API?.interactionJump()' src/js/dev/test-mode.js
+          grep -q 'CC_RUNTIME_API?.interactionSlide()' src/js/dev/test-mode.js
+          ! grep -q 'a==="jump")window.CC_RUNTIME_API?.jump()' src/js/dev/test-mode.js
+          ! grep -q 'a==="slide")window.CC_RUNTIME_API?.slide()' src/js/dev/test-mode.js
+          grep -q 'background:#0d1422' src/css/asset-navigator.css
+          grep -q 'background:#0d1422' src/css/contextual-inspector.css
+          grep -q 'test-type-switch' src/dev.html
+          grep -q 'test-section h3' src/dev.html
+          grep -q 'setCollisionBounds(collision)' src/js/dev/test-mode.js
+          grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
+          grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|finish-marker-editor|runtime-monitor|test-mode' src/game.html
+          ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|finish-marker-editor|runtime-monitor|test-mode' src/js/bootstrap/production-bootstrap.js
+          grep -q './js/runtime-host-api.js' src/game.html
+          ! grep -R -nE 'LAB25Q_CONFIG|data:image/' src
+          grep -q 'slideDuration:0.75' src/js/game-config.js
+          grep -q 'recoveryDuration:1.10' src/js/game-config.js
+          grep -q 'invulnerabilityDuration:2.00' src/js/game-config.js
+          grep -q 'highClearance:68' src/js/game-config.js
+          grep -q 'lowClearance:18' src/js/game-config.js
+          grep -q 'maxVisible:2' src/js/game-config.js
+          grep -q 'reactionLead:2.20' src/js/game-config.js
+          grep -q 'characterX:220' src/js/game-config.js
+          grep -q 'worldSpeed:120' src/js/game-config.js
+          grep -q 'canvas:{w:960,h:540}' src/js/game-config.js
+          grep -q 'slide:\[{l:0,r:0,t:0,b:0},{l:55,r:0,t:0,b:0}\]' src/js/game-config.js
+          grep -q 'GROUND_SURFACE_Y = 410' docs/WORLD_RENDERING_SPEC.md
+          for f in src/js/game-config.js src/js/config-schema.js src/js/game-runtime.js src/js/runtime-host-api.js src/js/game-host-ui.js src/js/bootstrap/*.js src/js/dev/*.js; do node --check "$f"; done
+          node <<'NODE'
+          const fs=require('fs'),vm=require('vm');const context={window:{}};vm.createContext(context);vm.runInContext(fs.readFileSync('src/js/game-config.js','utf8'),context);vm.runInContext(fs.readFileSync('src/js/config-schema.js','utf8'),context);const s=context.window.GAME_SCHEMA,c=context.window.GAME_CONFIG;s.validateLegacyConfig(c);const v=s.buildCompatibilityView(c);s.validateCanonicalView(v);if(s.GROUND_SURFACE_Y!==410)throw Error('ground surface');if(Object.keys(v.stages).length!==9)throw Error('stage count');for(const[id,stage]of Object.entries(v.stages)){const p=c.worldProfiles[id];if(stage.compatibility.legacyRenderedSurfaceY!==p.seamY+p.groundYOffset)throw Error(`surface ${id}`);if(stage.hazards.length!==c.objectQA.defs[id].length)throw Error(`hazards ${id}`);for(const h of stage.hazards){if(Object.values(h.crop).some(n=>n<0))throw Error(`crop ${id}`);if(h.animation.frameCrops.length!==h.atlas.frames)throw Error(`frame crops ${id}/${h.name}`);for(const fc of h.animation.frameCrops)if(Object.values(fc).some(n=>n<0))throw Error(`frame crop ${id}/${h.name}`);}}const barrel=v.stages.eu01.hazards[1];if(barrel.name!=="Rolling Wooden Barrel"||barrel.atlas.frames!==4||barrel.animation.frameCrops.length!==4)throw Error('barrel animation authoring');const b=v.stages.eu03.hazards[0];if(b.name!=="Gaudí Mosaic Bench"||b.atlas.sourceRegion.w!==1086)throw Error('Gaudi baseline');if(c.actions.slideDuration!==.75||c.hitRecovery.recoveryDuration!==1.10||c.hitRecovery.invulnerabilityDuration!==2.00)throw Error('gameplay parity');
+          NODE

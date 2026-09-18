@@ -1,0 +1,7 @@
+(() => {
+  "use strict";
+  if(!window.CC_APP || !window.CC_APP.isDevelopment)throw new Error("Development mode shell requires development-bootstrap.js");
+  const LABELS={design:"DESIGN",test:"TEST",game:"GAME"};
+  function mount(){if(document.getElementById("phase7ModeShell"))return;const shell=document.createElement("nav");shell.id="phase7ModeShell";shell.className="phase7-mode-shell";shell.setAttribute("aria-label","Application mode");const build=document.createElement("span");build.className="phase7-build-id";build.textContent=window.CC_RUNTIME_API?.BUILD_LABEL||"PHASE 7 • QA";shell.appendChild(build);for(const mode of window.CC_APP.build.modes){const button=document.createElement("button");button.type="button";button.dataset.mode=mode;button.textContent=LABELS[mode];button.addEventListener("click",()=>window.CC_APP.setMode(mode));shell.appendChild(button);}document.body.prepend(shell);const sync=mode=>{document.documentElement.dataset.appMode=mode;shell.querySelectorAll("button[data-mode]").forEach(button=>{const active=button.dataset.mode===mode;button.classList.toggle("active",active);button.setAttribute("aria-pressed",String(active));});window.CC_RUNTIME_API?.refresh();};sync(window.CC_APP.mode);window.CC_APP.onModeChange(sync);}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount,{once:true});else mount();
+})();

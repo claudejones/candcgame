@@ -1,61 +1,62 @@
 # Current Status
 
-Last updated: 2026-09-16
+Last updated: 2026-09-18
 
-## Current reference baseline
-`archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html`
+## Production baseline
+Phase 6 is complete and user-verified. Phase 7 production authoring architecture is complete and was visually accepted by the user on 2026-09-18. Phase 8 landscape pre-production is now authorized, subject to its existing asset-by-asset approval gates.
 
-LAB25Q remains the behavioral reference/test-harness baseline. It is preserved unchanged and is now being structurally extracted into modular code.
+Phase 8 validation production is active. `P8-NA01-FAR`, `P8-NA01-MID` and `P8-NA01-GROUND` are approved regenerated landscape assets preserved under `assets/phase8-validation/north-america/`. The complete set is now integrated into the development app for canonical pilot QA; packaged production remains on the preserved baseline pending full-stage acceptance.
 
-## Preservation checkpoint — COMPLETE
-- Exact LAB25Q Git blob preserved under `archive/LAB25Q/`.
-- Original uploaded assets preserved unchanged under `assets-original/current-generated/`.
-- `/incoming` remains intact for provenance.
-- All 27 current NA/SA/EU landscape PNGs remain preserved.
+Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game-config.js`, `src/js/game-runtime.js`, with semantic assets under `assets/`. Production remains `src/game.html` with production bootstrap only.
 
-## Landscape replacement decision — LOCKED
-Explicit decision 2026-09-16: regenerate all 27 existing NA/SA/EU landscape layers against a unified geometry + alpha + overscan contract, then use the validated contract for the remaining 36 landscape layers. Historical KEEP/REPAIR classifications remain diagnostic history, not the replacement plan.
+## Migration status
+- Phase 0–6: COMPLETE / user verified where applicable
+- Phase 7A coordinate and viewport contract: COMPLETE
+- Phase 7B canonical configuration schema: COMPLETE / CI accepted
+- Phase 7C modular application shell/bootstrap split: COMPLETE / CI accepted
+- Phase 7D Design Asset Navigator: COMPLETE / CI accepted
+- Phase 7E Contextual Inspector: COMPLETE / CI accepted (run #78)
+- Phase 7F Landscape editor: COMPLETE / CI accepted (run #98)
+- Phase 7G Hazard/atlas editor: COMPLETE / CI accepted (run #122)
+- Phase 7H Character editor: COMPLETE / CI accepted (run #122)
+- Phase 7I Runtime Monitor: COMPLETE / CI accepted (run #122)
+- Phase 7J Test mode: COMPLETE / CI accepted (run #134)
+- Phase 7K Game mode: COMPLETE / CI accepted (run #134)
+- Phase 7L persistence/import/export finalization: COMPLETE / user accepted
+- Phase 7M final regression/CI/deployment: COMPLETE / user accepted
 
-`docs/LANDSCAPE_GENERATION_CONTRACT_V1.md` is now the test contract. Its 2172×724 source geometry and GROUND source anchor Y=393 are validation values, not final production authority until the rebuilt full harness proves them.
+The final Phase 7 acceptance correction added Design-mode hazard/character guide toggles, clamped Fine Crop inputs to non-negative values, locked paused animated-hazard previews to the explicitly selected frame, added an enlarged live cropped-frame preview, and made the animated-preview controls respond before their frame refresh could replace the clicked button. User testing confirmed that the pause-control issue was resolved. This correction did not alter approved assets, collision geometry or gameplay constants.
 
-## Modular extraction checkpoint — PHASE 1 COMPLETE / PARITY IN PROGRESS
-Created the production-oriented module skeleton:
-- `src/index.html`
-- `src/css/game.css`
-- `src/css/qa.css`
-- `src/js/main.js`
-- `src/js/game.js`
-- `src/js/renderer.js`
-- `src/js/world.js`
-- `src/js/player.js`
-- `src/js/hud.js`
-- `src/js/controls.js`
-- `src/js/progression.js`
-- `src/js/qa-harness.js`
-- `src/js/config/gameplay.js`
-- `src/js/config/worlds.js`
-- `src/js/config/hazards.js`
-- `src/js/config/qa.js`
-- `qa/full-harness/index.html`
+## Coordinate/config authority
+Canonical logical viewport: `960 x 540`. Canonical production ground surface: `GROUND_SURFACE_Y = 410`. Canonical asset vocabulary: `SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> GAMEPLAY ANCHOR -> COLLISION`.
 
-`src/legacy/lab25q/source.inspect.js` remains the inspectable behavioral source. The new shell intentionally does not re-embed LAB25Q base64 assets.
+Legacy stage `seamY` and landscape offsets remain compatibility/calibration evidence only and are not canonical gameplay-coordinate authority.
 
-Important: the new modular shell is NOT yet declared LAB25Q-parity-complete. Player sprite rendering, exact HUD DOM/CSS/assets, external asset registry, hazard/spawn execution, finish behavior, full QA controls/checkpoint/export, and exact START RUN dependency parity still require extraction/verification.
+## Design persistence / portability
+All Design saves remain browser-local only under `cc-world-design-config-v1`; browser authoring never writes Git or production source. SAVE STAGE and SAVE CHARACTER remain scoped actions, and SAVE ALL LOCAL persists the complete current authoring draft.
 
-## Recovered implementation evidence
-LAB25Q uses a 960×540 QA canvas, cloud Y=0 / scale=.65 / opacity=.75, source-world contract 2048×682 with MID source baseline 621 and GROUND surface 393, historical per-stage world offsets, historical character-grounding overrides, and the established hazard/collision configuration. These remain parity evidence rather than the new standardized landscape target.
+EXPORT STAGE remains available. EXPORT GAME CONFIG creates the complete portable canonical authoring payload. IMPORT GAME CONFIG validates schema version, 960x540 viewport, ground Y=410, all nine current stages and canonical schema invariants before replacing and persisting the local draft. Invalid/incompatible imports are rejected rather than partially applied.
 
-## Exact next steps
-1. Externalize the preserved character/shared/hazard assets into `assets/` without altering `assets-original/`.
-2. Extract exact LAB25Q player sprite renderer/frame/crop/anchor behavior and wire it to `player.js`/`renderer.js`.
-3. Extract exact HUD markup/CSS/assets and control presentation rather than using the current structural shell placeholders.
-4. Extract spawn director, collision, finish marker and persistent-red QA behavior into modules.
-5. Restore the remaining LAB25Q QA controls in `qa/full-harness/`, keeping QA state isolated from production config.
-6. Run parity QA against archived LAB25Q.
-7. Once the full shell is trustworthy, generate the first complete replacement landscape stage FAR -> MID -> GROUND under `LANDSCAPE_GENERATION_CONTRACT_V1.md`, technical-QA it, and use that result to prove/refine the universal geometry before generating the other 24 validation images.
+## Mode architecture
+DESIGN contains authoring tools. TEST exposes focused stage/character/run/reset/unlimited-lives/collision/ground-guide validation controls. Development GAME hides Design/Test authoring panels around the same renderer. Production `src/game.html` has GAME as its only mode and cannot reference development modules under CI guards.
+
+## Final Phase 7 regression guard
+Production CI checks the production/development dependency boundary, syntax for every runtime/dev module, no Base64 runtime assets, canonical 960x540/Y410 authority, all nine stage compatibility mappings, hazard counts, non-negative crop, Gaudí bench source-region baseline, approved Constance Slide crop and preserved Phase 6 gameplay constants (Slide .75, recovery 1.10, invulnerability 2.00, flying 68/18, maxVisible 2, reactionLead 2.20, characterX 220, worldSpeed 120).
+
+## Known deferred calibration/content work
+- Phase 8 regeneration of the 27 existing FAR/MID/GROUND layers as the universal-contract validation batch, followed by the remaining 36 layers after the contract passes
+- final character grounding after each corrected landscape
+- hazard visual size/position after each corrected landscape
+- collision/hitbox calibration after each corrected landscape
+- historical Slide 0.75s versus production-spec 0.70s reconciliation
+- cold first-load optimization / staged asset loading
+
+## Next production step
+Run the complete NA01 pilot in the development app across Design, Test and development Game modes. Validate layer composition, horizontal scrolling/repetition, Y=410 grounding, hazards, collision bounds and finish-marker placement. Do not promote the assets into the packaged production world path or continue to NA02 until the user accepts the integrated pilot and any required calibration is complete.
 
 ## Guardrails
-- Archived LAB25Q and `assets-original/` remain immutable.
-- Structural modularization must preserve gameplay behavior unless a separate explicit decision changes it.
-- G1D is Slide, not Duck; production lock is 0.70s even though LAB25Q contains a historical 0.75s implementation value. Reconcile deliberately rather than silently inheriting it.
-- Do not reintroduce per-stage geometry as the target solution for newly standardized landscapes.
+- `archive/` and `assets-original/` remain immutable.
+- Approved character/hazard/shared assets are not regenerated, resized, normalized, or replaced for convenience.
+- Structural changes preserve user-approved Phase 6 behavior unless a separate explicit decision changes gameplay.
+- Legacy Phase 6 calibration values remain evidence until replacement assets are authored.
+- G1D is Slide, not Duck.
