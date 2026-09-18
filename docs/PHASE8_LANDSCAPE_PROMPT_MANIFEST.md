@@ -1,6 +1,6 @@
 # Phase 8 Landscape Prompt Manifest
 
-Status: PRODUCTION PROMPT SET — NA02 is authorized as a stage-level approval-gate trial; other jobs retain their current gates
+Status: PRODUCTION PROMPT SET — North America complete; later jobs retain their current gates
 Date: 2026-09-18  
 Scope: 27 validation-batch images for NA01–NA03, SA01–SA03 and EU01–EU03
 
@@ -51,6 +51,8 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 ```
 
 ## North America
+
+Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets passed their applicable deployed visual-acceptance gates on 2026-09-18.
 
 ### P8-NA01-FAR — Desert mesas
 
@@ -110,7 +112,7 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA03_BG_DISTANT_NYC.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_BG_DISTANT_NYC.png`
-- Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
+- Status: APPROVED 2026-09-18 — deployed integrated-stage acceptance
 - Candidate SHA-256: `be8f72c6f523624c8022ba14e43715a1aede49b0119e875d8afa504c80333df6`
 - Layer directive: FAR
 - Stage lock: Preserve the blue-sky Manhattan waterfront panorama, recognizable Empire State Building emphasis, varied distant skyscrapers and blue water band. Retain the approved skyline density and scale; do not add close brownstones, street furniture, clouds or gameplay pavement.
@@ -119,7 +121,7 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA03_BG_MID_CITY.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_BG_MID_CITY.png`
-- Status: ALTERNATE STOREFRONT DIRECTION USER-APPROVED — pending deployed integrated-stage user acceptance
+- Status: APPROVED 2026-09-18 — deployed integrated-stage acceptance at runtime MID Y=0
 - Candidate SHA-256: `9a6e14456bc351c18229c503d0827f5bbbf83f521a6f24bce25a2c7a7cf5ef14`
 - Source treatment: regenerated in the user-approved alternate neighborhood direction with brownstones, stoops, railings, restrained storefronts, mature trees and sparse planters. A deterministic lower-overscan correction preserves the approved composition through source Y=609, extends only its existing foundation/frontage pixels through Y=723, and normalizes the generated one-pixel width discrepancy to the required `2172x724` RGBA canvas. Rows Y=610–723 contain continuous authored MID coverage across the full width so runtime MID offset remains `Y=0`.
 - Layer directive: MID
@@ -129,7 +131,7 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA03_GROUND_CITY.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_GROUND_CITY.png`
-- Status: USER-SUPPLIED GROUND APPROVED — pending integrated-stage user acceptance
+- Status: APPROVED 2026-09-18 — deployed integrated-stage acceptance
 - Candidate SHA-256: `095aa9cb85d4d36a2cb97f9a1d72bca8255c42abda836bfedfa6eeb893293b02`
 - Source dimensions: `2170x725` RGBA; preserved byte-for-byte from the ZIP original matching the user's approved attachment, without resizing, translation or reconstruction.
 - Layer directive: GROUND
