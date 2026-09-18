@@ -111,7 +111,7 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 - Reference: `assets-original/current-generated/NA-assets/NA03_BG_DISTANT_NYC.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_BG_DISTANT_NYC.png`
 - Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
-- Candidate SHA-256: `c91146de70b1c9b645ce58ef905e1fa6234100a2cc58fb08488454d036b6e2b8`
+- Candidate SHA-256: `be8f72c6f523624c8022ba14e43715a1aede49b0119e875d8afa504c80333df6`
 - Layer directive: FAR
 - Stage lock: Preserve the blue-sky Manhattan waterfront panorama, recognizable Empire State Building emphasis, varied distant skyscrapers and blue water band. Retain the approved skyline density and scale; do not add close brownstones, street furniture, clouds or gameplay pavement.
 
@@ -120,7 +120,7 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 - Reference: `assets-original/current-generated/NA-assets/NA03_BG_MID_CITY.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_BG_MID_CITY.png`
 - Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
-- Candidate SHA-256: `b1a0be3d2e0589459641e0eda9ac60540792ad88a42c40805f54d9aba9e1dbba`
+- Candidate SHA-256: `3ea3319ab25c3a00a97c39af04d1cd5323443d6557bdd8d65acd2e759100e18b`
 - Layer directive: MID
 - Stage lock: Preserve the row of varied brick brownstones and apartment buildings, rooftop water tanks/chimneys, street trees and warm urban palette. Keep the recognizable neighborhood silhouette and transparent sky; do not include the distant skyline, playable sidewalk or hazards.
 
@@ -129,7 +129,7 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 - Reference: `assets-original/current-generated/NA-assets/NA03_GROUND_CITY.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_GROUND_CITY.png`
 - Status: INTERNAL QA COMPLETE — pending integrated-stage user acceptance
-- Candidate SHA-256: `e1dd43725810ae44ac5fd9fa47698d90e0a9d8a1d5b3bae696c490ff12e49f3c`
+- Candidate SHA-256: `c91ddde03037a003e4b28d62ffa44c06965d0a3fdbe8de9ff3c304b1e2b1fe25`
 - Layer directive: GROUND
 - Stage lock: Preserve the level gray sidewalk slabs, curb edge, dark masonry/substructure and occasional restrained weeds. Maintain a clean urban running surface and continuous depth; do not add buildings, road traffic, street props or hazards.
 
