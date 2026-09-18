@@ -1,6 +1,6 @@
 # Phase 8 Landscape Prompt Manifest
 
-Status: PRODUCTION PROMPT SET — asset generation still requires the existing per-asset approval gate  
+Status: PRODUCTION PROMPT SET — NA02 is authorized as a stage-level approval-gate trial; other jobs retain their current gates  
 Date: 2026-09-18  
 Scope: 27 validation-batch images for NA01–NA03, SA01–SA03 and EU01–EU03
 

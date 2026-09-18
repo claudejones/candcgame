@@ -66,6 +66,10 @@ Gate 8B: each regenerated layer is reviewed individually. The full pilot stage m
 
 Gate 8C: Phase 8 does not advance to the remaining 12 stages until all 27 regenerated validation layers, all nine composites and their dependent calibration are accepted.
 
+#### Authorized NA02 workflow trial
+
+NA02 is an explicit trial of a stage-level user approval gate. FAR, MID and GROUND are still generated sequentially and each must pass internal technical QA before the next layer begins. The assistant may iterate intermediate candidates without a separate user accept/revise decision, then preserves the final candidates, integrates the complete stage and presents the canonical composite/application result for one user approval decision. This scoped trial does not waive immutable-source references, layer responsibility, technical QA, Git preservation, CI/deployment or final visual acceptance. Its outcome determines whether the same streamlined gate is adopted for later stages.
+
 ### 8D — Remaining continents and stages
 
 For each remaining continent:
@@ -92,6 +96,8 @@ Every regenerated or new landscape asset follows this loop:
 7. Repeat only as directed; commit the approved result through GitHub.
 
 No batch generation bypasses this loop.
+
+If an otherwise acceptable generated candidate fails only at its horizontal repeat boundary, the approved deterministic repeat-edge correction in `ASSET_PRODUCTION_SPEC.md` may be applied before repeating technical and wrap-preview QA. This is a technical seam repair, not a substitute for regeneration when composition, coverage, layer ownership or anchors are defective.
 
 ## Phase 8 completion criteria
 
