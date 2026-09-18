@@ -1,9 +1,9 @@
 # Current Status
 
-Last updated: 2026-09-17
+Last updated: 2026-09-18
 
 ## Production baseline
-Phase 6 is complete and user-verified. Phase 7 production authoring architecture is implemented through 7M; final CI/deployment acceptance is pending.
+Phase 6 is complete and user-verified. Phase 7 production authoring architecture is complete and was visually accepted by the user on 2026-09-18. Phase 8 landscape pre-production is now authorized, subject to its existing asset-by-asset approval gates.
 
 Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game-config.js`, `src/js/game-runtime.js`, with semantic assets under `assets/`. Production remains `src/game.html` with production bootstrap only.
 
@@ -20,10 +20,10 @@ Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game
 - Phase 7I Runtime Monitor: COMPLETE / CI accepted (run #122)
 - Phase 7J Test mode: COMPLETE / CI accepted (run #134)
 - Phase 7K Game mode: COMPLETE / CI accepted (run #134)
-- Phase 7L persistence/import/export finalization: IMPLEMENTED
-- Phase 7M final regression/CI/deployment: acceptance correction implemented; CI/deployment/user acceptance pending
+- Phase 7L persistence/import/export finalization: COMPLETE / user accepted
+- Phase 7M final regression/CI/deployment: COMPLETE / user accepted
 
-Latest Phase 7 acceptance correction adds Design-mode hazard/character guide toggles, clamps Fine Crop inputs to non-negative values, locks paused animated-hazard previews to the explicitly selected frame, adds an enlarged live cropped-frame preview, and makes the animated-preview controls respond before their frame refresh can replace the clicked button. This correction does not alter approved assets, collision geometry or gameplay constants.
+The final Phase 7 acceptance correction added Design-mode hazard/character guide toggles, clamped Fine Crop inputs to non-negative values, locked paused animated-hazard previews to the explicitly selected frame, added an enlarged live cropped-frame preview, and made the animated-preview controls respond before their frame refresh could replace the clicked button. User testing confirmed that the pause-control issue was resolved. This correction did not alter approved assets, collision geometry or gameplay constants.
 
 ## Coordinate/config authority
 Canonical logical viewport: `960 x 540`. Canonical production ground surface: `GROUND_SURFACE_Y = 410`. Canonical asset vocabulary: `SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> GAMEPLAY ANCHOR -> COLLISION`.
@@ -42,7 +42,7 @@ DESIGN contains authoring tools. TEST exposes focused stage/character/run/reset/
 Production CI checks the production/development dependency boundary, syntax for every runtime/dev module, no Base64 runtime assets, canonical 960x540/Y410 authority, all nine stage compatibility mappings, hazard counts, non-negative crop, Gaudí bench source-region baseline, approved Constance Slide crop and preserved Phase 6 gameplay constants (Slide .75, recovery 1.10, invulnerability 2.00, flying 68/18, maxVisible 2, reactionLead 2.20, characterX 220, worldSpeed 120).
 
 ## Known deferred calibration/content work
-- Phase 8 landscape FAR/MID/GROUND regeneration against the universal production contract
+- Phase 8 landscape validation and targeted repair against the universal production contract
 - final character grounding after each corrected landscape
 - hazard visual size/position after each corrected landscape
 - collision/hitbox calibration after each corrected landscape
@@ -50,7 +50,7 @@ Production CI checks the production/development dependency boundary, syntax for 
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-Wait for the final 7L-7M CI checkpoint. If successful, verify deployment and user-test the completed Phase 7 Design/Test/Game architecture. Phase 8 landscape regeneration begins only after that acceptance.
+Review and approve `docs/PHASE8_LANDSCAPE_EXECUTION_PLAN.md`, then perform its read-only nine-stage composition audit in the accepted Phase 7 renderer. Select the first repair pilot from audit evidence and obtain explicit approval before editing or generating any landscape asset.
 
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.

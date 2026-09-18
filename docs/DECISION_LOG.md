@@ -65,3 +65,8 @@ The preserved Phase 6 `src/index.html` remains the shared runtime host during th
 
 ## 2026-09-18 — Phase 7 animated-hazard authoring feedback correction
 In Design mode, a paused animated-hazard preview is locked to the frame explicitly selected in the contextual inspector. Play advances that same deterministic preview; it does not depend on the shared flying-hazard clock. Per-frame Fine Crop remains non-negative and affects visual rendering only, without changing collision geometry. The contextual inspector exposes hazard and character preview-guide toggles and an enlarged cropped-frame preview so source-pixel changes can be inspected before save/export.
+
+## 2026-09-18 — Phase 7 visually accepted; Phase 8 authorized
+The user confirmed that the final animated-hazard pause-control correction resolved the observed issue and accepted Phase 7 as complete. Later defects may be handled as they arise, but they do not keep Phase 7 open by default.
+
+Phase 8 landscape work is now authorized to enter pre-production. Authorization does not waive any asset lock or approval gate: the current landscapes are audited before mutation, each proposed repair is approved and produced iteratively, and no new continent is partially integrated. Phase 8 must preserve the accepted Phase 7 renderer, fixed 960x540 viewport, Y=410 ground surface, immutable originals, and GitHub review/CI/deployment workflow.
