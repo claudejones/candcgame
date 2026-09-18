@@ -1404,7 +1404,7 @@ const ASSET_SOURCES={
  na02Ground:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA02_GROUND_TRAIL.png?v=f6ada52c-verified":"../assets/worlds/north-america/NA02_GROUND_TRAIL.png",
  na03Far:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA03_BG_DISTANT_NYC.png?v=be8f72c6":"../assets/worlds/north-america/NA03_BG_DISTANT_NYC.png",
  na03Mid:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA03_BG_MID_CITY.png?v=3ea3319a":"../assets/worlds/north-america/NA03_BG_MID_CITY.png",
- na03Ground:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA03_GROUND_CITY.png?v=c91ddde0":"../assets/worlds/north-america/NA03_GROUND_CITY.png",
+ na03Ground:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA03_GROUND_CITY.png?v=095aa9cb":"../assets/worlds/north-america/NA03_GROUND_CITY.png",
  far:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png":"../assets/worlds/north-america/NA01_BG_DISTANT_MESAS.png",
  clouds:"../assets/shared/NA_CLOUD_LAYER.png"
 ,
