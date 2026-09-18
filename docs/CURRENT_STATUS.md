@@ -54,7 +54,7 @@ Production CI checks the production/development dependency boundary, syntax for 
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-NA01 landscape composition and scaling are visually acceptable for continuing Phase 8; dependent character/hazard grounding and later configuration calibration are intentionally deferred until landscape generation is complete. Execute the authorized NA02 stage-level workflow test: generate FAR, MID and GROUND sequentially with internal technical/composite QA, preserve the final candidates in Git, integrate the complete NA02 set into the development app and present one final integrated stage for user visual acceptance. Do not treat the individual NA02 layers as user-approved before that stage-level decision.
+NA01 landscape composition and scaling are visually acceptable for continuing Phase 8; dependent character/hazard grounding and later configuration calibration are intentionally deferred until landscape generation is complete. The authorized NA02 FAR, MID and GROUND candidates have completed internal source QA and are integrated development-only under the Phase 8 pilot flag. Preserve them in Git, run deployed Design/Test/Game composite QA and present the complete NA02 stage for user visual acceptance. Do not treat the individual NA02 layers as user-approved before that stage-level decision.
 
 Current pilot QA evidence: NA01's yellow legacy seam, red rendered GROUND surface and cyan rendered MID base coincide at canonical Y=410, so the cyan guide (drawn last) visually covers the other two. This is expected alignment, not a missing ground guide. Legacy NA02 retains separated calibration values, so its three evidence lines remain visibly distinct.
 

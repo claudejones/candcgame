@@ -115,3 +115,7 @@ The assistant may iterate or reject intermediate NA02 candidates without separat
 The user authorized a reusable deterministic seam correction when image generation produces an otherwise acceptable landscape whose only remaining defect is a visible left/right edge discontinuity during repetition. This correction exists specifically to ensure continuous backgrounds during endless horizontal scrolling.
 
 The repair is limited to feathering corresponding edge color continuity. It may not redesign or relocate landmarks, change dimensions or alpha ownership, rescale artwork, alter source anchors, or compensate for missing layer coverage. Every corrected candidate must be reviewed in a duplicated wrap preview and remains subject to the applicable technical, composite and final user-acceptance gates.
+
+## 2026-09-18 — NA02 complete candidate set enters integrated-stage QA
+
+Under the authorized stage-level trial, NA02 FAR, MID and GROUND were produced sequentially from their immutable repository references and passed internal dimension, alpha/layer-ownership, lower-depth and wrap/composite checks. The candidate files remain pending user approval as one integrated stage; internal QA does not individually approve them. Development-only integration uses the same 2172-pixel source width, canonical Y=410 surface and pilot FAR scale evidence as NA01. Character, hazard, collision and finish-marker calibration remain intentionally deferred.
