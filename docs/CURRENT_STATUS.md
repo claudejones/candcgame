@@ -23,7 +23,7 @@ Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game
 - Phase 7L persistence/import/export finalization: IMPLEMENTED
 - Phase 7M final regression/CI/deployment: acceptance correction implemented; CI/deployment/user acceptance pending
 
-Latest Phase 7 acceptance correction adds Design-mode hazard/character guide toggles, clamps Fine Crop inputs to non-negative values, locks paused animated-hazard previews to the explicitly selected frame, and adds an enlarged live cropped-frame preview. This correction does not alter approved assets, collision geometry or gameplay constants.
+Latest Phase 7 acceptance correction adds Design-mode hazard/character guide toggles, clamps Fine Crop inputs to non-negative values, locks paused animated-hazard previews to the explicitly selected frame, adds an enlarged live cropped-frame preview, and makes the animated-preview controls respond before their frame refresh can replace the clicked button. This correction does not alter approved assets, collision geometry or gameplay constants.
 
 ## Coordinate/config authority
 Canonical logical viewport: `960 x 540`. Canonical production ground surface: `GROUND_SURFACE_Y = 410`. Canonical asset vocabulary: `SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> GAMEPLAY ANCHOR -> COLLISION`.

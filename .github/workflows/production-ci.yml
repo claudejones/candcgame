@@ -45,6 +45,7 @@ jobs:
           grep -q 'yellow = animation source • cyan = active frame' src/js/dev/hazard-editor.js
           grep -q 'CROPPED FRAME PREVIEW' src/js/dev/hazard-editor.js
           grep -q 'previewFrame' src/js/dev/hazard-editor.js
+          grep -q 'onpointerdown' src/js/dev/hazard-editor.js
           grep -q 'Number.isInteger(d.previewFrame)' src/js/game-runtime.js
           grep -q 'Hazard + collision bounds' src/js/dev/contextual-inspector.js
           grep -q 'setCharacterCropBounds' src/js/runtime-host-api.js

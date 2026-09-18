@@ -48,13 +48,15 @@
     decorate();
   }
 
+  function bindImmediate(button,action){button.onpointerdown=e=>{e.preventDefault();action();};button.onclick=e=>{if(e.detail===0)action();};}
+
   function decorate(){
     const q=selected();if(window.CC_APP.mode!=="design"||!q)return;
     const {h}=q,panel=document.getElementById("phase7ContextualInspector");if(!panel)return;
     panel.querySelector(".full-atlas-view")?.remove();
     const box=document.createElement("section");box.className="inspector-group full-atlas-view";box.innerHTML="<h3>FULL ATLAS VIEW</h3>";
     const canvas=document.createElement("canvas");canvas.className="atlas-canvas";const caption=document.createElement("p");caption.className="inspector-note";caption.textContent=`${h.atlas.key} • yellow = animation source • cyan = active frame`;box.append(canvas,caption);
-    if((h.atlas.frames||1)>1){const controls=document.createElement("div");controls.className="animation-preview-controls";const prev=document.createElement("button"),label=document.createElement("strong"),next=document.createElement("button"),play=document.createElement("button");prev.textContent="◀";next.textContent="▶";label.textContent=`FRAME ${activeFrame+1} / ${h.atlas.frames}`;play.textContent=playing?"Ⅱ PAUSE":"▶ PLAY";prev.onclick=()=>selectFrame(activeFrame-1);next.onclick=()=>selectFrame(activeFrame+1);play.onclick=()=>setPlaying(!playing);controls.append(prev,label,next,play);box.append(controls);}
+    if((h.atlas.frames||1)>1){const controls=document.createElement("div");controls.className="animation-preview-controls";const prev=document.createElement("button"),label=document.createElement("strong"),next=document.createElement("button"),play=document.createElement("button");prev.textContent="◀";next.textContent="▶";label.textContent=`FRAME ${activeFrame+1} / ${h.atlas.frames}`;play.textContent=playing?"Ⅱ PAUSE":"▶ PLAY";bindImmediate(prev,()=>selectFrame(activeFrame-1));bindImmediate(next,()=>selectFrame(activeFrame+1));bindImmediate(play,()=>setPlaying(!playing));controls.append(prev,label,next,play);box.append(controls);}
     const cropTitle=document.createElement("h3");cropTitle.textContent=`CROPPED FRAME PREVIEW${(h.atlas.frames||1)>1?` — ${activeFrame+1}/${h.atlas.frames}`:""}`;cropTitle.className="cropped-frame-title";const cropCanvas=document.createElement("canvas");cropCanvas.className="cropped-frame-canvas";box.append(cropTitle,cropCanvas);panel.insertBefore(box,panel.querySelector(".inspector-actions"));drawAtlas(canvas,h);drawCroppedFrame(cropCanvas,h);
   }
 
