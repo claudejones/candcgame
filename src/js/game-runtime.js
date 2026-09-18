@@ -327,7 +327,7 @@ class ObjectQA{
  screenX(drawW){if(!CONFIG.objectQA.scrollWithWorld)return CONFIG.objectQA.x;const q=CONFIG.objectQA;const phase=((this.scene.worldX-q.scrollOrigin)%q.loopDistance+q.loopDistance)%q.loopDistance;let x=q.x-phase;while(x < -drawW-30)x += q.loopDistance;return x;}
  characterBox(){const who=this.character.character,state=this.character.state,q=CONFIG.objectQA.characterCollision[who][state];const vw=Math.max(8,this.character.last.visibleWidth||40),vh=Math.max(8,this.character.last.visibleHeight||70);const top=this.character.last.visibleTop??((this.character.last.footY??this.surfaceY())-vh);const w=vw*q.w,h=vh*q.h,cx=(this.character.last.centerX??CONFIG.characterX)+(q.x*vw),y=top+(vh-h)*(1-q.y);return{x:cx-w/2,y,w,h};}
  intersects(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
- update(dt){const d=this.active();if(!d)return;const f=CONFIG.objectQA.flying;if(d.frames){f.t+=dt;f.frame=Math.floor(f.t*f.fps)%d.frames;}if(d.kind==="flying"&&CONFIG.objectQA.scrollWithWorld)f.travel+=dt*f.speed;}
+ update(dt){const d=this.active();if(!d)return;const f=CONFIG.objectQA.flying;if(d.frames){if(Number.isInteger(d.previewFrame))f.frame=Math.max(0,Math.min(d.frames-1,d.previewFrame));else{f.t+=dt;f.frame=Math.floor(f.t*f.fps)%d.frames;}}if(d.kind==="flying"&&CONFIG.objectQA.scrollWithWorld)f.travel+=dt*f.speed;}
  draw(){
    const d=this.active();if(!d)return;const img=this.a[d.atlasKey];if(!img)return;const baseScale=CONFIG.canvas.w/CONFIG.worldContract.sourceW;const s=baseScale*d.scale;let sw,sh,sx,sy,dw,dh,dx,dy,anchorY,cL=0,cR=0,cT=0,cB=0;
    const crop=d.crop||(d.crop={l:0,r:0,t:0,b:0});

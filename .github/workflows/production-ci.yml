@@ -35,6 +35,7 @@ jobs:
           grep -q 'phase7GameStart' src/js/game-host-ui.js
           grep -q 'FINISH MARKER PREVIEW' src/js/dev/finish-marker-editor.js
           grep -q 'cc-world-design-config-v1' src/js/dev/design-draft.js
+          grep -q 'sanitizeCrop' src/js/dev/design-draft.js
           grep -q 'SAVE ALL LOCAL' src/js/dev/contextual-inspector.js
           grep -q 'EXPORT GAME CONFIG' src/js/dev/contextual-inspector.js
           grep -q 'FINE CROP — FRAME' src/js/dev/contextual-inspector.js
@@ -42,6 +43,12 @@ jobs:
           grep -q 'FULL ATLAS VIEW' src/js/dev/hazard-editor.js
           grep -q 'FRAME ${activeFrame+1}' src/js/dev/hazard-editor.js
           grep -q 'yellow = animation source • cyan = active frame' src/js/dev/hazard-editor.js
+          grep -q 'CROPPED FRAME PREVIEW' src/js/dev/hazard-editor.js
+          grep -q 'previewFrame' src/js/dev/hazard-editor.js
+          grep -q 'Number.isInteger(d.previewFrame)' src/js/game-runtime.js
+          grep -q 'Hazard + collision bounds' src/js/dev/contextual-inspector.js
+          grep -q 'setCharacterCropBounds' src/js/runtime-host-api.js
+          grep -q 'min:0' src/js/dev/contextual-inspector.js
           grep -q 'syncToRuntime' src/js/dev/hazard-editor.js
           grep -q 'STATE / SOURCE CROP' src/js/dev/character-editor.js
           grep -q 'RUNTIME MONITOR' src/js/dev/runtime-monitor.js
