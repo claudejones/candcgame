@@ -70,3 +70,10 @@ In Design mode, a paused animated-hazard preview is locked to the frame explicit
 The user confirmed that the final animated-hazard pause-control correction resolved the observed issue and accepted Phase 7 as complete. Later defects may be handled as they arise, but they do not keep Phase 7 open by default.
 
 Phase 8 landscape work is now authorized to enter pre-production. Authorization does not waive any asset lock or approval gate: the current landscapes are audited before mutation, each proposed repair is approved and produced iteratively, and no new continent is partially integrated. Phase 8 must preserve the accepted Phase 7 renderer, fixed 960x540 viewport, Y=410 ground surface, immutable originals, and GitHub review/CI/deployment workflow.
+
+## 2026-09-18 — Phase 8 regeneration scope corrected
+The user reaffirmed the previously accepted 2026-09-16 Phase 8 decision: all 27 existing landscape layers across the nine NA/SA/EU stages are the regeneration validation batch for the standardized landscape contract. The later technical audit's 21 KEEP / 6 REPAIR classifications describe the condition and reusable visual content of the current files; they do not exempt 21 files from standardization and do not supersede the accepted regeneration decision.
+
+The validation sequence remains one complete stage first, with FAR, MID and GROUND generated and approved individually, followed by technical and full-renderer composite QA and any necessary contract refinement. After the pilot is accepted, regenerate the other eight existing stage sets. Only after all 27 validation layers pass may the contract be promoted to the remaining 36 layers for the other 12 stages.
+
+The production objective is one consistent authored geometry and one shared 960x540/Y410 renderer contract without stage-specific world Y/scale or character-grounding compensation. Approved themes, visual identities, references and original files remain preserved; regeneration standardizes geometry and layer responsibility rather than authorizing redesign.

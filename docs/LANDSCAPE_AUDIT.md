@@ -3,16 +3,17 @@
 Audit date: 2026-09-16
 Source: GitHub Actions run 35131578854, `Landscape technical audit`.
 Contract: `docs/WORLD_RENDERING_SPEC.md`.
+Status: TECHNICAL EVIDENCE / HISTORICAL DISPOSITION LABELS. The later accepted production decision is to regenerate all 27 layers as the standardized-contract validation batch. KEEP means reusable visual/content evidence, not exemption from Phase 8 regeneration.
 
 ## Important scope
 This is the completed **technical/geometry audit** of all 27 current FAR/MID/GROUND PNGs. It measures source dimensions, alpha bounds, transparency, and coverage at key source rows.
 
-The automated measurements are objective evidence, but KEEP / REPAIR / REGENERATE is a production disposition. A file is not rejected merely because a particular legacy source row is transparent; the production logical contract and the coordinated FAR+MID+GROUND stage composition remain authoritative.
+The automated measurements are objective evidence. The original KEEP / REPAIR / REGENERATE labels recorded the files' technical condition before the complete standardization decision. A file is not rejected merely because a particular legacy source row is transparent; the production logical contract and the coordinated FAR+MID+GROUND stage composition remain authoritative.
 
 Classification meanings:
-- **KEEP** — current source has no technical evidence requiring artwork alteration; preserve for production migration and verify visually in the production composition.
+- **KEEP** — current source has no technical evidence requiring artwork alteration; preserve as an approved visual reference and verify its composition evidence in the production renderer.
 - **REPAIR** — artwork is fundamentally usable, but technical evidence and/or established LAB25Q QA evidence shows coverage/geometry work is required before production use.
-- **REGENERATE** — artwork is structurally unsuitable enough that replacement is preferable to repair. No current file reaches this threshold from the technical audit alone.
+- **REGENERATE** — artwork is structurally unsuitable enough that replacement would have been preferable to repair based on the technical audit alone. No current file reached that severity threshold; the later all-layer regeneration decision instead addresses cross-stage standardization.
 
 ## Executive result
 - KEEP: **21**
@@ -76,13 +77,13 @@ All nine FAR layers are fully opaque across their complete source canvases and p
 - `EU03_BG_MID_BARCELONA.png` — **KEEP**. 2172x724, content Y53-677, 70.67% at Y393 and 100% at Y621. Previous MID adjustment aligned reasonably; no technical reason to alter it now.
 - `EU03_GROUND_BARCELONA.png` — **KEEP**. Content Y123-612 and 100% at Y393. Bottom/Y621 transparency must be validated against the production baseline, but unlike EU01/EU02 there is no established stage QA evidence of an unresolved ground-coverage failure.
 
-## What the audit changes
-1. **Do not regenerate all landscapes.** The evidence does not support that.
-2. **Do not alter any FAR artwork.** All nine FAR layers are technically sound foundations.
-3. First repair candidates are exactly six files: NA02 MID + GROUND, EU01 MID + GROUND, EU02 MID + GROUND.
-4. South America remains intact for production migration subject to visual regression QA.
-5. EU03 remains intact unless production-composition QA reveals a real void at the canonical logical baseline.
-6. REPAIR means preserve approved artwork/style and correct coverage/geometry. It does not authorize stylistic regeneration.
+## How Phase 8 uses the audit
+1. All 27 layers remain in the accepted regeneration validation batch.
+2. The nine technically sound FAR layers are strong visual references, not geometry exemptions.
+3. The six REPAIR labels identify the most severe current coverage failures: NA02 MID + GROUND, EU01 MID + GROUND and EU02 MID + GROUND.
+4. KEEP layers retain their approved visual identity while being regenerated to the standard authored geometry.
+5. The measurements provide baseline evidence for canvas, alpha, coverage, anchor and seam QA.
+6. Regeneration standardizes geometry and layer responsibility; it does not authorize stylistic redesign.
 
 ## Required next gate
-Before modifying the six repair candidates, build/use the production logical world-composition harness at 480x270 with `GROUND_BASELINE_Y=205`, transparent backing, layer-isolation controls, and explicit overscan visualization. Validate all nine KEEP stage sets there first. Then repair the six flagged files one at a time under the existing approval gate.
+Use these measurements and classifications when writing regeneration briefs. Regenerate one complete stage first under the individual FAR/MID/GROUND approval gates, validate it in the canonical 960x540 renderer with `GROUND_SURFACE_Y=410`, transparent backing, layer-isolation controls and explicit overscan visualization, and refine the contract if necessary. Then regenerate the other eight existing stage sets. Preserve approved visual identity throughout; do not carry legacy geometry forward merely because a layer was originally labeled KEEP.

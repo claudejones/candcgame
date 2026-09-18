@@ -42,7 +42,7 @@ DESIGN contains authoring tools. TEST exposes focused stage/character/run/reset/
 Production CI checks the production/development dependency boundary, syntax for every runtime/dev module, no Base64 runtime assets, canonical 960x540/Y410 authority, all nine stage compatibility mappings, hazard counts, non-negative crop, Gaudí bench source-region baseline, approved Constance Slide crop and preserved Phase 6 gameplay constants (Slide .75, recovery 1.10, invulnerability 2.00, flying 68/18, maxVisible 2, reactionLead 2.20, characterX 220, worldSpeed 120).
 
 ## Known deferred calibration/content work
-- Phase 8 landscape validation and targeted repair against the universal production contract
+- Phase 8 regeneration of the 27 existing FAR/MID/GROUND layers as the universal-contract validation batch, followed by the remaining 36 layers after the contract passes
 - final character grounding after each corrected landscape
 - hazard visual size/position after each corrected landscape
 - collision/hitbox calibration after each corrected landscape
@@ -50,7 +50,7 @@ Production CI checks the production/development dependency boundary, syntax for 
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-Review and approve `docs/PHASE8_LANDSCAPE_EXECUTION_PLAN.md`, then perform its read-only nine-stage composition audit in the accepted Phase 7 renderer. Select the first repair pilot from audit evidence and obtain explicit approval before editing or generating any landscape asset.
+Review and approve `docs/PHASE8_LANDSCAPE_EXECUTION_PLAN.md`, then perform its read-only nine-stage composition baseline in the accepted Phase 7 renderer. Select the first complete-stage regeneration pilot and obtain explicit approval before generating its FAR asset.
 
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.
