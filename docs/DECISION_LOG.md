@@ -143,3 +143,13 @@ The lost NA03 candidates could not be recovered byte-for-byte from the surviving
 - `NA03_BG_DISTANT_NYC.png`: SHA-256 `c91146de70b1c9b645ce58ef905e1fa6234100a2cc58fb08488454d036b6e2b8`
 - `NA03_BG_MID_CITY.png`: SHA-256 `b1a0be3d2e0589459641e0eda9ac60540792ad88a42c40805f54d9aba9e1dbba`
 - `NA03_GROUND_CITY.png`: SHA-256 `e1dd43725810ae44ac5fd9fa47698d90e0a9d8a1d5b3bae696c490ff12e49f3c`
+
+## 2026-09-18 — NA03 proxy-derived recovery superseded by ZIP originals
+
+The first NA03 recovery used copies produced by the chat image-attachment pipeline. Those workspace copies measured 2048 pixels wide even though the user's true files measured 2172x724 for FAR/MID and 2170x725 for GROUND. The user identified that the deployed GROUND was not the intended asset and supplied all three originals inside a ZIP so image-transfer resizing could not alter them.
+
+The proxy-derived NA03 files and their hashes above are superseded and are not approved assets. FAR and MID are restored byte-for-byte from the ZIP originals. GROUND is reconstructed only from the true 2170x725 ZIP original: nearest-neighbor normalization to 2172x724 preserves the pixel-art treatment, followed by a vertical translation that maps the first nontransparent row from Y=233 to the contract surface Y=393 and retains terrain through Y=723. All three remain pending integrated-stage user acceptance.
+
+- `NA03_BG_DISTANT_NYC.png`: SHA-256 `be8f72c6f523624c8022ba14e43715a1aede49b0119e875d8afa504c80333df6`
+- `NA03_BG_MID_CITY.png`: SHA-256 `3ea3319ab25c3a00a97c39af04d1cd5323443d6557bdd8d65acd2e759100e18b`
+- `NA03_GROUND_CITY.png`: SHA-256 `c91ddde03037a003e4b28d62ffa44c06965d0a3fdbe8de9ff3c304b1e2b1fe25`

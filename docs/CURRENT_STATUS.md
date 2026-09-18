@@ -54,9 +54,9 @@ Production CI checks the production/development dependency boundary, syntax for 
 - cold first-load optimization / staged asset loading
 
 ## Next production step
-NA01 and NA02 landscape sets are approved. Dependent character/hazard grounding and later configuration calibration remain intentionally deferred until landscape generation is complete. The NA03 FAR/MID/GROUND set has completed internal reconstruction, PNG-integrity, geometry, wrap and source-composite QA and is pending complete-stage Git integration, deployed Design/Test/Game QA and one final user acceptance gate. It is not user-approved yet.
+NA01 and NA02 landscape sets are approved. Dependent character/hazard grounding and later configuration calibration remain intentionally deferred until landscape generation is complete. NA03 is pending corrected complete-stage Git integration, deployed Design/Test/Game QA and one final user acceptance gate. It is not user-approved yet.
 
-The original NA03 generation outputs survived a conversation/workspace handoff, but the first normalized local candidates did not. The user explicitly authorized deterministic recovery from those surviving outputs. The reconstructed 2172x724 candidates now carry new documented hashes; the earlier uncommitted hashes remain historical evidence and must not be represented as the recovered bytes.
+The first NA03 recovery deployment used image-attachment proxy copies that had been resized in transit. The user supplied the actual generated files in a ZIP, preserving their true dimensions and bytes. FAR and MID now use the ZIP originals directly at 2172x724. GROUND is normalized from the true 2170x725 ZIP original to the required 2172x724 canvas with its first nontransparent row at source Y=393 and terrain continuing through Y=723. The proxy-derived hashes and cache keys are superseded.
 
 Current pilot QA evidence: NA01's yellow legacy seam, red rendered GROUND surface and cyan rendered MID base coincide at canonical Y=410, so the cyan guide (drawn last) visually covers the other two. This is expected alignment, not a missing ground guide. Legacy NA02 retains separated calibration values, so its three evidence lines remain visibly distinct.
 
