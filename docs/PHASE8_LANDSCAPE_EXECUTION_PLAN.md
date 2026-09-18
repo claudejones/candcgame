@@ -65,6 +65,15 @@ Before publication, require:
 
 Automated checks establish technical readiness. The assistant must also inspect the rendered composite because dimensions and alpha statistics cannot establish visual quality.
 
+Run the stage workflow with:
+
+```bash
+node scripts/validate-phase8-pngs.js --stage sa01
+python scripts/phase8-stage-qa.py sa01
+```
+
+Replace `sa01` with the active stage ID. The command writes its report and previews under `tmp/phase8-qa/<stage>/`, which remains uncommitted. Production CI runs the registry-driven validator and check-only QA against every registry stage whose status is `integrated` or `approved`.
+
 ### 4. Stop rule
 
 Stop generating when all technical checks pass, the integrated stage has no identified visual defect and the locked visual identity is preserved. Do not continue optimizing acceptable artwork merely because another variation might exist.
@@ -107,6 +116,7 @@ After all three stages are approved, run one continent-level regression. Do not 
 - `assets-original/`: immutable references.
 - `assets/phase8-validation/`: current working and accepted validation assets; direct replacement is permitted before approval because Git provides rollback.
 - `assets/phase8-candidates/` and `tmp/`: temporary only, ignored and uncommitted by default.
+- `config/phase8-landscapes.json`: machine-readable stage paths, geometry, layer expectations, approval state and cache keys. Update a stage to `integrated` when its complete set enters deployment QA and to `approved` after user acceptance.
 - `CURRENT_STATUS.md`: concise active checkpoint; update at meaningful integration/approval gates, not every attempt.
 - `DECISION_LOG.md`: append only durable decisions, not routine replacements.
 - Prompt manifest: record final integrated hashes and approval state, not every rejected candidate.
