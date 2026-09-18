@@ -11,7 +11,10 @@ const ASSETS = [
   "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png",
   "assets/phase8-validation/north-america/NA02_BG_DISTANT_MOUNTAINS.png",
   "assets/phase8-validation/north-america/NA02_BG_MID_PINES.png",
-  "assets/phase8-validation/north-america/NA02_GROUND_TRAIL.png"
+  "assets/phase8-validation/north-america/NA02_GROUND_TRAIL.png",
+  "assets/phase8-validation/north-america/NA03_BG_DISTANT_NYC.png",
+  "assets/phase8-validation/north-america/NA03_BG_MID_CITY.png",
+  "assets/phase8-validation/north-america/NA03_GROUND_CITY.png"
 ];
 
 const CRC_TABLE = Array.from({length:256},(_,n)=>{

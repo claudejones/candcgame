@@ -133,3 +133,13 @@ Validation-asset runtime URLs carry a short content-hash version key. When a can
 After deployed Design and gameplay-run QA, the user approved the complete NA02 FAR, MID and GROUND set as one integrated stage and separately verified the landscape source previews added to the Contextual Inspector. The three NA02 validation assets are therefore visually accepted; deferred character, hazard, collision and finish-marker calibration remains outside this landscape approval.
 
 The successful NA02 stage-level workflow is authorized for NA03. Produce NA03 sequentially as FAR -> MID -> GROUND from the immutable repository references, perform internal per-layer technical and composite QA, preserve the final candidates in Git, integrate the complete stage into the development app, and present one deployed stage-level visual acceptance gate.
+
+## 2026-09-18 — Deterministic candidate recovery authorized
+
+The user authorized a reusable recovery workflow when an internally validated but uncommitted generated candidate is lost during a conversation/workspace handoff while its original generated source survives. Recovery may deterministically reconstruct the required canvas geometry from that surviving source, but it must preserve the source's visual content, repeat all technical and visual QA, record new checksums, and explicitly distinguish reconstructed bytes from the lost candidate. A recorded old hash may not be claimed for a reconstruction unless it actually matches. Git integration and user acceptance gates remain unchanged.
+
+The lost NA03 candidates could not be recovered byte-for-byte from the surviving 2048-pixel generated outputs. The authorized reconstruction uses nearest-neighbor geometry normalization to preserve the pixel-art forms. FAR and MID were normalized to 2172x724. GROUND was normalized to 2172x724 and translated so its first nontransparent row maps exactly to source Y=393; the lower masonry clips through Y=723. The reconstructed candidates passed internal isolated-layer, alpha-bound, duplicated-wrap and source-composite review and remain pending deployed integrated-stage user acceptance.
+
+- `NA03_BG_DISTANT_NYC.png`: SHA-256 `c91146de70b1c9b645ce58ef905e1fa6234100a2cc58fb08488454d036b6e2b8`
+- `NA03_BG_MID_CITY.png`: SHA-256 `b1a0be3d2e0589459641e0eda9ac60540792ad88a42c40805f54d9aba9e1dbba`
+- `NA03_GROUND_CITY.png`: SHA-256 `e1dd43725810ae44ac5fd9fa47698d90e0a9d8a1d5b3bae696c490ff12e49f3c`

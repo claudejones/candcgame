@@ -6,7 +6,7 @@ const CONFIG=window.GAME_CONFIG;
 
 const PHASE8_PILOT=new URLSearchParams(window.location.search).get("phase8Pilot")==="na01";
 if(PHASE8_PILOT){
- for(const id of ["na01","na02"]){
+ for(const id of ["na01","na02","na03"]){
   const p=CONFIG.worldProfiles[id];
   Object.assign(p,{sourceW:2172,seamY:410,farY:0,farScale:1.25,midYOffset:0,midScale:1,groundYOffset:0,groundScale:1,characterGrounding:{claude:0,constance:0}});
  }
@@ -1402,9 +1402,9 @@ const ASSET_SOURCES={
  na02Far:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA02_BG_DISTANT_MOUNTAINS.png?v=259b8f38-verified":"../assets/worlds/north-america/NA02_BG_DISTANT_MOUNTAINS.png",
  na02Mid:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA02_BG_MID_PINES.png?v=cc4a6f43-verified":"../assets/worlds/north-america/NA02_BG_MID_PINES.png",
  na02Ground:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA02_GROUND_TRAIL.png?v=f6ada52c-verified":"../assets/worlds/north-america/NA02_GROUND_TRAIL.png",
- na03Far:"../assets/worlds/north-america/NA03_BG_DISTANT_NYC.png",
- na03Mid:"../assets/worlds/north-america/NA03_BG_MID_CITY.png",
- na03Ground:"../assets/worlds/north-america/NA03_GROUND_CITY.png",
+ na03Far:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA03_BG_DISTANT_NYC.png?v=c91146de":"../assets/worlds/north-america/NA03_BG_DISTANT_NYC.png",
+ na03Mid:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA03_BG_MID_CITY.png?v=b1a0be3d":"../assets/worlds/north-america/NA03_BG_MID_CITY.png",
+ na03Ground:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA03_GROUND_CITY.png?v=e1dd4372":"../assets/worlds/north-america/NA03_GROUND_CITY.png",
  far:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png":"../assets/worlds/north-america/NA01_BG_DISTANT_MESAS.png",
  clouds:"../assets/shared/NA_CLOUD_LAYER.png"
 ,
