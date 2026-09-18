@@ -58,7 +58,7 @@ NA01 landscape composition and scaling are visually acceptable for continuing Ph
 
 Current pilot QA evidence: NA01's yellow legacy seam, red rendered GROUND surface and cyan rendered MID base coincide at canonical Y=410, so the cyan guide (drawn last) visually covers the other two. This is expected alignment, not a missing ground guide. Legacy NA02 retains separated calibration values, so its three evidence lines remain visibly distinct.
 
-NA02 deployment recovery: the first integrated upload exposed a browser-decode failure in all three generated NA02 PNGs due to embedded non-pixel metadata. The files were losslessly re-encoded with metadata stripped and verified at zero pixel difference before replacement. Browser decoding is now a required pre-integration check for subsequent generated candidates, and validation-asset URLs use content-hash version keys so repaired binaries bypass stale browser/CDN responses.
+NA02 deployment recovery: the first integrated upload exposed that all three generated NA02 PNGs had been truncated by an intermediate Base64/text-output transfer limit. The intact local files were losslessly re-encoded at zero pixel difference during diagnosis, but metadata was not the root cause. Large assets now require a binary-safe GitHub transfer path, Production CI validates the complete PNG chunk/CRC/decompression/scanline structure, and validation-asset URLs use content-hash version keys so corrected binaries bypass stale browser/CDN responses.
 
 ## Guardrails
 - `archive/` and `assets-original/` remain immutable.

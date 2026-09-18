@@ -24,6 +24,12 @@ Development-branch CI never deploys Pages. Pull-request CI never deploys Pages. 
 
 Rerunning an older workflow run is not a valid way to publish a newer commit: a rerun retains the original run's SHA.
 
+## Binary asset transfer
+
+Do not route PNG or other binary assets through shell-output capture, Base64 text relays or another interface that can truncate large outputs. Upload large binaries through a binary-safe Git/GitHub path, then confirm the committed blob matches the local file before promotion.
+
+Production CI runs `scripts/validate-phase8-pngs.js` over every integrated Phase 8 validation landscape. The validator checks PNG signatures, complete chunk boundaries, chunk CRC values, complete IDAT decompression, expected dimensions and exact pixel scanline length. A failed integrity check blocks `main` validation and therefore blocks automatic Pages deployment.
+
 ## Required handoff evidence
 
 Before a QA build is called ready for testing, record or report:
