@@ -119,9 +119,9 @@ Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one 
 
 - Reference: `assets-original/current-generated/NA-assets/NA03_BG_MID_CITY.png`
 - Candidate: `assets/phase8-validation/north-america/NA03_BG_MID_CITY.png`
-- Status: USER-SUPPLIED CORRECTION INTEGRATED — pending deployed integrated-stage user acceptance
-- Candidate SHA-256: `97b3a625a3b0bbf887ccd0016242b4b7572e5886a8501eb5b3192da459d8bac9`
-- Source treatment: the user-resupplied brownstone composition arrived through attachment transport at `2048x682`; it was restored with nearest-neighbor sampling to the required `2172x724` production canvas and translated downward by 41 source pixels, matching the user's tested runtime adjustment of approximately `+18` logical pixels while retaining the standard runtime MID offset `Y=0`.
+- Status: STANDALONE CANDIDATE USER-APPROVED — pending deployed integrated-stage user acceptance
+- Candidate SHA-256: `adc6a17a5a40b01ceead9b52219c48f4cfe35d90291a7398a8f1d9d96b0deb8a`
+- Source treatment: freshly generated at the required `2172x724` RGBA production canvas after deployed review showed the prior supplied composition could not achieve the desired foliage/sidewalk relationship at standard runtime `Y=0`. The approved standalone candidate uses restrained intermittent foundation shrubs, readable brownstone bases and taller street trees while retaining sufficient lower-edge coverage for the `Y=0` MID-to-GROUND overlap. No runtime MID offset is required.
 - Layer directive: MID
 - Stage lock: Preserve the row of varied brick brownstones and apartment buildings, rooftop water tanks/chimneys, street trees and warm urban palette. Keep the recognizable neighborhood silhouette and transparent sky; do not include the distant skyline, playable sidewalk or hazards.
 
