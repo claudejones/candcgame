@@ -125,3 +125,5 @@ Under the authorized stage-level trial, NA02 FAR, MID and GROUND were produced s
 Phase 8 generated candidates must be browser-decodable before Git preservation and application integration. The initial NA02 files contained embedded provenance chunks that survived local image inspection but failed Chromium decoding after Pages delivery, causing the runtime's all-assets preload to abort. The three NA02 candidates were losslessly re-encoded with metadata stripped; pixel comparison reported zero changed pixels for every layer.
 
 This normalization changes file hashes but not approved visual content, geometry, dimensions, alpha ownership or asset status. Apply the same browser-decode check and metadata normalization to later generated landscape candidates before integration so one unreadable optional stage asset cannot block the development runtime.
+
+Validation-asset runtime URLs carry a short content-hash version key. When a candidate binary is replaced, its key changes with the documented SHA-256 so Pages and browser caches cannot retain an earlier failed or superseded response under the same path.
