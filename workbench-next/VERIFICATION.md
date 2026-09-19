@@ -12,7 +12,7 @@ Authorized 2026-09-19. Changes remain inside `workbench-next/`, retaining the ex
 
 Reproduce: `node --test workbench-next/*.test.mjs`; optional UI check uses the existing `verify-scene-ui.mjs` command below. Real-artwork matrix: `node workbench-next/verify-calibration-artwork.mjs /absolute/path/to/canvas-dependency-directory /absolute/path/to/optional-report.json`.
 
-Publication details are recorded after the exact implementation passes repository CI and the private deployment succeeds. Full Test/Game, finish/FX and production snapshot conversion remain planned.
+Publication succeeded at https://candc-workbench-next.claudejones.chatgpt.site (saved version 11, deployment `appgdep_6aaebe611e4c819183679b68f30a76d7`). Site source `b42ded10e8b7aff32bc6ef5a10ca01b86c345e7b` packages GitHub implementation `4d8bf4e5b5da0cd9cf3dddf718912883f7309cc6`; [Production CI passed for that exact implementation](https://github.com/claudejones/candcgame/actions/runs/35456361994). The validated archive has 80 files and 53 byte-identical PNGs. Native deployment status: `succeeded`. Full Test/Game, finish/FX and production snapshot conversion remain planned.
 
 ## Review 06 — in-scene Design calibration and motion
 
