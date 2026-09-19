@@ -17,6 +17,8 @@ User review: open Stage → Stage landscape; choose Scene/Layer/Source and FAR/M
 
 Browser interaction/responsive visual acceptance remains pending. Character/hazard/finish placement, collision, FX, live cloud motion, import UI and Test/Game are not implemented by this increment. The candidate is still a parallel review editor; no cutover is approved.
 
+Review 03 private publication succeeded at https://candc-workbench-next.claudejones.chatgpt.site (saved version 3, deployment `appgdep_6aae0e2868f48191998e59ff3e0723a8`). Site source: `71654c35c4b6b0107ff7004be80098c16a9593aa`; GitHub implementation: `1a8fb2e2cc803f82ae384553677cc1a4a9ef778c`. Archive manifest/entrypoint and packaged code match the prepared source; all 53 PNG copies are byte-identical.
+
 ## Earlier review evidence
 
 Date: 2026-09-19. Baseline: main `132955434f7835064e5d28d8761521111ce0dbf5`.

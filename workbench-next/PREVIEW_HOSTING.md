@@ -21,6 +21,8 @@ Publication confirmed successful on 2026-09-19. Version 1 uses Site source commi
 
 ## Review scope
 
+Review 03 publication succeeded on 2026-09-19 at the same URL. Site source commit: `71654c35c4b6b0107ff7004be80098c16a9593aa`; saved version: 3; deployment ID: `appgdep_6aae0e2868f48191998e59ff3e0723a8`. Canonical implementation: `1a8fb2e2cc803f82ae384553677cc1a4a9ef778c`, incorporating main `723a42b…`. All 53 packaged PNGs match repository source bytes.
+
 Review 02 publication succeeded on 2026-09-19 at the same live URL. Site source commit: `1e6655173838bfb95fa0c2fd007f12d312777ca8`; saved version: 2; deployment ID: `appgdep_6aae03d0994c819181298034305f7c0c`. Canonical editor implementation commit: `0441baf3ef56aeed19d7de19651a741c025ba40f` on `editor-next`.
 
 Landscape scene/layer/source views, layer transforms and scroll/parallax, six states for both characters, stage hazards, frame playback/stepping, full-atlas view, comparison, per-frame edits, unified undo/redo, separate browser saves and candidate export. A visible loading count covers image download/decode until the selected scene/frame is drawn. Test/Game, gameplay entities and finish editing are later milestones.
