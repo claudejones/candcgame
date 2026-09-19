@@ -47,6 +47,8 @@ Four continents / 12 stages remain to be specified and produced. Their exact sta
 
 Command keys reserve AF01–AF03 (Africa), AS01–AS03 (Asia), OC01–OC03 (Oceania/Australia; AU alias), and AN01–AN03 (Antarctica). These are identifiers, not approved themes or generation authorization. `config/asset-commands.json` is the key catalog; `help keys` lists it. Phase 8 remains NA/SA/EU only.
 
+Planning authorized on 2026-09-19: [REMAINING_CONTINENTS_PLAN.md](REMAINING_CONTINENTS_PLAN.md) and `config/remaining-continent-proposal.json` propose all 12 themes, their three landscapes, two ground hazards and one flying hazard per stage. These are explicitly unapproved proposals. The catalog has exact proposed paths and focused stage briefs but is not loaded by the runtime or enabled production commands. Preserve the existing Phase 8 promotion and user-review gates.
+
 ## Current landscape audit scope
 27 landscape assets across NA01–NA03, SA01–SA03 and EU01–EU03: FAR/DISTANT + MID + GROUND for each stage.
 

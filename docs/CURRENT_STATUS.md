@@ -16,4 +16,6 @@ Updated 2026-09-19. GitHub is authoritative. Historical explanations live in DEC
 
 ## Deferred and protected
 
+Parallel planning: the user authorized mapping the remaining four continents and their complete stage sets (three landscapes, two ground hazards and one flying hazard per stage). `docs/REMAINING_CONTINENTS_PLAN.md` and `config/remaining-continent-proposal.json` contain the 12-stage proposal and shared implementation handoff. Themes/atlas contract await approval; expanded commands and production remain disabled. This planning does not change EU03's active work or imply Phase 8 completion.
+
 Character grounding, hazard size/position and collision calibration follow landscape correction. Slide timing reconciliation (.75s current versus .70s historical spec), cold first-load optimization and the remaining four continents are separate future work. Preserve Phase 6 gameplay constants and the production/development boundary. Preserve `archive/` and `assets-original/`; never commit candidate/review directories.
