@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "active": {
     "stage": "SA02",
-    "phase": "ready-to-publish",
+    "phase": "awaiting-approval",
     "command": "build landscape SA02",
     "selectedLayers": [
       "FAR",
@@ -16,7 +16,27 @@
     },
     "stageSpec": "3afa40f35595e8ab29c844890841547865e105a996eaa62fe117f546c18f3795",
     "recoveryBranch": "work/assets/sa02",
-    "baseCommit": "5de38f3c2ac66bad19ebdfef577c227f9032a419"
+    "baseCommit": "29176df173eeb78cd0436bfa98a13f22317bb07d",
+    "deployedCommit": "29176df173eeb78cd0436bfa98a13f22317bb07d",
+    "developmentCommit": "15da5ab68b611e806c4e7fd68c3bdcee89131638",
+    "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35418079717",
+    "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35418116771",
+    "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35418134078",
+    "reviewUrl": "https://claudejones.github.io/candcgame/src/dev.html",
+    "verification": {
+      "deployedByteHashesMatch": true,
+      "inspectorOffsets": {
+        "far": 0,
+        "mid": 0,
+        "ground": 0
+      },
+      "artworkApproved": false,
+      "liveModes": [
+        "design",
+        "test",
+        "game"
+      ]
+    }
   },
   "approvedRevisions": {
     "na01": {
