@@ -1,6 +1,23 @@
 {
   "schemaVersion": 1,
-  "active": null,
+  "active": {
+    "stage": "EU01",
+    "phase": "ready-to-publish",
+    "command": "build landscape EU01",
+    "selectedLayers": [
+      "FAR",
+      "MID",
+      "GROUND"
+    ],
+    "files": {
+      "assets/phase8-validation/europe/EU01_BG_DISTANT_GREECE.png": "213eceb527830fd1bc534654da698b166c264d5a4b49ff5080eaa5597720b694",
+      "assets/phase8-validation/europe/EU01_BG_MID_GREECE.png": "2ea736336cba3e6c3086a069dd5c031234f5ffd6f7bdfad5f4038cf2430bdfdd",
+      "assets/phase8-validation/europe/EU01_GROUND_GREECE.png": "83f9d5b0bc922bf01677736f05ad6307eabdb645540af4a10c74b15d4b4f7619"
+    },
+    "stageSpec": "d4fe240d721ee2f92e41998e1f80bd5c3d2b80f022a3139c22ec0b39b21c393b",
+    "recoveryBranch": "work/assets/eu01",
+    "baseCommit": "4342b666145afd908030dcf40c29b31e0c308c10"
+  },
   "approvedRevisions": {
     "na01": {
       "commit": "660aa55e35b378e613e07d8315074552620fcb61"
