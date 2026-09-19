@@ -1,4 +1,4 @@
-import {MAX_IMPORT_BYTES,RECOVERY_KEY,UNREADABLE_KEY,ARTWORK_RECOVERY_KEY,PREVIOUS_PROJECT_FORMAT} from './project.mjs';
+import {MAX_IMPORT_BYTES,RECOVERY_KEY,UNREADABLE_KEY,ARTWORK_RECOVERY_KEY,PREVIOUS_PROJECT_FORMAT,PRE_CALIBRATION_FORMAT} from './project.mjs';
 import {PLACEMENT_FIELDS} from './scene-model.mjs';
 const $=id=>document.getElementById(id);
 function download(text,name) {
@@ -13,7 +13,7 @@ export function setupProjectWorkflow({draft,beforeAction,changed,message}) {
   const dialog=$('project-dialog');let review=null,recovery=null,unreadable=null,artworkRecovery=null,previousEditor=null,reading=false;
   function refresh() {
     $('save-status').textContent=draft.dirty?'Unsaved changes · all stages & characters':draft.savedAt?`Saved in this browser · ${dateLabel(draft.savedAt)}`:'Baseline loaded · no browser save yet';
-    $('change-count').textContent=`${draft.changedFrames} frames · ${draft.changedLayers} layers · ${draft.changedRows().filter(row=>row.element==='Placement').length} placement fields changed`;
+    $('change-count').textContent=`${draft.changedFrames} frames · ${draft.changedLayers} layers · ${draft.changedRows().filter(row=>row.element==='Placement').length} placement fields · ${draft.changedRows().filter(row=>row.element==='Automation').length} calibration fields changed`;
     $('save').disabled=reading || (!draft.dirty && Boolean(draft.savedAt));
     for(const id of ['import','export','changes'])$(id).disabled=reading;
     $('undo').disabled=!draft.past.length;$('redo').disabled=!draft.future.length;
@@ -22,7 +22,7 @@ export function setupProjectWorkflow({draft,beforeAction,changed,message}) {
     recovery=null;unreadable=draft.failedSave||null;
     try {
       artworkRecovery=draft.migrated&&draft.expectedRaw?draft.expectedRaw:localStorage.getItem(ARTWORK_RECOVERY_KEY);
-      previousEditor=localStorage.getItem(PREVIOUS_PROJECT_FORMAT);
+      previousEditor=localStorage.getItem(PRE_CALIBRATION_FORMAT)||localStorage.getItem(PREVIOUS_PROJECT_FORMAT);
       const raw=localStorage.getItem(RECOVERY_KEY);
       if(raw){recovery=JSON.parse(raw);draft.decode(recovery.project);}
       unreadable ||= localStorage.getItem(UNREADABLE_KEY);

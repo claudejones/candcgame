@@ -1,12 +1,14 @@
 import {SceneClock,STEP,ContactPass,PLACEMENT_FIELDS,drawDesignScene,sceneGeometry} from './scene-model.mjs';
 import {createMotion} from './runtime-rules.mjs';
+import {profileConfig,pathShift,calibrationStamp} from './calibration-settings.mjs';
 import {same,validateAtlas} from './model.mjs';
 import {hitBounds} from './frame-editor.mjs';
 import {contains,dragBox,placementForBox,drawHandles} from './hitbox-editor.mjs';
 const $=id=>document.getElementById(id);
-export function setupSceneEditor({config,contract,items,landscapes,catalog,draft,active,reload,changed,message}) {
-  let current=null,who='claude',state='run',inspectorKey='',selectionKey='',target='character',motion=null,result=null,editing=false,drag=null,signature='';
+export function setupSceneEditor({config,contract,items,landscapes,catalog,draft,active,reload,changed,message,calibration=()=>null}) {
+  let current=null,who='claude',state='run',inspectorKey='',selectionKey='',target='character',motion=null,result=null,editing=false,drag=null,signature='',sequence=null,demo=null,sequenceIndex=0;
   const pass=new ContactPass(),hazards=new Map(landscapes.map(s=>[s.stage,items.find(i=>i.stage===s.stage&&i.type==='hazard').id]));
+  const cfg=()=>profileConfig(config,draft.calibration);
   const find=id=>items.find(i=>i.id===id),gameActions=()=>$('scene-motion').value==='encounter';
   function syncContext(selected,stage){
     const key=selected.id+':'+stage;
@@ -19,12 +21,16 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
   function context(){return {character:find(`character:${who}:${gameActions()?(motion?.state||state):state}`),hazard:find(hazards.get(current.stage))};}
   const clock=new SceneClock({available:()=>Boolean(active()&&current?.ready&&!document.hidden&&!$('project-dialog').open&&!drag),paint,advance});
   function options(time=clock.time){
-    const c=context(),images={...current.images,character:current.images[`character:${c.character.state}`]};
-    return {config,contract,draft,...current,...c,images,time,travel:$('actor-travel').checked,flight:$('scene-flight').value,guides:$('actor-guides').checked,boxes:$('actor-boxes').checked||editing,motion:gameActions()?motion:null,looping:false,contactLatched:pass.firstContact!==null,placementOverride:drag?{[drag.item.id]:drag.value}:null};
+    const c=context(),images={...current.images,character:current.images[`character:${c.character.state}`]},proposal=calibration()?.previewFor(c.hazard);
+    return {config:cfg(),contract,draft,...current,...c,images,time,encounters:sequence?.events.map(e=>({...e,item:find(e.id)})),travel:$('actor-travel').checked,flight:$('scene-flight').value,guides:$('actor-guides').checked,boxes:$('actor-boxes').checked||editing,motion:gameActions()?motion:null,looping:false,contactLatched:pass.firstContact!==null,placementOverride:drag?{[drag.item.id]:drag.value}:proposal?{[c.hazard.id]:proposal.value}:null};
   }
   function advance(time){
     if(gameActions())motion.update(STEP);
-    const g=sceneGeometry(options(time)),first=pass.sample(g,time,{travel:$('actor-travel').checked});
+    if(sequence){while(sequenceIndex<sequence.events.length&&time+1e-8>=sequence.events[sequenceIndex].start+sequence.events[sequenceIndex].local[who]){const e=sequence.events[sequenceIndex++];motion[e.action==='jump'?'triggerJump':'triggerSlide']();}}
+    else if(demo&&!demo.triggered&&time+1e-8>=demo.at){motion[demo.action==='jump'?'triggerJump':'triggerSlide']();demo.triggered=true;}
+    const g=sceneGeometry(options(time));
+    if(sequence){const first=g.contact&&pass.firstContact===null;if(first)pass.firstContact=time;pass.complete=time>=sequence.duration;return !(pass.complete||(first&&$('pause-contact').checked));}
+    const first=pass.sample(g,time,{travel:$('actor-travel').checked});
     return !((first&&$('pause-contact').checked)||pass.complete);
   }
   function entries(selected,stage){
@@ -32,7 +38,7 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
     const landscape=landscapes.find(s=>s.stage===stage),entries=Object.entries(landscape.sources).map(([layer,key])=>[layer,catalog.assets[key]]);
     if(config.worldProfiles[stage].clouds!==false)entries.push(['clouds',catalog.assets.clouds]);
     for(const item of items.filter(i=>i.type==='character'&&i.id.split(':')[1]===who))entries.push([`character:${item.state}`,catalog.assets[item.asset]]);
-    entries.push(['hazard',catalog.assets[find(hazards.get(stage)).asset]]);return entries;
+    entries.push(['hazard',catalog.assets[find(hazards.get(stage)).asset]]);for(const item of items.filter(i=>i.stage===stage&&i.type==='hazard'))entries.push(['hazard:'+item.id,catalog.assets[item.asset]]);return entries;
   }
   function validate(selected,stage,images){
     syncContext(selected,stage);
@@ -43,22 +49,27 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
   function paint(){
     if(!current||!active())return;
     const opts=options();result=drawDesignScene($('preview'),opts);
-    if($('compare').checked)drawDesignScene($('baseline'),{...opts,baseline:true,contactLatched:false});
-    if(editing&&current.ready)drawHandles($('preview'),result[target].collision);
+    const proposal=calibration()?.previewFor(context().hazard);
+    if($('compare').checked)drawDesignScene($('baseline'),{...opts,baseline:!proposal,placementOverride:proposal?{[proposal.row.id]:proposal.before}:null,contactLatched:false});
+    document.querySelector('.baseline-card .preview-tag').textContent=proposal?'BEFORE':'BASELINE';
+    $('preview-label').textContent=proposal?(proposal.proposed?'PROPOSED · UNSAVED':'BEFORE · UNSAVED'):sequence?'CHECKED SEQUENCE · DEMO':`${current.stage.toUpperCase()} · WORKING SCENE`;
+    if(editing&&current.ready&&!proposal&&!sequence)drawHandles($('preview'),result[target].collision);
     $('preview').classList.toggle('hitbox-editing',editing);
     $('actor-play').textContent=clock.running?'Pause / freeze':pass.complete?'Replay pass':'Play scene';$('actor-play').setAttribute('aria-pressed',String(clock.running));
     for(const id of ['actor-play','actor-step','actor-restart','actor-speed','actor-jump','actor-slide','edit-hitbox','edit-target'])$(id).disabled=!current.ready;
     $('actor-step').disabled=!current.ready||pass.complete;
-    $('actor-jump').disabled=$('actor-slide').disabled=!current.ready||!gameActions()||pass.complete;
+    $('actor-jump').disabled=$('actor-slide').disabled=!current.ready||!gameActions()||pass.complete||Boolean(sequence);
+    $('edit-hitbox').disabled=!current.ready||Boolean(proposal)||Boolean(sequence);
     $('actor-time').textContent=`Step ${clock.steps.toLocaleString()} · ${clock.time.toFixed(2)} s${clock.running?'':' · Frozen'}`;
-    const c=context();$('actor-pose').textContent=`${who==='claude'?'Claude':'Constance'} ${c.character.state} ${result.character.frame+1}/${c.character.frames} · ${c.hazard.name} ${result.hazard.frame+1}/${c.hazard.frames}`;
+    const c=context();$('actor-pose').textContent=sequence?`${who==='claude'?'Claude':'Constance'} ${c.character.state} · ${sequenceIndex}/${sequence.events.length} actions`:`${who==='claude'?'Claude':'Constance'} ${c.character.state} ${result.character.frame+1}/${c.character.frames} · ${c.hazard.name} ${result.hazard.frame+1}/${c.hazard.frames}`;
     const status=$('contact-status'),label=current.ready?pass.label(result,{travel:opts.travel}):'Loading scene…';
     if(status.textContent!==label)status.textContent=label;
     status.classList.toggle('contact',result.contact||pass.firstContact!==null);
-    $('scene-playback-help').textContent=gameActions()?'One hazard pass · contact checks without damage. Jump/Slide use game timing. Next frame = 1/60 s.':'Pose loop only · contact checks for this pose; use Game actions to test Jump/Slide clearance.';
+    $('scene-playback-help').textContent=sequence?'Checked sequence · actions play automatically for the selected character. Freeze or step to inspect. Exit sequence to edit.':demo?'Proposed timing demo · action plays automatically. Freeze or step to inspect.':gameActions()?'One hazard pass · contact checks without damage. Jump/Slide use game timing. Next frame = 1/60 s.':'Pose loop only · contact checks for this pose; use Game actions to test Jump/Slide clearance.';
     $('edit-target').value=target;$('edit-target-name').textContent=target==='character'?`${c.character.name} · ${c.character.state}`:c.hazard.name;
     $('edit-hitbox').setAttribute('aria-pressed',String(editing));$('edit-hitbox').textContent=editing?'Finish hitbox editing':'Edit hitbox on scene';
     inspector(false);
+    if(opts.guides&&current.ready){const ctx=$('preview').getContext('2d');ctx.save();ctx.strokeStyle='#d5eeee';ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(0,draft.calibration.stages[current.stage].pathY);ctx.lineTo(960,draft.calibration.stages[current.stage].pathY);ctx.stroke();ctx.restore();}
   }
   function group(title,id,fields,description,open=true){
     const details=document.createElement('details');details.className='inspector-group';details.open=open;
@@ -69,6 +80,8 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
     for(const field of fields){
       const [text,min,max,step]=PLACEMENT_FIELDS[field],label=document.createElement('label'),input=document.createElement('input');label.className='field';label.textContent=text;
       Object.assign(input,{type:'number',min,max,step});input.dataset.placement=id;input.dataset.field=field;label.append(input);grid.append(label);
+      if(draft.calibration.hazards[id]){const lockLabel=document.createElement('span');lockLabel.className='field-lock';const lock=document.createElement('input');lock.type='checkbox';lock.dataset.lock=id;lock.dataset.lockField=field;lock.setAttribute('aria-label',`Lock ${text}`);lockLabel.append(lock,document.createTextNode('Lock from optimizer'));label.append(lockLabel);lock.onchange=()=>{const checked=lock.checked;clock.pause();const c=structuredClone(draft.calibration),h=c.hazards[id];h.locks=checked?[...new Set([...h.locks,field])]:h.locks.filter(k=>k!==field);draft.editCalibration(c);render(current);changed();};}
+
       input.onfocus=()=>{if(clock.running)clock.pause();};
       input.onchange=()=>{try{if(input.value.trim()==='')throw new Error('Enter a value.');draft.editPlacement(id,{...draft.placement[id],[field]:Number(input.value)});message('Updated placement. Replay the pass to check your changes.');}catch(error){message(error.message,true);}render(current);changed();};
     }
@@ -84,20 +97,27 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
       if(selected.type==='character') {
         groups.push(group('Shared character',`character:${who}`,['masterScale','footOffset'],'All states · all stages'));
         groups.push(group('State placement',selected.id,['stateScale','offsetX','offsetY'],`${selected.state} · all stages`));
-        groups.push(group('Stage grounding',`grounding:${stage}:${who}`,['groundOffset'],`${who} · ${stage.toUpperCase()} only. Positive Y moves down.`));
+        groups.push(group('Character-only stage correction',`grounding:${stage}:${who}`,['groundOffset'],`${who} · ${stage.toUpperCase()} only. Positive Y moves down.`));
       }else {
         const fields=['scale','xOffset',...(selected.kind==='ground'?['groundOffset']:['highClearance','lowClearance']),...(selected.frames>1?['fps']:[])];
+        const automation=document.createElement('div');automation.className='group-content';
+        for(const [field,text] of [['follow','Follow shared pathway'],['enabled','Include in generated sequences']]){const label=document.createElement('label');label.className='check';const input=document.createElement('input');input.type='checkbox';input.dataset.policy=field;input.dataset.hazard=selected.id;label.append(input,document.createTextNode(text));automation.append(label);input.onchange=()=>{const checked=input.checked;clock.pause();const cal=structuredClone(draft.calibration);cal.hazards[selected.id][field]=checked;const placements=structuredClone(draft.placement);if(field==='follow'){const d=pathShift(draft,stage)*(checked?-1:1),p=placements[selected.id];if(selected.kind==='ground')p.groundOffset+=d;else{p.highClearance-=d;p.lowClearance-=d;}}try{draft.editCalibration(cal,placements);}catch(error){message(error.message,true);}render(current);changed();};}groups.push(automation);
+        const checked=document.createElement('p');checked.id='hazard-check-status';checked.className='scope-note';groups.push(checked);
         groups.push(group('Hazard placement',selected.id,fields,`${stage.toUpperCase()} · ${selected.name}. Positive grounding moves down.`));
       }
       const box=group('Hitbox',selected.id,['cw','ch','cx','cy'],selected.type==='character'?'Game collision proportions. At height 1, vertical offset has no effect; reduce height to create adjustment space.':'Game collision proportions. Dragging follows the same limits as these fields.',editing);box.id='hitbox-properties';groups.push(box);
       $('placement-properties').replaceChildren(...groups);
     }
-    if(updateValues)for(const input of $('placement-properties').querySelectorAll('input')){input.value=draft.placement[input.dataset.placement][input.dataset.field];input.disabled=!current.ready;}
-    for(const reset of $('placement-properties').querySelectorAll('button')){const id=reset.dataset.resetPlacement;reset.disabled=!current.ready||reset.dataset.fields.split(',').every(f=>same(draft.placement[id][f],draft.placementBaseline[id][f]));}
+    for(const input of $('placement-properties').querySelectorAll('input[data-placement]')){const proposal=calibration()?.previewFor(context().hazard);if(updateValues)input.value=(proposal&&input.dataset.placement===proposal.row.id?proposal.value:draft.placement[input.dataset.placement])[input.dataset.field];input.disabled=!current.ready||Boolean(proposal)||Boolean(sequence);}
+    for(const lock of $('placement-properties').querySelectorAll('[data-lock]')){lock.checked=draft.calibration.hazards[lock.dataset.lock].locks.includes(lock.dataset.lockField);lock.disabled=Boolean(calibration()?.isPreview())||Boolean(sequence);}
+    for(const input of $('placement-properties').querySelectorAll('[data-policy]')){input.checked=draft.calibration.hazards[input.dataset.hazard][input.dataset.policy];input.disabled=Boolean(calibration()?.isPreview())||Boolean(sequence);}
+    if($('hazard-check-status')){const policy=draft.calibration.hazards[selected.id];$('hazard-check-status').textContent=policy.stamp?(policy.stamp===calibrationStamp(draft,selected,config)?'Applied calibration · reference unchanged':'Needs recheck · reference or hazard changed'):'Not calibrated · optimize to propose a starting point';}
+
+    for(const reset of $('placement-properties').querySelectorAll('button')){const id=reset.dataset.resetPlacement;reset.disabled=!current.ready||Boolean(calibration()?.isPreview())||Boolean(sequence)||reset.dataset.fields.split(',').every(f=>same(draft.placement[id][f],draft.placementBaseline[id][f]));}
   }
   function render(value){
     current=value;syncContext(value.selected,value.stage);motion??=createMotion(config,state);
-    const next=JSON.stringify([draft.placement,draft.frames,draft.value]);if(signature&&next!==signature)pass.invalidate();signature=next;
+    const next=JSON.stringify([draft.placement,draft.frames,draft.value,draft.calibration]);if(signature&&next!==signature)pass.invalidate();signature=next;
     $('compare').disabled=false;document.querySelector('.baseline-card').hidden=!$('compare').checked;
     $('preview').classList.remove('editing');$('preview').setAttribute('aria-label',`${current.stage.toUpperCase()} scene with ${who} and ${context().hazard.name}`);
     $('preview-label').textContent=`${current.stage.toUpperCase()} · WORKING SCENE`;
@@ -109,16 +129,16 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
     if($('scene-hazard').dataset.stage!==current.stage){$('scene-hazard').replaceChildren(...list.map(i=>new Option(i.name,i.id)));$('scene-hazard').dataset.stage=current.stage;}
     $('scene-hazard').value=context().hazard.id;$('scene-flight-choice').hidden=context().hazard.kind!=='flying';
     if(current.ready&&clock.steps===0)pass.sample(sceneGeometry(options()),0,{travel:$('actor-travel').checked});
-    inspector(true);paint();
+    calibration()?.refresh();inspector(true);paint();
   }
-  function reset(){cancelDrag();motion=createMotion(config,state);pass.reset();clock.restart();if(current?.ready){pass.sample(sceneGeometry(options()),0,{travel:$('actor-travel').checked});paint();}}
-  function replay(){reset();if(pass.firstContact!==null&&$('pause-contact').checked)return;clock.play();}
+  function reset(keep=false){cancelDrag();if(!keep){sequence=null;demo=null;}sequenceIndex=0;if(demo)demo.triggered=false;motion=createMotion(config,sequence||demo?'run':state);if(demo&&demo.at===0){motion[demo.action==='jump'?'triggerJump':'triggerSlide']();demo.triggered=true;}pass.reset();clock.restart();if(current?.ready){pass.sample(sceneGeometry(options()),0,{travel:$('actor-travel').checked});paint();}}
+  function replay(){reset(true);if(pass.firstContact!==null&&$('pause-contact').checked)return;clock.play();}
   function choose(next){clock.pause();cancelDrag();target=next;inspectorKey='';inspector(true);paint();}
   function action(name){cancelDrag();motion[name==='jump'?'triggerJump':'triggerSlide']();const first=pass.sample(sceneGeometry(options()),clock.time,{travel:$('actor-travel').checked});if(first&&$('pause-contact').checked)clock.pause();paint();}
   function point(e){const r=$('preview').getBoundingClientRect();return {x:(e.clientX-r.left)*$('preview').width/r.width,y:(e.clientY-r.top)*$('preview').height/r.height};}
   function cancelDrag(){if(!drag)return;const id=drag.pointer;drag=null;if($('preview').hasPointerCapture?.(id))$('preview').releasePointerCapture(id);paint();}
   $('preview').addEventListener('pointerdown',e=>{
-    if(!active()||!current?.ready||e.button!==0||e.defaultPrevented)return;
+    if(!active()||!current?.ready||e.button!==0||e.defaultPrevented||sequence||calibration()?.isPreview())return;
     const p=point(e),g=result[target],tolerance=8*$('preview').width/($('preview').getBoundingClientRect().width||960);
     const handle=editing?hitBounds(p,g.collision,tolerance):null;
     if(handle){clock.pause();e.preventDefault();$('preview').focus();$('preview').setPointerCapture(e.pointerId);const item=context()[target];drag={pointer:e.pointerId,point:p,box:{...g.collision},geometry:g,item,handle,value:{...draft.placement[item.id]},before:{...draft.placement[item.id]}};return;}
@@ -138,14 +158,17 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
   $('scene-character').onchange=()=>{who=$('scene-character').value;reload();};
   $('scene-state').onchange=()=>{state=$('scene-state').value;reload();};
   $('scene-hazard').onchange=()=>{hazards.set(current.stage,$('scene-hazard').value);reload();};
-  $('scene-flight').onchange=reset;$('scene-motion').onchange=reset;
+  $('scene-flight').onchange=()=>reset();$('scene-motion').onchange=()=>reset();
   $('pause-contact').onchange=()=>{if($('pause-contact').checked)$('actor-boxes').checked=true;paint();};
   $('actor-play').onclick=()=>{cancelDrag();if(clock.running)clock.pause();else if(pass.complete)replay();else clock.play();};
   $('actor-step').onclick=()=>{cancelDrag();clock.step();};$('actor-restart').onclick=replay;
   $('actor-jump').onclick=()=>action('jump');$('actor-slide').onclick=()=>action('slide');
   $('actor-speed').onchange=()=>clock.setSpeed(Number($('actor-speed').value));
   for(const id of ['actor-guides','actor-boxes'])$(id).onchange=paint;
-  $('actor-travel').onchange=reset;$('edit-target').onchange=()=>choose($('edit-target').value);
+  $('actor-travel').onchange=()=>reset();$('edit-target').onchange=()=>choose($('edit-target').value);
   $('edit-hitbox').onclick=()=>{clock.pause();cancelDrag();editing=!editing;if(editing){$('actor-boxes').checked=true;$('hitbox-properties').open=true;}paint();};
-  return {entries,validate,render,editingItem:()=>current?context()[target]:null,stop:()=>{cancelDrag();clock.pause();},reset,step:()=>{cancelDrag();if(!pass.complete)clock.step();},clock};
+  async function demonstrate(character,action,at){who=character;state='run';$('scene-motion').value='encounter';await reload();demo={action,at:Math.round(at/STEP)*STEP};reset(true);$('actor-travel').checked=true;clock.play();}
+  function startSequence(value){sequence=value;state='run';$('scene-motion').value='encounter';$('actor-travel').checked=true;reset(true);pass.startedAhead=true;clock.play();}
+  function endSequence(){if(sequence){sequence=null;reset();render(current);}}
+  return {entries,validate,render,demonstrate,startSequence,endSequence,sequenceActive:()=>Boolean(sequence),refresh:()=>{if(current&&active())render(current);},editingItem:()=>current?context()[target]:null,stop:()=>{cancelDrag();clock.pause();},reset,step:()=>{cancelDrag();if(!pass.complete)clock.step();},clock};
 }

@@ -1,5 +1,19 @@
 # Workbench review — verification
 
+## Review 08 — assisted calibration
+
+Authorized 2026-09-19. Changes remain inside `workbench-next/`, retaining the existing production/artwork snapshot.
+
+- 50 Node tests pass, including shared/local/manual grounding ownership, full v5 migration with customized-field locks, v6 save/reload/import/history, invalid imports, proposal immutability, lock preservation, stale-reference detection, bounded failure reporting and deterministic sequence/renderer contact parity for both characters.
+- The actual DOM/canvas flow passes: cancel analysis, stage proposals without mutation, before/proposed preview, Claude/Constance timed demos and replay, one-step batch apply/undo/redo, saved profile/locks, unlink without changing displayed position, reference invalidation, full sequence freeze/step/clear for both characters, and whole-project restoration. Existing atlas, hitbox, panning, scene loading and contact checks continue to pass. This uses jsdom and real PNG/canvas decoding, not browser layout QA.
+- All 27 real hazard atlases were measured against the unmodified references. On the baseline Standard profile, 17 bounded proposals meet the timing target; 10 are explicitly reported as needing adjustment. No artwork, character physics or production defaults were altered to force those 10 to pass. Every generated sequence excludes hazards that fail its selected profile and lists them.
+- After applying those bounded proposals in an isolated QA draft, all nine stages generated a continuously checked action schedule for **each** of Easy, Standard and Hard: 27 stage/profile combinations, both characters, 60 simulation steps/s, with action recovery and simultaneous-hazard checks. These are finite deterministic design scenarios, not exhaustive proof over all seeds/configurations or the production campaign spawn director.
+- Real proposal Scene canvas was inspected: character foot guide and proposed visible hazard support share the pathway. Source PNGs remain byte-identical. Catalog and generated production-action adapter checks pass. User browser acceptance remains pending.
+
+Reproduce: `node --test workbench-next/*.test.mjs`; optional UI check uses the existing `verify-scene-ui.mjs` command below. Real-artwork matrix: `node workbench-next/verify-calibration-artwork.mjs /absolute/path/to/canvas-dependency-directory /absolute/path/to/optional-report.json`.
+
+Publication details are recorded after the exact implementation passes repository CI and the private deployment succeeds. Full Test/Game, finish/FX and production snapshot conversion remain planned.
+
 ## Review 06 — in-scene Design calibration and motion
 
 Explicitly requested 2026-09-19. Changes remain inside `workbench-next/`; the current artwork/configuration source snapshot is retained.

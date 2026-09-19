@@ -2,6 +2,7 @@ import {same} from './model.mjs';
 import {croppedBounds,defaultBounds} from './frame-editor.mjs';
 import {drawLandscape} from './landscape.mjs';
 import {intersects} from './runtime-rules.mjs';
+import {pathShift,effectivePlacement} from './calibration-settings.mjs';
 
 export const STEP=1/60;
 export const PLACEMENT_FIELDS={
@@ -54,12 +55,12 @@ export function characterGeometry(config,item,frame,bounds,crop,placement,motion
   const collision={x:config.characterX+state.cx*vw-w/2,y:y+meta.top*s+(vh-h)*(1-state.cy),w,h};
   return {source,dest,collision,foot,scale:s,hitReference:{x:config.characterX,top:y+meta.top*s,w:vw,h:vh}};
 }
-export function hazardGeometry(config,item,frame,bounds,crop,p,{time=0,travel=true,flight='high',looping=true}={}) {
+export function hazardGeometry(config,item,frame,bounds,crop,p,{time=0,travel=true,flight='high',looping=true,startX=config.objectQA.x,phase=0}={}) {
   const source=croppedBounds(bounds,crop),scale=960/config.worldContract.sourceW*p.scale;
   const w=source.w*scale,h=source.h*scale;
   const distance=travel?time*(item.kind==='flying'?config.objectQA.flying.speed:config.worldSpeed):0;
   const loop=config.objectQA.loopDistance;
-  let center=config.objectQA.x-(looping?distance%loop:distance);if(looping)while(center < -w-30)center+=loop;
+  let center=startX-(looping?distance%loop:distance);if(looping)while(center < -w-30)center+=loop;
   center+=p.xOffset;
   const anchor=item.kind==='flying'?410-p[flight==='high'?'highClearance':'lowClearance']:410+p.groundOffset;
   const dest={x:center-w/2,y:anchor-(item.kind==='flying'?h/2:h),w,h};
@@ -67,19 +68,20 @@ export function hazardGeometry(config,item,frame,bounds,crop,p,{time=0,travel=tr
   const collision={x:dest.x+(w-cw)/2+p.cx*w,y:item.kind==='flying'?dest.y+(h-ch)/2+p.cy*h:anchor-ch+p.cy*h,w:cw,h:ch};
   return {source,dest,collision,anchor,scale,hitReference:{...dest,anchor,kind:item.kind}};
 }
-export const poseFrame=(item,time,fps=item.fps)=>Math.floor((time+1e-9)*fps)%item.frames;
-export function sceneGeometry({config,stage,draft,character,hazard,time=0,baseline=false,travel=true,flight='high',motion=null,looping=true,placementOverride=null}) {
+export const poseFrame=(item,time,fps=item.fps)=>((Math.floor((time+1e-9)*fps)%item.frames)+item.frames)%item.frames;
+export function sceneGeometry({config,stage,draft,character,hazard,time=0,baseline=false,travel=true,flight='high',motion=null,looping=true,placementOverride=null,hazardTime=time,hazardPhase=0,encounters=null}) {
   const placements={...(baseline?draft.placementBaseline:draft.placement),...(!baseline&&placementOverride||{})};
   const frames=baseline?draft.frameBaseline:draft.frames,crops=baseline?draft.baseline:draft.value,result={};
   if(character) {
     const f=motion?motion.frame:poseFrame(character,time),who=character.id.split(':')[1];
-    result.character={...characterGeometry(config,character,f,frames[character.id][f],crops[character.id][f],{...placements,groundOffset:placements[`grounding:${stage}:${who}`].groundOffset},motion?.y||0),frame:f,id:character.id};
+    result.character={...characterGeometry(config,character,f,frames[character.id][f],crops[character.id][f],{...placements,groundOffset:placements[`grounding:${stage}:${who}`].groundOffset+pathShift(draft,stage,baseline)},motion?.y||0),frame:f,id:character.id};
   }
   if(hazard) {
-    const p=placements[hazard.id],f=poseFrame(hazard,time,p.fps??hazard.fps);
-    result.hazard={...hazardGeometry(config,hazard,f,frames[hazard.id][f],crops[hazard.id][f],p,{time,travel,flight,looping}),frame:f,id:hazard.id};
+    const p=effectivePlacement({...draft,placement:placements},hazard,baseline),f=poseFrame(hazard,hazardTime+hazardPhase,p.fps??hazard.fps);
+    result.hazard={...hazardGeometry(config,hazard,f,frames[hazard.id][f],crops[hazard.id][f],p,{time:hazardTime,travel,flight,looping}),frame:f,id:hazard.id};
   }
-  result.contact=Boolean(result.character&&result.hazard&&intersects(result.character.collision,result.hazard.collision));
+  if(encounters){result.encounters=encounters.filter(e=>time-e.start>=-960/e.speed&&time<=e.exit).map(e=>{const r=sceneGeometry({config,stage,draft,character,hazard:e.item,time,baseline,travel,flight:e.flight,motion,looping:false,placementOverride,hazardTime:time-e.start});return {...r.hazard,item:e.item,contact:r.contact};});}
+  result.contact=encounters?result.encounters.some(e=>e.contact):Boolean(result.character&&result.hazard&&intersects(result.character.collision,result.hazard.collision));
   return result;
 }
 export function drawDesignScene(canvas,options) {
@@ -93,7 +95,7 @@ export function drawDesignScene(canvas,options) {
     if(boxes){const c=g.collision;ctx.save();ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.strokeRect(c.x,c.y,c.w,c.h);ctx.restore();}
   };
   draw(images.character,result.character,result.contact?'#ff7373':'#64d9ff');
-  draw(images.hazard,result.hazard,result.contact||contactLatched?'#ff7373':'#c9ed8a');
+  if(result.encounters)for(const g of result.encounters)draw(images['hazard:'+g.item.id],g,g.contact?'#ff7373':'#c9ed8a');else draw(images.hazard,result.hazard,result.contact||contactLatched?'#ff7373':'#c9ed8a');
   if(character&&images.character&&guides){ctx.save();ctx.strokeStyle='#ffffff';ctx.beginPath();ctx.moveTo(config.characterX-30,result.character.foot+.5);ctx.lineTo(config.characterX+30,result.character.foot+.5);ctx.stroke();ctx.restore();}
   return result;
 }

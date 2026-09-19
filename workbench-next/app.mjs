@@ -7,6 +7,8 @@ import {setupProjectWorkflow} from './project-ui.mjs';
 import {setupWorkspace} from './workspace-ui.mjs';
 import {LandscapePlayback} from './landscape-playback.mjs';
 import {setupSceneEditor} from './scene-ui.mjs';
+import {setupCalibration} from './calibration-ui.mjs';
+import {profileConfig} from './calibration-settings.mjs';
 
 const $ = id => document.getElementById(id);
 const config = structuredClone(window.GAME_CONFIG);
@@ -15,7 +17,7 @@ contract.apply(config,registry);
 const spriteItems = descriptors(config, window.GAME_SCHEMA);
 const landscapes = landscapeDescriptors(config,registry,contract);
 const items = [...landscapes,...spriteItems];
-let draft,projectWorkflow,actorScene;
+let draft,projectWorkflow,actorScene,calibrationUI;
 const loader = new AssetLoader();
 const selection = new AssetSelection(items);
 const stageSelection = new StageSelection(landscapes,registry);
@@ -37,7 +39,7 @@ const scrollPlayback=new LandscapePlayback({speed:config.worldSpeed,end:Number($
 
 function message(text, error = false) { $('message').textContent = text; $('message').classList.toggle('error', error); }
 function saveState() {
-  projectWorkflow?.refresh();
+  projectWorkflow?.refresh();calibrationUI?.refresh();
 }
 
 function button(label, pressed, action, description) {
@@ -172,6 +174,7 @@ function makeFilmstrip() {
 
 function render(updateThumbnails = true) {
   if(!draft)return;
+  scrollPlayback.speed=profileConfig(config,draft.calibration).worldSpeed;
   if(isLandscape()){renderLandscape();saveState();workspace.fit();return;}
   if(isActorScene()){actorScene?.render({selected,stage,ready,images:sceneImages});saveState();workspace.fit();return;}
   const crop=draft.crop(selected.id,frame);
@@ -237,7 +240,7 @@ function updateScrollControls() {
   $('scene-play').disabled=!available;$('scene-restart').disabled=!available;$('scene-scroll').disabled=!available;
   $('scene-play').textContent=scrollPlayback.running?'Pause':position>=scrollPlayback.end?'Replay':'Play scroll';
   $('scene-play').setAttribute('aria-pressed',String(scrollPlayback.running));
-  $('scene-play').title=scrollPlayback.running?'Freeze landscape and clouds for inspection':`Preview at gameplay speed: ${config.worldSpeed} px/s; clouds ${config.worldContract.cloudSpeed} px/s`;
+  $('scene-play').title=scrollPlayback.running?'Freeze landscape and clouds for inspection':`Preview at gameplay speed: ${scrollPlayback.speed} px/s; clouds ${config.worldContract.cloudSpeed} px/s`;
   $('scene-scroll').value=position;
   $('scroll-value').textContent=`${Math.round(position).toLocaleString()} / ${scrollPlayback.end.toLocaleString()} px`;
 }
@@ -247,7 +250,7 @@ function updateScrollControls() {
 function paintLandscape() {
   if(!draft||!isLandscape())return;
   const state=sceneState[stage];
-  const options={config,contract,stage,images:sceneImages,...state,
+  const options={config:profileConfig(config,draft.calibration),contract,stage,images:sceneImages,...state,
     visible:state.view==='layer'?{...state.visible,[state.layer]:true}:state.visible};
   drawLandscape($('preview'),{...options,transforms:draft.landscapes[stage]});
   if($('compare').checked&&state.view!=='source')drawLandscape($('baseline'),{...options,transforms:draft.landscapeBaseline[stage]});
@@ -354,7 +357,7 @@ function history(direction) {
   const edit=(direction==='undo'?draft.past:draft.future).at(-1);if(!edit)return;
   cancelDrag();stopMotion();draft[direction]();
   if(edit.kind==='placement'){render();message(`${direction==='undo'?'Undid':'Redid'} placement: ${edit.id.replaceAll(':',' / ')}.`);return;}
-  if(edit.kind==='project'){render();message(`${direction==='undo'?'Undid':'Redid'} the complete project import.`);return;}
+  if(edit.kind==='project'){render();message(`${direction==='undo'?'Undid':'Redid'} the configuration change.`);return;}
   selection.remember(selected,frame);
   if(edit.kind==='landscape') {sceneState[edit.stage].layer=edit.layer;sceneState[edit.stage].view='scene';select(`landscape:${edit.stage}`);}
   else {selection.frames.set(edit.id,edit.frame);if(selected.id===edit.id)frame=edit.frame;select(edit.id);}
@@ -377,7 +380,8 @@ try{
   try{
     message(draft.load(localStorage));
   }catch(error){message(`Candidate save was not loaded: ${error.message}. The stored copy is unchanged.`,true);}
-  actorScene=setupSceneEditor({config,contract,items:spriteItems,landscapes,catalog,draft,active:isActorScene,reload:()=>select(selected.id),changed:saveState,message});
+  actorScene=setupSceneEditor({config,contract,items:spriteItems,landscapes,catalog,draft,active:isActorScene,reload:()=>select(selected.id),changed:saveState,message,calibration:()=>calibrationUI});
+  calibrationUI=setupCalibration({config,draft,items:spriteItems,catalog,loader,getStage:()=>stage,navigate:async id=>{view='scene';await select(id);},scene:()=>actorScene,changed:()=>{stopMotion();saveState();render();},message});
   projectWorkflow=setupProjectWorkflow({draft,beforeAction:()=>{cancelDrag();stopMotion();render();},changed:()=>render(),message});
   await select(selected.id);
 }catch(error){$('loading').classList.add('failed');$('loading').textContent=error.message;message('Could not start the Design workspace. Serve the repository over HTTP and reload.',true);}

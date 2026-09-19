@@ -1,6 +1,6 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 7; not the replacement editor**.
+Status: **review increment 8; not the replacement editor**.
 Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0` for EU02 and EU03 landscapes (2026-09-19). Production source/assets match this upstream snapshot; candidate-only changes remain under `workbench-next/`. EU02 is approved; EU03 is integrated and awaiting artwork approval.
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
@@ -24,9 +24,24 @@ The exact Review 05 and Review 05.1/05.2 source signatures are recorded in `proj
 From the repository root, run `python -m http.server 8080`, then open
 `http://localhost:8080/workbench-next/`.
 
-This is a working **landscape and sprite Design proposal**, using repository artwork. It includes both characters, all six states, all nine existing stages' hazards, a shared frame strip, step/play controls, full-atlas view, per-frame crops, before/after comparison, undo/redo, separate draft saving, and export. Jump/Hit playback here is an explicitly labeled artwork loop, not simulated gameplay or a timing change. Test and Game connections are visibly deferred.
+This is a working **landscape and sprite Design proposal**, using repository artwork. It includes both characters, all six states, all nine existing stages' hazards, a shared frame strip, step/play controls, full-atlas view, per-frame crops, before/after comparison, undo/redo, separate draft saving, and export. Frame/atlas playback is an artwork loop; Scene additionally provides the production-derived movement and contact checks described below. Test and Game connections are visibly deferred.
 
 It does not load the old runtime, write the current editor's storage, modify source images/configuration, or change gameplay. The candidate project export has its own format and is **not** a current game-config import. Future runtime integration must convert these complete drafts explicitly. Test and Game remain required next milestones.
+
+## Assisted calibration — Review 08
+
+Start with **Calibrate hazards → Optimize stage**. Select a result to see **Before / Proposed** in the Scene and numerical changes in the inspector. **Demo Claude / Demo Constance** automatically times the suggested Jump or Slide; flying hazards support HIGH and LOW. Freeze, Next frame and Replay still work. Mark the proposals you accept as **Reviewed**, then **Apply reviewed stage** or **Apply all reviewed**. A batch is one Undo step. **Save all / Export all / Import** include the complete result.
+
+- **Shared pathway Y** belongs to the selected stage. It begins at the midpoint of the two current character foot references, with zero initial displacement. Moving it moves both characters and hazards with **Follow shared pathway** enabled. Character-only shared/state/stage corrections stay local; changes to either character invalidate the hazard checks. Re-optimize to update collision/clearance suggestions after a reference change. Auto-follow handles position; it does not silently rewrite approved hitboxes.
+- Ground proposals use measured visible support from the existing cropped frames, accounting for transparent padding. HIGH flying clearance is derived from both Slide collision envelopes; LOW is placed relative to the shared pathway. Frame-to-frame support variation is flagged. These are reviewable suggestions, not new artwork metadata or image edits. Both characters remain fixed throughout optimization.
+- Every manually changed hazard field is locked from optimization. You can toggle each field's lock explicitly. Turning **Follow shared pathway** off freezes the hazard at its current position and preserves its grounding during optimization; switching it back on links future pathway movement without a jump. Stage-specific placement and hitbox overrides remain available.
+- The bounded solver checks all hazard starting frames against all Run starting frames for both characters at 60 simulation steps/s using production movement/intersection methods. It searches only plausible collision dimensions/clearances; it does not change artwork scale or character physics. Results report measured input windows and standing contact. **Needs adjustment** means the current target was not established; review can still apply its limited proposal, but it is not marked checked or eligible for a sequence.
+- **Difficulty · global** stores editable Easy / Standard / Hard profiles: ground/flying speed, minimum input window, arrival/reaction spacing, count and maximum visible hazards. Easy starts at the proven base speed with a larger timing margin, fewer hazards, longer gaps and one visible hazard. Slowing an obstacle can make it harder to clear during a fixed-duration action, so lower speed alone is not labeled easier. Hard increases speed and density; Jump/Slide physics and hitboxes remain shared.
+- **Generate stage sequence** checks the current applied draft, excludes hazards that miss the selected profile (listed by name), respects the per-hazard inclusion toggle, and verifies a complete action schedule for both characters. **Watch checked sequence** demonstrates it with automatic actions; freeze/step remain available. Change the scene character, then Watch again for the other character. A relevant edit, profile change or stage change requires regeneration. This is a deterministic Design demo, not the complete production spawn director or Test/Game mode.
+- **Optimize all** visits all 27 currently available hazards across nine stages, with decoded-image reuse, visible progress and cancellation. Nothing is applied automatically. New v6 projects include pathway references, profiles, follow/include settings, locks and check provenance. Real v5 saves retain their existing edits; customized hazard fields migrate as locked. The older browser record is retained. Transient proposals and generated demos are not saved; regenerate them from the saved configuration.
+- The compact Hand icon and Space + drag pan the zoomed preview without editing the draft.
+
+Test and Game, damage/recovery, FX/finish authoring and full runtime snapshot conversion remain the next delivery milestones. Production files and the working GitHub Pages editor are unchanged.
 
 ## Contact checks and direct scene editing — Review 07
 
@@ -69,7 +84,7 @@ Review 05 adds **Continent → Stage**, derived from available stage metadata. E
 - **Import** validates a project before showing field-by-field differences against your current work. Applying replaces the full editable configuration; resets are visible in the comparison. It creates a pre-import browser recovery copy first, then applies one undoable transaction. Choose Save all to persist the imported draft.
 - **Changes & recovery** compares all scopes with the GitHub baseline, identifies the source baseline, and lets you review or download the pre-import copy. That copy survives saving and reloading. Browser data is local to its origin: export/import transfers work between the preview and a compatible future GitHub-hosted editor.
 
-New v5 files record source baseline, actual asset SHA-256 hashes and dimensions. Incompatible files are rejected before mutation. Older v1/v2/v3/v4 drafts are accepted with compatibility notes; missing landscapes/boundaries use baseline values and every resulting reset is shown. Production game-config files are rejected. Maximum import size is 2 MB.
+New v6 files record source baseline, actual asset SHA-256 hashes and dimensions. Incompatible files are rejected before mutation. Older v1/v2/v3/v4 drafts are accepted with compatibility notes; missing landscapes/boundaries use baseline values and every resulting reset is shown. Production game-config files are rejected. Maximum import size is 2 MB.
 
 Failed writes retain the working draft and its dirty status. An import cannot apply unless its recovery copy was stored. Conflicting saves from another browser tab require export/reload. An unreadable browser save can be downloaded and is backed up before an explicit Save all replaces it. Original v1/v2/v3 keys remain untouched.
 
@@ -85,7 +100,7 @@ The preview fits both width and height. Zoom can show actual source pixels with 
 
 - Everything in this increment is under `workbench-next/`.
 - Existing `src/`, `assets/`, `archive/`, `config/`, CI and Pages workflows remain unchanged.
-- Storage key: `cc-workbench-next-project-v5`; pre-import recovery: `cc-workbench-next-before-import-v5`; unreadable-save backup: `cc-workbench-next-unreadable-save-v5`. Older candidate keys are read only for recovery. Layout choices use `cc-workbench-next-layout-v1` separately. No reads/writes to current editor checkpoints.
+- Storage key: `cc-workbench-next-project-v6`; pre-import recovery: `cc-workbench-next-before-import-v4`; unreadable-save backup: `cc-workbench-next-unreadable-save-v4`. Recovery keys retain their existing names; v5/v4 browser saves are preserved. Older candidate keys are read only for recovery. Layout choices use `cc-workbench-next-layout-v1` separately. No reads/writes to current editor checkpoints.
 - No production promotion, main merge or Pages deployment before user approval and the existing gates.
 - `tmp/` is intentionally not used: repository policy excludes it from Git.
 - Approved source and archive files remain immutable. Keep the candidate out of the production bundle at eventual integration.

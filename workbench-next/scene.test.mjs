@@ -80,7 +80,7 @@ test('placement scopes join crop/landscape history and whole-project round trips
 
 test('actual v4 saved projects upgrade without modifying their old record or existing edits',()=>{
   const original=make();original.edit('character:constance:slide',1,{l:65,r:0,t:0,b:0});original.editLayer('eu03','mid',{...original.transform('eu03','mid'),y:13});
-  const payload=original.export();payload.format=PREVIOUS_PROJECT_FORMAT;delete payload.placement;
+  const payload=original.export();payload.format=PREVIOUS_PROJECT_FORMAT;delete payload.placement;delete payload.calibration;
   const raw=JSON.stringify(payload),store=memory();store.setItem(PREVIOUS_PROJECT_FORMAT,raw);
   const upgraded=make();upgraded.load(store);assert.equal(upgraded.dirty,true);assert.equal(upgraded.crop('character:constance:slide',1).l,65);assert.equal(upgraded.transform('eu03','mid').y,13);
   assert.deepEqual(upgraded.placement,upgraded.placementBaseline);upgraded.editPlacement('grounding:eu03:claude',{groundOffset:-5});upgraded.save(store);
