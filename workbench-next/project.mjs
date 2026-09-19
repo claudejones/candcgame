@@ -1,9 +1,11 @@
 import {FrameDraft,FRAME_FORMAT,FRAME_STORAGE_KEY} from './frame-editor.mjs';
 import {Draft,FORMAT,STORAGE_KEY,same} from './model.mjs';
 import {DESIGN_FORMAT,DESIGN_STORAGE_KEY,LAYERS} from './landscape.mjs';
+import {placementDefaults,validatePlacement} from './scene-model.mjs';
 
-export const PROJECT_FORMAT='cc-workbench-next-project-v4';
-export const PROJECT_STORAGE_KEY='cc-workbench-next-project-v4';
+export const PREVIOUS_PROJECT_FORMAT='cc-workbench-next-project-v4';
+export const PROJECT_FORMAT='cc-workbench-next-project-v5';
+export const PROJECT_STORAGE_KEY='cc-workbench-next-project-v5';
 export const RECOVERY_KEY='cc-workbench-next-before-import-v4';
 export const UNREADABLE_KEY='cc-workbench-next-unreadable-save-v4';
 export const ARTWORK_RECOVERY_KEY='cc-workbench-next-before-artwork-refresh-v4';
@@ -25,8 +27,8 @@ export function projectProvenance(catalog,sprites,landscapes) {
   return {repository:'claudejones/candcgame',branch:'editor-next',baseline:catalog.baseline,
     assets:Object.fromEntries(ids.map(id=>[id,{...catalog.dimensions[id],sha256:catalog.hashes[id]}]))};
 }
-function snapshot(draft){return {crops:clone(draft.value),frames:clone(draft.frames),landscapes:clone(draft.landscapes)};}
-function install(draft,value){draft.value=clone(value.crops);draft.frames=clone(value.frames);draft.landscapes=clone(value.landscapes);}
+function snapshot(draft){return {crops:clone(draft.value),frames:clone(draft.frames),landscapes:clone(draft.landscapes),placement:clone(draft.placement||{})};}
+function install(draft,value){draft.value=clone(value.crops);draft.frames=clone(value.frames);draft.landscapes=clone(value.landscapes);draft.placement=clone(value.placement||{});}
 export function changesBetween(before,after,items) {
   const rows=[];
   const diff=(scope,element,a,b)=>{for(const field of Object.keys(a))if(!same(a[field],b[field]))rows.push({scope,element,field,before:a[field],after:b[field]});};
@@ -36,19 +38,33 @@ export function changesBetween(before,after,items) {
     diff(scope,`Frame ${frame+1} crop`,before.crops[id][frame],after.crops[id][frame]);
   }
   for(const stage of Object.keys(before.landscapes))for(const layer of LAYERS)diff(stage.toUpperCase(),`${layer.toUpperCase()} landscape`,before.landscapes[stage][layer],after.landscapes[stage][layer]);
+  for(const id of Object.keys(before.placement||{})) {
+    const [kind,a,b]=id.split(':'),item=items.get(id);
+    const scope=kind==='grounding'?`${a.toUpperCase()} / ${b} grounding`:item?item.type==='hazard'?`${item.stage.toUpperCase()} / ${item.name}`:`${item.name} / ${item.state}`:`${a[0].toUpperCase()+a.slice(1)} / shared`;
+    diff(scope,'Placement',before.placement[id],after.placement[id]);
+  }
   return rows;
 }
 
 export class ProjectDraft extends FrameDraft {
-  constructor(items,landscapes,dimensions,provenance,migrations=[]) {
+  constructor(items,landscapes,dimensions,provenance,migrations=[],config=null) {
     super(items,landscapes,dimensions);this.provenance=clone(provenance);this.migrations=clone(migrations);this.savedAt=null;this.expectedRaw=null;this.unreadable=false;
+    this.placementBaseline=placementDefaults(config,items);this.placement=clone(this.placementBaseline);this.savedPlacement=clone(this.placement);
   }
-  export(){return {format:PROJECT_FORMAT,purpose:'All editable Workbench Next settings. Artwork stays in the project; Test/Game configuration integration is pending.',provenance:clone(this.provenance),design:super.export()};}
+  get dirty(){return super.dirty || !same(this.placement,this.savedPlacement);}
+  editPlacement(id,value){
+    validatePlacement({...this.placement,[id]:value},this.placementBaseline);
+    if(same(value,this.placement[id]))return;
+    this.past.push({kind:'placement',id,before:clone(this.placement[id]),after:clone(value)});this.future=[];this.placement[id]=clone(value);
+  }
+  export(){return {format:PROJECT_FORMAT,purpose:'All editable Workbench Next settings. Artwork stays in the project; Test/Game configuration integration is pending.',provenance:clone(this.provenance),placement:clone(this.placement),design:super.export()};}
   decode(payload) {
     let design=payload,legacy=true,migration=null;
     const supported=this.migrations.filter(item=>same(item.toProvenance,this.provenance));
-    if(payload?.format===PROJECT_FORMAT) {
-      keys(payload,['format','purpose','provenance','design','savedAt'],['format','provenance','design']);
+    if([PROJECT_FORMAT,PREVIOUS_PROJECT_FORMAT].includes(payload?.format)) {
+      const fields=['format','purpose','provenance','design','savedAt'],required=['format','provenance','design'];
+      if(payload.format===PROJECT_FORMAT){fields.push('placement');required.push('placement');}
+      keys(payload,fields,required);
       if(!same(payload.provenance,this.provenance)) {
         migration=supported.find(item=>same(item.fromProvenance,payload.provenance));
         if(!migration)throw new Error('This project uses different artwork or source defaults. Keep the file for a compatible editor; nothing has been changed.');
@@ -84,7 +100,10 @@ export class ProjectDraft extends FrameDraft {
       const check=new FrameDraft([...this.items.values()],this.definitions,this.dimensions);check.restore(converted);
       notes.push(`Landscape artwork updated for ${updated.join(' and ')}. Untouched settings now use the new baseline defaults; your custom adjustments and all sprite edits are retained. Review adjusted landscapes with the new artwork; see Source & status for artwork approval.`);
     }
-    return {state:snapshot(candidate),notes,legacy,migrated:Boolean(migration)};
+    candidate.placement=payload?.format===PROJECT_FORMAT?clone(validatePlacement(payload.placement,this.placementBaseline)):clone(this.placementBaseline);
+    const upgraded=payload?.format!==PROJECT_FORMAT;
+    if(upgraded)notes.unshift('Earlier project: new scene placement settings use their baseline defaults. Existing frame and landscape edits are retained.');
+    return {state:snapshot(candidate),notes,legacy,migrated:Boolean(migration)||upgraded};
   }
   prepareImport(payload) {
     const decoded=this.decode(payload),before=snapshot(this);
@@ -103,17 +122,17 @@ export class ProjectDraft extends FrameDraft {
     this.past.push({kind:'project',before:checked.before,after:checked.after});this.future=[];
     install(this,checked.after);return true;
   }
-  undo(){const e=this.past.at(-1);if(e?.kind!=='project')return super.undo();this.past.pop();install(this,e.before);this.future.push(e);}
-  redo(){const e=this.future.at(-1);if(e?.kind!=='project')return super.redo();this.future.pop();install(this,e.after);this.past.push(e);}
-  changedRows(){return changesBetween({crops:this.baseline,frames:this.frameBaseline,landscapes:this.landscapeBaseline},snapshot(this),this.items);}
+  undo(){const e=this.past.at(-1);if(e?.kind==='placement'){this.past.pop();this.placement[e.id]=clone(e.before);this.future.push(e);return;}if(e?.kind!=='project')return super.undo();this.past.pop();install(this,e.before);this.future.push(e);}
+  redo(){const e=this.future.at(-1);if(e?.kind==='placement'){this.future.pop();this.placement[e.id]=clone(e.after);this.past.push(e);return;}if(e?.kind!=='project')return super.redo();this.future.pop();install(this,e.after);this.past.push(e);}
+  changedRows(){return changesBetween({crops:this.baseline,frames:this.frameBaseline,landscapes:this.landscapeBaseline,placement:this.placementBaseline},snapshot(this),this.items);}
   load(storage) {
     this.expectedRaw=storage.getItem(PROJECT_STORAGE_KEY);
-    const choices=[[PROJECT_STORAGE_KEY,this.expectedRaw],[FRAME_STORAGE_KEY,storage.getItem(FRAME_STORAGE_KEY)],[DESIGN_STORAGE_KEY,storage.getItem(DESIGN_STORAGE_KEY)],[STORAGE_KEY,storage.getItem(STORAGE_KEY)]];
+    const choices=[[PROJECT_STORAGE_KEY,this.expectedRaw],[PREVIOUS_PROJECT_FORMAT,storage.getItem(PREVIOUS_PROJECT_FORMAT)],[FRAME_STORAGE_KEY,storage.getItem(FRAME_STORAGE_KEY)],[DESIGN_STORAGE_KEY,storage.getItem(DESIGN_STORAGE_KEY)],[STORAGE_KEY,storage.getItem(STORAGE_KEY)]];
     const entry=choices.find(([,raw])=>raw!==null);
     if(!entry)return 'Ready. Save all keeps every editable setting in this browser.';
     try {
       const payload=JSON.parse(entry[1]),decoded=this.decode(payload);
-      install(this,decoded.state);this.saved=clone(this.value);this.savedFrames=clone(this.frames);this.savedLandscapes=clone(this.landscapes);
+      install(this,decoded.state);this.saved=clone(this.value);this.savedFrames=clone(this.frames);this.savedLandscapes=clone(this.landscapes);this.savedPlacement=clone(this.placement);
       this.migrated=entry[0]!==PROJECT_STORAGE_KEY||decoded.migrated;this.savedAt=payload.savedAt||null;this.past=[];this.future=[];
       if(decoded.migrated)return `${decoded.notes.at(-1)} Save all keeps the updated project; your previous saved copy is preserved.`;
       return this.migrated?'Recovered your earlier draft. Save all creates the new project copy and retains the old save.':'Restored all settings from this browser.';
@@ -126,7 +145,7 @@ export class ProjectDraft extends FrameDraft {
     if(this.migrated && this.expectedRaw!==null)storage.setItem(ARTWORK_RECOVERY_KEY,this.expectedRaw);
     const savedAt=new Date().toISOString(),raw=JSON.stringify({...this.export(),savedAt});
     storage.setItem(PROJECT_STORAGE_KEY,raw);
-    this.expectedRaw=raw;this.savedAt=savedAt;this.saved=clone(this.value);this.savedFrames=clone(this.frames);this.savedLandscapes=clone(this.landscapes);this.migrated=false;this.unreadable=false;
+    this.expectedRaw=raw;this.savedAt=savedAt;this.saved=clone(this.value);this.savedFrames=clone(this.frames);this.savedLandscapes=clone(this.landscapes);this.savedPlacement=clone(this.placement);this.migrated=false;this.unreadable=false;
   }
 }
 

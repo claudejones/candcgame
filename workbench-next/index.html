@@ -12,7 +12,7 @@
   <header class="topbar">
     <div class="brand"><b>C<span>&</span>C</b><div>AROUND THE WORLD<small>Production workbench</small></div></div>
     <nav aria-label="Workspace mode"><button class="mode active" aria-pressed="true">Design</button><button class="mode" disabled title="Next: connect the complete draft to gameplay tests">Test <small>Planned</small></button><button class="mode" disabled title="After Test: clean playable preview of your complete draft">Game <small>Planned</small></button></nav>
-    <div class="review-badge">EDITOR NEXT <span>Review 05.3 · EU02 / EU03 synced</span></div>
+    <div class="review-badge">EDITOR NEXT <span>Review 06 · Scene calibration</span></div>
   </header>
   <div class="review-note">Design preview · Saves stay in this browser <a href="./PLAN.md">Roadmap · Design → Test → Game ↗</a></div>
   <main class="workspace" id="workspace">
@@ -22,9 +22,10 @@
         <button id="stage-tab" role="tab" aria-selected="true" aria-controls="stage-panel">Stage</button>
         <button id="character-tab" role="tab" aria-selected="false" aria-controls="character-panel" tabindex="-1">Character</button>
       </div>
-      <section id="stage-panel" class="asset-panel" role="tabpanel" aria-labelledby="stage-tab">
-        <label class="field continent-field">Continent<select id="continent"></select></label>
+      <div id="stage-context"><p class="scope-note" id="stage-context-label">Stage context</p>        <label class="field continent-field">Continent<select id="continent"></select></label>
         <label class="field">Stage<select id="stage"></select></label>
+</div>
+      <section id="stage-panel" class="asset-panel" role="tabpanel" aria-labelledby="stage-tab">
         <details id="landscape-nav" class="nav-group" data-pref open><summary>Landscape</summary><div id="landscapes" class="asset-list"></div></details>
         <details id="hazard-nav" class="nav-group" data-pref open><summary>Hazards <span id="stage-code"></span></summary><div id="hazards" class="asset-list"></div></details>
       </section>
@@ -32,17 +33,24 @@
         <p class="scope-note">Shared across all stages</p><div id="characters" class="asset-list"></div>
         <div class="section-label spaced">ANIMATION STATE</div><div id="states" class="asset-list state-list" aria-label="Character state"></div>
       </section>
+      <details id="actor-context" class="nav-group" open hidden><summary>Scene companions</summary><div class="group-content">
+        <div id="scene-character-choice"><label class="field">Character<select id="scene-character"><option value="claude">Claude</option><option value="constance">Constance</option></select></label><label class="field">Pose loop<select id="scene-state"></select></label></div>
+        <label class="field" id="scene-hazard-choice">Hazard<select id="scene-hazard"></select></label>
+        <label class="field" id="scene-flight-choice">Flying pass<select id="scene-flight"><option value="high">HIGH</option><option value="low">LOW</option></select></label>
+        <p class="muted">Preview context only. Select an asset above to edit its properties.</p>
+      </div></details>
       <div class="nav-footer"><span id="stage-availability">9 available stages · 21 planned</span><p><a href="./AUDIT.md">Functionality audit ↗</a></p></div>
     </aside>
     <section class="studio" aria-label="Asset workspace">
       <div class="studio-heading"><div><div class="section-label" id="breadcrumb">NA01 / LANDSCAPE</div><h2 id="asset-title">Desert</h2></div><span class="chip" id="asset-scope">STAGE NA01</span></div>
       <div class="view-toolbar">
-        <div id="sprite-views" class="segmented" aria-label="Sprite view" hidden><button id="frame-view" aria-pressed="true">Frame</button><button id="atlas-view" aria-pressed="false">Full atlas</button></div>
+        <div id="sprite-views" class="segmented" aria-label="Sprite view" hidden><button id="actor-view" aria-pressed="true">Scene</button><button id="frame-view" aria-pressed="false">Frame</button><button id="atlas-view" aria-pressed="false">Full atlas</button></div>
         <div id="landscape-views" class="segmented" aria-label="Landscape view"><button id="scene-view" aria-pressed="true">Scene</button><button id="layer-view" aria-pressed="false">Layer</button><button id="source-view" aria-pressed="false">Source</button></div>
         <label class="zoom-control">Zoom<select id="zoom"><option value="fit">Fit</option><option value="0.5">50%</option><option value="1">100%</option><option value="2">200%</option></select></label>
         <details class="view-options" id="view-options"><summary>View options</summary><div class="options-popover">
           <label class="check"><input type="checkbox" id="compare"> Compare baseline</label>
           <label class="check" id="bounds-control" hidden><input type="checkbox" id="bounds" checked> Crop outline</label>
+          <div id="actor-tools" hidden><label class="check"><input type="checkbox" id="actor-guides" checked> Ground / foot guides</label><label class="check"><input type="checkbox" id="actor-boxes"> Collision boxes</label><label class="check"><input type="checkbox" id="actor-travel" checked> Scroll and hazard travel</label></div>
           <div id="scene-tools"><div class="section-label">SHOW LAYERS</div><div class="layer-visibility">
             <label class="check"><input type="checkbox" id="visible-far" checked> FAR</label><label class="check"><input type="checkbox" id="visible-mid" checked> MID</label><label class="check"><input type="checkbox" id="visible-ground" checked> GROUND</label><label class="check"><input type="checkbox" id="visible-clouds" checked> Clouds</label><label class="check"><input type="checkbox" id="scene-guides"> Ground guide</label>
           </div></div>
@@ -53,6 +61,11 @@
         <div class="preview-card baseline-card" hidden><span class="preview-tag">BASELINE</span><div class="canvas-scroll"><canvas id="baseline" width="960" height="540" aria-label="Baseline preview"></canvas></div></div>
         <div class="preview-card"><span class="preview-tag" id="preview-label">WORKING DRAFT</span><div class="canvas-scroll"><canvas id="preview" width="960" height="540" tabindex="0" aria-label="Selected asset preview" aria-describedby="atlas-help"></canvas></div><div id="loading" role="status">Loading assets…</div><button id="retry" hidden>Retry images</button></div>
       </div>
+      <div id="actor-dock" class="animation-dock" hidden>
+        <div class="playback"><div class="transport"><button id="actor-play" aria-pressed="false" disabled>Play scene</button><button id="actor-step" title="Freeze, then advance the entire scene by 1/60 second" disabled>Next frame</button><button id="actor-restart" disabled>Restart</button></div><label>Speed<select id="actor-speed"><option value="0.25">¼×</option><option value="0.5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div>
+        <div class="scene-readout"><span id="actor-time">Step 0 · 0.00 s</span><span id="actor-pose"></span></div>
+        <p class="muted scene-note">Pose loops for placement. Next frame = 1/60 s; sprite poses change at their animation FPS. Gameplay actions and collisions belong in Test.</p>
+      </div>
       <div id="landscape-dock" class="landscape-dock landscape-transport"><div class="transport"><button id="scene-play" aria-pressed="false" disabled>Play scroll</button><button id="scene-restart" title="Play again from 0 px" aria-label="Restart landscape preview from 0 pixels" disabled>Restart</button></div><label class="scroll-control" for="scene-scroll"><span class="visually-hidden">Scroll preview</span><input type="range" id="scene-scroll" min="0" max="4800" value="0" step="10" disabled><output id="scroll-value" for="scene-scroll">0 / 4,800 px</output></label></div>
       <section id="animation-dock" class="animation-dock" aria-label="Animation frames" hidden>
         <div class="playback"><div class="transport"><button id="previous" aria-label="Previous frame">←</button><button id="play">Play</button><button id="next" aria-label="Next frame">→</button></div><strong id="frame-label">Frame 1 / 4</strong><label>Speed<select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div>
@@ -61,6 +74,7 @@
     </section>
     <aside class="inspector" aria-label="Selected asset properties">
       <div class="section-label">INSPECTOR</div><h2 id="inspector-title">Layer properties</h2><p class="muted" id="scope"></p>
+      <div id="placement-properties" hidden></div>
       <details id="landscape-properties" class="inspector-group" data-pref open><summary>Layer transform <span id="editing-layer">FAR</span></summary><div class="group-content"><div class="crop-grid">
         <label class="field">Scale multiplier<input type="number" id="layer-scale" min="0.1" max="4" step="0.01"></label><label class="field">Parallax<input type="number" id="layer-parallax" min="0" max="2" step="0.01"></label>
         <label class="field">Offset X<input type="number" id="layer-x" min="-1920" max="1920" step="1"></label><label class="field">Offset Y<input type="number" id="layer-y" min="-1080" max="1080" step="1"></label>
@@ -82,11 +96,11 @@
     <div class="dialog-heading"><h2 id="project-dialog-title">Project changes</h2><button id="close-project-dialog" aria-label="Close project changes">×</button></div>
     <p id="project-dialog-description"></p>
     <p id="project-provenance" class="muted"></p>
-    <p id="project-scope" class="muted">One file includes every landscape, character and hazard setting available in this editor: transforms, frame boundaries and crops. Artwork stays in the project. Gameplay settings will be included when Test and Game are connected.</p>
+    <p id="project-scope" class="muted">One file includes every landscape, character and hazard setting available in this editor: transforms, frame boundaries, crops, grounding, scale, position and collision geometry. Artwork stays in the project. Gameplay settings will be included when Test and Game are connected.</p>
     <div id="import-notes" class="warning"></div>
     <p id="project-summary" role="status"></p>
     <div class="change-table-wrap"><table class="change-table"><thead><tr><th scope="col">Asset</th><th scope="col">Setting</th><th scope="col" id="before-heading">Baseline</th><th scope="col">After</th></tr></thead><tbody id="project-changes"></tbody></table></div>
-    <details id="recovery-panel"><summary>Recovery copies</summary><p id="recovery-status"></p><div class="recovery-actions"><button id="review-recovery" disabled>Review pre-import copy</button><button id="export-recovery" disabled>Download pre-import copy</button><button id="export-artwork-recovery" hidden>Download copy before artwork update</button><button id="export-unreadable" hidden>Download unreadable save</button></div></details>
+    <details id="recovery-panel"><summary>Recovery copies</summary><p id="recovery-status"></p><div class="recovery-actions"><button id="review-recovery" disabled>Review pre-import copy</button><button id="export-recovery" disabled>Download pre-import copy</button><button id="export-artwork-recovery" hidden>Download copy before artwork update</button><button id="export-previous-editor" hidden>Download previous editor save</button><button id="export-unreadable" hidden>Download unreadable save</button></div></details>
     <p id="project-dialog-error" class="error" role="alert"></p>
     <div class="dialog-actions"><button id="cancel-import">Close</button><button id="apply-import" class="primary" hidden>Apply all changes</button></div>
   </dialog>

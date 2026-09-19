@@ -69,19 +69,19 @@ The current asset map has **58 image entries**, all resolving to files in this c
 ## Verification boundary
 
 Observed deployed: Design character/landscape/global panels, Test setup/actions, first-load preview absence followed by successful preview after selection. Source audit covers Game entry, save/import, atlas sourcing, runtime controls, and all legacy control IDs. Repeated-pause, cross-mode contamination, full-course draft application, all nine stage visuals, and fresh/mobile performance remain targeted acceptance tests, not claimed reproduced results. No production values were changed for this audit.
-# Current candidate coverage — review 05.2
+# Current candidate coverage — review 06
 
 This implementation status supplements the original old/new functionality audit below. A completed preview tool does not establish gameplay parity.
 
 | Authoring workflow | Available in candidate | Still required before cutover |
 |---|---|---|
 | Landscapes | All nine stage sets; scene/layer/source views; FAR/MID/GROUND scale, X/Y, parallax; visibility, guide, repeat scroll; Play/Pause/Restart with runtime-speed cloud drift; synchronized baseline comparison | Runtime adapter parity across Design/Test/Game and full-course/finish behavior |
-| Character animation | Both characters, six states, every frame, editable per-frame atlas bounds, crops, atlas and baseline views | Scale/position, global vs stage grounding, gameplay timing |
-| Hazard animation | All 27 hazards, editable frame bounds/crops/atlas/comparison | Placement/flight, collision and spawn behavior |
+| Character animation | Both characters, six states, every frame, editable per-frame atlas bounds, crops, atlas/baseline views; shared/state scale and position, stage grounding, collision geometry and animated scene | Gameplay physics/state transitions and FX integration |
+| Hazard animation | All 27 hazards, frame bounds/crops/atlas/comparison; scene placement, HIGH/LOW clearance, animation FPS, collision geometry and moving pass | Runtime collision outcomes and spawn behavior |
 | FX | Not yet connected | Stun-star frames and attachment/state behavior |
 | Finish scene | Not yet connected | Marker artwork, transforms, grounding and end sequence |
 | Stage/gameplay settings | Landscape transforms only | Complete field ownership and runtime-backed settings |
-| Draft lifecycle | Whole-project Save all / Export all / Import; field diff, validation, required pre-import recovery, one-step import undo/redo, browser timestamp, v1/v2/v3 recovery and v4 artwork/source provenance | Production snapshot conversion; future fields join the same complete project |
+| Draft lifecycle | Whole-project Save all / Export all / Import; field diff, validation, required pre-import recovery, one-step import undo/redo, browser timestamp, v1/v2/v3 recovery and v5 placement/collision settings, v4 recovery and artwork/source provenance | Production snapshot conversion; future fields join the same complete project |
 | Stage navigation | Continent → Stage; available metadata only; remembered stage and asset per continent/stage | Expand with stage catalog; readiness/approval summary |
 | Loading | Selected content only; decode-aware count, stale-selection guard, cached reuse, retry | Integrated scene readiness and measured cold-start/stage-switch timings |
 | Test / Game | Visible as planned | Actual gameplay connection and full regression gate |

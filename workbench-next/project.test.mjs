@@ -13,7 +13,7 @@ contract.apply(config,registry);
 const sprites=descriptors(config,context.window.GAME_SCHEMA),landscapes=landscapeDescriptors(config,registry,contract);
 const catalog=JSON.parse(fs.readFileSync(new URL('./asset-catalog.json',import.meta.url)));
 const provenance=projectProvenance(catalog,sprites,landscapes);
-const create=()=>new ProjectDraft(sprites,landscapes,catalog.dimensions,provenance,catalog.migrations);
+const create=()=>new ProjectDraft(sprites,landscapes,catalog.dimensions,provenance,catalog.migrations,config);
 function storage(entries=[]) {const data=new Map(entries);return {data,getItem:key=>data.get(key)??null,setItem:(key,value)=>data.set(key,value)};}
 function revise(draft) {
   draft.editLayer('na01','ground',{...draft.transform('na01','ground'),x:-18,y:9});

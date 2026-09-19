@@ -1,6 +1,6 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 5.3; not the replacement editor**.
+Status: **review increment 6; not the replacement editor**.
 Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0` for EU02 and EU03 landscapes (2026-09-19). Production source/assets match this upstream snapshot; candidate-only changes remain under `workbench-next/`. EU02 is approved; EU03 is integrated and awaiting artwork approval.
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
@@ -28,6 +28,20 @@ This is a working **landscape and sprite Design proposal**, using repository art
 
 It does not load the old runtime, write the current editor's storage, modify source images/configuration, or change gameplay. The candidate project export has its own format and is **not** a current game-config import. Future runtime integration must convert these complete drafts explicitly. Test and Game remain required next milestones.
 
+## In-scene character and hazard calibration — Review 06
+
+Select **Character → Claude/Constance → state**, or **Stage → hazard**. The new **Scene** view shows the selected character and one selected hazard together on the stage. **Frame** and **Full atlas** retain their existing per-frame editing tools. In Character Scene, Continent/Stage is explicitly a preview context; selecting it never changes shared character settings. Scene companions choose the comparison hazard, or the character/state shown beside a selected hazard.
+
+- Character inspector: shared master scale and foot offset; state scale and X/Y; separately labeled character + stage grounding; state collision proportions/offsets.
+- Hazard inspector: scale and placement X, ground offset or HIGH/LOW flight clearance, animation FPS where applicable, and collision proportions/offsets. Settings belong to that hazard's stage.
+- **Play scene / Pause (freeze)** moves scenery, clouds, pose animation and the selected hazard on one clock. **Next frame** freezes and advances exactly 1/60 second; a pose changes only when its FPS reaches the next frame. **Restart** returns to time zero, frozen. Speeds: ¼×, ½×, 1×, 2×.
+- View options: ground/foot guides, collision boxes, baseline comparison and scroll/hazard travel. Turn travel off to animate poses in place. Frozen numeric edits repaint immediately without advancing time. Playback repaints canvases/readouts without rebuilding focused inspector controls.
+- Comparison uses the same clock and preview selections. Selection/view changes, history, project actions and hiding the browser tab stop motion. Scene controls remain disabled until all selected images finish decoding; failed assets offer Retry.
+
+This is a Design pose/pass preview: Jump, Slide and Hit loop their artwork for calibration. It does not simulate jump physics, timed gameplay actions, collision outcomes or the stage course. Test/Game, FX/finish authoring and the complete production runtime adapter remain separate milestones. Baseline drawing equations are checked directly against the existing production renderer; gameplay geometry uses the canonical Y=410 surface independently of visual landscape offsets.
+
+**Save all / Export all / Import** now include every placement/collision field across both characters, all states and all stages. Placement edits share Undo/Redo with crops, bounds and landscape edits. New exports use v5. Existing v4 and earlier projects retain their old frame/landscape edits and receive baseline defaults for newly introduced settings; every reset is visible on import review. A v5 browser checkpoint is separate from the retained v4 record, downloadable under **Changes & recovery → Download previous editor save**. Existing artwork migrations still apply; no PNGs or production config values changed.
+
 ## Landscape playback
 
 Review 05.2 adds **Play scroll / Pause**, **Restart** and **Replay** beside the existing slider. In Stage → Landscape → Scene, Play moves from the current position to the preview endpoint of 4,800 px (40 seconds from zero at the unchanged 120 px/s world speed). Restart begins at zero immediately; Replay starts over after reaching the endpoint. The shared clouds drift at the runtime's 8 px/s, with existing stage visibility, scale, height and opacity. Layer view isolates the selected layer; Source remains static. This range checks landscape repetition and is not a full gameplay course or finish sequence.
@@ -43,7 +57,7 @@ Review 05 adds **Continent → Stage**, derived from available stage metadata. E
 - **Import** validates a project before showing field-by-field differences against your current work. Applying replaces the full editable configuration; resets are visible in the comparison. It creates a pre-import browser recovery copy first, then applies one undoable transaction. Choose Save all to persist the imported draft.
 - **Changes & recovery** compares all scopes with the GitHub baseline, identifies the source baseline, and lets you review or download the pre-import copy. That copy survives saving and reloading. Browser data is local to its origin: export/import transfers work between the preview and a compatible future GitHub-hosted editor.
 
-New v4 files record source baseline, actual asset SHA-256 hashes and dimensions. Incompatible files are rejected before mutation. Older v1/v2/v3 drafts are accepted with compatibility notes; missing landscapes/boundaries use baseline values and every resulting reset is shown. Production game-config files are rejected. Maximum import size is 2 MB.
+New v5 files record source baseline, actual asset SHA-256 hashes and dimensions. Incompatible files are rejected before mutation. Older v1/v2/v3/v4 drafts are accepted with compatibility notes; missing landscapes/boundaries use baseline values and every resulting reset is shown. Production game-config files are rejected. Maximum import size is 2 MB.
 
 Failed writes retain the working draft and its dirty status. An import cannot apply unless its recovery copy was stored. Conflicting saves from another browser tab require export/reload. An unreadable browser save can be downloaded and is backed up before an explicit Save all replaces it. Original v1/v2/v3 keys remain untouched.
 

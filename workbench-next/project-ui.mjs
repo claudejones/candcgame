@@ -1,4 +1,5 @@
-import {MAX_IMPORT_BYTES,RECOVERY_KEY,UNREADABLE_KEY,ARTWORK_RECOVERY_KEY} from './project.mjs';
+import {MAX_IMPORT_BYTES,RECOVERY_KEY,UNREADABLE_KEY,ARTWORK_RECOVERY_KEY,PREVIOUS_PROJECT_FORMAT} from './project.mjs';
+import {PLACEMENT_FIELDS} from './scene-model.mjs';
 const $=id=>document.getElementById(id);
 function download(text,name) {
   const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');
@@ -6,13 +7,13 @@ function download(text,name) {
 }
 const projectDownload=payload=>download(JSON.stringify(payload,null,2),'cc-workbench-project.json');
 const dateLabel=value=>new Date(value).toLocaleString([], {dateStyle:'short',timeStyle:'short'});
-const fields={x:'X',y:'Y',w:'Width',h:'Height',l:'Left',r:'Right',t:'Top',b:'Bottom',scale:'Scale',parallax:'Parallax'};
+const fields={x:'X',y:'Y',w:'Width',h:'Height',l:'Left',r:'Right',t:'Top',b:'Bottom',scale:'Scale',parallax:'Parallax',...Object.fromEntries(Object.entries(PLACEMENT_FIELDS).map(([key,value])=>[key,value[0]]))};
 
 export function setupProjectWorkflow({draft,beforeAction,changed,message}) {
-  const dialog=$('project-dialog');let review=null,recovery=null,unreadable=null,artworkRecovery=null,reading=false;
+  const dialog=$('project-dialog');let review=null,recovery=null,unreadable=null,artworkRecovery=null,previousEditor=null,reading=false;
   function refresh() {
     $('save-status').textContent=draft.dirty?'Unsaved changes · all stages & characters':draft.savedAt?`Saved in this browser · ${dateLabel(draft.savedAt)}`:'Baseline loaded · no browser save yet';
-    $('change-count').textContent=`${draft.changedFrames} frames · ${draft.changedLayers} layers changed from GitHub baseline`;
+    $('change-count').textContent=`${draft.changedFrames} frames · ${draft.changedLayers} layers · ${draft.changedRows().filter(row=>row.element==='Placement').length} placement fields changed`;
     $('save').disabled=reading || (!draft.dirty && Boolean(draft.savedAt));
     for(const id of ['import','export','changes'])$(id).disabled=reading;
     $('undo').disabled=!draft.past.length;$('redo').disabled=!draft.future.length;
@@ -21,6 +22,7 @@ export function setupProjectWorkflow({draft,beforeAction,changed,message}) {
     recovery=null;unreadable=draft.failedSave||null;
     try {
       artworkRecovery=draft.migrated&&draft.expectedRaw?draft.expectedRaw:localStorage.getItem(ARTWORK_RECOVERY_KEY);
+      previousEditor=localStorage.getItem(PREVIOUS_PROJECT_FORMAT);
       const raw=localStorage.getItem(RECOVERY_KEY);
       if(raw){recovery=JSON.parse(raw);draft.decode(recovery.project);}
       unreadable ||= localStorage.getItem(UNREADABLE_KEY);
@@ -28,6 +30,7 @@ export function setupProjectWorkflow({draft,beforeAction,changed,message}) {
     }catch(error){recovery=null;$('recovery-status').textContent=`Recovery unavailable: ${error.message}`;}
     $('review-recovery').disabled=!recovery;$('export-recovery').disabled=!recovery;$('export-unreadable').hidden=!unreadable;
     $('export-artwork-recovery').hidden=!artworkRecovery;
+    $('export-previous-editor').hidden=!previousEditor;
   }
   function showRows(rows) {
     $('project-changes').replaceChildren(...rows.map(row=>{
@@ -86,6 +89,7 @@ export function setupProjectWorkflow({draft,beforeAction,changed,message}) {
   $('export-recovery').onclick=()=>projectDownload(recovery.project);
   $('export-unreadable').onclick=()=>download(unreadable,'cc-workbench-unreadable-save.json');
   $('export-artwork-recovery').onclick=()=>download(artworkRecovery,'cc-workbench-before-artwork-update.json');
+  $('export-previous-editor').onclick=()=>download(previousEditor,'cc-workbench-before-scene-editor.json');
   $('cancel-import').onclick=$('close-project-dialog').onclick=()=>dialog.close();
   dialog.addEventListener('close',()=>{review=null;});
   refresh();return {refresh};

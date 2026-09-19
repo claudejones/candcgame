@@ -6,6 +6,7 @@ import {ProjectDraft,projectProvenance,StageSelection} from './project.mjs';
 import {setupProjectWorkflow} from './project-ui.mjs';
 import {setupWorkspace} from './workspace-ui.mjs';
 import {LandscapePlayback} from './landscape-playback.mjs';
+import {setupSceneEditor} from './scene-ui.mjs';
 
 const $ = id => document.getElementById(id);
 const config = structuredClone(window.GAME_CONFIG);
@@ -14,12 +15,12 @@ contract.apply(config,registry);
 const spriteItems = descriptors(config, window.GAME_SCHEMA);
 const landscapes = landscapeDescriptors(config,registry,contract);
 const items = [...landscapes,...spriteItems];
-let draft,projectWorkflow;
+let draft,projectWorkflow,actorScene;
 const loader = new AssetLoader();
 const selection = new AssetSelection(items);
 const stageSelection = new StageSelection(landscapes,registry);
 let selected = landscapes[0];
-let stage = selected.stage, frame = 0, view = 'frame', playing = false, image = null, lastTick = 0, animationRequest = 0;
+let stage = selected.stage, frame = 0, view = 'scene', playing = false, image = null, lastTick = 0, animationRequest = 0;
 let sceneImages = {}, ready = false;
 const sceneState = Object.fromEntries(landscapes.map(item=>[item.stage,{layer:'far',view:'scene',scroll:0,
   visible:{far:true,mid:true,ground:true,clouds:true},guides:false}]));
@@ -27,6 +28,7 @@ let catalog;
 let editingBounds=false,drag=null;
 const workspace=setupWorkspace();
 const isLandscape = () => selected.type === 'landscape';
+const isActorScene=()=>!isLandscape()&&view==='scene';
 const scrollPlayback=new LandscapePlayback({speed:config.worldSpeed,end:Number($('scene-scroll').max),
   read:()=>sceneState[stage].scroll,
   write:value=>{sceneState[stage].scroll=value;paintLandscape();},
@@ -74,17 +76,23 @@ function navigation() {
     ()=>select(`character:${selected.id.split(':')[1]}:${state}`))));
   for(const id of ['landscape-views','landscape-properties','scene-tools','landscape-dock','landscape-status'])$(id).hidden=!isLandscape();
   for(const id of ['sprite-views','sprite-properties','frame-boundaries','bounds-control','playback-note'])$(id).hidden=isLandscape();
-  $('animation-dock').hidden=isLandscape()||selected.frames<2;
-  $('preview-area').classList.toggle('landscape-preview',isLandscape());
-  $('inspector-title').textContent=isLandscape()?'Layer properties':'Frame properties';
+  const scene=isActorScene();
+  for(const id of ['actor-context','actor-dock','actor-tools','placement-properties'])$(id).hidden=!scene;
+  for(const id of ['sprite-properties','frame-boundaries','bounds-control'])$(id).hidden=isLandscape()||scene;
+  $('stage-context').hidden=scope==='character'&&!scene;
+  $('stage-context-label').textContent=scope==='character'?'Preview stage · character stays shared':'Stage context';
+  for(const [id,mode] of [['actor-view','scene'],['frame-view','frame'],['atlas-view','atlas']])$(id).setAttribute('aria-pressed',String(view===mode));
+  $('animation-dock').hidden=isLandscape()||scene||selected.frames<2;
+  $('preview-area').classList.toggle('landscape-preview',isLandscape()||scene);
+  $('inspector-title').textContent=isLandscape()?'Layer properties':scene?'Scene properties':'Frame properties';
   $('source-size-label').textContent=isLandscape()?'Image size':'Frame size';
   $('source-count-label').textContent=isLandscape()?'Artwork':'Frames';
-  $('preview-context').textContent=isLandscape()?'Scene · 960 × 540':'Source pixels · fixed frame scale';
+  $('preview-context').textContent=isLandscape()||scene?'Scene · 960 × 540 · ground Y = 410':'Source pixels · fixed frame scale';
 }
 
 async function select(id) {
   if(!catalog)return;
-  scrollPlayback.pause();
+  stopMotion();actorScene?.reset();
   selection.remember(selected,frame);
   selected=items.find(item=>item.id===id); if(!selected)throw new Error('Unknown sprite');
   drag=null;editingBounds=false;
@@ -108,6 +116,7 @@ async function select(id) {
   if(!isLandscape())makeFilmstrip();render();
   const entries=isLandscape()?LAYERS.map(layer=>[layer,catalog.assets[selected.sources[layer]]]):[['sprite',catalog.assets[selected.asset]]];
   if(isLandscape() && config.worldProfiles[stage].clouds!==false)entries.push(['clouds',catalog.assets.clouds]);
+  if(isActorScene())entries.push(...actorScene.entries(selected,stage));
   await loader.select(entries,{
     progress:(count,total)=>{$('loading').textContent=`Loading ${isLandscape()?stage.toUpperCase()+' landscape':selected.name} · ${count} of ${total} ready…`;},
     ready:loaded=>{
@@ -121,6 +130,7 @@ async function select(id) {
         validateAtlas(selected,loaded.sprite.naturalWidth,loaded.sprite.naturalHeight);image=loaded.sprite;
         const size=draft.size(selected.id);
         if(size.width!==image.naturalWidth||size.height!==image.naturalHeight)throw new Error('Decoded atlas differs from its registered size.');
+        if(isActorScene()){actorScene.validate(selected,stage,loaded);sceneImages=loaded;}
         $('asset-health').textContent=`Loaded · ${image.naturalWidth} × ${image.naturalHeight} · frames verified`;
         $('play').disabled=selected.frames<2;$('previous').disabled=selected.frames<2;$('next').disabled=selected.frames<2;
       }
@@ -162,6 +172,7 @@ function makeFilmstrip() {
 function render(updateThumbnails = true) {
   if(!draft)return;
   if(isLandscape()){renderLandscape();saveState();workspace.fit();return;}
+  if(isActorScene()){actorScene?.render({selected,stage,ready,images:sceneImages});saveState();workspace.fit();return;}
   const crop=draft.crop(selected.id,frame);
   const bounds=activeBounds();
   $('frame-label').textContent=`Frame ${frame+1} / ${selected.frames}`;
@@ -243,8 +254,8 @@ function paintLandscape() {
 }
 
 function setPlaying(next) {cancelAnimationFrame(animationRequest);animationRequest=0;playing=next;lastTick=0;$('play').textContent=playing?'Pause':'Play';$('play').setAttribute('aria-pressed',String(playing));}
-function stopMotion(){scrollPlayback.pause();setPlaying(false);}
-function setFrame(number) {if(isLandscape()||!ready)return;drag=null;setPlaying(false);frame=(number+selected.frames)%selected.frames;render();}
+function stopMotion(){scrollPlayback.pause();actorScene?.stop();setPlaying(false);}
+function setFrame(number) {if(isLandscape()||isActorScene()||!ready)return;drag=null;setPlaying(false);frame=(number+selected.frames)%selected.frames;render();}
 function tick(now) {
   if(playing&&image){
     if(!lastTick)lastTick=now;
@@ -256,8 +267,9 @@ function tick(now) {
 
 for(const name of stageSelection.groups.keys())$('continent').add(new Option(name,name));
 $('stage-availability').textContent=`${stageSelection.groups.size} continents · ${landscapes.length} available stages · 21 planned`;
-$('continent').onchange=()=>select(selection.stageId(stageSelection.choose($('continent').value)));
-$('stage').onchange=()=>select(selection.stageId($('stage').value));
+function changeStage(next){if(selected.type==='character'){stage=next;select(selected.id);}else select(selection.stageId(next));}
+$('continent').onchange=()=>changeStage(stageSelection.choose($('continent').value));
+$('stage').onchange=()=>changeStage($('stage').value);
 for(const scope of ['stage','character']) {
   $(`${scope}-tab`).onclick=()=>select(scope==='stage'?selection.stageId(stage):selection.characterId());
   $(`${scope}-tab`).onkeydown=event=>{
@@ -269,8 +281,8 @@ for(const scope of ['stage','character']) {
 }
 $('previous').onclick=()=>setFrame(frame-1);$('next').onclick=()=>setFrame(frame+1);
 $('play').onclick=()=>{drag=null;editingBounds=false;setPlaying(!playing);render(false);if(playing)animationRequest=requestAnimationFrame(tick);};
-function spriteView(next){drag=null;view=next;$('frame-view').setAttribute('aria-pressed',String(view==='frame'));$('atlas-view').setAttribute('aria-pressed',String(view==='atlas'));if(next==='frame')editingBounds=false;render();}
-$('frame-view').onclick=()=>spriteView('frame');$('atlas-view').onclick=()=>spriteView('atlas');
+function spriteView(next){const reload=view==='scene'||next==='scene';stopMotion();drag=null;view=next;if(next==='frame')editingBounds=false;navigation();if(reload)select(selected.id);else render();}
+$('actor-view').onclick=()=>spriteView('scene');$('frame-view').onclick=()=>spriteView('frame');$('atlas-view').onclick=()=>spriteView('atlas');
 $('compare').onchange=render;$('bounds').onchange=render;
 $('retry').onclick=()=>select(selected.id);
 for(const mode of ['scene','layer','source'])$(`${mode}-view`).onclick=()=>{if(mode==='source')scrollPlayback.pause();sceneState[stage].view=mode;render();};
@@ -331,6 +343,7 @@ $('preview').onkeydown=event=>{
   if(event.key==='Escape'){cancelDrag();return;}
   if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key)||isLandscape()||!ready)return;
   event.preventDefault();
+  if(isActorScene()){if(event.key==='ArrowRight')actorScene.step();return;}
   if(editingBounds&&view==='atlas'){
     const step=event.shiftKey?10:1,dx=event.key==='ArrowLeft'?-step:event.key==='ArrowRight'?step:0,dy=event.key==='ArrowUp'?-step:event.key==='ArrowDown'?step:0;
     draft.editBounds(selected.id,frame,dragBounds(draft.bounds(selected.id,frame),'move',dx,dy,draft.size(selected.id),draft.crop(selected.id,frame)));render();
@@ -339,6 +352,7 @@ $('preview').onkeydown=event=>{
 function history(direction) {
   const edit=(direction==='undo'?draft.past:draft.future).at(-1);if(!edit)return;
   cancelDrag();stopMotion();draft[direction]();
+  if(edit.kind==='placement'){render();message(`${direction==='undo'?'Undid':'Redid'} placement: ${edit.id.replaceAll(':',' / ')}.`);return;}
   if(edit.kind==='project'){render();message(`${direction==='undo'?'Undid':'Redid'} the complete project import.`);return;}
   selection.remember(selected,frame);
   if(edit.kind==='landscape') {sceneState[edit.stage].layer=edit.layer;sceneState[edit.stage].view='scene';select(`landscape:${edit.stage}`);}
@@ -353,15 +367,16 @@ window.addEventListener('keydown',event=>{
   if($('project-dialog').open)return;
   if(['INPUT','SELECT','TEXTAREA','BUTTON','CANVAS','SUMMARY'].includes(document.activeElement?.tagName))return;
   if(event.key==='ArrowLeft'){event.preventDefault();setFrame(frame-1);}
-  if(event.key==='ArrowRight'){event.preventDefault();setFrame(frame+1);}
+  if(event.key==='ArrowRight'){event.preventDefault();if(isActorScene())actorScene.step();else setFrame(frame+1);}
 });
 
 try{
   const response=await fetch('./asset-catalog.json',{cache:'no-cache'});if(!response.ok)throw new Error(`Catalog load failed (${response.status})`);catalog=await response.json();
-  draft=new ProjectDraft(spriteItems,landscapes,catalog.dimensions,projectProvenance(catalog,spriteItems,landscapes),catalog.migrations);
+  draft=new ProjectDraft(spriteItems,landscapes,catalog.dimensions,projectProvenance(catalog,spriteItems,landscapes),catalog.migrations,config);
   try{
     message(draft.load(localStorage));
   }catch(error){message(`Candidate save was not loaded: ${error.message}. The stored copy is unchanged.`,true);}
+  actorScene=setupSceneEditor({config,contract,items:spriteItems,landscapes,catalog,draft,active:isActorScene,reload:()=>select(selected.id),changed:saveState,message});
   projectWorkflow=setupProjectWorkflow({draft,beforeAction:()=>{cancelDrag();stopMotion();render();},changed:()=>render(),message});
   await select(selected.id);
 }catch(error){$('loading').classList.add('failed');$('loading').textContent=error.message;message('Could not start the Design workspace. Serve the repository over HTTP and reload.',true);}

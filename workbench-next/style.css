@@ -838,3 +838,13 @@ h2 {
     padding-inline:10px;
   }
 }
+
+#stage-context {margin:10px 0 14px;}
+#actor-context .field {margin:8px 0;}
+#actor-dock {flex-shrink:0;}
+.scene-readout {display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:7px;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;}
+.scene-note {font-size:11px;margin:6px 0 0;}
+#placement-properties .scope-note {margin:0 0 10px;}
+#actor-play {min-width:95px;}
+
+#actor-dock .playback {flex-wrap:wrap;}

@@ -1,5 +1,19 @@
 # Workbench review — verification
 
+## Review 06 — in-scene Design calibration and motion
+
+Explicitly requested 2026-09-19. Changes remain inside `workbench-next/`; the current artwork/configuration source snapshot is retained.
+
+- 41 Node tests pass. New renderer comparisons execute the actual production CharacterMachine/ObjectQA drawing code and compare all character states/poses and all hazard poses, both flight heights, and multiple pass times. Baseline coordinates/collision geometry match; shared/stage offsets remain distinct and canonical ground is 410.
+- Fixed-step clock cases verify whole-scene 1/60-second stepping, freeze/resume, no paused-time jump, slow motion, restart, unavailable previews and stale callbacks. Pose selection remains FPS-based. Selected-state artwork loops are explicitly Design previews; gameplay physics/timing/collision outcomes remain for Test.
+- New placement fields round-trip through complete export/import/save/reload, mixed history and one-step import undo/redo. Invalid/missing/unknown placement fields reject atomically. Actual v4 browser records migrate without overwriting the retained v4 key; v5 saves/reloads preserve both old edits and new placement.
+- DOM integration ran the real app and event handlers with jsdom and real canvas/image decoding: scene readiness, character/stage/hazard context, numerical edits retaining focus during playback, fixed stepping/freeze/slow motion/restart, Frame/Atlas switching, HIGH/LOW, comparison, save/change review, import/apply/undo and hidden-tab freeze. This is not a browser CSS/layout test.
+- Actual Scene canvases for character calibration and Constance Slide + flying hazard were rendered and visually inspected. Source artwork and previously authored frame/crop bounds feed the same scene. Automatic responsive browser visual acceptance remains pending.
+
+Reproduce pure checks: `node --test workbench-next/*.test.mjs`. Optional DOM check: install `jsdom@26` and `@napi-rs/canvas` in a separate temporary directory, then run `node workbench-next/verify-scene-ui.mjs /absolute/path/to/dependency-directory /absolute/path/to/optional-render-output`. Test artifacts/dependencies are not runtime or Site dependencies.
+
+User acceptance: open a character or hazard, select Scene, adjust shared/state/stage grounding or hazard placement, freeze/step/restart, try ¼×, compare baseline, save/export/import/reload, and return to Frame/Atlas. Select a flying hazard for HIGH/LOW. Frame stepping advances time; it does not force a new sprite pose every click. Test and Game are still planned.
+
 ## Review 05.3 — EU02/EU03 artwork sync
 
 Requested 2026-09-19 for configuration testing. Incorporated main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0`; source/configuration/artwork match that upstream snapshot exactly. EU02 is approved; EU03 is integrated and awaiting artwork acceptance. No image generation or alteration occurred.
