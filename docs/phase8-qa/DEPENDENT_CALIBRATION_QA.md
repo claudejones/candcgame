@@ -1,6 +1,8 @@
 # Dependent gameplay calibration — review increment
 
-Status: implementation prepared for deployed user review; not accepted and not formal landscape-contract promotion. User authorization covers completing the outstanding prerequisites. No Africa artwork has been generated.
+Status: deployed review evidence assigned by the user to the separate auto-calibration agent for review and adjustments. The user authorized Africa production to proceed independently on 2026-09-19. These calibrations are not recorded as visually accepted; this follow-up is no longer an asset-generation blocker. No Africa artwork has been generated.
+
+Deployed calibration baseline: `57d6ca4e6932cc0ee5f6d05597245c1c17a74e85`. [Development CI](https://github.com/claudejones/candcgame/actions/runs/35456071828), [main CI](https://github.com/claudejones/candcgame/actions/runs/35456119553) and [Pages](https://github.com/claudejones/candcgame/actions/runs/35456144739) passed. Live inspection confirmed versioned scripts, Vulture scale .285, Paris café scale .14/contact 33.761326, and canonical/rendered ground Y=410.
 
 ## Scope
 
@@ -47,7 +49,7 @@ Open [the workbench](https://claudejones.github.io/candcgame/src/dev.html?mode=d
 2. Ground/Jump and believable size/contact: EU01 crates, EU02 café and bicycle, EU03 bench. Also spot-check NA02 fallen log and SA02 LOW flamingo; their small reductions address narrow jump windows.
 3. Established character grounding and finish contact, with landscape offsets zero.
 
-Approve the calibration or identify adjustments. Only after explicit acceptance should the agent record calibration acceptance, promote the shared landscape contract and enable eligible AF01 production. The following command then begins the AF01–AF03 trial at its first stage:
+The separate auto-calibration agent reviews these findings and any size/contact concerns, then applies its authorized adjustments. Preserve the measurements as historical evidence; do not treat the 60ms regression threshold as an approved difficulty target. The user has already authorized adoption of the landscape contract and eligible Africa production independently. The following command begins the AF01–AF03 trial at its first stage:
 
 `In claudejones/candcgame: build stage AF01.`
 

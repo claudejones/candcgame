@@ -1,6 +1,6 @@
 # Unified Landscape Generation Contract V1
 
-Status: VALIDATION BATCH ACCEPTED — all 27 registered NA/SA/EU landscape layers passed landscape review and continent regression. Dependent gameplay calibration and full contract promotion remain pending; do not extend this contract to the remaining 36 until their scope, references and production gates are complete.
+Status: ADOPTED FOR REMAINING-STAGE PRODUCTION, 2026-09-19. All 27 registered NA/SA/EU landscape layers passed landscape review and continent regression. The user authorized proceeding while a separate auto-calibration agent reviews existing gameplay calibration. That follow-up is not a generation blocker or an accepted calibration result. Each remaining stage retains its content/reference, integration, collision and deployed approval gates.
 
 ## Objective
 One renderer geometry and one character foot/running-surface anchor across every stage. Newly standardized landscapes must conform to the contract; runtime stage-specific Y/scale/character-grounding corrections are not the target solution.
@@ -75,4 +75,4 @@ Technical PASS is necessary but not sufficient. Each stage must be tested as FAR
 - no stage-specific world Y/scale correction.
 
 ## Validation sequence
-Use ASSET_COMMAND_WORKFLOW and PHASE8_LANDSCAPE_EXECUTION_PLAN for any eligible production work. The complete NA/SA/EU set is approved; do not reopen it or describe SA02 as the next landscape. Dependent character/hazard calibration and promotion of this contract into the remaining runtime/gameplay scope are still pending. The remaining-continent direction, workflow and themes are approved for planning, while replacement hazard choices/references and production readiness gates remain pending. Extend this contract only after those gates are explicitly complete. Preserve registered approved exceptions, including NA03 GROUND at 2170×725; never resize approved artwork merely to match the generic canvas.
+Use ASSET_COMMAND_WORKFLOW and PHASE8_LANDSCAPE_EXECUTION_PLAN for any eligible production work. The complete NA/SA/EU set is approved; do not reopen it or describe SA02 as the next landscape. Use this accepted landscape geometry for eligible remaining-stage production. Existing character/hazard calibration review continues in the separate user-assigned workstream; do not repeat it before generation. Resolve each selected stage's remaining content/reference gates and validate its actual generated hazards before deployed review. Preserve registered approved exceptions, including NA03 GROUND at 2170×725; never resize approved artwork merely to match the generic canvas.

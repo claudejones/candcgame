@@ -4,7 +4,7 @@ Active, 2026-09-19. Operational steps and command lookup are maintained once in 
 
 ## Scope and order
 
-Phase 8 is the existing nine NA/SA/EU stages: 27 FAR/MID/GROUND layers. All nine landscape stage sets are approved, and North America, South America and Europe landscape regressions have passed. EU03 and Europe were closed on 2026-09-19. Required dependent gameplay calibration and full contract promotion remain pending. The other four continents/36 landscape layers need approved themes, references and authorization after this validation phase. The command system is project-wide; no repeat setup per continent.
+Phase 8 is the existing nine NA/SA/EU stages: 27 FAR/MID/GROUND layers. All nine landscape stage sets are approved, and North America, South America and Europe landscape regressions have passed. EU03 and Europe were closed on 2026-09-19. The user has authorized adoption of the landscape contract for the other four continents/36 landscape layers, subject to their individual readiness gates. Existing dependent gameplay calibration review is delegated to a separate auto-calibration workstream and does not block that production. The command system is project-wide; no repeat setup per continent.
 
 ## Authority and approval
 
@@ -18,4 +18,4 @@ The user accepts one deployed complete stage: FAR/MID/GROUND together, Gameplay/
 
 Require source integrity, layer ownership/alpha, authored overscan, repeat inspection, actual runtime source width/scales/zero offsets, saved-config/reset consistency, and a correctly composed 960×540 scene with running surface at Y=410. Inspect artwork visually; neither PNG dimensions nor composite opacity prove composition quality. Stop optimizing once it meets these requirements.
 
-After explicit approval, record final state/hashes once and provide the automatically resolved next prompt. After the third approved stage of a continent, perform its regression without reopening acceptable art. Phase 8 completes when all nine stage and three continent gates pass, the universal contract is validated in Design/Test/Game without synthetic backing or positional rescue, and required dependent gameplay calibration is resolved. Separate deferred work is not silently added to scope.
+After explicit approval, record final state/hashes once and provide the automatically resolved next prompt. After the third approved stage of a continent, perform its regression without reopening acceptable art. Phase 8 completes when all nine stage and three continent gates pass, the universal contract is validated in Design/Test/Game without synthetic backing or positional rescue, and required dependent gameplay calibration is resolved. The user explicitly separated existing calibration review from remaining-stage generation on 2026-09-19; that follow-up stays open with its assigned agent and is not falsely marked accepted. It no longer blocks the Africa trial. Separate deferred work is not silently added to scope.

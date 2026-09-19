@@ -1,14 +1,14 @@
 # Remaining continents — stage production proposal
 
-Status: DIRECTION AND WORKFLOW APPROVED, 2026-09-19. The user approved this plan and the bounded parallel workflow. Implementation may proceed. Unresolved replacement selections, visual references, calibration/contract promotion and runtime integration remain explicit readiness items; no generated artwork is pre-approved.
+Status: DIRECTION AND WORKFLOW APPROVED, 2026-09-19. The user approved this plan and the bounded parallel workflow. Implementation may proceed. Shared preparation and landscape-contract adoption are complete for eligible production. The user assigned existing calibration review/adjustments to a separate agent and instructed Africa production to proceed. Unresolved stage selections/references and actual generated-stage validation remain required; no generated artwork is pre-approved.
 
 ## Scope and authority
 
 Complete the campaign's remaining 12 stages: Africa AF01–AF03, Asia AS01–AS03, Oceania OC01–OC03 (AU alias), and Antarctica AN01–AN03. Each stage contains three landscape layers, two distinct grounded hazards and one flying hazard type. This is broader than the current landscape-only Phase 8 work.
 
-Phase 8 remains the existing nine NA/SA/EU stages and 27 landscape images. All nine landscape sets and all three landscape regression gates have passed. The existing landscape test contract explicitly requires completion of its validation batch before promotion to the remaining 36 landscapes. Required dependent calibration and formal contract promotion remain pending; this approval does not claim those checks passed.
+Phase 8 remains the existing nine NA/SA/EU stages and 27 landscape images. All nine landscape sets and all three landscape regression gates have passed. The existing landscape test contract explicitly requires completion of its validation batch before promotion to the remaining 36 landscapes. The user authorized adopting that landscape contract for remaining-stage production while existing gameplay calibration review continues separately. This records the changed sequencing, not visual acceptance of calibration.
 
-The selected themes, per-layer art briefs, hazard identities, exact proposed filenames, source references and order are stored in [remaining-continent-proposal.json](../config/remaining-continent-proposal.json). That file supplies focused command/readiness packets, not playable runtime configuration. Its productionEnabled flag remains false; changing it alone cannot activate production. Approval, selection/reference readiness, runtime registration and generated-artwork acceptance are separate fields. Existing approved runtime records remain unchanged.
+The selected themes, per-layer art briefs, hazard identities, exact proposed filenames, source references and order are stored in [remaining-continent-proposal.json](../config/remaining-continent-proposal.json). That file supplies focused command/readiness packets, not playable runtime configuration. Its productionEnabled flag is true; the selected stage must still satisfy every readiness gate, and only a complete measured release activates gameplay. Approval, selection/reference readiness, runtime registration and generated-artwork acceptance are separate fields. Existing approved runtime records remain unchanged.
 
 The user has approved the stage themes, production scope and workflow direction. The flagged duplicate/replacement selections below still need concrete resolution and review; this approval does not silently accept an unknown replacement. Agents prepare those choices and references without asking the user to fill in filenames or research fields. Once the selected content and existing readiness gates are satisfied, agents generate/correct internally, integrate and deploy. The next artwork approval is the complete deployed stage, including its hazards. No new per-image prompt/candidate approval loop is introduced.
 
@@ -100,13 +100,13 @@ The shared setup now registers all 21 stage identities while retaining only the 
 
 Implemented once for all continents:
 1. Catalog-driven new-stage profile/source installation, continent selectors, title/seed mapping, source-preview URLs and complete-stage release validation. Old stage signatures and mechanics stay intact; each new release supplies its own validated signature.
-2. The existing landscape registry and geometry implementation accept pending new-stage paths; no copied geometry engine or renamed accepted asset. Contract promotion remains a separate evidence gate.
+2. The existing landscape registry and geometry implementation accept pending new-stage paths; no copied geometry engine or renamed accepted asset. Landscape-contract adoption is authorized; existing calibration follow-up remains separately owned.
 3. Explicit ground-foot and flying-body source anchors shared by preview/gameplay placement, including asymmetric crop and scale. Existing hazards retain their legacy placement. Saved/imported authoring retains old edits and registered additions.
 4. `validate-stage-assets.cjs` reuses the complete PNG integrity checker, then checks atlas alpha, gutters, foot contact and distinct frame bytes. Visual pose/scale/collision/loop judgment is still performed on generated art; a structural pass cannot claim it.
 5. `integrate-stage.mjs` accepts measured release metadata and an eligible explicit command, checks all five hashes, preserves unselected files/metadata and compares unselected ground-cell pixels to Git before integration. Registry sync updates the host and inner renderer together. CI validates active releases and explicitly protects the original nine stages.
 6. Africa is the three-stage trial: **AF01 → AF02 → AF03**. AF01 is the first user-review checkpoint. At most two workers operate within one active stage; this is not three simultaneous stage builds. Reuse setup across the trial and measure totals across all three stages.
 
-The setup tests use clearly synthetic metadata/atlas fixtures; no future-stage artwork, actual gameplay calibration or user acceptance is claimed. AF01 now has six retrieved, inspected and hash-verified reference photos under `assets/references/africa/af01/`, with source credits and licenses in `REFERENCES.json`. Its focused output mappings attach only the relevant photo and approved game-style references. AF02/AF03 packs remain just-in-time agent work before their stages. Existing Phase 8 dependent calibration is implemented for deployed review; evidence, scope and the remaining acceptance gate are in `phase8-qa/DEPENDENT_CALIBRATION_QA.md`. Formal promotion remains pending.
+The setup tests use clearly synthetic metadata/atlas fixtures; no future-stage artwork, actual gameplay calibration or user acceptance is claimed. AF01 now has six retrieved, inspected and hash-verified reference photos under `assets/references/africa/af01/`, with source credits and licenses in `REFERENCES.json`. Its focused output mappings attach only the relevant photo and approved game-style references. AF02/AF03 packs remain just-in-time agent work before their stages. Existing Phase 8 calibration evidence and review concerns are in `phase8-qa/DEPENDENT_CALIBRATION_QA.md`. The user assigned follow-up to the auto-calibration agent and authorized remaining-stage production with the accepted landscape contract; no further existing-calibration review is required before AF01 generation.
 
 Coordinate the shared catalog with the separately active production-editor redesign. Reuse its agreed integration points when available; this plan is not authorization to merge or replace that editor. Recheck live branches before writes and preserve approved EU03 and concurrent editor work.
 
@@ -130,7 +130,7 @@ GROUND1/GROUND2/FLYING are hazard selectors; GROUND alone is the landscape layer
 
 ## Repeatable production and acceptance
 
-Once the remaining readiness items and Phase 8 contract promotion are complete:
+For each eligible stage (AF01 is ready):
 1. Resolve one stage and its checkpoint; attach its reference pixels and read only its focused rules.
 2. Generate FAR, MID, GROUND, the ground-object atlas and flying atlas. Validate each changed output and correct identified defects internally. Commit/recover selected completed files when interrupted; never silently regenerate missing work.
 3. Integrate the stage configuration, cache keys, source regions, anchors and hazards. Inspect the composite and repeat behavior; test both ground objects with both characters and test flying HIGH/LOW, animation loop and collisions using the existing diagnostics.
@@ -156,14 +156,15 @@ Use existing image generation and the established connected publisher. There is 
 | New-atlas direction | Approved for AF01 pilot; measured integration still required |
 | Africa selections | Agent-selected and locally researched; artwork/visible scale acceptance pending. Other continents still need selection review |
 | All 27 NA/SA/EU landscapes and three continent landscape regressions | Approved/passed |
-| Dependent calibration and formal landscape-contract promotion | Technical calibration prepared; deployed user acceptance/promotion pending |
+| Landscape-contract adoption | User authorized for remaining-stage production |
+| Existing gameplay calibration | Review/adjustments delegated to separate agent; nonblocking for generation, not marked accepted |
 | Actual stage-specific visual/species reference packs | AF01 retrieved, inspected and mapped per output; AF02/AF03 prepared before their respective stages |
 | Workflow V3 job checkpoints and focused stage/hazard readiness packets | Implemented; tested separately from image production |
 | Shared 21-stage runtime/editor support and hazard validation tooling | Implemented and fixture-tested; no pending stage exposed as playable |
 | Africa AF01–AF03 production trial | Pending; AF01 first checkpoint, two workers within one active stage |
 | Asia, Oceania, Antarctica | Follow evaluation of the complete Africa trial |
 
-Approval authorizes implementation of the scoped plan. It does not pre-approve generated artwork or waive a release gate. The next production step is to resolve the reported prerequisites, not to repeat plan approval or regenerate accepted landscapes. The coordinator supplies one concrete next prompt and any genuinely unresolved content choices; the user supplies no technical checkpoint fields.
+Approval authorizes implementation of the scoped plan. It does not pre-approve generated artwork or waive a release gate. The next production step is `build stage AF01`; resolve later stages' references just in time without repeating shared setup or reopening accepted landscapes. The coordinator supplies one concrete next prompt and any genuinely unresolved content choices; the user supplies no technical checkpoint fields.
 
 ## Research basis
 

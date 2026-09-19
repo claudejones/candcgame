@@ -15,14 +15,14 @@ Type these messages into the conversation with the agent. The user does not need
 | Inspect AF01 readiness in a fresh conversation | `In claudejones/candcgame: status AF01.` |
 | Inspect AF01 packet/help in a fresh conversation | `In claudejones/candcgame: help AF01.` |
 | Resume AF01 in a fresh conversation | `In claudejones/candcgame: resume AF01.` |
-| Request the AF01 readiness packet | `In claudejones/candcgame: build stage AF01.` |
+| Start AF01 full-stage production | `In claudejones/candcgame: build stage AF01.` |
 | Ask for help in a fresh conversation | `In claudejones/candcgame: help.` |
 | Replace NA01 FAR in a fresh conversation | `In claudejones/candcgame: regenerate landscape NA01 FAR.` |
 | Ask for available commands in the current repository conversation | `help` |
 | See NA01's layer filenames in the current conversation | `help NA01` |
 | Resume AF01 work within the current conversation | `resume AF01` |
 
-AF01 is the current readiness example: its direction and theme are approved, with Africa hazard choices resolved, while actual reference pixels and calibration/contract promotion remain pending. `build stage AF01` returns a readiness packet and does not enable gameplay or asset generation.
+AF01 is ready for full-stage production: its choices, inspected reference files, shared tooling and landscape-contract adoption are recorded. The user delegated existing calibration review/adjustments to a separate auto-calibration agent and authorized production to proceed. `build stage AF01` starts generation through deployed review; it does not approve artwork or immediately activate an incomplete stage.
 
 ## If a conversation reaches its limit
 
@@ -40,7 +40,7 @@ At an intentional interruption, the agent must save and verify the recovery chec
 
 ## User commands
 
-The table below uses the short form for a conversation already working in this repository. For the first message in a fresh conversation, add `In claudejones/candcgame:` as shown above. AF01 is the current readiness example; its packet remains blocked until actual reference pixels and calibration/contract promotion are complete. Legacy landscape commands remain supported for recovery and explicit approved-asset replacement.
+The table below uses the short form for a conversation already working in this repository. For the first message in a fresh conversation, add `In claudejones/candcgame:` as shown above. AF01 is the next eligible stage. Later stages retain their own selection/reference gates; the agent resolves those before generation. Legacy landscape commands remain supported for recovery and explicit approved-asset replacement.
 
 | Command | Result |
 | --- | --- |
@@ -48,7 +48,7 @@ The table below uses the short form for a conversation already working in this r
 | `help keys` | All continent/stage/layer keys |
 | `help AF01` | AF01 readiness state and focused packet |
 | `status AF01` | AF01 approval and recovery checkpoint |
-| `build stage AF01` | Resolve a readiness-aware packet; does not generate or enable gameplay while blocked |
+| `build stage AF01` | Generate the complete eligible five-file stage, validate, integrate and publish for one deployed review |
 | `resume AF01` | Recover AF01 work, or report no active work |
 | `regenerate landscape NA01 FAR` | Explicitly reopen only FAR, replace it and deploy with the existing MID/GROUND |
 | `regenerate landscape NA01 MID` | The same operation for MID |
@@ -65,16 +65,16 @@ Omitting a layer selects FAR, MID and GROUND. Keys are case-insensitive; `NA1` a
 | NA | North America | NA01, NA02, NA03 | Phase 8 |
 | SA | South America | SA01, SA02, SA03 | Phase 8 |
 | EU | Europe | EU01, EU02, EU03 | Phase 8 |
-| AF | Africa | AF01, AF02, AF03 | Approved themes; readiness pending |
+| AF | Africa | AF01, AF02, AF03 | AF01 ready; AF02/AF03 references prepared before their stages |
 | AS | Asia | AS01, AS02, AS03 | Approved themes; readiness pending |
 | OC | Oceania / Australia | OC01, OC02, OC03 | Approved themes; readiness pending; AU is an alias |
 | AN | Antarctica | AN01, AN02, AN03 | Approved themes; readiness pending |
 
-Only the existing nine NA/SA/EU stages are authorized for Phase 8 production, and all 27 landscape layers are approved. Reserving keys does not invent future themes or references. The remaining-continent direction, workflow and themes are approved for planning, but replacement hazard choices/references and production gates remain pending. Approved existing assets stay locked. Character, hazard, object, UI and shared-effect families are discoverable with `help character` etc.; selectors may resolve to a focused readiness packet, while the new-stage runtime/validation tooling is implemented but generation still waits for references and contract promotion.
+Only the existing nine NA/SA/EU stages are authorized for Phase 8 production, and all 27 landscape layers are approved. Reserving keys does not invent future themes or references. Remaining-stage production is authorized using the adopted landscape contract and each stage's readiness packet. AF01 is ready; unresolved choices/references for later stages remain agent work. Approved existing assets stay locked. Character, hazard, object, UI and shared-effect families are discoverable with `help character` etc.; selectors may resolve to a focused readiness packet, while the new-stage runtime/validation tooling is implemented but generation waits only for the selected packet's remaining prerequisites.
 
 ## V3 readiness and delegation
 
-`build stage AF01` and equivalent future-stage requests resolve a readiness-aware packet: the packet identifies the stage, proposed theme, missing references, hazards and required gates. It does not enable gameplay, create production assets or authorize generation while any reference or calibration/contract-promotion gate is pending. A hazard selector can resolve its proposed identity and focused references for review; it remains blocked from production until those gates pass.
+`build stage AF01` and equivalent future-stage requests resolve a readiness-aware packet: the packet identifies the stage, proposed theme, missing references, hazards and required gates. Generation proceeds only when the packet reports ready. Existing calibration review is delegated and nonblocking by explicit user direction; new-stage collision/integration checks and deployed acceptance remain required. A complete measured release is still required before gameplay activation. A hazard selector can resolve its proposed identity and focused references for review; it remains blocked from production until those gates pass.
 
 When a later build is eligible, one coordinator may delegate narrowly scoped stage work to at most two workers. The coordinator starts the run with `node scripts/assets.mjs coordinator start <expectedRevision> "<asset command>"`, then starts each pinned job with `coordinator start-job <runId> <jobId> <expectedRevision>`. Workers return an isolated result manifest through `coordinator result <runId> <jobId> <expectedRevision> <result-manifest.json>`; this verifies the owned bytes and immutable local commit evidence only. The coordinator must then fetch the remote ref and run `node scripts/assets.mjs coordinator verify-recovery <runId> <jobId> <expectedRevision> <fetchedRemoteRef>`; only that remote byte match marks the job durable. The coordinator records the selected checkpoint with `coordinator checkpoint <runId> <phase> <expectedRevision> [recoveryRef]`; `ready-to-publish` requires complete matching local outputs; it does not require an extra recovery publication. `awaiting-approval` requires verified durable jobs and the existing deployed review evidence. Workers receive a pinned stage/file packet and actual references, and return outputs in isolated worktrees. The coordinator imports one completed file at a time before result verification, so another worker's in-progress file cannot trigger an unowned-output change. The coordinator owns the shared registry, checkpoints, releases, plan and decision log; no nested continent managers are used. This delegation rule does not claim parallel image throughput or establish a fixed usage budget.
 
@@ -82,7 +82,7 @@ When a later build is eligible, one coordinator may delegate narrowly scoped sta
 
 The test covers **AF01–AF03**, with shared setup completed once. AF01 is the first deployed acceptance checkpoint, followed by AF02 and AF03. Two workers may handle separate asset groups within one stage. Do not describe this as simultaneous three-stage production. Measure elapsed time, attempts, repeated setup and available usage for each stage and the whole trial; do not promise a subscription percentage.
 
-The coordinator handles remaining reference retrieval from the catalog's `referenceSources` and the recorded Phase 8 calibration/promotion gate. `status` is read-only, not an instruction to perform that setup or evidence that generation is ready. Do not hand it to the user as if it starts production. Actual downloaded image pixels must be inspected and added to the selected job's reference paths before marking `referencesReady`.
+The coordinator handles stage-specific reference retrieval from the catalog's `referenceSources`. The shared landscape contract is adopted; do not repeat the separately assigned existing-calibration review during asset startup. Preserve concurrent calibration/editor changes and use the current shared runtime as the integration baseline. `status` is read-only, not an instruction to perform that setup or evidence that generation is ready. Do not hand it to the user as if it starts production. Actual downloaded image pixels must be inspected and added to the selected job's reference paths before marking `referencesReady`.
 
 For a new complete stage, build all five files and measured metadata. Run `node scripts/validate-stage-assets.cjs AF01` for source/atlas checks. Metadata in `config/stage-releases.json` includes the five path/SHA-256 pairs, three calibrated runtime hazard definitions (sourceAnchor, source region, crop, scale, collision, animation), finish placement, a 75–85s signature and completed technical/composition/contact/animation/collision/finish checks. These values are agent-measured, never a user template or invented defaults. Use `node scripts/integrate-stage.mjs "build stage AF01" <measured-release.json>` with the resolved command; single-cell revisions require the original atlas at HEAD and preserve sibling RGBA/metadata. Then run the existing targeted `check`, inspect the actual scene, publish and request one complete-stage review including hazards. Normal integration still uses one publication snapshot.
 
