@@ -22,6 +22,10 @@ The agent starts from `ASSET_COMMAND_WORKFLOW.md`; routine commands do not need 
 
 Development-branch CI never deploys Pages. Pull-request CI never deploys Pages. A failed or cancelled Production CI run never deploys Pages.
 
+## Asset-only publication from AF02
+
+The same automated branch/CI/Pages publication path applies to durable new-stage PNGs and their versioned asset-ready handoff. A published file is not a playable stage: leave runtime release/activation pending. Verify the five hashes and handoff, then return the Workbench handoff instead of requiring gameplay browser tests or a zero-hit course. Artwork review/calibration occurs after the Workbench agent imports those exact files. Later calibrated playable releases retain the integrated-stage checks above. Source/metadata validation, artwork acceptance, calibration and gameplay release must not share an ambiguous “approved” flag.
+
 ## Manual fallback
 
 `workflow_dispatch` remains available for recovery or an explicitly requested redeployment. It is a fallback, not the normal release path and not a substitute for visual approval or successful Production CI.

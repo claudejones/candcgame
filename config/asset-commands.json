@@ -143,12 +143,12 @@
     },
     "build": {
       "example": "build landscape SA02",
-      "summary": "Complete one unapproved stage through deployed review; reuse completed work.",
+      "summary": "Build an unapproved target; new full stages stop at a durable asset-ready handoff for Workbench calibration.",
       "operation": "produce-and-publish"
     },
     "generate": {
       "example": "generate landscape SA02",
-      "summary": "Alias for build: generate, check and deploy an unapproved target for review.",
+      "summary": "Alias for build; new full stages stop at asset-ready rather than gameplay release.",
       "operation": "produce-and-publish"
     },
     "regenerate": {
@@ -175,6 +175,11 @@
       "example": "resume SA02",
       "summary": "Inspect remote checkpoint and resume the pending operation without starting over.",
       "operation": "resume"
+    },
+    "asset-ready": {
+      "example": "asset-ready AF02",
+      "summary": "Validate the five-file handoff and mark a durable production run ready for Workbench calibration.",
+      "operation": "asset-handoff"
     },
     "approve": {
       "example": "approve SA02",
@@ -210,7 +215,7 @@
     "coordinatorStartJob": "coordinator start-job <runId> <jobId> <expectedRevision>",
     "coordinatorResult": "coordinator result <runId> <jobId> <expectedRevision> <result-manifest.json>",
     "coordinatorVerifyRecovery": "coordinator verify-recovery <runId> <jobId> <expectedRevision> <fetchedRemoteRef>",
-    "coordinatorCheckpoint": "coordinator checkpoint <runId> <phase> <expectedRevision> [recoveryRef]",
+    "coordinatorCheckpoint": "coordinator checkpoint <runId> <phase> <expectedRevision> [handoffPath|recoveryRef] [handoffRemoteRef]",
     "coordinatorClose": "coordinator close <runId> <expectedRevision>",
     "coordinatorRequeue": "coordinator requeue <runId> <jobId> <expectedRevision>"
   }

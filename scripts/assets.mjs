@@ -6,12 +6,16 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {createRequire} from 'node:module';
 import {
   checkpointRun, closeRun, createRun, hashValue, readWorkflowState, recordResult,
   requeueJob, resumeReport, startJob, updateWorkflowState, verifyRecovery
 } from './asset-jobs.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const require=createRequire(import.meta.url);
+const {expectedPaths,validateBundleFile}=require('./validate-asset-handoff.cjs');
+const {validateAssetHandoff}=require('../src/js/asset-handoff-contract.js');
 const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
 const json = p => JSON.parse(read(p));
 export const catalog = json('config/asset-commands.json');
@@ -23,6 +27,12 @@ const fileHash = p => crypto.createHash('sha256').update(fs.readFileSync(path.jo
 const layers = ['FAR', 'MID', 'GROUND'];
 const hazardSelectors = ['GROUND1', 'GROUND2', 'FLYING'];
 const readyValue = value => value === true || ['ready','complete','completed','approved','passed'].includes(String(value).toLowerCase());
+function handoffSummary(stageId){
+  const bundlePath=`config/asset-handoffs/${stageId.toLowerCase()}.json`;
+  if(!fs.existsSync(path.join(ROOT,bundlePath)))return null;
+  const bundle=json(bundlePath);validateAssetHandoff(bundle,{expectedPaths:expectedPaths(stageId)});
+  return {stageId:bundle.stageId,readiness:bundle.readiness,bundle:bundlePath,downstream:bundle.downstream,existingAcceptance:bundle.existingAcceptance??null};
+}
 
 function futureStage(input) {
   let id;
@@ -167,18 +177,24 @@ export function futurePacket(command, family, stage, words, state, plan=proposal
     readiness:readiness.readiness, selectionStatus:readiness.selectionStatus, referencesReady:readiness.referencesReady,
     message:generationAllowed?'Prerequisites and actual reference pixels are ready.':'No generation may start while any listed prerequisite is pending.'
   };
-  if (productionCommand && !generationAllowed) packet.operation='blocked';
+  if (productionCommand && !generationAllowed) {
+    const preparationOnly=blockers.length>0&&blockers.every(item=>/reference|referencesReady/.test(item));
+    packet.operation=preparationOnly?'prepare':'blocked';
+    if(preparationOnly){packet.preparationRequired=blockers;packet.message='Prepare and inspect the missing references, record their paths/hashes, then continue this same build command.';}
+  }
   if (approvedBuild) {
     packet.operation='read';
     packet.generationAllowed=false;
     packet.message='Already approved. Explicit regenerate or revise is required to reopen this target.';
   }
   if (productionCommand && generationAllowed && !approvedBuild) {
+    if(!approved)packet.operation='produce-only';
     packet.jobs=planned;
     packet.protectedOutputs=Object.values(files).filter(Boolean);
     packet.continuityOutputs=layers.map(layer=>files[layer]).filter(Boolean);
     packet.specHash=hashValue(stage);
     packet.specSources=['config/remaining-continent-proposal.json',plan.plan,plan.shared?.landscapeContract,catalog.families.landscape.profile,'docs/asset-profiles/hazard.md'].filter(Boolean);
+    if(!approved)packet.stop='Durable asset-ready handoff for Workbench import; calibration and gameplay release remain pending.';
   }
   return packet;
 }
@@ -210,9 +226,11 @@ function nextStage(prefix,state=workflow()) {
 export function handoff(state=workflow()) {
   const next = nextStage(undefined,state);
   if (next) return `In ${catalog.repository}: ${next.command} ${next.stage}.`;
+  const calibrationRun=Object.values(state.runs??{}).filter(run=>run.status==='ready-for-calibration'&&run.handoff).sort((a,b)=>String(b.closedAt).localeCompare(String(a.closedAt)))[0];
+  if(calibrationRun&&!state.approvedRevisions?.[calibrationRun.target.toLowerCase()])return `In the candcgame Workbench conversation: import asset handoff ${calibrationRun.handoff.path} for ${calibrationRun.target}.`;
   try {
     const first=proposal().stages?.find(stage=>stage.status!=='approved'&&!state.approvedRevisions?.[stage.id.toLowerCase()]);
-    if (first) return `In ${catalog.repository}: ${futureReadiness(first).generationAllowed?'build stage':'status'} ${first.id}.`;
+    if (first) return `In ${catalog.repository}: build stage ${first.id}.`;
   } catch {}
   return 'Phase 8 registered landscapes are approved. Complete the required readiness gates before generating other assets.';
 }
@@ -261,15 +279,30 @@ export function resolve(input, state=workflow()) {
   if (!rawTarget) throw new Error(`${command} requires a stage. Use help keys.`);
   const planned=futureStage(rawTarget);
   if (planned) {
-    if (command==='status') return futureReadiness(planned);
+    if (command==='status') {
+      const result=futureReadiness(planned),handoffPath=`config/asset-handoffs/${planned.id.toLowerCase()}.json`;
+      if(fs.existsSync(path.join(ROOT,handoffPath)))result.assetHandoff=handoffSummary(planned.id);
+      return result;
+    }
     const tail=words.join(' '), colon=tail.indexOf(':');
     const selection=(colon<0?tail:tail.slice(0,colon)).trim();
     const direction=colon<0?'':tail.slice(colon+1).trim();
     if (direction && command!=='revise') throw new Error('Use revise for written change directions.');
     if (command==='revise' && (!selection || !direction)) throw new Error('Use revise hazard AF01 FLYING: describe the requested change.');
     if (!['stage','landscape','hazard'].includes(family)) throw new Error(`${family}: registration required. Use help ${family}.`);
-    const effectiveFamily=['resume','publish','approve','rollback','verify'].includes(command)?'stage':family;
+    const effectiveFamily=['resume','publish','approve','rollback','verify','asset-ready'].includes(command)?'stage':family;
     const packet=futurePacket(command,effectiveFamily,planned,selection?[selection]:[],state);
+    const handoffPath=`config/asset-handoffs/${planned.id.toLowerCase()}.json`;
+    const handoffExists=fs.existsSync(path.join(ROOT,handoffPath));
+    if(command==='asset-ready'){
+      if(selection)throw new Error('asset-ready operates on a complete five-file stage; omit the selector.');
+      if(!handoffExists)return {...packet,operation:'blocked',generationAllowed:false,state:'handoff-missing',handoff:handoffPath,message:`Build all five assets and write ${handoffPath}, then run asset-ready ${planned.id}.`};
+      const validated=validateBundleFile(handoffPath);
+      return {...packet,operation:'asset-handoff',generationAllowed:false,state:'asset-ready',handoff:validated,message:'Five validated assets and import metadata are ready for Workbench. Calibration and release remain pending.'};
+    }
+    const previouslyApproved=planned.status==='approved'||Boolean(state.approvedRevisions?.[planned.id.toLowerCase()]);
+    if(command==='publish'&&handoffExists&&!previouslyApproved)return {...packet,operation:'publish-only',publicationScope:'asset-handoff',generationAllowed:false,state:'asset-ready',handoff:validateBundleFile(handoffPath),message:'Publish only the five assets and handoff bundle. This does not activate gameplay or approve calibration/release.'};
+    if(command==='verify'&&handoffExists)packet.assetHandoff=validateBundleFile(handoffPath);
     if (direction) packet.direction=direction;
     if (command==='resume') {
       const active=state.activeRunId ? state.runs?.[state.activeRunId] : null;
@@ -391,8 +424,17 @@ function coordinator(args) {
     return mutationResult(verifyRecovery({root:ROOT,statePath:workflowPath,runId,jobId,expectedRevision:Number(revision),remoteRef}));
   }
   if (action==='checkpoint') {
-    const [runId,phase,revision,recoveryRef]=args;
-    return mutationResult(checkpointRun({root:ROOT,statePath:workflowPath,runId,phase,expectedRevision:Number(revision),recoveryRef}));
+    const [runId,phase,revision,extra,bundleRecoveryRef]=args;
+    let handoffPath=null,recoveryRef=null,handoffRecoveryRef=null;
+    if(phase==='asset-ready'){
+      if(!extra||!bundleRecoveryRef)throw new Error('Use coordinator checkpoint <runId> asset-ready <expectedRevision> <handoff.json> <fetchedRemoteTrackingRef>.');
+      const validated=validateBundleFile(extra);
+      const run=workflow().runs?.[runId];
+      if(!run||validated.stageId!==run.target.toLowerCase())throw new Error('Asset handoff stage does not match the coordinator run.');
+      handoffPath=extra;
+      handoffRecoveryRef=bundleRecoveryRef;
+    }else recoveryRef=extra;
+    return mutationResult(checkpointRun({root:ROOT,statePath:workflowPath,runId,phase,expectedRevision:Number(revision),recoveryRef,handoffPath,handoffRecoveryRef}));
   }
   if (action==='close') {
     const [runId,revision]=args;

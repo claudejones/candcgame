@@ -10,7 +10,7 @@ Phase 8 remains the existing nine NA/SA/EU stages and 27 landscape images. All n
 
 The selected themes, per-layer art briefs, hazard identities, exact proposed filenames, source references and order are stored in [remaining-continent-proposal.json](../config/remaining-continent-proposal.json). That file supplies focused command/readiness packets, not playable runtime configuration. Its productionEnabled flag is true; the selected stage must still satisfy every readiness gate, and only a complete measured release activates gameplay. Approval, selection/reference readiness, runtime registration and generated-artwork acceptance are separate fields. Existing approved runtime records remain unchanged.
 
-The user has approved the stage themes, production scope and workflow direction. The flagged duplicate/replacement selections below still need concrete resolution and review; this approval does not silently accept an unknown replacement. Agents prepare those choices and references without asking the user to fill in filenames or research fields. Once the selected content and existing readiness gates are satisfied, agents generate/correct internally, integrate and deploy. The next artwork approval is the complete deployed stage, including its hazards. No new per-image prompt/candidate approval loop is introduced.
+The user has approved the stage themes, production scope and workflow direction. The flagged duplicate/replacement selections below still need concrete resolution and review; this approval does not silently accept an unknown replacement. Agents prepare those choices and references without asking the user to fill in filenames or research fields. Once selected content and reference gates are satisfied, agents generate/correct internally and publish the complete asset-ready handoff. The user then notifies the Workbench agent to import it for artwork review, calibration and save. Playable release follows its separate validation and approval gate. No new per-image prompt/candidate approval loop is introduced.
 
 ## Proposed lineup
 
@@ -73,14 +73,14 @@ No generated image is accepted on dimensions alone. Inspect ownership, repeat se
 
 ## New-hazard pilot contract
 
-This common direction is approved for the new-asset pilot only. It does not resize or normalize existing approved atlases. Its measured scale/contact/collision results remain unverified until AF01; use AF01 as the first checkpoint of the AF01–AF03 Africa trial before applying lessons to AF02/AF03 and later continents.
+This common direction is approved for the new-asset pilot only. It does not resize or normalize existing approved atlases. AF01 is approved and its measured settings/evidence remain intact. AF02/AF03 retain this source-art contract; iterative gameplay calibration moves to editor-next after asset handoff.
 
 Ground atlas:
 - 2172×724 RGBA PNG, two side-by-side 1086×724 cells. GROUND1 occupies the left cell, GROUND2 the right.
 - Two stationary objects initially; a parked cart or sled does not introduce independent movement or extra animation.
 - Clear shape contrast within the pair: generally one lower/wider object and one more compact/upright object, both avoidable with the established controls.
 - At least 32 source pixels of clear gutter inside each cell. No scenery, labels, cast backdrop or neighboring-object contamination.
-- Proposed authored foot anchor Y=620 in each cell. This is a sprite anchor, separate from landscape GROUND's Y=393 source anchor. Derive the runtime transform so the visible contact point meets the common Y=410 surface. Do not import a legacy stage's corrective grounding offset.
+- Proposed authored foot anchor Y=620 in each cell. This is a sprite anchor, separate from landscape GROUND's Y=393 source anchor. Supply the source anchor and a usable provisional transform against the common Y=410 surface; final character-relative grounding belongs to Workbench. Do not import a legacy stage's corrective grounding offset.
 - Source rectangles, fine crop, scale, foot anchor and collision geometry are separate metadata. Collision follows the readable solid obstacle, excluding decorative leaves, straps, tails or transparent margins.
 - A single-object revision must preserve the accepted sibling's pixels and metadata. If the generation tool cannot reliably do that in a combined atlas, resolve lossless cell assembly in the one-time tooling implementation; do not silently accept a redrawn sibling.
 
@@ -88,11 +88,11 @@ Flying atlas:
 - 2172×724 RGBA PNG, four 543×724 cells in one horizontal row, one creature per frame for the proposed initial set.
 - Face right consistently with the established flying-reference convention. Fixed body anchor proposed at cell X=271, Y=362; stable body size, head position and aggregate collision footprint.
 - Explicit loop: upstroke apex → descending wings forward → downstroke apex → rising wings swept back → first frame. Four visibly different wing poses; avoid duplicate middle frames and a snapping loop.
-- Keep all wings/tails inside the cell gutters. Use existing HIGH/LOW flight placement derived from the canonical ground surface; calibrate the new sprite to current controls without changing global clearances, speed or physics to rescue it.
+- Keep all wings/tails inside the cell gutters. Supply existing HIGH/LOW placement as a provisional starting point. Workbench owns final character-relative flight placement and action fairness; do not change global clearances, speed or physics to rescue artwork.
 - If a later approved choice uses a flock, every constituent creature must animate independently, remain visible and keep stable body anchors. A single flying hazard type does not require multiple creatures.
 - Inspect white birds/ice objects against Antarctic scenery and dark birds against forests at actual gameplay size. Contrast is functional.
 
-Final per-object scale, fine crop, contact and collision values are measured during integration and recorded with the approved asset. The proposal intentionally does not present untested collision numbers as calibrated facts. Landscape offsets remain zero; sprite-anchor-derived placement is a different contract.
+Source regions, fine crops and anchors accompany the asset handoff. Final per-object scale, grounding, flight height and collision settings are reviewed/saved in Workbench and validated for later release. The proposal intentionally does not present untested collision numbers as calibrated facts. Landscape offsets remain zero; sprite-anchor-derived placement is a different contract.
 
 ## One-time implementation handoff
 
@@ -102,7 +102,7 @@ Implemented once for all continents:
 1. Catalog-driven new-stage profile/source installation, continent selectors, title/seed mapping, source-preview URLs and complete-stage release validation. Old stage signatures and mechanics stay intact; each new release supplies its own validated signature.
 2. The existing landscape registry and geometry implementation accept pending new-stage paths; no copied geometry engine or renamed accepted asset. Landscape-contract adoption is authorized; existing calibration follow-up remains separately owned.
 3. Explicit ground-foot and flying-body source anchors shared by preview/gameplay placement, including asymmetric crop and scale. Existing hazards retain their legacy placement. Saved/imported authoring retains old edits and registered additions.
-4. `validate-stage-assets.cjs` reuses the complete PNG integrity checker, then checks atlas alpha, gutters, foot contact and distinct frame bytes. Visual pose/scale/collision/loop judgment is still performed on generated art; a structural pass cannot claim it.
+4. `validate-stage-assets.cjs` reuses the complete PNG integrity checker, then checks atlas alpha, gutters, foot contact and distinct frame bytes. Visual pose/scale/loop judgment stays with asset review; calibrated collision judgment occurs later in Workbench and release validation. A structural pass cannot claim either.
 5. `integrate-stage.mjs` accepts measured release metadata and an eligible explicit command, checks all five hashes, preserves unselected files/metadata and compares unselected ground-cell pixels to Git before integration. Registry sync updates the host and inner renderer together. CI validates active releases and explicitly protects the original nine stages.
 6. Africa is the three-stage trial: **AF01 → AF02 → AF03**. AF01 is the first user-review checkpoint. At most two workers operate within one active stage; this is not three simultaneous stage builds. Reuse setup across the trial and measure totals across all three stages.
 
@@ -110,7 +110,7 @@ The setup tests use clearly synthetic metadata/atlas fixtures; no future-stage a
 
 Coordinate the shared catalog with the separately active production-editor redesign. Reuse its agreed integration points when available; this plan is not authorization to merge or replace that editor. Recheck live branches before writes and preserve approved EU03 and concurrent editor work.
 
-The historical Slide duration discrepancy (.70s in recovered prose versus .75s current baseline) and deferred character/global calibration are existing separate decisions. Do not silently resolve them while registering new stages. The new hazards' own fit, contacts and collision QA are part of their production task.
+The historical Slide duration discrepancy (.70s in recovered prose versus .75s current baseline) and deferred character/global calibration are existing separate decisions. Do not silently resolve them while registering new stages. Asset production checks basic fit/readability and source metadata. Iterative contact, collision and action-timing QA belong to Workbench calibration and later release.
 
 ## Command interface — readiness aware
 
@@ -119,7 +119,7 @@ The resolver accepts the following stage keys and scopes. Status/help report the
 | User intent | Command; production requires readiness |
 | --- | --- |
 | See available commands/readiness | In claudejones/candcgame: help. |
-| Produce all five AF01 image files and integrate the full stage | In claudejones/candcgame: build stage AF01. |
+| Produce all five AF02 image files and the asset-ready handoff | In claudejones/candcgame: build stage AF02. |
 | Replace only a landscape layer | In claudejones/candcgame: regenerate landscape AF01 MID. |
 | Replace only the first grounded hazard | In claudejones/candcgame: regenerate hazard AF01 GROUND1. |
 | Revise only the flying hazard | In claudejones/candcgame: revise hazard AF01 FLYING: make the wing poses more distinct. |
@@ -130,15 +130,16 @@ GROUND1/GROUND2/FLYING are hazard selectors; GROUND alone is the landscape layer
 
 ## Repeatable production and acceptance
 
-For each eligible stage (AF01 is ready):
-1. Resolve one stage and its checkpoint; attach its reference pixels and read only its focused rules.
-2. Generate FAR, MID, GROUND, the ground-object atlas and flying atlas. Validate each changed output and correct identified defects internally. Commit/recover selected completed files when interrupted; never silently regenerate missing work.
-3. Integrate the stage configuration, cache keys, source regions, anchors and hazards. Inspect the composite and repeat behavior; test both ground objects with both characters and test flying HIGH/LOW, animation loop and collisions using the existing diagnostics.
-4. Complete the established development/main CI and Pages process using connected publication. Verify deployed bytes, geometry, Inspector previews and a full scrolling run through the finish. Unlimited Lives may be used transiently for scenery/end-of-stage review; separately demonstrate the new hazards' collision/avoidance behavior.
-5. Give the user one deployed complete-stage review. Say what passed: landscape, new-hazard and deployment checks. Do not label it exhaustive verification of every game feature.
-6. On explicit approval, preserve the reviewed files/configuration, record acceptance once and supply the next command. Metadata-only closeout does not repeat unchanged artwork/browser review. After the third stage, run the continent regression without reopening accepted artwork.
+Use the existing `ASSET_COMMAND_WORKFLOW.md` asset-ready procedure. AF01 remains approved. For AF02 and later stages:
 
-Do not turn a passing technical check into artistic approval or keep polishing accepted work. Global mechanics remain unchanged. A report should say whether the defect is in an image, configuration, collision, tool access or deployment before changing anything.
+1. Resolve the focused brief; the agent prepares missing inspected references before generation.
+2. Generate and inspect five PNGs, canonical zero-offset composition/repeats, source regions/anchors/facing, animation and believable size. Provide usable provisional scale/body metadata.
+3. Validate and publish `config/asset-handoffs/<stage>.json` with the files. Leave production activation and unperformed gameplay checks pending. Preserve completed bytes for resume.
+4. Tell the user the assets are ready for calibration. The user notifies the Workbench agent; it imports the bundle, and the user reviews/calibrates/saves. Artwork acceptance, calibration acceptance and release approval stay distinct.
+5. A later calibrated release must pass the existing strict contact/collision/finish/signature and gameplay gates before playable integration and deployed review. Repeated zero-hit courses are not a prerequisite for artwork handoff.
+6. After the user's calibration/save and instruction to advance, print the next fully completed command. At AF03, report the asset trial separately from any still-pending playable-continent regression.
+
+Do not keep polishing accepted work. Genuine renderer and scheduler defects remain engineering fixes with regression tests; preserve prior calibration findings as evidence. Keep global mechanics and approved stages unchanged.
 
 ## Bounded parallel execution
 
@@ -153,7 +154,7 @@ Use existing image generation and the established connected publisher. There is 
 | Requirement | Current status |
 | --- | --- |
 | Remaining 12 themes, five-file stage scope, visual rules and bounded parallel workflow direction | User approved on 2026-09-19 |
-| New-atlas direction | Approved for AF01 pilot; measured integration still required |
+| New-atlas direction | AF01 approved; source-art contract retained for asset-ready handoffs |
 | Africa selections | Agent-selected and locally researched; artwork/visible scale acceptance pending. Other continents still need selection review |
 | All 27 NA/SA/EU landscapes and three continent landscape regressions | Approved/passed |
 | Landscape-contract adoption | User authorized for remaining-stage production |
@@ -161,10 +162,10 @@ Use existing image generation and the established connected publisher. There is 
 | Actual stage-specific visual/species reference packs | AF01 retrieved, inspected and mapped per output; AF02/AF03 prepared before their respective stages |
 | Workflow V3 job checkpoints and focused stage/hazard readiness packets | Implemented; tested separately from image production |
 | Shared 21-stage runtime/editor support and hazard validation tooling | Implemented and fixture-tested; no pending stage exposed as playable |
-| Africa AF01–AF03 production trial | Pending; AF01 first checkpoint, two workers within one active stage |
+| Africa AF01–AF03 production trial | AF01 approved; AF02/AF03 use asset-ready → Workbench calibration, two workers within one active stage |
 | Asia, Oceania, Antarctica | Follow evaluation of the complete Africa trial |
 
-Approval authorizes implementation of the scoped plan. It does not pre-approve generated artwork or waive a release gate. The next production step is `build stage AF01`; resolve later stages' references just in time without repeating shared setup or reopening accepted landscapes. The coordinator supplies one concrete next prompt and any genuinely unresolved content choices; the user supplies no technical checkpoint fields.
+Approval authorizes implementation of the scoped plan. It does not pre-approve generated artwork or waive a release gate. The next production step is `build stage AF02`; resolve later stages' references just in time without repeating shared setup or reopening accepted landscapes. The coordinator supplies one concrete next prompt and any genuinely unresolved content choices; the user supplies no technical checkpoint fields.
 
 ## Research basis
 

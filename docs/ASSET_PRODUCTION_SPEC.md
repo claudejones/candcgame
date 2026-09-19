@@ -12,12 +12,14 @@ Use `ASSET_COMMAND_WORKFLOW.md` for command execution and `PHASE8_LANDSCAPE_EXEC
 
 Working Phase 8 validation assets may be replaced directly under `assets/phase8-validation/`; Git history is the rollback mechanism. `assets-original/` remains immutable. Rejected candidates and review renders are temporary working material and are not committed by default.
 
+For new full-stage production from AF02 onward, completion means validated artwork and the versioned asset-ready handoff, followed by editor-next import and user calibration/save. Artwork review remains explicit; asset readiness is neither calibrated gameplay nor release approval. Asset agents inspect composition, source metadata and basic rendering, but do not iterate flight placement, hitbox fairness, action windows or spawn difficulty. The complete gameplay release gate applies after calibration. Existing approved stages and their evidence remain unchanged.
+
 ## World assets
 For routine registered landscape commands, use `asset-profiles/landscape.md` and the resolver's selected prompt sections. Read `WORLD_RENDERING_SPEC.md` when changing its rules or diagnosing a conflict. Keep the focused profile synchronized with the source specifications.
 
 Critical principles:
 - FAR, MID and GROUND are coordinated parts of one stage composition.
-- Each layer needs sufficient vertical coverage for its responsibility and reasonable independent Y calibration.
+- Each layer needs sufficient vertical coverage at its specified placement. Adopted canonical landscapes use FAR/MID/GROUND Y=0; do not use offsets to compensate for deficient art.
 - FAR must exist behind intentional MID transparency.
 - MID must not depend on excessive GROUND displacement to hide insufficient coverage.
 - GROUND must contain sufficient terrain depth beneath the running surface.
