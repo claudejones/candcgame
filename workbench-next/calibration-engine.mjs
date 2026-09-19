@@ -1,7 +1,7 @@
 import {createMotion,intersects} from './runtime-rules.mjs';
 import {STEP,characterGeometry,hazardGeometry} from './scene-model.mjs';
 import {croppedBounds} from './frame-editor.mjs';
-import {pathShift,effectivePlacement,profileConfig,calibrationReferenceStamp,timingProfileStamp,PROFILES} from './calibration-settings.mjs';
+import {pathShift,characterPathShift,effectivePlacement,profileConfig,calibrationReferenceStamp,timingProfileStamp,PROFILES} from './calibration-settings.mjs';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const median=values=>[...values].sort((a,b)=>a-b)[Math.floor(values.length/2)];
 export function measureArtwork(image,item,draft,createCanvas=()=>document.createElement('canvas')){
@@ -20,14 +20,14 @@ export function measureArtwork(image,item,draft,createCanvas=()=>document.create
  return {...m,frames,warnings};
 }
 function actorCache(config,draft,items,stage,who,action,end){
- const shared={...draft.placement,groundOffset:draft.placement[`grounding:${stage}:${who}`].groundOffset+pathShift(draft,stage)};
+ const shared={...draft.placement,groundOffset:draft.placement[`grounding:${stage}:${who}`].groundOffset+characterPathShift(draft,stage,who)};
  const geom=m=>{const item=items.find(i=>i.id===`character:${who}:${m.state}`);return characterGeometry(config,item,m.frame,draft.frames[item.id][m.frame],draft.value[item.id][m.frame],shared,m.y).collision;};
  const run=[];for(let phase=0;phase<config.state.run.frames;phase++){const m=createMotion(config);m.elapsed=phase/config.state.run.fps;const arr=[];for(let n=0;n<=end;n++){arr.push(geom(m));m.update(STEP);}run.push(arr);}
  const m=createMotion(config,action),acted=[];let duration=0;for(let n=0;n<=end;n++){acted.push(geom(m));if(n&&m.state==='run'&&!duration)duration=n;m.update(STEP);}return {run,acted,duration:duration||end};
 }
 const cache=new WeakMap();
 function actorsFor(config,draft,items,stage,action,end){
- let map=cache.get(draft);if(!map){map=new Map();cache.set(draft,map);}const key=JSON.stringify([stage,action,end,pathShift(draft,stage),Object.entries(draft.placement).filter(([id])=>id.startsWith('character:')||id.startsWith('grounding:')),Object.entries(draft.frames).filter(([id])=>id.startsWith('character:')),Object.entries(draft.value).filter(([id])=>id.startsWith('character:'))]);
+ let map=cache.get(draft);if(!map){map=new Map();cache.set(draft,map);}const key=JSON.stringify([stage,action,end,['claude','constance'].map(who=>characterPathShift(draft,stage,who)),Object.entries(draft.placement).filter(([id])=>id.startsWith('character:')||id.startsWith('grounding:')),Object.entries(draft.frames).filter(([id])=>id.startsWith('character:')),Object.entries(draft.value).filter(([id])=>id.startsWith('character:'))]);
  if(!map.has(key))map.set(key,Object.fromEntries(['claude','constance'].map(who=>[who,actorCache(config,draft,items,stage,who,action,end)])));return map.get(key);
 }
 function intervals(flags){const out=[];let start=null;for(let i=0;i<=flags.length;i++){if(flags[i]&&start===null)start=i;if(!flags[i]&&start!==null){out.push({start:start*STEP,end:(i-1)*STEP,width:(i-start)*STEP});start=null;}}return out;}
@@ -64,7 +64,7 @@ function suggestions(config,draft,items,item,art){
  const b=croppedBounds(draft.frames[item.id][0],draft.value[item.id][0]),h=b.h*960/config.worldContract.sourceW*p.scale,path=draft.calibration.stages[item.stage].pathY,shift=policy.follow?pathShift(draft,item.stage):0;
  if(item.kind==='ground')set('groundOffset',clamp(path-410+(1-art.bottom)*h-shift,-300,300));
  else{
-  const slideTops=[];for(const who of ['claude','constance']){const it=items.find(i=>i.id===`character:${who}:slide`);for(let frame=0;frame<it.frames;frame++)slideTops.push(characterGeometry(config,it,frame,draft.frames[it.id][frame],draft.value[it.id][frame],{...draft.placement,groundOffset:draft.placement[`grounding:${item.stage}:${who}`].groundOffset+pathShift(draft,item.stage)}).collision.y);}
+  const slideTops=[];for(const who of ['claude','constance']){const it=items.find(i=>i.id===`character:${who}:slide`);for(let frame=0;frame<it.frames;frame++)slideTops.push(characterGeometry(config,it,frame,draft.frames[it.id][frame],draft.value[it.id][frame],{...draft.placement,groundOffset:draft.placement[`grounding:${item.stage}:${who}`].groundOffset+characterPathShift(draft,item.stage,who)}).collision.y);}
   set('highClearance',clamp(410+h*p.ch/2+p.cy*h-Math.min(...slideTops)+5+shift,-300,500));
   set('lowClearance',clamp(410+h*p.ch/2+p.cy*h-(path-4)+shift,-300,500));
  }
@@ -118,7 +118,7 @@ export function makeSequence({config,draft,items,reports,stage,seed=1}){
  const cfg=profileConfig(config,draft.calibration),duration=Math.max(...events.map(e=>e.exit))+1;
  for(const who of ['claude','constance']){const m=createMotion(cfg);let next=0;for(let step=0;step<=Math.ceil(duration/STEP);step++){
   const t=step*STEP;if(next<events.length&&t+1e-8>=events[next].start+events[next].local[who]){const e=events[next++];if(m.state!=='run')throw new Error('Sequence action conflict; increase spacing.');m[e.action==='jump'?'triggerJump':'triggerSlide']();}
-  const character=items.find(i=>i.id===`character:${who}:${m.state}`),cb=characterGeometry(cfg,character,m.frame,draft.frames[character.id][m.frame],draft.value[character.id][m.frame],{...draft.placement,groundOffset:draft.placement[`grounding:${stage}:${who}`].groundOffset+pathShift(draft,stage)},m.y).collision;
+  const character=items.find(i=>i.id===`character:${who}:${m.state}`),cb=characterGeometry(cfg,character,m.frame,draft.frames[character.id][m.frame],draft.value[character.id][m.frame],{...draft.placement,groundOffset:draft.placement[`grounding:${stage}:${who}`].groundOffset+characterPathShift(draft,stage,who)},m.y).collision;
   let visible=0;
   for(const e of events){const item=items.find(i=>i.id===e.id),time=t-e.start;if(time< -960/e.speed||t>e.exit)continue;const hp=effectivePlacement(draft,item),frame=((Math.floor(time*(hp.fps??item.fps)+1e-9)%item.frames)+item.frames)%item.frames,g=hazardGeometry(cfg,item,frame,draft.frames[item.id][frame],draft.value[item.id][frame],hp,{time,flight:e.flight,looping:false});if(g.dest.x<960&&g.dest.x+g.dest.w>0)visible++;if(intersects(cb,g.collision))throw new Error(`Sequence needs more spacing for ${who}. Increase spacing/reaction time and regenerate.`);}
   if(visible>p.maxVisible)throw new Error('Sequence exceeds visible hazard limit. Increase spacing.');m.update(STEP);

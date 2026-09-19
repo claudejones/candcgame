@@ -28,6 +28,8 @@ export function setupCalibration({config,draft,items,catalog,loader,stageGroups,
  }
  function refresh(){
   const stage=getStage(),cal=draft.calibration;$('pathway-y').value=cal.stages[stage].pathY;$('difficulty-profile').value=cal.profile;
+  $('pathway-label').textContent=`Stage pathway Y · ${stage.toUpperCase()}`;
+  for(const who of ['claude','constance'])$(`pathway-follow-${who}`).checked=cal.stages[stage].characterFollow[who];
   for(const input of $('difficulty-fields').querySelectorAll('input'))input.value=cal.profiles[cal.profile][input.dataset.profile];
   if(active&&!fresh(active)){closeProposal();message('Calibration inputs changed. Analyze again to refresh the proposal.');}
   for(const r of rows)if(r.reviewed&&(!fresh(r)||!checksFresh(r)))r.reviewed=false;
@@ -102,6 +104,13 @@ export function setupCalibration({config,draft,items,catalog,loader,stageGroups,
  }
  function editConfig(fn){scene()?.stop();const cal=clone(draft.calibration);try{fn(cal);draft.editCalibration(cal);scene()?.reset();changed();refresh();scene()?.refresh();}catch(error){message(error.message,true);refresh();}}
  $('pathway-y').onchange=()=>editConfig(c=>{if($('pathway-y').value.trim()==='')throw new Error('Enter a pathway Y.');c.stages[getStage()].pathY=Number($('pathway-y').value);});
+ function setCharacterFollow(who,follow){
+  scene()?.stop();
+  try{draft.setCharacterFollow(getStage(),who,follow);scene()?.reset();changed();message(`${who==='claude'?'Claude':'Constance'} ${follow?'follows the stage pathway':'has an independent stage offset'}. Position preserved.`);}
+  catch(error){message(error.message,true);}
+  refresh();scene()?.refresh();
+ }
+ for(const who of ['claude','constance'])$(`pathway-follow-${who}`).onchange=()=>setCharacterFollow(who,$(`pathway-follow-${who}`).checked);
  $('difficulty-profile').onchange=()=>editConfig(c=>c.profile=$('difficulty-profile').value);
  const labels={groundSpeed:'Ground speed · px/s',flyingSpeed:'Flying speed · px/s',minWindowMs:'Minimum input window · ms',spacingSeconds:'Minimum arrival spacing · s',reactionSeconds:'Reaction / action spacing · s',count:'Sequence hazard count',maxVisible:'Maximum visible hazards'};
  for(const [key,[min,max]] of Object.entries(PROFILE_FIELDS)){const label=document.createElement('label');label.className='field';label.textContent=labels[key];const input=document.createElement('input');Object.assign(input,{type:'number',min,max,step:key.includes('Seconds')?.1:1});input.dataset.profile=key;label.append(input);$('difficulty-fields').append(label);input.onchange=()=>editConfig(c=>{if(input.value.trim()==='')throw new Error('Enter a profile value.');c.profiles[c.profile][key]=Number(input.value);});}
@@ -127,5 +136,5 @@ export function setupCalibration({config,draft,items,catalog,loader,stageGroups,
   const reports=row.applied?row.profiles:row.beforeProfiles,failed=PROFILES.filter(p=>!meetsProfile(reports[p]));
   return failed.length?'Current settings need adjustment: '+failed.join(', '):'Current settings checked · all difficulties';
  }
- return {refresh,previewFor,checkStatus,isPreview:()=>Boolean(active&&fresh(active)),busy:()=>busy};
+ return {refresh,previewFor,checkStatus,setCharacterFollow,isPreview:()=>Boolean(active&&fresh(active)),busy:()=>busy};
 }

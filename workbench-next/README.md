@@ -1,6 +1,6 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 9; not the replacement editor**.
+Status: **review increment 10; not the replacement editor**.
 Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0` for EU02 and EU03 landscapes (2026-09-19). Production source/assets match this upstream snapshot; candidate-only changes remain under `workbench-next/`. EU02 is approved; EU03 is integrated and awaiting artwork approval.
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
@@ -27,6 +27,20 @@ From the repository root, run `python -m http.server 8080`, then open
 This is a working **landscape and sprite Design proposal**, using repository artwork. It includes both characters, all six states, all nine existing stages' hazards, a shared frame strip, step/play controls, full-atlas view, per-frame crops, before/after comparison, undo/redo, separate draft saving, and export. Frame/atlas playback is an artwork loop; Scene additionally provides the production-derived movement and contact checks described below. Test and Game connections are visibly deferred.
 
 It does not load the old runtime, write the current editor's storage, modify source images/configuration, or change gameplay. The candidate project export has its own format and is **not** a current game-config import. Future runtime integration must convert these complete drafts explicitly. Test and Game remain required next milestones.
+
+## Stage grounding — Review 10
+
+**Stage pathway Y · [stage]** is specific to the selected stage. It moves both linked characters and linked hazards together, without changing other stages. The left calibration panel has separate **Claude follows pathway** and **Constance follows pathway** checkboxes. The character Scene inspector exposes the same setting under **Stage grounding → Follow stage pathway**.
+
+The inspector's **Total stage offset · Y** includes the pathway shift and updates immediately. While linked, this field is read-only: use Stage pathway Y. Uncheck the link to edit that character's offset independently for this stage. Unlinking and relinking both preserve its current position; relinking follows future pathway changes without discarding the character's individual correction. Global foot offsets and per-state artwork corrections remain separate. Hazard follow controls keep their existing behavior. Link changes are atomic Undo/Redo actions, including the compensating offset. Out-of-range compensation fails without changing either setting.
+
+The project format/storage key is now **v7**. v6 browser saves and exports migrate with both characters linked, preserving current positions, pathways, profiles, hazard policies/locks and other edits. Save all writes the new copy and retains the old browser record. Export/Import includes every stage's character links. Earlier check certificates require rechecking; no optimization or geometry change is applied during migration. Rendering, optimizer actor caches, HIGH placement suggestions and sequence checks use the same character-link calculation.
+
+## Asset handoff and calibration ownership
+
+Asset creation remains a separate process. The user tells the Workbench agent when a stage's complete asset set is ready; only then does the agent integrate that set and its required metadata into the Workbench, preserving authored configuration. The user calibrates that stage, uses Save all / Export all, and moves on to the next stage. Workbench calibration is **not** a task or completion gate for asset-generation agents. Do not pull in unfinished stages automatically.
+
+“Runtime validation” means checking the saved settings against the actual game's movement, collisions and spawning. Its intended user-facing home is Workbench Test/Game. The current Design scene and checked sequences provide useful previews; full Test/Game runtime integration is still pending. “Complete-stage user review” is ordinary visual/play testing, not an additional implemented feature, separate application or extra approval step in the user's stage-by-stage workflow. Release validation remains distinct from completing assets or saving calibration. Save all stays local; Export all produces a portable project, not an automatic GitHub/game-config publication.
 
 ## Shared calibration and organized results — Review 09
 
@@ -114,7 +128,7 @@ Review 05 adds **Continent → Stage**, derived from available stage metadata. E
 - **Import** validates a project before showing field-by-field differences against your current work. Applying replaces the full editable configuration; resets are visible in the comparison. It creates a pre-import browser recovery copy first, then applies one undoable transaction. Choose Save all to persist the imported draft.
 - **Changes & recovery** compares all scopes with the GitHub baseline, identifies the source baseline, and lets you review or download the pre-import copy. That copy survives saving and reloading. Browser data is local to its origin: export/import transfers work between the preview and a compatible future GitHub-hosted editor.
 
-New v6 files record source baseline, actual asset SHA-256 hashes and dimensions. Incompatible files are rejected before mutation. Older v1/v2/v3/v4 drafts are accepted with compatibility notes; missing landscapes/boundaries use baseline values and every resulting reset is shown. Production game-config files are rejected. Maximum import size is 2 MB.
+New v7 files record source baseline, actual asset SHA-256 hashes and dimensions. Incompatible files are rejected before mutation. Older v1/v2/v3/v4 drafts are accepted with compatibility notes; missing landscapes/boundaries use baseline values and every resulting reset is shown. Production game-config files are rejected. Maximum import size is 2 MB.
 
 Failed writes retain the working draft and its dirty status. An import cannot apply unless its recovery copy was stored. Conflicting saves from another browser tab require export/reload. An unreadable browser save can be downloaded and is backed up before an explicit Save all replaces it. Original v1/v2/v3 keys remain untouched.
 
@@ -130,7 +144,7 @@ The preview fits both width and height. Zoom can show actual source pixels with 
 
 - Everything in this increment is under `workbench-next/`.
 - Existing `src/`, `assets/`, `archive/`, `config/`, CI and Pages workflows remain unchanged.
-- Storage key: `cc-workbench-next-project-v6`; pre-import recovery: `cc-workbench-next-before-import-v4`; unreadable-save backup: `cc-workbench-next-unreadable-save-v4`. Recovery keys retain their existing names; v5/v4 browser saves are preserved. Older candidate keys are read only for recovery. Layout choices use `cc-workbench-next-layout-v1` separately. No reads/writes to current editor checkpoints.
+- Storage key: `cc-workbench-next-project-v7`; pre-import recovery: `cc-workbench-next-before-import-v4`; unreadable-save backup: `cc-workbench-next-unreadable-save-v4`. Recovery keys retain their existing names; v6/v5/v4 browser saves are preserved. Older candidate keys are read only for recovery. Layout choices use `cc-workbench-next-layout-v1` separately. No reads/writes to current editor checkpoints.
 - No production promotion, main merge or Pages deployment before user approval and the existing gates.
 - `tmp/` is intentionally not used: repository policy excludes it from Git.
 - Approved source and archive files remain immutable. Keep the candidate out of the production bundle at eventual integration.

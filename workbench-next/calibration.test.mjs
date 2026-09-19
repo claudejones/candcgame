@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {descriptors} from './model.mjs';
 import {landscapeDescriptors} from './landscape.mjs';
-import {ProjectDraft,projectProvenance,PRE_CALIBRATION_FORMAT,PROJECT_STORAGE_KEY} from './project.mjs';
+import {ProjectDraft,projectProvenance,PRE_CALIBRATION_FORMAT,PRE_CHARACTER_LINK_FORMAT,PROJECT_STORAGE_KEY} from './project.mjs';
 import {sceneGeometry,STEP} from './scene-model.mjs';
 import {calibrationStamp,calibrationReferenceStamp,timingProfileStamp,PROFILES,effectivePlacement,profileConfig} from './calibration-settings.mjs';
 import {analyzeHazard,optimizeHazard,meetsProfile,makeSequence} from './calibration-engine.mjs';
@@ -34,7 +34,7 @@ test('shared path moves both characters and linked ground/HIGH/LOW hazards; loca
  assert.equal(d.calibration.stages.eu01.pathY,d.calibration.stages.eu01.originY);
 });
 
-test('v5 migration retains all edits and locks only custom hazard fields; v6 round trips calibration in one transaction',()=>{
+test('v5 migration retains all edits and locks only custom hazard fields; v7 round trips calibration in one transaction',()=>{
  const old=make(),store=memory();old.editPlacement(hazard.id,{...old.placement[hazard.id],cw:.25});old.editPlacement('grounding:na01:claude',{groundOffset:12});
  const payload=old.export();payload.format=PRE_CALIBRATION_FORMAT;delete payload.calibration;const raw=JSON.stringify(payload);store.setItem(PRE_CALIBRATION_FORMAT,raw);
  const d=make();d.load(store);assert.equal(d.placement[hazard.id].cw,.25);assert.deepEqual(d.calibration.hazards[hazard.id].locks,['cw']);assert.equal(d.calibration.stages.na01.pathY,d.calibration.stages.na01.originY);
@@ -91,4 +91,33 @@ test('only relevant timing inputs invalidate profile checks; speed or density ed
  d.calibration.profiles.hard.flyingSpeed+=10;const flying=signatures();assert.deepEqual(flying[hazard.id],before[hazard.id]);assert.notEqual(flying[fly.id][2],before[fly.id][2]);assert.deepEqual(flying[fly.id].slice(0,2),before[fly.id].slice(0,2));
  d.calibration.profiles.easy.minWindowMs+=20;assert.notEqual(signatures()[hazard.id][0],before[hazard.id][0]);assert.notEqual(signatures()[fly.id][0],before[fly.id][0]);assert.equal(calibrationReferenceStamp(d,hazard,config),geometry);assert.notEqual(calibrationStamp(d,hazard,config),certified);assert.deepEqual(d.placement,original);
  const save=memory();d.save(save);const restored=make();restored.load(save);assert.deepEqual(restored.export(),d.export());
+});
+
+
+test('per-stage character links preserve every pose, rebase atomically, and persist independently',()=>{
+ const d=make(),move=n=>{const c=structuredClone(d.calibration);c.stages.na01.pathY+=n;d.editCalibration(c);};
+ const geometry=(who='claude',state='run',stage='na01')=>sceneGeometry({config,stage,draft:d,character:find(`character:${who}:${state}`),hazard:find(`hazard:${stage}:0`)});
+ const poses=()=>Object.fromEntries(items.filter(i=>i.type==='character').map(i=>[i.id,geometry(i.id.split(':')[1],i.state).character]));
+ const other=geometry('claude','run','eu01');move(23);const before=d.export(),beforePoses=poses(),hazardY=geometry().hazard.anchor;
+ d.setCharacterFollow('na01','claude',false);assert.deepEqual(poses(),beforePoses);assert.equal(d.placement['grounding:na01:claude'].groundOffset,before.placement['grounding:na01:claude'].groundOffset+23);
+ d.undo();assert.deepEqual(d.export(),before);d.redo();assert.equal(d.calibration.stages.na01.characterFollow.claude,false);
+ move(17);assert.equal(geometry().character.foot,beforePoses['character:claude:run'].foot);assert.equal(geometry('constance').character.foot,beforePoses['character:constance:run'].foot+17);assert.equal(geometry().hazard.anchor,hazardY+17);assert.deepEqual(geometry('claude','run','eu01'),other);
+ d.editPlacement('grounding:na01:claude',{groundOffset:8});const edited=poses();d.setCharacterFollow('na01','claude',true);assert.deepEqual(poses(),edited);move(-9);assert.equal(geometry().character.foot,edited['character:claude:run'].foot-9);
+ d.setCharacterFollow('na01','constance',false);const store=memory();d.save(store);const loaded=make();loaded.load(store);assert.deepEqual(loaded.export(),d.export());const target=make();target.applyImport(target.prepareImport(d.export()),memory());assert.deepEqual(target.export(),d.export());
+ const extreme=make(),c=structuredClone(extreme.calibration);c.stages.na01.pathY=1200;extreme.editCalibration(c);const snapshot=extreme.export(),history=extreme.past.length;assert.throws(()=>extreme.setCharacterFollow('na01','claude',false),/range/);assert.deepEqual(extreme.export(),snapshot);assert.equal(extreme.past.length,history);
+});
+
+test('v6 migration preserves current geometry and automation; invalid link imports cannot mutate a draft',()=>{
+ const old=make(),c=structuredClone(old.calibration);c.stages.na01.pathY+=27;c.profile='hard';c.profiles.easy.minWindowMs=190;c.hazards[hazard.id].follow=false;c.hazards[hazard.id].locks=['cw'];old.editCalibration(c);old.editPlacement('grounding:na01:claude',{groundOffset:-11});
+ const payload=old.export();payload.format=PRE_CHARACTER_LINK_FORMAT;payload.calibration.version=1;for(const stage of Object.values(payload.calibration.stages))delete stage.characterFollow;
+ const store=memory(),raw=JSON.stringify({...payload,savedAt:'2026-09-19T12:00:00.000Z'});store.setItem(PRE_CHARACTER_LINK_FORMAT,raw);const d=make();d.load(store);assert.deepEqual(d.export(),old.export());assert.equal(d.migrated,true);assert.equal(d.dirty,true);
+ const geometry=draft=>sceneGeometry({config,stage:'na01',draft,character:find('character:claude:run'),hazard});assert.deepEqual(geometry(d),geometry(old));d.save(store);assert.equal(store.getItem(PRE_CHARACTER_LINK_FORMAT),raw);assert.ok(store.getItem(PROJECT_STORAGE_KEY));
+ const baseline=d.export();for(const mutate of [x=>x.calibration.stages.na01.characterFollow.claude='false',x=>delete x.calibration.stages.eu01.characterFollow.constance,x=>x.calibration.stages.na01.characterFollow.other=true,x=>x.calibration.version=1]){const bad=structuredClone(baseline);mutate(bad);assert.throws(()=>d.prepareImport(bad));assert.deepEqual(d.export(),baseline);}
+ const malformed=structuredClone(payload);malformed.calibration.stages.na01.characterFollow={claude:false,constance:true};assert.throws(()=>d.prepareImport(malformed));
+});
+
+test('solver actor cache respects character links even when every numeric placement stays unchanged',()=>{
+ const d=make(),c=structuredClone(d.calibration);c.stages.na01.pathY+=95;d.editCalibration(c);
+ const before=analyzeHazard({config,draft:d,items,item:hazard});const unlinked=structuredClone(d.calibration);unlinked.stages.na01.characterFollow.claude=false;d.editCalibration(unlinked);
+ const after=analyzeHazard({config,draft:d,items,item:hazard});const fresh=make();fresh.editCalibration(d.calibration,d.placement);assert.deepEqual(after,analyzeHazard({config,draft:fresh,items,item:hazard}));assert.notDeepEqual(after.characters.claude,before.characters.claude);assert.deepEqual(after.characters.constance,before.characters.constance);
 });

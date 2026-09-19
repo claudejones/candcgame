@@ -1,6 +1,6 @@
 import {SceneClock,STEP,ContactPass,PLACEMENT_FIELDS,drawDesignScene,sceneGeometry} from './scene-model.mjs';
 import {createMotion} from './runtime-rules.mjs';
-import {profileConfig,pathShift,calibrationStamp} from './calibration-settings.mjs';
+import {profileConfig,pathShift,characterPathShift,calibrationStamp} from './calibration-settings.mjs';
 import {same,validateAtlas} from './model.mjs';
 import {hitBounds} from './frame-editor.mjs';
 import {contains,dragBox,placementForBox,drawHandles} from './hitbox-editor.mjs';
@@ -105,10 +105,10 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
       if(draft.calibration.hazards[id]){const lockLabel=document.createElement('span');lockLabel.className='field-lock';const lock=document.createElement('input');lock.type='checkbox';lock.dataset.lock=id;lock.dataset.lockField=field;lock.setAttribute('aria-label',`Lock ${text}`);lockLabel.append(lock,document.createTextNode('Lock from optimizer'));label.append(lockLabel);lock.onchange=()=>{const checked=lock.checked;clock.pause();const c=structuredClone(draft.calibration),h=c.hazards[id];h.locks=checked?[...new Set([...h.locks,field])]:h.locks.filter(k=>k!==field);draft.editCalibration(c);render(current);changed();};}
 
       input.onfocus=()=>{if(clock.running)clock.pause();};
-      input.onchange=()=>{try{if(input.value.trim()==='')throw new Error('Enter a value.');draft.editPlacement(id,{...draft.placement[id],[field]:Number(input.value)});message('Updated placement. Replay the pass to check your changes.');}catch(error){message(error.message,true);}render(current);changed();};
+      input.onchange=()=>{try{if(input.disabled)throw new Error('Unlink the character from the stage pathway to edit its offset.');if(input.value.trim()==='')throw new Error('Enter a value.');draft.editPlacement(id,{...draft.placement[id],[field]:Number(input.value)});message('Updated placement. Replay the pass to check your changes.');}catch(error){message(error.message,true);}render(current);changed();};
     }
     const reset=document.createElement('button');reset.className='subtle';reset.textContent='Reset this group';reset.dataset.resetPlacement=id;reset.dataset.fields=fields.join(',');body.append(reset);
-    reset.onclick=()=>{clock.pause();draft.editPlacement(id,{...draft.placement[id],...Object.fromEntries(fields.map(f=>[f,draft.placementBaseline[id][f]]))});render(current);changed();};
+    reset.onclick=()=>{if(reset.disabled)return;clock.pause();draft.editPlacement(id,{...draft.placement[id],...Object.fromEntries(fields.map(f=>[f,draft.placementBaseline[id][f]]))});render(current);changed();};
     if(title==='Hitbox')details.addEventListener('toggle',()=>{if(details.open){$('actor-boxes').checked=true;paint();}});
     return details;
   }
@@ -119,7 +119,11 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
       if(selected.type==='character') {
         groups.push(group('Shared character',`character:${who}`,['masterScale','footOffset'],'All states · all stages'));
         groups.push(group('State placement',selected.id,['stateScale','offsetX','offsetY'],`${selected.state} · all stages`));
-        groups.push(group('Character-only stage correction',`grounding:${stage}:${who}`,['groundOffset'],`${who} · ${stage.toUpperCase()} only. Positive Y moves down.`));
+        const grounding=group(`Stage grounding · ${stage.toUpperCase()}`,`grounding:${stage}:${who}`,['groundOffset'],'');
+        const body=grounding.querySelector('.group-content'),label=document.createElement('label'),link=document.createElement('input'),note=document.createElement('p');
+        label.className='check';link.type='checkbox';link.dataset.characterFollow=who;label.append(link,document.createTextNode('Follow stage pathway'));note.className='scope-note';note.dataset.groundingHelp='';body.prepend(label,note);
+        grounding.querySelector('.field').firstChild.textContent='Total stage offset · Y';
+        link.onchange=()=>calibration()?.setCharacterFollow(who,link.checked);groups.push(grounding);
       }else {
         const fields=['scale','xOffset',...(selected.kind==='ground'?['groundOffset']:['highClearance','lowClearance']),...(selected.frames>1?['fps']:[])];
         const automation=document.createElement('div');automation.className='group-content';
@@ -130,12 +134,20 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
       const box=group('Hitbox',selected.id,['cw','ch','cx','cy'],selected.type==='character'?'Game collision proportions. At height 1, vertical offset has no effect; reduce height to create adjustment space.':'Game collision proportions. Dragging follows the same limits as these fields.',editing);box.id='hitbox-properties';groups.push(box);
       $('placement-properties').replaceChildren(...groups);
     }
-    for(const input of $('placement-properties').querySelectorAll('input[data-placement]')){const proposal=calibration()?.previewFor(context().hazard);if(updateValues)input.value=(proposal&&input.dataset.placement===proposal.row.id?proposal.value:draft.placement[input.dataset.placement])[input.dataset.field];input.disabled=!current.ready||Boolean(proposal)||Boolean(sequence);}
+    for(const input of $('placement-properties').querySelectorAll('input[data-placement]')){
+      const proposal=calibration()?.previewFor(context().hazard),id=input.dataset.placement,grounding=id.startsWith('grounding:'),linked=grounding&&draft.calibration.stages[stage].characterFollow[who];
+      if(updateValues)input.value=(proposal&&id===proposal.row.id?proposal.value:draft.placement[id])[input.dataset.field]+(grounding?characterPathShift(draft,stage,who):0);
+      input.disabled=!current.ready||Boolean(proposal)||Boolean(sequence)||linked;
+    }
+    for(const link of $('placement-properties').querySelectorAll('[data-character-follow]')){
+      link.checked=draft.calibration.stages[stage].characterFollow[link.dataset.characterFollow];link.disabled=!current.ready||Boolean(calibration()?.isPreview())||Boolean(sequence);
+      $('placement-properties').querySelector('[data-grounding-help]').textContent=link.checked?'Includes this stage’s pathway shift. Uncheck Follow stage pathway to edit independently. Global foot and state artwork corrections stay separate.':'Independent offset for this character in this stage. Positive Y moves down. Relinking keeps its position and follows future pathway changes.';
+    }
     for(const lock of $('placement-properties').querySelectorAll('[data-lock]')){lock.checked=draft.calibration.hazards[lock.dataset.lock].locks.includes(lock.dataset.lockField);lock.disabled=Boolean(calibration()?.isPreview())||Boolean(sequence);}
     for(const input of $('placement-properties').querySelectorAll('[data-policy]')){input.checked=draft.calibration.hazards[input.dataset.hazard][input.dataset.policy];input.disabled=Boolean(calibration()?.isPreview())||Boolean(sequence);}
     if($('hazard-check-status')){const policy=draft.calibration.hazards[selected.id];$('hazard-check-status').textContent=calibration()?.checkStatus(selected)??(policy.stamp?(policy.stamp===calibrationStamp(draft,selected,config)?'Applied calibration · all difficulties checked':'Needs recheck · reference, hazard or timing target changed'):'Not calibrated · optimize to propose a starting point');}
 
-    for(const reset of $('placement-properties').querySelectorAll('button')){const id=reset.dataset.resetPlacement;reset.disabled=!current.ready||Boolean(calibration()?.isPreview())||Boolean(sequence)||reset.dataset.fields.split(',').every(f=>same(draft.placement[id][f],draft.placementBaseline[id][f]));}
+    for(const reset of $('placement-properties').querySelectorAll('button')){const id=reset.dataset.resetPlacement;reset.disabled=!current.ready||Boolean(calibration()?.isPreview())||Boolean(sequence)||(id.startsWith('grounding:')&&draft.calibration.stages[stage].characterFollow[who])||reset.dataset.fields.split(',').every(f=>same(draft.placement[id][f],draft.placementBaseline[id][f]));}
   }
   function render(value){
     current=value;syncContext(value.selected,value.stage);motion??=createMotion(config,state);

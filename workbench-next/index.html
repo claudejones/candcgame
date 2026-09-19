@@ -12,7 +12,7 @@
   <header class="topbar">
     <div class="brand"><b>C<span>&</span>C</b><div>AROUND THE WORLD<small>Production workbench</small></div></div>
     <nav aria-label="Workspace mode"><button class="mode active" aria-pressed="true">Design</button><button class="mode" disabled title="Next: connect the complete draft to gameplay tests">Test <small>Planned</small></button><button class="mode" disabled title="After Test: clean playable preview of your complete draft">Game <small>Planned</small></button></nav>
-    <div class="review-badge">EDITOR NEXT <span>Review 09 · Shared calibration</span></div>
+    <div class="review-badge">EDITOR NEXT <span>Review 10 · Stage grounding</span></div>
   </header>
   <div class="review-note">Design preview · Saves stay in this browser <a href="./PLAN.md">Roadmap · Design → Test → Game ↗</a></div>
   <main class="workspace" id="workspace">
@@ -40,7 +40,11 @@
         <p class="muted">Preview context only. Select an asset above to edit its properties.</p>
       </div></details>
       <details id="calibration-panel" class="nav-group" open><summary>Calibrate hazards</summary><div class="group-content">
-        <label class="field">Shared pathway Y<input id="pathway-y" type="number" min="-200" max="1200" step="1"></label><p class="muted">Moves both characters and linked hazards. Artwork corrections stay separate.</p>
+        <label class="field"><span id="pathway-label">Stage pathway Y</span><input id="pathway-y" type="number" min="-200" max="1200" step="1" aria-describedby="pathway-help"></label>
+        <p class="muted" id="pathway-help">Selected stage only. Moves linked characters and hazards together. Other stages stay unchanged.</p>
+        <label class="check"><input id="pathway-follow-claude" type="checkbox">Claude follows pathway</label>
+        <label class="check"><input id="pathway-follow-constance" type="checkbox">Constance follows pathway</label>
+        <p class="muted">Uncheck to edit a character’s stage offset independently in the Scene inspector. Toggling keeps its current position.</p>
         <div class="cal-actions"><button id="optimize-stage">Optimize stage</button><button id="optimize-all">Optimize all</button><button id="cancel-optimization" hidden>Cancel</button></div>
         <progress id="cal-progress" max="1" value="0" hidden></progress><p id="cal-status" role="status" class="muted">One shared calibration, checked against Easy, Standard and Hard. Review before applying.</p>
         <p id="cal-profile" class="muted"></p><p id="cal-counts" role="status"></p>

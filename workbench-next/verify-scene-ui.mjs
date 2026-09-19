@@ -21,7 +21,7 @@ const $=id=>w.document.getElementById(id),wait=async()=>{for(let i=0;i<300;i++){
 const click=id=>$(id).click(),change=(node,value)=>{node.value=value;node.dispatchEvent(new w.Event('change',{bubbles:true}));};
 await import(root+'/workbench-next/app.mjs');await wait();
 click('character-tab');await wait();assert.equal($('actor-loop').checked,true);click('actor-loop');assert.equal($('actor-dock').hidden,false);assert.equal($('stage-context').hidden,false);assert.equal($('actor-play').disabled,false);
-const ground=()=>w.document.querySelector('input[data-placement="grounding:na01:claude"]');assert.ok(ground());change(ground(),'-12');assert.match($('save-status').textContent,/Unsaved/);
+const ground=()=>w.document.querySelector('input[data-placement="grounding:na01:claude"]');assert.ok(ground());assert.equal(ground().disabled,true);w.document.querySelector('[data-character-follow="claude"]').click();assert.equal(ground().disabled,false);assert.equal($('pathway-follow-claude').checked,false);change(ground(),'-12');assert.match($('save-status').textContent,/Unsaved/);
 click('actor-step');assert.match($('actor-time').textContent,/Step 1 .*0.02 s/);
 click('actor-play');assert.equal(raf.size,1);const tick=time=>{const entries=[...raf];raf.clear();for(const [,cb] of entries)cb(time);};tick(0);tick(1000);assert.match($('actor-time').textContent,/Step 61/);
 const focused=ground();focused.focus();focused.value='-13';tick(1100);assert.equal(raf.size,0);assert.equal(w.document.activeElement,focused);assert.equal(focused.value,'-13');change(focused,'-13');
@@ -30,7 +30,7 @@ change($('actor-speed'),'0.25');click('actor-play');tick(2000);tick(3000);click(
 click('actor-restart');assert.match($('actor-time').textContent,/Step 0/);assert.equal($('actor-play').textContent,'Pause / freeze');click('actor-play');
 click('save');const {PROJECT_STORAGE_KEY:key}=await import('./project.mjs');assert.equal(JSON.parse(w.localStorage.getItem(key)).placement['grounding:na01:claude'].groundOffset,-13);
 change($('continent'),'Europe');await wait();assert.equal($('actor-dock').hidden,false);assert.ok(w.document.querySelector('input[data-placement="grounding:eu01:claude"]'));
-change($('stage'),'eu03');await wait();change(w.document.querySelector('input[data-placement="grounding:eu03:claude"]'),'-19');
+change($('stage'),'eu03');await wait();assert.equal($('pathway-follow-claude').checked,true);click('pathway-follow-claude');change(w.document.querySelector('input[data-placement="grounding:eu03:claude"]'),'-19');
 if(output)fs.writeFileSync(path.join(output,'scene-character.png'),backing($('preview')).toBuffer('image/png'));
 click('frame-view');await wait();assert.equal($('actor-dock').hidden,true);assert.equal($('stage-context').hidden,true);click('atlas-view');assert.equal($('atlas-view').getAttribute('aria-pressed'),'true');click('actor-view');await wait();
 click('stage-tab');await wait();const hazardButtons=[...$('hazards').querySelectorAll('button')];hazardButtons[2].click();await wait();assert.equal($('actor-dock').hidden,false);assert.equal($('scene-flight-choice').hidden,false);change($('scene-flight'),'low');change($('scene-character'),'constance');await wait();change($('scene-state'),'slide');await wait();
@@ -79,7 +79,21 @@ const calibrationConfig=structuredClone(w.GAME_CONFIG);w.CC_LANDSCAPE_CONTRACT.a
 const allItems=descriptors(calibrationConfig,w.GAME_SCHEMA),landscapes=landscapeDescriptors(calibrationConfig,w.CC_LANDSCAPE_REGISTRY,w.CC_LANDSCAPE_CONTRACT),catalog=JSON.parse(fs.readFileSync(root+'/workbench-next/asset-catalog.json'));
 const baseline=new ProjectDraft(allItems,landscapes,catalog.dimensions,projectProvenance(catalog,allItems,landscapes),catalog.migrations,calibrationConfig).export();
 const restore=async payload=>{const text=JSON.stringify(payload);Object.defineProperty($('import-file'),'files',{configurable:true,value:[{name:'calibration.json',size:text.length,text:async()=>text}]});await $('import-file').onchange();assert.equal($('project-dialog-error').textContent,'');click('apply-import');assert.equal($('project-dialog-error').textContent,'');};
+await restore(baseline);
+// Review 10: stage scope, synchronized left/inspector links, atomic history and v6 recovery.
+change($('edit-target'),'character');assert.match($('pathway-label').textContent,/NA01/);
+const link=()=>w.document.querySelector('[data-character-follow="claude"]'),startOffset=Number(ground().value),startPath=Number($('pathway-y').value);
+change($('pathway-y'),String(startPath+10));assert.equal(Number(ground().value),startOffset+10);assert.equal(ground().disabled,true);assert.equal(link().checked,true);
+link().click();assert.equal(Number(ground().value),startOffset+10);assert.equal(ground().disabled,false);assert.equal($('pathway-follow-claude').checked,false);
+click('undo');assert.equal(Number(ground().value),startOffset+10);assert.equal(link().checked,true);assert.equal($('pathway-follow-claude').checked,true);click('redo');assert.equal(link().checked,false);
+change($('pathway-y'),String(startPath+20));assert.equal(Number(ground().value),startOffset+10);assert.equal($('pathway-follow-constance').checked,true);
+change(ground(),'7');click('pathway-follow-claude');assert.equal(Number(ground().value),7);assert.equal(link().checked,true);assert.equal(ground().disabled,true);
+change($('pathway-y'),String(startPath+24));assert.equal(Number(ground().value),11);click('pathway-follow-constance');click('save');const linksSaved=JSON.parse(w.localStorage.getItem(key));
+assert.equal(linksSaved.calibration.stages.na01.characterFollow.constance,false);assert.deepEqual(linksSaved.calibration.stages.eu01.characterFollow,{claude:true,constance:true});
+await restore(baseline);await restore(linksSaved);assert.equal(Number(ground().value),11);assert.equal($('pathway-follow-constance').checked,false);
+const v6=structuredClone(linksSaved);v6.format='cc-workbench-next-project-v6';v6.calibration.version=1;for(const stage of Object.values(v6.calibration.stages))delete stage.characterFollow;await restore(v6);assert.equal($('pathway-follow-constance').checked,true);assert.equal(Number(ground().value),11);
 await restore(baseline);change($('edit-target'),'hazard');change($('zoom'),'1');
+console.log('Review 10 DOM flow passed: stage-specific links, total offsets, no-jump toggles, independent edits, left/inspector sync, undo/redo, v7 round trip and v6 import.');
 const cancelled=$('optimize-all').onclick();click('cancel-optimization');await cancelled;assert.match($('cal-status').textContent,/Cancelled/);assert.equal($('cal-results').children.length,0);
 await $('optimize-stage').onclick();assert.equal($('cal-results').querySelectorAll('.cal-result').length,3);assert.match($('cal-status').textContent,/3 proposals/);click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement,baseline.placement,'analysis makes no edits');
 await $('cal-results').querySelector('button').onclick();await wait();assert.equal($('proposal-review').hidden,false);assert.match($('preview-label').textContent,/PROPOSED/);assert.equal($('edit-hitbox').disabled,true);assert.equal(w.document.querySelector('input[data-placement][data-field="cw"]').disabled,true);

@@ -2,7 +2,7 @@ import {same} from './model.mjs';
 import {croppedBounds,defaultBounds} from './frame-editor.mjs';
 import {drawLandscape} from './landscape.mjs';
 import {intersects} from './runtime-rules.mjs';
-import {pathShift,effectivePlacement} from './calibration-settings.mjs';
+import {characterPathShift,effectivePlacement} from './calibration-settings.mjs';
 
 export const STEP=1/60;
 export const PLACEMENT_FIELDS={
@@ -74,7 +74,7 @@ export function sceneGeometry({config,stage,draft,character,hazard,time=0,baseli
   const frames=baseline?draft.frameBaseline:draft.frames,crops=baseline?draft.baseline:draft.value,result={};
   if(character) {
     const f=motion?motion.frame:poseFrame(character,time),who=character.id.split(':')[1];
-    result.character={...characterGeometry(config,character,f,frames[character.id][f],crops[character.id][f],{...placements,groundOffset:placements[`grounding:${stage}:${who}`].groundOffset+pathShift(draft,stage,baseline)},motion?.y||0),frame:f,id:character.id};
+    result.character={...characterGeometry(config,character,f,frames[character.id][f],crops[character.id][f],{...placements,groundOffset:placements[`grounding:${stage}:${who}`].groundOffset+characterPathShift(draft,stage,who,baseline)},motion?.y||0),frame:f,id:character.id};
   }
   if(hazard) {
     const p=effectivePlacement({...draft,placement:placements},hazard,baseline),f=poseFrame(hazard,hazardTime+hazardPhase,p.fps??hazard.fps);

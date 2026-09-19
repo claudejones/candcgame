@@ -1,5 +1,14 @@
 # Workbench review — verification
 
+## Review 10 — stage grounding links
+
+- Rendering and all solver character paths honor each stage's independent character links; actor-cache keys include the effective shifts.
+- Behavior checks cover all poses, position-preserving link toggles, unaffected stages/other characters, local edits, one-step undo/redo, atomic range failures, v6 save migration, v7 save/reload/import, retained legacy records, invalid imports and cache invalidation.
+- Actual application DOM/canvas checks cover synchronized panel/inspector controls, total-offset updates/read-only state, independent editing, history, v6 import and v7 round trips, followed by the existing complete scene/proposal/sequence flows. These checks do not constitute browser layout acceptance.
+- Asset creation remains separate. Stage integration waits for the user's readiness notice; calibration and saving follow integration. Full Test/Game runtime validation remains pending.
+- All 57 Node tests and the complete DOM/canvas flow pass. Full-artwork checks retain 19 of 27 shared proposals meeting all profiles, eight correctly flagged, and all 27 stage/profile sequences clearing for both characters at 60 Hz. Publication evidence follows after deployment.
+
+
 ## Review 09 — shared calibration and organized results
 
 - 54 Node tests pass, including identical shared proposals regardless of selected difficulty, preservation of previously passing profiles, relevant-only timing invalidation, profile/placement persistence, large-list filtering, unchanged drafts, locks, migration, cancellation and deterministic sequence equations.
