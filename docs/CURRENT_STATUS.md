@@ -12,7 +12,7 @@ Updated 2026-09-19. GitHub is authoritative. Historical explanations live in DEC
 
 ## Next action
 
-In `claudejones/candcgame`: **build landscape SA03**. Follow AGENTS.md. SA02 is closed; its approved reviewed revision is `29176df173eeb78cd0436bfa98a13f22317bb07d`. The three approved images retain their verified hashes and zero offsets.
+`In claudejones/candcgame: build landscape SA03.` SA02 is closed; its approved reviewed revision is `29176df173eeb78cd0436bfa98a13f22317bb07d`. The three approved images retain their verified hashes and zero offsets. Agents follow AGENTS.md automatically; routine startup uses the focused command packet and proceeds to generation. The established connected GitHub route is documented in GITHUB_WORKFLOW; terminal credential discovery is not a startup task.
 
 ## Deferred and protected
 
