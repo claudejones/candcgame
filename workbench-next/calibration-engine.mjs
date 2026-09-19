@@ -1,7 +1,7 @@
 import {createMotion,intersects} from './runtime-rules.mjs';
 import {STEP,characterGeometry,hazardGeometry} from './scene-model.mjs';
 import {croppedBounds} from './frame-editor.mjs';
-import {pathShift,effectivePlacement,profileConfig,calibrationStamp} from './calibration-settings.mjs';
+import {pathShift,effectivePlacement,profileConfig,calibrationReferenceStamp,timingProfileStamp,PROFILES} from './calibration-settings.mjs';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const median=values=>[...values].sort((a,b)=>a-b)[Math.floor(values.length/2)];
 export function measureArtwork(image,item,draft,createCanvas=()=>document.createElement('canvas')){
@@ -31,8 +31,8 @@ function actorsFor(config,draft,items,stage,action,end){
  if(!map.has(key))map.set(key,Object.fromEntries(['claude','constance'].map(who=>[who,actorCache(config,draft,items,stage,who,action,end)])));return map.get(key);
 }
 function intervals(flags){const out=[];let start=null;for(let i=0;i<=flags.length;i++){if(flags[i]&&start===null)start=i;if(!flags[i]&&start!==null){out.push({start:start*STEP,end:(i-1)*STEP,width:(i-start)*STEP});start=null;}}return out;}
-export function analyzeHazard({config,draft,items,item,placement=draft.placement[item.id],flight='high'}){
- const cfg=profileConfig(config,draft.calibration),profile=draft.calibration.profiles[draft.calibration.profile],action=item.kind==='flying'&&flight==='high'?'slide':'jump';
+export function analyzeHazard({config,draft,items,item,placement=draft.placement[item.id],flight='high',profileName=draft.calibration.profile}){
+ const cfg=profileConfig(config,{...draft.calibration,profile:profileName}),profile=draft.calibration.profiles[profileName],action=item.kind==='flying'&&flight==='high'?'slide':'jump';
  const effective=effectivePlacement({...draft,placement:{...draft.placement,[item.id]:placement}},item),speed=item.kind==='flying'?cfg.objectQA.flying.speed:cfg.worldSpeed;
  const maxW=Math.max(...draft.frames[item.id].map((b,i)=>croppedBounds(b,draft.value[item.id][i]).w))*960/config.worldContract.sourceW*placement.scale;
  const end=Math.ceil((cfg.objectQA.x+Math.abs(placement.xOffset)+maxW*3+300)/speed/STEP),actors=actorsFor(cfg,draft,items,item.stage,action,end),phases=[];
@@ -70,27 +70,38 @@ function suggestions(config,draft,items,item,art){
  }
  return p;
 }
+export function analyzeProfiles({config,draft,items,item,placement=draft.placement[item.id],profiles=PROFILES}){
+ const flights=item.kind==='flying'?['high','low']:['high'];
+ return Object.fromEntries(profiles.map(profile=>[profile,flights.map(flight=>analyzeHazard({config,draft,items,item,placement,flight,profileName:profile}))]));
+}
+export const meetsProfile=reports=>Boolean(reports?.length)&&reports.every(r=>r.pass);
+export const meetsAll=reports=>PROFILES.every(p=>meetsProfile(reports[p]));
 export async function optimizeHazard({config,draft,items,item,art,yieldTask=()=>Promise.resolve(),cancelled=()=>false}){
  if(cancelled())throw new Error('Analysis cancelled.');
- const before={...draft.placement[item.id]},base=suggestions(config,draft,items,item,art),locked=new Set([...draft.calibration.hazards[item.id].locks,...(!draft.calibration.hazards[item.id].follow?['groundOffset','highClearance','lowClearance']:[])]),flights=item.kind==='flying'?['high','low']:['high'];
- const evaluate=p=>flights.map(flight=>analyzeHazard({config,draft,items,item,placement:p,flight}));
- const beforeReports=evaluate(before);let best=base,reports=evaluate(base),score=Math.min(...reports.map(r=>r.score));
- // Bounded geometry search. Never scale artwork or change characters/physics.
+ const before={...draft.placement[item.id]},base=suggestions(config,draft,items,item,art),locked=new Set([...draft.calibration.hazards[item.id].locks,...(!draft.calibration.hazards[item.id].follow?['groundOffset','highClearance','lowClearance']:[]) ]);
+ const evaluate=placement=>analyzeProfiles({config,draft,items,item,placement});
+ const beforeProfiles=evaluate(before),baseProfiles=evaluate(base);
+ const preserves=reports=>PROFILES.every(p=>!meetsProfile(beforeProfiles[p])||meetsProfile(reports[p]));
+ const quality=reports=>[PROFILES.filter(p=>meetsProfile(reports[p])).length,Math.min(...Object.values(reports).flat().map(r=>r.score/(r.minimumMs/1000)))];
+ const better=(a,b)=>{const x=quality(a),y=quality(b);return x[0]>y[0]||(x[0]===y[0]&&x[1]>y[1]+.00001);};
+ // Prefer the artwork alignment when it preserves existing passing profiles;
+ // retain the current configuration as a safe candidate throughout the search.
+ let best=preserves(baseProfiles)&&quality(baseProfiles)[0]>=quality(beforeProfiles)[0]?base:before,profiles=best===base?baseProfiles:beforeProfiles;
  search: for(const factor of [1,.9,.8])for(const lift of item.kind==='flying'?[0,-6,6]:[0]){
-  if(reports.every(r=>r.pass))break search;
+  if(meetsAll(profiles))break search;
   if(cancelled())throw new Error('Analysis cancelled.');
   const p={...base};if(!locked.has('cw'))p.cw=base.cw*factor;if(!locked.has('ch'))p.ch=base.ch*factor;
   if(item.kind==='flying'){if(!locked.has('highClearance'))p.highClearance=clamp(base.highClearance+lift,-300,500);if(!locked.has('lowClearance'))p.lowClearance=clamp(base.lowClearance+lift,-300,500);}
-  const r=evaluate(p),n=Math.min(...r.map(x=>x.score));
-  if(r.every(x=>x.pass)&&!reports.every(x=>x.pass)||n>score+.00001){best=p;reports=r;score=n;}
-  await yieldTask();if(reports.every(r=>r.pass))break search;
+  const r=evaluate(p);if(preserves(r)&&better(r,profiles)){best=p;profiles=r;}
+  await yieldTask();
  }
+ if(cancelled())throw new Error('Analysis cancelled.');
  const changes=Object.keys(best).filter(k=>Math.abs(best[k]-before[k])>1e-9).map(field=>({field,before:before[field],after:best[field]}));
- return {id:item.id,stage:item.stage,name:item.name,before,placement:best,beforeReports,reports,changes,warnings:[...art.warnings,...(!draft.calibration.hazards[item.id].follow?['Manual grounding retained: Follow shared pathway is off.']:[])],anchor:art.bottom,stamp:calibrationStamp(draft,item,config),ready:reports.every(r=>r.pass),reviewed:false};
+ return {id:item.id,stage:item.stage,name:item.name,before,placement:best,beforeProfiles,profiles,profileStamps:Object.fromEntries(PROFILES.map(p=>[p,timingProfileStamp(draft.calibration,item,p)])),changes,warnings:[...art.warnings,...(!draft.calibration.hazards[item.id].follow?['Manual grounding retained: Follow shared pathway is off.']:[]),...(!changes.length&&!meetsAll(profiles)?['Current settings retained; no better shared configuration found within the search limits.']:[])],anchor:art.bottom,stamp:calibrationReferenceStamp(draft,item,config),ready:meetsAll(profiles),reviewed:false};
 }
 export function makeSequence({config,draft,items,reports,stage,seed=1}){
  const p=draft.calibration.profiles[draft.calibration.profile],eligible=reports.filter(r=>r.stage===stage&&r.ready&&draft.calibration.hazards[r.id].enabled);
- if(!eligible.length)throw new Error('No checked hazards meet this profile. Optimize and apply this stage first, or adjust the profile.');
+ if(!eligible.length)throw new Error('No current hazards meet this profile. Review the calibration results or adjust its speed and timing target.');
  let rng=seed>>>0;const rand=()=>{rng=(Math.imul(1664525,rng)+1013904223)>>>0;return rng/4294967296;};
  const events=[],lastAction={claude:-100,constance:-100},motionEnd={claude:-100,constance:-100};let start=0;
  for(let i=0;i<p.count;i++){

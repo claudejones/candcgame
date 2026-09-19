@@ -1,6 +1,6 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 8.2; not the replacement editor**.
+Status: **review increment 9; not the replacement editor**.
 Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0` for EU02 and EU03 landscapes (2026-09-19). Production source/assets match this upstream snapshot; candidate-only changes remain under `workbench-next/`. EU02 is approved; EU03 is integrated and awaiting artwork approval.
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
@@ -28,13 +28,25 @@ This is a working **landscape and sprite Design proposal**, using repository art
 
 It does not load the old runtime, write the current editor's storage, modify source images/configuration, or change gameplay. The candidate project export has its own format and is **not** a current game-config import. Future runtime integration must convert these complete drafts explicitly. Test and Game remain required next milestones.
 
+## Shared calibration and organized results — Review 09
+
+**Optimize stage / Optimize all** now proposes one shared hazard configuration and checks it against **Easy, Standard and Hard**. Selecting a different preview difficulty changes the scene speed, timed demo and sequence context; it does not invalidate or rewrite approved geometry. The bounded search preserves every difficulty that the current settings already pass. Artwork size, characters, movement physics and manual field locks stay fixed. A proposal that cannot satisfy every profile remains explicitly flagged; applying it does not certify it as ready for every difficulty.
+
+Results use **continent headings → collapsible stage groups → hazard cards**, with a count for each stage, shared readiness totals, search by hazard/stage/continent, a continent filter and **All / Needs attention / Ready to apply / Selected / Applied** filters. Expand/Collapse stages affects the shown groups. Search opens matching groups. Each card contains Easy/Standard/Hard badges; its review inspector shows a Before/Proposed verdict table and the selected profile's numerical timing windows. Clear filters recovers the complete list. Selection survives filtering; the Apply controls explicitly count selected items hidden by filters. Stage Apply changes only the selected stage, while Apply all selected includes those hidden selections. Both remain one Undo transaction.
+
+**Recheck results** validates existing numbers without optimizing or applying geometry. Editing a profile's relevant speed or minimum timing window automatically rechecks that profile for affected results; unrelated profiles and hazard kinds retain their checks. Changing count, spacing, reaction time or visibility affects generated sequences only. A character/atlas/pathway/hazard reference change marks affected results for recheck; explicitly rechecking those entries uses the new working settings and clears their obsolete proposal. Re-optimize only when new geometry suggestions are wanted. Cancellation leaves unfinished entries marked for recheck and never applies values.
+
+The v6 project format and all existing placement/crop/manual settings are preserved. Only check fingerprints change: old single-profile certificates require a new check; they are not silently relabeled as all-profile approval. Results, filters and reports are session-only; Save all/Export keep authored settings, not transient reports. After reopening, Optimize or Recheck the available results to obtain fresh analysis. Profile settings and the selected preview profile retain their existing persistence behavior.
+
+On the current unmodified artwork baseline, **19 of 27 shared proposals pass all three difficulty targets**; eight remain flagged. All 27 stage/profile sequence combinations clear for both characters using their eligible hazards. These are Design solver results at 60 simulation steps/s, not exhaustive production gameplay certification. The runtime collision-order / timing-window reconciliation, main's eleven comparison candidates and full Test/Game integration remain pending. Neither production files nor existing GitHub Pages are changed by this review.
+
 ## Proposal review — Review 08.2
 
 Each hazard has an explicit **Review proposal** button; it becomes **Close comparison** while selected. That action and **Exit proposal** stop/reset the demo, hide comparison and restore the editable working scene without applying anything. Applying or invalidating a proposal also clears its preview.
 
 **Before** is the working configuration snapshot taken when analysis ran, including unsaved edits; it is not necessarily the repository baseline. **Proposed** is the optional replacement. Cards and the inspector show both timing verdicts. If both meet the target, keep the current settings unless the proposed alignment or timing margin is preferable. Both versions now have independently timed **Demo Before/Proposed** buttons for Claude and Constance. The main preview's result is labeled by version and character; the side comparison is a visual reference, not an independently checked encounter.
 
-The selected global difficulty profile, minimum input window and ground/flying speeds are visible with the results. A single demo showing **Cleared** only demonstrates one sampled action time. **Meets target** additionally requires both characters to pass the solver's sampled starting-frame checks, including both HIGH and LOW for flying hazards. Changing profile or other calibration inputs invalidates old results. This review UI update does not change the solver or resolve the runtime parity limitations below.
+The selected global difficulty profile, minimum input window and ground/flying speeds are visible with the results. A single demo showing **Cleared** only demonstrates one sampled action time. **Meets target** additionally requires both characters to pass the solver's sampled starting-frame checks, including both HIGH and LOW for flying hazards. Review 09 supersedes the original profile-selection invalidation: switching profiles keeps the all-profile checks; changing relevant timing inputs rechecks them. This review UI update does not change the solver or resolve the runtime parity limitations below.
 
 Select **Reviewed · select to apply** only for proposals you want. Apply buttons show stage and selection counts; the selection note identifies any results still needing adjustment. **Apply** updates the working draft in one Undo step. **Save all** persists in this browser; **Export all** downloads a portable project. Neither writes GitHub or updates the existing production game. Proposals still needing adjustment remain unchecked for sequence eligibility even if deliberately applied.
 

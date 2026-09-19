@@ -1,5 +1,13 @@
 # Workbench review — verification
 
+## Review 09 — shared calibration and organized results
+
+- 54 Node tests pass, including identical shared proposals regardless of selected difficulty, preservation of previously passing profiles, relevant-only timing invalidation, profile/placement persistence, large-list filtering, unchanged drafts, locks, migration, cancellation and deterministic sequence equations.
+- Actual DOM/canvas checks cover all 27 result cards grouped into nine stages/three continents, 81 difficulty badges, expansion/collapse, continent/status/text filtering, empty-state recovery, selections hidden by filters and stage-scoped Apply. They also verify separate Before/Proposed demos at different difficulties, profile selection without invalidation, flying-only timing rechecks, manual-reference rechecks without rewriting placement, batch history, all prior transport/contact/frame/atlas/scene/persistence flows.
+- Full real-artwork QA checks all 27 hazards. Nineteen shared proposals meet Easy, Standard and Hard; eight remain flagged. Every previously passing profile is retained. All 27 stage/profile combinations generate verified continuous action sequences for both characters using eligible hazards, at 60 simulation steps/s. Approved PNGs remain byte-identical.
+- The saved v6 format is unchanged; check fingerprints now cover all relevant difficulty timing inputs and ignore preview selection/spawn density. Older single-profile fingerprints deliberately require rechecking. Session reports are not persisted. No production runtime integration, main tuning candidate merge or artwork approval is implied; collision-order and timing-span reconciliation are still pending. DOM/canvas verification is not browser layout acceptance.
+- Publication evidence follows the matching preview deployment.
+
 ## Review 08.2 — proposal review clarity and exit correction
 
 - Explicit Review proposal / Close comparison controls and selected-state accessibility replace hazard-name-only buttons. Exit, apply and stale-input invalidation restore the working scene, hide comparison, clear the timed demo and restore editing.

@@ -6,8 +6,8 @@ import {descriptors} from './model.mjs';
 import {landscapeDescriptors} from './landscape.mjs';
 import {ProjectDraft,projectProvenance,PRE_CALIBRATION_FORMAT,PROJECT_STORAGE_KEY} from './project.mjs';
 import {sceneGeometry,STEP} from './scene-model.mjs';
-import {calibrationStamp,effectivePlacement,profileConfig} from './calibration-settings.mjs';
-import {analyzeHazard,optimizeHazard,makeSequence} from './calibration-engine.mjs';
+import {calibrationStamp,calibrationReferenceStamp,timingProfileStamp,PROFILES,effectivePlacement,profileConfig} from './calibration-settings.mjs';
+import {analyzeHazard,optimizeHazard,meetsProfile,makeSequence} from './calibration-engine.mjs';
 import {createMotion} from './runtime-rules.mjs';
 const context={window:{}};vm.createContext(context);
 for(const name of ['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js'])vm.runInContext(fs.readFileSync(new URL('../src/js/'+name,import.meta.url),'utf8'),context);
@@ -72,4 +72,23 @@ test('bounded optimization reports impossible geometry and proves complete gener
  }
  assert.equal(JSON.stringify(config),configBefore);assert.equal(JSON.stringify(Object.entries(d.placement).filter(([id])=>id.startsWith('character:'))),charactersBefore);
  d.placement[hazard.id]={...d.placement[hazard.id],scale:2,cw:2,ch:2};d.calibration.hazards[hazard.id].locks=['scale','cw','ch','groundOffset','cx','cy'];const impossible=await optimizeHazard({config,draft:d,items,item:hazard,art});assert.equal(impossible.ready,false);assert.equal(impossible.placement.cw,2);
+});
+
+
+test('shared proposals and certification are independent of selected difficulty; every previously passing profile is preserved',async()=>{
+ const d=make(),before=d.export(),rows=[];
+ for(const profile of PROFILES){d.calibration.profile=profile;rows.push(await optimizeHazard({config,draft:d,items,item:hazard,art}));}
+ for(const row of rows){assert.deepEqual(row.placement,rows[0].placement);assert.deepEqual(row.profiles,rows[0].profiles);assert.equal(row.stamp,rows[0].stamp);assert.deepEqual(Object.keys(row.profiles),PROFILES);for(const p of PROFILES)if(meetsProfile(row.beforeProfiles[p]))assert.equal(meetsProfile(row.profiles[p]),true,`must preserve ${p}`);}
+ assert.deepEqual(d.placement,before.placement);const stamp=calibrationStamp(d,hazard,config);d.calibration.profile='easy';assert.equal(calibrationStamp(d,hazard,config),stamp);
+});
+
+test('only relevant timing inputs invalidate profile checks; speed or density edits never alter shared placement',()=>{
+ const d=make(),fly=find('hazard:na01:2'),geometry=calibrationReferenceStamp(d,hazard,config),original=structuredClone(d.placement);
+ const signatures=()=>Object.fromEntries([hazard,fly].map(item=>[item.id,PROFILES.map(p=>timingProfileStamp(d.calibration,item,p))]));
+ const before=signatures(),certified=calibrationStamp(d,hazard,config);
+ d.calibration.profiles.hard.count=14;d.calibration.profiles.hard.spacingSeconds=2;d.calibration.profile='hard';
+ assert.deepEqual(signatures(),before);assert.equal(calibrationStamp(d,hazard,config),certified);
+ d.calibration.profiles.hard.flyingSpeed+=10;const flying=signatures();assert.deepEqual(flying[hazard.id],before[hazard.id]);assert.notEqual(flying[fly.id][2],before[fly.id][2]);assert.deepEqual(flying[fly.id].slice(0,2),before[fly.id].slice(0,2));
+ d.calibration.profiles.easy.minWindowMs+=20;assert.notEqual(signatures()[hazard.id][0],before[hazard.id][0]);assert.notEqual(signatures()[fly.id][0],before[fly.id][0]);assert.equal(calibrationReferenceStamp(d,hazard,config),geometry);assert.notEqual(calibrationStamp(d,hazard,config),certified);assert.deepEqual(d.placement,original);
+ const save=memory();d.save(save);const restored=make();restored.load(save);assert.deepEqual(restored.export(),d.export());
 });

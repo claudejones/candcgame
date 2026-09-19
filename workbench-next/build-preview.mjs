@@ -33,7 +33,7 @@ async function copy(relative) {
   await fs.mkdir(path.dirname(destination), {recursive:true});
   await fs.copyFile(path.join(root, relative), destination);
 }
-for (const filename of ['index.html','app.mjs','model.mjs','landscape.mjs','landscape-playback.mjs','scene-model.mjs','scene-ui.mjs','runtime-rules.mjs','hitbox-editor.mjs','calibration-settings.mjs','calibration-engine.mjs','calibration-ui.mjs','frame-editor.mjs','project.mjs','project-ui.mjs','workspace-ui.mjs','asset-loader.mjs','style.css','AUDIT.md','PLAN.md']) {
+for (const filename of ['index.html','app.mjs','model.mjs','landscape.mjs','landscape-playback.mjs','scene-model.mjs','scene-ui.mjs','runtime-rules.mjs','hitbox-editor.mjs','calibration-settings.mjs','calibration-engine.mjs','calibration-ui.mjs','calibration-results.mjs','frame-editor.mjs','project.mjs','project-ui.mjs','workspace-ui.mjs','asset-loader.mjs','style.css','AUDIT.md','PLAN.md']) {
   await copy(`workbench-next/${filename}`);
 }
 for (const filename of dependencies) await copy(`src/js/${filename}`);

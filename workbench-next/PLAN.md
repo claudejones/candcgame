@@ -2,7 +2,9 @@
 
 Status: proposed; parallel branch only. The user's approval is required before replacing the working interface.
 
-Current increment: **Review 08.2 — clearer proposal review**. Explicit open/close actions reliably restore the working scene. Before/Proposed have separate demos, verdicts and version-labeled results. Difficulty context, selection counts and Apply/Save/Export distinctions are visible. Analysis and preview still make no authored edits. Solver validation reconciliation and Test/Game integration remain pending.
+Current increment: **Review 09 — shared calibration and organized results**. One bounded proposal is checked across Easy, Standard and Hard, preserving existing passing profiles. Preview difficulty selection no longer invalidates shared calibration. Relevant speed/target edits recheck affected results without changing geometry; reference edits can be rechecked separately from optimization. Continent/stage groups, search/status filters, profile badges, comparison matrices and explicit hidden-selection counts support large lists. v6 authored settings are unchanged; old single-profile stamps need a new check. Runtime validation reconciliation and full Test/Game remain pending.
+
+Previous increment: **Review 08.2 — clearer proposal review**. Explicit open/close actions reliably restore the working scene. Before/Proposed have separate demos, verdicts and version-labeled results. Difficulty context, selection counts and Apply/Save/Export distinctions are visible. Analysis and preview still make no authored edits. Solver validation reconciliation and Test/Game integration remain pending.
 
 Previous increment: **Review 08.1 — continuous Scene playback**. Play now loops the current scenario by default. Pause freezes, Stop returns to the beginning frozen, Restart begins again, and disabling Loop retains a finite pass. The scenery/cloud clock continues across repetitions. Per-pass contacts, automatic proposal/sequence action schedules, readiness and v6 persistence are preserved.
 

@@ -865,7 +865,7 @@ h2 {
 #pan-tool {width:34px;min-width:34px;padding:6px;display:grid;place-items:center;}
 .cal-actions {display:flex;gap:5px;flex-wrap:wrap;margin:8px 0;}
 .cal-actions button {font-size:11px;padding:5px 7px;min-height:28px;}
-.cal-results {display:grid;gap:7px;max-height:250px;overflow:auto;}
+.cal-results {display:grid;gap:8px;max-height:440px;overflow:auto;overscroll-behavior:contain;}
 .cal-result {border:1px solid var(--line);padding:7px;border-radius:6px;font-size:11px;}
 .cal-result button {width:100%;font-size:11px;text-align:left;min-height:28px;}
 .cal-result.active {border-color:var(--accent);}
@@ -880,3 +880,19 @@ h2 {
 .field-lock input {width:12px;min-height:12px;}
 #sequence-list {font-size:11px;padding-left:20px;max-height:150px;overflow:auto;}
 #calibration-panel p,#difficulty-panel p {font-size:11px;}
+
+.cal-continent-group h4 {margin:4px 0 8px;font-size:12px;color:var(--muted);}
+.cal-stage-group {margin-bottom:7px;border:1px solid var(--line);border-radius:6px;}
+.cal-stage-group>summary {padding:8px;font-size:11px;}
+.cal-stage-group>summary small {display:block;color:var(--muted);margin:4px 0 0 12px;font-size:10px;}
+.cal-stage-results {display:grid;gap:6px;padding:0 5px 5px;}
+.cal-profile-badges {display:flex;flex-wrap:wrap;gap:4px;margin:7px 0;}
+.cal-profile-badges span {font-size:10px;padding:3px 5px;border:1px solid var(--line);border-radius:4px;}
+.cal-profile-badges .pass {color:var(--accent);}
+.cal-profile-badges .attention {color:#ffd28a;}
+.cal-profile-badges .stale {color:var(--muted);}
+#cal-result-tools .field {margin:7px 0;}
+#proposal-profiles {width:100%;border-collapse:collapse;margin:8px 0;font-size:10px;}
+#proposal-profiles caption {text-align:left;color:var(--muted);margin-bottom:6px;}
+#proposal-profiles th,#proposal-profiles td {text-align:left;padding:5px 3px;border-bottom:1px solid var(--line);}
+#proposal-profiles tr.current {background:rgba(192,234,134,.08);}

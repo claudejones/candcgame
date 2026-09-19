@@ -381,7 +381,7 @@ try{
     message(draft.load(localStorage));
   }catch(error){message(`Candidate save was not loaded: ${error.message}. The stored copy is unchanged.`,true);}
   actorScene=setupSceneEditor({config,contract,items:spriteItems,landscapes,catalog,draft,active:isActorScene,reload:()=>select(selected.id),changed:saveState,message,calibration:()=>calibrationUI});
-  calibrationUI=setupCalibration({config,draft,items:spriteItems,catalog,loader,getStage:()=>stage,navigate:async id=>{view='scene';await select(id);},scene:()=>actorScene,changed:()=>{stopMotion();saveState();render();},message});
+  calibrationUI=setupCalibration({config,draft,items:spriteItems,catalog,loader,stageGroups:stageSelection.groups,getStage:()=>stage,navigate:async id=>{view='scene';await select(id);},scene:()=>actorScene,changed:()=>{stopMotion();saveState();render();},message});
   projectWorkflow=setupProjectWorkflow({draft,beforeAction:()=>{cancelDrag();stopMotion();render();},changed:()=>render(),message});
   await select(selected.id);
 }catch(error){$('loading').classList.add('failed');$('loading').textContent=error.message;message('Could not start the Design workspace. Serve the repository over HTTP and reload.',true);}
