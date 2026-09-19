@@ -82,7 +82,7 @@ export class FrameDraft extends DesignDraft {
     if(!frames || !same(Object.keys(frames).sort(),[...this.items.keys()].sort()))throw new Error('Frame set does not match this editor.');
     if(!payload.sprites?.crops || !same(Object.keys(payload.sprites.crops).sort(),[...this.items.keys()].sort()))throw new Error('Sprite crop set does not match this editor.');
     for(const [id,item] of this.items) {
-      if(!Array.isArray(frames[id]) || frames[id].length!==item.frames || payload.sprites?.crops?.[id]?.length!==item.frames)throw new Error('Wrong frame count.');
+      if(!Array.isArray(frames[id]) || frames[id].length!==item.frames || !Array.isArray(payload.sprites.crops[id]) || payload.sprites.crops[id].length!==item.frames)throw new Error('Wrong frame count.');
       frames[id].forEach((b,i)=>validateBounds(b,this.size(id),payload.sprites.crops[id][i]));
     }
     // Validate landscape/provenance independently; new fine crops use the edited bounds.

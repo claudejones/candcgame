@@ -2,7 +2,11 @@
 
 Status: proposed; parallel branch only. The user's approval is required before replacing the working interface.
 
-Current increment: **Review 04 — atlas frame boundaries and preview space**, approved for implementation 2026-09-19. Every character/hazard frame has an editable source rectangle independent of fine crop and neighboring frames. Numeric edits, atlas drag/resize, keyboard nudges, reset, mixed Undo/Redo and v3 browser persistence/export are implemented. Fine crop remains nonnegative; expanding the source rectangle reveals more artwork. Source-image bytes and production defaults are unchanged.
+Current increment: **Review 05 — whole-project configurations and continent navigation**, requested 2026-09-19. Continent → Stage shows available registry stages and remembers the last stage per continent. Save all / Export all / Import operate on the complete editable configuration. Import validates before a field-level diff, preserves a pre-import recovery copy, and applies as one Undo step. Browser save status is distinct from GitHub. The v4 project records source and artwork provenance; v1/v2/v3 candidate drafts recover without overwriting their old keys. Runtime conversion remains pending.
+
+Next delivery sequence: **runtime adapter + in-scene Design → working Test → working Game → legacy cleanup and cutover review**. Test and Game remain required work; their visible tabs are planned, disabled entry points. No individual stage/asset save workflow is needed for the current scope.
+
+Previous increment: **Review 04 — atlas frame boundaries and preview space**, approved for implementation 2026-09-19. Every character/hazard frame has an editable source rectangle independent of fine crop and neighboring frames. Numeric edits, atlas drag/resize, keyboard nudges, reset, mixed Undo/Redo and v3 browser persistence/export are implemented. Fine crop remains nonnegative; expanding the source rectangle reveals more artwork. Source-image bytes and production defaults are unchanged.
 
 Navigation now owns landscape FAR/MID/GROUND and character states. The center has one compact view/zoom/options/focus toolbar and fits the canvas to both available dimensions. Inspector groups and the frame strip collapse independently; Focus view hides both side panels; choices use a separate layout key. Preview visibility remains outside authored configuration. Browser acceptance is still required.
 
@@ -34,10 +38,10 @@ Switching sub-tabs restores the last character/state/frame or the selected stage
 
 Next usability refinements, in order:
 
-1. Complete draft recovery: candidate import with validation/diff, clear browser-save versus repository status, and export/import round-trip before runtime integration.
+1. Completed in Review 05: candidate import with validation/diff/recovery, clear browser-save versus repository status, and whole-project export/import round-trip. Runtime snapshot conversion follows.
 2. Connect an in-scene view for scale, position, grounding and collision, while retaining the same frame tools in both sub-tabs. Audit every enabled field against a visible change and saved value.
 3. Use collapsible inspector sections and adjustable panel widths as scene controls grow; retain frame controls and Save without page-wide scrolling at normal laptop sizes.
-4. Add stage search/filter and asset readiness/approval summaries when the full 21-stage catalog is available. Load the chosen scene first and show progress/retry in that viewport.
+4. Continent → Stage replaces a flat list in Review 05. Expand from available registry entries as stages are built; add readiness/approval summaries when the full 21-stage catalog is available. Load the chosen scene first and show progress/retry in that viewport.
 5. Connect Test and Game only after the adapter preserves existing behavior; remove legacy dependencies after parity evidence, then request cutover approval.
 
 ## Loading experience — required
@@ -101,4 +105,4 @@ Milestones 2–6 are incremental changes within the parallel track. Preview prog
 
 ## Next implementation packet
 
-Continue in `editor-next`; read root AGENTS.md, Current Status and this folder. Review the landscape workspace, complete the remaining state/import contracts, then build the runtime adapter and in-scene character/hazard/finish editing. Use the current coverage matrix in AUDIT.md to prevent omissions. This is a Design increment, not a complete editor, gameplay preview, production configuration importer or approval of the replacement. Landscape artwork production remains a separate track. Main was incorporated through `723a42b…`; do not overwrite subsequent artwork/workflow changes at later integration.
+Continue in `editor-next`; read root AGENTS.md, Current Status and this folder. Review the complete project save/import workflow, then build the runtime adapter and in-scene character/hazard/finish/FX editing. Convert one validated complete project snapshot on runtime readiness and every mode transition. Test must then provide deterministic play/pause/reset/step and focused/full-stage/finish/recovery scenarios; Game must start from an explicit complete draft or baseline with diagnostics removed. Use the coverage matrix in AUDIT.md to prevent omissions. This remains a parallel Design increment, not a production importer or approval of replacement. Landscape artwork production stays separate. Main was incorporated through `723a42b…`; preserve subsequent artwork/workflow updates at later integration, and provide explicit draft compatibility handling for changed baselines.

@@ -1,6 +1,6 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 4; not the replacement editor**.
+Status: **review increment 5; not the replacement editor**.
 Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `723a42b88b44ef610da94222babee51e65018402` for the approved SA02 landscapes and workflow updates (2026-09-19).
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
@@ -22,7 +22,20 @@ From the repository root, run `python -m http.server 8080`, then open
 
 This is a working **landscape and sprite Design proposal**, using repository artwork. It includes both characters, all six states, all nine existing stages' hazards, a shared frame strip, step/play controls, full-atlas view, per-frame crops, before/after comparison, undo/redo, separate draft saving, and export. Jump/Hit playback here is an explicitly labeled artwork loop, not simulated gameplay or a timing change. Test and Game connections are visibly deferred.
 
-It does not load the old runtime, write the current editor's storage, modify source images/configuration, or change gameplay. The candidate Design export has its own format and is **not** a current game-config import. Future integration must migrate these drafts explicitly. Import UI and gameplay integration remain pending.
+It does not load the old runtime, write the current editor's storage, modify source images/configuration, or change gameplay. The candidate project export has its own format and is **not** a current game-config import. Future runtime integration must convert these complete drafts explicitly. Test and Game remain required next milestones.
+
+## One project, all configurations
+
+Review 05 adds **Continent → Stage**, derived from available stage metadata. Each continent remembers its last stage during the session, and each stage retains its selected asset. Only the three available continents and nine stages are selectable; the menu will expand with the registry. Character settings remain shared across stages.
+
+- **Save all** writes every editable landscape transform, character/hazard crop and atlas boundary to one browser checkpoint. It includes stages/assets you have not selected. Saving does not commit to GitHub. The status shows unsaved changes or the successful browser-save time.
+- **Export all** downloads the complete working project, including unsaved changes. Images remain in the repository. Exports do not mark the browser draft as saved.
+- **Import** validates a project before showing field-by-field differences against your current work. Applying replaces the full editable configuration; resets are visible in the comparison. It creates a pre-import browser recovery copy first, then applies one undoable transaction. Choose Save all to persist the imported draft.
+- **Changes & recovery** compares all scopes with the GitHub baseline, identifies the source baseline, and lets you review or download the pre-import copy. That copy survives saving and reloading. Browser data is local to its origin: export/import transfers work between the preview and a compatible future GitHub-hosted editor.
+
+New v4 files record source baseline, actual asset SHA-256 hashes and dimensions. Incompatible files are rejected before mutation. Older v1/v2/v3 drafts are accepted with compatibility notes; missing landscapes/boundaries use baseline values and every resulting reset is shown. Production game-config files are rejected. Maximum import size is 2 MB.
+
+Failed writes retain the working draft and its dirty status. An import cannot apply unless its recovery copy was stored. Conflicting saves from another browser tab require export/reload. An unreadable browser save can be downloaded and is backed up before an explicit Save all replaces it. Original v1/v2/v3 keys remain untouched.
 
 ## Frame boundary editing and layout
 
@@ -36,7 +49,7 @@ The preview fits both width and height. Zoom can show actual source pixels with 
 
 - Everything in this increment is under `workbench-next/`.
 - Existing `src/`, `assets/`, `archive/`, `config/`, CI and Pages workflows remain unchanged.
-- Storage key: `cc-workbench-next-design-draft-v3`. Existing v2 Design drafts or v1 sprite crops are recovered; saving writes only v3, retaining older copies. Layout choices use `cc-workbench-next-layout-v1` separately. No reads/writes to current editor checkpoints.
+- Storage key: `cc-workbench-next-project-v4`; pre-import recovery: `cc-workbench-next-before-import-v4`; unreadable-save backup: `cc-workbench-next-unreadable-save-v4`. Older candidate keys are read only for recovery. Layout choices use `cc-workbench-next-layout-v1` separately. No reads/writes to current editor checkpoints.
 - No production promotion, main merge or Pages deployment before user approval and the existing gates.
 - `tmp/` is intentionally not used: repository policy excludes it from Git.
 - Approved source and archive files remain immutable. Keep the candidate out of the production bundle at eventual integration.
@@ -53,4 +66,4 @@ The preview fits both width and height. Zoom can show actual source pixels with 
 
 `build-catalog.cjs` reads the existing runtime source map without executing the runtime and applies the shared landscape registry's active source overrides. Run it again when source paths or approvals change. Candidate code uses the real config's cell sizes, frame counts, crop defaults and production landscape geometry function. Source PNGs are copied without modification. Only the selected sprite or selected scene's layers/clouds are requested by the browser.
 
-Next milestone: review the proposed organization and finish persistence/runtime contracts before connecting the candidate to gameplay. See PLAN.md. Do not treat this increment as feature parity or approval of the replacement.
+Next milestone: connect the complete draft to the existing runtime and in-scene character/hazard/finish/FX editing, then implement actual Test and Game modes. See PLAN.md. This increment does not establish gameplay parity or approve replacement.

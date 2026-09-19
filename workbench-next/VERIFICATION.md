@@ -1,5 +1,16 @@
 # Workbench review — verification
 
+## Review 05 — whole-project configuration workflow
+
+Requested 2026-09-19 after the user reviewed Review 04's layout and atlas dragging positively. Changes stay under `workbench-next/`; production artwork, runtime, configs and current editor storage remain untouched.
+
+- 26 Node tests pass, including whole-project export/import/save/reload across unvisited stages, both characters and expanded-boundary fine crops; visible resets; one-step import Undo/Redo with existing history; saved/dirty behavior; invalid fields, source mismatches and stale reviews rejected before mutation; quota and conflicting-tab protection; recovery after save/reload; v1/v2/v3 recovery retaining old keys; malformed-save backup; unordered JSON object compatibility; and continent/stage memory.
+- Import preview does not write or mutate. Apply requires a durable pre-import recovery copy. Apply does not auto-save the imported project. Export includes all working changes without marking them saved.
+- Save status identifies browser persistence; the change dialog identifies the GitHub source baseline. Only current Design settings are included; Test/Game runtime settings are still pending.
+- Catalog records hashes and dimensions from unchanged repository PNGs. Syntax, ID references and static packaging are checked before publication.
+
+Browser interaction and responsive visual acceptance remain pending. Review: select Europe → EU02, change continents and return; verify EU02 is remembered. Edit one character frame, one hazard boundary and one landscape, export all, change a value, import the exported file, review/reset differences, apply, Undo/Redo, save all and reload. Under Changes & recovery, review the pre-import copy. Import an invalid JSON file to verify a visible error without losing work. Test and Game remain disabled until the runtime adapter and their dedicated milestones are complete.
+
 ## Review 04 — frame boundaries and fitted workspace
 
 Implemented from the user's approved refinement on 2026-09-19. Production/config/artwork remain untouched; this increment changes only `workbench-next/` on its existing upstream baseline.

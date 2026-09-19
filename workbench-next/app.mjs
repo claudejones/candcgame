@@ -1,7 +1,9 @@
-import {AssetSelection, descriptors, same, validateAtlas, STORAGE_KEY} from './model.mjs';
-import {DESIGN_STORAGE_KEY, LAYERS, landscapeDescriptors, drawLandscape} from './landscape.mjs';
+import {AssetSelection, descriptors, same, validateAtlas} from './model.mjs';
+import {LAYERS, landscapeDescriptors, drawLandscape} from './landscape.mjs';
 import {AssetLoader} from './asset-loader.mjs';
-import {FrameDraft,FRAME_STORAGE_KEY,croppedBounds,frameViewBox,drawSprite,hitBounds,dragBounds} from './frame-editor.mjs';
+import {croppedBounds,frameViewBox,drawSprite,hitBounds,dragBounds} from './frame-editor.mjs';
+import {ProjectDraft,projectProvenance,StageSelection} from './project.mjs';
+import {setupProjectWorkflow} from './project-ui.mjs';
 import {setupWorkspace} from './workspace-ui.mjs';
 
 const $ = id => document.getElementById(id);
@@ -11,9 +13,10 @@ contract.apply(config,registry);
 const spriteItems = descriptors(config, window.GAME_SCHEMA);
 const landscapes = landscapeDescriptors(config,registry,contract);
 const items = [...landscapes,...spriteItems];
-let draft;
+let draft,projectWorkflow;
 const loader = new AssetLoader();
 const selection = new AssetSelection(items);
+const stageSelection = new StageSelection(landscapes,registry);
 let selected = landscapes[0];
 let stage = selected.stage, frame = 0, view = 'frame', playing = false, image = null, lastTick = 0, animationRequest = 0;
 let sceneImages = {}, ready = false;
@@ -26,12 +29,7 @@ const isLandscape = () => selected.type === 'landscape';
 
 function message(text, error = false) { $('message').textContent = text; $('message').classList.toggle('error', error); }
 function saveState() {
-  if(!draft)return;
-  $('save-status').textContent = draft.dirty ? 'Unsaved browser draft changes' : 'Browser draft · no unsaved changes';
-  $('change-count').textContent = `${draft.changedFrames} sprite frames · ${draft.changedLayers} landscape layers changed`;
-  $('save').disabled = !draft.dirty;
-  $('undo').disabled = !draft.past.length;
-  $('redo').disabled = !draft.future.length;
+  projectWorkflow?.refresh();
 }
 
 function button(label, pressed, action, description) {
@@ -50,6 +48,9 @@ function navigation() {
     $(`${name}-panel`).hidden = !active;
   }
   $('stage-code').textContent = stage.toUpperCase();
+  stageSelection.remember(stage);
+  $('continent').value=stageSelection.continent;
+  $('stage').replaceChildren(...stageSelection.groups.get(stageSelection.continent).map(item=>new Option(`${item.id.toUpperCase()} · ${item.label}`,item.id)));
   $('stage').value = stage;
   $('landscapes').replaceChildren(...LAYERS.map(layer=>{
     const node=button(layer.toUpperCase(),isLandscape()&&sceneState[stage].layer===layer,()=>{
@@ -227,8 +228,9 @@ function tick(now) {
   if(playing)animationRequest=requestAnimationFrame(tick);
 }
 
-for(const [id,profile] of Object.entries(config.worldProfiles))$('stage').add(new Option(`${id.toUpperCase()} · ${profile.label.split('—')[1]?.trim()||profile.label}`,id));
-$('stage').value=stage;
+for(const name of stageSelection.groups.keys())$('continent').add(new Option(name,name));
+$('stage-availability').textContent=`${stageSelection.groups.size} continents · ${landscapes.length} available stages · 21 planned`;
+$('continent').onchange=()=>select(selection.stageId(stageSelection.choose($('continent').value)));
 $('stage').onchange=()=>select(selection.stageId($('stage').value));
 for(const scope of ['stage','character']) {
   $(`${scope}-tab`).onclick=()=>select(scope==='stage'?selection.stageId(stage):selection.characterId());
@@ -254,7 +256,7 @@ for(const field of ['scale','x','y','parallax'])$(`layer-${field}`).onchange=()=
     const raw=$(`layer-${field}`).value;if(raw.trim()==='')throw new Error('Enter a transform value.');
     const layer=sceneState[stage].layer;
     draft.editLayer(stage,layer,{...draft.transform(stage,layer),[field]:Number(raw)});
-    message(`Updated ${stage.toUpperCase()} ${layer.toUpperCase()}. Save browser draft to keep this adjustment.`);
+    message(`Updated ${stage.toUpperCase()} ${layer.toUpperCase()}. Save all to keep this adjustment.`);
   }catch(error){message(error.message,true);}render();
 };
 $('reset-layer').onclick=()=>{const layer=sceneState[stage].layer;draft.editLayer(stage,layer,draft.landscapeBaseline[stage][layer]);message(`${layer.toUpperCase()} restored to the stage baseline.`);render();};
@@ -308,21 +310,17 @@ $('preview').onkeydown=event=>{
 function history(direction) {
   const edit=(direction==='undo'?draft.past:draft.future).at(-1);if(!edit)return;
   cancelDrag();setPlaying(false);draft[direction]();
+  if(edit.kind==='project'){render();message(`${direction==='undo'?'Undid':'Redid'} the complete project import.`);return;}
   selection.remember(selected,frame);
   if(edit.kind==='landscape') {sceneState[edit.stage].layer=edit.layer;sceneState[edit.stage].view='scene';select(`landscape:${edit.stage}`);}
   else {selection.frames.set(edit.id,edit.frame);if(selected.id===edit.id)frame=edit.frame;select(edit.id);}
   message(`${direction==='undo'?'Undid':'Redid'} ${edit.kind==='landscape'?edit.stage.toUpperCase()+' '+edit.layer.toUpperCase():'sprite frame '+(edit.frame+1)} change.`);
 }
 $('undo').onclick=()=>history('undo');$('redo').onclick=()=>history('redo');
-$('save').onclick=()=>{try{draft.save(localStorage);message('Frame boundaries, crops and landscapes saved in this browser. GitHub source is unchanged.');}catch(error){message(`Save failed: ${error.message}. Export the design draft to retain your work.`,true);}saveState();};
-$('export').onclick=()=>{
-  const blob=new Blob([JSON.stringify(draft.export(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download='cc-workbench-next-design-draft.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-  message('Exported candidate boundaries, crops and landscapes. This is not a production game-config import.');
-};
 window.addEventListener('beforeunload',event=>{if(draft?.dirty){event.preventDefault();event.returnValue='';}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){setPlaying(false);render();}});
 window.addEventListener('keydown',event=>{
+  if($('project-dialog').open)return;
   if(['INPUT','SELECT','TEXTAREA','BUTTON','CANVAS','SUMMARY'].includes(document.activeElement?.tagName))return;
   if(event.key==='ArrowLeft'){event.preventDefault();setFrame(frame-1);}
   if(event.key==='ArrowRight'){event.preventDefault();setFrame(frame+1);}
@@ -330,12 +328,10 @@ window.addEventListener('keydown',event=>{
 
 try{
   const response=await fetch('./asset-catalog.json');if(!response.ok)throw new Error(`Catalog load failed (${response.status})`);catalog=await response.json();
-  draft=new FrameDraft(spriteItems,landscapes,catalog.dimensions);$('export').disabled=false;
+  draft=new ProjectDraft(spriteItems,landscapes,catalog.dimensions,projectProvenance(catalog,spriteItems,landscapes));
   try{
-    const saved=localStorage.getItem(FRAME_STORAGE_KEY), previous=localStorage.getItem(DESIGN_STORAGE_KEY), old=localStorage.getItem(STORAGE_KEY);
-    if(saved){draft.restore(JSON.parse(saved));message('Restored the browser draft: frame boundaries, landscapes and sprite crops.');}
-    else if(previous){draft.restore(JSON.parse(previous));message('Recovered the previous Design draft. Save to keep it with frame boundaries; the old copy is retained.');}
-    else if(old){draft.restoreSpriteDraft(JSON.parse(old));message('Recovered previous sprite crops. Save browser draft to include landscapes; the old saved copy is retained.');}
+    message(draft.load(localStorage));
   }catch(error){message(`Candidate save was not loaded: ${error.message}. The stored copy is unchanged.`,true);}
+  projectWorkflow=setupProjectWorkflow({draft,beforeAction:()=>{cancelDrag();setPlaying(false);render();},changed:()=>render(),message});
   await select(selected.id);
 }catch(error){$('loading').classList.add('failed');$('loading').textContent=error.message;message('Could not start the Design workspace. Serve the repository over HTTP and reload.',true);}

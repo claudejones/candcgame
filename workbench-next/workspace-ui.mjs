@@ -22,6 +22,6 @@ export function setupWorkspace() {
   const observer=new ResizeObserver(fit);for(const node of document.querySelectorAll('.canvas-scroll'))observer.observe(node);
   $('zoom').onchange=fit;
   document.addEventListener('pointerdown',event=>{if(!$('view-options').contains(event.target))$('view-options').open=false;});
-  window.addEventListener('keydown',event=>{if(event.key==='Escape'){$('view-options').open=false;focus(false);}});
+  window.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.querySelector('dialog[open]')){$('view-options').open=false;focus(false);}});
   return {fit};
 }

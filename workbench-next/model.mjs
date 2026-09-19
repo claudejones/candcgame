@@ -1,7 +1,13 @@
 export const STORAGE_KEY = 'cc-workbench-next-sprite-draft-v1';
 export const FORMAT = 'cc-workbench-next-sprite-crops-v1';
 const clone = value => JSON.parse(JSON.stringify(value));
-export const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+// JSON objects have no authored key order; reordered imports must compare equally.
+export const same = (a, b) => {
+  if (a === b) return true;
+  if (!a || !b || typeof a !== 'object' || typeof b !== 'object' || Array.isArray(a) !== Array.isArray(b)) return false;
+  const keys = Object.keys(a).sort();
+  return keys.length === Object.keys(b).length && keys.every(key => Object.hasOwn(b,key) && same(a[key],b[key]));
+};
 
 export function descriptors(config, schema) {
   const items = [];

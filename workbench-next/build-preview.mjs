@@ -30,7 +30,7 @@ async function copy(relative) {
   await fs.mkdir(path.dirname(destination), {recursive:true});
   await fs.copyFile(path.join(root, relative), destination);
 }
-for (const filename of ['index.html','app.mjs','model.mjs','landscape.mjs','frame-editor.mjs','workspace-ui.mjs','asset-loader.mjs','style.css','AUDIT.md','PLAN.md']) {
+for (const filename of ['index.html','app.mjs','model.mjs','landscape.mjs','frame-editor.mjs','project.mjs','project-ui.mjs','workspace-ui.mjs','asset-loader.mjs','style.css','AUDIT.md','PLAN.md']) {
   await copy(`workbench-next/${filename}`);
 }
 for (const filename of dependencies) await copy(`src/js/${filename}`);
@@ -39,7 +39,7 @@ for (const sourcePath of Object.values(assets)) {
   if (!relative.startsWith('assets' + path.sep)) throw new Error('Unexpected asset location');
   await copy(relative);
 }
-await fs.writeFile(path.join(outputRoot,'workbench-next/asset-catalog.json'),JSON.stringify({source:catalog.source,assets,dimensions:catalog.dimensions},null,2)+'\n');
+await fs.writeFile(path.join(outputRoot,'workbench-next/asset-catalog.json'),JSON.stringify({...catalog,assets},null,2)+'\n');
 await fs.writeFile(path.join(outputRoot,'index.html'),'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C&C Workbench — Design Preview</title><meta http-equiv="refresh" content="0;url=./workbench-next/"><a href="./workbench-next/">Open the C&C editor preview</a></html>\n');
 await fs.writeFile(path.join(target,'README.md'),'# C&C Workbench preview\n\nDerived publication of `claudejones/candcgame`, branch `editor-next`.\nEdit the GitHub source, then run its `workbench-next/build-preview.mjs` against this checkout.\nThis private preview does not replace the GitHub Pages game/editor.\n');
 console.log(`Prepared Design preview: ${keys.length} images, 9 landscapes and ${items.length} sprite/state definitions. Images load on selection.`);

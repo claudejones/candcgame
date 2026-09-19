@@ -11,10 +11,10 @@
 <body>
   <header class="topbar">
     <div class="brand"><b>C<span>&</span>C</b><div>AROUND THE WORLD<small>Production workbench</small></div></div>
-    <nav aria-label="Workspace mode"><button class="mode active" aria-pressed="true">Design</button><button class="mode" disabled>Test <small>Planned</small></button><button class="mode" disabled>Game <small>Planned</small></button></nav>
-    <div class="review-badge">EDITOR NEXT <span>Review 04</span></div>
+    <nav aria-label="Workspace mode"><button class="mode active" aria-pressed="true">Design</button><button class="mode" disabled title="Next: connect the complete draft to gameplay tests">Test <small>Planned</small></button><button class="mode" disabled title="After Test: clean playable preview of your complete draft">Game <small>Planned</small></button></nav>
+    <div class="review-badge">EDITOR NEXT <span>Review 05</span></div>
   </header>
-  <div class="review-note">Design preview · Separate browser draft <a href="./PLAN.md">Migration plan ↗</a></div>
+  <div class="review-note">Design preview · Saves stay in this browser <a href="./PLAN.md">Roadmap · Design → Test → Game ↗</a></div>
   <main class="workspace" id="workspace">
     <aside class="navigator" aria-label="Project assets">
       <div class="section-label">PROJECT</div><h1>Asset studio</h1>
@@ -23,6 +23,7 @@
         <button id="character-tab" role="tab" aria-selected="false" aria-controls="character-panel" tabindex="-1">Character</button>
       </div>
       <section id="stage-panel" class="asset-panel" role="tabpanel" aria-labelledby="stage-tab">
+        <label class="field continent-field">Continent<select id="continent"></select></label>
         <label class="field">Stage<select id="stage"></select></label>
         <details id="landscape-nav" class="nav-group" data-pref open><summary>Landscape</summary><div id="landscapes" class="asset-list"></div></details>
         <details id="hazard-nav" class="nav-group" data-pref open><summary>Hazards <span id="stage-code"></span></summary><div id="hazards" class="asset-list"></div></details>
@@ -31,7 +32,7 @@
         <p class="scope-note">Shared across all stages</p><div id="characters" class="asset-list"></div>
         <div class="section-label spaced">ANIMATION STATE</div><div id="states" class="asset-list state-list" aria-label="Character state"></div>
       </section>
-      <div class="nav-footer">9 available stages · 21 planned<p><a href="./AUDIT.md">Functionality audit ↗</a></p></div>
+      <div class="nav-footer"><span id="stage-availability">9 available stages · 21 planned</span><p><a href="./AUDIT.md">Functionality audit ↗</a></p></div>
     </aside>
     <section class="studio" aria-label="Asset workspace">
       <div class="studio-heading"><div><div class="section-label" id="breadcrumb">NA01 / LANDSCAPE</div><h2 id="asset-title">Desert</h2></div><span class="chip" id="asset-scope">STAGE NA01</span></div>
@@ -75,6 +76,19 @@
       <div id="message" role="status" class="message">Candidate draft is separate from your current editor.</div>
     </aside>
   </main>
-  <footer class="savebar"><div><strong id="save-status">No unsaved changes</strong><span id="change-count">0 changes from baseline</span></div><div class="save-actions"><button id="undo" disabled>Undo</button><button id="redo" disabled>Redo</button><button id="export" disabled>Export design draft</button><button class="primary" id="save" disabled>Save browser draft</button></div></footer>
+  <footer class="savebar"><div><strong id="save-status" role="status">Opening project…</strong><span id="change-count">All stages and characters</span></div><div class="save-actions"><button id="undo" disabled>Undo</button><button id="redo" disabled>Redo</button><button id="changes" disabled>Changes &amp; recovery</button><button id="import" disabled>Import</button><button id="export" disabled>Export all</button><button class="primary" id="save" disabled>Save all</button></div></footer>
+  <input id="import-file" type="file" accept=".json,application/json" hidden>
+  <dialog id="project-dialog" aria-labelledby="project-dialog-title" aria-describedby="project-dialog-description">
+    <div class="dialog-heading"><h2 id="project-dialog-title">Project changes</h2><button id="close-project-dialog" aria-label="Close project changes">×</button></div>
+    <p id="project-dialog-description"></p>
+    <p id="project-provenance" class="muted"></p>
+    <p id="project-scope" class="muted">One file includes every landscape, character and hazard setting available in this editor: transforms, frame boundaries and crops. Artwork stays in the project. Gameplay settings will be included when Test and Game are connected.</p>
+    <div id="import-notes" class="warning"></div>
+    <p id="project-summary" role="status"></p>
+    <div class="change-table-wrap"><table class="change-table"><thead><tr><th scope="col">Asset</th><th scope="col">Setting</th><th scope="col" id="before-heading">Baseline</th><th scope="col">After</th></tr></thead><tbody id="project-changes"></tbody></table></div>
+    <details id="recovery-panel"><summary>Recovery copies</summary><p id="recovery-status"></p><div class="recovery-actions"><button id="review-recovery" disabled>Review pre-import copy</button><button id="export-recovery" disabled>Download pre-import copy</button><button id="export-unreadable" hidden>Download unreadable save</button></div></details>
+    <p id="project-dialog-error" class="error" role="alert"></p>
+    <div class="dialog-actions"><button id="cancel-import">Close</button><button id="apply-import" class="primary" hidden>Apply all changes</button></div>
+  </dialog>
 </body>
 </html>
