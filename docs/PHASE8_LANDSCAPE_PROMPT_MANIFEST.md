@@ -241,6 +241,7 @@ Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets pas
 
 - Reference: `assets-original/current-generated/EU-assets/EU02_BG_DISTANT_PARIS.png`
 - Candidate: `assets/phase8-validation/europe/EU02_BG_DISTANT_PARIS.png`
+- Status: APPROVED 2026-09-19 — deployed integrated-stage acceptance
 - Layer directive: FAR
 - Stage lock: Preserve the Eiffel Tower focal point, Seine, arched bridges, classical Paris skyline, domes and bright blue sky. Retain the approved warm stone, green tree and blue-water balance; do not add close Haussmann façades, lamps, café objects or clouds.
 
@@ -248,6 +249,7 @@ Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets pas
 
 - Reference: `assets-original/current-generated/EU-assets/EU02_BG_MID_PARIS.png`
 - Candidate: `assets/phase8-validation/europe/EU02_BG_MID_PARIS.png`
+- Status: APPROVED 2026-09-19 — deployed integrated-stage acceptance
 - Layer directive: MID
 - Stage lock: Preserve the close Haussmann buildings, mansard roofs, leafy trees, bridge arches, stone embankment and warm Parisian streetscape. Extend useful lower ownership and overlap beyond the legacy cutoff while retaining transparent sky openings; do not add the Eiffel Tower or playable promenade surface.
 
@@ -255,6 +257,7 @@ Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets pas
 
 - Reference: `assets-original/current-generated/EU-assets/EU02_GROUND_PARIS.png`
 - Candidate: `assets/phase8-validation/europe/EU02_GROUND_PARIS.png`
+- Status: APPROVED 2026-09-19 — deployed integrated-stage acceptance
 - Layer directive: GROUND
 - Stage lock: Preserve the gray-brown stone riverside pavement, dark railing, classic black lamps and red flower planters. Extend dependable masonry/terrain depth to the bottom with a clean level gameplay edge; do not add café furniture, bicycles, buildings or water.
 

@@ -1,6 +1,6 @@
 # EU02 Paris landscape QA
 
-2026-09-19 — Deployed integrated stage; awaiting user artwork approval.
+2026-09-19 — Explicitly approved by the user.
 
 Scope: only EU02 FAR, MID and GROUND at their standard Europe validation paths, registry activation/cache keys, generated entry-page references, and workflow/QA records. No images were regenerated during recovery. The three recovered SHA-256 values match the interrupted ready-to-publish checkpoint. Approved sibling stages, original/archived files, gameplay and character/hazard calibration are unchanged.
 
@@ -28,6 +28,8 @@ Scope: only EU02 FAR, MID and GROUND at their standard Europe validation paths, 
 - Live Inspector: FAR scale 0.5524861878453038; MID/GROUND scale 0.4419889502762431; all X/Y offsets zero; MID/GROUND parallax 0.2/1. Runtime monitor confirms canonical Y=410 and rendered 410.
 - Live Design composite, Test gameplay with scrolling beyond repeated layer boundaries, and Game start/rendering inspected. No uncovered scenery gaps observed. Existing cloud behavior and deferred character/hazard calibration are preserved.
 - Full local Production CI workflow passed, including all 13 existing command/runtime tests, PNG integrity and integrated composites. Exact-revision automatic gates passed.
-- Technical verification is complete; user artwork acceptance remains pending. EU03 has not started.
+- User explicitly approved the reviewed deployed artwork on 2026-09-19. Approval preserves all three image hashes and canonical geometry; the active checkpoint is closed. EU03 has not started.
 
 - Unlimited-lives Test run completed the full course: 0:00, FINISH RELEASE, no active hazards, 21 cleared, character in CELEBRATE. Finish-marker view and final landscape continuity inspected.
+
+- Next authorized production command: `In claudejones/candcgame: build landscape EU03.`
