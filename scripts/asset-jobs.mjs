@@ -325,17 +325,18 @@ export function closeRun({statePath, expectedRevision, runId}) {
     const run=state.runs[runId];
     if (!run) throw new Error(`Unknown run ${runId}.`);
     if (state.activeRunId !== runId) throw new Error(`${runId} is not the active run.`);
-    if (run.status !== 'awaiting-approval') throw new Error(`Run ${runId} must be awaiting-approval before approved closeout.`);
-    run.status='approved';
+    if (!['awaiting-approval','asset-ready'].includes(run.status)) throw new Error(`Run ${runId} must be awaiting-approval or asset-ready before closeout.`);
+    const approved=run.status==='awaiting-approval';
+    run.status=approved?'approved':'ready-for-calibration';
     run.closedAt=new Date().toISOString();
     state.activeRunId=null;
     return {runId,status:run.status,activeRunId:null};
   }});
 }
 
-export function checkpointRun({root, statePath, expectedRevision, runId, phase, recoveryRef = null}) {
-  const phases = new Set(['working', 'ready-to-publish', 'awaiting-approval']);
-  if (!phases.has(phase)) throw new Error('Checkpoint phase must be working, ready-to-publish or awaiting-approval.');
+export function checkpointRun({root, statePath, expectedRevision, runId, phase, recoveryRef = null, handoffPath = null, handoffRecoveryRef = null}) {
+  const phases = new Set(['working', 'ready-to-publish', 'asset-ready', 'awaiting-approval']);
+  if (!phases.has(phase)) throw new Error('Checkpoint phase must be working, ready-to-publish, asset-ready or awaiting-approval.');
   return updateWorkflowState({statePath, expectedRevision, actor: 'coordinator', mutate(state) {
     const run = state.runs[runId];
     if (!run) throw new Error(`Unknown run ${runId}.`);
@@ -343,9 +344,20 @@ export function checkpointRun({root, statePath, expectedRevision, runId, phase, 
     if (phase !== 'working' && (report.missing.length || report.pending.length)) {
       throw new Error(`${phase} requires every saved job: ${report.missing.length} missing/changed, ${report.pending.length} pending.`);
     }
-    if (phase === 'awaiting-approval') {
+    if (phase === 'asset-ready' || phase === 'awaiting-approval') {
       const nonDurable = Object.values(run.jobs).filter(job => !job.durable).map(job => job.id);
       if (nonDurable.length) throw new Error(`${phase} requires verified remote recovery evidence for: ${nonDurable.join(', ')}.`);
+    }
+    if (phase === 'asset-ready') {
+      if (!handoffPath) throw new Error('asset-ready requires a validated handoff path.');
+      const relative=assertRelative(handoffPath),hash=fileHash(root,relative);
+      if (!hash) throw new Error(`asset-ready handoff is missing: ${relative}.`);
+      if(!/^refs\/remotes\/[^/]+\/(?!HEAD$).+/.test(handoffRecoveryRef??''))throw new Error('asset-ready requires an explicit fetched remote-tracking ref for the handoff bundle.');
+      let commit;
+      try{commit=execFileSync('git',['rev-parse','--verify',handoffRecoveryRef],{cwd:root,encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();}
+      catch{throw new Error(`Handoff recovery ref is not present in the fetched repository: ${handoffRecoveryRef}.`);}
+      if(gitBlobHash(root,commit,relative)!==hash)throw new Error(`Handoff recovery ref ${handoffRecoveryRef} does not preserve ${relative} at the recorded hash.`);
+      run.handoff={path:relative,sha256:hash,recoveryRef:handoffRecoveryRef,commit,remoteRefVerified:true};
     }
     if (recoveryRef && !run.recoveryRefs.includes(recoveryRef)) run.recoveryRefs.push(recoveryRef);
     run.status = phase;

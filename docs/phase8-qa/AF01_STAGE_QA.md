@@ -1,6 +1,6 @@
 # AF01 — Serengeti complete-stage QA
 
-2026-09-19. User-requested facing correction completed locally; revised deployment pending. Artwork is not approved.
+2026-09-19. The user explicitly approved the complete AF01 stage with `approve AF01`. Accepted reviewed revision: `a09b176dd8531bfb3425c9af534ff197a05a253e`, including the facing correction. The exact five-file hashes and reviewed metadata are recorded in `config/asset-workflow-state.json`; release and landscape status are approved.
 
 ## Scope and source preservation
 
@@ -42,7 +42,16 @@ Targeted AF01 asset/runtime/composite checks pass. The complete local suite iden
 
 The user identified that the porcupine and roller face away from the player. The original live review missed this requirement. Their source art faces right; runtime now mirrors only these two hazards to face left. No image regeneration or PNG edits. Shared `drawSprite` and anchor placement support the optional `flipX` flag; preview and gameplay collision X offsets mirror with the art. Source crop, animation frame order, scale, Y placement, speed and physics are unchanged. Full-atlas preview intentionally shows source pixels; cropped and scene previews show gameplay facing. Old saved designs and QA snapshots missing the flag inherit the release default while retaining other edits and explicit facing choices.
 
-`node --test scripts/tests/hazard-facing.test.cjs` checks all four frames and HIGH/LOW modes, preview/game parity, fixed-anchor geometry, reflected colliders, canvas-state restoration, default scope and saved-config migration. The refreshed gameplay measurements above reproduce four full zero-hit courses with mirrored geometry. Revised CI/Pages and live facing inspection are pending. Previous publication evidence below identifies the superseded review build.
+`node --test scripts/tests/hazard-facing.test.cjs` checks all four frames and HIGH/LOW modes, preview/game parity, fixed-anchor geometry, reflected colliders, canvas-state restoration, default scope and saved-config migration. The refreshed gameplay measurements above reproduce four full zero-hit courses with mirrored geometry. Revised development/main CI and Pages pass. Live browser review confirms the porcupine faces left in Design and the roller faces left in Test at HIGH/LOW with both character selections; displayed bounds follow the mirrored body. Six changed runtime/editor scripts were fetched from the deployed cache URLs and match the local SHA-256 hashes. All five PNGs retain their original release hashes. Previous publication evidence below identifies the superseded review build.
+
+## Current facing-revision publication
+
+- Reviewed main/development commit: `a09b176dd8531bfb3425c9af534ff197a05a253e`. Validated tree: `a56b8c736c3684aaaa29ded928e023b6a1a897da`.
+- Development Production CI: https://github.com/claudejones/candcgame/actions/runs/35463173425 — success.
+- Main Production CI: https://github.com/claudejones/candcgame/actions/runs/35463228007 — success.
+- Pages: https://github.com/claudejones/candcgame/actions/runs/35463262596 — success, same commit.
+- Review: https://claudejones.github.io/candcgame/src/dev.html → Africa → Tanzania — Serengeti savannah.
+- User acceptance: `approve AF01`, 2026-09-19. Next resolved handoff: `In claudejones/candcgame: status AF02.`
 
 ## Previous publication evidence
 
@@ -52,8 +61,13 @@ The user identified that the porcupine and roller face away from the player. The
 - Pages: https://github.com/claudejones/candcgame/actions/runs/35461507306 — success, same commit.
 - Review URL: https://claudejones.github.io/candcgame/src/dev.html. Select Africa → Tanzania — Serengeti savannah. No pilot flag required.
 - Scope: all three scenery layers, termite mound, crested porcupine, four-frame roller at HIGH/LOW, stage signature and finish. Review scenery in Design, isolated hazards in Test and the complete stage in Game.
-- Approval prompt after review: `In claudejones/candcgame: approve AF01.` Do not start AF02 before acceptance.
+- This original build was superseded by the accepted facing revision above.
 
 ## Africa trial
 
 AF01 is the first AF01–AF03 checkpoint. Original generation used 25 calls (FAR 2, MID 12, GROUND 2, OBJECT_ATLAS 7, FLYING 2); this resume used zero image-generation calls. Technical finishing used two focused workers plus coordinator review, which rejected and corrected two MID issues. Subscription usage percentage is unavailable. No measured throughput improvement is claimed before the full trial is complete.
+
+
+## Approval closeout
+
+Approval changes only status/checkpoint records, this evidence and generated registry/cache references. All five PNGs, hazard geometry (including `flipX` and HIGH placement), scenery transforms, signature, finish and runtime implementation are unchanged from the reviewed commit. The active checkpoint and coordinator run are closed. Automatic approval-record CI/Pages gates apply without another artwork review. Africa's full continent regression remains due after AF03, and the separate editor-next calibration work is not closed by this acceptance.

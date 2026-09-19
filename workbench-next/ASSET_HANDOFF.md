@@ -20,13 +20,19 @@ User direction, 2026-09-19: asset creation finishes separately. Claude notifies 
 
 Runtime correctness remains engineering work: for example, a scheduler missing spawns, drawing/collision transform disagreement or a source-anchor bug must be fixed and regression-tested. It must not be hidden with calibration values. Actual game release validation/CI is still required before publishing a playable release.
 
-## Update the real workflow contracts together
+## Separate readiness contracts
 
-The upstream workflow still couples a complete asset handoff to calibrated gameplay. `AGENTS.md` (bounded asset delegation), `docs/ASSET_COMMAND_WORKFLOW.md`, `docs/asset-profiles/hazard.md`, `docs/HAZARD_SPEC.md`, `scripts/integrate-stage.mjs`, `src/js/stage-contract.js` and their tests need a coordinated owner update before the next trial. In particular, the current release validator requires `contacts`, `collision` and `finish` checks as well as art checks before activating a stage. A prose-only change is insufficient.
+Asset-handoff schema v1 now represents truthful asset readiness separately from calibrated/playable release readiness. It requires technical, composition, animation and basic-rendering evidence while both downstream states remain `pending`. The later release validator retains its contacts, collision, finish and signature gates. An asset-ready handoff never activates a stage or labels an unrun gameplay check as passed.
 
-Introduce a truthful asset-ready handoff separately from calibrated/playable release readiness. Do not mark an unrun check as passed or weaken the later gameplay release gate. The Workbench importer must consume that asset-ready handoff when the coordinator establishes its versioned schema. This asset-only import contract is a next integration step, not a feature claimed complete by AF01 import: AF01 already supplies the current complete release contract.
+## Workbench importer
 
-No new master workflow is created by this note. It records the requested correction for the production-workflow owner to apply to the existing authoritative runbook and validators. This Workbench increment does not edit shared production instructions or promote new art acceptance.
+`node workbench-next/import-asset-handoff.mjs --bundle FILE --source-root REPOSITORY` consumes asset-handoff schema v1. The source repository bundle remains the provenance record; the Workbench stores byte-identical files at their reserved canonical paths together with the exact SHA-256 hashes and authored starting metadata.
+
+The import is transactional across preview bytes, handoff metadata, the generated asset catalog and project migration. Validation failure leaves all four unchanged. A new stage is registered only in the Workbench Design preview as `asset-ready · calibration pending`. The importer does not change the production stage status, activate the runtime stage or create finish, contact, signature or collision-pass evidence. Its provisional collision values are editable starting values and its generated compatibility finish record is an internal neutral placeholder, never release metadata.
+
+Existing saved projects migrate from their recorded provenance: prior stages and every calibration/lock field are retained, while the newly imported stage receives defaults and empty calibration certificates. Reimporting identical bytes is idempotent. Differing bytes require a separate explicit artwork-refresh migration.
+
+This Workbench increment consumes that shared contract without promoting new art acceptance.
 
 ## Facing rule for future stages
 

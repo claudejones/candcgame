@@ -7,10 +7,11 @@ const clone = value => JSON.parse(JSON.stringify(value));
 
 export function landscapeDescriptors(config, registry, contract) {
   return Object.entries(config.worldProfiles).map(([stage, profile]) => {
+    const preview=config.workbenchAssetReady?.[stage];
     const active = contract.active(registry, stage);
     const metadata = registry.stages[stage];
     return {id:`landscape:${stage}`, type:'landscape', stage, name:'Landscape',
-      status:active ? metadata.status : 'legacy',
+      status:preview ? 'asset-ready · calibration pending' : active ? metadata.status : 'legacy',
       sources:Object.fromEntries(LAYERS.map(layer => [layer, profile[`${layer}Key`]])),
       expected:active ? clone(metadata.layers) : null,
       baseline:Object.fromEntries(LAYERS.map(layer => [layer, {
@@ -18,7 +19,7 @@ export function landscapeDescriptors(config, registry, contract) {
         y:profile[layer === 'far' ? 'farY' : `${layer}YOffset`],
         parallax:layer === 'far' ? 0 : profile[`${layer}Parallax`]
       }])),
-      revision:active ? `${registry.contractVersion}:${LAYERS.map(layer=>metadata.layers[layer].cacheKey).join(':')}` : 'legacy-world-profile-v1'
+      revision:preview ? `${preview.landscape.contractVersion}:${['FAR','MID','GROUND'].map(layer=>preview.assets[layer].sha256.slice(0,8)).join(':')}` : active ? `${registry.contractVersion}:${LAYERS.map(layer=>metadata.layers[layer].cacheKey).join(':')}` : 'legacy-world-profile-v1'
     };
   });
 }

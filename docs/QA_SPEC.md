@@ -3,6 +3,12 @@
 ## Purpose
 QA must verify visual composition, gameplay behavior, collision behavior, calibration, and migration regressions without turning temporary QA controls into production configuration.
 
+## Separate readiness gates
+
+Asset-ready means the five new-stage PNGs, their source/anchor/facing metadata and the recorded technical, composition, animation and basic-rendering checks are complete. It does not activate a playable stage. Verify dimensions/alpha, seams/coverage at zero landscape offsets, source regions, animation, source anchors, believable size and the exact handoff hashes. Preserve artwork acceptance as a user decision.
+
+Calibration happens in editor-next after import: the user reviews and saves grounding, flight height, collision fairness, action timing and difficulty/spawn settings. Playable release still requires the complete release contract and its contact, collision, finish and gameplay validation. Repeated zero-hit full-course runs are not required for an asset-ready handoff. Missing calibration or release checks stay pending; a preview, successful import or CI run cannot satisfy them. Keep renderer/scheduler regression tests and historical calibration evidence, including the eleven comparison candidates.
+
 ## Current reference harness
 LAB25Q is the current behavioral/visual QA reference baseline.
 

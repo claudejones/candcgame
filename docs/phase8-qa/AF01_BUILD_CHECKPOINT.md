@@ -1,20 +1,11 @@
-# AF01 — current recovery checkpoint
+# AF01 — approved recovery checkpoint
 
-2026-09-19. Original command: `In claudejones/candcgame: build stage AF01.`
+2026-09-19. The user explicitly accepted the complete stage with `approve AF01`.
 
-The user authorized deterministic technical finishing by answering **yes** during `resume AF01`. All five production assets are complete and deployed at `9f0b5e381667c89d714f72a859adc435920bea4a`. Internal PNG, composite, animation, collision and full-course checks pass. Development/main Production CI, exact-SHA Pages deployment, deployed asset-byte verification and live browser review also pass. AF01 is not yet user-approved.
+Reviewed and accepted revision: `a09b176dd8531bfb3425c9af534ff197a05a253e`. It includes FAR/MID/GROUND, termite mound, crested porcupine, four-frame lilac-breasted roller, collision/finish metadata and the porcupine/roller facing correction. Approval does not alter images or geometry.
 
-Current QA: `docs/phase8-qa/AF01_STAGE_QA.md`. Reproducible measurements: `docs/phase8-qa/AF01_GAMEPLAY_MEASUREMENTS.json`. Production asset hashes and measured metadata: `config/stage-releases.json`. Recovery jobs: `config/asset-workflow-state.json`.
+The exact five-file hashes, reviewed metadata hashes, CI/Pages evidence and approval date are in `config/asset-workflow-state.json` under `approvedRevisions.af01`. The coordinator run is approved; both active pointers are cleared. The release and landscape registry are approved. Full technical and review evidence: `docs/phase8-qa/AF01_STAGE_QA.md`.
 
-Original selected sources remain immutable under `assets-original/africa/af01/`; their hashes and original image-generation attempts remain in `docs/phase8-qa/af01-production/SELECTED_SOURCES.json` and generation logs. Do not regenerate the completed assets.
+Original sources remain immutable under `assets-original/africa/af01/`. Do not regenerate or reopen AF01 without an explicit revision request. Preserve the separate editor-next/calibration work and eleven existing comparison candidates.
 
-Next: return the deployed review link, https://claudejones.github.io/candcgame/src/dev.html, and ask for one complete-stage acceptance. Select Africa → Tanzania — Serengeti savannah. The exact successful runs are recorded in `AF01_STAGE_QA.md` and workflow state. The final evidence checkpoint is on `work/assets/af01`; the deployed runtime remains the validated commit above. Preserve concurrent editor-next/calibration work and the eleven existing comparison candidates. Do not begin AF02 until AF01 is accepted.
-
-Copy-ready continuation: `In claudejones/candcgame: resume AF01.`
-
-After review: `In claudejones/candcgame: approve AF01.`
-
-
-## Current revision — facing correction
-
-The user requested AF01's crested porcupine and lilac-breasted roller face the player. The renderer now mirrors only those hazards, including their collider and anchor geometry. PNG hashes remain identical. Targeted facing/save tests and all four full-course simulations pass. Publish the revised runtime through the standard CI/Pages gates, verify left-facing animals live, and replace the current deployment pointer. The original deployment above is superseded for user review. No regeneration or AF02 work is authorized by this revision.
+Next resolved prompt: `In claudejones/candcgame: status AF02.` AF02 readiness/reference preparation is the next task; no new stage was started during approval closeout.

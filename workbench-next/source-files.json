@@ -4,6 +4,8 @@
   "src/js/landscape-registry.js",
   "src/js/stage-catalog.js",
   "src/js/stage-contract.js",
+  "workbench-next/imported-handoffs.js",
+  "workbench-next/asset-ready-preview.js",
   "src/js/config-schema.js",
   "src/js/landscape-contract.js"
 ]

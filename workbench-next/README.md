@@ -56,6 +56,20 @@ Asset creation remains a separate process. The user tells the Workbench agent wh
 
 “Runtime validation” means checking the saved settings against the actual game's movement, collisions and spawning. Its intended user-facing home is Workbench Test/Game. The current Design scene and checked sequences provide useful previews; full Test/Game runtime integration is still pending. “Complete-stage user review” is ordinary visual/play testing, not an additional implemented feature, separate application or extra approval step in the user's stage-by-stage workflow. Release validation remains distinct from completing assets or saving calibration. Save all stays local; Export all produces a portable project, not an automatic GitHub/game-config publication.
 
+### Import an asset-ready stage
+
+The Workbench agent imports the coordinator's versioned bundle from the source checkout:
+
+```sh
+node workbench-next/import-asset-handoff.mjs \
+  --bundle /path/to/source-repo/config/asset-handoffs/AF02.json \
+  --source-root /path/to/source-repo
+```
+
+The command accepts schema v1 `asset-ready` bundles only. It verifies the stage's five canonical paths, complete PNG structure and pixel stream, dimensions, SHA-256 hashes, evidence paths, source anchors, frame crops, facing, provisional scale and collision metadata. It copies the verified PNG bytes to their reserved canonical asset paths and adds a Workbench-only preview configuration. Calibration and release remain `pending`; the production stage catalog stays pending and no gameplay checks are synthesized.
+
+An identical repeat is a no-op. Different bytes or metadata for an already imported stage, and conflicting bytes already present at a canonical destination, are rejected so an artwork refresh cannot silently replace saved settings. Existing integrated AF01 bytes are compatibility-checked and retain their current Workbench defaults and acceptance metadata. For a new stage, the generated provenance migration retains all existing crops, bounds, landscape transforms, placement, pathway links, difficulty profiles and field locks, then adds the new stage with pending calibration defaults.
+
 ## Shared calibration and organized results — Review 09
 
 **Optimize stage / Optimize all** now proposes one shared hazard configuration and checks it against **Easy, Standard and Hard**. Selecting a different preview difficulty changes the scene speed, timed demo and sequence context; it does not invalidate or rewrite approved geometry. The bounded search preserves every difficulty that the current settings already pass. Artwork size, characters, movement physics and manual field locks stay fixed. A proposal that cannot satisfy every profile remains explicitly flagged; applying it does not certify it as ready for every difficulty.

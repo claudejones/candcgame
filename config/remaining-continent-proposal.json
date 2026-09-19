@@ -1223,19 +1223,19 @@
     "firstCheckpoint": "AF01",
     "maxActiveStages": 1,
     "maxWorkers": 2,
-    "stageReview": "One deployed complete-stage approval per stage; approval advances the next filled command.",
+    "stageReview": "AF01 accepted under the prior complete-stage flow. AF02/AF03 deliver asset-ready handoffs; the user notifies Workbench, reviews/calibrates and saves before advancing. Gameplay release remains separate.",
     "successCriteria": [
       "all three complete five-file stage sets accepted",
       "canonical zero landscape offsets",
-      "hazard contact, animation and both-character collision checks",
+      "source anchors, animation, facing, basic rendering and usable Workbench handoff; later contact/collision/gameplay validation remains required for release",
       "resume uses completed bytes",
       "record elapsed time, attempts, repeated setup and available usage; no fixed percentage claim"
     ]
   },
   "readinessEvidence": {
     "runtimeRegistration": "scripts/tests/stage-expansion.test.cjs: 21 pending/active catalog boundaries, complete fixture activation, saved config migration and shared anchor rendering. This is implementation readiness, not evidence of generated-stage playability.",
-    "hazardValidation": "scripts/validate-stage-assets.cjs + hazard-atlas-qa.py + stage-contract.js; structural fixtures passed. Real pose/collision/scale checks remain per generated stage.",
-    "landscapeContractPromotion": "User authorized proceeding with remaining-stage production on 2026-09-19 using the accepted landscape contract. Existing calibration review/adjustments are assigned to a separate auto-calibration agent and do not block asset generation; this is not acceptance of that calibration. See docs/phase8-qa/DEPENDENT_CALIBRATION_QA.md and DECISION_LOG. Per-stage reference, measured collision/integration and deployed approval gates remain."
+    "hazardValidation": "Shared asset-handoff contract and source PNG/atlas validators establish asset readiness. Character-relative calibration and collision/gameplay validation belong to editor-next and later release.",
+    "landscapeContractPromotion": "The accepted zero-offset landscape contract is authorized for remaining stages. Stage-specific references, artwork checks and explicit visual acceptance remain required. Asset-ready handoff does not imply calibrated or playable release."
   },
   "calibrationFollowUp": {
     "status": "delegated-review-and-adjustments-pending",
@@ -1245,5 +1245,14 @@
     "blocksAssetGeneration": false,
     "authorization": "User explicitly instructed remaining-stage production to proceed while the other agent reviews calibration. Do not record existing calibration as visually accepted or overwrite concurrent calibration work.",
     "legacyTuning": "paused; preserve eleven comparison candidates and regression evidence; no silent promotion, overwrite or rollback"
+  },
+  "assetHandoff": {
+    "schemaVersion": 1,
+    "directory": "config/asset-handoffs",
+    "owner": "asset production",
+    "calibrationOwner": "editor-next Workbench",
+    "completion": "asset-ready",
+    "playableActivation": false,
+    "userSequence": "Asset handoff -> user notifies Workbench agent -> import -> user calibrates and saves -> later gameplay release"
   }
 }
