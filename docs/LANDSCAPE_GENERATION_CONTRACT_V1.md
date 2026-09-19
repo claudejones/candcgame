@@ -18,7 +18,7 @@ The 2172 × 724 canvas is deliberately taller than the visible composition requi
 Bottom-to-top ownership is:
 `CONTROL -> GROUND -> MID -> FAR`, with CLOUD and HUD renderer-owned overlays.
 
-The exact logical control-zone and running-surface numbers remain subject to the rebuilt LAB25Q full-harness proof. Asset generation therefore uses normalized source-space bands so we can test the geometry without stage-specific offsets.
+The accepted modular viewport is 960×540 with running surface Y=410. Integrated landscapes use source width 2172, FAR/MID/GROUND offsets zero, FAR scale multiplier 1.25 and MID/GROUND multipliers 1.00. MID source anchor 621 and GROUND source anchor 393 map to the running surface. See the registry and WORLD_RENDERING_SPEC for source-to-runtime mapping.
 
 ### FAR contract
 - Must be a complete visual foundation across 100% of canvas width.
@@ -38,7 +38,7 @@ The exact logical control-zone and running-surface numbers remain subject to the
 ### GROUND contract
 - Canvas remains 2172 × 724.
 - The playable running surface is authored at one shared normalized source anchor across every GROUND asset.
-- V1 target source anchor: Y=393. This is inherited from LAB25Q only as the first validation anchor and may be revised once the modular full harness proves the final logical composition.
+- Accepted Phase 8 source anchor: Y=393. Do not vary it by stage or compensate for defective artwork with runtime offsets.
 - Terrain must provide substantial continuous depth beneath the running surface through the bottom overscan region.
 - The region immediately above the running surface may be transparent where MID/FAR should show through.
 - Ground must not end early and expose backing below the terrain.
@@ -75,4 +75,4 @@ Technical PASS is necessary but not sufficient. Each stage must be tested as FAR
 - no stage-specific world Y/scale correction.
 
 ## Validation sequence
-Generate one complete stage set first (FAR -> approval -> MID -> approval -> GROUND -> approval), run technical QA and full-harness composite QA, refine this contract if needed, then continue the other eight existing stages. Only after all nine existing stages pass should this contract be promoted for the remaining 36 landscapes.
+Use ASSET_COMMAND_WORKFLOW and PHASE8_LANDSCAPE_EXECUTION_PLAN. Generate/check a complete stage internally, deploy it and obtain one integrated-stage approval. NA01–NA03 and SA01 are already approved; continue from SA02 without reopening them. Only after the nine-stage validation batch passes and the remaining specifications are approved may this contract be extended to the other 36 landscapes. Preserve registered approved exceptions, including NA03 GROUND at 2170×725; never resize approved artwork merely to match the generic canvas.

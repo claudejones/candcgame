@@ -81,8 +81,6 @@ jobs:
           grep -q 'test-section h3' src/dev.html
           grep -q 'setCollisionBounds(collision)' src/js/dev/test-mode.js
           grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
-          grep -Fq 'for (const id of ["na01", "na02", "na03", "sa01"])' src/js/bootstrap/development-bootstrap.js
-          grep -Fq 'sourceW:2172,seamY:410,farY:0,farScale:1.25,midYOffset:0,midScale:1,groundYOffset:0,groundScale:1' src/js/bootstrap/development-bootstrap.js
           grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
           ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|finish-marker-editor|runtime-monitor|test-mode' src/game.html
           ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|finish-marker-editor|runtime-monitor|test-mode' src/js/bootstrap/production-bootstrap.js
@@ -101,6 +99,8 @@ jobs:
           grep -q 'slide:\[{l:0,r:0,t:0,b:0},{l:55,r:0,t:0,b:0}\]' src/js/game-config.js
           grep -q 'GROUND_SURFACE_Y = 410' docs/WORLD_RENDERING_SPEC.md
           for f in src/js/game-config.js src/js/config-schema.js src/js/game-runtime.js src/js/runtime-host-api.js src/js/game-host-ui.js src/js/bootstrap/*.js src/js/dev/*.js; do node --check "$f"; done
+          node scripts/sync-landscape-registry.cjs --check
+          node --test scripts/tests/*.test.cjs scripts/tests/*.test.mjs
           node scripts/validate-phase8-pngs.js
           python scripts/phase8-stage-qa.py --all-integrated --check-only > /dev/null
           node <<'NODE'

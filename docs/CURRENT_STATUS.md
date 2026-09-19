@@ -1,76 +1,19 @@
-# Current Status
+# Current status
 
-Last updated: 2026-09-18
+Updated 2026-09-19. GitHub is authoritative. Historical explanations live in DECISION_LOG; command execution lives in ASSET_COMMAND_WORKFLOW.
 
-## Production baseline
-Phase 6 is complete and user-verified. Phase 7 production authoring architecture is complete and was visually accepted by the user on 2026-09-18. Phase 8 landscape production now uses one integrated-stage user approval gate. FAR, MID and GROUND remain sequential internal production units, but their generation and technical iteration do not require separate user approvals when the stage direction and source references are already locked.
+- Phases 0–7 are complete; Phase 7 modular Design/Test/Game authoring was user-accepted.
+- Phase 8 covers the 27 NA/SA/EU landscape layers only. NA01, NA02, NA03 and SA01 are approved complete stage sets. North America is closed. SA02 has not started; it is the next stage, then SA03 and Europe.
+- Latest approved artwork snapshot before command-workflow setup: main `660aa55e35b378e613e07d8315074552620fcb61`. SA01 MID retains the snake and removes the monkey; SHA-256 `8e5653f5dfc7dea8254521f445e2609eebf3b1e0c683c64e4ffab38755519f03`.
+- Approved validation assets remain under `assets/phase8-validation/`; packaged production keeps its legacy assets. No artwork is replaced by the command-workflow setup. NA03 GROUND's approved 2170×725 exception remains unchanged.
+- Canonical integrated landscapes: source width 2172, viewport 960×540, ground surface 410, FAR/MID/GROUND offsets 0, scale multipliers 1.25/1/1, MID/GROUND source anchors 621/393. The registry now supplies both the development host and inner renderer. Saved legacy landscape transforms migrate without clearing unrelated authoring work. Pending stages remain legacy until integrated.
+- Commands, keys and next prompt: `node scripts/assets.mjs help`. Active work/recovery and approved revision pointers: `config/asset-workflow-state.json`. Paths/status/cache keys: `config/phase8-landscapes.json`. Browser authoring saves remain local and never write Git.
+- Publication remains development Production CI → identical tree on main → main CI → automatic Pages → deployed visual review. Technical success does not approve artwork. Platform access prompts and repository artwork acceptance are different gates.
 
-Phase 8 validation production is active. North America is complete: the complete NA01, NA02 and NA03 FAR/MID/GROUND sets are approved Phase 8 landscape assets preserved under `assets/phase8-validation/north-america/`. All three stages passed their applicable deployed integrated-stage visual QA, including gameplay/test behavior, horizontal scrolling/repeat review and Contextual Inspector landscape previews. Packaged production remains on the preserved baseline while validation continues.
+## Next action
 
-Approved QA snapshots now follow the automated GitHub path documented in `docs/GITHUB_WORKFLOW.md`: commit the exact accepted snapshot to `main`, require successful Production CI for that push SHA, then automatically deploy that same validated SHA to Pages. Development-branch and pull-request CI do not deploy. Manual Pages dispatch remains a recovery fallback only.
+In `claudejones/candcgame`: **build landscape SA02**. Follow AGENTS.md. Use a fresh conversation; the agent resolves the three asset names, references and rules. No one-time setup is needed again. At closeout the agent must print the next completed prompt automatically.
 
-Active shared runtime remains `src/index.html`, `src/css/game.css`, `src/js/game-config.js`, `src/js/game-runtime.js`, with semantic assets under `assets/`. Production remains `src/game.html` with production bootstrap only.
+## Deferred and protected
 
-## Migration status
-- Phase 0–6: COMPLETE / user verified where applicable
-- Phase 7A coordinate and viewport contract: COMPLETE
-- Phase 7B canonical configuration schema: COMPLETE / CI accepted
-- Phase 7C modular application shell/bootstrap split: COMPLETE / CI accepted
-- Phase 7D Design Asset Navigator: COMPLETE / CI accepted
-- Phase 7E Contextual Inspector: COMPLETE / CI accepted (run #78)
-- Phase 7F Landscape editor: COMPLETE / CI accepted (run #98)
-- Phase 7G Hazard/atlas editor: COMPLETE / CI accepted (run #122)
-- Phase 7H Character editor: COMPLETE / CI accepted (run #122)
-- Phase 7I Runtime Monitor: COMPLETE / CI accepted (run #122)
-- Phase 7J Test mode: COMPLETE / CI accepted (run #134)
-- Phase 7K Game mode: COMPLETE / CI accepted (run #134)
-- Phase 7L persistence/import/export finalization: COMPLETE / user accepted
-- Phase 7M final regression/CI/deployment: COMPLETE / user accepted
-
-The final Phase 7 acceptance correction added Design-mode hazard/character guide toggles, clamped Fine Crop inputs to non-negative values, locked paused animated-hazard previews to the explicitly selected frame, added an enlarged live cropped-frame preview, and made the animated-preview controls respond before their frame refresh could replace the clicked button. User testing confirmed that the pause-control issue was resolved. This correction did not alter approved assets, collision geometry or gameplay constants.
-
-## Coordinate/config authority
-Canonical logical viewport: `960 x 540`. Canonical production ground surface: `GROUND_SURFACE_Y = 410`. Canonical asset vocabulary: `SOURCE REGION -> FINE CROP -> SCALE -> POSITION -> GAMEPLAY ANCHOR -> COLLISION`.
-
-Legacy stage `seamY` and landscape offsets remain compatibility/calibration evidence only and are not canonical gameplay-coordinate authority.
-
-## Design persistence / portability
-All Design saves remain browser-local only under `cc-world-design-config-v1`; browser authoring never writes Git or production source. SAVE STAGE and SAVE CHARACTER remain scoped actions, and SAVE ALL LOCAL persists the complete current authoring draft.
-
-EXPORT STAGE remains available. EXPORT GAME CONFIG creates the complete portable canonical authoring payload. IMPORT GAME CONFIG validates schema version, 960x540 viewport, ground Y=410, all nine current stages and canonical schema invariants before replacing and persisting the local draft. Invalid/incompatible imports are rejected rather than partially applied.
-
-## Mode architecture
-DESIGN contains authoring tools. TEST exposes focused stage/character/run/reset/unlimited-lives/collision/ground-guide validation controls. Development GAME hides Design/Test authoring panels around the same renderer. Production `src/game.html` has GAME as its only mode and cannot reference development modules under CI guards.
-
-## Final Phase 7 regression guard
-Production CI checks the production/development dependency boundary, syntax for every runtime/dev module, no Base64 runtime assets, canonical 960x540/Y410 authority, all nine stage compatibility mappings, hazard counts, non-negative crop, Gaudí bench source-region baseline, approved Constance Slide crop and preserved Phase 6 gameplay constants (Slide .75, recovery 1.10, invulnerability 2.00, flying 68/18, maxVisible 2, reactionLead 2.20, characterX 220, worldSpeed 120).
-
-## Known deferred calibration/content work
-- Phase 8 regeneration of the 27 existing FAR/MID/GROUND layers as the universal-contract validation batch, followed by the remaining 36 layers after the contract passes
-- final character grounding after each corrected landscape
-- hazard visual size/position after each corrected landscape
-- collision/hitbox calibration after each corrected landscape
-- historical Slide 0.75s versus production-spec 0.70s reconciliation
-- cold first-load optimization / staged asset loading
-
-## Next production step
-North America Phase 8 landscape validation is complete. NA01, NA02 and NA03 are approved as complete FAR/MID/GROUND stage sets. NA03 passed deployed Design/Test/Game review at standard runtime MID `Y=0`, including Contextual Inspector previews and horizontal scrolling/repeat behavior. Dependent character/hazard grounding and later configuration calibration remain intentionally deferred until landscape generation is complete.
-
-The first NA03 recovery deployment used image-attachment proxy copies that had been resized in transit. The later ZIP correction restored FAR and MID successfully, but its resized-and-translated GROUND derivative did not match the image the user had approved. GROUND now uses the untouched 2170x725 ZIP original that matches the user's approved attachment, SHA-256 `095aa9cb85d4d36a2cb97f9a1d72bca8255c42abda836bfedfa6eeb893293b02`, without resizing, translation or reconstruction. Deployed review proved that the preceding MID still required runtime `Y=16`. The approved replacement uses the alternate storefront/brownstone direction and deterministic lower overscan so authored frontage continues through the final source row at standard runtime `Y=0`. Its SHA-256 is `9a6e14456bc351c18229c503d0827f5bbbf83f521a6f24bce25a2c7a7cf5ef14`. The deployed complete-stage gate is accepted.
-
-The one-time, project-wide Phase 8 workflow-support setup is complete: temporary candidate/review workspaces are ignored, `config/phase8-landscapes.json` is the machine-readable stage registry, PNG validation is registry-driven, and `scripts/phase8-stage-qa.py` produces compact technical evidence plus isolated, duplicated-wrap and canonical composite previews. Production CI validates every registry stage marked `integrated` or `approved`. The same setup already covers SA01–SA03 and EU01–EU03 and must not be repeated per continent.
-
-SA01 FAR/MID/GROUND is approved after deployed Design/Test/Game, Contextual Inspector and horizontal-scroll/repeat review. The final MID retains the colorful hanging snake and removes the monkey, SHA-256 `8e5653f5dfc7dea8254521f445e2609eebf3b1e0c683c64e4ffab38755519f03`. The accepted stage uses canonical Phase 8 geometry: source width 2172, FAR/MID/GROUND offset Y=0, FAR scale contract 1.25 and MID/GROUND scale contract 1.00. SA02 is the next production stage and must begin in a fresh conversation.
-
-Current pilot QA evidence: NA01's yellow legacy seam, red rendered GROUND surface and cyan rendered MID base coincide at canonical Y=410, so the cyan guide (drawn last) visually covers the other two. This is expected alignment, not a missing ground guide. Legacy NA02 retains separated calibration values, so its three evidence lines remain visibly distinct.
-
-NA02 deployment recovery: the first integrated upload exposed that all three generated NA02 PNGs had been truncated by an intermediate Base64/text-output transfer limit. The intact local files were losslessly re-encoded at zero pixel difference during diagnosis, but metadata was not the root cause. Large assets now require a binary-safe GitHub transfer path, Production CI validates the complete PNG chunk/CRC/decompression/scanline structure, and validation-asset URLs use content-hash version keys so corrected binaries bypass stale browser/CDN responses.
-
-The NA03 corrected-asset deployment also exposed a development-host startup race: the outer mode shell could request legacy-style suppression while the shared-runtime iframe still had a document without a `<head>`, causing an `appendChild` exception and an intermittently unusable QA application. The host now defers that operation until the iframe head exists; the iframe load event then applies it normally.
-
-## Guardrails
-- `archive/` and `assets-original/` remain immutable.
-- Approved character/hazard/shared assets are not regenerated, resized, normalized, or replaced for convenience.
-- Structural changes preserve user-approved Phase 6 behavior unless a separate explicit decision changes gameplay.
-- Legacy Phase 6 calibration values remain evidence until replacement assets are authored.
-- G1D is Slide, not Duck.
+Character grounding, hazard size/position and collision calibration follow landscape correction. Slide timing reconciliation (.75s current versus .70s historical spec), cold first-load optimization and the remaining four continents are separate future work. Preserve Phase 6 gameplay constants and the production/development boundary. Preserve `archive/` and `assets-original/`; never commit candidate/review directories.

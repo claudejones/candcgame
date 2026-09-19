@@ -4,6 +4,7 @@
 import argparse
 import hashlib
 import json
+import math
 import subprocess
 from pathlib import Path
 
@@ -52,40 +53,36 @@ def edge_delta(image):
     return round(total / (rgba.height * 4), 3)
 
 
-def render_layer(image, layer_name, viewport, output_width):
-    viewport_width = viewport["width"]
+def render_layer(image, geometry, viewport, output_width):
     viewport_height = viewport["height"]
-    base_scale = viewport_width / 2172
-    scale = base_scale * viewport[f"{layer_name}Scale"]
+    scale = geometry["scale"]
     resized = image.convert("RGBA").resize(
-        (max(1, round(image.width * scale)), max(1, round(image.height * scale))),
+        (max(1, math.ceil(image.width * scale)), max(1, math.ceil(image.height * scale))),
         Image.Resampling.NEAREST,
     )
-    if layer_name == "far":
-        draw_y = 0
-    elif layer_name == "mid":
-        draw_y = round(viewport["groundSurfaceY"] - viewport["midBaselineSourceY"] * scale)
-    else:
-        draw_y = round(viewport["groundSurfaceY"] - viewport["groundSurfaceSourceY"] * scale)
+    draw_y = math.floor(geometry["y"] + 0.5)
     canvas = Image.new("RGBA", (output_width, viewport_height), (0, 0, 0, 0))
-    tile_width = resized.width
+    tile_width = image.width * scale
     x = 0
     while x < output_width:
-        canvas.alpha_composite(resized, (x, draw_y))
+        canvas.alpha_composite(resized, (math.floor(x + 0.5), draw_y))
         x += tile_width
     return canvas
 
 
-def validate_stage(stage_id, stage, registry, output_root, check_only):
-    subprocess.run(
-        ["node", str(ROOT / "scripts" / "validate-phase8-pngs.js"), "--stage", stage_id],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
+def validate_stage(stage_id, stage, registry, output_root, check_only, skip_png=False, layer=None, preview=False):
+    if not skip_png:
+        subprocess.run(
+            ["node", str(ROOT / "scripts" / "validate-phase8-pngs.js"), "--stage", stage_id]
+            + (["--layer", layer] if layer else []),
+            cwd=ROOT, check=True, capture_output=True, text=True,
+        )
+    runtime = json.loads(subprocess.check_output(
+        ["node", str(ROOT / "scripts" / "landscape-runtime-state.cjs"), stage_id]
+        + (["--preview"] if preview else []), cwd=ROOT, text=True,
+    ))
 
-    report = {"stage": stage_id, "label": stage["label"], "status": stage["status"], "layers": {}}
+    report = {"stage": stage_id, "label": stage["label"], "status": stage["status"], "runtime": runtime, "layers": {}}
     images = {}
     for layer_name in LAYER_ORDER:
         spec = stage["layers"][layer_name]
@@ -119,8 +116,8 @@ def validate_stage(stage_id, stage, registry, output_root, check_only):
         }
 
     viewport = registry["viewport"]
-    isolated = {name: render_layer(image, name, viewport, viewport["width"]) for name, image in images.items()}
-    wrap = {name: render_layer(image, name, viewport, viewport["width"] * 2) for name, image in images.items()}
+    isolated = {name: render_layer(image, runtime["geometry"][name], viewport, viewport["width"]) for name, image in images.items()}
+    wrap = {name: render_layer(image, runtime["geometry"][name], viewport, viewport["width"] * 2) for name, image in images.items()}
     composite = Image.new("RGBA", (viewport["width"], viewport["height"]), (0, 0, 0, 0))
     for layer_name in LAYER_ORDER:
         composite.alpha_composite(isolated[layer_name])
@@ -152,6 +149,9 @@ def main():
     parser.add_argument("stage", nargs="?")
     parser.add_argument("--all-integrated", action="store_true")
     parser.add_argument("--check-only", action="store_true")
+    parser.add_argument("--skip-png", action="store_true", help="Use only after the same files passed PNG validation")
+    parser.add_argument("--layer", choices=LAYER_ORDER, help="Validate the changed PNG; composite still includes all layers")
+    parser.add_argument("--preview", action="store_true", help="Prospective geometry for an unintegrated stage; never deployment evidence")
     parser.add_argument("--output", type=Path, default=ROOT / "tmp" / "phase8-qa")
     args = parser.parse_args()
     registry = json.loads(REGISTRY_PATH.read_text())
@@ -166,7 +166,7 @@ def main():
     else:
         parser.error("provide STAGE or --all-integrated")
 
-    reports = [validate_stage(stage_id, stage, registry, args.output, args.check_only) for stage_id, stage in selected]
+    reports = [validate_stage(stage_id, stage, registry, args.output, args.check_only, args.skip_png, args.layer, args.preview) for stage_id, stage in selected]
     summary = {
         "validated": [report["stage"] for report in reports],
         "outputs": {report["stage"]: report.get("output") for report in reports if report.get("output")},

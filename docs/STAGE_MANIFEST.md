@@ -45,6 +45,8 @@ Known approved hazards include macaws, Andean flamingo, and tropical parakeets. 
 ## Remaining continents
 Four continents / 12 stages remain to be specified and produced. Their exact stage identities/themes must be taken from an approved product/stage specification once recovered or explicitly approved; do not invent them from memory.
 
+Command keys reserve AF01–AF03 (Africa), AS01–AS03 (Asia), OC01–OC03 (Oceania/Australia; AU alias), and AN01–AN03 (Antarctica). These are identifiers, not approved themes or generation authorization. `config/asset-commands.json` is the key catalog; `help keys` lists it. Phase 8 remains NA/SA/EU only.
+
 ## Current landscape audit scope
 27 landscape assets across NA01–NA03, SA01–SA03 and EU01–EU03: FAR/DISTANT + MID + GROUND for each stage.
 

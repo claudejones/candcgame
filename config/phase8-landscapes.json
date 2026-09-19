@@ -1,5 +1,6 @@
 {
   "schemaVersion": 1,
+  "contractVersion": "phase8-landscape-1",
   "canvas": {"width": 2172, "height": 724},
   "viewport": {"width": 960, "height": 540, "groundSurfaceY": 410, "midBaselineSourceY": 621, "groundSurfaceSourceY": 393, "farScale": 1.25, "midScale": 1, "groundScale": 1},
   "stages": {

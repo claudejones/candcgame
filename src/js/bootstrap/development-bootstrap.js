@@ -6,10 +6,7 @@
   const requested = (params.get("mode") || "design").toLowerCase();
   let mode = VALID_MODES.includes(requested) ? requested : "design";
 
-  for (const id of ["na01", "na02", "na03", "sa01"]) {
-    const pilot = window.GAME_CONFIG?.worldProfiles?.[id];
-    if (pilot) Object.assign(pilot, {sourceW:2172,seamY:410,farY:0,farScale:1.25,midYOffset:0,midScale:1,groundYOffset:0,groundScale:1,characterGrounding:{claude:0,constance:0}});
-  }
+  window.CC_LANDSCAPE_CONTRACT.apply(window.GAME_CONFIG, window.CC_LANDSCAPE_REGISTRY);
 
   const listeners = new Set();
   const notify = () => listeners.forEach(fn => fn(mode));
@@ -43,8 +40,9 @@
     const frame = document.getElementById("sharedRuntime");
     if (!frame) return;
     const url = new URL(frame.src, window.location.href);
-    if (url.searchParams.get("phase8Pilot") === "na01") return;
-    url.searchParams.set("phase8Pilot", "na01");
+    if (url.searchParams.get("landscapes") === "phase8") return;
+    url.searchParams.delete("phase8Pilot");
+    url.searchParams.set("landscapes", "phase8");
     frame.src = url;
   }, {once:true});
 })();

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "repository": "claudejones/candcgame",
+  "runbook": "docs/ASSET_COMMAND_WORKFLOW.md",
+  "continents": {
+    "NA": {"name": "North America", "phase8": true},
+    "SA": {"name": "South America", "phase8": true},
+    "EU": {"name": "Europe", "phase8": true},
+    "AF": {"name": "Africa", "phase8": false},
+    "AS": {"name": "Asia", "phase8": false},
+    "OC": {"name": "Oceania / Australia", "phase8": false, "aliases": ["AU"]},
+    "AN": {"name": "Antarctica", "phase8": false}
+  },
+  "stageNumbers": ["01", "02", "03"],
+  "families": {
+    "landscape": {"state": "ready", "aliases": ["landscapes"], "registry": "config/phase8-landscapes.json", "profile": "docs/asset-profiles/landscape.md", "layers": {"FAR": ["DISTANT", "BG_FAR", "BG_DISTANT"], "MID": ["BG_MID"], "GROUND": []}},
+    "character": {"state": "registration-required", "aliases": ["characters"], "specs": ["docs/CHARACTER_SPEC.md", "docs/ASSET_PRODUCTION_SPEC.md", "docs/GAMEPLAY_SPEC.md"]},
+    "hazard": {"state": "registration-required", "aliases": ["hazards"], "specs": ["docs/HAZARD_SPEC.md", "docs/ASSET_PRODUCTION_SPEC.md", "docs/GAMEPLAY_SPEC.md", "docs/QA_SPEC.md"]},
+    "object": {"state": "registration-required", "aliases": ["objects"], "specs": ["docs/HAZARD_SPEC.md", "docs/ASSET_PRODUCTION_SPEC.md", "docs/STAGE_MANIFEST.md"]},
+    "ui": {"state": "registration-required", "aliases": ["hud"], "specs": ["docs/UI_UX_SPEC.md", "docs/ASSET_PRODUCTION_SPEC.md"]},
+    "shared": {"state": "registration-required", "aliases": ["effect", "effects"], "specs": ["docs/ASSET_PRODUCTION_SPEC.md", "docs/WORLD_RENDERING_SPEC.md"]}
+  },
+  "commands": {
+    "help": {"example": "help", "summary": "List commands, valid keys and supported asset families.", "operation": "read"},
+    "status": {"example": "status SA02", "summary": "Show approval, file availability and saved checkpoint.", "operation": "read"},
+    "build": {"example": "build landscape SA02", "summary": "Complete one unapproved stage through deployed review; reuse completed work.", "operation": "produce-and-publish"},
+    "generate": {"example": "generate landscape SA02", "summary": "Alias for build: generate, check and deploy an unapproved target for review.", "operation": "produce-and-publish"},
+    "regenerate": {"example": "regenerate landscape NA01 MID", "summary": "Explicitly reopen and regenerate only the selected layer or stage, then deploy for review.", "operation": "produce-and-publish"},
+    "revise": {"example": "revise landscape SA01 MID: remove the monkey; keep the snake", "summary": "Apply the requested edit to one current image and deploy it with the existing stage.", "operation": "edit-and-publish"},
+    "verify": {"example": "verify SA01", "summary": "Inspect existing files, effective runtime and deployment; no artwork changes.", "operation": "read"},
+    "publish": {"example": "publish SA02", "summary": "Publish a saved validated snapshot; never regenerate during publication.", "operation": "publish-only"},
+    "resume": {"example": "resume SA02", "summary": "Inspect remote checkpoint and resume the pending operation without starting over.", "operation": "resume"},
+    "approve": {"example": "approve SA02", "summary": "Record explicit acceptance of the reviewed deployed revision and print the next command.", "operation": "accept"},
+    "rollback": {"example": "rollback SA01", "summary": "Restore the saved last-approved stage snapshot through a new commit; preserve unrelated work.", "operation": "restore"}
+  }
+}

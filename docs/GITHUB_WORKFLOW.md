@@ -8,6 +8,8 @@ GitHub is the primary source of truth. Development, asset generation and visual 
 
 ## Normal change path
 
+The agent starts from `ASSET_COMMAND_WORKFLOW.md`; routine commands do not need repeated conversational permission. These CI/deployment gates remain automated and are reported as a short result. They are not additional user artwork approvals.
+
 1. Internal generation and QA may replace working files directly under their final validation paths. Rejected iterations are not published or documented as production history.
 2. Once a complete stage passes internal technical and composite QA, create one integration commit on `modular-parity-validation` containing only its final assets, required runtime/configuration changes and compact QA evidence.
 3. Require successful `Production CI` for that exact development SHA.
@@ -28,9 +30,11 @@ Rerunning an older workflow run is not a valid way to publish a newer commit: a 
 
 ## Binary asset transfer
 
+Prefer a normal authenticated Git commit/push. Check its availability once before expensive generation. When unavailable, use the connected GitHub object's binary-safe upload and text-blob/tree route as a fallback, not a mandatory ritual. Verify text/blob IDs and the final tree internally; do not stream image encodings or full API objects into the conversation. Recheck both shared branch heads before writing and never force-update them. If a concurrent change appears, reconcile it and revalidate before promotion.
+
 Do not route PNG or other binary assets through shell-output capture, Base64 text relays or another interface that can truncate large outputs. Upload large binaries through a binary-safe Git/GitHub path, then confirm the committed blob matches the local file before promotion.
 
-Production CI reads `config/phase8-landscapes.json` and runs `scripts/validate-phase8-pngs.js` plus `scripts/phase8-stage-qa.py --all-integrated --check-only` over every Phase 8 stage marked `integrated` or `approved`. The checks cover PNG signatures, complete chunk boundaries, chunk CRC values, complete IDAT decompression, expected dimensions and pixel scanline length, layer alpha requirements, GROUND bottom coverage and canonical composite void detection. A failure blocks `main` validation and therefore blocks automatic Pages deployment.
+Production CI reads `config/phase8-landscapes.json`, verifies the generated runtime registry and cache keys, exercises actual host/renderer startup and saved-config/reset behavior, and runs the PNG/composite checks over stages marked `integrated` or `approved`. Offline previews consume the renderer's shared geometry; a pending stage's prospective preview is not deployment evidence. PNG checks retain full chunk/CRC/decompression/scanline integrity, dimensions and alpha/coverage requirements. A failure blocks main validation and automatic Pages deployment. Local single-image iterations use targeted checks; the full automatic CI gate remains.
 
 ## Required handoff evidence
 

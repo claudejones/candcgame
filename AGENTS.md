@@ -6,7 +6,13 @@ This repository is the primary source of truth for development of the Claude & C
 Before modifying code, configuration, assets, or specifications, an AI/developer must read:
 1. `AGENTS.md`
 2. `docs/CURRENT_STATUS.md`
-3. The task-specific specifications listed below.
+3. Use the command route below for routine asset tasks; otherwise read the task-specific specifications listed below.
+
+## Asset command route
+
+For `help`, `status`, `build`, `generate`, `regenerate`, `revise`, `verify`, `publish`, `resume`, `approve` or `rollback`, use `node scripts/assets.mjs <command>`. Resolve paths, references and keys from its packet; never ask the user to fill a template. Read `docs/ASSET_COMMAND_WORKFLOW.md` once for execution. Ordinary landscape commands use the focused profile and selected prompt sections returned by the resolver instead of preloading every full specification and decision history. Help/status need only this file, current status and command output. Full specifications are required when changing the contract/system or resolving a concrete conflict.
+
+GitHub is durable memory; scratch paths are not. Recover a missing checkout from GitHub. Do not reproduce completed image work from a chat description if its committed bytes can be recovered. Keep output focused on outcomes and actual blockers. See the runbook for recovery checkpoints and publication fallback.
 
 Repository specifications override conversational memory when a documented locked requirement exists. Conversation context may clarify the current request, but it must not silently replace a locked repository requirement. If the current request conflicts with a locked specification, identify the conflict before changing production files.
 
@@ -34,7 +40,7 @@ Do not promote temporary QA implementation details into production requirements 
 - Configuration/calibration is for positioning correctly authored assets, not compensating for defective artwork.
 - When a QA issue is reported: analyze -> state exact correction -> wait for explicit approval when the workflow calls for an approval gate -> modify -> provide a testable increment -> verify no unrelated regressions.
 - For Phase 8 landscapes, use the integrated-stage approval workflow in `docs/PHASE8_LANDSCAPE_EXECUTION_PLAN.md`. Internal layer generation, rejection, regeneration and technical QA do not require separate user approval when the stage specification and references are already locked.
-- At every Phase 8 stage or continent closeout, provide the user with the next fully completed, copy-ready conversation prompt. Populate the stage ID, continent, asset filenames, repository instructions and scope from the current repository and registry; never give the user placeholders or require them to fill in workflow fields.
+- At every stage or continent closeout, provide the next fully completed, copy-ready prompt from `node scripts/assets.mjs handoff`. The command resolves stage, continent, filenames and scope; never emit placeholders or require the user to fill workflow fields. This setup applies across continents and must not be repeated.
 - Update `docs/CURRENT_STATUS.md` when the production baseline or next approved step changes.
 - Append important locked decisions to `docs/DECISION_LOG.md`; do not erase historical decisions.
 
@@ -43,3 +49,5 @@ The legacy LAB25Q HTML is a reference/test-harness baseline, not permission for 
 
 ## Repository safety
 `archive/` and `assets-original/` are preservation areas. Files placed there are immutable historical/source artifacts. Production-ready derivatives belong under `assets/` and application code under `src/`.
+
+Never commit `assets/phase8-candidates/` or `tmp/`. Preserve approved image bytes and the archived LAB25Q HTML. Existing approval and CI/Pages gates remain in force; routine authorized operations do not need new conversational permission.
