@@ -43,16 +43,16 @@ Known approved hazards include macaws, Andean flamingo, and tropical parakeets. 
   - Mediterranean bats
 
 ## Remaining continents
-Four continents / 12 stages remain to be specified and produced. Their exact stage identities/themes must be taken from an approved product/stage specification once recovered or explicitly approved; do not invent them from memory.
+Four continents / 12 stages remain planned for future production. Their direction, workflow and themes are approved as the planning baseline; exact replacement hazard choices/references and production readiness gates remain pending. Do not generate them until those gates are complete.
 
-Command keys reserve AF01–AF03 (Africa), AS01–AS03 (Asia), OC01–OC03 (Oceania/Australia; AU alias), and AN01–AN03 (Antarctica). These are identifiers, not approved themes or generation authorization. `config/asset-commands.json` is the key catalog; `help keys` lists it. Phase 8 remains NA/SA/EU only.
+Command keys reserve AF01–AF03 (Africa), AS01–AS03 (Asia), OC01–OC03 (Oceania/Australia; AU alias), and AN01–AN03 (Antarctica). The approved theme mappings are in the remaining-continent plan; keys alone do not authorize generation before readiness passes. `config/asset-commands.json` is the key catalog; `help keys` lists it. Phase 8 remains NA/SA/EU only.
 
-Planning authorized on 2026-09-19: [REMAINING_CONTINENTS_PLAN.md](REMAINING_CONTINENTS_PLAN.md) and `config/remaining-continent-proposal.json` propose all 12 themes, their three landscapes, two ground hazards and one flying hazard per stage. These are explicitly unapproved proposals. The catalog has exact proposed paths and focused stage briefs but is not loaded by the runtime or enabled production commands. Preserve the existing Phase 8 promotion and user-review gates.
+Planning authorized on 2026-09-19: [REMAINING_CONTINENTS_PLAN.md](REMAINING_CONTINENTS_PLAN.md) and `config/remaining-continent-proposal.json` define the approved planning direction, workflow and 12 themes, with three landscapes, two ground hazards and one flying hazard per stage. Replacement hazard selections/references and production gates remain pending. The catalog has exact proposed paths and focused stage briefs but is not loaded by the runtime or enabled gameplay/production commands. Preserve the existing Phase 8 promotion and user-review gates.
 
 ## Current landscape audit scope
 27 landscape assets across NA01–NA03, SA01–SA03 and EU01–EU03: FAR/DISTANT + MID + GROUND for each stage.
 
-All 27 are the Phase 8 regeneration validation batch under `LANDSCAPE_GENERATION_CONTRACT_V1.md`. The completed KEEP / REPAIR / REGENERATE audit remains technical and visual-reference evidence; it does not exempt a layer from standardized regeneration.
+All 27 are the approved Phase 8 landscape set governed by `LANDSCAPE_GENERATION_CONTRACT_V1.md`. The completed KEEP / REPAIR / REGENERATE audit remains technical and visual-reference evidence; dependent calibration and contract promotion remain separate gates.
 
 ## Phase 8 landscape acceptance
 

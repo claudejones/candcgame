@@ -46,6 +46,11 @@ Do not promote temporary QA implementation details into production requirements 
 - Update `docs/CURRENT_STATUS.md` when the production baseline or next approved step changes.
 - Append important locked decisions to `docs/DECISION_LOG.md`; do not erase historical decisions.
 
+## Bounded asset delegation
+For approved independent preparation or an eligible multi-file build, use one coordinator and at most two focused workers; no nested managers. Keep help/status and ordinary single-image revisions with one agent. Prefer `gpt-5.6-sol` at medium effort for production workers and `gpt-5.6-luna` for narrow support, retaining the coordinator for direction and complete-stage review; use available capabilities and report a material fallback. New-stage generation still waits for the packet's content/reference, calibration/promotion and runtime/validation prerequisites. CI and Pages remain publication gates after integration, not pre-generation gates.
+
+Give workers fresh scoped context, pinned stage/file rules and actual reference pixels. They own isolated image outputs only; the coordinator owns shared registry/state, integration and publication. Follow the coordinator job procedure in the runbook. Do not claim measured parallel image throughput or a fixed usage budget before the AF01 pilot.
+
 ## Current migration rule
 The legacy LAB25Q HTML is a reference/test-harness baseline, not permission for a wholesale rewrite. Migration to external assets/modules must preserve behavior and be verified incrementally against the archived baseline.
 

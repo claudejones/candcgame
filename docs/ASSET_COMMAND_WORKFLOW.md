@@ -1,6 +1,6 @@
 # Asset commands
 
-Active workflow, 2026-09-19. These are commands to the agent working in `claudejones/candcgame`. No user-filled template, separate setup conversation or per-continent installation is needed. The agent resolves commands with `node scripts/assets.mjs ...`; the resolver supplies instructions and file mappings, while the agent performs image generation and connected publication.
+Active workflow V3, 2026-09-19. These are commands to the agent working in `claudejones/candcgame`. No user-filled template, separate setup conversation or per-continent installation is needed. The agent resolves commands with `node scripts/assets.mjs ...`; the resolver supplies instructions and file mappings, while the agent performs eligible image generation and connected publication.
 
 ## Where to type commands
 
@@ -12,23 +12,27 @@ Type these messages into the conversation with the agent. The user does not need
 
 | Situation | Exact message to send |
 | --- | --- |
-| Start SA02 in a fresh conversation | `In claudejones/candcgame: build landscape SA02.` |
-| Continue SA02 in a fresh conversation after a limit or interruption | `In claudejones/candcgame: resume SA02.` |
+| Inspect AF01 readiness in a fresh conversation | `In claudejones/candcgame: status AF01.` |
+| Inspect AF01 packet/help in a fresh conversation | `In claudejones/candcgame: help AF01.` |
+| Resume AF01 in a fresh conversation | `In claudejones/candcgame: resume AF01.` |
+| Request the AF01 readiness packet | `In claudejones/candcgame: build stage AF01.` |
 | Ask for help in a fresh conversation | `In claudejones/candcgame: help.` |
 | Replace NA01 FAR in a fresh conversation | `In claudejones/candcgame: regenerate landscape NA01 FAR.` |
 | Ask for available commands in the current repository conversation | `help` |
 | See NA01's layer filenames in the current conversation | `help NA01` |
-| Continue interrupted SA02 work within the current conversation | `resume SA02` |
+| Resume AF01 work within the current conversation | `resume AF01` |
+
+AF01 is the current readiness example: its direction and theme are approved, while references, hazard selections and production gates remain pending. `build stage AF01` returns a readiness packet and does not enable gameplay or asset generation.
 
 ## If a conversation reaches its limit
 
 Open one new conversation and send:
 
 ```text
-In claudejones/candcgame: resume SA02.
+In claudejones/candcgame: resume AF01.
 ```
 
-The agent finds the current GitHub state, the stage's recovery branch and any available working files, then continues the next unfinished operation. It must inspect the recovery branch even if main's checkpoint still says there is no active work. Completed images are reused; if publication was interrupted, it continues publication; if the stage is awaiting review, it returns the review link. It does not restart the stage or approve it automatically.
+The agent finds the current GitHub state, the stage's recovery branch and any available working files, then continues the next unfinished operation. If no active work exists, it reports that state. It must inspect the recovery branch even if main's checkpoint still says there is no active work. Completed images are reused; if publication was interrupted, it continues publication; if the stage is awaiting review, it returns the review link. It does not restart the stage or approve it automatically.
 
 The user does not need a long handoff, commit hashes, filenames or the old transcript. Recovery depends on saved work: if the interruption happened before a durable checkpoint and the working files are unavailable, the agent must identify what is missing instead of claiming recovery or silently regenerating it. The recovery rules below remain mandatory.
 
@@ -36,23 +40,21 @@ At an intentional interruption, the agent must save and verify the recovery chec
 
 ## User commands
 
-The table below uses the short form for a conversation already working in this repository. For the first message in a fresh conversation, add `In claudejones/candcgame:` as shown above.
+The table below uses the short form for a conversation already working in this repository. For the first message in a fresh conversation, add `In claudejones/candcgame:` as shown above. AF01 is the current readiness example; its packet remains blocked until references, runtime 21, profile validation and production gates are complete. Legacy landscape commands remain supported for recovery and explicit approved-asset replacement.
 
 | Command | Result |
 | --- | --- |
 | `help` | Commands, supported families, stage keys and next command |
 | `help keys` | All continent/stage/layer keys |
-| `help NA01` | Current state and exact FAR/MID/GROUND filenames |
-| `status SA02` | Approval and recovery checkpoint |
-| `build landscape SA02` | Generate the missing stage layers, check, replace and deploy for review |
-| `generate landscape SA02` | Same workflow as build |
-| `build landscape SA` | Resolve the next unfinished South America stage; never silently batch the continent |
+| `help AF01` | AF01 readiness state and focused packet |
+| `status AF01` | AF01 approval and recovery checkpoint |
+| `build stage AF01` | Resolve a readiness-aware packet; does not generate or enable gameplay while blocked |
+| `resume AF01` | Recover AF01 work, or report no active work |
 | `regenerate landscape NA01 FAR` | Explicitly reopen only FAR, replace it and deploy with the existing MID/GROUND |
 | `regenerate landscape NA01 MID` | The same operation for MID |
 | `revise landscape SA01 MID: remove the monkey; keep the snake` | Edit only the current MID according to the direction, then deploy |
 | `verify SA01` | Inspect existing assets, effective configuration and deployed stage |
 | `publish SA02` | Publish a completed checkpoint without generating again |
-| `resume SA02` | Recover work and continue the next unfinished operation |
 | `approve SA02` | Accept the reviewed deployed revision, close it and print the next command |
 | `rollback SA01` | Restore the recorded approved stage through a new commit |
 
@@ -63,12 +65,18 @@ Omitting a layer selects FAR, MID and GROUND. Keys are case-insensitive; `NA1` a
 | NA | North America | NA01, NA02, NA03 | Phase 8 |
 | SA | South America | SA01, SA02, SA03 | Phase 8 |
 | EU | Europe | EU01, EU02, EU03 | Phase 8 |
-| AF | Africa | AF01, AF02, AF03 | Reserved; specifications required |
-| AS | Asia | AS01, AS02, AS03 | Reserved; specifications required |
-| OC | Oceania / Australia | OC01, OC02, OC03 | Reserved; AU is an alias |
-| AN | Antarctica | AN01, AN02, AN03 | Reserved; specifications required |
+| AF | Africa | AF01, AF02, AF03 | Approved themes; readiness pending |
+| AS | Asia | AS01, AS02, AS03 | Approved themes; readiness pending |
+| OC | Oceania / Australia | OC01, OC02, OC03 | Approved themes; readiness pending; AU is an alias |
+| AN | Antarctica | AN01, AN02, AN03 | Approved themes; readiness pending |
 
-Only the existing nine NA/SA/EU stages are authorized for Phase 8 production. Reserving keys does not invent future themes or references. Character, hazard, object, UI and shared-effect families are discoverable with `help character` etc.; they require an approved key registry, focused profile and validation before production commands are enabled. Approved existing assets stay locked.
+Only the existing nine NA/SA/EU stages are authorized for Phase 8 production, and all 27 landscape layers are approved. Reserving keys does not invent future themes or references. The remaining-continent direction, workflow and themes are approved for planning, but replacement hazard choices/references and production gates remain pending. Approved existing assets stay locked. Character, hazard, object, UI and shared-effect families are discoverable with `help character` etc.; selectors may resolve to a focused readiness packet, while gameplay/production commands remain blocked until runtime 21 and profile validation are implemented.
+
+## V3 readiness and delegation
+
+`build stage AF01` and equivalent future-stage requests resolve a readiness-aware packet: the packet identifies the stage, proposed theme, missing references, hazards and required gates. It does not enable gameplay, create production assets or authorize generation while any reference, runtime 21 or profile-validation gate is pending. A hazard selector can resolve its proposed identity and focused references for review; it remains blocked from production until those gates pass.
+
+When a later build is eligible, one coordinator may delegate narrowly scoped stage work to at most two workers. The coordinator starts the run with `node scripts/assets.mjs coordinator start <expectedRevision> "<asset command>"`, then starts each pinned job with `coordinator start-job <runId> <jobId> <expectedRevision>`. Workers return an isolated result manifest through `coordinator result <runId> <jobId> <expectedRevision> <result-manifest.json>`; this verifies the owned bytes and immutable local commit evidence only. The coordinator must then fetch the remote ref and run `node scripts/assets.mjs coordinator verify-recovery <runId> <jobId> <expectedRevision> <fetchedRemoteRef>`; only that remote byte match marks the job durable. The coordinator records the selected checkpoint with `coordinator checkpoint <runId> <phase> <expectedRevision> [recoveryRef]`; `ready-to-publish` requires complete matching local outputs; it does not require an extra recovery publication. `awaiting-approval` requires verified durable jobs and the existing deployed review evidence. Workers receive a pinned stage/file packet and actual references, and return outputs in isolated worktrees. The coordinator imports one completed file at a time before result verification, so another worker's in-progress file cannot trigger an unowned-output change. The coordinator owns the shared registry, checkpoints, releases, plan and decision log; no nested continent managers are used. This delegation rule does not claim parallel image throughput or establish a fixed usage budget.
 
 ## Agent startup and lookup
 
@@ -95,9 +103,9 @@ Approval records are repository changes, so the existing automatic CI/Pages gate
 
 ## Recovery and rollback
 
-`config/asset-workflow-state.json` is the small machine checkpoint. Before publication, use `node scripts/assets.mjs checkpoint SA02 ready-to-publish "build landscape SA02"`; use `working` only for an interruption/incomplete set. Store selected scope, original command, hashes, stage metadata and recovery branch. Once deployed, record `awaiting-approval` plus the deployed commit/run URLs before handoff. Do not mark a working file durable until its remote commit is verified.
+`config/asset-workflow-state.json` is the small machine checkpoint. Before publication, use `node scripts/assets.mjs checkpoint <stage> ready-to-publish "<asset command>"`; use `working` only for an interruption/incomplete set. Store selected scope, original command, hashes, stage metadata and recovery branch. Once deployed, record `awaiting-approval` plus the deployed commit/run URLs before handoff. For a V3 run, use `coordinator requeue <runId> <jobId> <expectedRevision>` only after confirming the prior worker stopped and recovering any existing output; completed files are never requeued. After explicit user acceptance, record the reviewed revision/asset hashes and use `coordinator close <runId> <expectedRevision>` to release the active run. Do not mark a working file durable until its remote commit is verified.
 
-The normal successful path needs no extra recovery deployment. If stopping before development publication, commit only selected finished assets, necessary registry data and the checkpoint to `work/assets/sa02`, non-force, and verify the remote tree. Keep that branch until its work is safely published/abandoned. Never commit `tmp/` or `assets/phase8-candidates/`. Previews are disposable; irreplaceable selected images belong in Git, not only a scratch handoff path. Resume inspects remote heads, this branch and matching file/metadata hashes; it never silently generates a replacement for lost work. Missing bytes are a recovery problem to report.
+The normal successful path needs no extra recovery commit or deployment: assemble one final integration snapshot, publish it through the existing gates, then record verified recovery/deployment evidence. A local `ready-to-publish` checkpoint is not yet durable. If stopping before development publication, commit only selected finished assets, necessary registry data and the checkpoint to `work/assets/sa02`, non-force, and verify the remote tree. Keep that branch until its work is safely published/abandoned. Never commit `tmp/` or `assets/phase8-candidates/`. Previews are disposable; irreplaceable selected images belong in Git, not only a scratch handoff path. Resume inspects remote heads, this branch and matching file/metadata hashes; it never silently generates a replacement for lost work. Missing bytes are a recovery problem to report.
 
 Rollback restores only the target stage's files and registry record from its recorded approved revision, regenerates the runtime registry, validates, and publishes a new commit through the same gates. Never reset/force either shared branch or revert unrelated work. If the checkpoint lacks an approved revision, identify the last approved snapshot from repository evidence before restoring.
 
