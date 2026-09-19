@@ -101,7 +101,7 @@
       "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
     }
   },
-  "revision": 14,
+  "revision": 16,
   "runs": {
     "af01-20260919172919-679b96": {
       "runId": "af01-20260919172919-679b96",
@@ -116,7 +116,8 @@
       "nestedManagers": false,
       "recoveryRefs": [
         "work/af01-landscapes",
-        "work/assets/af01"
+        "work/assets/af01",
+        "refs/remotes/origin/work/assets/af01"
       ],
       "jobs": {
         "AF01:FAR": {
@@ -267,16 +268,16 @@
           "interruptions": 0,
           "status": "completed",
           "resultHash": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
-          "recoveryRef": "work/af01-landscapes",
+          "recoveryRef": "refs/remotes/origin/work/assets/af01",
           "recoveryEvidence": {
-            "ref": "work/af01-landscapes",
-            "commit": "cf34996a95635e1c94c2ab012c5a37e05677f49b",
+            "ref": "refs/remotes/origin/work/assets/af01",
+            "commit": "d59688a642b5374651266d1c2fa223f64d9ffe79",
             "contentHash": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
             "localCommitVerified": true,
-            "remoteRefVerified": false,
-            "verifiedAt": null
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T17:56:25.174Z"
           },
-          "durable": false,
+          "durable": true,
           "completedAt": "2026-09-19T17:35:17.536Z"
         },
         "AF01:MID": {
@@ -948,6 +949,12 @@
             "sha256": "833dd5edffad21729732b5716ceeffda6678cc569bf06cf88cc0df5eddfa221a",
             "productionQualified": false
           }
+        },
+        "remoteSources": {
+          "ref": "refs/remotes/origin/work/assets/af01",
+          "commit": "d59688a642b5374651266d1c2fa223f64d9ffe79",
+          "verifiedAt": "2026-09-19T17:56:25.095Z",
+          "sha256Verified": true
         }
       },
       "generationAttempts": {
