@@ -79,6 +79,23 @@
         "downstroke apex",
         "rising wings swept back"
       ]
+    },
+    "artDirectionRequirements": {
+      "authority": "User direction, 2026-09-19; see the composition, identity and scale section of the plan.",
+      "scope": "Remaining-continent proposals; existing approved artwork is not reopened.",
+      "FAR": "One recognizable local landmark or dominant natural formation, readable in the runtime composite behind MID and away from repeat joins.",
+      "MID": "One restrained, unique local sign of life: settlement/frontage, everyday-use detail or static background wildlife. No people or gameplay hazards baked into scenery.",
+      "originality": "Compare identities and visible silhouettes against existing and proposed campaign elements. No reused species/objects, renamed duplicates or recolors as new hazards; shared background materials are not signature elements.",
+      "scale": "Judge visible subjects at 960x540 and normal mobile presentation relative to characters, architecture and depth. Reject subjects that read too small or need implausible enlargement. Preserve canonical transforms and physics.",
+      "requiredStageBriefFields": [
+        "farFocalPoint",
+        "midLifeDetail",
+        "localReference",
+        "campaignDistinctiveness",
+        "intendedRelativeScale"
+      ],
+      "selectionReviewStatus": "pending-campaign-comparison-and-scale-review",
+      "approval": "Requirements confirmed; individual choices still proposed. Use existing content review and deployed-stage acceptance, with no added per-image gate."
     }
   },
   "factSources": {
@@ -284,10 +301,14 @@
           "animation": "static"
         },
         "FLYING": {
-          "label": "Rock pigeon",
-          "path": "assets/worlds/africa/AF03_HAZARD_PIGEON.png",
+          "label": "Distinct local flying species — replacement pending",
+          "path": "assets/worlds/africa/AF03_HAZARD_FLYING.png",
           "frames": 4,
-          "creatures": 1
+          "creatures": 1,
+          "selectionStatus": "replacement-required",
+          "excludedChoices": [
+            "Pigeon, including rock pigeon: repeats NA03"
+          ]
         }
       },
       "styleReferenceStages": [
@@ -298,7 +319,7 @@
         "marrakesh"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Architecture stays scenery. The jar and crate are isolated gameplay objects, never duplicated into the running surface. Verify local pigeon reference."
+      "notes": "Architecture stays scenery. The original rock pigeon is rejected because NA03 already uses pigeons. Select a locally verified, visibly distinct flying species at credible gameplay scale. Reassess the produce crate against existing crate/basket hazards; no renamed or recolored duplicates."
     },
     {
       "id": "AS01",

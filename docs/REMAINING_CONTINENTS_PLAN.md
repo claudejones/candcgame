@@ -20,7 +20,7 @@ These are original design proposals, not recovered prior decisions. Order: Afric
 | --- | --- | --- | --- | --- |
 | AF01 | Tanzania — Serengeti savannah | Termite mound | Fallen acacia log | Lilac-breasted roller |
 | AF02 | Namibia — Sossusvlei dunes | Weathered sandstone block | Dry branch snag | Pale chanting goshawk |
-| AF03 | Morocco — Marrakesh medina | Terracotta storage jar | Produce crate | Rock pigeon |
+| AF03 | Morocco — Marrakesh medina | Terracotta storage jar | Produce crate | Replacement pending; pigeons excluded |
 | AS01 | Japan — Kyoto bamboo foothills | Bamboo bundle | Mossy stone | Japanese white-eye |
 | AS02 | China — Zhangjiajie stone forest | Rock outcrop | Weathered stump | Red-billed blue magpie |
 | AS03 | Thailand — Bangkok riverfront | Market basket | Parked handcart | House swift |
@@ -32,6 +32,19 @@ These are original design proposals, not recovered prior decisions. Order: Afric
 | AN03 | East Antarctica — coastal research outpost | Cargo crate | Equipment sled | Snow petrel |
 
 The choices alternate silhouettes, terrain and palettes rather than repeating one visual treatment twelve times. The three Antarctic stages distinguish coast, volcanic terrain and a fictional coastal outpost. All running surfaces remain level; mountains, dunes and cliffs are background scenery.
+
+### User-directed composition, identity and scale requirements
+
+The user confirmed these requirements on 2026-09-19. They constrain revision of the draft lineup; they do not approve its remaining choices or reopen accepted stages.
+
+- **FAR needs a focal point.** Specify one recognizable, locally appropriate landmark or dominant natural formation, comparable in compositional importance to the Paris landmark. A generic skyline or an incidental tiny roof is insufficient. Keep its silhouette readable behind MID, at the canonical runtime scale and during scrolling; place it clear of repeat joins. Do not duplicate the feature within a tile merely to fill space.
+- **MID needs a sign of life.** Specify a restrained, scene-specific detail: characteristic settlement/frontage, signs of everyday use, or locally appropriate background wildlife. The village and Amazon snake are examples of the principle, not motifs to copy into new stages. Decorative wildlife is static, noninteractive scenery, separated visually from the playable route and hazard silhouettes. No people, new animation system or gameplay obstacles are implied.
+- **Every selected element must belong to its setting.** Verify the particular location, habitat and appearance before generation. Regionally fitting does not require a species to be endemic, but a familiar generic prop is not enough to establish stage identity.
+- **Do not repeat distinctive elements or hazards across the campaign.** Compare proposed identities and visible silhouettes with all nine existing stages and the other new proposals. Renaming a pigeon species, recoloring an existing object or changing a log's wood species does not create a new hazard. Shared background materials remain possible; focal points, life details and hazard designs must be distinct.
+- **Choose for believable scale and readability.** Review the actual 960×540 composite and normal mobile presentation with the characters, nearby architecture and other objects visible. Large features must retain their apparent mass at their intended depth; small creatures must not disappear or become implausibly giant to function as hazards. Frame/canvas dimensions alone are not visible subject size. Prefer a more suitable subject if it cannot read at a credible scale. Keep canonical landscape transforms and gameplay physics unchanged.
+- **Resolve these choices in the focused stage brief.** Record the FAR focal point, MID life detail, local reference, comparison against existing/proposed elements and intended relative size before generation. Carry these fields into the future command packet; check their appearance in the existing composite review. This is agent work within the planned content review and single deployed-stage approval, not an extra user approval gate or another general-purpose QA document.
+
+The initial catalog has not passed that comparison. NA03 already uses pigeons; AF03's rock pigeon is rejected and removed as a generation choice. Its reserved flying filename is now species-neutral until the agent resolves a distinct, suitable replacement. Repeated logs, stones/outcrops and crates/baskets across the initial proposal and existing NA02/SA01/SA02/EU01 hazards need replacement or a demonstrably different design; a local material or color change is insufficient. Also compare swift versus existing swallows, parrot-family choices versus existing macaws/parakeets, and small birds such as the white-eye for credible gameplay scale. These are unresolved selection risks, not claims that those designs passed. Do not generate from the initial lineup unchanged.
 
 ## Deliverables and filenames
 
