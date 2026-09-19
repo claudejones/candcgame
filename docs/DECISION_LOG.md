@@ -295,3 +295,12 @@ The user reported that AF01's crested porcupine and lilac-breasted roller face a
 ## 2026-09-19 — AF01 complete-stage acceptance
 
 The user explicitly approved AF01 with `approve AF01` at reviewed revision `a09b176dd8531bfb3425c9af534ff197a05a253e`. Acceptance covers the three scenery layers, termite mound, crested porcupine, four-frame roller, reviewed stage geometry/finish and the corrected player-facing sprites. Record the exact five asset hashes and reviewed revision, mark release and landscape approved, and close the active coordinator checkpoint. No PNG or runtime geometry changes accompany approval. AF01 is the first accepted AF01–AF03 trial checkpoint; AF02/AF03 and Africa regression remain open. This does not approve or close the separate editor-next calibration workstream.
+
+
+## 2026-09-19 — Separate asset-ready handoff from Workbench calibration
+
+The user authorized completing the AF02 prerequisites after identifying duplicated AF01 hazard tuning. Remaining-stage asset agents own five PNGs, dimensions/alpha/repeats/animation, source regions/anchors/facing, basic rendering and usable provisional metadata. They publish a versioned asset-ready handoff; no repeated zero-hit course or calibrated signature/finish is required to deliver artwork.
+
+The user notifies the editor-next Workbench agent, which imports the same versioned contract; the user calibrates and saves. Iterative grounding, flight height, hitbox fairness, Jump/Slide timing, difficulty and spawn balancing belong to that phase. Asset readiness, artwork acceptance, calibration and gameplay-release acceptance are distinct. The strict playable-release validator and existing automated publication gates remain; unperformed checks stay pending. Genuine renderer/scheduler fixes and regression tests remain valid engineering work.
+
+AF01 approval/artwork/settings, historical calibration measurements and eleven comparison candidates are preserved. The coordinated implementation changes the command/checkpoint path and real Workbench importer together, with AF01 compatibility and pending-stage boundary tests; it does not generate AF02 assets or activate any new stage. After this setup, the agent-owned next production command is `In claudejones/candcgame: build stage AF02.`

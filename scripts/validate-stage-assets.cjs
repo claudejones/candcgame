@@ -3,6 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypt
 const ROOT=path.resolve(__dirname,'..');
 const {validatePng}=require('./png-integrity.cjs');
 const {validateRelease}=require('../src/js/stage-contract.js');
+const {validateCommitted}=require('./validate-asset-handoff.cjs');
 function validate(id,release){
   id=id.toLowerCase();
   const plan=JSON.parse(fs.readFileSync(path.join(ROOT,'config/remaining-continent-proposal.json')));
@@ -24,5 +25,7 @@ if(require.main===module){try{
   const records=JSON.parse(fs.readFileSync(path.join(ROOT,'config/stage-releases.json'))).stages;
   const ids=process.argv[2]?[process.argv[2].toLowerCase()]:Object.keys(records);
   for(const id of ids){validate(id,records[id]);console.log(`Full-stage assets OK: ${id}`);}
+  const handoffs=validateCommitted();
+  for(const item of handoffs)console.log(`Asset-ready handoff OK: ${item.stageId}`);
 }catch(error){console.error(error.stderr?.toString().trim()||error.message);process.exitCode=1;}}
 module.exports={validate};

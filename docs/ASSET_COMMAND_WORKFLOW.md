@@ -12,24 +12,23 @@ Type these messages into the conversation with the agent. The user does not need
 
 | Situation | Exact message to send |
 | --- | --- |
-| Inspect AF01 readiness in a fresh conversation | `In claudejones/candcgame: status AF01.` |
-| Inspect AF01 packet/help in a fresh conversation | `In claudejones/candcgame: help AF01.` |
-| Resume AF01 in a fresh conversation | `In claudejones/candcgame: resume AF01.` |
-| Start AF01 full-stage production | `In claudejones/candcgame: build stage AF01.` |
+| Inspect AF02 readiness in a fresh conversation | `In claudejones/candcgame: status AF02.` |
+| Inspect AF02 packet/help in a fresh conversation | `In claudejones/candcgame: help AF02.` |
+| Resume AF02 in a fresh conversation | `In claudejones/candcgame: resume AF02.` |
+| Start AF02 full-stage production | `In claudejones/candcgame: build stage AF02.` |
 | Ask for help in a fresh conversation | `In claudejones/candcgame: help.` |
 | Replace NA01 FAR in a fresh conversation | `In claudejones/candcgame: regenerate landscape NA01 FAR.` |
 | Ask for available commands in the current repository conversation | `help` |
 | See NA01's layer filenames in the current conversation | `help NA01` |
-| Resume AF01 work within the current conversation | `resume AF01` |
+| Resume AF02 work within the current conversation | `resume AF02` |
 
-AF01 is ready for full-stage production: its choices, inspected reference files, shared tooling and landscape-contract adoption are recorded. The user delegated existing calibration review/adjustments to a separate auto-calibration agent and authorized production to proceed. `build stage AF01` starts generation through deployed review; it does not approve artwork or immediately activate an incomplete stage.
-
+AF01 is approved. AF02 is next. `build stage AF02` includes the agent's required reference preparation, then generation when the packet is ready. From AF02, new-stage production ends at **asset-ready for Workbench calibration**. It does not activate gameplay or claim calibration acceptance.
 ## If a conversation reaches its limit
 
 Open one new conversation and send:
 
 ```text
-In claudejones/candcgame: resume AF01.
+In claudejones/candcgame: resume AF02.
 ```
 
 The agent finds the current GitHub state, the stage's recovery branch and any available working files, then continues the next unfinished operation. If no active work exists, it reports that state. It must inspect the recovery branch even if main's checkpoint still says there is no active work. Completed images are reused; if publication was interrupted, it continues publication; if the stage is awaiting review, it returns the review link. It does not restart the stage or approve it automatically.
@@ -40,16 +39,16 @@ At an intentional interruption, the agent must save and verify the recovery chec
 
 ## User commands
 
-The table below uses the short form for a conversation already working in this repository. For the first message in a fresh conversation, add `In claudejones/candcgame:` as shown above. AF01 is the next eligible stage. Later stages retain their own selection/reference gates; the agent resolves those before generation. Legacy landscape commands remain supported for recovery and explicit approved-asset replacement.
+The table below uses the short form for a conversation already working in this repository. For the first message in a fresh conversation, add `In claudejones/candcgame:` as shown above. AF02 is the next stage; its reference pack is prepared by the agent before generation. Later stages retain their own selection/reference gates; the agent resolves those before generation. Legacy landscape commands remain supported for recovery and explicit approved-asset replacement.
 
 | Command | Result |
 | --- | --- |
 | `help` | Commands, supported families, stage keys and next command |
 | `help keys` | All continent/stage/layer keys |
-| `help AF01` | AF01 readiness state and focused packet |
-| `status AF01` | AF01 approval and recovery checkpoint |
-| `build stage AF01` | Generate the complete eligible five-file stage, validate, integrate and publish for one deployed review |
-| `resume AF01` | Recover AF01 work, or report no active work |
+| `help AF02` | AF02 readiness state and focused packet |
+| `status AF02` | AF02 approval and recovery checkpoint |
+| `build stage AF02` | Prepare references, generate and publish five validated files plus the asset-ready Workbench handoff |
+| `resume AF02` | Recover AF02 work, or report no active work |
 | `regenerate landscape NA01 FAR` | Explicitly reopen only FAR, replace it and deploy with the existing MID/GROUND |
 | `regenerate landscape NA01 MID` | The same operation for MID |
 | `revise landscape SA01 MID: remove the monkey; keep the snake` | Edit only the current MID according to the direction, then deploy |
@@ -65,28 +64,30 @@ Omitting a layer selects FAR, MID and GROUND. Keys are case-insensitive; `NA1` a
 | NA | North America | NA01, NA02, NA03 | Phase 8 |
 | SA | South America | SA01, SA02, SA03 | Phase 8 |
 | EU | Europe | EU01, EU02, EU03 | Phase 8 |
-| AF | Africa | AF01, AF02, AF03 | AF01 ready; AF02/AF03 references prepared before their stages |
+| AF | Africa | AF01, AF02, AF03 | AF01 approved; AF02/AF03 references prepared before their stages |
 | AS | Asia | AS01, AS02, AS03 | Approved themes; readiness pending |
 | OC | Oceania / Australia | OC01, OC02, OC03 | Approved themes; readiness pending; AU is an alias |
 | AN | Antarctica | AN01, AN02, AN03 | Approved themes; readiness pending |
 
-Only the existing nine NA/SA/EU stages are authorized for Phase 8 production, and all 27 landscape layers are approved. Reserving keys does not invent future themes or references. Remaining-stage production is authorized using the adopted landscape contract and each stage's readiness packet. AF01 is ready; unresolved choices/references for later stages remain agent work. Approved existing assets stay locked. Character, hazard, object, UI and shared-effect families are discoverable with `help character` etc.; selectors may resolve to a focused readiness packet, while the new-stage runtime/validation tooling is implemented but generation waits only for the selected packet's remaining prerequisites.
+Only the existing nine NA/SA/EU stages are authorized for Phase 8 production, and all 27 landscape layers are approved. Reserving keys does not invent future themes or references. Remaining-stage production is authorized using the adopted landscape contract and each stage's readiness packet. AF01 is approved; unresolved choices/references for later stages remain agent work. Approved existing assets stay locked. Character, hazard, object, UI and shared-effect families are discoverable with `help character` etc.; selectors may resolve to a focused readiness packet, while the new-stage runtime/validation tooling is implemented but generation waits only for the selected packet's remaining prerequisites.
 
 ## V3 readiness and delegation
 
-`build stage AF01` and equivalent future-stage requests resolve a readiness-aware packet: the packet identifies the stage, proposed theme, missing references, hazards and required gates. Generation proceeds only when the packet reports ready. Existing calibration review is delegated and nonblocking by explicit user direction; new-stage collision/integration checks and deployed acceptance remain required. A complete measured release is still required before gameplay activation. A hazard selector can resolve its proposed identity and focused references for review; it remains blocked from production until those gates pass.
-
+`build stage AF02` and equivalent future-stage requests resolve a focused readiness packet. Missing references become explicit preparation work; generation still waits for inspected, recorded reference pixels. Help/status stay read-only. The packet separates asset readiness from calibration and playable-release readiness. Existing calibration review is nonblocking. No new stage becomes playable merely because its artwork is ready.
 When a later build is eligible, one coordinator may delegate narrowly scoped stage work to at most two workers. The coordinator starts the run with `node scripts/assets.mjs coordinator start <expectedRevision> "<asset command>"`, then starts each pinned job with `coordinator start-job <runId> <jobId> <expectedRevision>`. Workers return an isolated result manifest through `coordinator result <runId> <jobId> <expectedRevision> <result-manifest.json>`; this verifies the owned bytes and immutable local commit evidence only. The coordinator must then fetch the remote ref and run `node scripts/assets.mjs coordinator verify-recovery <runId> <jobId> <expectedRevision> <fetchedRemoteRef>`; only that remote byte match marks the job durable. The coordinator records the selected checkpoint with `coordinator checkpoint <runId> <phase> <expectedRevision> [recoveryRef]`; `ready-to-publish` requires complete matching local outputs; it does not require an extra recovery publication. `awaiting-approval` requires verified durable jobs and the existing deployed review evidence. Workers receive a pinned stage/file packet and actual references, and return outputs in isolated worktrees. The coordinator imports one completed file at a time before result verification, so another worker's in-progress file cannot trigger an unowned-output change. The coordinator owns the shared registry, checkpoints, releases, plan and decision log; no nested continent managers are used. This delegation rule does not claim parallel image throughput or establish a fixed usage budget.
 
-## Africa trial and full-stage integration
+## Africa trial and asset-ready handoff
 
-The test covers **AF01–AF03**, with shared setup completed once. AF01 is the first deployed acceptance checkpoint, followed by AF02 and AF03. Two workers may handle separate asset groups within one stage. Do not describe this as simultaneous three-stage production. Measure elapsed time, attempts, repeated setup and available usage for each stage and the whole trial; do not promise a subscription percentage.
+The trial covers **AF01–AF03**, one stage at a time and at most two workers within it. AF01 is already accepted. AF02/AF03 use the separated handoff below. Record attempts, elapsed time, repeated setup and available usage; do not promise a subscription percentage.
 
-The coordinator handles stage-specific reference retrieval from the catalog's `referenceSources`. The shared landscape contract is adopted; do not repeat the separately assigned existing-calibration review during asset startup. Preserve concurrent calibration/editor changes and use the current shared runtime as the integration baseline. `status` is read-only, not an instruction to perform that setup or evidence that generation is ready. Do not hand it to the user as if it starts production. Actual downloaded image pixels must be inspected and added to the selected job's reference paths before marking `referencesReady`.
+1. Resolve the selected stage. Prepare and inspect missing location/species references using the catalog; record credits, hashes and focused output mappings. The agent supplies these fields. `status` never performs this work.
+2. Generate the five files: FAR, MID, GROUND, OBJECT_ATLAS and FLYING. Inspect composition/repeats at canonical landscape Y=0, alpha/coverage, ground-cell isolation, every animation frame, source anchors and credible visible scale. Supply source regions/crops, source-facing and intended gameplay-facing directions, plus usable provisional scale/body bounds. Correct actual artwork defects; do not tune action windows or difficulty.
+3. Produce the versioned `config/asset-handoffs/<stage>.json` using `src/js/asset-handoff-contract.js` (the accepted AF01 bundle is a schema example, not artwork or calibration to copy). Validate with `node scripts/validate-asset-handoff.cjs config/asset-handoffs/af02.json` for AF02. Record only performed technical, composition, animation and basic-rendering checks on those exact hashes. No signature, calibrated finish, contact/collision pass or repeated zero-hit course is required for asset handoff. New-stage calibration and release remain pending. Preserve existing AF01 acceptance separately.
+4. Publish completed PNGs and handoff through the existing GitHub publication path, and verify their durable hashes. Leave production `stage-releases` and landscape activation pending. Do not make a stage playable to manufacture a review surface. After fetching the published remote ref, record `coordinator checkpoint <runId> asset-ready <expectedRevision> config/asset-handoffs/af02.json <fetchedRemoteTrackingRef>`, then `coordinator close <runId> <expectedRevision>`. These are internal agent commands; close records `ready-for-calibration`, never gameplay approval. The checkpoint verifies both durable image jobs and the remote handoff bytes.
+5. Return the GitHub handoff link and tell the user the files are ready for the Workbench agent. The user notifies that agent. It uses the compatible importer on `editor-next` (see `workbench-next/ASSET_HANDOFF.md` on that branch), preserves existing edits, and presents the new assets for review/calibration. The user calibrates and saves. Save/export alone does not publish approved gameplay configuration.
+6. Keep artwork acceptance, saved calibration and playable release separate. Later gameplay integration uses the strict `scripts/integrate-stage.mjs` / `stage-contract.js` release path with actual contact, collision, finish, signature and gameplay evidence plus deployed acceptance. Never copy provisional asset checks into those release fields. Preserve renderer/scheduler fixes and their tests.
 
-For a new complete stage, build all five files and measured metadata. Run `node scripts/validate-stage-assets.cjs AF01` for source/atlas checks. Metadata in `config/stage-releases.json` includes the five path/SHA-256 pairs, three calibrated runtime hazard definitions (sourceAnchor, source region, crop, scale, collision, animation), finish placement, a 75–85s signature and completed technical/composition/contact/animation/collision/finish checks. These values are agent-measured, never a user template or invented defaults. Use `node scripts/integrate-stage.mjs "build stage AF01" <measured-release.json>` with the resolved command; single-cell revisions require the original atlas at HEAD and preserve sibling RGBA/metadata. Then run the existing targeted `check`, inspect the actual scene, publish and request one complete-stage review including hazards. Normal integration still uses one publication snapshot.
-
-On acceptance, update both the new-stage release status and landscape registry, plus the exact five-file approval/checkpoint record. Rollback restores those same files/metadata from the recorded accepted revision; no branch resets. AF02 and AF03 follow AF01 through ordinary filled handoff commands. New stages remain absent from gameplay until their complete measured release is integrated. Source/animation validators do not grant visual acceptance.
+At asset handoff, `handoff` returns the Workbench action for the current stage; do not silently start the next stage. After the user's calibration/save and explicit advance instruction, provide the next fully completed asset command. After AF03, distinguish the asset trial review from the later playable-continent regression; an unfinished release regression stays pending.
 
 ## Agent startup and lookup
 
@@ -99,7 +100,9 @@ The compact landscape profile is the approved operational extraction of the worl
 
 The sync command also versions the script references in the two entry pages from their actual content hashes. These mechanical HTML updates prevent stale registry/renderer scripts after refresh. Include them in the same commit; no hand-written runtime edit is needed for an image replacement.
 
-## Execute the requested scope
+## Existing playable-stage revisions and later release
+
+The following integration/review steps apply to existing playable stages and later calibrated releases. New asset-only stages follow the handoff procedure above.
 
 1. **Resolve once:** confirm the requested stage/layers, current checkpoint and reference files. Existing GitHub reads establish repository access; do not delay generation to rediscover upload methods. Use the established connected route in `GITHUB_WORKFLOW.md` at publication. If an actual access failure occurs, identify that specific blocker and preserve completed work under the recovery rules.
 2. **Generate or revise:** one image per call using actual attached references. Replace the selected working asset at its standard validation path. Reuse completed valid work on build/resume. Generate is a build alias; approved targets require explicit regenerate/revise. For a single-layer request, preserve sibling bytes and check the layer against those siblings. Do not change scenery to fix a configuration defect.

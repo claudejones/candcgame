@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {
-  checkpointRun, createRun, fileHash, readWorkflowState, recordResult,
+  checkpointRun, closeRun, createRun, fileHash, readWorkflowState, recordResult,
   requeueJob, resumeReport, startJob, updateWorkflowState, verifyRecovery
 } from '../asset-jobs.mjs';
 
@@ -127,4 +127,29 @@ test('large binary recovery requires coordinator verification of a fetched remot
   mutation=verifyRecovery({root:f.root,statePath:f.statePath,expectedRevision:mutation.state.revision,runId,jobId:job.id,remoteRef:'refs/remotes/origin/work/assets/zz01'});
   assert.equal(mutation.result.durable,true);
   assert.throws(()=>verifyRecovery({root:f.root,statePath:f.statePath,expectedRevision:mutation.state.revision,runId,jobId:job.id,remoteRef:commit}),/remote-tracking ref/);
+});
+
+test('asset-ready closeout requires durable jobs and a remotely verified handoff without approving gameplay',()=>{
+  const f=fixture();
+  f.packet.jobs=[f.packet.jobs[0]];f.packet.protectedOutputs=['assets/far.png'];
+  fs.mkdirSync(path.join(f.root,'config/asset-handoffs'),{recursive:true});
+  fs.writeFileSync(path.join(f.root,'config/asset-handoffs/zz01.json'),'{}\n');
+  for(const args of [['init'],['config','user.email','test@example.invalid'],['config','user.name','Test'],['add','.'],['commit','-m','base']])execFileSync('git',args,{cwd:f.root,stdio:'ignore'});
+  const baseCommit=execFileSync('git',['rev-parse','HEAD'],{cwd:f.root,encoding:'utf8'}).trim();
+  let mutation=createRun({root:f.root,statePath:f.statePath,expectedRevision:0,command:'build stage ZZ01',packet:f.packet,baseCommit});
+  const runId=mutation.result.runId;
+  mutation=startJob({root:f.root,statePath:f.statePath,expectedRevision:mutation.state.revision,runId,jobId:'ZZ01:FAR'});
+  fs.writeFileSync(path.join(f.root,'assets/far.png'),'ready');
+  execFileSync('git',['add','.'],{cwd:f.root});execFileSync('git',['commit','-m','asset-ready'],{cwd:f.root,stdio:'ignore'});
+  const commit=execFileSync('git',['rev-parse','HEAD'],{cwd:f.root,encoding:'utf8'}).trim(),job=mutation.state.runs[runId].jobs['ZZ01:FAR'];
+  const hash=fileHash(f.root,job.output),manifest={runId,jobId:job.id,path:job.output,sha256:hash,baseCommit,baseHash:job.baseHash,specHash:job.specHash,referenceHashes:job.referenceHashes,attempts:1,recovery:{ref:'work/assets/zz01',commit,contentHash:hash}};
+  mutation=recordResult({root:f.root,statePath:f.statePath,expectedRevision:mutation.state.revision,runId,jobId:job.id,manifest});
+  assert.throws(()=>checkpointRun({root:f.root,statePath:f.statePath,expectedRevision:mutation.state.revision,runId,phase:'asset-ready',handoffPath:'config/asset-handoffs/zz01.json'}),/verified remote recovery evidence/);
+  execFileSync('git',['update-ref','refs/remotes/origin/work/assets/zz01',commit],{cwd:f.root});
+  mutation=verifyRecovery({root:f.root,statePath:f.statePath,expectedRevision:mutation.state.revision,runId,jobId:job.id,remoteRef:'refs/remotes/origin/work/assets/zz01'});
+  mutation=checkpointRun({root:f.root,statePath:f.statePath,expectedRevision:mutation.state.revision,runId,phase:'asset-ready',handoffPath:'config/asset-handoffs/zz01.json',handoffRecoveryRef:'refs/remotes/origin/work/assets/zz01'});
+  assert.equal(mutation.state.runs[runId].handoff.remoteRefVerified,true);
+  mutation=closeRun({statePath:f.statePath,expectedRevision:mutation.state.revision,runId});
+  assert.equal(mutation.result.status,'ready-for-calibration');
+  assert.equal(mutation.state.approvedRevisions.zz01,undefined);
 });

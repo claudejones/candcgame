@@ -89,8 +89,9 @@ test('synthetic ready future state gives jobs only to production commands and ke
   stage.referenceFiles=['assets-original/current-generated/NA-assets/NA01_BG_DISTANT_MESAS.png'];
   const state={approvedRevisions:{},runs:{},activeRunId:null};
   const build=futurePacket('build','stage',stage,[],state,plan);
-  assert.equal(build.operation,'produce-and-publish');
+  assert.equal(build.operation,'produce-only');
   assert.equal(build.jobs.length,5);
+  assert.match(build.stop,/Workbench/);
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'future-packet-'));
   const statePath=path.join(temp,'state.json');
   fs.writeFileSync(statePath,JSON.stringify({schemaVersion:2,revision:0,active:null,activeRunId:null,runs:{},approvedRevisions:{}}));
@@ -111,7 +112,7 @@ test('synthetic ready future state gives jobs only to production commands and ke
   const locked=futurePacket('build','stage',{...stage,status:'approved'},[],state,plan);
   assert.equal(locked.operation,'read');
   assert.equal(locked.jobs,undefined);
-  assert.match(handoff({active:null,activeRunId:null,runs:{},approvedRevisions:{af01:{commit:'c'}}}),/status AF02/);
+  assert.equal(handoff({active:null,activeRunId:null,runs:{},approvedRevisions:{af01:{commit:'c'}}}),'In claudejones/candcgame: build stage AF02.');
 });
 
 test('reference readiness cannot enable generation with an empty downloaded image',()=>{

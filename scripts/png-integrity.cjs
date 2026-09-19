@@ -13,8 +13,8 @@ function crc32(buffer) {
   return (c ^ 0xffffffff) >>> 0;
 }
 
-function validatePng(stageId, layerName, spec) {
-  const file = path.join(ROOT, spec.validation);
+function validatePng(stageId, layerName, spec, root = ROOT) {
+  const file = path.join(root, spec.validation);
   if (!fs.existsSync(file)) throw new Error(`${stageId}/${layerName}: missing ${spec.validation}`);
   const data = fs.readFileSync(file);
   if (!data.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) {
