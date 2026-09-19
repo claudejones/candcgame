@@ -25,5 +25,7 @@ Every creature in a multi-creature flock must visibly animate across the complet
 ## Collision QA
 The QA harness may latch an individual spawned hazard's bounds red after collision until that instance exits. This is diagnostic state only and does not alter collision mechanics.
 
+Calibration must exercise the complete timed Jump or Slide through the full hazard pass for both characters, including HIGH/LOW flying modes and configured speeds. A clear jump apex or an indefinitely held Slide pose does not prove avoidance. Keep the established character reference and movement physics fixed; fit hazard scale and solid-body collision to that reference, then inspect readability at gameplay size. Record measured timing windows as technical evidence, not as user acceptance or a new difficulty setting.
+
 ## Migration
 Preserve current hazard timing, placement patterns, crop/calibration values, collision geometry and stage signatures while externalizing assets/configuration.

@@ -261,12 +261,12 @@
         "porcupine",
         "roller"
       ],
-      "referenceStatus": "Source pages and initial image URLs researched; actual inspected per-output reference pack remains required. Direct HTTP retrieval was unavailable in the preparation environment; no downloaded/verified pixels are claimed.",
+      "referenceStatus": "Six retrieved, inspected and hash-verified photographs plus approved game-style references. See assets/references/africa/af01/REFERENCES.json; attach only the selected output references.",
       "notes": "Regional Tanzania/savanna species selection; no exact park occurrence claim. Porcupine may rest beside a shaded burrow because it is nocturnal. Large wildlife remains background-only. No log replacement by recoloring.",
       "selectionStatus": "ready",
-      "referencesReady": false,
+      "referencesReady": true,
       "brief": {
-        "status": "agent-selected-for-trial; visual-reference-pack-pending",
+        "status": "agent-selected-and-reference-inspected; generated-artwork-acceptance-pending",
         "farFocalPoint": "A prominent granite kopje with a recognizable stacked-rock silhouette above the savannah.",
         "midLifeDetail": "A restrained giraffe browsing an acacia away from the playable route.",
         "localReference": [
@@ -284,27 +284,77 @@
       ],
       "referenceSources": [
         {
-          "role": "setting",
-          "page": "https://whc.unesco.org/en/list/156/gallery/"
+          "role": "landscape",
+          "path": "assets/references/africa/af01/landscape.jpg",
+          "sha256": "fd790e26f2006e0b0221b6ab48f76ec683de0bd402187b51b11f542a8f8bb8fc",
+          "page": "https://commons.wikimedia.org/wiki/File:Serengeti-Landscape-2012.JPG",
+          "credit": "Bjørn Christian Tørrissen",
+          "license": "CC BY-SA 3.0"
         },
         {
-          "role": "GROUND2",
-          "page": "https://www.mpalalive.org/field_guide/view/crested_porcupine",
-          "image": "https://www.mpalalive.org//uploads/gallery/crested-porcupine_gallery_2.jpg",
-          "credit": "MpalaLive; research reference only; no redistribution license established"
+          "role": "kopje",
+          "path": "assets/references/africa/af01/kopje.jpg",
+          "sha256": "00d9484077c980afcef6b15d7bc906258dfe6b479dc21208b8a4ed6718a43352",
+          "page": "https://commons.wikimedia.org/wiki/File:Kopjes_on_the_serengeti_national_park_tanzania_africa_landscape.jpg",
+          "credit": "Stolz Gary M, U.S. Fish and Wildlife Service",
+          "license": "Public domain"
         },
         {
-          "role": "FLYING",
+          "role": "giraffe",
+          "path": "assets/references/africa/af01/giraffe.jpg",
+          "sha256": "5440ee0fa67edb3b762e9bfd8ec96e5c0fdaafaf12a473ecb23d98ad499a8640",
+          "page": "https://commons.wikimedia.org/wiki/File:042_Masai_giraffe_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent_(cropped).jpg",
+          "credit": "© Giles Laurent, gileslaurent.com",
+          "license": "CC BY-SA 4.0"
+        },
+        {
+          "role": "termite_mound",
+          "path": "assets/references/africa/af01/termite_mound.jpg",
+          "sha256": "32378c544d4349aa009ebad1bc901210df8c18553a3e0ca3222c29efdbfd4ea0",
+          "page": "https://commons.wikimedia.org/wiki/File:Flora_of_Tanzania_1097_Nevit.jpg",
+          "credit": "Nevit Dilmen",
+          "license": "CC BY-SA 3.0"
+        },
+        {
+          "role": "crested_porcupine",
+          "path": "assets/references/africa/af01/crested_porcupine.jpg",
+          "sha256": "b0c80b443ce1787049117abea863e43b6e66145e5e43ad9830a6af4a2b4c0136",
+          "page": "https://commons.wikimedia.org/wiki/File:Hystrix_cristata_qtl1.jpg",
+          "credit": "Quartl",
+          "license": "CC BY-SA 3.0"
+        },
+        {
+          "role": "lilac_breasted_roller_flight",
+          "path": "assets/references/africa/af01/lilac_breasted_roller_flight.jpg",
+          "sha256": "f610793515762b529d9d850586b0fc079ac4425378f81b88b914bf42398c8630",
           "page": "https://commons.wikimedia.org/wiki/File:Coracias_caudatus_-Tarangire_National_Park,_Tanzania_-flying-8.jpg",
-          "image": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Coracias_caudatus_-Tarangire_National_Park%2C_Tanzania_-flying-8.jpg",
-          "credit": "Demetrius John Kessy, CC BY 2.0"
+          "credit": "Demetrius John Kessy",
+          "license": "CC BY 2.0"
         }
       ],
       "referenceFiles": {
-        "shared": [
+        "FAR": [
           "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png",
+          "assets/references/africa/af01/landscape.jpg",
+          "assets/references/africa/af01/kopje.jpg"
+        ],
+        "MID": [
           "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png",
-          "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png"
+          "assets/references/africa/af01/landscape.jpg",
+          "assets/references/africa/af01/giraffe.jpg"
+        ],
+        "GROUND": [
+          "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png",
+          "assets/references/africa/af01/landscape.jpg"
+        ],
+        "OBJECT_ATLAS": [
+          "assets/worlds/north-america/NA01_HAZARD_ATLAS.png",
+          "assets/references/africa/af01/termite_mound.jpg",
+          "assets/references/africa/af01/crested_porcupine.jpg"
+        ],
+        "FLYING": [
+          "assets/worlds/north-america/NA01_HAZARD_VULTURE.png",
+          "assets/references/africa/af01/lilac_breasted_roller_flight.jpg"
         ]
       }
     },
@@ -1184,6 +1234,6 @@
   "readinessEvidence": {
     "runtimeRegistration": "scripts/tests/stage-expansion.test.cjs: 21 pending/active catalog boundaries, complete fixture activation, saved config migration and shared anchor rendering. This is implementation readiness, not evidence of generated-stage playability.",
     "hazardValidation": "scripts/validate-stage-assets.cjs + hazard-atlas-qa.py + stage-contract.js; structural fixtures passed. Real pose/collision/scale checks remain per generated stage.",
-    "landscapeContractPromotion": "Still pending the existing dependent calibration review; no existing character, hazard, physics or Slide setting changed."
+    "landscapeContractPromotion": "Dependent calibration implementation and timed runtime checks prepared for deployed review; see docs/phase8-qa/DEPENDENT_CALIBRATION_QA.md. Eleven hazard scales/contact offsets adjusted; established character settings, artwork, physics and Slide timing preserved. User acceptance and formal promotion remain pending."
   }
 }

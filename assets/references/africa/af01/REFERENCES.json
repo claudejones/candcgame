@@ -1,0 +1,84 @@
+{
+  "stage": "AF01",
+  "verification": "Coordinator and reference worker inspected the downloaded images; SHA-256, nonempty bytes and dimensions verified. Photographs are visual references only, not game artwork. Source-provided thumbnail bytes are retained unchanged.",
+  "assets": [
+    {
+      "id": "landscape",
+      "path": "assets/references/africa/af01/landscape.jpg",
+      "bytes": 314183,
+      "width": 1280,
+      "height": 737,
+      "sha256": "fd790e26f2006e0b0221b6ab48f76ec683de0bd402187b51b11f542a8f8bb8fc",
+      "credit": "Bjørn Christian Tørrissen",
+      "license": "CC BY-SA 3.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Serengeti-Landscape-2012.JPG",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Serengeti-Landscape-2012.JPG/1280px-Serengeti-Landscape-2012.JPG",
+      "inspection": "Serengeti broad gold grassland, umbrella acacia, scattered trees and low distant ridge. Strong palette and depth reference; no giraffe and not a clear standalone kopje."
+    },
+    {
+      "id": "kopje",
+      "path": "assets/references/africa/af01/kopje.jpg",
+      "bytes": 106727,
+      "width": 2166,
+      "height": 1462,
+      "sha256": "00d9484077c980afcef6b15d7bc906258dfe6b479dc21208b8a4ed6718a43352",
+      "credit": "Stolz Gary M, U.S. Fish and Wildlife Service",
+      "license": "Public domain",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Kopjes_on_the_serengeti_national_park_tanzania_africa_landscape.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Kopjes_on_the_serengeti_national_park_tanzania_africa_landscape.jpg",
+      "inspection": "Explicit Serengeti kopje: clustered rounded granite blocks with dark clefts, sparse shrubs on and behind the rock, dry grass base, large clean sky area. Strong FAR focal silhouette reference."
+    },
+    {
+      "id": "giraffe",
+      "path": "assets/references/africa/af01/giraffe.jpg",
+      "bytes": 482556,
+      "width": 1280,
+      "height": 1337,
+      "sha256": "5440ee0fa67edb3b762e9bfd8ec96e5c0fdaafaf12a473ecb23d98ad499a8640",
+      "credit": "© Giles Laurent, gileslaurent.com",
+      "license": "CC BY-SA 4.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:042_Masai_giraffe_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent_(cropped).jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/042_Masai_giraffe_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent_%28cropped%29.jpg/1280px-042_Masai_giraffe_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent_%28cropped%29.jpg",
+      "inspection": "Masai giraffe photographed in Serengeti National Park. Clear right-facing full-body pose, ossicones and irregular dark leaf-shaped patches; dry grass and acacias support MID-life color integration."
+    },
+    {
+      "id": "termite_mound",
+      "path": "assets/references/africa/af01/termite_mound.jpg",
+      "bytes": 4545735,
+      "width": 3648,
+      "height": 2736,
+      "sha256": "32378c544d4349aa009ebad1bc901210df8c18553a3e0ca3222c29efdbfd4ea0",
+      "credit": "Nevit Dilmen",
+      "license": "CC BY-SA 3.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Flora_of_Tanzania_1097_Nevit.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Flora_of_Tanzania_1097_Nevit.jpg",
+      "inspection": "Tanzanian dry savanna with red-brown termite mound wrapped around an acacia base. Mound is partly occluded; useful for color, granular texture and irregular low-lobed form, not for copying the tree."
+    },
+    {
+      "id": "crested_porcupine",
+      "path": "assets/references/africa/af01/crested_porcupine.jpg",
+      "bytes": 378526,
+      "width": 1280,
+      "height": 846,
+      "sha256": "b0c80b443ce1787049117abea863e43b6e66145e5e43ad9830a6af4a2b4c0136",
+      "credit": "Quartl",
+      "license": "CC BY-SA 3.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Hystrix_cristata_qtl1.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Hystrix_cristata_qtl1.jpg/1280px-Hystrix_cristata_qtl1.jpg",
+      "inspection": "Clean left-facing side profile with low body, small head and feet, dark mantle and long black-white banded quills. Captive Germany setting: anatomy and markings only, not habitat."
+    },
+    {
+      "id": "lilac_breasted_roller_flight",
+      "path": "assets/references/africa/af01/lilac_breasted_roller_flight.jpg",
+      "bytes": 39927,
+      "width": 800,
+      "height": 535,
+      "sha256": "f610793515762b529d9d850586b0fc079ac4425378f81b88b914bf42398c8630",
+      "credit": "Demetrius John Kessy",
+      "license": "CC BY 2.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Coracias_caudatus_-Tarangire_National_Park,_Tanzania_-flying-8.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Coracias_caudatus_-Tarangire_National_Park%2C_Tanzania_-flying-8.jpg",
+      "inspection": "Lilac-breasted roller in flight at Tarangire National Park, Tanzania. Readable wing spread, turquoise and dark flight-feather blocks, lilac chest and paired tail streamers. Regional Tanzania reference, not exact Serengeti occurrence."
+    }
+  ]
+}
