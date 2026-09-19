@@ -9,6 +9,8 @@ Requested 2026-09-19 after the user reviewed Review 04's layout and atlas draggi
 - Save status identifies browser persistence; the change dialog identifies the GitHub source baseline. Only current Design settings are included; Test/Game runtime settings are still pending.
 - Catalog records hashes and dimensions from unchanged repository PNGs. Syntax, ID references and static packaging are checked before publication.
 
+Review 05 private publication succeeded at https://candc-workbench-next.claudejones.chatgpt.site (version 5, deployment `appgdep_6aae1f4eb83c8191a5615b0403db4aa5`). Site source: `ef7b2f606962fe21f9a0265a11983fa0f225ba39`; GitHub implementation: `6e81660ea95efb55be8ab1bf7f69a85d40e61e36`. [Production CI passed for that implementation](https://github.com/claudejones/candcgame/actions/runs/35424288144). Packaged code and provenance match the source; all 53 packaged PNG hashes match their source. The archive entrypoint and hosting manifest were verified before saving. Main and development have since advanced independently; this editor increment retains its existing configuration/artwork baseline.
+
 Browser interaction and responsive visual acceptance remain pending. Review: select Europe → EU02, change continents and return; verify EU02 is remembered. Edit one character frame, one hazard boundary and one landscape, export all, change a value, import the exported file, review/reset differences, apply, Undo/Redo, save all and reload. Under Changes & recovery, review the pre-import copy. Import an invalid JSON file to verify a visible error without losing work. Test and Game remain disabled until the runtime adapter and their dedicated milestones are complete.
 
 ## Review 04 — frame boundaries and fitted workspace

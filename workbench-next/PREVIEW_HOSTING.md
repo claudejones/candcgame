@@ -21,6 +21,8 @@ Publication confirmed successful on 2026-09-19. Version 1 uses Site source commi
 
 ## Review scope
 
+Review 05 publication succeeded on 2026-09-19 at the same URL. Site source commit: `ef7b2f606962fe21f9a0265a11983fa0f225ba39`; saved version: 5; deployment ID: `appgdep_6aae1f4eb83c8191a5615b0403db4aa5`. Canonical implementation: `6e81660ea95efb55be8ab1bf7f69a85d40e61e36`, with successful Production CI for that exact SHA. The archive contains 72 files, including 53 byte-identical PNGs; native deployment status is `succeeded`. Browser/user acceptance of the new import flow remains pending.
+
 Review 04 publication succeeded on 2026-09-19 at the same URL. Site source commit: `3a70a9bee0dacf1ff3fafea1d69f24b314fa2a1e`; saved version: 4; deployment ID: `appgdep_6aae1633fce48191a0665232b63bfda6`. Canonical implementation: `398ce53d656b048fc7ca307696cba92d7b328264`. The validated static archive contains 70 files, including 53 unchanged source PNGs; SHA-256: `1207d6a1bcad289b587def99f6068299fcef72f4a359bf53b45a7f3069ba9487`. Native deployment status is `succeeded`; browser/user visual acceptance remains pending.
 
 Review 03 publication succeeded on 2026-09-19 at the same URL. Site source commit: `71654c35c4b6b0107ff7004be80098c16a9593aa`; saved version: 3; deployment ID: `appgdep_6aae0e2868f48191998e59ff3e0723a8`. Canonical implementation: `1a8fb2e2cc803f82ae384553677cc1a4a9ef778c`, incorporating main `723a42b…`. All 53 packaged PNGs match repository source bytes.
