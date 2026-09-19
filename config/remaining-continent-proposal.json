@@ -1234,6 +1234,6 @@
   "readinessEvidence": {
     "runtimeRegistration": "scripts/tests/stage-expansion.test.cjs: 21 pending/active catalog boundaries, complete fixture activation, saved config migration and shared anchor rendering. This is implementation readiness, not evidence of generated-stage playability.",
     "hazardValidation": "scripts/validate-stage-assets.cjs + hazard-atlas-qa.py + stage-contract.js; structural fixtures passed. Real pose/collision/scale checks remain per generated stage.",
-    "landscapeContractPromotion": "Dependent calibration implementation and timed runtime checks prepared for deployed review; see docs/phase8-qa/DEPENDENT_CALIBRATION_QA.md. Nine hazard scales/contact offsets adjusted; established character settings, artwork, physics and Slide timing preserved. User acceptance and formal promotion remain pending."
+    "landscapeContractPromotion": "Dependent calibration implementation and timed runtime checks prepared for deployed review; see docs/phase8-qa/DEPENDENT_CALIBRATION_QA.md. Eleven hazard scales/contact offsets adjusted; established character settings, artwork, physics and Slide timing preserved. User acceptance and formal promotion remain pending."
   }
 }
