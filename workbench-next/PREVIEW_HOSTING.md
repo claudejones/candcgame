@@ -21,6 +21,8 @@ Publication confirmed successful on 2026-09-19. Version 1 uses Site source commi
 
 ## Review scope
 
+Review 02 publication succeeded on 2026-09-19 at the same live URL. Site source commit: `1e6655173838bfb95fa0c2fd007f12d312777ca8`; saved version: 2; deployment ID: `appgdep_6aae03d0994c819181298034305f7c0c`. Canonical editor implementation commit: `0441baf3ef56aeed19d7de19651a741c025ba40f` on `editor-next`.
+
 Sprite navigation, six states for both characters, stage hazards, frame playback/stepping, full-atlas view, crop comparison, per-frame edits, undo/redo, separate local saves and candidate export. A visible spinner covers image download/decode until the selected frame is drawn. Test/Game and in-scene editing are later milestones.
 
 The static preview does not have a compatible managed development server. Automated browser visual QA is still pending; do not use a cloud browser on the live Sites URL. User visual review can proceed once publication succeeds.

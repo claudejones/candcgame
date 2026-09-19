@@ -52,3 +52,5 @@ User review checklist for this increment:
 4. Tab to the sub-tabs and use Left/Right or Home/End. Confirm only the active panel's controls receive keyboard focus.
 
 The supplied screenshot informed these changes; no new browser interaction or rendered responsive-layout checks have been claimed. Final visual acceptance remains a user review gate.
+
+Review 02 private publication succeeded at the same review URL (version 2, deployment `appgdep_6aae03d0994c819181298034305f7c0c`). Packaged UI/model/plan files were verified byte-for-byte against the candidate source. GitHub implementation commit: `0441baf3ef56aeed19d7de19651a741c025ba40f`; Site source commit: `1e6655173838bfb95fa0c2fd007f12d312777ca8`.
