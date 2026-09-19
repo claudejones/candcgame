@@ -59,7 +59,11 @@ function futureBlockers(plan, stage) {
   if (stage.referencesReady === true) {
     const references=referenceFilesFor(stage);
     if (!references.length) blockers.push('actual reference image files are missing');
-    for (const file of references) if (!fs.existsSync(path.join(ROOT,file))) blockers.push(`reference image is missing: ${file}`);
+    for (const file of references) {
+      const local=path.join(ROOT,file);
+      if (!fs.existsSync(local)) blockers.push(`reference image is missing: ${file}`);
+      else if (!fs.statSync(local).isFile() || fs.statSync(local).size===0) blockers.push(`reference image is empty or not a file: ${file}`);
+    }
   }
   if (stage.hazards?.FLYING?.selectionStatus && !readyValue(stage.hazards.FLYING.selectionStatus)) blockers.push(`FLYING selection is ${stage.hazards.FLYING.selectionStatus}`);
   return blockers;

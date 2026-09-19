@@ -262,7 +262,8 @@ class CharacterMachine{
    const gScale=baseScale*p.groundScale;
    const gY=p.seamY-CONFIG.worldContract.groundSurfaceSourceY*gScale+p.groundYOffset;
    const renderedSurfaceY=gY+CONFIG.worldContract.groundSurfaceSourceY*gScale;
-   const footY=renderedSurfaceY+CONFIG.worldContract.footOffset[this.character]+(p.characterGrounding?.[this.character]||0);
+   const gameplaySurfaceY=window.CC_LANDSCAPE_CONTRACT.gameplaySurface(CONFIG,window.CC_LANDSCAPE_REGISTRY,CONFIG.activeWorld,renderedSurfaceY);
+   const footY=gameplaySurfaceY+CONFIG.worldContract.footOffset[this.character]+(p.characterGrounding?.[this.character]||0);
    const dy=footY-dh+this.y+stateRenderY;
 
    ctx.drawImage(img,sx+cL,sy+cT,srcW,srcH,
@@ -323,7 +324,7 @@ class ObjectQA{
  active(){const list=this.defs();if(!list.length)return null;const i=Math.max(0,Math.min(list.length-1,CONFIG.objectQA.activeIndex[CONFIG.activeWorld]||0));return list[i]}
  setIndex(delta){const list=this.defs();if(!list.length)return;let i=CONFIG.objectQA.activeIndex[CONFIG.activeWorld]||0;i=(i+delta+list.length)%list.length;CONFIG.objectQA.activeIndex[CONFIG.activeWorld]=i;CONFIG.objectQA.flying.t=0;CONFIG.objectQA.flying.frame=0;CONFIG.objectQA.flying.travel=0;this.collisionLatched=false;this.lastCollision=false;}
  resetPass(){CONFIG.objectQA.scrollOrigin=this.scene.worldX;CONFIG.objectQA.x=650;CONFIG.objectQA.flying.t=0;CONFIG.objectQA.flying.travel=0;this.collisionLatched=false;this.lastCollision=false;this.lastObjectBox=null;}
- surfaceY(){return this.scene.lastRenderedSurfaceY ?? CONFIG.worldProfiles[CONFIG.activeWorld].seamY}
+ surfaceY(){return window.CC_LANDSCAPE_CONTRACT.gameplaySurface(CONFIG,window.CC_LANDSCAPE_REGISTRY,CONFIG.activeWorld,this.scene.lastRenderedSurfaceY ?? CONFIG.worldProfiles[CONFIG.activeWorld].seamY)}
  screenX(drawW){if(!CONFIG.objectQA.scrollWithWorld)return CONFIG.objectQA.x;const q=CONFIG.objectQA;const phase=((this.scene.worldX-q.scrollOrigin)%q.loopDistance+q.loopDistance)%q.loopDistance;let x=q.x-phase;while(x < -drawW-30)x += q.loopDistance;return x;}
  characterBox(){const who=this.character.character,state=this.character.state,q=CONFIG.objectQA.characterCollision[who][state];const vw=Math.max(8,this.character.last.visibleWidth||40),vh=Math.max(8,this.character.last.visibleHeight||70);const top=this.character.last.visibleTop??((this.character.last.footY??this.surfaceY())-vh);const w=vw*q.w,h=vh*q.h,cx=(this.character.last.centerX??CONFIG.characterX)+(q.x*vw),y=top+(vh-h)*(1-q.y);return{x:cx-w/2,y,w,h};}
  intersects(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}

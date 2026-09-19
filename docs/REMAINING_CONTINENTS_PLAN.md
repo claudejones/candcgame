@@ -106,7 +106,7 @@ Implemented once for all continents:
 5. `integrate-stage.mjs` accepts measured release metadata and an eligible explicit command, checks all five hashes, preserves unselected files/metadata and compares unselected ground-cell pixels to Git before integration. Registry sync updates the host and inner renderer together. CI validates active releases and explicitly protects the original nine stages.
 6. Africa is the three-stage trial: **AF01 → AF02 → AF03**. AF01 is the first user-review checkpoint. At most two workers operate within one active stage; this is not three simultaneous stage builds. Reuse setup across the trial and measure totals across all three stages.
 
-The setup tests use clearly synthetic metadata/atlas fixtures; no future-stage artwork, actual gameplay calibration or user acceptance is claimed. Actual reference pixels still need to be retrieved, inspected and attached; their researched source pages/initial image URLs are recorded in the catalog. Direct image downloads returned HTTP 403 or HTML in this preparation environment, so reference readiness remains false. Agents handle retrieval, not the user. Existing Phase 8 dependent calibration/contract promotion also remains pending.
+The setup tests use clearly synthetic metadata/atlas fixtures; no future-stage artwork, actual gameplay calibration or user acceptance is claimed. AF01 now has six retrieved, inspected and hash-verified reference photos under `assets/references/africa/af01/`, with source credits and licenses in `REFERENCES.json`. Its focused output mappings attach only the relevant photo and approved game-style references. AF02/AF03 packs remain just-in-time agent work before their stages. Existing Phase 8 dependent calibration is implemented for deployed review; evidence, scope and the remaining acceptance gate are in `phase8-qa/DEPENDENT_CALIBRATION_QA.md`. Formal promotion remains pending.
 
 Coordinate the shared catalog with the separately active production-editor redesign. Reuse its agreed integration points when available; this plan is not authorization to merge or replace that editor. Recheck live branches before writes and preserve approved EU03 and concurrent editor work.
 
@@ -156,8 +156,8 @@ Use existing image generation and the established connected publisher. There is 
 | New-atlas direction | Approved for AF01 pilot; measured integration still required |
 | Africa selections | Agent-selected and locally researched; artwork/visible scale acceptance pending. Other continents still need selection review |
 | All 27 NA/SA/EU landscapes and three continent landscape regressions | Approved/passed |
-| Dependent calibration and formal landscape-contract promotion | Pending |
-| Actual stage-specific visual/species reference packs | Source research/initial image URLs recorded for Africa; pixel retrieval/inspection pending |
+| Dependent calibration and formal landscape-contract promotion | Technical calibration prepared; deployed user acceptance/promotion pending |
+| Actual stage-specific visual/species reference packs | AF01 retrieved, inspected and mapped per output; AF02/AF03 prepared before their respective stages |
 | Workflow V3 job checkpoints and focused stage/hazard readiness packets | Implemented; tested separately from image production |
 | Shared 21-stage runtime/editor support and hazard validation tooling | Implemented and fixture-tested; no pending stage exposed as playable |
 | Africa AF01–AF03 production trial | Pending; AF01 first checkpoint, two workers within one active stage |

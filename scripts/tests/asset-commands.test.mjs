@@ -111,3 +111,21 @@ test('synthetic ready future state gives jobs only to production commands and ke
   assert.equal(locked.jobs,undefined);
   assert.match(handoff({active:null,activeRunId:null,runs:{},approvedRevisions:{af01:{commit:'c'}}}),/status AF02/);
 });
+
+test('reference readiness cannot enable generation with an empty downloaded image',()=>{
+  const plan=JSON.parse(fs.readFileSync(`${ROOT}/config/remaining-continent-proposal.json`,'utf8'));
+  plan.productionEnabled=true;
+  plan.readiness={landscapeContractPromotion:'complete',runtimeRegistration:'complete',hazardValidation:'passed'};
+  const stage=structuredClone(plan.stages.find(item=>item.id==='AF01'));
+  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'empty-reference-'));
+  try {
+    const file=path.join(temp,'reference.jpg');
+    fs.writeFileSync(file,'');
+    stage.selectionStatus='ready';stage.referencesReady=true;
+    stage.referenceFiles=[path.relative(ROOT,file)];
+    const packet=futurePacket('build','stage',stage,[],{approvedRevisions:{}},plan);
+    assert.equal(packet.generationAllowed,false);
+    assert.equal(packet.jobs,undefined);
+    assert.match(packet.blockers.join(' '),/reference image is empty/);
+  } finally { fs.rmSync(temp,{recursive:true,force:true}); }
+});
