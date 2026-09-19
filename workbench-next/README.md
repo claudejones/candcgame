@@ -1,7 +1,7 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 5.2; not the replacement editor**.
-Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `b469182fd6ee76c346a959cfde82a5b108b048ed` for the approved EU01 and SA03 landscapes (2026-09-19). Production source/assets match this upstream snapshot; candidate-only changes remain under `workbench-next/`.
+Status: **review increment 5.3; not the replacement editor**.
+Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0` for EU02 and EU03 landscapes (2026-09-19). Production source/assets match this upstream snapshot; candidate-only changes remain under `workbench-next/`. EU02 is approved; EU03 is integrated and awaiting artwork approval.
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
 
@@ -15,11 +15,11 @@ GitHub remains the source of truth and GitHub Pages is the final delivery destin
 
 Review 02 separates **Stage** and **Character** sub-tabs, remembers each character's state/frame and each stage's selected hazard/frame during the session, labels global versus stage scope, and reduces headings/spacing. The stage selector appears only in Stage. Crop editing waits for the selected image to finish loading.
 
-Review 04 lists **Stage → Landscape → FAR/MID/GROUND** directly in the left panel. Character animation states are also on the left. Use **Scene**, **Layer** or **Source** to choose the view. Scale, X/Y offsets and parallax change the scene; scroll to inspect repetition. Layer/cloud visibility and the ground guide are temporary preview settings. Compare shows the baseline beside the draft. Review 05.1 uses approved assets for NA01–NA03, SA01–SA03 and EU01; EU02/EU03 remain explicitly labeled legacy sets until synchronized from an approved upstream snapshot.
+Review 04 lists **Stage → Landscape → FAR/MID/GROUND** directly in the left panel. Character animation states are also on the left. Use **Scene**, **Layer** or **Source** to choose the view. Scale, X/Y offsets and parallax change the scene; scroll to inspect repetition. Layer/cloud visibility and the ground guide are temporary preview settings. Compare shows the baseline beside the draft. Review 05.3 uses the current integrated landscape sets for all nine stages. NA01–NA03, SA01–SA03 and EU01–EU02 are approved; EU03 is labeled as awaiting approval in Source & status.
 
 The review host packages a GitHub snapshot; refreshing a browser does not synchronize newer upstream artwork. Every asset refresh must update the branch, registry, catalog and private deployment together. Images retain their approved bytes and hash-based cache keys; the catalog revalidates on startup. Preview packaging removes generated output first so superseded images are not retained in the archive.
 
-The exact Review 05 → 05.1 draft migration is recorded in `project-migrations.json`. Saved v4 projects and older v2/v3 Design files keep all sprite crops/bounds and custom transforms. Untouched legacy landscape values move to the new approved defaults. Unknown source revisions are still rejected. Save all preserves the previous v4 browser record under `cc-workbench-next-before-artwork-refresh-v4`; download it under Changes & recovery. No browser record is overwritten automatically during loading.
+The exact Review 05 and Review 05.1/05.2 source signatures are recorded in `project-migrations.json` for conversion to the current artwork snapshot. Saved v4 projects and older v2/v3 Design files keep all sprite crops/bounds and custom transforms. Untouched legacy landscape values move to the new baseline defaults, including zero EU02/EU03 offsets. Unknown source revisions are still rejected. Save all preserves the previous v4 browser record under `cc-workbench-next-before-artwork-refresh-v4`; download it under Changes & recovery. No browser record is overwritten automatically during loading. Custom offsets remain intentional edits; use Compare baseline to inspect them against the new artwork.
 
 From the repository root, run `python -m http.server 8080`, then open
 `http://localhost:8080/workbench-next/`.

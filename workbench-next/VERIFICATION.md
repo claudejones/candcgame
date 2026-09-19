@@ -1,5 +1,16 @@
 # Workbench review — verification
 
+## Review 05.3 — EU02/EU03 artwork sync
+
+Requested 2026-09-19 for configuration testing. Incorporated main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0`; source/configuration/artwork match that upstream snapshot exactly. EU02 is approved; EU03 is integrated and awaiting artwork acceptance. No image generation or alteration occurred.
+
+- The six selected PNGs match upstream QA hashes, dimensions and registry cache keys. Targeted EU02/EU03 asset checks and runtime-registry synchronization pass. Baseline offsets are zero, multipliers 1.25/1/1, anchors MID 621/GROUND 393, and logical ground 410.
+- 36 Node tests pass, including saved Review 05.1/05.2 projects retaining character/hazard frame edits, custom EU02/EU03 transforms and unrelated-stage settings. Untouched defaults update, the old saved record survives loading and is backed up before Save all, and the migrated checkpoint reloads exactly. Older Review 05 and v2/v3 Design imports also remain supported; unknown sources are rejected.
+- Candidate EU02/EU03 composites were rendered and visually inspected at 0 and 2,400 px. The new Paris and Barcelona layers are visible with correct geometry and no transparent holes. This is offline renderer evidence, not browser interaction acceptance.
+- Migration messaging points to Source & status for artwork approval, so the integrated EU03 set is not presented as approved. Test/Game implementation remains pending; this update enables current Design configuration testing.
+
+User review: refresh the private preview, look for Review 05.3, then choose Europe → EU02 / EU03. Check FAR/MID/GROUND, Scene and Play scroll. Use Compare baseline when reviewing preserved custom transforms. Existing saved edits should load; Save all retains a downloadable pre-update checkpoint in Changes & recovery.
+
 ## Review 05.2 — landscape playback
 
 Requested 2026-09-19. The existing 0–4,800 px slider now supports Play/Pause, Restart and end-of-range Replay. Landscape and clouds use the current runtime speeds (120 and 8 px/s); cloud scale, height, opacity, layer order and stage visibility are preserved. Baseline and draft share one preview time. Code changes are confined to `workbench-next/`; approved artwork, game runtime and project format are unchanged.

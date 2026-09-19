@@ -1,6 +1,23 @@
 {
   "schemaVersion": 1,
-  "active": null,
+  "active": {
+    "stage": "EU03",
+    "phase": "ready-to-publish",
+    "command": "build landscape EU03",
+    "selectedLayers": [
+      "FAR",
+      "MID",
+      "GROUND"
+    ],
+    "files": {
+      "assets/phase8-validation/europe/EU03_BG_DISTANT_BARCELONA.png": "fb3ae5964f53f73d761872fad20dee8e98afc4696966f6879dd5ea2845757f09",
+      "assets/phase8-validation/europe/EU03_BG_MID_BARCELONA.png": "0fd183d36bc48ca61a5cabce90c7874e36332c22e4bbcc548a8b3e3fee15421c",
+      "assets/phase8-validation/europe/EU03_GROUND_BARCELONA.png": "45916a46209dd8b5ede78c6e1f41fc9af641ee5155177c7be18296fda37745ff"
+    },
+    "stageSpec": "3fd57012dc1216399b77a071c2728f6c79a6cb5b6c4df51a4961ddd98ab7629d",
+    "recoveryBranch": "work/assets/eu03",
+    "baseCommit": "c02c80f5a889b4b5879f860121233edb6a356d5b"
+  },
   "approvedRevisions": {
     "na01": {
       "commit": "660aa55e35b378e613e07d8315074552620fcb61"
@@ -46,6 +63,17 @@
       },
       "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35422237867",
       "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35422258302"
+    },
+    "eu02": {
+      "commit": "961d3911c756c9084114ab95255a4a06cfe489c0",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/europe/EU02_BG_DISTANT_PARIS.png": "dc76bae1b14faa2878143bad449df64d89a46c1e8c08fdc26447bce79bab39dc",
+        "assets/phase8-validation/europe/EU02_BG_MID_PARIS.png": "9919b9dd8da7fc468b3a3c8552cb58418e752f476844720f59be2bd145570b4e",
+        "assets/phase8-validation/europe/EU02_GROUND_PARIS.png": "52f12eebaee2665dbf418b845a732c05e843c2526e291a6454bc96abfc8ce6b5"
+      },
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35426252658",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35426273472"
     }
   },
   "continentRegressions": {

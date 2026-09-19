@@ -82,7 +82,7 @@ export class ProjectDraft extends FrameDraft {
       }
       const converted={...candidate.export(),landscapeRevision:clone(this.landscapeRevision),atlasDimensions:clone(this.dimensions)};
       const check=new FrameDraft([...this.items.values()],this.definitions,this.dimensions);check.restore(converted);
-      notes.push(`Approved artwork updated for ${updated.join(' and ')}. Untouched settings now use the approved defaults; your custom adjustments and all sprite edits are retained. Review adjusted landscapes with the new artwork.`);
+      notes.push(`Landscape artwork updated for ${updated.join(' and ')}. Untouched settings now use the new baseline defaults; your custom adjustments and all sprite edits are retained. Review adjusted landscapes with the new artwork; see Source & status for artwork approval.`);
     }
     return {state:snapshot(candidate),notes,legacy,migrated:Boolean(migration)};
   }

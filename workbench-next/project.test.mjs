@@ -98,8 +98,7 @@ test('Continent → Stage remembers each continent and includes only available s
   assert.equal(landscapes.length,9);
 });
 
-function beforeArtworkRefresh(Type=FrameDraft) {
-  const previous=catalog.migrations[0];
+function beforeArtworkRefresh(Type=FrameDraft,previous=catalog.migrations[0]) {
   const definitions=landscapes.map(item=>({...item,...previous.landscapeRevision[item.stage]}));
   return new Type(sprites,definitions,previous.atlasDimensions);
 }
@@ -110,7 +109,7 @@ test('approved landscape refresh preserves saved sprite edits and custom setting
   old.editLayer('na01','ground',{...old.transform('na01','ground'),x:21});
   const previous={...create().export(),provenance:catalog.migrations[0].fromProvenance,design:old.export(),savedAt:'2026-09-19T05:00:00.000Z'};
   const raw=JSON.stringify(previous),saved=storage([[PROJECT_STORAGE_KEY,raw]]),target=create();
-  assert.match(target.load(saved),/Approved artwork updated/);assert.equal(target.dirty,true);
+  assert.match(target.load(saved),/Landscape artwork updated/);assert.equal(target.dirty,true);
   assert.equal(target.crop('character:constance:slide',1).l,63);assert.equal(target.bounds('hazard:eu01:1',3).x,1574);
   assert.equal(target.transform('sa03','mid').y,17);assert.equal(target.transform('na01','ground').x,21);
   for(const layer of ['far','mid','ground'])assert.deepEqual(target.transform('eu01',layer),target.landscapeBaseline.eu01[layer]);
@@ -123,11 +122,46 @@ test('older Design imports receive the same bounded artwork migration; unknown s
   for(const Type of [DesignDraft,FrameDraft]) {
     const old=beforeArtworkRefresh(Type);old.edit('character:claude:run',1,{l:9,r:0,t:0,b:0});
     const target=create(),review=target.prepareImport(old.export());
-    assert.ok(review.notes.some(note=>note.includes('Approved artwork updated')));
+    assert.ok(review.notes.some(note=>note.includes('Landscape artwork updated')));
     target.applyImport(review,storage());assert.equal(target.crop('character:claude:run',1).l,9);
     assert.equal(target.transform('eu01','far').y,0);assert.equal(target.transform('sa03','ground').y,0);
   }
   const payload={...create().export(),provenance:structuredClone(catalog.migrations[0].fromProvenance),design:beforeArtworkRefresh().export()};
   payload.provenance.assets.run.sha256='unexpected';assert.throws(()=>create().prepareImport(payload),/different artwork/);
   const target=create();target.provenance.baseline='future-unsupported-source';assert.throws(()=>target.prepareImport({...payload,provenance:catalog.migrations[0].fromProvenance}),/different artwork/);
+});
+
+test('EU02/EU03 refresh retains Review 05.1/05.2 saved edits and recovers the previous checkpoint',()=>{
+  const migration=catalog.migrations.find(m=>m.id==='review051-052-to-europe-refresh');assert.ok(migration);
+  const old=beforeArtworkRefresh(FrameDraft,migration);
+  old.editLayer('eu02','mid',{...old.transform('eu02','mid'),y:19,parallax:0.35});
+  old.editLayer('eu03','ground',{...old.transform('eu03','ground'),x:31});
+  old.editLayer('eu01','far',{...old.transform('eu01','far'),scale:1.3});
+  old.editBounds('hazard:eu01:1',3,{x:1574,y:0,w:598,h:724});
+  old.edit('character:claude:run',0,{l:7,r:0,t:0,b:0});
+  const raw=JSON.stringify({...create().export(),provenance:migration.fromProvenance,design:old.export(),savedAt:'2026-09-19T06:00:00.000Z'});
+  const saved=storage([[PROJECT_STORAGE_KEY,raw]]),target=create();
+  assert.match(target.load(saved),/EU02 and EU03/);assert.equal(target.dirty,true);
+  assert.equal(target.transform('eu02','mid').y,19);assert.equal(target.transform('eu02','mid').parallax,0.35);
+  assert.equal(target.transform('eu03','ground').x,31);assert.equal(target.transform('eu03','ground').y,0);
+  assert.equal(target.transform('eu01','far').scale,1.3);
+  assert.deepEqual(target.transform('eu02','far'),target.landscapeBaseline.eu02.far);
+  assert.deepEqual(target.transform('eu03','mid'),target.landscapeBaseline.eu03.mid);
+  assert.equal(target.bounds('hazard:eu01:1',3).x,1574);assert.equal(target.crop('character:claude:run',0).l,7);
+  assert.equal(saved.getItem(PROJECT_STORAGE_KEY),raw);
+  target.save(saved);assert.equal(saved.getItem(ARTWORK_RECOVERY_KEY),raw);
+  const restored=create();restored.load(saved);assert.deepEqual(restored.export(),target.export());
+  assert.equal(restored.migrated,false);assert.equal(restored.dirty,false);
+});
+
+test('every supported pre-refresh Design export receives Europe defaults without losing custom values',()=>{
+  for(const migration of catalog.migrations)for(const Type of [DesignDraft,FrameDraft]) {
+    const old=beforeArtworkRefresh(Type,migration);old.editLayer('eu03','mid',{...old.transform('eu03','mid'),y:23});
+    old.edit('character:constance:slide',1,{l:62,r:0,t:0,b:0});
+    const target=create(),review=target.prepareImport(old.export());target.applyImport(review,storage());
+    assert.equal(target.transform('eu03','mid').y,23);assert.equal(target.crop('character:constance:slide',1).l,62);
+    for(const stage of ['eu02','eu03'])assert.deepEqual(target.transform(stage,'far'),target.landscapeBaseline[stage].far);
+    assert.equal(target.transform('eu03','ground').y,0);
+    assert.ok(review.notes.some(note=>note.includes('Source & status')));
+  }
 });

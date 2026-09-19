@@ -1,0 +1,801 @@
+{
+  "schemaVersion": 1,
+  "status": "proposal-awaiting-user-review",
+  "productionEnabled": false,
+  "phase": "post-phase8-expansion",
+  "plan": "docs/REMAINING_CONTINENTS_PLAN.md",
+  "scope": {
+    "continents": 4,
+    "stages": 12,
+    "landscapeLayers": 36,
+    "groundHazardDesigns": 24,
+    "flyingHazardDesigns": 12,
+    "plannedImageFiles": 60
+  },
+  "order": [
+    "AF01",
+    "AF02",
+    "AF03",
+    "AS01",
+    "AS02",
+    "AS03",
+    "OC01",
+    "OC02",
+    "OC03",
+    "AN01",
+    "AN02",
+    "AN03"
+  ],
+  "shared": {
+    "landscapeContract": "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md",
+    "landscapePromotionRequired": true,
+    "landscapeSource": [
+      2172,
+      724
+    ],
+    "viewport": [
+      960,
+      540
+    ],
+    "surfaceY": 410,
+    "landscapeOffsets": {
+      "FAR": 0,
+      "MID": 0,
+      "GROUND": 0
+    },
+    "landscapeScaleMultipliers": {
+      "FAR": 1.25,
+      "MID": 1,
+      "GROUND": 1
+    },
+    "landscapeAnchors": {
+      "MID": 621,
+      "GROUND": 393
+    },
+    "proposedGroundAtlas": {
+      "width": 2172,
+      "height": 724,
+      "columns": 2,
+      "cellWidth": 1086,
+      "cellHeight": 724,
+      "minimumCellGutter": 32,
+      "footAnchorY": 620
+    },
+    "proposedFlyingAtlas": {
+      "width": 2172,
+      "height": 724,
+      "columns": 4,
+      "cellWidth": 543,
+      "cellHeight": 724,
+      "minimumCellGutter": 32,
+      "bodyAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "facing": "right",
+      "frames": [
+        "upstroke apex",
+        "descending wings forward",
+        "downstroke apex",
+        "rising wings swept back"
+      ]
+    },
+    "artDirectionRequirements": {
+      "authority": "User direction, 2026-09-19; see the composition, identity and scale section of the plan.",
+      "scope": "Remaining-continent proposals; existing approved artwork is not reopened.",
+      "FAR": "One recognizable local landmark or dominant natural formation, readable in the runtime composite behind MID and away from repeat joins.",
+      "MID": "One restrained, unique local sign of life: settlement/frontage, everyday-use detail or static background wildlife. No people or gameplay hazards baked into scenery.",
+      "originality": "Compare identities and visible silhouettes against existing and proposed campaign elements. No reused species/objects, renamed duplicates or recolors as new hazards; shared background materials are not signature elements.",
+      "scale": "Judge visible subjects at 960x540 and normal mobile presentation relative to characters, architecture and depth. Reject subjects that read too small or need implausible enlargement. Preserve canonical transforms and physics.",
+      "requiredStageBriefFields": [
+        "farFocalPoint",
+        "midLifeDetail",
+        "localReference",
+        "campaignDistinctiveness",
+        "intendedRelativeScale"
+      ],
+      "selectionReviewStatus": "pending-campaign-comparison-and-scale-review",
+      "approval": "Requirements confirmed; individual choices still proposed. Use existing content review and deployed-stage acceptance, with no added per-image gate."
+    }
+  },
+  "factSources": {
+    "serengeti": {
+      "title": "UNESCO — Serengeti National Park",
+      "url": "https://whc.unesco.org/en/list/156/"
+    },
+    "namib": {
+      "title": "UNESCO — Namib Sand Sea",
+      "url": "https://whc.unesco.org/en/list/1430/"
+    },
+    "marrakesh": {
+      "title": "UNESCO — Medina of Marrakesh",
+      "url": "https://whc.unesco.org/en/list/331/"
+    },
+    "kyoto": {
+      "title": "UNESCO — Historic Monuments of Ancient Kyoto",
+      "url": "https://whc.unesco.org/en/list/688/"
+    },
+    "wulingyuan": {
+      "title": "UNESCO — Wulingyuan Scenic and Historic Interest Area",
+      "url": "https://whc.unesco.org/en/list/640/"
+    },
+    "bangkok": {
+      "title": "Tourism Authority of Thailand — Bangkok",
+      "url": "https://www.tourismthailand.org/Destinations/Provinces/Bangkok/219"
+    },
+    "uluru": {
+      "title": "UNESCO — Uluru-Kata Tjuta National Park",
+      "url": "https://whc.unesco.org/en/list/447/"
+    },
+    "queensland": {
+      "title": "UNESCO — Wet Tropics of Queensland",
+      "url": "https://whc.unesco.org/en/list/486/"
+    },
+    "fiordland": {
+      "title": "UNESCO — Te Wahipounamu",
+      "url": "https://whc.unesco.org/en/list/551/"
+    },
+    "kea": {
+      "title": "New Zealand DOC — Kea",
+      "url": "https://www.doc.govt.nz/nature/native-animals/birds/birds-a-z/kea/"
+    },
+    "antarctic_geography": {
+      "title": "Australian Antarctic Program — Antarctic geography",
+      "url": "https://www.antarctica.gov.au/about-antarctica/geography-and-geology/geography/"
+    },
+    "antarctic_tern": {
+      "title": "Australian Antarctic Program — Antarctic tern",
+      "url": "https://www.antarctica.gov.au/about-antarctica/animals/flying-birds/antarctic-tern/"
+    },
+    "polar_skua": {
+      "title": "Australian Antarctic Program — South polar skua",
+      "url": "https://www.antarctica.gov.au/about-antarctica/animals/flying-birds/south-polar-skua/"
+    },
+    "petrels": {
+      "title": "Australian Antarctic Program — Petrels and shearwaters",
+      "url": "https://www.antarctica.gov.au/about-antarctica/animals/flying-birds/petrels-and-shearwaters/"
+    },
+    "casey": {
+      "title": "Australian Antarctic Program — Casey research station",
+      "url": "https://www.antarctica.gov.au/antarctic-operations/stations-and-field-locations/casey/"
+    }
+  },
+  "stages": [
+    {
+      "id": "AF01",
+      "label": "Tanzania — Serengeti savannah",
+      "continent": "africa",
+      "status": "proposed",
+      "theme": "SERENGETI",
+      "palette": "Ochre, muted gold, olive and sky blue; turquoise bird accents.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
+          "direction": "Warm open plains, low distant kopjes and a broad blue sky; scenery continues behind MID openings."
+        },
+        "MID": {
+          "path": "assets/worlds/africa/AF01_BG_MID_SERENGETI.png",
+          "direction": "Widely spaced flat-topped acacias, golden grass islands and weathered rock groups; open sightlines and authored lower overlap."
+        },
+        "GROUND": {
+          "path": "assets/worlds/africa/AF01_GROUND_SERENGETI.png",
+          "direction": "Level compacted ochre trail with sparse dry grass at its edge and deep earth below; no baked obstacles."
+        }
+      },
+      "groundAtlas": "assets/worlds/africa/AF01_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Termite mound",
+          "direction": "Compact taller mound with a clear triangular profile",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Fallen acacia log",
+          "direction": "Low wide trunk with one readable broken branch",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "Lilac-breasted roller",
+          "path": "assets/worlds/africa/AF01_HAZARD_ROLLER.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "na01"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "serengeti"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "Keep large wildlife out of the running lane and out of hazard artwork. The chosen bird's local range and flight references need confirmation before generation."
+    },
+    {
+      "id": "AF02",
+      "label": "Namibia — Sossusvlei dunes",
+      "continent": "africa",
+      "status": "proposed",
+      "theme": "SOSSUSVLEI",
+      "palette": "Rust, terracotta, pale cream and cool blue; dark bird silhouette.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png",
+          "direction": "Sweeping rust-orange dunes with pale distant ridges and clear sky; no savannah scene copied into this desert."
+        },
+        "MID": {
+          "path": "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png",
+          "direction": "Sparse weathered dead-tree silhouettes, dune shoulders and pale clay-pan patches, with enough lower frontage for overlap."
+        },
+        "GROUND": {
+          "path": "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png",
+          "direction": "Flat firm sand/clay trail with stratified ochre depth; dune slopes remain scenery rather than changing the running surface."
+        }
+      },
+      "groundAtlas": "assets/worlds/africa/AF02_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Weathered sandstone block",
+          "direction": "Short broad angular block",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Dry branch snag",
+          "direction": "Taller narrow forked timber silhouette",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "Pale chanting goshawk",
+          "path": "assets/worlds/africa/AF02_HAZARD_GOSHAWK.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "na01"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "namib"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "Stylized Sossusvlei landscape. Bird identity is a proposed Namib-region choice; confirm habitat/range against a reliable species reference before production."
+    },
+    {
+      "id": "AF03",
+      "label": "Morocco — Marrakesh medina",
+      "continent": "africa",
+      "status": "proposed",
+      "theme": "MARRAKESH",
+      "palette": "Rose plaster, ochre stone, muted teal accents and warm sky.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/africa/AF03_BG_DISTANT_MARRAKESH.png",
+          "direction": "Ochre roofscape with a restrained distant minaret silhouette and open sky; avoid mixing unrelated landmark styles."
+        },
+        "MID": {
+          "path": "assets/worlds/africa/AF03_BG_MID_MARRAKESH.png",
+          "direction": "Warm plaster facades, simple arches, closed shopfronts and sparse palms; no people, text or playable paving."
+        },
+        "GROUND": {
+          "path": "assets/worlds/africa/AF03_GROUND_MARRAKESH.png",
+          "direction": "Level warm stone lane over masonry depth, with a clean uncluttered walking edge."
+        }
+      },
+      "groundAtlas": "assets/worlds/africa/AF03_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Terracotta storage jar",
+          "direction": "Tall round-bodied jar with a narrow neck",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Produce crate",
+          "direction": "Low wide wooden crate with a restrained fruit accent",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "Distinct local flying species — replacement pending",
+          "path": "assets/worlds/africa/AF03_HAZARD_FLYING.png",
+          "frames": 4,
+          "creatures": 1,
+          "selectionStatus": "replacement-required",
+          "excludedChoices": [
+            "Pigeon, including rock pigeon: repeats NA03"
+          ]
+        }
+      },
+      "styleReferenceStages": [
+        "eu02"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "marrakesh"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "Architecture stays scenery. The original rock pigeon is rejected because NA03 already uses pigeons. Select a locally verified, visibly distinct flying species at credible gameplay scale. Reassess the produce crate against existing crate/basket hazards; no renamed or recolored duplicates."
+    },
+    {
+      "id": "AS01",
+      "label": "Japan — Kyoto bamboo foothills",
+      "continent": "asia",
+      "status": "proposed",
+      "theme": "KYOTO",
+      "palette": "Bamboo green, pale leaf yellow, dark timber and warm gravel.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/asia/AS01_BG_DISTANT_KYOTO.png",
+          "direction": "Layered green foothills with a restrained distant roofline; generous sky openings without repeating a dominant landmark at every edge."
+        },
+        "MID": {
+          "path": "assets/worlds/asia/AS01_BG_MID_KYOTO.png",
+          "direction": "Bamboo clusters, low timber fences and small traditional roof fragments; a readable grove with transparent openings."
+        },
+        "GROUND": {
+          "path": "assets/worlds/asia/AS01_GROUND_KYOTO.png",
+          "direction": "Flat gravel-and-earth garden trail with compact soil depth; no stairs or raised playable roots."
+        }
+      },
+      "groundAtlas": "assets/worlds/asia/AS01_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Bamboo bundle",
+          "direction": "Low horizontal tied bundle",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Mossy stone",
+          "direction": "Compact taller rounded stone with moss confined to its top",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "Japanese white-eye",
+          "path": "assets/worlds/asia/AS01_HAZARD_WHITE_EYE.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "sa01"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "kyoto"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "Use a Kyoto-inspired composite rather than claiming an exact mapped trail. Confirm bird appearance/range and obtain a bamboo photo reference before generation."
+    },
+    {
+      "id": "AS02",
+      "label": "China — Zhangjiajie stone forest",
+      "continent": "asia",
+      "status": "proposed",
+      "theme": "ZHANGJIAJIE",
+      "palette": "Cool gray sandstone, deep green trees and pale blue distance.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/asia/AS02_BG_DISTANT_ZHANGJIAJIE.png",
+          "direction": "Tall sandstone pillars receding through pale atmospheric bands; distant geology belongs to FAR."
+        },
+        "MID": {
+          "path": "assets/worlds/asia/AS02_BG_MID_ZHANGJIAJIE.png",
+          "direction": "Closer wooded rock shoulders, pines and restrained timber rail sections; do not repeat the entire FAR mountain wall."
+        },
+        "GROUND": {
+          "path": "assets/worlds/asia/AS02_GROUND_ZHANGJIAJIE.png",
+          "direction": "Level stone forest trail with dark rock depth and subtle moss; no cliff gaps or new fall mechanic."
+        }
+      },
+      "groundAtlas": "assets/worlds/asia/AS02_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Rock outcrop",
+          "direction": "Compact upright jagged stone",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Weathered stump",
+          "direction": "Lower wide stump with visible root flare",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "Red-billed blue magpie",
+          "path": "assets/worlds/asia/AS02_HAZARD_BLUE_MAGPIE.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "sa02"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "wulingyuan"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "Keep long tail and wings inside every animation cell. Verify the proposed species' local range before production; no added mist effect is needed."
+    },
+    {
+      "id": "AS03",
+      "label": "Thailand — Bangkok riverfront",
+      "continent": "asia",
+      "status": "proposed",
+      "theme": "BANGKOK",
+      "palette": "Warm cream, muted gold, river blue and dark wooden accents.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/asia/AS03_BG_DISTANT_BANGKOK.png",
+          "direction": "River-city skyline with restrained temple-spire silhouettes and sky; the skyline remains legible at gameplay size."
+        },
+        "MID": {
+          "path": "assets/worlds/asia/AS03_BG_MID_BANGKOK.png",
+          "direction": "Riverfront shophouses, piers and palms with small water openings; no traffic or crowds."
+        },
+        "GROUND": {
+          "path": "assets/worlds/asia/AS03_GROUND_BANGKOK.png",
+          "direction": "Level masonry promenade with a clear top edge and substantial retaining-wall depth."
+        }
+      },
+      "groundAtlas": "assets/worlds/asia/AS03_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Market basket",
+          "direction": "Compact taller woven basket",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Parked handcart",
+          "direction": "Low wide stationary cart, clearly separate from background props",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "House swift",
+          "path": "assets/worlds/asia/AS03_HAZARD_SWIFT.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "eu02"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "bangkok"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "Cart wheels do not animate or introduce a new motion type. Verify swift species/range and avoid unverified religious icon details."
+    },
+    {
+      "id": "OC01",
+      "label": "Australia — Uluru red desert",
+      "continent": "oceania",
+      "status": "proposed",
+      "theme": "ULURU",
+      "palette": "Red earth, muted sage, warm stone and blue sky; pink-gray bird.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/oceania/OC01_BG_DISTANT_ULURU.png",
+          "direction": "The recognizable monolith seen from a distance, low desert horizons and clear sky; no climbable rock route."
+        },
+        "MID": {
+          "path": "assets/worlds/oceania/OC01_BG_MID_ULURU.png",
+          "direction": "Sparse desert-oak silhouettes, low scrub and reddish rock shelves with broad open gaps."
+        },
+        "GROUND": {
+          "path": "assets/worlds/oceania/OC01_GROUND_ULURU.png",
+          "direction": "Flat red-earth track with pebbles and deep red soil beneath the running surface."
+        }
+      },
+      "groundAtlas": "assets/worlds/oceania/OC01_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Spinifex tussock",
+          "direction": "Wide low grassy mound with a compact readable collision core",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Sandstone block",
+          "direction": "Taller angular orange stone",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "Galah",
+          "path": "assets/worlds/oceania/OC01_HAZARD_GALAH.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "na01"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "uluru"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "Use a respectful distant public-view composition; no invented cultural markings. Verify local galah reference before generation."
+    },
+    {
+      "id": "OC02",
+      "label": "Australia — Queensland tropical coast",
+      "continent": "oceania",
+      "status": "proposed",
+      "theme": "QUEENSLAND",
+      "palette": "Turquoise water, emerald foliage and pale sand; controlled rainbow bird accents.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/oceania/OC02_BG_DISTANT_QUEENSLAND.png",
+          "direction": "Blue sea, a low tropical headland and distant rainforest ridges under clear sky."
+        },
+        "MID": {
+          "path": "assets/worlds/oceania/OC02_BG_MID_QUEENSLAND.png",
+          "direction": "Coastal palms, broad-leaf vegetation and occasional unoccupied timber beach structures; retain ocean openings."
+        },
+        "GROUND": {
+          "path": "assets/worlds/oceania/OC02_GROUND_QUEENSLAND.png",
+          "direction": "Level packed coastal path with sandy surface and compacted earth depth; no wet-water gap mechanic."
+        }
+      },
+      "groundAtlas": "assets/worlds/oceania/OC02_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Driftwood stump",
+          "direction": "Compact upright pale stump",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Coconut crate",
+          "direction": "Low broad timber crate with a few readable coconuts",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "Rainbow lorikeet",
+          "path": "assets/worlds/oceania/OC02_HAZARD_LORIKEET.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "sa01",
+        "sa03"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "queensland"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "Keep foliage quieter than the colorful flying hazard. Verify the selected coastal vegetation and lorikeet reference before generation."
+    },
+    {
+      "id": "OC03",
+      "label": "New Zealand — Fiordland",
+      "continent": "oceania",
+      "status": "proposed",
+      "theme": "FIORDLAND",
+      "palette": "Cool blue-gray, deep green, charcoal stone and small orange underwing accents.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/oceania/OC03_BG_DISTANT_FIORDLAND.png",
+          "direction": "Steep fiord walls, distant water and layered cool mountain silhouettes; no large baked cloud shapes."
+        },
+        "MID": {
+          "path": "assets/worlds/oceania/OC03_BG_MID_FIORDLAND.png",
+          "direction": "Beech forest, tree ferns and mossy rock shoulders with intermittent water views."
+        },
+        "GROUND": {
+          "path": "assets/worlds/oceania/OC03_GROUND_FIORDLAND.png",
+          "direction": "Flat damp gravel trail with moss at the edge and dark rocky soil beneath."
+        }
+      },
+      "groundAtlas": "assets/worlds/oceania/OC03_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Mossy boulder",
+          "direction": "Taller rounded dark stone with light moss contrast",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Fallen beech log",
+          "direction": "Low wide trunk with restrained lichen detail",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "Kea",
+          "path": "assets/worlds/oceania/OC03_HAZARD_KEA.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "sa02",
+        "na02"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "fiordland",
+        "kea"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "DOC supports kea in Fiordland forest/alpine habitats. Show avoidance encounters only; no attacking or injured wildlife."
+    },
+    {
+      "id": "AN01",
+      "label": "Antarctic Peninsula — icy coast",
+      "continent": "antarctica",
+      "status": "proposed",
+      "theme": "PENINSULA",
+      "palette": "Icy cyan, white, navy sea and dark rock; red bill accent.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/antarctica/AN01_BG_DISTANT_PENINSULA.png",
+          "direction": "Jagged glaciated coastal peaks, pale sky and distant blue sea."
+        },
+        "MID": {
+          "path": "assets/worlds/antarctica/AN01_BG_MID_PENINSULA.png",
+          "direction": "Closer ice shelves, blue ice blocks and dark coastal rock islands with lower authored coverage."
+        },
+        "GROUND": {
+          "path": "assets/worlds/antarctica/AN01_GROUND_PENINSULA.png",
+          "direction": "Level firm snow crust over layered blue ice; continuous surface with no crevasses."
+        }
+      },
+      "groundAtlas": "assets/worlds/antarctica/AN01_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Blue ice chunk",
+          "direction": "Compact taller angular ice block with a dark readable edge",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Snow-covered rock",
+          "direction": "Low broad dark rock with a snow cap",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "Antarctic tern",
+          "path": "assets/worlds/antarctica/AN01_HAZARD_ANTARCTIC_TERN.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "sa02"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "antarctic_geography",
+        "antarctic_tern"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "Penguins must not be used as flying hazards. Avoid white-on-white collision silhouettes."
+    },
+    {
+      "id": "AN02",
+      "label": "Ross Island — volcanic shore",
+      "continent": "antarctica",
+      "status": "proposed",
+      "theme": "ROSS_ISLAND",
+      "palette": "Charcoal basalt, blue-white snow and pale lavender sky.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/antarctica/AN02_BG_DISTANT_ROSS_ISLAND.png",
+          "direction": "A snow-covered volcanic cone and broad cold sky beyond a coastal rock plain."
+        },
+        "MID": {
+          "path": "assets/worlds/antarctica/AN02_BG_MID_ROSS_ISLAND.png",
+          "direction": "Dark volcanic ridges and wind-carved snowbanks; no animated lava, eruption or new weather system."
+        },
+        "GROUND": {
+          "path": "assets/worlds/antarctica/AN02_GROUND_ROSS_ISLAND.png",
+          "direction": "Level dark gravel track with snow edging and basalt depth beneath."
+        }
+      },
+      "groundAtlas": "assets/worlds/antarctica/AN02_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Basalt boulder",
+          "direction": "Taller angular black rock with a blue-lit edge",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Wind-carved ice ridge",
+          "direction": "Low wide asymmetric ice lump, separate from the flat running surface",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "South polar skua",
+          "path": "assets/worlds/antarctica/AN02_HAZARD_POLAR_SKUA.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "sa02"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "antarctic_geography",
+        "polar_skua"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "Confirm Ross Island/Erebus silhouette with an official reference during reference preparation. Use South polar skua, not the distinct subantarctic skua."
+    },
+    {
+      "id": "AN03",
+      "label": "East Antarctica — coastal research outpost",
+      "continent": "antarctica",
+      "status": "proposed",
+      "theme": "RESEARCH_OUTPOST",
+      "palette": "White and blue ice with muted red/ochre station accents and dark object outlines.",
+      "landscapes": {
+        "FAR": {
+          "path": "assets/worlds/antarctica/AN03_BG_DISTANT_RESEARCH_OUTPOST.png",
+          "direction": "A coastal ice plateau, distant nunataks and blue sea under a clean pale sky."
+        },
+        "MID": {
+          "path": "assets/worlds/antarctica/AN03_BG_MID_RESEARCH_OUTPOST.png",
+          "direction": "A fictional unbranded research outpost of raised modular huts, supports and antenna shapes; no people, logos or readable signage."
+        },
+        "GROUND": {
+          "path": "assets/worlds/antarctica/AN03_GROUND_RESEARCH_OUTPOST.png",
+          "direction": "Level compacted snow service route above deep ice and gravel, with a continuous surface."
+        }
+      },
+      "groundAtlas": "assets/worlds/antarctica/AN03_OBJECT_ATLAS.png",
+      "hazards": {
+        "GROUND1": {
+          "label": "Cargo crate",
+          "direction": "Compact taller strapped supply crate",
+          "cell": 0,
+          "animation": "static"
+        },
+        "GROUND2": {
+          "label": "Equipment sled",
+          "direction": "Low wide stationary sled with restrained equipment shapes",
+          "cell": 1,
+          "animation": "static"
+        },
+        "FLYING": {
+          "label": "Snow petrel",
+          "path": "assets/worlds/antarctica/AN03_HAZARD_SNOW_PETREL.png",
+          "frames": 4,
+          "creatures": 1
+        }
+      },
+      "styleReferenceStages": [
+        "eu02",
+        "sa02"
+      ],
+      "styleReferenceRevision": "89b0c986b6881dbd040c467ef6215e3d14d4e27c",
+      "factSourceIds": [
+        "antarctic_geography",
+        "casey",
+        "petrels"
+      ],
+      "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
+      "notes": "The station is fictional, informed by coastal stations rather than presented as Casey. Confirm snow-petrel range and flight reference; keep the white bird readable."
+    }
+  ]
+}
