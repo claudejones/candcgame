@@ -315,7 +315,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "eu03": {
       "label": "Europe — Spain / Barcelona",
-      "status": "integrated",
+      "status": "approved",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/EU-assets/EU03_BG_DISTANT_BARCELONA.png",
