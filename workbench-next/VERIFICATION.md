@@ -9,7 +9,7 @@ User-requested Design transport correction. The finite pass remains available wi
 - Existing load, context, numeric edit, atlas, hitbox, panning, proposal, sequence, save/import/history and hidden-tab checks pass. Loop/transport actions leave authored project settings unchanged. Tests use jsdom with real canvas/PNG decoding; user browser layout acceptance remains separate.
 - The runtime-order, multiple-rate and timing-window reconciliation identified by the dependent calibration review is explicitly prioritized in PLAN.md. This transport update does not claim to resolve those calibration differences or merge main's eleven pending size/contact proposals.
 
-Publication evidence follows after the exact implementation passes CI and deployment succeeds.
+Publication succeeded at https://candc-workbench-next.claudejones.chatgpt.site (saved version 12, deployment `appgdep_6aaec42c74dc81918f88c72201d7d179`). Site source `bb158858ea3a051c38800cf56e17600f4291fba2` packages GitHub implementation `2de356c5091788b9451e131d935419768f33295d`; [Production CI passed for that exact implementation](https://github.com/claudejones/candcgame/actions/runs/35457657980). The validated archive has 80 files and 53 unchanged PNGs. Native deployment status: `succeeded`.
 
 ## Review 08 — assisted calibration
 
