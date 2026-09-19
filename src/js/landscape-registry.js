@@ -241,7 +241,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "eu01": {
       "label": "Europe — Greece / Santorini",
-      "status": "pending",
+      "status": "integrated",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/EU-assets/EU01_BG_DISTANT_GREECE.png",
@@ -252,7 +252,8 @@ window.CC_LANDSCAPE_REGISTRY = {
             2,
             6
           ],
-          "requireOpaque": true
+          "requireOpaque": true,
+          "cacheKey": "213eceb5"
         },
         "mid": {
           "reference": "assets-original/current-generated/EU-assets/EU01_BG_MID_GREECE.png",
@@ -260,7 +261,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "width": 2172,
           "height": 724,
           "colorType": 6,
-          "requireTransparency": true
+          "requireTransparency": true,
+          "cacheKey": "2ea73633"
         },
         "ground": {
           "reference": "assets-original/current-generated/EU-assets/EU01_GROUND_GREECE.png",
@@ -269,7 +271,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "height": 724,
           "colorType": 6,
           "requireTransparency": true,
-          "sourceSurfaceY": 393
+          "sourceSurfaceY": 393,
+          "cacheKey": "83f9d5b0"
         }
       }
     },
