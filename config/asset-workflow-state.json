@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "active": {
     "stage": "SA03",
-    "phase": "ready-to-publish",
+    "phase": "awaiting-approval",
     "command": "build landscape SA03",
     "selectedLayers": [
       "FAR",
@@ -16,7 +16,16 @@
     },
     "stageSpec": "52b49b26824ff230057911e3e0fb87c766b13371a0e3da9df74e53133e933900",
     "recoveryBranch": "work/assets/sa03",
-    "baseCommit": "fbdd858ee478a321d673f293166a83345a05e82e"
+    "baseCommit": "fbdd858ee478a321d673f293166a83345a05e82e",
+    "developmentCommit": "74cc4d0b6a07d5fd2842908bf81157d60701f860",
+    "deployedCommit": "c1fb39c909d68b87f200c354dc2c966f96a597c1",
+    "deployedTree": "296d61100310fcd59e69d9cb45427fbd138b3aee",
+    "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35420606302",
+    "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35420656908",
+    "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35420675177",
+    "reviewUrl": "https://claudejones.github.io/candcgame/src/dev.html",
+    "verifiedAt": "2026-09-19",
+    "verification": "All deployed PNG bytes and cache keys match; entry pages and generated registry match. Design/Test/Game and scrolling inspected; Inspector Y offsets 0/0/0; runtime ground canonical/rendered 410. Artwork awaits explicit user approval."
   },
   "approvedRevisions": {
     "na01": {

@@ -12,7 +12,7 @@ Updated 2026-09-19. GitHub is authoritative. Historical explanations live in DEC
 
 ## Next action
 
-SA03 Rio's three landscape layers are integrated and ready for publication through the required gates. Review the deployed FAR/MID/GROUND, scrolling, Test/Game and Inspector, then explicitly approve SA03. All three offsets remain zero; gameplay and character/hazard calibration are unchanged. `In claudejones/candcgame: resume SA03.` resolves an interrupted publication without regenerating the completed assets. SA02 remains approved at `29176df173eeb78cd0436bfa98a13f22317bb07d`.
+SA03 Rio's three landscape layers are deployed at `c1fb39c909d68b87f200c354dc2c966f96a597c1`; CI, Pages, deployed bytes and browser checks passed. Awaiting user artwork approval. Review the deployed FAR/MID/GROUND, scrolling, Test/Game and Inspector, then explicitly approve SA03. All three offsets remain zero; gameplay and character/hazard calibration are unchanged. `In claudejones/candcgame: resume SA03.` resolves an interrupted publication without regenerating the completed assets. SA02 remains approved at `29176df173eeb78cd0436bfa98a13f22317bb07d`.
 
 ## Deferred and protected
 
