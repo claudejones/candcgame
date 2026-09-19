@@ -17,7 +17,9 @@ From AF02, production ends with five validated PNGs and `config/asset-handoffs/<
 
 ## Next action
 
-**AF02 source validation complete:** all five 2172×724 PNGs and the v1 bundle `config/asset-handoffs/af02.json` pass source validation after the user-authorized cleanup. Exact hashes and performed checks are in `docs/phase8-qa/AF02_ASSET_QA.md`. Active run: `af02-20260919204119-fb761a`; finish the required publication gates and durable checkpoint, then give the user the Workbench import handoff. Artwork acceptance, calibration and playable release remain pending; production activation is unchanged.
+**AF02 asset-ready and published:** the five validated 2172×724 PNGs and `config/asset-handoffs/af02.json` are ready for Workbench import. Source revision `b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484` passed development/main Production CI and Pages; all five deployed image hashes match. The asset run is closed as `ready-for-calibration`. Artwork acceptance, calibration and playable release remain pending; production activation is unchanged.
+
+Next user action: `In the candcgame Workbench conversation: import asset handoff config/asset-handoffs/af02.json for AF02.` After import, the user calibrates and saves. Do not begin AF03 until the user explicitly advances. Source/evidence: `docs/phase8-qa/AF02_ASSET_QA.md`.
 
 **AF01 remains approved:** reviewed revision `a09b176dd8531bfb3425c9af534ff197a05a253e`, including the porcupine/roller facing correction. Its exact five PNG hashes, reviewed geometry and approval remain unchanged. Evidence: `docs/phase8-qa/AF01_STAGE_QA.md`.
 

@@ -1,6 +1,6 @@
 # AF02 — asset-ready QA
 
-Status: **five source assets validated; ready for publication and Workbench calibration**. Artwork acceptance, calibration and playable release remain pending.
+Status: **asset-ready, published and ready for Workbench calibration**. Artwork acceptance, calibration and playable release remain pending.
 
 ## Exact reviewed files
 
@@ -35,4 +35,12 @@ No production stage-release or landscape activation is changed. No contact/colli
 
 ## Publication
 
-Publish through development Production CI, identical validated tree on main, main Production CI and automatic Pages. Verify the five remote hashes and bundle before closing the asset run. Recovery and publication commit evidence is tracked in `config/asset-workflow-state.json`.
+Source revision: `b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484`.
+
+- Development Production CI: https://github.com/claudejones/candcgame/actions/runs/35470261538 — success.
+- Main Production CI, identical source tree/SHA: https://github.com/claudejones/candcgame/actions/runs/35470309023 — success.
+- Pages for that exact SHA: https://github.com/claudejones/candcgame/actions/runs/35470339782 — success.
+- All five PNGs fetched from `https://claudejones.github.io/candcgame/assets/worlds/africa/` with their content-hash queries matched the table above.
+- The remote v1 bundle and all image jobs were verified before the run closed as `ready-for-calibration`. The active run was cleared; approval records and production activation remain unchanged.
+
+User handoff: `In the candcgame Workbench conversation: import asset handoff config/asset-handoffs/af02.json for AF02.`
