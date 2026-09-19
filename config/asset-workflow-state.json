@@ -1,32 +1,6 @@
 {
   "schemaVersion": 2,
-  "active": {
-    "stage": "AF01",
-    "phase": "ready-to-publish",
-    "command": "build stage AF01",
-    "files": {
-      "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
-      "assets/worlds/africa/AF01_BG_MID_SERENGETI.png": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811",
-      "assets/worlds/africa/AF01_GROUND_SERENGETI.png": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527",
-      "assets/worlds/africa/AF01_OBJECT_ATLAS.png": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569",
-      "assets/worlds/africa/AF01_HAZARD_ROLLER.png": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b"
-    },
-    "stageSpec": "2475010add44afffd94be85fd1713fe2e9dbe5477dd0f4eae6f618c12091f9d2",
-    "recoveryBranch": "work/assets/af01",
-    "baseCommit": "bafef40d77c7069e819c10689a5ac49efaa7b28b",
-    "sourceFiles": {
-      "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
-      "assets-original/africa/af01/AF01_BG_MID_SERENGETI_SOURCE.png": "f5f0b48e1e0970b2da3342ce0f89ba7e417fbe13c2adf309dd09a4c1f3051877",
-      "assets-original/africa/af01/AF01_GROUND_SERENGETI_SOURCE.png": "1e4bc051e26b3e92e2b989b55e837643cfd1c4334ee19c456b63a6304f3e3740",
-      "assets-original/africa/af01/AF01_OBJECT_ATLAS_SOURCE.png": "02479a308e31a71231881ab88f64f09e1c9f84eb2e3f53ded86f942120c06d8e",
-      "assets-original/africa/af01/AF01_HAZARD_ROLLER_SOURCE.png": "833dd5edffad21729732b5716ceeffda6678cc569bf06cf88cc0df5eddfa221a"
-    },
-    "deployment": {
-      "result": "pending",
-      "evidence": "docs/phase8-qa/AF01_STAGE_QA.md",
-      "userApproval": "pending"
-    }
-  },
+  "active": null,
   "approvedRevisions": {
     "na01": {
       "commit": "660aa55e35b378e613e07d8315074552620fcb61"
@@ -95,6 +69,23 @@
       "qa": "docs/phase8-qa/EU03_LANDSCAPE_QA.md",
       "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35428215455",
       "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35428236249"
+    },
+    "af01": {
+      "commit": "a09b176dd8531bfb3425c9af534ff197a05a253e",
+      "approvedAt": "2026-09-19",
+      "scope": "full-stage",
+      "files": {
+        "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
+        "assets/worlds/africa/AF01_BG_MID_SERENGETI.png": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811",
+        "assets/worlds/africa/AF01_GROUND_SERENGETI.png": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527",
+        "assets/worlds/africa/AF01_OBJECT_ATLAS.png": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569",
+        "assets/worlds/africa/AF01_HAZARD_ROLLER.png": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b"
+      },
+      "releaseSpec": "236dfed3777ef28218aabbc7e960bb4edac90819f4ae9cf9d748acd608a5d3d2",
+      "landscapeSpec": "2475010add44afffd94be85fd1713fe2e9dbe5477dd0f4eae6f618c12091f9d2",
+      "qa": "docs/phase8-qa/AF01_STAGE_QA.md",
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35463228007",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35463262596"
     }
   },
   "continentRegressions": {
@@ -110,14 +101,14 @@
       "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
     }
   },
-  "revision": 39,
+  "revision": 43,
   "runs": {
     "af01-20260919172919-679b96": {
       "runId": "af01-20260919172919-679b96",
       "target": "AF01",
       "command": "build stage AF01",
       "operation": "produce-and-publish",
-      "status": "ready-to-publish",
+      "status": "approved",
       "baseCommit": "bafef40d77c7069e819c10689a5ac49efaa7b28b",
       "specHash": "f6afd7f9943adce8945f6955ab40c0850ac7a31e5e65686cbb746b3eb6366da3",
       "createdAt": "2026-09-19T17:29:19.211Z",
@@ -127,7 +118,8 @@
         "work/af01-landscapes",
         "work/assets/af01",
         "refs/remotes/origin/work/assets/af01",
-        "refs/remotes/origin/modular-parity-validation"
+        "refs/remotes/origin/modular-parity-validation",
+        "refs/remotes/origin/main"
       ],
       "jobs": {
         "AF01:FAR": {
@@ -1061,11 +1053,21 @@
         "OBJECT_ATLAS": 7,
         "FLYING": 2
       },
-      "updatedAt": "2026-09-19T19:02:35.725Z",
+      "updatedAt": "2026-09-19T19:08:50.664Z",
       "deployment": {
-        "result": "pending",
+        "commit": "a09b176dd8531bfb3425c9af534ff197a05a253e",
+        "tree": "a56b8c736c3684aaaa29ded928e023b6a1a897da",
+        "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35463173425",
+        "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35463228007",
+        "pages": "https://github.com/claudejones/candcgame/actions/runs/35463262596",
+        "reviewURL": "https://claudejones.github.io/candcgame/src/dev.html",
+        "result": "passed",
+        "deployedRuntimeHashesVerified": true,
+        "assetHashesUnchanged": true,
+        "browserReview": "Porcupine and roller face left toward the player; HIGH/LOW collision bounds follow the mirrored roller body.",
+        "verifiedAt": "2026-09-19T19:08:50.543Z",
         "evidence": "docs/phase8-qa/AF01_STAGE_QA.md",
-        "userApproval": "pending"
+        "userApproval": "approved"
       },
       "trial": {
         "scope": "AF01–AF03",
@@ -1108,10 +1110,17 @@
         "checks": {
           "mirrorAndSavedConfig": true,
           "timedGameplay": true,
-          "deployedVisual": false
-        }
-      }
+          "deployedVisual": true
+        },
+        "completedAt": "2026-09-19T19:08:50.543Z"
+      },
+      "approval": {
+        "approvedAt": "2026-09-19",
+        "userCommand": "approve AF01",
+        "reviewedCommit": "a09b176dd8531bfb3425c9af534ff197a05a253e"
+      },
+      "closedAt": "2026-09-19T19:20:15.353Z"
     }
   },
-  "activeRunId": "af01-20260919172919-679b96"
+  "activeRunId": null
 }

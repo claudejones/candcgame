@@ -153,7 +153,7 @@ window.CC_STAGE_CATALOG = {
       "label": "Tanzania — Serengeti savannah",
       "continent": "africa",
       "legacy": false,
-      "status": "integrated",
+      "status": "approved",
       "seedOffset": 1001,
       "files": {
         "FAR": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
@@ -163,7 +163,7 @@ window.CC_STAGE_CATALOG = {
         "FLYING": "assets/worlds/africa/AF01_HAZARD_ROLLER.png"
       },
       "release": {
-        "status": "integrated",
+        "status": "approved",
         "assets": {
           "FAR": {
             "path": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",

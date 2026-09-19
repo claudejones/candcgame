@@ -352,7 +352,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "af01": {
       "label": "Tanzania — Serengeti savannah",
-      "status": "integrated",
+      "status": "approved",
       "scope": "full-stage",
       "layers": {
         "far": {

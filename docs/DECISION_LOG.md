@@ -290,3 +290,8 @@ The user answered yes to deterministic transparency cleanup, exact atlas sizing 
 ## 2026-09-19 — AF01 animals face the player through rendering
 
 The user reported that AF01's crested porcupine and lilac-breasted roller face away from the player and authorized correction through regeneration or code. Preserve both atlases exactly and set `flipX: true` only on those two hazards. Mirror each frame and its collision geometry around the existing source anchor in Design/Test/Game. Source pixels, frame order, crop, scale, vertical placement, speeds and physics remain unchanged. Preserve explicit facing settings on import; older saves missing the new field inherit the released facing without replacing their calibration edits. This is a rendering correction, not independent calibration tuning or artwork acceptance. Add facing to future integrated visual review.
+
+
+## 2026-09-19 — AF01 complete-stage acceptance
+
+The user explicitly approved AF01 with `approve AF01` at reviewed revision `a09b176dd8531bfb3425c9af534ff197a05a253e`. Acceptance covers the three scenery layers, termite mound, crested porcupine, four-frame roller, reviewed stage geometry/finish and the corrected player-facing sprites. Record the exact five asset hashes and reviewed revision, mark release and landscape approved, and close the active coordinator checkpoint. No PNG or runtime geometry changes accompany approval. AF01 is the first accepted AF01–AF03 trial checkpoint; AF02/AF03 and Africa regression remain open. This does not approve or close the separate editor-next calibration workstream.
