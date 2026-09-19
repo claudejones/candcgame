@@ -101,7 +101,7 @@
       "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
     }
   },
-  "revision": 53,
+  "revision": 59,
   "runs": {
     "af01-20260919172919-679b96": {
       "runId": "af01-20260919172919-679b96",
@@ -1134,7 +1134,9 @@
       "nestedManagers": false,
       "recoveryRefs": [
         "af02-landscape-output",
-        "af02-hazard-output"
+        "af02-hazard-output",
+        "refs/remotes/origin/work/assets/af02",
+        "work/assets/af02"
       ],
       "jobs": {
         "AF02:FAR": {
@@ -1286,17 +1288,27 @@
           "interruptions": 0,
           "status": "completed",
           "resultHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
-          "recoveryRef": "af02-landscape-output",
+          "recoveryRef": "refs/remotes/origin/work/assets/af02",
           "recoveryEvidence": {
-            "ref": "af02-landscape-output",
-            "commit": "5983ad83ad96e848a5a712a5ef14cf95e458f87e",
+            "ref": "refs/remotes/origin/work/assets/af02",
+            "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
             "contentHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
             "localCommitVerified": true,
-            "remoteRefVerified": false,
-            "verifiedAt": null
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:04:10.801Z"
           },
-          "durable": false,
-          "completedAt": "2026-09-19T20:48:17.500Z"
+          "durable": true,
+          "completedAt": "2026-09-19T20:48:17.500Z",
+          "priorRecoveryEvidence": [
+            {
+              "ref": "af02-landscape-output",
+              "commit": "5983ad83ad96e848a5a712a5ef14cf95e458f87e",
+              "contentHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ]
         },
         "AF02:MID": {
           "id": "AF02:MID",
@@ -1451,17 +1463,27 @@
           "interruptions": 0,
           "status": "completed",
           "resultHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
-          "recoveryRef": "af02-landscape-output",
+          "recoveryRef": "refs/remotes/origin/work/assets/af02",
           "recoveryEvidence": {
-            "ref": "af02-landscape-output",
-            "commit": "d9c40c08b55b7b9a4c659a28e188b58b30b7bdcf",
+            "ref": "refs/remotes/origin/work/assets/af02",
+            "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
             "contentHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
             "localCommitVerified": true,
-            "remoteRefVerified": false,
-            "verifiedAt": null
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:04:10.889Z"
           },
-          "durable": false,
-          "completedAt": "2026-09-19T21:00:45.738Z"
+          "durable": true,
+          "completedAt": "2026-09-19T21:00:45.738Z",
+          "priorRecoveryEvidence": [
+            {
+              "ref": "af02-landscape-output",
+              "commit": "d9c40c08b55b7b9a4c659a28e188b58b30b7bdcf",
+              "contentHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ]
         },
         "AF02:GROUND": {
           "id": "AF02:GROUND",
@@ -1611,7 +1633,14 @@
           "interruptions": 0,
           "status": "running",
           "resultHash": null,
-          "recoveryRef": null
+          "recoveryRef": null,
+          "candidateRecovery": {
+            "sha256": "d6e58e046623d036f592ee2b7a0aed13670481cd453f71f1d3d8117a8f607202",
+            "commit": "2820a408e005e6889f7272dc0cfd0f44f6349483",
+            "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
+            "technicalQa": "failed",
+            "assetReady": false
+          }
         },
         "AF02:OBJECT_ATLAS": {
           "id": "AF02:OBJECT_ATLAS",
@@ -1787,22 +1816,32 @@
           "interruptions": 0,
           "status": "completed",
           "resultHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
-          "recoveryRef": "af02-hazard-output",
+          "recoveryRef": "refs/remotes/origin/work/assets/af02",
           "recoveryEvidence": {
-            "ref": "af02-hazard-output",
-            "commit": "454d1e6d10190adf8883c0985a8e57b0b54a9af8",
+            "ref": "refs/remotes/origin/work/assets/af02",
+            "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
             "contentHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
             "localCommitVerified": true,
-            "remoteRefVerified": false,
-            "verifiedAt": null
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:04:10.975Z"
           },
-          "durable": false,
+          "durable": true,
           "completedAt": "2026-09-19T20:52:06.397Z",
           "technicalQa": {
             "status": "failed",
-            "evidence": "tmp/af02/OBJECT_ATLAS-result.json",
+            "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
             "reason": "Ground contact outside tolerance and stray alpha in a cell gutter; requires source-image correction before asset-ready."
-          }
+          },
+          "priorRecoveryEvidence": [
+            {
+              "ref": "af02-hazard-output",
+              "commit": "454d1e6d10190adf8883c0985a8e57b0b54a9af8",
+              "contentHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ]
         },
         "AF02:FLYING": {
           "id": "AF02:FLYING",
@@ -1979,10 +2018,23 @@
           "interruptions": 0,
           "status": "running",
           "resultHash": null,
-          "recoveryRef": null
+          "recoveryRef": null,
+          "candidateRecovery": {
+            "sha256": "fcb97b5d07bc46f37b514fdd7c83d976fd447333ddbda70bd0b9f7a941823ad3",
+            "commit": "044ab72ecd44cbb4a008777be30625e73621f419",
+            "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
+            "technicalQa": "failed",
+            "assetReady": false
+          }
         }
       },
-      "resumeNote": "Resumed from available local worker commits; FAR and MID recovered. OBJECT_ATLAS result was a byte-recovery checkpoint, not a technical pass: contact and alpha-gutter defects remain. GROUND and FLYING are in production."
+      "resumeNote": "All five source candidates are saved. FAR/MID pass; GROUND and hazard source technical cleanup requires explicit user authorization. See docs/phase8-qa/AF02_ASSET_QA.md. Do not regenerate or mark pending checks passed.",
+      "awaitingDecision": {
+        "type": "deterministic-source-cleanup",
+        "authorized": false,
+        "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+      },
+      "updatedAt": "2026-09-19T21:13:28.448Z"
     }
   },
   "activeRunId": "af02-20260919204119-fb761a"

@@ -17,7 +17,7 @@ From AF02, production ends with five validated PNGs and `config/asset-handoffs/<
 
 ## Next action
 
-**AF02 in progress:** resume command `In claudejones/candcgame: resume AF02.` The reference pack is prepared; FAR and MID were recovered from the previous worker commits and pass their source reviews. GROUND and FLYING remain in production. The saved OBJECT_ATLAS is a recovery candidate with failed source contact/gutter checks, not an asset-ready result; it needs correction. Active run: `af02-20260919204119-fb761a`; recovery branch: `work/assets/af02`. Gameplay activation, calibration and release remain pending.
+**AF02 source candidates saved; cleanup authorization pending:** all five native 2172×724 PNGs are recoverable on `work/assets/af02`. FAR/MID source reviews passed; GROUND surface and hazard contact/alpha-gutter checks still fail. The measured correction proposal and exact hashes are in `docs/phase8-qa/AF02_ASSET_QA.md`. No asset-ready bundle or gameplay activation has been created. Active run: `af02-20260919204119-fb761a`. Resume with `In claudejones/candcgame: resume AF02.`; obtain the outstanding explicit authorization before deterministic pixel edits.
 
 **AF01 remains approved:** reviewed revision `a09b176dd8531bfb3425c9af534ff197a05a253e`, including the porcupine/roller facing correction. Its exact five PNG hashes, reviewed geometry and approval remain unchanged. Evidence: `docs/phase8-qa/AF01_STAGE_QA.md`.
 
