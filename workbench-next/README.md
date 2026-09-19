@@ -1,6 +1,6 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 8.1; not the replacement editor**.
+Status: **review increment 8.2; not the replacement editor**.
 Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0` for EU02 and EU03 landscapes (2026-09-19). Production source/assets match this upstream snapshot; candidate-only changes remain under `workbench-next/`. EU02 is approved; EU03 is integrated and awaiting artwork approval.
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
@@ -28,6 +28,16 @@ This is a working **landscape and sprite Design proposal**, using repository art
 
 It does not load the old runtime, write the current editor's storage, modify source images/configuration, or change gameplay. The candidate project export has its own format and is **not** a current game-config import. Future runtime integration must convert these complete drafts explicitly. Test and Game remain required next milestones.
 
+## Proposal review — Review 08.2
+
+Each hazard has an explicit **Review proposal** button; it becomes **Close comparison** while selected. That action and **Exit proposal** stop/reset the demo, hide comparison and restore the editable working scene without applying anything. Applying or invalidating a proposal also clears its preview.
+
+**Before** is the working configuration snapshot taken when analysis ran, including unsaved edits; it is not necessarily the repository baseline. **Proposed** is the optional replacement. Cards and the inspector show both timing verdicts. If both meet the target, keep the current settings unless the proposed alignment or timing margin is preferable. Both versions now have independently timed **Demo Before/Proposed** buttons for Claude and Constance. The main preview's result is labeled by version and character; the side comparison is a visual reference, not an independently checked encounter.
+
+The selected global difficulty profile, minimum input window and ground/flying speeds are visible with the results. A single demo showing **Cleared** only demonstrates one sampled action time. **Meets target** additionally requires both characters to pass the solver's sampled starting-frame checks, including both HIGH and LOW for flying hazards. Changing profile or other calibration inputs invalidates old results. This review UI update does not change the solver or resolve the runtime parity limitations below.
+
+Select **Reviewed · select to apply** only for proposals you want. Apply buttons show stage and selection counts; the selection note identifies any results still needing adjustment. **Apply** updates the working draft in one Undo step. **Save all** persists in this browser; **Export all** downloads a portable project. Neither writes GitHub or updates the existing production game. Proposals still needing adjustment remain unchecked for sequence eligibility even if deliberately applied.
+
 ## Continuous Scene playback — Review 08.1
 
 **Play scene** now repeats continuously by default. **Loop** repeats the selected hazard pass, proposal action demo or checked stage sequence. Each repeat resets its actor/action schedule and contact result while the landscape and clouds continue on the existing world clock. The preceding result stays visible as **Previous**. This repeats the current scenario; it does not generate a new random course.
@@ -38,7 +48,7 @@ Loop and transport state are preview settings; Save all/Export retain the same v
 
 ## Assisted calibration — Review 08
 
-Start with **Calibrate hazards → Optimize stage**. Select a result to see **Before / Proposed** in the Scene and numerical changes in the inspector. **Demo Claude / Demo Constance** automatically times the suggested Jump or Slide; flying hazards support HIGH and LOW. Freeze, Next frame and Replay still work. Mark the proposals you accept as **Reviewed**, then **Apply reviewed stage** or **Apply all reviewed**. A batch is one Undo step. **Save all / Export all / Import** include the complete result.
+Start with **Calibrate hazards → Optimize stage**. Click **Review proposal** to see **Before / Proposed** in the Scene and numerical changes in the inspector. **Demo Claude / Demo Constance** automatically times the suggested Jump or Slide; flying hazards support HIGH and LOW. Freeze, Next frame and Replay still work. Mark the proposals you accept as **Reviewed · select to apply**, then **Apply selected in [stage]** or **Apply all selected**. A batch is one Undo step. **Save all / Export all / Import** include the complete result.
 
 - **Shared pathway Y** belongs to the selected stage. It begins at the midpoint of the two current character foot references, with zero initial displacement. Moving it moves both characters and hazards with **Follow shared pathway** enabled. Character-only shared/state/stage corrections stay local; changes to either character invalidate the hazard checks. Re-optimize to update collision/clearance suggestions after a reference change. Auto-follow handles position; it does not silently rewrite approved hitboxes.
 - Ground proposals use measured visible support from the existing cropped frames, accounting for transparent padding. HIGH flying clearance is derived from both Slide collision envelopes; LOW is placed relative to the shared pathway. Frame-to-frame support variation is flagged. These are reviewable suggestions, not new artwork metadata or image edits. Both characters remain fixed throughout optimization.

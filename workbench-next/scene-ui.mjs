@@ -72,8 +72,8 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
     const opts=options();result=drawDesignScene($('preview'),opts);
     const proposal=calibration()?.previewFor(context().hazard);
     if($('compare').checked)drawDesignScene($('baseline'),{...opts,baseline:!proposal,placementOverride:proposal?{[proposal.row.id]:proposal.before}:null,contactLatched:false});
-    document.querySelector('.baseline-card .preview-tag').textContent=proposal?'BEFORE':'BASELINE';
-    $('preview-label').textContent=proposal?(proposal.proposed?'PROPOSED · UNSAVED':'BEFORE · UNSAVED'):sequence?'CHECKED SEQUENCE · DEMO':`${current.stage.toUpperCase()} · WORKING SCENE`;
+    document.querySelector('.baseline-card .preview-tag').textContent=proposal?'BEFORE · VISUAL REFERENCE':'BASELINE';
+    $('preview-label').textContent=proposal?(proposal.proposed?'PROPOSED · NOT APPLIED':'BEFORE · SNAPSHOT'):sequence?'CHECKED SEQUENCE · DEMO':`${current.stage.toUpperCase()} · WORKING SCENE`;
     if(editing&&current.ready&&!proposal&&!sequence)drawHandles($('preview'),result[target].collision);
     $('preview').classList.toggle('hitbox-editing',editing);
     $('actor-play').textContent=clock.running?'Pause / freeze':pass.complete&&!loopEnabled()?'Replay pass':'Play scene';$('actor-play').setAttribute('aria-pressed',String(clock.running));
@@ -84,9 +84,10 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
     $('actor-time').textContent=`Step ${clock.steps.toLocaleString()} · ${clock.time.toFixed(2)} s${clock.running?'':' · Frozen'}`;
     const c=context();$('actor-pose').textContent=sequence?`${who==='claude'?'Claude':'Constance'} ${c.character.state} · ${sequenceIndex}/${sequence.events.length} actions`:`${who==='claude'?'Claude':'Constance'} ${c.character.state} ${result.character.frame+1}/${c.character.frames} · ${c.hazard.name} ${result.hazard.frame+1}/${c.hazard.frames}`;
     const status=$('contact-status'),label=current.ready?`${cycleNumber>1?'Pass '+cycleNumber+' · ':''}${pass.label(result,{travel:opts.travel})}${lastResult?' · Previous: '+lastResult:''}`:'Loading scene…';
-    if(status.textContent!==label)status.textContent=label;
+    const statusLabel=proposal?`${proposal.proposed?'Proposed':'Before'} · ${who==='claude'?'Claude':'Constance'} · ${label}`:label;
+    if(status.textContent!==statusLabel)status.textContent=statusLabel;
     status.classList.toggle('contact',result.contact||pass.firstContact!==null);
-    $('scene-playback-help').textContent=(loopEnabled()?'Loop repeats this pass or sequence. Pause freezes; Stop returns to the start. ':'One pass; stops at the end. ')+(sequence?'Checked sequence · actions play automatically for the selected character. Freeze or step to inspect. Exit sequence to edit.':demo?'Proposed timing demo · action plays automatically. Freeze or step to inspect.':gameActions()?'Jump/Slide use game timing. Next frame = 1/60 s.':'Pose loop only · contact checks for this pose; use Game actions to test Jump/Slide clearance.');
+    $('scene-playback-help').textContent=(loopEnabled()?'Loop repeats this pass or sequence. Pause freezes; Stop returns to the start. ':'One pass; stops at the end. ')+(sequence?'Checked sequence · actions play automatically for the selected character. Freeze or step to inspect. Exit sequence to edit.':demo?`${proposal&&!proposal.proposed?'Before':'Proposed'} timing demo · action plays automatically. Result describes the main preview only. Freeze or step to inspect.`:gameActions()?'Jump/Slide use game timing. Next frame = 1/60 s.':'Pose loop only · contact checks for this pose; use Game actions to test Jump/Slide clearance.');
     $('edit-target').value=target;$('edit-target-name').textContent=target==='character'?`${c.character.name} · ${c.character.state}`:c.hazard.name;
     $('edit-hitbox').setAttribute('aria-pressed',String(editing));$('edit-hitbox').textContent=editing?'Finish hitbox editing':'Edit hitbox on scene';
     inspector(false);

@@ -868,6 +868,9 @@ h2 {
 .cal-results {display:grid;gap:7px;max-height:250px;overflow:auto;}
 .cal-result {border:1px solid var(--line);padding:7px;border-radius:6px;font-size:11px;}
 .cal-result button {width:100%;font-size:11px;text-align:left;min-height:28px;}
+.cal-result.active {border-color:var(--accent);}
+.cal-result strong {display:block;}
+.cal-result .check {margin-top:7px;}
 .cal-result p {margin:5px 0;}
 #cal-progress {width:100%;accent-color:var(--accent);}
 #proposal-review {padding:10px;border:1px solid var(--accent);border-radius:6px;margin-bottom:10px;font-size:11px;}

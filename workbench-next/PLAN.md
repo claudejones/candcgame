@@ -2,7 +2,9 @@
 
 Status: proposed; parallel branch only. The user's approval is required before replacing the working interface.
 
-Current increment: **Review 08.1 — continuous Scene playback**. Play now loops the current scenario by default. Pause freezes, Stop returns to the beginning frozen, Restart begins again, and disabling Loop retains a finite pass. The scenery/cloud clock continues across repetitions. Per-pass contacts, automatic proposal/sequence action schedules, readiness and v6 persistence are preserved.
+Current increment: **Review 08.2 — clearer proposal review**. Explicit open/close actions reliably restore the working scene. Before/Proposed have separate demos, verdicts and version-labeled results. Difficulty context, selection counts and Apply/Save/Export distinctions are visible. Analysis and preview still make no authored edits. Solver validation reconciliation and Test/Game integration remain pending.
+
+Previous increment: **Review 08.1 — continuous Scene playback**. Play now loops the current scenario by default. Pause freezes, Stop returns to the beginning frozen, Restart begins again, and disabling Loop retains a finite pass. The scenery/cloud clock continues across repetitions. Per-pass contacts, automatic proposal/sequence action schedules, readiness and v6 persistence are preserved.
 
 Previous increment: **Review 08 — assisted calibration**, authorized 2026-09-19. Shared pathway/opt-in following, reviewed bounded hazard proposals using both current characters, per-field locks, before/proposed Scene demos, global difficulty profiles and verified Design stage sequences are implemented. v6 preserves earlier saved work. See README for the testing workflow and explicit limits. The optimizer never silently changes character physics or applies proposals. Full Test/Game integration remains next.
 

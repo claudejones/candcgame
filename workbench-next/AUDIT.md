@@ -69,7 +69,7 @@ The current asset map has **58 image entries**, all resolving to files in this c
 ## Verification boundary
 
 Observed deployed: Design character/landscape/global panels, Test setup/actions, first-load preview absence followed by successful preview after selection. Source audit covers Game entry, save/import, atlas sourcing, runtime controls, and all legacy control IDs. Repeated-pause, cross-mode contamination, full-course draft application, all nine stage visuals, and fresh/mobile performance remain targeted acceptance tests, not claimed reproduced results. No production values were changed for this audit.
-# Current candidate coverage — reviews 06–08.1
+# Current candidate coverage — reviews 06–08.2
 
 This implementation status supplements the original old/new functionality audit below. A completed preview tool does not establish gameplay parity.
 
@@ -112,3 +112,13 @@ Test and Game, damage/recovery, FX/finish authoring and full runtime snapshot co
 **Pause / freeze** retains the exact current time; **Next frame** advances one simulation step while frozen. **Stop** returns the scene to its beginning, frozen, retaining the selected demo/sequence. **Restart** returns to the beginning and plays. Turning Loop off finishes the current pass and stops at its endpoint. **Pause on contact** is an explicit exception: it freezes on the first contact of each pass. Selection, editing focus, project actions and hidden tabs retain their existing pause behavior. Controls wait for scene readiness.
 
 Loop and transport state are preview settings; Save all/Export retain the same v6 project data. Artwork, calibration values, timing-window calculations and production runtime code are unchanged in this update.
+
+## Proposal review — Review 08.2
+
+Each hazard has an explicit **Review proposal** button; it becomes **Close comparison** while selected. That action and **Exit proposal** stop/reset the demo, hide comparison and restore the editable working scene without applying anything. Applying or invalidating a proposal also clears its preview.
+
+**Before** is the working configuration snapshot taken when analysis ran, including unsaved edits; it is not necessarily the repository baseline. **Proposed** is the optional replacement. Cards and the inspector show both timing verdicts. If both meet the target, keep the current settings unless the proposed alignment or timing margin is preferable. Both versions now have independently timed **Demo Before/Proposed** buttons for Claude and Constance. The main preview's result is labeled by version and character; the side comparison is a visual reference, not an independently checked encounter.
+
+The selected global difficulty profile, minimum input window and ground/flying speeds are visible with the results. A single demo showing **Cleared** only demonstrates one sampled action time. **Meets target** additionally requires both characters to pass the solver's sampled starting-frame checks, including both HIGH and LOW for flying hazards. Changing profile or other calibration inputs invalidates old results. This review UI update does not change the solver or resolve the runtime parity limitations below.
+
+Select **Reviewed · select to apply** only for proposals you want. Apply buttons show stage and selection counts; the selection note identifies any results still needing adjustment. **Apply** updates the working draft in one Undo step. **Save all** persists in this browser; **Export all** downloads a portable project. Neither writes GitHub or updates the existing production game. Proposals still needing adjustment remain unchecked for sequence eligibility even if deliberately applied.

@@ -1,5 +1,12 @@
 # Workbench review — verification
 
+## Review 08.2 — proposal review clarity and exit correction
+
+- Explicit Review proposal / Close comparison controls and selected-state accessibility replace hazard-name-only buttons. Exit, apply and stale-input invalidation restore the working scene, hide comparison, clear the timed demo and restore editing.
+- Actual DOM/canvas checks exercise Before and Proposed demos separately, labeled outcomes, exit during an active demo, toggling the same result closed, profile-change cleanup, selected/needs-adjustment counts, batch apply, Undo/Redo and unchanged settings until Apply. Existing transport, loading, atlas, hitbox, panning, sequence and persistence flows pass.
+- All 51 Node tests pass. No new solver, physics, artwork, schema or production-runtime changes. Existing 60 Hz timing-window and collision-order limitations still apply; runtime reconciliation remains pending. DOM/canvas checks are not browser layout acceptance.
+- Publication evidence is recorded after the matching preview deployment completes.
+
 ## Review 08.1 — continuous Scene playback
 
 User-requested Design transport correction. The finite pass remains available with Loop off; Loop is enabled by default. No calibration numbers or runtime defaults changed.
