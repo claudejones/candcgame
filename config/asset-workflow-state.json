@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "active": {
     "stage": "EU02",
-    "phase": "ready-to-publish",
+    "phase": "awaiting-approval",
     "command": "build landscape EU02",
     "selectedLayers": [
       "FAR",
@@ -16,7 +16,15 @@
     },
     "stageSpec": "dd492c7c26ceb8259f7da434ba762c0bdb200393c8e62b71b9ad2a37c443f729",
     "recoveryBranch": "work/assets/eu02",
-    "baseCommit": "78e9b1306153ad51189267e28b2e774366a8e804"
+    "baseCommit": "78e9b1306153ad51189267e28b2e774366a8e804",
+    "deployedCommit": "961d3911c756c9084114ab95255a4a06cfe489c0",
+    "developmentCommit": "680c01a3c2ac067c934b12be0a716b927f80bc92",
+    "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35426209008",
+    "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35426252658",
+    "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35426273472",
+    "reviewUrl": "https://claudejones.github.io/candcgame/src/dev.html",
+    "verifiedAt": "2026-09-19",
+    "qaEvidence": "docs/phase8-qa/EU02_LANDSCAPE_QA.md"
   },
   "approvedRevisions": {
     "na01": {
