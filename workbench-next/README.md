@@ -7,6 +7,8 @@ Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration 
 
 ## Review this increment
 
+[Open the private design preview](https://candc-workbench-next.claudejones.chatgpt.site). Publication is confirmed; user visual acceptance remains pending.
+
 Private preview publication is authorized as a separate Site. See [PREVIEW_HOSTING.md](PREVIEW_HOSTING.md) for its identity and repeatable packaging. This does not authorize replacing the working editor or deploying this branch over GitHub Pages.
 
 From the repository root, run `python -m http.server 8080`, then open

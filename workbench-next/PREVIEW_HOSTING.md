@@ -4,7 +4,7 @@ Authorized 2026-09-19 after the user requested proceeding with a clickable inter
 
 - Site project ID: `appgprj_6aadf9bb7cf08191b8dce9d7ada54bba`
 - Site title: C&C Workbench — Design Preview
-- Reserved origin: `https://candc-workbench-next.fancy-dune-7826.chatgpt.site`
+- Live URL: https://candc-workbench-next.claudejones.chatgpt.site
 - GitHub source authority: `claudejones/candcgame`, branch `editor-next`.
 - Existing GitHub Pages workbench/game remain untouched. Site deployment is publication of this review increment only; it is not editor cutover approval.
 
@@ -16,7 +16,7 @@ Run `node workbench-next/build-preview.mjs /absolute/path/to/separate-preview-ch
 
 The separate checkout's `.openai/hosting.json` contains the exact `project_id` above and `static: {"directory":"dist"}`. Commit/push that checkout to the Site's source repository, package static output with the hosting helper, save the exact pushed revision, and deploy privately. Renew credentials for the same project when needed; never record tokens here or in Git.
 
-The reserved origin is not evidence of successful publication. Confirm a native Sites deployment response reports success and its URL before handing the preview to the user.
+Publication confirmed successful on 2026-09-19. Version 1 uses Site source commit `95d78b7ef1df0e2d786b55261d4593eccf2f7375`; deployment ID `appgdep_6aadfaedb0148191ac7bc000a21c35a2`. The live URL above comes from the successful native deployment response and replaces the provisional origin supplied during registration. For later updates, confirm the new deployment succeeds before claiming the updated preview is live.
 
 ## Review scope
 

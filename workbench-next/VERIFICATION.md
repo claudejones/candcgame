@@ -35,3 +35,5 @@ This increment does not test gameplay, scene grounding, collisions, timing, fini
 User authorized a separate clickable preview on 2026-09-19. `PREVIEW_HOSTING.md` records the durable Site identity and repeatable publication path. Static packaging passed entrypoint/manifest checks; all 25 included source PNGs are byte-identical to their GitHub source, and the copied application/configuration files match this candidate. Loading now includes image decoding, a visible spinner, an accessible busy state and a clear failure/retry state.
 
 The preview remains a Design/sprite review increment. Publication success must be confirmed by the Sites deployment response; it does not count as user visual approval or approval to replace the working editor.
+
+Private preview deployment succeeded on 2026-09-19: https://candc-workbench-next.claudejones.chatgpt.site . Site source revision: `95d78b7ef1df0e2d786b55261d4593eccf2f7375`. The native deployment response confirms publication; browser visual testing and user approval remain pending.
