@@ -2,7 +2,41 @@
 
 Active workflow, 2026-09-19. These are commands to the agent working in `claudejones/candcgame`. No user-filled template, separate setup conversation or per-continent installation is needed. The agent resolves commands with `node scripts/assets.mjs ...`; the resolver supplies instructions and file mappings, while the agent performs image generation and connected publication.
 
+## Where to type commands
+
+Type these messages into the conversation with the agent. The user does not need to run terminal commands.
+
+**In a fresh conversation, name the repository in the first message.** Use the copy-ready form `In claudejones/candcgame: ...`. This establishes which project the command applies to. Being in the same ChatGPT project does not replace that explicit repository instruction. The agent follows AGENTS.md automatically; the user does not need to paste the specifications or previous conversation.
+
+**Once that conversation is working in this repository, use the short commands.** Do not repeat the repository prefix on every message. The prefix is conversation context; the agent extracts the command when invoking the local resolver.
+
+| Situation | Exact message to send |
+| --- | --- |
+| Start SA02 in a fresh conversation | `In claudejones/candcgame: build landscape SA02.` |
+| Continue SA02 in a fresh conversation after a limit or interruption | `In claudejones/candcgame: resume SA02.` |
+| Ask for help in a fresh conversation | `In claudejones/candcgame: help.` |
+| Replace NA01 FAR in a fresh conversation | `In claudejones/candcgame: regenerate landscape NA01 FAR.` |
+| Ask for available commands in the current repository conversation | `help` |
+| See NA01's layer filenames in the current conversation | `help NA01` |
+| Continue interrupted SA02 work within the current conversation | `resume SA02` |
+
+## If a conversation reaches its limit
+
+Open one new conversation and send:
+
+```text
+In claudejones/candcgame: resume SA02.
+```
+
+The agent finds the current GitHub state, the stage's recovery branch and any available working files, then continues the next unfinished operation. It must inspect the recovery branch even if main's checkpoint still says there is no active work. Completed images are reused; if publication was interrupted, it continues publication; if the stage is awaiting review, it returns the review link. It does not restart the stage or approve it automatically.
+
+The user does not need a long handoff, commit hashes, filenames or the old transcript. Recovery depends on saved work: if the interruption happened before a durable checkpoint and the working files are unavailable, the agent must identify what is missing instead of claiming recovery or silently regenerating it. The recovery rules below remain mandatory.
+
+At an intentional interruption, the agent must save and verify the recovery checkpoint and print the fully completed resume message. At stage closeout, it prints the fully completed next-stage message. No placeholder templates or second setup conversation.
+
 ## User commands
+
+The table below uses the short form for a conversation already working in this repository. For the first message in a fresh conversation, add `In claudejones/candcgame:` as shown above.
 
 | Command | Result |
 | --- | --- |
