@@ -14,6 +14,8 @@ Reproduce pure checks: `node --test workbench-next/*.test.mjs`. Optional DOM che
 
 User acceptance: open a character or hazard, select Scene, adjust shared/state/stage grounding or hazard placement, freeze/step/restart, try ¼×, compare baseline, save/export/import/reload, and return to Frame/Atlas. Select a flying hazard for HIGH/LOW. Frame stepping advances time; it does not force a new sprite pose every click. Test and Game are still planned.
 
+Publication succeeded at https://candc-workbench-next.claudejones.chatgpt.site (saved version 9, deployment `appgdep_6aaea37986d8819181b58e3f2d91ffd3`). Site source: `fb93bbc3fcd40c8a19faa54e97f1faed07498538`; GitHub implementation: `8234467e606866401098ec49e594af72d5e28062`. [Production CI passed for that exact implementation](https://github.com/claudejones/candcgame/actions/runs/35450342079). All module syntax, unique IDs and DOM references pass. The validated archive contains 75 files and 53 unchanged PNGs; source/provenance match the pushed revision. Native deployment status is `succeeded`; user browser testing can begin.
+
 ## Review 05.3 — EU02/EU03 artwork sync
 
 Requested 2026-09-19 for configuration testing. Incorporated main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0`; source/configuration/artwork match that upstream snapshot exactly. EU02 is approved; EU03 is integrated and awaiting artwork acceptance. No image generation or alteration occurred.
