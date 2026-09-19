@@ -217,6 +217,7 @@ Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets pas
 
 - Reference: `assets-original/current-generated/EU-assets/EU01_BG_DISTANT_GREECE.png`
 - Candidate: `assets/phase8-validation/europe/EU01_BG_DISTANT_GREECE.png`
+- Status: APPROVED 2026-09-19 — deployed integrated-stage acceptance
 - Layer directive: FAR
 - Stage lock: Preserve the Santorini caldera's intensely blue Aegean water, distant volcanic island, white cliffside village, blue domes, warm sunlit rock and small sailboats. Retain the crisp white/blue/pink Mediterranean palette; do not add close terraces, foreground flowers or clouds.
 
@@ -224,6 +225,7 @@ Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets pas
 
 - Reference: `assets-original/current-generated/EU-assets/EU01_BG_MID_GREECE.png`
 - Candidate: `assets/phase8-validation/europe/EU01_BG_MID_GREECE.png`
+- Status: APPROVED 2026-09-19 — deployed integrated-stage acceptance
 - Layer directive: MID
 - Stage lock: Preserve the stepped white Cycladic buildings, blue domes and doors, cypress trees, stone arches, pergolas and vivid magenta bougainvillea. Keep intentional openings that reveal the caldera FAR, but correct unintended window/arch voids and provide adequate lower overlap. Do not create the playable promenade.
 
@@ -231,6 +233,7 @@ Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets pas
 
 - Reference: `assets-original/current-generated/EU-assets/EU01_GROUND_GREECE.png`
 - Candidate: `assets/phase8-validation/europe/EU01_GROUND_GREECE.png`
+- Status: APPROVED 2026-09-19 — deployed integrated-stage acceptance
 - Layer directive: GROUND
 - Stage lock: Preserve the pale stone promenade, warm stone retaining wall, blue wooden rail accents, flower pots, bougainvillea and small Mediterranean plants. Extend continuous stone depth through the bottom overscan while keeping a level readable surface; do not add buildings or sea.
 

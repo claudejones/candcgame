@@ -3,7 +3,7 @@
 Updated 2026-09-19. GitHub is authoritative. Historical explanations live in DECISION_LOG; command execution lives in ASSET_COMMAND_WORKFLOW.
 
 - Phases 0–7 are complete; Phase 7 modular Design/Test/Game authoring was user-accepted.
-- Phase 8 covers the 27 NA/SA/EU landscape layers only. NA01, NA02, NA03, SA01, SA02 and SA03 are approved complete stage sets. North America and South America are closed. SA03 was explicitly approved on 2026-09-19 and the South America regression passed; EU01 is integrated and awaiting deployed-stage review.
+- Phase 8 covers the 27 NA/SA/EU landscape layers only. NA01, NA02, NA03, SA01, SA02, SA03 and EU01 are approved complete stage sets. North America and South America are closed. SA03 was explicitly approved on 2026-09-19 and the South America regression passed; EU01 was explicitly approved on 2026-09-19; EU02 is next.
 - Latest approved artwork snapshot before command-workflow setup: main `660aa55e35b378e613e07d8315074552620fcb61`. SA01 MID retains the snake and removes the monkey; SHA-256 `8e5653f5dfc7dea8254521f445e2609eebf3b1e0c683c64e4ffab38755519f03`.
 - Approved validation assets remain under `assets/phase8-validation/`; packaged production keeps its legacy assets. No artwork is replaced by the command-workflow setup. NA03 GROUND's approved 2170×725 exception remains unchanged.
 - Canonical integrated landscapes: source width 2172, viewport 960×540, ground surface 410, FAR/MID/GROUND offsets 0, scale multipliers 1.25/1/1, MID/GROUND source anchors 621/393. The registry now supplies both the development host and inner renderer. Saved legacy landscape transforms migrate without clearing unrelated authoring work. Pending stages remain legacy until integrated.
@@ -12,7 +12,7 @@ Updated 2026-09-19. GitHub is authoritative. Historical explanations live in DEC
 
 ## Next action
 
-Review the deployed EU01 — Greece / Santorini stage, then send `approve EU01` or request a focused revision. EU01's new FAR/MID/GROUND use offsets 0/0/0, multipliers 1.25/1/1 and MID/GROUND source anchors 621/393. Source PNG, isolated/repeat and complete composite checks pass. Publication and live-review evidence is recorded in the EU01 workflow checkpoint (recovery branch `work/assets/eu01`) and `docs/phase8-qa/EU01_LANDSCAPE_QA.md`. Technical success does not approve the stage. Do not begin EU02 before explicit EU01 acceptance.
+`In claudejones/candcgame: build landscape EU02.` EU01 — Greece / Santorini is approved at reviewed revision `8556e5a0312e53cb3843f1b69c61a35e698383ef`. Its three image hashes, zero offsets and source anchors are unchanged. Deployed Design/Test/Game, scrolling through the finish and Inspector geometry passed. Evidence is in `docs/phase8-qa/EU01_LANDSCAPE_QA.md`; exact approval/hash pointers are in `config/asset-workflow-state.json`. EU02 and EU03 remain pending. Europe regression follows EU03 acceptance.
 
 ## Deferred and protected
 
