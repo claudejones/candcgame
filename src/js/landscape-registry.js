@@ -278,7 +278,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "eu02": {
       "label": "Europe — France / Paris",
-      "status": "integrated",
+      "status": "approved",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/EU-assets/EU02_BG_DISTANT_PARIS.png",

@@ -39,7 +39,7 @@
       "mid": {"reference": "assets-original/current-generated/EU-assets/EU01_BG_MID_GREECE.png", "validation": "assets/phase8-validation/europe/EU01_BG_MID_GREECE.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "cacheKey": "2ea73633"},
       "ground": {"reference": "assets-original/current-generated/EU-assets/EU01_GROUND_GREECE.png", "validation": "assets/phase8-validation/europe/EU01_GROUND_GREECE.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393, "cacheKey": "83f9d5b0"}
     }},
-    "eu02": {"label": "Europe — France / Paris", "status": "integrated", "layers": {
+    "eu02": {"label": "Europe — France / Paris", "status": "approved", "layers": {
       "far": {"reference": "assets-original/current-generated/EU-assets/EU02_BG_DISTANT_PARIS.png", "validation": "assets/phase8-validation/europe/EU02_BG_DISTANT_PARIS.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true, "cacheKey": "dc76bae1"},
       "mid": {"reference": "assets-original/current-generated/EU-assets/EU02_BG_MID_PARIS.png", "validation": "assets/phase8-validation/europe/EU02_BG_MID_PARIS.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "cacheKey": "9919b9dd"},
       "ground": {"reference": "assets-original/current-generated/EU-assets/EU02_GROUND_PARIS.png", "validation": "assets/phase8-validation/europe/EU02_GROUND_PARIS.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393, "cacheKey": "52f12eeb"}
