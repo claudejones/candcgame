@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "proposal-awaiting-user-review",
+  "status": "approved-direction-readiness-pending",
   "productionEnabled": false,
   "phase": "post-phase8-expansion",
   "plan": "docs/REMAINING_CONTINENTS_PLAN.md",
@@ -95,7 +95,40 @@
         "intendedRelativeScale"
       ],
       "selectionReviewStatus": "pending-campaign-comparison-and-scale-review",
-      "approval": "Requirements confirmed; individual choices still proposed. Use existing content review and deployed-stage acceptance, with no added per-image gate."
+      "approval": "Requirements and workflow direction approved. Unresolved selection changes remain review items; generated artwork still requires deployed-stage acceptance."
+    },
+    "execution": {
+      "version": 3,
+      "maxWorkers": 2,
+      "nestedDelegation": false,
+      "activeStages": 1,
+      "coordinatorOwns": [
+        "shared configuration",
+        "workflow state",
+        "integration",
+        "publication",
+        "user review"
+      ],
+      "workerGroups": {
+        "landscape": [
+          "FAR",
+          "MID",
+          "GROUND"
+        ],
+        "hazard": [
+          "OBJECT_ATLAS",
+          "FLYING"
+        ]
+      },
+      "models": {
+        "coordinator": "gpt-6-astra",
+        "production": "gpt-5.6-sol",
+        "support": "gpt-5.6-luna"
+      },
+      "imageCalls": "One built-in image generation call per physical output file; parallel image throughput is unmeasured. Sequential generation is permitted while independent preparation or QA runs in parallel.",
+      "context": "Fresh scoped worker context; selected stage/job and actual reference pixels only. Return a compact result manifest and exceptions, not raw logs.",
+      "skillPolicy": "Use the existing imagegen skill and repository resolver; no duplicate project skill added.",
+      "pilot": "AF01; measure elapsed time, attempts, setup volume and reported usage before expanding concurrency."
     }
   },
   "factSources": {
@@ -165,7 +198,7 @@
       "id": "AF01",
       "label": "Tanzania — Serengeti savannah",
       "continent": "africa",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "SERENGETI",
       "palette": "Ochre, muted gold, olive and sky blue; turquoise bird accents.",
       "landscapes": {
@@ -211,13 +244,30 @@
         "serengeti"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Keep large wildlife out of the running lane and out of hazard artwork. The chosen bird's local range and flight references need confirmation before generation."
+      "notes": "Keep large wildlife out of the running lane and out of hazard artwork. The chosen bird's local range and flight references need confirmation before generation.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "A prominent granite kopje with a recognizable stacked-rock silhouette above the savannah.",
+        "midLifeDetail": "A restrained giraffe browsing an acacia away from the playable route.",
+        "localReference": [
+          "serengeti"
+        ],
+        "campaignDistinctiveness": [
+          "GROUND2 repeats the existing fallen-log hazard family; select a distinct replacement."
+        ],
+        "intendedRelativeScale": "The kopje must retain visual mass behind MID; the giraffe should read as a large animal at middle distance, not a miniature beside a tree."
+      },
+      "selectionReview": [
+        "GROUND2 repeats the existing fallen-log hazard family; select a distinct replacement."
+      ]
     },
     {
       "id": "AF02",
       "label": "Namibia — Sossusvlei dunes",
       "continent": "africa",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "SOSSUSVLEI",
       "palette": "Rust, terracotta, pale cream and cool blue; dark bird silhouette.",
       "landscapes": {
@@ -263,13 +313,32 @@
         "namib"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Stylized Sossusvlei landscape. Bird identity is a proposed Namib-region choice; confirm habitat/range against a reliable species reference before production."
+      "notes": "Stylized Sossusvlei landscape. Bird identity is a proposed Namib-region choice; confirm habitat/range against a reliable species reference before production.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "One dominant high dune crest, with a clear sunlit face and shadow edge.",
+        "midLifeDetail": "A single oryx near sparse dead camelthorn silhouettes, well behind gameplay.",
+        "localReference": [
+          "namib"
+        ],
+        "campaignDistinctiveness": [
+          "GROUND1 repeats the proposed stone/block family; revise the selection.",
+          "Compare the goshawk silhouette against NA02 eagle at gameplay size."
+        ],
+        "intendedRelativeScale": "Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation."
+      },
+      "selectionReview": [
+        "GROUND1 repeats the proposed stone/block family; revise the selection.",
+        "Compare the goshawk silhouette against NA02 eagle at gameplay size."
+      ]
     },
     {
       "id": "AF03",
       "label": "Morocco — Marrakesh medina",
       "continent": "africa",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "MARRAKESH",
       "palette": "Rose plaster, ochre stone, muted teal accents and warm sky.",
       "landscapes": {
@@ -319,13 +388,32 @@
         "marrakesh"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Architecture stays scenery. The original rock pigeon is rejected because NA03 already uses pigeons. Select a locally verified, visibly distinct flying species at credible gameplay scale. Reassess the produce crate against existing crate/basket hazards; no renamed or recolored duplicates."
+      "notes": "Architecture stays scenery. The original rock pigeon is rejected because NA03 already uses pigeons. Select a locally verified, visibly distinct flying species at credible gameplay scale. Reassess the produce crate against existing crate/basket hazards; no renamed or recolored duplicates.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "A recognizable Marrakesh minaret silhouette above the ochre roofscape; verify the selected local reference.",
+        "midLifeDetail": "A shaded courtyard frontage with hanging woven textiles and a restrained citrus planter.",
+        "localReference": [
+          "marrakesh"
+        ],
+        "campaignDistinctiveness": [
+          "FLYING replacement required; pigeons are excluded.",
+          "GROUND2 repeats existing crate/basket hazards; select a distinct replacement."
+        ],
+        "intendedRelativeScale": "The minaret must read as a substantial distant tower; doorways, textiles and planters establish a coherent middle-distance scale."
+      },
+      "selectionReview": [
+        "FLYING replacement required; pigeons are excluded.",
+        "GROUND2 repeats existing crate/basket hazards; select a distinct replacement."
+      ]
     },
     {
       "id": "AS01",
       "label": "Japan — Kyoto bamboo foothills",
       "continent": "asia",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "KYOTO",
       "palette": "Bamboo green, pale leaf yellow, dark timber and warm gravel.",
       "landscapes": {
@@ -371,13 +459,32 @@
         "kyoto"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Use a Kyoto-inspired composite rather than claiming an exact mapped trail. Confirm bird appearance/range and obtain a bamboo photo reference before generation."
+      "notes": "Use a Kyoto-inspired composite rather than claiming an exact mapped trail. Confirm bird appearance/range and obtain a bamboo photo reference before generation.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "A distinct Kyoto temple roof or pagoda silhouette emerging from layered green foothills.",
+        "midLifeDetail": "A small timber tea-house frontage with a noren-style entrance curtain beside the bamboo grove.",
+        "localReference": [
+          "kyoto"
+        ],
+        "campaignDistinctiveness": [
+          "GROUND2 repeats the stone/boulder family.",
+          "Validate whether a white-eye reads at a credible size before keeping it as a hazard."
+        ],
+        "intendedRelativeScale": "Architecture must read above the bamboo without becoming a tiny incidental roof; verify local details and judge the small proposed bird at gameplay size."
+      },
+      "selectionReview": [
+        "GROUND2 repeats the stone/boulder family.",
+        "Validate whether a white-eye reads at a credible size before keeping it as a hazard."
+      ]
     },
     {
       "id": "AS02",
       "label": "China — Zhangjiajie stone forest",
       "continent": "asia",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "ZHANGJIAJIE",
       "palette": "Cool gray sandstone, deep green trees and pale blue distance.",
       "landscapes": {
@@ -423,13 +530,30 @@
         "wulingyuan"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Keep long tail and wings inside every animation cell. Verify the proposed species' local range before production; no added mist effect is needed."
+      "notes": "Keep long tail and wings inside every animation cell. Verify the proposed species' local range before production; no added mist effect is needed.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "One unmistakable tall sandstone pillar rising above the other Zhangjiajie formations.",
+        "midLifeDetail": "A small timber lookout pavilion tucked into the forested middle distance.",
+        "localReference": [
+          "wulingyuan"
+        ],
+        "campaignDistinctiveness": [
+          "GROUND1 repeats SA02 rock outcrop; GROUND2 repeats SA01 stump/root. Both need distinct replacements."
+        ],
+        "intendedRelativeScale": "Preserve the pillar's monumental height and depth; the pavilion is human-scale architecture, not a toy object."
+      },
+      "selectionReview": [
+        "GROUND1 repeats SA02 rock outcrop; GROUND2 repeats SA01 stump/root. Both need distinct replacements."
+      ]
     },
     {
       "id": "AS03",
       "label": "Thailand — Bangkok riverfront",
       "continent": "asia",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "BANGKOK",
       "palette": "Warm cream, muted gold, river blue and dark wooden accents.",
       "landscapes": {
@@ -475,13 +599,32 @@
         "bangkok"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Cart wheels do not animate or introduce a new motion type. Verify swift species/range and avoid unverified religious icon details."
+      "notes": "Cart wheels do not animate or introduce a new motion type. Verify swift species/range and avoid unverified religious icon details.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "A prominent Bangkok riverfront temple spire with locally verified architecture.",
+        "midLifeDetail": "One moored long-tail boat beside a lived-in riverside frontage, behind the running route.",
+        "localReference": [
+          "bangkok"
+        ],
+        "campaignDistinctiveness": [
+          "GROUND1 repeats EU01 baskets; GROUND2 overlaps SA03 vendor cart.",
+          "Compare swift silhouette against EU02 swallows before accepting the choice."
+        ],
+        "intendedRelativeScale": "The spire should remain recognizable through MID openings; boat, mooring and doorways must share believable proportions."
+      },
+      "selectionReview": [
+        "GROUND1 repeats EU01 baskets; GROUND2 overlaps SA03 vendor cart.",
+        "Compare swift silhouette against EU02 swallows before accepting the choice."
+      ]
     },
     {
       "id": "OC01",
       "label": "Australia — Uluru red desert",
       "continent": "oceania",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "ULURU",
       "palette": "Red earth, muted sage, warm stone and blue sky; pink-gray bird.",
       "landscapes": {
@@ -527,13 +670,32 @@
         "uluru"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Use a respectful distant public-view composition; no invented cultural markings. Verify local galah reference before generation."
+      "notes": "Use a respectful distant public-view composition; no invented cultural markings. Verify local galah reference before generation.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "The broad, recognizable Uluru monolith profile with substantial width and mass.",
+        "midLifeDetail": "A small group of resting red kangaroos among sparse local desert vegetation, well behind gameplay.",
+        "localReference": [
+          "uluru"
+        ],
+        "campaignDistinctiveness": [
+          "GROUND2 repeats sandstone/boulder proposals.",
+          "Compare the galah against existing parrot-family hazards and confirm a visibly distinct design."
+        ],
+        "intendedRelativeScale": "Do not shrink the monolith into a small boulder; kangaroos should retain believable animal proportions and regional references require verification."
+      },
+      "selectionReview": [
+        "GROUND2 repeats sandstone/boulder proposals.",
+        "Compare the galah against existing parrot-family hazards and confirm a visibly distinct design."
+      ]
     },
     {
       "id": "OC02",
       "label": "Australia — Queensland tropical coast",
       "continent": "oceania",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "QUEENSLAND",
       "palette": "Turquoise water, emerald foliage and pale sand; controlled rainbow bird accents.",
       "landscapes": {
@@ -580,13 +742,32 @@
         "queensland"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Keep foliage quieter than the colorful flying hazard. Verify the selected coastal vegetation and lorikeet reference before generation."
+      "notes": "Keep foliage quieter than the colorful flying hazard. Verify the selected coastal vegetation and lorikeet reference before generation.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "A distinctive rainforest headland meeting the Queensland coast.",
+        "midLifeDetail": "A simple shore landing with drying fishing nets, kept separate from the running surface.",
+        "localReference": [
+          "queensland"
+        ],
+        "campaignDistinctiveness": [
+          "GROUND1 repeats stump/log family; GROUND2 repeats crates.",
+          "Compare lorikeet silhouette against existing macaws/parakeets and other proposed parrots."
+        ],
+        "intendedRelativeScale": "The headland must have a clear silhouette; the landing and nets should establish coastal use at a coherent architectural scale."
+      },
+      "selectionReview": [
+        "GROUND1 repeats stump/log family; GROUND2 repeats crates.",
+        "Compare lorikeet silhouette against existing macaws/parakeets and other proposed parrots."
+      ]
     },
     {
       "id": "OC03",
       "label": "New Zealand — Fiordland",
       "continent": "oceania",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "FIORDLAND",
       "palette": "Cool blue-gray, deep green, charcoal stone and small orange underwing accents.",
       "landscapes": {
@@ -634,13 +815,33 @@
         "kea"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "DOC supports kea in Fiordland forest/alpine habitats. Show avoidance encounters only; no attacking or injured wildlife."
+      "notes": "DOC supports kea in Fiordland forest/alpine habitats. Show avoidance encounters only; no attacking or injured wildlife.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "A dominant steep Fiordland peak rising above deep water and forested slopes.",
+        "midLifeDetail": "A restrained fur-seal haul-out on a middle-distance shore, away from gameplay.",
+        "localReference": [
+          "fiordland",
+          "kea"
+        ],
+        "campaignDistinctiveness": [
+          "Both ground hazards repeat the existing boulder/log pair.",
+          "Kea needs a visually distinct appearance from the other parrot-family choices."
+        ],
+        "intendedRelativeScale": "The peak must retain height and distance; resting seals should be recognizable as scenery without resembling collision hazards."
+      },
+      "selectionReview": [
+        "Both ground hazards repeat the existing boulder/log pair.",
+        "Kea needs a visually distinct appearance from the other parrot-family choices."
+      ]
     },
     {
       "id": "AN01",
       "label": "Antarctic Peninsula — icy coast",
       "continent": "antarctica",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "PENINSULA",
       "palette": "Icy cyan, white, navy sea and dark rock; red bill accent.",
       "landscapes": {
@@ -687,13 +888,33 @@
         "antarctic_tern"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Penguins must not be used as flying hazards. Avoid white-on-white collision silhouettes."
+      "notes": "Penguins must not be used as flying hazards. Avoid white-on-white collision silhouettes.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "A distinctive blue glacier face and calving arch framed by coastal peaks.",
+        "midLifeDetail": "A small penguin gathering on a separate dark-rock island; verify a locally appropriate species.",
+        "localReference": [
+          "antarctic_geography",
+          "antarctic_tern"
+        ],
+        "campaignDistinctiveness": [
+          "GROUND2 repeats the stone/boulder family; compare the ice chunk against AN02 ice ridge.",
+          "Check tern distinction from existing gulls at gameplay size."
+        ],
+        "intendedRelativeScale": "The glacier needs monumental scale; penguins must retain plausible body size against nearby rocks and remain off the playable route."
+      },
+      "selectionReview": [
+        "GROUND2 repeats the stone/boulder family; compare the ice chunk against AN02 ice ridge.",
+        "Check tern distinction from existing gulls at gameplay size."
+      ]
     },
     {
       "id": "AN02",
       "label": "Ross Island — volcanic shore",
       "continent": "antarctica",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "ROSS_ISLAND",
       "palette": "Charcoal basalt, blue-white snow and pale lavender sky.",
       "landscapes": {
@@ -740,13 +961,31 @@
         "polar_skua"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "Confirm Ross Island/Erebus silhouette with an official reference during reference preparation. Use South polar skua, not the distinct subantarctic skua."
+      "notes": "Confirm Ross Island/Erebus silhouette with an official reference during reference preparation. Use South polar skua, not the distinct subantarctic skua.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "The broad snow-covered volcanic cone of Ross Island, with its silhouette verified before generation.",
+        "midLifeDetail": "A resting seal beside a breathing hole on the distant sea-ice margin; verify an appropriate local species.",
+        "localReference": [
+          "antarctic_geography",
+          "polar_skua"
+        ],
+        "campaignDistinctiveness": [
+          "GROUND1 repeats the boulder family; compare GROUND2 with AN01 ice chunk."
+        ],
+        "intendedRelativeScale": "The volcanic cone must dominate the backdrop; the seal and breathing hole must read naturally at their shared distance."
+      },
+      "selectionReview": [
+        "GROUND1 repeats the boulder family; compare GROUND2 with AN01 ice chunk."
+      ]
     },
     {
       "id": "AN03",
       "label": "East Antarctica — coastal research outpost",
       "continent": "antarctica",
-      "status": "proposed",
+      "status": "direction-approved",
       "theme": "RESEARCH_OUTPOST",
       "palette": "White and blue ice with muted red/ochre station accents and dark object outlines.",
       "landscapes": {
@@ -795,7 +1034,49 @@
         "petrels"
       ],
       "referenceStatus": "geographic basis researched; stage-specific visual and species references to prepare before production",
-      "notes": "The station is fictional, informed by coastal stations rather than presented as Casey. Confirm snow-petrel range and flight reference; keep the white bird readable."
+      "notes": "The station is fictional, informed by coastal stations rather than presented as Casey. Confirm snow-petrel range and flight reference; keep the white bird readable.",
+      "selectionStatus": "needs-review",
+      "referencesReady": false,
+      "brief": {
+        "status": "proposed-details-reference-review-required",
+        "farFocalPoint": "An angular exposed nunatak rising from the coastal ice plateau.",
+        "midLifeDetail": "A fictional research outpost with a warmly lit window and a windsock, without people, text or logos.",
+        "localReference": [
+          "antarctic_geography",
+          "casey",
+          "petrels"
+        ],
+        "campaignDistinctiveness": [
+          "GROUND1 repeats crate hazards; select a distinct supply object.",
+          "Confirm the white flying silhouette stays readable against snow."
+        ],
+        "intendedRelativeScale": "The nunatak must remain a major landform; station modules and equipment should read as full-size structures, not tiny scattered props."
+      },
+      "selectionReview": [
+        "GROUND1 repeats crate hazards; select a distinct supply object.",
+        "Confirm the white flying silhouette stays readable against snow."
+      ]
     }
-  ]
+  ],
+  "approval": {
+    "status": "approved",
+    "date": "2026-09-19",
+    "scope": [
+      "remaining-continent stage themes and scope",
+      "bounded parallel workflow implementation",
+      "new-atlas direction for AF01 pilot",
+      "FAR focal point, MID life, originality and scale requirements"
+    ],
+    "exclusions": [
+      "unresolved replacement selections",
+      "unverified references",
+      "generated artwork acceptance",
+      "dependent calibration and landscape contract promotion"
+    ]
+  },
+  "readiness": {
+    "landscapeContractPromotion": "pending",
+    "runtimeRegistration": "pending",
+    "hazardValidation": "pending"
+  }
 }

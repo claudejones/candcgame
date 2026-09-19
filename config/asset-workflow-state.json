@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "active": null,
   "approvedRevisions": {
     "na01": {
@@ -83,5 +83,8 @@
       "result": "passed",
       "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
     }
-  }
+  },
+  "revision": 0,
+  "runs": {},
+  "activeRunId": null
 }

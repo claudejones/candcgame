@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {help,resolve as route,stageKey,handoff} from '../assets.mjs';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {help,resolve as route,stageKey,handoff,futurePacket,ROOT} from '../assets.mjs';
+import {createRun,startJob} from '../asset-jobs.mjs';
 const resolve=input=>route(input,{active:null,approvedRevisions:{}});
 
 test('help exposes all continent keys, layer aliases and reserved scope without prompts',()=>{
@@ -49,13 +53,61 @@ test('revision keeps existing edit source and explicit direction',()=>{
   assert.throws(()=>resolve('revise SA01 MID'),/describe the requested change/);
 });
 test('unknown or unapproved future scope is blocked; publication has no generation packet',()=>{
-  assert.throws(()=>resolve('build AF01'),/reserved key/);
+  const future=resolve('build stage AF01');
+  assert.equal(future.operation,'blocked');
+  assert.equal(future.generationAllowed,false);
+  assert.equal(future.jobs,undefined);
+  assert.deepEqual(future.assignments.map(item=>item.owner),['landscape-worker','hazard-worker']);
+  assert.match(future.blockers.join(' '),/productionEnabled/);
   assert.throws(()=>resolve('build landscape AS'),/outside Phase 8/);
   assert.throws(()=>resolve('build character claude'),/registration required/);
   assert.equal(help('character').state,'registration-required');
+  assert.deepEqual(help('hazard').selectors,['GROUND1','GROUND2','FLYING']);
+  assert.equal(resolve('regenerate hazard AF01 GROUND1').plannedJobs[0].preserveSibling,'GROUND2');
+  assert.equal(resolve('revise hazard AF01 FLYING: clearer wing poses').direction,'clearer wing poses');
   assert.equal(resolve('publish SA02').jobs,undefined);
   assert.equal(resolve('resume SA02').jobs,undefined);
-  assert.equal(resolve('status OC01').state,'specification-required');
+  assert.equal(resolve('status OC01').state,'readiness-pending');
+  const emptyResume=resolve('resume AF01');
+  assert.equal(emptyResume.activeRun,null);
+  assert.deepEqual(emptyResume.recovery.pending,[]);
+  assert.equal(emptyResume.recovery.autoRegenerate,false);
   assert.throws(()=>resolve('regenerate NA01 SKY'),/Unknown layer/);
   assert.throws(()=>route('regenerate NA01 FAR',{active:{stage:'SA02'},approvedRevisions:{}}),/Active checkpoint/);
+  assert.throws(()=>resolve('build character AF01'),/registration required/);
+});
+
+test('synthetic ready future state gives jobs only to production commands and keeps approved builds locked',()=>{
+  const plan=JSON.parse(fs.readFileSync(`${ROOT}/config/remaining-continent-proposal.json`,'utf8'));
+  plan.productionEnabled=true;
+  plan.readiness={landscapeContractPromotion:'complete',runtimeRegistration:'complete',hazardValidation:'passed'};
+  const stage=structuredClone(plan.stages.find(item=>item.id==='AF01'));
+  stage.selectionStatus='approved';
+  stage.referencesReady=true;
+  stage.referenceFiles=['assets-original/current-generated/NA-assets/NA01_BG_DISTANT_MESAS.png'];
+  const state={approvedRevisions:{},runs:{},activeRunId:null};
+  const build=futurePacket('build','stage',stage,[],state,plan);
+  assert.equal(build.operation,'produce-and-publish');
+  assert.equal(build.jobs.length,5);
+  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'future-packet-'));
+  const statePath=path.join(temp,'state.json');
+  fs.writeFileSync(statePath,JSON.stringify({schemaVersion:2,revision:0,active:null,activeRunId:null,runs:{},approvedRevisions:{}}));
+  let mutation=createRun({root:ROOT,statePath,expectedRevision:0,command:'build stage AF01',packet:build,baseCommit:'b'.repeat(40)});
+  const runId=mutation.result.runId;
+  mutation=startJob({root:ROOT,statePath,expectedRevision:mutation.state.revision,runId,jobId:'AF01:FAR'});
+  assert.match(mutation.result.packet.prompt,/granite kopje/);
+  assert.ok(!JSON.stringify(mutation.result.packet).includes('SOSSUSVLEI'));
+  mutation=startJob({root:ROOT,statePath,expectedRevision:mutation.state.revision,runId,jobId:'AF01:OBJECT_ATLAS'});
+  assert.match(mutation.result.packet.prompt,/Termite mound/);
+  assert.match(mutation.result.packet.prompt,/Fallen acacia log/);
+  assert.deepEqual(mutation.result.packet.selectedHazards,['GROUND1','GROUND2']);
+  for(const command of ['publish','resume','verify','approve','rollback']) {
+    const packet=futurePacket(command,'stage',stage,[],state,plan);
+    assert.equal(packet.operation,command==='publish'?'publish-only':command==='resume'?'resume':command==='verify'?'read':command==='approve'?'accept':'restore');
+    assert.equal(packet.jobs,undefined);
+  }
+  const locked=futurePacket('build','stage',{...stage,status:'approved'},[],state,plan);
+  assert.equal(locked.operation,'read');
+  assert.equal(locked.jobs,undefined);
+  assert.match(handoff({active:null,activeRunId:null,runs:{},approvedRevisions:{af01:{commit:'c'}}}),/status AF02/);
 });
