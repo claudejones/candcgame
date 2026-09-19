@@ -1,6 +1,6 @@
 # SA03 Rio landscape QA
 
-2026-09-19 — Integrated for deployed user review; artwork acceptance pending.
+2026-09-19 — Explicitly approved by the user; South America landscape closeout passed.
 
 Scope: FAR, MID and GROUND at their standard validation paths. Immutable SA03 reference images were used with the locked prompt-manifest directions. Built-in image generation produced the layers; targeted generation edits corrected canvas size and the ground surface. No legacy or approved sibling images changed.
 
@@ -18,7 +18,7 @@ Scope: FAR, MID and GROUND at their standard validation paths. Immutable SA03 re
 | MID | `9c4e9ed444a920d2bea84d21c3d94912c929b111959fe9d5ae435110c0fb8111` |
 | GROUND | `206ed3d821345a852ff5fe3ea873d5c0306cf0f039bdcef07be57202adc9f77a` |
 
-Publication and review evidence is recorded in the active workflow checkpoint. Technical success does not approve the artwork.
+Publication and review evidence is recorded in the active workflow checkpoint. Explicit user approval was received on 2026-09-19.
 
 ## Deployed evidence
 
@@ -30,4 +30,12 @@ Publication and review evidence is recorded in the active workflow checkpoint. T
 - Downloaded deployed FAR/MID/GROUND via their cache-key URLs and verified exact SHA-256 matches. Both entry pages and the runtime registry also match the validated bytes.
 - Live Inspector confirmed FAR scale 0.5524861878453038; MID/GROUND scale 0.4419889502762431; all Y offsets zero.
 - Inspected Design, Test/Game scrolling and Game mode. Runtime monitor reports canonical Y=410 and rendered 410. No landscape gaps at observed scroll positions; source previews resolve the new cache URLs.
-- User artwork approval remains pending. This recovery branch records the exact reviewed deployment without redeploying unchanged artwork.
+- User approved this exact deployed artwork on 2026-09-19. Approval preserves all image bytes and geometry.
+
+## South America regression and closeout
+
+- SA01, SA02 and SA03: all nine source PNGs pass integrity, dimensions, alpha and coverage checks; all three active canonical composites pass without uncovered pixels.
+- Eight runtime regression tests pass, including actual host/inner startup, real renderer geometry, saved-config migration, reset and packaged baseline isolation.
+- Live cross-stage review confirms Amazon's snake-only MID, Andes composition and Rio composition retain their approved artwork. Inspector scales are 0.5524861878453038 for FAR and 0.4419889502762431 for MID/GROUND, with all offsets zero. Runtime ground remains canonical/rendered 410. Rio Design/Test/Game and scrolling checks are recorded above.
+- Approval diff contains metadata and generated cache references only; no PNG, gameplay or calibration changes.
+- South America is closed. Next authorized production command: `In claudejones/candcgame: build landscape EU01.`

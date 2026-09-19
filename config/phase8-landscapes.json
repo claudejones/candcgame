@@ -29,7 +29,7 @@
       "mid": {"reference": "assets-original/current-generated/SA-assets/SA02_BG_MID_ANDES.png", "validation": "assets/phase8-validation/south-america/SA02_BG_MID_ANDES.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "cacheKey": "1d06ee2e"},
       "ground": {"reference": "assets-original/current-generated/SA-assets/SA02_GROUND_ANDES.png", "validation": "assets/phase8-validation/south-america/SA02_GROUND_ANDES.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393, "cacheKey": "0994eb04"}
     }},
-    "sa03": {"label": "South America — Rio de Janeiro", "status": "integrated", "layers": {
+    "sa03": {"label": "South America — Rio de Janeiro", "status": "approved", "layers": {
       "far": {"reference": "assets-original/current-generated/SA-assets/SA03_BG_DISTANT_RIO.png", "validation": "assets/phase8-validation/south-america/SA03_BG_DISTANT_RIO.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true, "cacheKey": "c838eea5"},
       "mid": {"reference": "assets-original/current-generated/SA-assets/SA03_BG_MID_RIO.png", "validation": "assets/phase8-validation/south-america/SA03_BG_MID_RIO.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "cacheKey": "9c4e9ed4"},
       "ground": {"reference": "assets-original/current-generated/SA-assets/SA03_GROUND_RIO.png", "validation": "assets/phase8-validation/south-america/SA03_GROUND_RIO.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393, "cacheKey": "206ed3d8"}

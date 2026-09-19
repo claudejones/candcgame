@@ -1,32 +1,6 @@
 {
   "schemaVersion": 1,
-  "active": {
-    "stage": "SA03",
-    "phase": "awaiting-approval",
-    "command": "build landscape SA03",
-    "selectedLayers": [
-      "FAR",
-      "MID",
-      "GROUND"
-    ],
-    "files": {
-      "assets/phase8-validation/south-america/SA03_BG_DISTANT_RIO.png": "c838eea5a5f4f295651a3f5e9ee45091f5850d9c19f7a965508360b730650e02",
-      "assets/phase8-validation/south-america/SA03_BG_MID_RIO.png": "9c4e9ed444a920d2bea84d21c3d94912c929b111959fe9d5ae435110c0fb8111",
-      "assets/phase8-validation/south-america/SA03_GROUND_RIO.png": "206ed3d821345a852ff5fe3ea873d5c0306cf0f039bdcef07be57202adc9f77a"
-    },
-    "stageSpec": "52b49b26824ff230057911e3e0fb87c766b13371a0e3da9df74e53133e933900",
-    "recoveryBranch": "work/assets/sa03",
-    "baseCommit": "fbdd858ee478a321d673f293166a83345a05e82e",
-    "developmentCommit": "74cc4d0b6a07d5fd2842908bf81157d60701f860",
-    "deployedCommit": "c1fb39c909d68b87f200c354dc2c966f96a597c1",
-    "deployedTree": "296d61100310fcd59e69d9cb45427fbd138b3aee",
-    "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35420606302",
-    "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35420656908",
-    "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35420675177",
-    "reviewUrl": "https://claudejones.github.io/candcgame/src/dev.html",
-    "verifiedAt": "2026-09-19",
-    "verification": "All deployed PNG bytes and cache keys match; entry pages and generated registry match. Design/Test/Game and scrolling inspected; Inspector Y offsets 0/0/0; runtime ground canonical/rendered 410. Artwork awaits explicit user approval."
-  },
+  "active": null,
   "approvedRevisions": {
     "na01": {
       "commit": "660aa55e35b378e613e07d8315074552620fcb61"
@@ -50,6 +24,30 @@
       },
       "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35418116771",
       "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35418134078"
+    },
+    "sa03": {
+      "commit": "c1fb39c909d68b87f200c354dc2c966f96a597c1",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/south-america/SA03_BG_DISTANT_RIO.png": "c838eea5a5f4f295651a3f5e9ee45091f5850d9c19f7a965508360b730650e02",
+        "assets/phase8-validation/south-america/SA03_BG_MID_RIO.png": "9c4e9ed444a920d2bea84d21c3d94912c929b111959fe9d5ae435110c0fb8111",
+        "assets/phase8-validation/south-america/SA03_GROUND_RIO.png": "206ed3d821345a852ff5fe3ea873d5c0306cf0f039bdcef07be57202adc9f77a"
+      },
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35420656908",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35420675177"
+    }
+  },
+  "continentRegressions": {
+    "sa": {
+      "completedAt": "2026-09-19",
+      "reviewedCommit": "c1fb39c909d68b87f200c354dc2c966f96a597c1",
+      "stages": [
+        "sa01",
+        "sa02",
+        "sa03"
+      ],
+      "result": "passed",
+      "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
     }
   }
 }
