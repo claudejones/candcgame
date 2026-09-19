@@ -1,5 +1,6 @@
 const test=require('node:test'), assert=require('node:assert/strict'), vm=require('node:vm');
 const {load,state,read}=require('../landscape-runtime-state.cjs');
+const {versionScripts}=require('../sync-landscape-registry.cjs');
 const clone=value=>JSON.parse(JSON.stringify(value));
 
 test('actual host and inner startup agree for every active stage; pending stays legacy',()=>{
@@ -105,4 +106,11 @@ test('packaged baseline remains legacy; scripts load before their consumers',()=
       assert.ok(text.indexOf(dependency)>0 && text.indexOf(dependency)<text.indexOf(consumer));
     }
   }
+});
+test('a registry revision invalidates both entry-page script references',()=>{
+  const old='<script src="./js/landscape-registry.js?v=stale"></script>';
+  const first=versionScripts(old,'registry-one');
+  assert.notEqual(first,old);
+  assert.equal(versionScripts(first,'registry-one'),first);
+  assert.notEqual(versionScripts(first,'registry-two'),first);
 });

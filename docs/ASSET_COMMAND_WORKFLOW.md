@@ -45,6 +45,8 @@ Only the existing nine NA/SA/EU stages are authorized for Phase 8 production. Re
 
 The compact landscape profile is the approved operational extraction of the world/asset specifications. Change it and its source specification together when requirements change. Machine geometry and paths live in `config/phase8-landscapes.json`; commands live in `config/asset-commands.json`. Do not copy stage lists into bootstrap code or prompts.
 
+The sync command also versions the script references in the two entry pages from their actual content hashes. These mechanical HTML updates prevent stale registry/renderer scripts after refresh. Include them in the same commit; no hand-written runtime edit is needed for an image replacement.
+
 ## Execute the requested scope
 
 1. **Preflight once:** resolve sources, existing accepted assets and a usable publication/CI route before generating. Normal authenticated Git is preferred. If unavailable, establish the supported binary-safe connector route once. Never put encoded PNGs into conversation text. Do not begin expensive generation when no durable transfer route exists.
