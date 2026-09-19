@@ -2,12 +2,16 @@
   "schemaVersion": 2,
   "active": {
     "stage": "AF01",
-    "phase": "working",
+    "phase": "awaiting-approval",
     "command": "build stage AF01",
     "files": {
-      "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868"
+      "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
+      "assets/worlds/africa/AF01_BG_MID_SERENGETI.png": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811",
+      "assets/worlds/africa/AF01_GROUND_SERENGETI.png": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527",
+      "assets/worlds/africa/AF01_OBJECT_ATLAS.png": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569",
+      "assets/worlds/africa/AF01_HAZARD_ROLLER.png": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b"
     },
-    "stageSpec": "1ec4ba1b26e34debcb3ec1c02d2e48be3569cce624e7baf44060c3fd2d0fc908",
+    "stageSpec": "2475010add44afffd94be85fd1713fe2e9dbe5477dd0f4eae6f618c12091f9d2",
     "recoveryBranch": "work/assets/af01",
     "baseCommit": "bafef40d77c7069e819c10689a5ac49efaa7b28b",
     "sourceFiles": {
@@ -16,6 +20,20 @@
       "assets-original/africa/af01/AF01_GROUND_SERENGETI_SOURCE.png": "1e4bc051e26b3e92e2b989b55e837643cfd1c4334ee19c456b63a6304f3e3740",
       "assets-original/africa/af01/AF01_OBJECT_ATLAS_SOURCE.png": "02479a308e31a71231881ab88f64f09e1c9f84eb2e3f53ded86f942120c06d8e",
       "assets-original/africa/af01/AF01_HAZARD_ROLLER_SOURCE.png": "833dd5edffad21729732b5716ceeffda6678cc569bf06cf88cc0df5eddfa221a"
+    },
+    "deployment": {
+      "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+      "tree": "02c9508754be58aed0188899e01f24a799a86ef2",
+      "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35461377682",
+      "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35461473998",
+      "pages": "https://github.com/claudejones/candcgame/actions/runs/35461507306",
+      "reviewURL": "https://claudejones.github.io/candcgame/src/dev.html",
+      "result": "passed",
+      "deployedAssetHashesVerified": true,
+      "browserReview": "passed",
+      "verifiedAt": "2026-09-19T18:39:36.273Z",
+      "evidence": "docs/phase8-qa/AF01_STAGE_QA.md",
+      "userApproval": "pending"
     }
   },
   "approvedRevisions": {
@@ -101,14 +119,14 @@
       "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
     }
   },
-  "revision": 16,
+  "revision": 37,
   "runs": {
     "af01-20260919172919-679b96": {
       "runId": "af01-20260919172919-679b96",
       "target": "AF01",
       "command": "build stage AF01",
       "operation": "produce-and-publish",
-      "status": "working",
+      "status": "awaiting-approval",
       "baseCommit": "bafef40d77c7069e819c10689a5ac49efaa7b28b",
       "specHash": "f6afd7f9943adce8945f6955ab40c0850ac7a31e5e65686cbb746b3eb6366da3",
       "createdAt": "2026-09-19T17:29:19.211Z",
@@ -117,7 +135,8 @@
       "recoveryRefs": [
         "work/af01-landscapes",
         "work/assets/af01",
-        "refs/remotes/origin/work/assets/af01"
+        "refs/remotes/origin/work/assets/af01",
+        "refs/remotes/origin/modular-parity-validation"
       ],
       "jobs": {
         "AF01:FAR": {
@@ -268,17 +287,18 @@
           "interruptions": 0,
           "status": "completed",
           "resultHash": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
-          "recoveryRef": "refs/remotes/origin/work/assets/af01",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
           "recoveryEvidence": {
-            "ref": "refs/remotes/origin/work/assets/af01",
-            "commit": "d59688a642b5374651266d1c2fa223f64d9ffe79",
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
             "contentHash": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
             "localCommitVerified": true,
             "remoteRefVerified": true,
-            "verifiedAt": "2026-09-19T17:56:25.174Z"
+            "verifiedAt": "2026-09-19T18:31:33.793Z"
           },
           "durable": true,
-          "completedAt": "2026-09-19T17:35:17.536Z"
+          "completedAt": "2026-09-19T17:35:17.536Z",
+          "workerCommit": "d59688a642b5374651266d1c2fa223f64d9ffe79"
         },
         "AF01:MID": {
           "id": "AF01:MID",
@@ -423,12 +443,37 @@
               "assets/worlds/africa/AF01_GROUND_SERENGETI.png"
             ]
           },
-          "attempts": 0,
-          "dispatches": 1,
+          "attempts": 1,
+          "dispatches": 2,
           "interruptions": 1,
-          "status": "pending",
-          "resultHash": null,
-          "recoveryRef": null
+          "status": "completed",
+          "resultHash": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+            "contentHash": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T18:31:33.872Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T18:08:38.139Z",
+          "technicalRevisions": [
+            {
+              "previousHash": "35994264b5cad1b7760781b859ad436195f1afa016ac5da5fd5baf1476be983c",
+              "reason": "Coordinator visual QA rejected pale matte fringe; authorized deterministic edge decontamination",
+              "replacementHash": "38ecb2d70a587c758e0b6d25e33b4b48835d38d971e24b05dcfe2b0009fb8462",
+              "commit": "c06d46232f741554c0814280ab22ce0aea1568d0"
+            },
+            {
+              "previousHash": "38ecb2d70a587c758e0b6d25e33b4b48835d38d971e24b05dcfe2b0009fb8462",
+              "reason": "Canonical composite QA found 50 uncovered pixels at Y400-401; source-alignment correction moves authored coverage up12px and remaps only opaque lower terrain, preserving zero runtime offsets",
+              "replacementHash": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811",
+              "commit": "84959afee9ef097f85832ca204e38572d943fe1c"
+            }
+          ],
+          "workerCommit": "84959afee9ef097f85832ca204e38572d943fe1c"
         },
         "AF01:GROUND": {
           "id": "AF01:GROUND",
@@ -570,12 +615,23 @@
               "assets/worlds/africa/AF01_BG_MID_SERENGETI.png"
             ]
           },
-          "attempts": 0,
-          "dispatches": 1,
+          "attempts": 1,
+          "dispatches": 2,
           "interruptions": 1,
-          "status": "pending",
-          "resultHash": null,
-          "recoveryRef": null
+          "status": "completed",
+          "resultHash": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+            "contentHash": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T18:31:33.951Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T18:14:04.866Z",
+          "workerCommit": "3c0a04c0200a4558099decab87040b1a7478968e"
         },
         "AF01:OBJECT_ATLAS": {
           "id": "AF01:OBJECT_ATLAS",
@@ -741,12 +797,23 @@
             "editingSource": null,
             "continuityFiles": []
           },
-          "attempts": 0,
-          "dispatches": 1,
+          "attempts": 1,
+          "dispatches": 2,
           "interruptions": 1,
-          "status": "pending",
-          "resultHash": null,
-          "recoveryRef": null
+          "status": "completed",
+          "resultHash": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+            "contentHash": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T18:31:34.024Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T18:11:05.049Z",
+          "workerCommit": "8dddeae459a2275faf69bb9b26983a86f2013c8d"
         },
         "AF01:FLYING": {
           "id": "AF01:FLYING",
@@ -911,16 +978,27 @@
             "editingSource": null,
             "continuityFiles": []
           },
-          "attempts": 0,
-          "dispatches": 1,
+          "attempts": 1,
+          "dispatches": 2,
           "interruptions": 1,
-          "status": "pending",
-          "resultHash": null,
-          "recoveryRef": null
+          "status": "completed",
+          "resultHash": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+            "contentHash": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T18:31:34.097Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T18:16:35.184Z",
+          "workerCommit": "4640e8e845c17f0b30841738dfe52d155d2796b2"
         }
       },
       "technicalFinishing": {
-        "status": "awaiting-user-authorization",
+        "status": "completed",
         "report": "docs/phase8-qa/AF01_BUILD_CHECKPOINT.md",
         "sourceManifest": "docs/phase8-qa/af01-production/SELECTED_SOURCES.json",
         "selected": {
@@ -955,6 +1033,34 @@
           "commit": "d59688a642b5374651266d1c2fa223f64d9ffe79",
           "verifiedAt": "2026-09-19T17:56:25.095Z",
           "sha256Verified": true
+        },
+        "authorization": {
+          "date": "2026-09-19",
+          "userResponse": "yes",
+          "scope": "Code-based transparency cleanup, exact canvas/atlas sizing, ground/sprite anchor alignment of the four saved AF01 sources; then integration, testing and deployment."
+        },
+        "completedAt": "2026-09-19T18:26:20.586Z",
+        "productionAssets": {
+          "FAR": {
+            "path": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
+            "sha256": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868"
+          },
+          "MID": {
+            "path": "assets/worlds/africa/AF01_BG_MID_SERENGETI.png",
+            "sha256": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811"
+          },
+          "GROUND": {
+            "path": "assets/worlds/africa/AF01_GROUND_SERENGETI.png",
+            "sha256": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527"
+          },
+          "OBJECT_ATLAS": {
+            "path": "assets/worlds/africa/AF01_OBJECT_ATLAS.png",
+            "sha256": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569"
+          },
+          "FLYING": {
+            "path": "assets/worlds/africa/AF01_HAZARD_ROLLER.png",
+            "sha256": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b"
+          }
         }
       },
       "generationAttempts": {
@@ -964,7 +1070,33 @@
         "OBJECT_ATLAS": 7,
         "FLYING": 2
       },
-      "updatedAt": "2026-09-19T17:54:35.837Z"
+      "updatedAt": "2026-09-19T18:39:36.375Z",
+      "deployment": {
+        "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+        "tree": "02c9508754be58aed0188899e01f24a799a86ef2",
+        "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35461377682",
+        "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35461473998",
+        "pages": "https://github.com/claudejones/candcgame/actions/runs/35461507306",
+        "reviewURL": "https://claudejones.github.io/candcgame/src/dev.html",
+        "result": "passed",
+        "deployedAssetHashesVerified": true,
+        "browserReview": "passed",
+        "verifiedAt": "2026-09-19T18:39:36.273Z",
+        "evidence": "docs/phase8-qa/AF01_STAGE_QA.md",
+        "userApproval": "pending"
+      },
+      "trial": {
+        "scope": "AF01–AF03",
+        "checkpoint": "AF01",
+        "imageGenerationCalls": 25,
+        "resumeImageGenerationCalls": 0,
+        "startedAt": "2026-09-19T17:29:19.211Z",
+        "deployedReviewAt": "2026-09-19T18:39:36.273Z",
+        "elapsedWallSeconds": 4217,
+        "elapsedNote": "Wall time includes source generation, technical-finishing permission checkpoint, cleanup, integration and CI/deployment waits; not active worker throughput.",
+        "subscriptionUsagePercentage": null,
+        "throughputConclusion": "Deferred until AF01–AF03 trial is complete."
+      }
     }
   },
   "activeRunId": "af01-20260919172919-679b96"

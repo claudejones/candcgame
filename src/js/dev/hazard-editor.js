@@ -19,6 +19,7 @@
     if(h.atlas.sourceAnchor)d.sourceAnchor={...h.atlas.sourceAnchor};
     d.scale=h.transform.scale;d.cw=h.collision.w;d.ch=h.collision.h;d.cx=h.collision.x;d.cy=h.collision.y;d.frames=h.atlas.frames;d.fps=h.animation?.fps||w.GAME_CONFIG.objectQA.flying.fps;d.frameCrops=h.animation?.frameCrops;
     if(d.kind==="ground")d.groundOffset=h.gameplayAnchor.adjustmentY+h.transform.offsetY;
+    else if(h.gameplayAnchor.adjustmentByMode)d.flightOffsetY={...h.gameplayAnchor.adjustmentByMode};
     else{w.GAME_CONFIG.objectQA.flying.highClearance=window.GAME_CONFIG.objectQA.flying.highClearance-h.transform.offsetY;w.GAME_CONFIG.objectQA.flying.lowClearance=window.GAME_CONFIG.objectQA.flying.lowClearance-h.transform.offsetY;}
     if(d.rect)d.rect={...h.atlas.sourceRegion};else{d.frameW=h.atlas.sourceRegion.w;d.frameH=h.atlas.sourceRegion.h;}
     const base=h.crop,frames=h.animation?.frameCrops||[base];

@@ -352,7 +352,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "af01": {
       "label": "Tanzania — Serengeti savannah",
-      "status": "pending",
+      "status": "integrated",
       "scope": "full-stage",
       "layers": {
         "far": {
@@ -364,7 +364,8 @@ window.CC_LANDSCAPE_REGISTRY = {
             2,
             6
           ],
-          "requireOpaque": true
+          "requireOpaque": true,
+          "cacheKey": "9d5b06c6"
         },
         "mid": {
           "reference": "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png",
@@ -372,7 +373,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "width": 2172,
           "height": 724,
           "colorType": 6,
-          "requireTransparency": true
+          "requireTransparency": true,
+          "cacheKey": "fc8a729f"
         },
         "ground": {
           "reference": "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png",
@@ -381,7 +383,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "height": 724,
           "colorType": 6,
           "requireTransparency": true,
-          "sourceSurfaceY": 393
+          "sourceSurfaceY": 393,
+          "cacheKey": "96986750"
         }
       }
     },

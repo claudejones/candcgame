@@ -22,6 +22,7 @@
       const anchor=i<2?{x:543,y:620}:{x:271,y:362};
       if(h.sourceAnchor?.x!==anchor.x||h.sourceAnchor?.y!==anchor.y)throw new Error(`${stage.id}: source anchor ${i}`);
       if(!Number.isFinite(h.scale)||h.scale<=0)throw new Error(`${stage.id}: scale ${i}`);
+      if(h.flightOffsetY)for(const mode of ['high','low'])if(!Number.isFinite(h.flightOffsetY[mode]))throw new Error(`${stage.id}: flight offset ${mode}`);
       for(const k of ['cw','ch','cx','cy'])if(!Number.isFinite(h[k]))throw new Error(`${stage.id}: collision ${i}/${k}`);
       if(h.cw<=0||h.ch<=0||h.cw>1||h.ch>1)throw new Error(`${stage.id}: collision dimensions ${i}`);
       for(const crop of [h.crop||{},...(h.frameCrops||[])]){

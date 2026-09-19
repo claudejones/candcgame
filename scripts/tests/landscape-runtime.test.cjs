@@ -23,7 +23,8 @@ test('actual host and inner startup agree for every active stage; pending stays 
 });
 test('new pending stages cannot activate with landscape status alone',()=>{
   const registry=clone(load().registry);registry.stages.af01.status='integrated';
-  for(const mode of ['runtime','host'])assert.throws(()=>load(mode,registry),/Missing runtime profile: af01/);
+  const catalog=clone(load().context.window.CC_STAGE_CATALOG);catalog.stages.af01.status='pending';delete catalog.stages.af01.release;
+  for(const mode of ['runtime','host'])assert.throws(()=>load(mode,registry,catalog),/Missing runtime profile: af01/);
 });
 test('bad source width, offsets or scale fail the actual runtime geometry gate',()=>{
   for(const [key,value] of Object.entries({sourceW:2048,farY:-14,midYOffset:-42,groundYOffset:-8,farScale:1,midScale:0.9})) {

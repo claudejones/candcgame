@@ -334,7 +334,7 @@ class ObjectQA{
    const crop=d.frameCrops?.[CONFIG.objectQA.flying.frame]||d.crop||(d.crop={l:0,r:0,t:0,b:0});
    if(d.kind==="flying"){
      const cellW=d.frameW,cellH=d.frameH;cL=Math.max(0,Math.min(cellW-1,crop.l||0));cR=Math.max(0,Math.min(cellW-1-cL,crop.r||0));cT=Math.max(0,Math.min(cellH-1,crop.t||0));cB=Math.max(0,Math.min(cellH-1-cT,crop.b||0));
-     sw=Math.max(1,cellW-cL-cR);sh=Math.max(1,cellH-cT-cB);sx=CONFIG.objectQA.flying.frame*cellW+cL;sy=cT;dw=sw*s;dh=sh*s;const f=CONFIG.objectQA.flying;let centerX=CONFIG.objectQA.scrollWithWorld?CONFIG.objectQA.x-f.travel:CONFIG.objectQA.x;while(centerX < -dw-30){f.travel-=CONFIG.objectQA.loopDistance;centerX=CONFIG.objectQA.x-f.travel;}dx=centerX-dw/2;const clearance=f.mode==="high"?f.highClearance:f.lowClearance;anchorY=this.surfaceY()-clearance;dy=anchorY-dh/2;
+     sw=Math.max(1,cellW-cL-cR);sh=Math.max(1,cellH-cT-cB);sx=CONFIG.objectQA.flying.frame*cellW+cL;sy=cT;dw=sw*s;dh=sh*s;const f=CONFIG.objectQA.flying;let centerX=CONFIG.objectQA.scrollWithWorld?CONFIG.objectQA.x-f.travel:CONFIG.objectQA.x;while(centerX < -dw-30){f.travel-=CONFIG.objectQA.loopDistance;centerX=CONFIG.objectQA.x-f.travel;}dx=centerX-dw/2;const clearance=f.mode==="high"?f.highClearance:f.lowClearance;anchorY=this.surfaceY()-clearance+(d.flightOffsetY?.[f.mode]||0);dy=anchorY-dh/2;
    }else{
      const r=d.rect||{x:0,y:0,w:d.frameW,h:d.frameH},rw=d.frames&&d.frameW?d.frameW:r.w,rh=d.frames&&d.frameH?d.frameH:r.h;cL=Math.max(0,Math.min(rw-1,crop.l||0));cR=Math.max(0,Math.min(rw-1-cL,crop.r||0));cT=Math.max(0,Math.min(rh-1,crop.t||0));cB=Math.max(0,Math.min(rh-1-cT,crop.b||0));sw=Math.max(1,rw-cL-cR);sh=Math.max(1,rh-cT-cB);sx=(d.frames&&d.frameW?CONFIG.objectQA.flying.frame*d.frameW:r.x)+cL;sy=(d.frames&&d.frameH?0:r.y)+cT;dw=sw*s;dh=sh*s;const centerX=this.screenX(dw);const groundOffset=Number.isFinite(d.groundOffset)?d.groundOffset:CONFIG.objectQA.groundOffset;anchorY=this.surfaceY()+groundOffset;dx=centerX-dw/2;dy=anchorY-dh;
    }
@@ -467,7 +467,7 @@ class GameplayDirector{
    if(d.kind==="flying"){
      const cellW=d.frameW,cellH=d.frameH,cL=Math.max(0,Math.min(cellW-1,crop.l||0)),cR=Math.max(0,Math.min(cellW-1-cL,crop.r||0)),cT=Math.max(0,Math.min(cellH-1,crop.t||0)),cB=Math.max(0,Math.min(cellH-1-cT,crop.b||0));
      sw=Math.max(1,cellW-cL-cR);sh=Math.max(1,cellH-cT-cB);sx=inst.frame*cellW+cL;sy=cT;dw=sw*sc;dh=sh*sc;dx=inst.x-dw/2;
-     const clearance=inst.mode==="high"?CONFIG.objectQA.flying.highClearance:CONFIG.objectQA.flying.lowClearance;anchorY=this.objectQA.surfaceY()-clearance;dy=anchorY-dh/2;
+     const clearance=inst.mode==="high"?CONFIG.objectQA.flying.highClearance:CONFIG.objectQA.flying.lowClearance;anchorY=this.objectQA.surfaceY()-clearance+(d.flightOffsetY?.[inst.mode]||0);dy=anchorY-dh/2;
    }else{
      const r=d.rect||{x:0,y:0,w:d.frameW,h:d.frameH},rw=d.frames&&d.frameW?d.frameW:r.w,rh=d.frames&&d.frameH?d.frameH:r.h,cL=Math.max(0,Math.min(rw-1,crop.l||0)),cR=Math.max(0,Math.min(rw-1-cL,crop.r||0)),cT=Math.max(0,Math.min(rh-1,crop.t||0)),cB=Math.max(0,Math.min(rh-1-cT,crop.b||0));
      sw=Math.max(1,rw-cL-cR);sh=Math.max(1,rh-cT-cB);sx=(d.frames&&d.frameW?inst.frame*d.frameW:r.x)+cL;sy=(d.frames&&d.frameH?0:r.y)+cT;dw=sw*sc;dh=sh*sc;dx=inst.x-dw/2;anchorY=this.objectQA.surfaceY()+(Number.isFinite(d.groundOffset)?d.groundOffset:CONFIG.objectQA.groundOffset);dy=anchorY-dh;
@@ -491,7 +491,16 @@ class GameplayDirector{
    // Each authored event has a target arrival time at the player. Spawn early enough that
    // the COMPLETE hazard starts beyond the right edge, then naturally enters the viewport.
    // Off-screen queued hazards do not consume the on-screen visibility budget.
-   while(s.nextPlanIndex<s.planned.length){
+   const expansionStage=window.CC_STAGE_CATALOG?.stages[CONFIG.activeWorld];
+   if(expansionStage&&!expansionStage.legacy){
+     // Mixed-speed hazards have different off-screen travel times. Dispatch each
+     // new-stage event when due, retaining the authored arrival order in planned.
+     for(const ev of s.planned){
+       if(ev.spawned)continue;
+       const d=this.defs().find(x=>x.name===ev.defName);if(!d)continue;
+       if(ev.time-s.elapsed<=this.travelLeadFor(ev,d)){this.spawnPlanned(ev);s.nextPlanIndex++;}
+     }
+   }else while(s.nextPlanIndex<s.planned.length){
      const ev=s.planned[s.nextPlanIndex],d=this.defs().find(x=>x.name===ev.defName);
      if(!d){s.nextPlanIndex++;continue}
      const lead=this.travelLeadFor(ev,d);

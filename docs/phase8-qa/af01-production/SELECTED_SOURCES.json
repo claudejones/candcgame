@@ -1,6 +1,6 @@
 {
   "stage": "AF01",
-  "status": "working-awaiting-explicit-technical-finishing-authorization",
+  "status": "source-checkpoint-finished-production-in-stage-release",
   "method": "built-in imagegen",
   "startedAt": "2026-09-19T17:29:19Z",
   "attempts": {
@@ -43,5 +43,10 @@
     "collision calibration",
     "CI/Pages deployment",
     "user artwork acceptance"
-  ]
+  ],
+  "finishing": {
+    "authorized": true,
+    "productionManifest": "config/stage-releases.json",
+    "qa": "docs/phase8-qa/AF01_STAGE_QA.md"
+  }
 }
