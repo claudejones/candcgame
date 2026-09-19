@@ -3,7 +3,7 @@
 Updated 2026-09-19. GitHub is authoritative. Historical explanations live in DECISION_LOG; command execution lives in ASSET_COMMAND_WORKFLOW.
 
 - Phases 0–7 are complete; Phase 7 modular Design/Test/Game authoring was user-accepted.
-- Phase 8 covers the 27 NA/SA/EU landscape layers only. NA01, NA02, NA03, SA01, SA02, SA03, EU01 and EU02 are approved complete stage sets. North America and South America are closed. SA03 was explicitly approved on 2026-09-19 and the South America regression passed; EU01 and EU02 were explicitly approved on 2026-09-19. EU03 is integrated and progressing through publication for user review.
+- Phase 8 covers the 27 NA/SA/EU landscape layers only. NA01, NA02, NA03, SA01, SA02, SA03, EU01 and EU02 are approved complete stage sets. North America and South America are closed. SA03 was explicitly approved on 2026-09-19 and the South America regression passed; EU01 and EU02 were explicitly approved on 2026-09-19. EU03 is integrated, deployed and awaiting user review.
 - Latest approved artwork snapshot before command-workflow setup: main `660aa55e35b378e613e07d8315074552620fcb61`. SA01 MID retains the snake and removes the monkey; SHA-256 `8e5653f5dfc7dea8254521f445e2609eebf3b1e0c683c64e4ffab38755519f03`.
 - Approved validation assets remain under `assets/phase8-validation/`; packaged production keeps its legacy assets. No artwork is replaced by the command-workflow setup. NA03 GROUND's approved 2170×725 exception remains unchanged.
 - Canonical integrated landscapes: source width 2172, viewport 960×540, ground surface 410, FAR/MID/GROUND offsets 0, scale multipliers 1.25/1/1, MID/GROUND source anchors 621/393. The registry now supplies both the development host and inner renderer. Saved legacy landscape transforms migrate without clearing unrelated authoring work. Pending stages remain legacy until integrated.
@@ -12,7 +12,9 @@ Updated 2026-09-19. GitHub is authoritative. Historical explanations live in DEC
 
 ## Next action
 
-EU03 — Spain / Barcelona FAR, MID and GROUND are recovered from the interrupted matching checkpoint and integrated. All three images retain their completed bytes. Local PNG, geometry, composite/repeat inspection and full Production CI checks pass. Publication and deployed Design/Test/Game/Inspector review are in progress; user artwork acceptance remains pending. Evidence: `docs/phase8-qa/EU03_LANDSCAPE_QA.md`. Resume with `In claudejones/candcgame: resume EU03.` Europe regression follows EU03 acceptance.
+Review EU03 — Spain / Barcelona in the deployed QA editor: https://claudejones.github.io/candcgame/src/dev.html (Europe → EU 3 — SPAIN / BARCELONA). FAR/MID/GROUND are integrated at artwork revision `94f94669bd2773b2ef9881c59e4adb710aeced60`; exact-revision development CI, main CI and automatic Pages succeeded. Deployed image/cache bytes, Design/Test/Game views, scrolling and zero-offset Inspector geometry pass. All completed artwork was recovered unchanged. Evidence: `docs/phase8-qa/EU03_LANDSCAPE_QA.md`; recovery/deployment pointers: `config/asset-workflow-state.json`.
+
+EU03 awaits explicit user artwork approval: `approve EU03`. Resume with `In claudejones/candcgame: resume EU03.` Europe regression follows EU03 acceptance. No subsequent continent production is started.
 
 ## Deferred and protected
 
