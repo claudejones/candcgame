@@ -11,6 +11,8 @@ Requested 2026-09-19 after the user found stale EU01 images despite a hard refre
 
 User review: open Europe → EU01; FAR/MID/GROUND should show approved artwork. Source & status should say Approved landscape. Existing draft edits should remain; use Compare baseline to distinguish a custom transform from the new defaults. Save all retains a downloadable pre-update copy under Changes & recovery. No main/Pages editor replacement is authorized by this update.
 
+Publication succeeded at https://candc-workbench-next.claudejones.chatgpt.site (saved version 6, deployment `appgdep_6aae224b39dc81918a94526f9a5728ce`). Site source: `ff7d4bd38a3a2fd17ce30c2eb5766e6fae7bc8a3`; GitHub implementation: `d338d0ab311e511a6ba7f44770df201fd6820ad3`. [Production CI passed for that exact implementation](https://github.com/claudejones/candcgame/actions/runs/35424878798). The archive contains 72 files and the six changed landscape PNGs match the approved upstream bytes. Native publication is confirmed; user browser review remains pending.
+
 ## Review 05 — whole-project configuration workflow
 
 Requested 2026-09-19 after the user reviewed Review 04's layout and atlas dragging positively. Changes stay under `workbench-next/`; production artwork, runtime, configs and current editor storage remain untouched.

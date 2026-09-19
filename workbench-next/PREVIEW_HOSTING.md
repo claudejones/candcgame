@@ -21,6 +21,8 @@ Publication confirmed successful on 2026-09-19. Version 1 uses Site source commi
 
 ## Review scope
 
+Review 05.1 publication succeeded on 2026-09-19 at the same URL (saved version 6). Site source: `ff7d4bd38a3a2fd17ce30c2eb5766e6fae7bc8a3`; deployment: `appgdep_6aae224b39dc81918a94526f9a5728ce`; canonical implementation: `d338d0ab311e511a6ba7f44770df201fd6820ad3`. Approved main `b469182…` is now incorporated, including EU01/SA03 landscapes. The 72-file archive has 53 PNGs with matching source hashes and excludes superseded legacy landscape copies. Bounded prior-draft migration preserves edits and archives the old saved record before Save all replaces it. Native deployment status: `succeeded`.
+
 Review 05 publication succeeded on 2026-09-19 at the same URL. Site source commit: `ef7b2f606962fe21f9a0265a11983fa0f225ba39`; saved version: 5; deployment ID: `appgdep_6aae1f4eb83c8191a5615b0403db4aa5`. Canonical implementation: `6e81660ea95efb55be8ab1bf7f69a85d40e61e36`, with successful Production CI for that exact SHA. The archive contains 72 files, including 53 byte-identical PNGs; native deployment status is `succeeded`. Browser/user acceptance of the new import flow remains pending.
 
 Review 04 publication succeeded on 2026-09-19 at the same URL. Site source commit: `3a70a9bee0dacf1ff3fafea1d69f24b314fa2a1e`; saved version: 4; deployment ID: `appgdep_6aae1633fce48191a0665232b63bfda6`. Canonical implementation: `398ce53d656b048fc7ca307696cba92d7b328264`. The validated static archive contains 70 files, including 53 unchanged source PNGs; SHA-256: `1207d6a1bcad289b587def99f6068299fcef72f4a359bf53b45a7f3069ba9487`. Native deployment status is `succeeded`; browser/user visual acceptance remains pending.
