@@ -81,6 +81,8 @@ jobs:
           grep -q 'test-section h3' src/dev.html
           grep -q 'setCollisionBounds(collision)' src/js/dev/test-mode.js
           grep -q 'VALID_MODES = Object.freeze(\["design", "test", "game"\])' src/js/bootstrap/development-bootstrap.js
+          grep -Fq 'for (const id of ["na01", "na02", "na03", "sa01"])' src/js/bootstrap/development-bootstrap.js
+          grep -Fq 'sourceW:2172,seamY:410,farY:0,farScale:1.25,midYOffset:0,midScale:1,groundYOffset:0,groundScale:1' src/js/bootstrap/development-bootstrap.js
           grep -q 'modes: Object.freeze(\["game"\])' src/js/bootstrap/production-bootstrap.js
           ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|finish-marker-editor|runtime-monitor|test-mode' src/game.html
           ! grep -qE 'js/dev/|development-bootstrap|mode-shell|asset-navigator|contextual-inspector|design-draft|landscape-editor|hazard-editor|character-editor|finish-marker-editor|runtime-monitor|test-mode' src/js/bootstrap/production-bootstrap.js

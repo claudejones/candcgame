@@ -6,7 +6,7 @@
   const requested = (params.get("mode") || "design").toLowerCase();
   let mode = VALID_MODES.includes(requested) ? requested : "design";
 
-  for (const id of ["na01", "na02", "na03"]) {
+  for (const id of ["na01", "na02", "na03", "sa01"]) {
     const pilot = window.GAME_CONFIG?.worldProfiles?.[id];
     if (pilot) Object.assign(pilot, {sourceW:2172,seamY:410,farY:0,farScale:1.25,midYOffset:0,midScale:1,groundYOffset:0,groundScale:1,characterGrounding:{claude:0,constance:0}});
   }
