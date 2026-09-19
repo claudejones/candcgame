@@ -1,0 +1,158 @@
+{
+  "stageId": "AF03",
+  "status": "downloaded-and-pixel-inspected",
+  "references": [
+    {
+      "id": "KOUTOUBIA_ARCH",
+      "selectors": [
+        "FAR context",
+        "MID arch/material"
+      ],
+      "sha256": "9e861692d2b4d62f6ae35a6bb7e81ed1eeb84a93af9f91fda9b6c20cdf8a0d52",
+      "downloadedBytes": 198446,
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:0091_KOUTOUBIA_Moschee,_Marrakesch_(37111435890).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/0091_KOUTOUBIA_Moschee%2C_Marrakesch_%2837111435890%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/0091_KOUTOUBIA_Moschee%2C_Marrakesch_%2837111435890%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "originalDimensions": [
+        600,
+        900
+      ],
+      "downloadDimensions": [
+        600,
+        900
+      ],
+      "credit": "Heribert Bechen  .. thanks for 2.6 mio. visits from Bergisch Gladbach, Germany",
+      "license": "CC BY-SA 2.0",
+      "inspection": "actual local pixels inspected with view_image",
+      "path": "assets/references/africa/af03/koutoubia.jpg"
+    },
+    {
+      "id": "MEDINA_LANE",
+      "selectors": [
+        "MID facade/arch/lantern/palm",
+        "GROUND warm stone lane"
+      ],
+      "sha256": "a2cbf08d901687e5aed7dcfe227af0aa5f158ab178eae74d0570a0a79ab9539c",
+      "downloadedBytes": 1077504,
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Medina_of_Marrakech,_20250125_1303_7246.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Medina_of_Marrakech%2C_20250125_1303_7246.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Medina_of_Marrakech%2C_20250125_1303_7246.jpg/1920px-Medina_of_Marrakech%2C_20250125_1303_7246.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "originalDimensions": [
+        3584,
+        5369
+      ],
+      "downloadDimensions": [
+        1920,
+        2876
+      ],
+      "credit": "Jakub Ha\u0142un",
+      "license": "CC BY 4.0",
+      "inspection": "actual local pixels inspected with view_image",
+      "path": "assets/references/africa/af03/medina_lane.jpg"
+    },
+    {
+      "id": "SOUK_DETAIL",
+      "selectors": [
+        "MID woven textiles and wrought-metal lantern detail"
+      ],
+      "sha256": "d424f4540de895c146019a78d4582323fe16614f14652636afced271dd9661a4",
+      "downloadedBytes": 985428,
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Souk_in_Marrakech_(54248020468).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Souk_in_Marrakech_%2854248020468%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Souk_in_Marrakech_%2854248020468%29.jpg/1920px-Souk_in_Marrakech_%2854248020468%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "originalDimensions": [
+        5994,
+        3597
+      ],
+      "downloadDimensions": [
+        1920,
+        1152
+      ],
+      "credit": "Jorge Franganillo",
+      "license": "CC BY 2.0",
+      "inspection": "actual local pixels inspected with view_image",
+      "path": "assets/references/africa/af03/souk_detail.jpg"
+    },
+    {
+      "id": "stork-temara",
+      "path": "assets/references/africa/af03/stork_temara.jpg",
+      "role": "species and flight-anatomy reference for FLYING",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_White_Stork_Flying_Over_Temara,_Morocco.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9b/A_White_Stork_Flying_Over_Temara%2C_Morocco.jpg",
+      "credit": "Moroccan spotter",
+      "license": "CC0 1.0",
+      "dimensions": [
+        5175,
+        3450
+      ],
+      "mode": "RGB",
+      "sha256": "b72e3c073cbc3c5b03006c51c1fb4e464a78ef1b6f2540653cb16c9425b4882b",
+      "inspection": "Exact original pixels opened. Clear white-stork anatomy: long straight neck, red bill, trailing red legs, white body and broad black remiges. Photo faces left; output remains locked right-facing."
+    },
+    {
+      "id": "moroccan-storage-jar",
+      "path": "assets/references/africa/af03/moroccan_storage_jar.jpg",
+      "role": "shape and material reference for OBJECT_ATLAS GROUND1",
+      "sourcePage": "https://www.1stdibs.com/furniture/dining-entertaining/pottery/19th-century-moroccan-terracotta-storage-pot-jar/id-f_7518713/",
+      "originalUrl": "https://a.1stdibscdn.com/archivesE/upload/f_25253/f_75187131495387229712/170283_2_l.JPG",
+      "credit": "1stDibs seller listing; maker/photographer not identified",
+      "license": "reference use only; no reuse license stated",
+      "dimensions": [
+        768,
+        768
+      ],
+      "mode": "RGB",
+      "sha256": "2bbb1e6d1af118a1933987f14fb9661854804c2a73721ebbfdfcce933ed9602d",
+      "inspection": "Pixels opened. Listing identifies handcrafted Moroccan terracotta storage jar, circa 1850. Round body, short narrow neck, everted rim, tiny lug handles and weathered unglazed surface. Exclude photographed display stand."
+    },
+    {
+      "id": "tagine-brazier-structure",
+      "path": "assets/references/africa/af03/tagine_brazier.jpg",
+      "role": "supplemental structure reference for tagine seated on broad ceramic charcoal brazier",
+      "sourcePage": "https://levraitraditionnel.com/",
+      "originalUrl": "https://levraitraditionnel.com/assets/images/moroccan-restaurant-marrakech-since-1946.jpg",
+      "credit": "Le Vrai Traditionnel, Bab Doukkala, Marrakech",
+      "license": "reference use only; no reuse license stated",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "sha256": "bd9b9df94efe7ee816976be35bb1be3c1a7cea9513a02c5ea8d78bc3974d42cf",
+      "inspection": "Pixels opened. Clear low round ceramic brazier and seated conical tagine lid. Output must be unlit: omit glow, flame, smoke, food and environment."
+    },
+    {
+      "id": "eu02-object-style",
+      "path": "assets/worlds/europe/EU02_OBJECT_ATLAS.png",
+      "role": "exact project style reference for OBJECT_ATLAS",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "dacff4c9f563fcc8827f976eb5b48df1e4d7165f5aa3b20b1efe0de2609ac14f"
+    },
+    {
+      "id": "eu02-flying-style",
+      "path": "assets/worlds/europe/EU02_HAZARD_SWALLOWS.png",
+      "role": "exact project style and four-frame layout reference for FLYING",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "mode": "RGBA",
+      "sha256": "46f61d2b9402104a38371370c97744e12123b84adaf11d8f5bfd34b52751a800"
+    },
+    {
+      "id": "character-runtime-scale",
+      "path": "assets/characters/G1A_RUN_CYCLE_ATLAS.png",
+      "role": "actual run-cycle character artwork for post-generation basic rendering and believable provisional hazard scale; not a generation attachment",
+      "dimensions": [
+        2800,
+        1400
+      ],
+      "mode": "RGBA",
+      "sha256": "b7cb1ca55534f888e4802c7c55892fc4ebfafc5d601ec5e7926d18ffa4322037"
+    }
+  ]
+}

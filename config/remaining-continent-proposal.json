@@ -523,12 +523,12 @@
         "marrakesh",
         "stork"
       ],
-      "referenceStatus": "Source pages and initial image URLs researched; actual inspected per-output reference pack remains required. Direct HTTP retrieval was unavailable in the preparation environment; no downloaded/verified pixels are claimed.",
+      "referenceStatus": "Six downloaded reference photographs inspected; credits and hashes in assets/references/africa/af03/REFERENCES.json. Actual EU02 style and run atlas references retained.",
       "notes": "White stork is a Morocco-level selection; reference photo is from Temara. Distinguish its straight neck, trailing legs and black/white wings from the pink bent-neck flamingo. Tagine brazier is a local design choice, not an archaeological reconstruction.",
       "selectionStatus": "ready",
-      "referencesReady": false,
+      "referencesReady": true,
       "brief": {
-        "status": "agent-selected-for-trial; visual-reference-pack-pending",
+        "status": "agent-selected-for-trial; visual-reference-pack-inspected",
         "farFocalPoint": "Koutoubia minaret with its recognizable square tower silhouette above the ochre roofscape.",
         "midLifeDetail": "Shaded souk/fondouk frontage with hanging woven textiles and one wrought-metal lantern; no people or text.",
         "localReference": [
@@ -556,10 +556,30 @@
         }
       ],
       "referenceFiles": {
-        "shared": [
-          "assets/phase8-validation/europe/EU02_BG_DISTANT_PARIS.png",
+        "FAR": [
+          "assets/references/africa/af03/koutoubia.jpg",
+          "assets/phase8-validation/europe/EU02_BG_DISTANT_PARIS.png"
+        ],
+        "MID": [
+          "assets/references/africa/af03/medina_lane.jpg",
+          "assets/references/africa/af03/souk_detail.jpg",
           "assets/phase8-validation/europe/EU02_BG_MID_PARIS.png",
+          "assets/worlds/africa/AF03_BG_DISTANT_MARRAKESH.png"
+        ],
+        "GROUND": [
+          "assets/references/africa/af03/medina_lane.jpg",
           "assets/phase8-validation/europe/EU02_GROUND_PARIS.png"
+        ],
+        "OBJECT_ATLAS": [
+          "assets/references/africa/af03/moroccan_storage_jar.jpg",
+          "assets/references/africa/af03/tagine_brazier.jpg",
+          "assets/worlds/europe/EU02_OBJECT_ATLAS.png",
+          "assets/characters/G1A_RUN_CYCLE_ATLAS.png"
+        ],
+        "FLYING": [
+          "assets/references/africa/af03/stork_temara.jpg",
+          "assets/worlds/europe/EU02_HAZARD_SWALLOWS.png",
+          "assets/characters/G1A_RUN_CYCLE_ATLAS.png"
         ]
       }
     },
