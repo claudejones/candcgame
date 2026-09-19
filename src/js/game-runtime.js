@@ -1368,7 +1368,7 @@ const ASSET_SOURCES={
  eu03Hazards:"../assets/worlds/europe/EU03_OBJECT_ATLAS.png",
  eu03Bird:"../assets/worlds/europe/EU03_HAZARD_BATS.png",
  sa01Far:PHASE8_PILOT?"../assets/phase8-validation/south-america/SA01_BG_DISTANT_AMAZON.png?v=cbe232ba":"../assets/worlds/south-america/SA01_BG_DISTANT_AMAZON.png",
- sa01Mid:PHASE8_PILOT?"../assets/phase8-validation/south-america/SA01_BG_MID_AMAZON.png?v=253ec4cd":"../assets/worlds/south-america/SA01_BG_MID_AMAZON.png",
+ sa01Mid:PHASE8_PILOT?"../assets/phase8-validation/south-america/SA01_BG_MID_AMAZON.png?v=0e458f4d":"../assets/worlds/south-america/SA01_BG_MID_AMAZON.png",
  sa01Ground:PHASE8_PILOT?"../assets/phase8-validation/south-america/SA01_GROUND_AMAZON.png?v=3ca40ce6":"../assets/worlds/south-america/SA01_GROUND_AMAZON.png",
  sa01Hazards:"../assets/worlds/south-america/SA01_OBJECT_ATLAS.png",
  sa01Bird:"../assets/worlds/south-america/SA01_HAZARD_MACAWS.png",
