@@ -241,7 +241,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "eu01": {
       "label": "Europe — Greece / Santorini",
-      "status": "integrated",
+      "status": "approved",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/EU-assets/EU01_BG_DISTANT_GREECE.png",
