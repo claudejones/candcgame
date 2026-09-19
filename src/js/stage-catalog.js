@@ -153,7 +153,7 @@ window.CC_STAGE_CATALOG = {
       "label": "Tanzania — Serengeti savannah",
       "continent": "africa",
       "legacy": false,
-      "status": "pending",
+      "status": "integrated",
       "seedOffset": 1001,
       "files": {
         "FAR": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
@@ -161,6 +161,158 @@ window.CC_STAGE_CATALOG = {
         "GROUND": "assets/worlds/africa/AF01_GROUND_SERENGETI.png",
         "OBJECT_ATLAS": "assets/worlds/africa/AF01_OBJECT_ATLAS.png",
         "FLYING": "assets/worlds/africa/AF01_HAZARD_ROLLER.png"
+      },
+      "release": {
+        "status": "integrated",
+        "assets": {
+          "FAR": {
+            "path": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
+            "sha256": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868"
+          },
+          "MID": {
+            "path": "assets/worlds/africa/AF01_BG_MID_SERENGETI.png",
+            "sha256": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811"
+          },
+          "GROUND": {
+            "path": "assets/worlds/africa/AF01_GROUND_SERENGETI.png",
+            "sha256": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527"
+          },
+          "OBJECT_ATLAS": {
+            "path": "assets/worlds/africa/AF01_OBJECT_ATLAS.png",
+            "sha256": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569"
+          },
+          "FLYING": {
+            "path": "assets/worlds/africa/AF01_HAZARD_ROLLER.png",
+            "sha256": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b"
+          }
+        },
+        "checks": {
+          "technical": true,
+          "composition": true,
+          "contacts": true,
+          "animation": true,
+          "collision": true,
+          "finish": true
+        },
+        "finish": {
+          "scale": 0.22,
+          "groundOffset": 6.290625,
+          "xOffset": 17.325
+        },
+        "signature": [
+          {
+            "time": 75.3,
+            "hazard": "GROUND1",
+            "speedClass": "normal"
+          },
+          {
+            "time": 77.3,
+            "hazard": "FLYING",
+            "mode": "high",
+            "speedClass": "normal"
+          },
+          {
+            "time": 79.3,
+            "hazard": "GROUND2",
+            "speedClass": "normal"
+          },
+          {
+            "time": 81.4,
+            "hazard": "FLYING",
+            "mode": "low",
+            "speedClass": "fast"
+          },
+          {
+            "time": 83.4,
+            "hazard": "GROUND1",
+            "speedClass": "normal"
+          }
+        ],
+        "hazards": [
+          {
+            "name": "Termite mound",
+            "kind": "ground",
+            "atlasKey": "af01Hazards",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "w": 1086,
+              "h": 724
+            },
+            "sourceAnchor": {
+              "x": 543,
+              "y": 620
+            },
+            "groundOffset": 0,
+            "scale": 0.18,
+            "crop": {
+              "l": 313,
+              "r": 312,
+              "t": 127,
+              "b": 100
+            },
+            "cw": 0.6941431670281996,
+            "ch": 0.9496981891348089,
+            "cx": -0.0010845986984815619,
+            "cy": 0
+          },
+          {
+            "name": "Crested porcupine",
+            "kind": "ground",
+            "atlasKey": "af01Hazards",
+            "rect": {
+              "x": 1086,
+              "y": 0,
+              "w": 1086,
+              "h": 724
+            },
+            "sourceAnchor": {
+              "x": 543,
+              "y": 620
+            },
+            "groundOffset": 0,
+            "scale": 0.2,
+            "crop": {
+              "l": 145,
+              "r": 144,
+              "t": 213,
+              "b": 101
+            },
+            "cw": 0.5959849435382685,
+            "ch": 0.6073170731707317,
+            "cx": 0.19949811794228356,
+            "cy": 0
+          },
+          {
+            "name": "Lilac-breasted roller",
+            "kind": "flying",
+            "atlasKey": "af01Bird",
+            "frameW": 543,
+            "frameH": 724,
+            "frames": 4,
+            "fps": 8,
+            "sourceAnchor": {
+              "x": 271,
+              "y": 362
+            },
+            "scale": 0.3,
+            "crop": {
+              "l": 35,
+              "r": 84,
+              "t": 95,
+              "b": 171
+            },
+            "cw": 0.4834905660377358,
+            "ch": 0.1965065502183406,
+            "cx": 0.17806603773584906,
+            "cy": 0.07860262008733625,
+            "flightOffsetY": {
+              "high": 22,
+              "low": 0
+            }
+          }
+        ],
+        "evidence": "docs/phase8-qa/AF01_STAGE_QA.md"
       }
     },
     "af02": {

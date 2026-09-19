@@ -12,9 +12,15 @@ function fixture(){
 }
 test('all 21 keys registered; pending images are neither loaded nor selectable',()=>{
   const catalog=build();assert.equal(Object.keys(catalog.stages).length,21);
-  const c=load('host');assert.equal(Object.keys(c.config.worldProfiles).length,9);
-  assert.equal(c.config.worldProfiles.af01,undefined);assert.deepEqual(stageContract.sources(catalog),{});
-  assert.equal(stageContract.continents(catalog,c.config).length,3);
+  const c=load('host'),active=Object.values(catalog.stages).filter(stageContract.active);
+  assert.deepEqual(Object.keys(c.config.worldProfiles).sort(),active.map(s=>s.id).sort());
+  const sources=stageContract.sources(catalog);
+  for(const stage of Object.values(catalog.stages).filter(s=>!stageContract.active(s))){
+    assert.equal(c.config.worldProfiles[stage.id],undefined);
+    for(const suffix of ['Far','Mid','Ground','Hazards','Bird'])assert.equal(sources[stage.id+suffix],undefined);
+  }
+  assert.equal(Object.keys(sources).length,active.filter(s=>!s.legacy).length*5);
+  assert.equal(stageContract.continents(catalog,c.config).length,catalog.continents.filter(continent=>continent.stages.some(id=>stageContract.active(catalog.stages[id]))).length);
 });
 test('complete new stage activates identically in host and inner runtime; incomplete release fails',()=>{
   const {catalog,registry}=fixture();
@@ -40,6 +46,7 @@ test('source anchors preserve ground/flight contacts through scale and asymmetri
 test('old nine-stage authoring imports retain edits and gain defaults for new active stage',()=>{
   const old=load('host');vm.runInContext(read('src/js/config-schema.js'),old.context);
   const payload=clone(old.context.window.GAME_SCHEMA.buildCompatibilityView(old.config));payload.stages.na01.hazards[0].crop.l=3;
+  for(const stage of Object.values(build().stages).filter(s=>!s.legacy))delete payload.stages[stage.id];
   payload.stages.af02={savedFutureData:'preserve without making playable'};
   const {catalog,registry}=fixture(),c=load('host',registry,catalog);
   vm.runInContext(read('src/js/config-schema.js'),c.context);
@@ -59,7 +66,7 @@ test('real object preview and gameplay renderers agree on new ground and flight 
   c.config.activeWorld='af01';
   for(const index of [0,2]){
     const d=c.config.objectQA.defs.af01[index];d.crop={l:40,r:32,t:45,b:32};
-    if(index===2)d.frameCrops=[{l:60,r:35,t:70,b:35},d.crop,d.crop,d.crop];
+    if(index===2){d.frameCrops=[{l:60,r:35,t:70,b:35},d.crop,d.crop,d.crop];d.flightOffsetY={high:22,low:0};}
     c.config.objectQA.activeIndex.af01=index;c.config.objectQA.showBounds=false;c.config.objectQA.x=650;
     const draws=[],ctx={drawImage(...v){draws.push(v);}},scene={lastRenderedSurfaceY:410},character={last:{},character:'claude',state:'run'};
     const preview=new c.context.Preview(ctx,{[d.atlasKey]:{}},scene,character);preview.draw();
@@ -68,10 +75,29 @@ test('real object preview and gameplay renderers agree on new ground and flight 
     assert.equal(draw[5],Math.round(g.dx));assert.equal(draw[6],Math.round(g.dy));
   }
 });
+test('new-stage mixed-speed events dispatch by travel deadline while retaining arrival order',()=>{
+  const {catalog,registry}=fixture(),c=load('runtime',registry,catalog),source=read('src/js/game-runtime.js');
+  c.context.CONFIG=c.config;
+  vm.runInContext(source.slice(source.indexOf('class ObjectQA{'),source.indexOf('class Lab{'))+'\nthis.Preview=ObjectQA;this.Director=GameplayDirector;',c.context);
+  c.config.activeWorld='af01';
+  const character={character:'claude',state:'run',last:{visibleTop:350,footY:410,centerX:220,visibleWidth:40,visibleHeight:60},setState(){}};
+  const scene={lastRenderedSurfaceY:410},preview=new c.context.Preview({}, {},scene,character);
+  const director=new c.context.Director({}, {},scene,character,preview),defs=c.config.objectQA.defs.af01,sp=c.config.spawnDirector;
+  const bird={time:8,defName:defs[2].name,mode:'high',speedClass:'fast',spawned:false};
+  const ground={time:9,defName:defs[0].name,mode:null,speedClass:'normal',spawned:false};
+  const birdDeadline=bird.time-director.travelLeadFor(bird,defs[2]),groundDeadline=ground.time-director.travelLeadFor(ground,defs[0]);
+  assert.ok(groundDeadline<birdDeadline);
+  sp.enabled=true;sp.paused=false;sp.failed=false;sp.active=[];sp.planned=[bird,ground];sp.nextPlanIndex=0;sp.elapsed=(groundDeadline+birdDeadline)/2;
+  director.update(0);
+  assert.equal(ground.spawned,true);assert.equal(bird.spawned,false);assert.equal(sp.active[0].defName,ground.defName);
+  assert.deepEqual(sp.planned.map(e=>e.time),[8,9]);
+  sp.elapsed=birdDeadline+.001;director.update(0);assert.equal(bird.spawned,true);assert.equal(sp.active.length,2);
+});
 test('older full QA snapshot preserves integrated additions and cannot inject pending profiles',()=>{
   const {catalog,registry}=fixture(),c=load('runtime',registry,catalog),source=read('src/js/game-runtime.js');
   const old=load('baseline').config;
   const snapshot={schema:'CC_WORLD_QA_SNAPSHOT_12',world:{profiles:clone(old.worldProfiles)},hazards:{definitions:clone(old.objectQA.defs)},gameplay:{finish:clone(old.finish)},activeContext:{stage:'af01'}};
+  for(const stage of Object.values(build().stages).filter(s=>!s.legacy)){delete snapshot.world.profiles[stage.id];delete snapshot.hazards.definitions[stage.id];delete snapshot.gameplay.finish.stages[stage.id];}
   snapshot.world.profiles.af02={label:'must not become playable'};
   c.context.CONFIG=c.config;c.context.PHASE8_PILOT=true;c.context.performance={now:()=>0};
   c.context.lab={character:{setState(){}},scene:{},objectQA:{resetPass(){}},gameplay:{reset(){}},draw(){},renderUI(){}};

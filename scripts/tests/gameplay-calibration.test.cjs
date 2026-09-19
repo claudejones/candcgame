@@ -133,3 +133,18 @@ test("calibration preserves the locked movement and altitude contract", () => {
     mode:"high", highClearance:68, lowClearance:18, speed:170, fps:8, frame:0, t:0, travel:0
   });
 });
+
+test("integrated expansion hazards threaten running players and permit timed avoidance", () => {
+  const catalog=runtime.context.window.CC_STAGE_CATALOG;
+  for(const stage of Object.values(catalog.stages).filter(s=>!s.legacy&&['integrated','approved'].includes(s.status))){
+    for(const def of runtime.config.objectQA.defs[stage.id]){
+      const variants=def.kind==='flying'?[{mode:'high',action:'slide'},{mode:'low',action:'jump'}]:[{mode:null,action:'jump'}];
+      for(const who of characters)for(const {mode,action} of variants){
+        const speeds=def.kind==='flying'?Object.values(runtime.config.spawnDirector.speedClasses):[runtime.config.worldSpeed];
+        for(const hz of sampleRates)for(const speed of speeds)for(let phase=0;phase<(def.frames||1);phase++)
+          assert.equal(outcome(stage.id,who,def,mode,null,0,speed,phase,hz).collided,true,`${stage.id}/${def.name}/${who}/${mode}: running must collide`);
+        assert.ok(robustWindow(stage.id,who,def,mode,action)>=.06-1e-9,`${stage.id}/${def.name}/${who}/${mode}: no robust timed ${action} window`);
+      }
+    }
+  }
+});
