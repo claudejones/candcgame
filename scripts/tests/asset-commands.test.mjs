@@ -53,7 +53,9 @@ test('revision keeps existing edit source and explicit direction',()=>{
   assert.throws(()=>resolve('revise SA01 MID'),/describe the requested change/);
 });
 test('unknown or unapproved future scope is blocked; publication has no generation packet',()=>{
-  const future=resolve('build stage AF01');
+  const plan=JSON.parse(fs.readFileSync(`${ROOT}/config/remaining-continent-proposal.json`,'utf8'));
+  plan.productionEnabled=false;
+  const future=futurePacket('build','stage',plan.stages.find(s=>s.id==='AF01'),[],{approvedRevisions:{}},plan);
   assert.equal(future.operation,'blocked');
   assert.equal(future.generationAllowed,false);
   assert.equal(future.jobs,undefined);

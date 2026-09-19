@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "status": "approved-direction-readiness-pending",
-  "productionEnabled": false,
+  "status": "approved-production-stage-gates-active",
+  "productionEnabled": true,
   "phase": "post-phase8-expansion",
   "plan": "docs/REMAINING_CONTINENTS_PLAN.md",
   "scope": {
@@ -1208,7 +1208,7 @@
     ]
   },
   "readiness": {
-    "landscapeContractPromotion": "pending",
+    "landscapeContractPromotion": "approved",
     "runtimeRegistration": "ready",
     "hazardValidation": "ready"
   },
@@ -1234,6 +1234,14 @@
   "readinessEvidence": {
     "runtimeRegistration": "scripts/tests/stage-expansion.test.cjs: 21 pending/active catalog boundaries, complete fixture activation, saved config migration and shared anchor rendering. This is implementation readiness, not evidence of generated-stage playability.",
     "hazardValidation": "scripts/validate-stage-assets.cjs + hazard-atlas-qa.py + stage-contract.js; structural fixtures passed. Real pose/collision/scale checks remain per generated stage.",
-    "landscapeContractPromotion": "Dependent calibration implementation and timed runtime checks prepared for deployed review; see docs/phase8-qa/DEPENDENT_CALIBRATION_QA.md. Eleven hazard scales/contact offsets adjusted; established character settings, artwork, physics and Slide timing preserved. User acceptance and formal promotion remain pending."
+    "landscapeContractPromotion": "User authorized proceeding with remaining-stage production on 2026-09-19 using the accepted landscape contract. Existing calibration review/adjustments are assigned to a separate auto-calibration agent and do not block asset generation; this is not acceptance of that calibration. See docs/phase8-qa/DEPENDENT_CALIBRATION_QA.md and DECISION_LOG. Per-stage reference, measured collision/integration and deployed approval gates remain."
+  },
+  "calibrationFollowUp": {
+    "status": "delegated-review-and-adjustments-pending",
+    "owner": "separate auto-calibration workstream",
+    "evidence": "docs/phase8-qa/DEPENDENT_CALIBRATION_QA.md",
+    "baselineCommit": "57d6ca4e6932cc0ee5f6d05597245c1c17a74e85",
+    "blocksAssetGeneration": false,
+    "authorization": "User explicitly instructed remaining-stage production to proceed while the other agent reviews calibration. Do not record existing calibration as visually accepted or overwrite concurrent calibration work."
   }
 }
