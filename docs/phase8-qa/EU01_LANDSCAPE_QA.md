@@ -18,4 +18,15 @@ Scope: FAR, MID and GROUND at their standard Europe validation paths. The immuta
 | MID | `2ea736336cba3e6c3086a069dd5c031234f5ffd6f7bdfad5f4038cf2430bdfdd` |
 | GROUND | `83f9d5b0bc922bf01677736f05ad6307eabdb645540af4a10c74b15d4b4f7619` |
 
-Publication and deployed review evidence will be recorded in the durable EU01 checkpoint on `work/assets/eu01`. Artwork acceptance remains pending.
+## Deployed evidence
+
+- Reviewed main revision: `8556e5a0312e53cb3843f1b69c61a35e698383ef`.
+- Development CI: https://github.com/claudejones/candcgame/actions/runs/35422174526 — success.
+- Main CI: https://github.com/claudejones/candcgame/actions/runs/35422237867 — success.
+- Pages: https://github.com/claudejones/candcgame/actions/runs/35422258302 — success for the reviewed main revision.
+- Review URL: https://claudejones.github.io/candcgame/src/dev.html — select Europe / EU 1 — GREECE / SANTORINI.
+- Downloaded all three deployed cache-key PNG URLs and verified exact SHA-256 matches. Both entry pages and the runtime registry also match the validated snapshot.
+- Live Inspector confirms FAR scale 0.5524861878453038, MID/GROUND scale 0.4419889502762431, all X/Y offsets zero; source previews resolve the new cache URLs.
+- Runtime monitor reports canonical Y=410 and rendered 410. Inspected Design, Test/Game scrolling beyond ground wrap and Game mode; no uncovered landscape gaps at observed positions.
+- The existing full local Production CI workflow passes, including 13 command/runtime tests, PNG integrity checks and all integrated composites. Required exact-revision automatic gates passed.
+- Durable awaiting-approval checkpoint: `work/assets/eu01`. No artwork acceptance is inferred from these technical checks.
