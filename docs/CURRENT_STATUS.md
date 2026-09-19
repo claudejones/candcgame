@@ -12,7 +12,7 @@ Updated 2026-09-19. GitHub is authoritative. Historical explanations live in DEC
 
 ## Next action
 
-`In claudejones/candcgame: build landscape EU02.` EU01 — Greece / Santorini is approved at reviewed revision `8556e5a0312e53cb3843f1b69c61a35e698383ef`. Its three image hashes, zero offsets and source anchors are unchanged. Deployed Design/Test/Game, scrolling through the finish and Inspector geometry passed. Evidence is in `docs/phase8-qa/EU01_LANDSCAPE_QA.md`; exact approval/hash pointers are in `config/asset-workflow-state.json`. EU02 and EU03 remain pending. Europe regression follows EU03 acceptance.
+EU02 — France / Paris has a complete recovered FAR/MID/GROUND set and is ready for publication and deployed review. The recovered image hashes match the interrupted local checkpoint. Canonical runtime geometry and targeted PNG/composite checks pass. No image was regenerated during recovery. See `docs/phase8-qa/EU02_LANDSCAPE_QA.md` and `config/asset-workflow-state.json`. Resume unfinished publication with `In claudejones/candcgame: resume EU02.` EU03 remains pending; do not begin it before EU02 acceptance.
 
 ## Deferred and protected
 
