@@ -1,6 +1,6 @@
 # AF01 — Serengeti complete-stage QA
 
-2026-09-19. Deployed and internally reviewed; awaiting complete-stage user approval. Artwork is not approved.
+2026-09-19. Facing correction deployed and visually verified; awaiting complete-stage user approval. Artwork is not approved.
 
 ## Scope and source preservation
 
@@ -29,8 +29,8 @@ Exact inputs, asset hashes, geometry and results: `AF01_GAMEPLAY_MEASUREMENTS.js
 | --- | ---: | ---: |
 | Termite mound / Jump | 140 ms | 130 ms |
 | Porcupine / Jump | 130 ms | 110 ms |
-| Roller HIGH / Slide | 320 ms | 260 ms |
-| Roller LOW / Jump | 320 ms | 310 ms |
+| Roller HIGH / Slide | 270 ms | 230 ms |
+| Roller LOW / Jump | 320 ms | 320 ms |
 
 All four complete 90-second simulations finish with zero hits across 21 planned hazards and enter Celebrate. These are deterministic timed inputs, not a claim about human play difficulty. The five-event 75.3–83.4s signature and finish release are preserved. The unchanged shared finish art has measured visible contact Y=410 and pole X=220 at completion.
 
@@ -38,7 +38,22 @@ All four complete 90-second simulations finish with zero hits across 21 planned 
 
 Targeted AF01 asset/runtime/composite checks pass. The complete local suite identified a stale pending-AF01 fixture; it now explicitly creates a pending catalog fixture, and the focused rerun passes. All existing NA/SA/EU registry values and `game-config.js` bytes are unchanged. The eleven calibration candidates and their retained evidence/tests are preserved. Production CI passed on development and main for the identical validated tree. Pages deployed the exact validated commit. Live browser review confirmed AF01 selection in Design/Test/Game, canonical scenery coverage, all three named hazards, roller HIGH/LOW controls, both character choices and the Game start flow. Sampled browser errors came from the browser extension, with no application errors observed. All five deployed PNG bytes match the release SHA-256 hashes. These checks do not grant user acceptance.
 
-## Publication evidence
+## Facing revision requested during user review
+
+The user identified that the porcupine and roller face away from the player. The original live review missed this requirement. Their source art faces right; runtime now mirrors only these two hazards to face left. No image regeneration or PNG edits. Shared `drawSprite` and anchor placement support the optional `flipX` flag; preview and gameplay collision X offsets mirror with the art. Source crop, animation frame order, scale, Y placement, speed and physics are unchanged. Full-atlas preview intentionally shows source pixels; cropped and scene previews show gameplay facing. Old saved designs and QA snapshots missing the flag inherit the release default while retaining other edits and explicit facing choices.
+
+`node --test scripts/tests/hazard-facing.test.cjs` checks all four frames and HIGH/LOW modes, preview/game parity, fixed-anchor geometry, reflected colliders, canvas-state restoration, default scope and saved-config migration. The refreshed gameplay measurements above reproduce four full zero-hit courses with mirrored geometry. Revised development/main CI and Pages pass. Live browser review confirms the porcupine faces left in Design and the roller faces left in Test at HIGH/LOW with both character selections; displayed bounds follow the mirrored body. Six changed runtime/editor scripts were fetched from the deployed cache URLs and match the local SHA-256 hashes. All five PNGs retain their original release hashes. Previous publication evidence below identifies the superseded review build.
+
+## Current facing-revision publication
+
+- Reviewed main/development commit: `a09b176dd8531bfb3425c9af534ff197a05a253e`. Validated tree: `a56b8c736c3684aaaa29ded928e023b6a1a897da`.
+- Development Production CI: https://github.com/claudejones/candcgame/actions/runs/35463173425 — success.
+- Main Production CI: https://github.com/claudejones/candcgame/actions/runs/35463228007 — success.
+- Pages: https://github.com/claudejones/candcgame/actions/runs/35463262596 — success, same commit.
+- Review: https://claudejones.github.io/candcgame/src/dev.html → Africa → Tanzania — Serengeti savannah.
+- Handoff: `In claudejones/candcgame: resume AF01.` After review: `In claudejones/candcgame: approve AF01.`
+
+## Previous publication evidence
 
 - Reviewed main/development commit: `9f0b5e381667c89d714f72a859adc435920bea4a`. Validated tree: `02c9508754be58aed0188899e01f24a799a86ef2`.
 - Development Production CI: https://github.com/claudejones/candcgame/actions/runs/35461377682 — success.

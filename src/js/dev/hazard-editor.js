@@ -17,6 +17,7 @@
     w.GAME_CONFIG.activeWorld=stageId;w.GAME_CONFIG.objectQA.activeIndex[stageId]=index;
     const d=w.GAME_CONFIG.objectQA.defs[stageId][index];
     if(h.atlas.sourceAnchor)d.sourceAnchor={...h.atlas.sourceAnchor};
+    if(h.transform.flipX!==undefined)d.flipX=h.transform.flipX;
     d.scale=h.transform.scale;d.cw=h.collision.w;d.ch=h.collision.h;d.cx=h.collision.x;d.cy=h.collision.y;d.frames=h.atlas.frames;d.fps=h.animation?.fps||w.GAME_CONFIG.objectQA.flying.fps;d.frameCrops=h.animation?.frameCrops;
     if(d.kind==="ground")d.groundOffset=h.gameplayAnchor.adjustmentY+h.transform.offsetY;
     else if(h.gameplayAnchor.adjustmentByMode)d.flightOffsetY={...h.gameplayAnchor.adjustmentByMode};
@@ -43,7 +44,7 @@
 
   function drawCroppedFrame(canvas,h){
     const src=ATLAS[h.atlas.key];if(!src)return;
-    const img=new Image();img.onload=()=>{const r=h.atlas.sourceRegion,frames=h.atlas.frames||1,crop=frames>1?h.animation.frameCrops[activeFrame]:h.crop,l=Math.max(0,crop?.l||0),rr=Math.max(0,crop?.r||0),t=Math.max(0,crop?.t||0),b=Math.max(0,crop?.b||0),sw=Math.max(1,r.w-l-rr),sh=Math.max(1,r.h-t-b),sx=r.x+(frames>1?activeFrame*r.w:0)+l,sy=r.y+t;canvas.width=260;canvas.height=150;const c=canvas.getContext("2d");c.imageSmoothingEnabled=false;c.clearRect(0,0,canvas.width,canvas.height);const scale=Math.min((canvas.width-12)/sw,(canvas.height-12)/sh),dw=Math.max(1,Math.round(sw*scale)),dh=Math.max(1,Math.round(sh*scale)),dx=Math.round((canvas.width-dw)/2),dy=Math.round((canvas.height-dh)/2);c.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh);};img.src=src;
+    const img=new Image();img.onload=()=>{const r=h.atlas.sourceRegion,frames=h.atlas.frames||1,crop=frames>1?h.animation.frameCrops[activeFrame]:h.crop,l=Math.max(0,crop?.l||0),rr=Math.max(0,crop?.r||0),t=Math.max(0,crop?.t||0),b=Math.max(0,crop?.b||0),sw=Math.max(1,r.w-l-rr),sh=Math.max(1,r.h-t-b),sx=r.x+(frames>1?activeFrame*r.w:0)+l,sy=r.y+t;canvas.width=260;canvas.height=150;const c=canvas.getContext("2d");c.imageSmoothingEnabled=false;c.clearRect(0,0,canvas.width,canvas.height);const scale=Math.min((canvas.width-12)/sw,(canvas.height-12)/sh),dw=Math.max(1,Math.round(sw*scale)),dh=Math.max(1,Math.round(sh*scale)),dx=Math.round((canvas.width-dw)/2),dy=Math.round((canvas.height-dh)/2);window.CC_STAGE_CONTRACT.drawSprite(c,img,{sx,sy,sw,sh,dx,dy,dw,dh},h.transform.flipX);};img.src=src;
   }
 
   function setPlaying(next){

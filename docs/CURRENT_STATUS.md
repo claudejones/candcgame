@@ -13,7 +13,7 @@ Updated 2026-09-19. GitHub is authoritative. Historical explanations live in DEC
 
 ## Next action
 
-**AF01 deployed, awaiting user approval:** all five assets are complete at `9f0b5e381667c89d714f72a859adc435920bea4a`. Technical/gameplay checks, development and main CI, Pages, deployed asset hashes and live browser review pass. Review https://claudejones.github.io/candcgame/src/dev.html → Africa → Tanzania — Serengeti savannah. Evidence: `docs/phase8-qa/AF01_STAGE_QA.md`; durable handoff: `work/assets/af01`. Next user command after review: `In claudejones/candcgame: approve AF01.` Do not regenerate or begin AF02 before acceptance.
+**AF01 corrected and deployed, awaiting user approval:** at `a09b176dd8531bfb3425c9af534ff197a05a253e`, the porcupine and roller face the player using per-hazard mirroring with matching collision bounds and fixed anchors. All five PNGs are unchanged. Targeted checks, full-stage simulations, development/main CI, Pages, deployed script hashes and live facing inspection pass. Review https://claudejones.github.io/candcgame/src/dev.html → Africa → Tanzania — Serengeti savannah. Evidence: `docs/phase8-qa/AF01_STAGE_QA.md`; durable handoff: `work/assets/af01`. After review: `In claudejones/candcgame: approve AF01.` Do not begin AF02 before acceptance.
 
 EU03 — Spain / Barcelona is approved at reviewed artwork revision `94f94669bd2773b2ef9881c59e4adb710aeced60`; the active checkpoint is closed. Europe regression passed with unchanged approved hashes and canonical geometry. Evidence: `docs/phase8-qa/EU03_LANDSCAPE_QA.md`; exact approval pointers: `config/asset-workflow-state.json`.
 

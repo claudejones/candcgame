@@ -339,8 +339,8 @@ class ObjectQA{
      const r=d.rect||{x:0,y:0,w:d.frameW,h:d.frameH},rw=d.frames&&d.frameW?d.frameW:r.w,rh=d.frames&&d.frameH?d.frameH:r.h;cL=Math.max(0,Math.min(rw-1,crop.l||0));cR=Math.max(0,Math.min(rw-1-cL,crop.r||0));cT=Math.max(0,Math.min(rh-1,crop.t||0));cB=Math.max(0,Math.min(rh-1-cT,crop.b||0));sw=Math.max(1,rw-cL-cR);sh=Math.max(1,rh-cT-cB);sx=(d.frames&&d.frameW?CONFIG.objectQA.flying.frame*d.frameW:r.x)+cL;sy=(d.frames&&d.frameH?0:r.y)+cT;dw=sw*s;dh=sh*s;const centerX=this.screenX(dw);const groundOffset=Number.isFinite(d.groundOffset)?d.groundOffset:CONFIG.objectQA.groundOffset;anchorY=this.surfaceY()+groundOffset;dx=centerX-dw/2;dy=anchorY-dh;
    }
    if(d.sourceAnchor){const placed=window.CC_STAGE_CONTRACT.place(d,dx+dw/2,anchorY,crop,s,{dx,dy});dx=placed.dx;dy=placed.dy;}
-   this.ctx.drawImage(img,sx,sy,sw,sh,Math.round(dx),Math.round(dy),Math.round(dw),Math.round(dh));
-   const cw=Math.max(4,dw*d.cw),ch=Math.max(4,dh*d.ch),cx=dx+(dw-cw)/2+d.cx*dw,cy=d.kind==="flying"?dy+(dh-ch)/2+d.cy*dh:anchorY-ch+d.cy*dh;const ob={x:cx,y:cy,w:cw,h:ch},cb=this.characterBox();
+   window.CC_STAGE_CONTRACT.drawSprite(this.ctx,img,{sx,sy,sw,sh,dx,dy,dw,dh},d.flipX);
+   const cw=Math.max(4,dw*d.cw),ch=Math.max(4,dh*d.ch),cx=dx+(dw-cw)/2+(d.flipX?-d.cx:d.cx)*dw,cy=d.kind==="flying"?dy+(dh-ch)/2+d.cy*dh:anchorY-ch+d.cy*dh;const ob={x:cx,y:cy,w:cw,h:ch},cb=this.characterBox();
    // A new pass is detected when the looping hazard jumps from off-screen left back to the right.
    if(this.lastObjectBox && ob.x>this.lastObjectBox.x+CONFIG.objectQA.loopDistance*.5)this.collisionLatched=false;
    this.lastObjectBox=ob;this.lastCharacterBox=cb;this.lastCollision=this.intersects(ob,cb);
@@ -473,7 +473,7 @@ class GameplayDirector{
      sw=Math.max(1,rw-cL-cR);sh=Math.max(1,rh-cT-cB);sx=(d.frames&&d.frameW?inst.frame*d.frameW:r.x)+cL;sy=(d.frames&&d.frameH?0:r.y)+cT;dw=sw*sc;dh=sh*sc;dx=inst.x-dw/2;anchorY=this.objectQA.surfaceY()+(Number.isFinite(d.groundOffset)?d.groundOffset:CONFIG.objectQA.groundOffset);dy=anchorY-dh;
    }
    if(d.sourceAnchor){const placed=window.CC_STAGE_CONTRACT.place(d,inst.x,anchorY,crop,sc,{dx,dy});dx=placed.dx;dy=placed.dy;}
-   const cw=Math.max(4,dw*d.cw),ch=Math.max(4,dh*d.ch),cx=dx+(dw-cw)/2+d.cx*dw,cy=d.kind==="flying"?dy+(dh-ch)/2+d.cy*dh:anchorY-ch+d.cy*dh;
+   const cw=Math.max(4,dw*d.cw),ch=Math.max(4,dh*d.ch),cx=dx+(dw-cw)/2+(d.flipX?-d.cx:d.cx)*dw,cy=d.kind==="flying"?dy+(dh-ch)/2+d.cy*dh:anchorY-ch+d.cy*dh;
    return{sw,sh,sx,sy,dw,dh,dx,dy,box:{x:cx,y:cy,w:cw,h:ch}};
  }
  triggerHit(inst){
@@ -526,7 +526,7 @@ class GameplayDirector{
  }
  draw(){
    const s=this.cfg();if(!s.enabled&&!this.finished&&!s.failed&&s.elapsed<=0){this.drawHUD();return}
-   for(const inst of s.active){const d=this.defFor(inst);if(!d)continue;const img=this.a[d.atlasKey],g=this.geom(inst,d);this.ctx.drawImage(img,g.sx,g.sy,g.sw,g.sh,Math.round(g.dx),Math.round(g.dy),Math.round(g.dw),Math.round(g.dh));if(CONFIG.objectQA.showBounds){this.ctx.save();this.ctx.strokeStyle=inst.hit?"#ff4d4d":"#43e07b";this.ctx.lineWidth=2;this.ctx.strokeRect(g.box.x+.5,g.box.y+.5,g.box.w,g.box.h);this.ctx.restore();}}
+   for(const inst of s.active){const d=this.defFor(inst);if(!d)continue;const img=this.a[d.atlasKey],g=this.geom(inst,d);window.CC_STAGE_CONTRACT.drawSprite(this.ctx,img,g,d.flipX);if(CONFIG.objectQA.showBounds){this.ctx.save();this.ctx.strokeStyle=inst.hit?"#ff4d4d":"#43e07b";this.ctx.lineWidth=2;this.ctx.strokeRect(g.box.x+.5,g.box.y+.5,g.box.w,g.box.h);this.ctx.restore();}}
    const fg=this.finishGeom();if(fg&&fg.dx<CONFIG.canvas.w+200&&fg.dx+fg.dw>-200){this.ctx.drawImage(fg.img,Math.round(fg.dx),Math.round(fg.dy),Math.round(fg.dw),Math.round(fg.dh));this.lastFinishBox=fg.trigger;if(CONFIG.finish.showBounds){this.ctx.save();this.ctx.strokeStyle="#ffd646";this.ctx.lineWidth=2;this.ctx.strokeRect(fg.trigger.x+.5,fg.trigger.y+.5,fg.trigger.w,fg.trigger.h);this.ctx.restore();}}
    this.drawHUD();
  }

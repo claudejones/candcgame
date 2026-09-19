@@ -22,16 +22,17 @@
       "assets-original/africa/af01/AF01_HAZARD_ROLLER_SOURCE.png": "833dd5edffad21729732b5716ceeffda6678cc569bf06cf88cc0df5eddfa221a"
     },
     "deployment": {
-      "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
-      "tree": "02c9508754be58aed0188899e01f24a799a86ef2",
-      "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35461377682",
-      "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35461473998",
-      "pages": "https://github.com/claudejones/candcgame/actions/runs/35461507306",
+      "commit": "a09b176dd8531bfb3425c9af534ff197a05a253e",
+      "tree": "a56b8c736c3684aaaa29ded928e023b6a1a897da",
+      "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35463173425",
+      "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35463228007",
+      "pages": "https://github.com/claudejones/candcgame/actions/runs/35463262596",
       "reviewURL": "https://claudejones.github.io/candcgame/src/dev.html",
       "result": "passed",
-      "deployedAssetHashesVerified": true,
-      "browserReview": "passed",
-      "verifiedAt": "2026-09-19T18:39:36.273Z",
+      "deployedRuntimeHashesVerified": true,
+      "assetHashesUnchanged": true,
+      "browserReview": "Porcupine and roller face left toward the player; HIGH/LOW collision bounds follow the mirrored roller body.",
+      "verifiedAt": "2026-09-19T19:08:50.543Z",
       "evidence": "docs/phase8-qa/AF01_STAGE_QA.md",
       "userApproval": "pending"
     }
@@ -119,7 +120,7 @@
       "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
     }
   },
-  "revision": 37,
+  "revision": 41,
   "runs": {
     "af01-20260919172919-679b96": {
       "runId": "af01-20260919172919-679b96",
@@ -136,7 +137,8 @@
         "work/af01-landscapes",
         "work/assets/af01",
         "refs/remotes/origin/work/assets/af01",
-        "refs/remotes/origin/modular-parity-validation"
+        "refs/remotes/origin/modular-parity-validation",
+        "refs/remotes/origin/main"
       ],
       "jobs": {
         "AF01:FAR": {
@@ -1070,18 +1072,19 @@
         "OBJECT_ATLAS": 7,
         "FLYING": 2
       },
-      "updatedAt": "2026-09-19T18:39:36.375Z",
+      "updatedAt": "2026-09-19T19:08:50.664Z",
       "deployment": {
-        "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
-        "tree": "02c9508754be58aed0188899e01f24a799a86ef2",
-        "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35461377682",
-        "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35461473998",
-        "pages": "https://github.com/claudejones/candcgame/actions/runs/35461507306",
+        "commit": "a09b176dd8531bfb3425c9af534ff197a05a253e",
+        "tree": "a56b8c736c3684aaaa29ded928e023b6a1a897da",
+        "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35463173425",
+        "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35463228007",
+        "pages": "https://github.com/claudejones/candcgame/actions/runs/35463262596",
         "reviewURL": "https://claudejones.github.io/candcgame/src/dev.html",
         "result": "passed",
-        "deployedAssetHashesVerified": true,
-        "browserReview": "passed",
-        "verifiedAt": "2026-09-19T18:39:36.273Z",
+        "deployedRuntimeHashesVerified": true,
+        "assetHashesUnchanged": true,
+        "browserReview": "Porcupine and roller face left toward the player; HIGH/LOW collision bounds follow the mirrored roller body.",
+        "verifiedAt": "2026-09-19T19:08:50.543Z",
         "evidence": "docs/phase8-qa/AF01_STAGE_QA.md",
         "userApproval": "pending"
       },
@@ -1096,6 +1099,39 @@
         "elapsedNote": "Wall time includes source generation, technical-finishing permission checkpoint, cleanup, integration and CI/deployment waits; not active worker throughput.",
         "subscriptionUsagePercentage": null,
         "throughputConclusion": "Deferred until AF01–AF03 trial is complete."
+      },
+      "deploymentHistory": [
+        {
+          "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+          "tree": "02c9508754be58aed0188899e01f24a799a86ef2",
+          "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35461377682",
+          "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35461473998",
+          "pages": "https://github.com/claudejones/candcgame/actions/runs/35461507306",
+          "reviewURL": "https://claudejones.github.io/candcgame/src/dev.html",
+          "result": "passed",
+          "deployedAssetHashesVerified": true,
+          "browserReview": "passed",
+          "verifiedAt": "2026-09-19T18:39:36.273Z",
+          "evidence": "docs/phase8-qa/AF01_STAGE_QA.md",
+          "userApproval": "pending"
+        }
+      ],
+      "facingRevision": {
+        "requestedAt": "2026-09-19T19:02:35.640Z",
+        "request": "Crested porcupine and lilac-breasted roller should face the player.",
+        "baseCommit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+        "method": "Per-hazard flipX renderer and collision reflection; original PNGs unchanged.",
+        "hazards": [
+          "GROUND2",
+          "FLYING"
+        ],
+        "imageGenerationCalls": 0,
+        "checks": {
+          "mirrorAndSavedConfig": true,
+          "timedGameplay": true,
+          "deployedVisual": true
+        },
+        "completedAt": "2026-09-19T19:08:50.543Z"
       }
     }
   },

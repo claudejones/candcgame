@@ -2,11 +2,11 @@
   "stage": "af01",
   "provenance": {
     "inputs": {
-      "src/js/game-runtime.js": "e30dce590a99fe86658e10f93411d11bafd725e02fe3e0f8ed386280ade02e4f",
+      "src/js/game-runtime.js": "fa2bd0718d0ebd8c40135aa0fe5371a948c36a017d90744d7c29b9e0b6f64b20",
       "src/js/game-config.js": "24706e398dd14da5bb742bf0f738e61cbf27d2a39a00bf4479a0f497f7abec1e",
-      "src/js/stage-contract.js": "f07ad9bae3632615643c02bc64da6151281948d09b823d80e1a11e7d64a69681",
-      "src/js/stage-catalog.js": "d65ac3979e59bc419b47d9e8cc9d138709390ac639bb2ec342dc049d9f472c7a",
-      "config/stage-releases.json": "7f7eb531e33da5a9a0a8c9087aac4aaecac262f34377a7c61660d3edc35d5268"
+      "src/js/stage-contract.js": "57a901bfe9ba45d43d7e8b925a77a7ad2da1ab9ba43e26c33c1fc28d5a906edf",
+      "src/js/stage-catalog.js": "3906322666844072b682f721a1516e510bb6f16eea12110eab09c6717e8c54e0",
+      "config/stage-releases.json": "e336a3c2269572e03e08231e2dbd299eee1a062b81408b1a96634c8cea38f786"
     },
     "assets": {
       "FAR": {
@@ -80,8 +80,8 @@
       "action": "jump",
       "threatensRunningPlayer": true,
       "window": {
-        "start": 0.3,
-        "end": 0.43,
+        "start": 0.55,
+        "end": 0.68,
         "width": 0.13,
         "minimumGap": 0.65
       }
@@ -93,8 +93,8 @@
       "action": "jump",
       "threatensRunningPlayer": true,
       "window": {
-        "start": 0.3,
-        "end": 0.41,
+        "start": 0.55,
+        "end": 0.66,
         "width": 0.11,
         "minimumGap": 0.28
       }
@@ -106,9 +106,9 @@
       "action": "slide",
       "threatensRunningPlayer": true,
       "window": {
-        "start": 0.17,
-        "end": 0.49,
-        "width": 0.32,
+        "start": 0.32,
+        "end": 0.59,
+        "width": 0.27,
         "minimumGap": 5.47
       }
     },
@@ -119,8 +119,8 @@
       "action": "jump",
       "threatensRunningPlayer": true,
       "window": {
-        "start": 0.27,
-        "end": 0.59,
+        "start": 0.37,
+        "end": 0.69,
         "width": 0.32,
         "minimumGap": 1.94
       }
@@ -132,9 +132,9 @@
       "action": "slide",
       "threatensRunningPlayer": true,
       "window": {
-        "start": 0.17,
-        "end": 0.43,
-        "width": 0.26,
+        "start": 0.3,
+        "end": 0.53,
+        "width": 0.23,
         "minimumGap": 2.66
       }
     },
@@ -145,9 +145,9 @@
       "action": "jump",
       "threatensRunningPlayer": true,
       "window": {
-        "start": 0.28,
-        "end": 0.59,
-        "width": 0.31,
+        "start": 0.37,
+        "end": 0.69,
+        "width": 0.32,
         "minimumGap": 0.99
       }
     }
@@ -182,10 +182,10 @@
       "sy": 213,
       "dw": 74.71875,
       "dh": 38.4375,
-      "dx": 612.6875,
+      "dx": 612.59375,
       "dy": 371.84375,
       "box": {
-        "x": 642.6875,
+        "x": 612.78125,
         "y": 386.65625,
         "w": 44.53125,
         "h": 23.34375
@@ -201,10 +201,10 @@
       "sy": 95,
       "dw": 59.625,
       "dh": 64.40625,
-      "dx": 616.8125,
+      "dx": 623.5625,
       "dy": 326.453125,
       "box": {
-        "x": 642.828125,
+        "x": 628.34375,
         "y": 357.390625,
         "w": 28.828125,
         "h": 12.65625
@@ -220,10 +220,10 @@
       "sy": 95,
       "dw": 59.625,
       "dh": 64.40625,
-      "dx": 616.8125,
+      "dx": 623.5625,
       "dy": 326.453125,
       "box": {
-        "x": 642.828125,
+        "x": 628.34375,
         "y": 357.390625,
         "w": 28.828125,
         "h": 12.65625
@@ -239,10 +239,10 @@
       "sy": 95,
       "dw": 59.625,
       "dh": 64.40625,
-      "dx": 616.8125,
+      "dx": 623.5625,
       "dy": 326.453125,
       "box": {
-        "x": 642.828125,
+        "x": 628.34375,
         "y": 357.390625,
         "w": 28.828125,
         "h": 12.65625
@@ -258,10 +258,10 @@
       "sy": 95,
       "dw": 59.625,
       "dh": 64.40625,
-      "dx": 616.8125,
+      "dx": 623.5625,
       "dy": 326.453125,
       "box": {
-        "x": 642.828125,
+        "x": 628.34375,
         "y": 357.390625,
         "w": 28.828125,
         "h": 12.65625
@@ -277,10 +277,10 @@
       "sy": 95,
       "dw": 59.625,
       "dh": 64.40625,
-      "dx": 616.8125,
+      "dx": 623.5625,
       "dy": 354.453125,
       "box": {
-        "x": 642.828125,
+        "x": 628.34375,
         "y": 385.390625,
         "w": 28.828125,
         "h": 12.65625
@@ -296,10 +296,10 @@
       "sy": 95,
       "dw": 59.625,
       "dh": 64.40625,
-      "dx": 616.8125,
+      "dx": 623.5625,
       "dy": 354.453125,
       "box": {
-        "x": 642.828125,
+        "x": 628.34375,
         "y": 385.390625,
         "w": 28.828125,
         "h": 12.65625
@@ -315,10 +315,10 @@
       "sy": 95,
       "dw": 59.625,
       "dh": 64.40625,
-      "dx": 616.8125,
+      "dx": 623.5625,
       "dy": 354.453125,
       "box": {
-        "x": 642.828125,
+        "x": 628.34375,
         "y": 385.390625,
         "w": 28.828125,
         "h": 12.65625
@@ -334,10 +334,10 @@
       "sy": 95,
       "dw": 59.625,
       "dh": 64.40625,
-      "dx": 616.8125,
+      "dx": 623.5625,
       "dy": 354.453125,
       "box": {
-        "x": 642.828125,
+        "x": 628.34375,
         "y": 385.390625,
         "w": 28.828125,
         "h": 12.65625

@@ -285,3 +285,8 @@ Preserved historical measurement data and added a read-only, hash-pinned 10ms au
 ## 2026-09-19 — AF01 technical finishing and measured new-stage integration
 
 The user answered yes to deterministic transparency cleanup, exact atlas sizing and anchor alignment for the four saved AF01 sources, followed by integration/testing/deployment. This authorization is specific to that finishing work; original source bytes remain immutable. AF01 uses an optional measured HIGH-only visual/body placement adjustment (+22 logical px, LOW zero) to preserve a believable small roller and real Slide interaction while leaving global clearances, physics and existing calibrations unchanged. Expansion-stage event dispatch now respects each hazard's travel deadline; existing nine-stage scheduling remains untouched. These changes and the generated stage remain subject to deployed artwork acceptance. Evidence: `phase8-qa/AF01_STAGE_QA.md`.
+
+
+## 2026-09-19 — AF01 animals face the player through rendering
+
+The user reported that AF01's crested porcupine and lilac-breasted roller face away from the player and authorized correction through regeneration or code. Preserve both atlases exactly and set `flipX: true` only on those two hazards. Mirror each frame and its collision geometry around the existing source anchor in Design/Test/Game. Source pixels, frame order, crop, scale, vertical placement, speeds and physics remain unchanged. Preserve explicit facing settings on import; older saves missing the new field inherit the released facing without replacing their calibration edits. This is a rendering correction, not independent calibration tuning or artwork acceptance. Add facing to future integrated visual review.
