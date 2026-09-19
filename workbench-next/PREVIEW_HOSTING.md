@@ -21,6 +21,8 @@ Publication confirmed successful on 2026-09-19. Version 1 uses Site source commi
 
 ## Review scope
 
+Review 05.2 publication succeeded on 2026-09-19 at the same URL (saved version 7). Site source: `1739d1fcc362812df4a3c030e6b1179446f4ea5e`; deployment: `appgdep_6aae261177ac819195c8c72a7f73700c`; canonical implementation: `e3d9c39e28ba23075cb464f07681add357cf190d`, with successful Production CI. Landscape Play/Pause/Restart/Replay and runtime-speed cloud drift are available. The archive contains 73 files and 53 unchanged source PNGs. Native deployment status: `succeeded`. User browser acceptance remains pending; Test/Game are still planned.
+
 Review 05.1 publication succeeded on 2026-09-19 at the same URL (saved version 6). Site source: `ff7d4bd38a3a2fd17ce30c2eb5766e6fae7bc8a3`; deployment: `appgdep_6aae224b39dc81918a94526f9a5728ce`; canonical implementation: `d338d0ab311e511a6ba7f44770df201fd6820ad3`. Approved main `b469182…` is now incorporated, including EU01/SA03 landscapes. The 72-file archive has 53 PNGs with matching source hashes and excludes superseded legacy landscape copies. Bounded prior-draft migration preserves edits and archives the old saved record before Save all replaces it. Native deployment status: `succeeded`.
 
 Review 05 publication succeeded on 2026-09-19 at the same URL. Site source commit: `ef7b2f606962fe21f9a0265a11983fa0f225ba39`; saved version: 5; deployment ID: `appgdep_6aae1f4eb83c8191a5615b0403db4aa5`. Canonical implementation: `6e81660ea95efb55be8ab1bf7f69a85d40e61e36`, with successful Production CI for that exact SHA. The archive contains 72 files, including 53 byte-identical PNGs; native deployment status is `succeeded`. Browser/user acceptance of the new import flow remains pending.

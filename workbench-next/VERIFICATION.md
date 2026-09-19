@@ -11,6 +11,8 @@ Requested 2026-09-19. The existing 0–4,800 px slider now supports Play/Pause, 
 
 Browser interaction and responsive visual acceptance remain pending. Review Stage → Landscape → Scene: Play scroll, pause, scrub, restart, compare the baseline, then switch stages or open Source. Clouds should drift behind MID, the endpoint should stop cleanly, and frame controls should still work in Character/Hazard views.
 
+Publication succeeded at https://candc-workbench-next.claudejones.chatgpt.site (saved version 7, deployment `appgdep_6aae261177ac819195c8c72a7f73700c`). Site source: `1739d1fcc362812df4a3c030e6b1179446f4ea5e`; GitHub implementation: `e3d9c39e28ba23075cb464f07681add357cf190d`. [Production CI passed for that exact implementation](https://github.com/claudejones/candcgame/actions/runs/35425556990). Module syntax, unique HTML IDs and literal DOM references pass. The 73-file archive matches the pushed source and contains 53 unchanged PNGs; the filtered catalog retains all source provenance. Native deployment status is `succeeded`; browser visual acceptance remains pending.
+
 ## Review 05.1 — approved EU01/SA03 snapshot refresh
 
 Requested 2026-09-19 after the user found stale EU01 images despite a hard refresh. Cause: the private prototype packaged an older GitHub snapshot. Merged approved main `b469182fd6ee76c346a959cfde82a5b108b048ed` into the parallel editor; production source/configuration/artwork match that upstream tree, and new editor logic remains under `workbench-next/`.
