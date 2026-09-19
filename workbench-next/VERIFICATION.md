@@ -1,5 +1,16 @@
 # Workbench review — verification
 
+## Review 05.1 — approved EU01/SA03 snapshot refresh
+
+Requested 2026-09-19 after the user found stale EU01 images despite a hard refresh. Cause: the private prototype packaged an older GitHub snapshot. Merged approved main `b469182fd6ee76c346a959cfde82a5b108b048ed` into the parallel editor; production source/configuration/artwork match that upstream tree, and new editor logic remains under `workbench-next/`.
+
+- All six EU01/SA03 landscape PNG hashes match `approvedRevisions`; registry-generated cache keys match the bytes. EU01 approval points to reviewed revision `8556e5a0312e53cb3843f1b69c61a35e698383ef`. No artwork was regenerated or transformed.
+- 28 Node checks pass. Added actual prior-baseline migration cases for v4 browser saves and v2/v3 imports: retained character crops, barrel bounds and custom transforms; unchanged defaults update; failed backup writes preserve the old saved record; saving/reloading succeeds; unknown or future source signatures remain blocked.
+- Rendered and inspected EU01 and SA03 with the candidate renderer and canonical defaults. New artwork is visible and scene geometry is correct. This is an offline composition check, not browser UI testing.
+- Generated catalog and runtime registry checks pass. Static packaging cleans its generated directory, preventing old landscape files from lingering. Startup revalidates the catalog; PNG URLs keep registry cache keys.
+
+User review: open Europe → EU01; FAR/MID/GROUND should show approved artwork. Source & status should say Approved landscape. Existing draft edits should remain; use Compare baseline to distinguish a custom transform from the new defaults. Save all retains a downloadable pre-update copy under Changes & recovery. No main/Pages editor replacement is authorized by this update.
+
 ## Review 05 — whole-project configuration workflow
 
 Requested 2026-09-19 after the user reviewed Review 04's layout and atlas dragging positively. Changes stay under `workbench-next/`; production artwork, runtime, configs and current editor storage remain untouched.

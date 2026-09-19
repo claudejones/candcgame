@@ -20,8 +20,9 @@ for(const source of Object.values(assets))if(!fs.existsSync(path.resolve(__dirna
 if (!assets.run || !assets.na01Bird) throw new Error('Incomplete catalog.');
 const dimensions=Object.fromEntries(Object.entries(assets).map(([key,source])=>{const data=fs.readFileSync(path.resolve(__dirname,source.split('?')[0]));return [key,{width:data.readUInt32BE(16),height:data.readUInt32BE(20)}];}));
 const hashes=Object.fromEntries(Object.entries(assets).map(([key,source])=>[key,crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,source.split('?')[0]))).digest('hex')]));
-const baseline=execFileSync('git',['log','-1','--format=%H','--','src/js/game-config.js','src/js/config-schema.js','src/js/landscape-registry.js','src/js/landscape-contract.js'],{cwd:root,encoding:'utf8'}).trim();
-const output = JSON.stringify({ source: 'game-runtime ASSET_SOURCES + active landscape registry', baseline, assets, dimensions, hashes }, null, 2) + '\n';
+const baseline=execFileSync('git',['log','--no-merges','-1','--format=%H','--','src/js/game-config.js','src/js/config-schema.js','src/js/landscape-registry.js','src/js/landscape-contract.js'],{cwd:root,encoding:'utf8'}).trim();
+const migrations=JSON.parse(fs.readFileSync(path.join(__dirname,'project-migrations.json'),'utf8'));
+const output = JSON.stringify({ source: 'game-runtime ASSET_SOURCES + active landscape registry', baseline, assets, dimensions, hashes, migrations }, null, 2) + '\n';
 const target = path.join(__dirname, 'asset-catalog.json');
 if (process.argv.includes('--check')) {
   if (fs.readFileSync(target, 'utf8') !== output) throw new Error('Candidate catalog is stale.');

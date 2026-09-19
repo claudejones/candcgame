@@ -4,7 +4,7 @@ Active, 2026-09-19. Operational steps and command lookup are maintained once in 
 
 ## Scope and order
 
-Phase 8 is the existing nine NA/SA/EU stages: 27 FAR/MID/GROUND layers. North America is complete. SA01 and SA02 are approved; next are SA03, the South America regression, then EU01–EU03 and the Europe regression. The other four continents/36 landscape layers need approved themes, references and authorization after this validation phase. The command system is project-wide; no repeat setup per continent.
+Phase 8 is the existing nine NA/SA/EU stages: 27 FAR/MID/GROUND layers. North America and South America are complete, including the South America regression. EU01 is approved. Next are EU02–EU03 and the Europe regression. The other four continents/36 landscape layers need approved themes, references and authorization after this validation phase. The command system is project-wide; no repeat setup per continent.
 
 ## Authority and approval
 

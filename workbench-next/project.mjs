@@ -6,6 +6,7 @@ export const PROJECT_FORMAT='cc-workbench-next-project-v4';
 export const PROJECT_STORAGE_KEY='cc-workbench-next-project-v4';
 export const RECOVERY_KEY='cc-workbench-next-before-import-v4';
 export const UNREADABLE_KEY='cc-workbench-next-unreadable-save-v4';
+export const ARTWORK_RECOVERY_KEY='cc-workbench-next-before-artwork-refresh-v4';
 export const MAX_IMPORT_BYTES=2*1024*1024;
 const clone=value=>structuredClone(value);
 function keys(value,allowed,required=allowed) {
@@ -39,21 +40,27 @@ export function changesBetween(before,after,items) {
 }
 
 export class ProjectDraft extends FrameDraft {
-  constructor(items,landscapes,dimensions,provenance) {
-    super(items,landscapes,dimensions);this.provenance=clone(provenance);this.savedAt=null;this.expectedRaw=null;this.unreadable=false;
+  constructor(items,landscapes,dimensions,provenance,migrations=[]) {
+    super(items,landscapes,dimensions);this.provenance=clone(provenance);this.migrations=clone(migrations);this.savedAt=null;this.expectedRaw=null;this.unreadable=false;
   }
   export(){return {format:PROJECT_FORMAT,purpose:'All editable Workbench Next settings. Artwork stays in the project; Test/Game configuration integration is pending.',provenance:clone(this.provenance),design:super.export()};}
   decode(payload) {
-    let design=payload,legacy=true;
+    let design=payload,legacy=true,migration=null;
+    const supported=this.migrations.filter(item=>same(item.toProvenance,this.provenance));
     if(payload?.format===PROJECT_FORMAT) {
       keys(payload,['format','purpose','provenance','design','savedAt'],['format','provenance','design']);
-      if(!same(payload.provenance,this.provenance))throw new Error('This project uses different artwork or source defaults. Keep the file for a compatible editor; nothing has been changed.');
+      if(!same(payload.provenance,this.provenance)) {
+        migration=supported.find(item=>same(item.fromProvenance,payload.provenance));
+        if(!migration)throw new Error('This project uses different artwork or source defaults. Keep the file for a compatible editor; nothing has been changed.');
+      }
       if(payload.savedAt!==undefined && (typeof payload.savedAt!=='string' || !Number.isFinite(Date.parse(payload.savedAt))))throw new Error('Saved date is invalid.');
       design=payload.design;legacy=false;
       if(design?.format!==FRAME_FORMAT)throw new Error('Project configuration version is invalid.');
     }
     validateShape(design);
-    const candidate=new FrameDraft([...this.items.values()],this.definitions,this.dimensions);
+    if(legacy && design.format!==FORMAT && !same(design.landscapeRevision,this.landscapeRevision))migration=supported.find(item=>same(item.landscapeRevision,design.landscapeRevision) && (design.format===DESIGN_FORMAT || same(item.atlasDimensions,design.atlasDimensions)));
+    const definitions=migration?this.definitions.map(item=>({...item,baseline:migration.landscapeRevision[item.stage].baseline,revision:migration.landscapeRevision[item.stage].revision})):this.definitions;
+    const candidate=new FrameDraft([...this.items.values()],definitions,migration?.atlasDimensions||this.dimensions);
     if(design.format===FORMAT) {
       const sprites=new Draft([...this.items.values()]);sprites.restore(design);
       candidate.value=clone(sprites.value);
@@ -62,7 +69,22 @@ export class ProjectDraft extends FrameDraft {
     if(legacy)notes.push('Older draft: source hashes were not recorded. Available baseline, frame and landscape checks passed.');
     if(design.format===DESIGN_FORMAT || design.format===FORMAT)notes.push('This older file has no atlas boundary edits. Boundaries will use the baseline; any resets appear below.');
     if(design.format===FORMAT)notes.push('This sprite-only file has no landscapes. Landscape values will use the baseline; any resets appear below.');
-    return {state:snapshot(candidate),notes,legacy};
+    if(migration) {
+      const updated=[];
+      for(const stage of Object.keys(this.landscapeBaseline)) {
+        const before=migration.landscapeRevision[stage];
+        if(same(before,this.landscapeRevision[stage]))continue;
+        updated.push(stage.toUpperCase());
+        for(const layer of LAYERS)for(const field of Object.keys(before.baseline[layer])) {
+          // Adopt new defaults only where the user left the old default unchanged.
+          if(candidate.landscapes[stage][layer][field]===before.baseline[layer][field])candidate.landscapes[stage][layer][field]=this.landscapeBaseline[stage][layer][field];
+        }
+      }
+      const converted={...candidate.export(),landscapeRevision:clone(this.landscapeRevision),atlasDimensions:clone(this.dimensions)};
+      const check=new FrameDraft([...this.items.values()],this.definitions,this.dimensions);check.restore(converted);
+      notes.push(`Approved artwork updated for ${updated.join(' and ')}. Untouched settings now use the approved defaults; your custom adjustments and all sprite edits are retained. Review adjusted landscapes with the new artwork.`);
+    }
+    return {state:snapshot(candidate),notes,legacy,migrated:Boolean(migration)};
   }
   prepareImport(payload) {
     const decoded=this.decode(payload),before=snapshot(this);
@@ -92,7 +114,8 @@ export class ProjectDraft extends FrameDraft {
     try {
       const payload=JSON.parse(entry[1]),decoded=this.decode(payload);
       install(this,decoded.state);this.saved=clone(this.value);this.savedFrames=clone(this.frames);this.savedLandscapes=clone(this.landscapes);
-      this.migrated=entry[0]!==PROJECT_STORAGE_KEY;this.savedAt=payload.savedAt||null;this.past=[];this.future=[];
+      this.migrated=entry[0]!==PROJECT_STORAGE_KEY||decoded.migrated;this.savedAt=payload.savedAt||null;this.past=[];this.future=[];
+      if(decoded.migrated)return `${decoded.notes.at(-1)} Save all keeps the updated project; your previous saved copy is preserved.`;
       return this.migrated?'Recovered your earlier draft. Save all creates the new project copy and retains the old save.':'Restored all settings from this browser.';
     }catch(error){this.unreadable=entry[0]===PROJECT_STORAGE_KEY;this.failedSave=entry[1];throw error;}
   }
@@ -100,6 +123,7 @@ export class ProjectDraft extends FrameDraft {
     this.assertStorage(storage);
     // Preserve a malformed/incompatible save before an explicit Save all replaces it.
     if(this.unreadable && this.expectedRaw!==null)storage.setItem(UNREADABLE_KEY,this.expectedRaw);
+    if(this.migrated && this.expectedRaw!==null)storage.setItem(ARTWORK_RECOVERY_KEY,this.expectedRaw);
     const savedAt=new Date().toISOString(),raw=JSON.stringify({...this.export(),savedAt});
     storage.setItem(PROJECT_STORAGE_KEY,raw);
     this.expectedRaw=raw;this.savedAt=savedAt;this.saved=clone(this.value);this.savedFrames=clone(this.frames);this.savedLandscapes=clone(this.landscapes);this.migrated=false;this.unreadable=false;

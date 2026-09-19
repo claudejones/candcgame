@@ -204,7 +204,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "sa03": {
       "label": "South America — Rio de Janeiro",
-      "status": "pending",
+      "status": "approved",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/SA-assets/SA03_BG_DISTANT_RIO.png",
@@ -215,7 +215,8 @@ window.CC_LANDSCAPE_REGISTRY = {
             2,
             6
           ],
-          "requireOpaque": true
+          "requireOpaque": true,
+          "cacheKey": "c838eea5"
         },
         "mid": {
           "reference": "assets-original/current-generated/SA-assets/SA03_BG_MID_RIO.png",
@@ -223,7 +224,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "width": 2172,
           "height": 724,
           "colorType": 6,
-          "requireTransparency": true
+          "requireTransparency": true,
+          "cacheKey": "9c4e9ed4"
         },
         "ground": {
           "reference": "assets-original/current-generated/SA-assets/SA03_GROUND_RIO.png",
@@ -232,13 +234,14 @@ window.CC_LANDSCAPE_REGISTRY = {
           "height": 724,
           "colorType": 6,
           "requireTransparency": true,
-          "sourceSurfaceY": 393
+          "sourceSurfaceY": 393,
+          "cacheKey": "206ed3d8"
         }
       }
     },
     "eu01": {
       "label": "Europe — Greece / Santorini",
-      "status": "pending",
+      "status": "approved",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/EU-assets/EU01_BG_DISTANT_GREECE.png",
@@ -249,7 +252,8 @@ window.CC_LANDSCAPE_REGISTRY = {
             2,
             6
           ],
-          "requireOpaque": true
+          "requireOpaque": true,
+          "cacheKey": "213eceb5"
         },
         "mid": {
           "reference": "assets-original/current-generated/EU-assets/EU01_BG_MID_GREECE.png",
@@ -257,7 +261,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "width": 2172,
           "height": 724,
           "colorType": 6,
-          "requireTransparency": true
+          "requireTransparency": true,
+          "cacheKey": "2ea73633"
         },
         "ground": {
           "reference": "assets-original/current-generated/EU-assets/EU01_GROUND_GREECE.png",
@@ -266,7 +271,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "height": 724,
           "colorType": 6,
           "requireTransparency": true,
-          "sourceSurfaceY": 393
+          "sourceSurfaceY": 393,
+          "cacheKey": "83f9d5b0"
         }
       }
     },

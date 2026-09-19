@@ -1,4 +1,4 @@
-import {MAX_IMPORT_BYTES,RECOVERY_KEY,UNREADABLE_KEY} from './project.mjs';
+import {MAX_IMPORT_BYTES,RECOVERY_KEY,UNREADABLE_KEY,ARTWORK_RECOVERY_KEY} from './project.mjs';
 const $=id=>document.getElementById(id);
 function download(text,name) {
   const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');
@@ -9,7 +9,7 @@ const dateLabel=value=>new Date(value).toLocaleString([], {dateStyle:'short',tim
 const fields={x:'X',y:'Y',w:'Width',h:'Height',l:'Left',r:'Right',t:'Top',b:'Bottom',scale:'Scale',parallax:'Parallax'};
 
 export function setupProjectWorkflow({draft,beforeAction,changed,message}) {
-  const dialog=$('project-dialog');let review=null,recovery=null,unreadable=null,reading=false;
+  const dialog=$('project-dialog');let review=null,recovery=null,unreadable=null,artworkRecovery=null,reading=false;
   function refresh() {
     $('save-status').textContent=draft.dirty?'Unsaved changes · all stages & characters':draft.savedAt?`Saved in this browser · ${dateLabel(draft.savedAt)}`:'Baseline loaded · no browser save yet';
     $('change-count').textContent=`${draft.changedFrames} frames · ${draft.changedLayers} layers changed from GitHub baseline`;
@@ -20,12 +20,14 @@ export function setupProjectWorkflow({draft,beforeAction,changed,message}) {
   function inspectRecovery() {
     recovery=null;unreadable=draft.failedSave||null;
     try {
+      artworkRecovery=draft.migrated&&draft.expectedRaw?draft.expectedRaw:localStorage.getItem(ARTWORK_RECOVERY_KEY);
       const raw=localStorage.getItem(RECOVERY_KEY);
       if(raw){recovery=JSON.parse(raw);draft.decode(recovery.project);}
       unreadable ||= localStorage.getItem(UNREADABLE_KEY);
       $('recovery-status').textContent=recovery?`Working project before the last import · ${dateLabel(recovery.createdAt)}`:'A recovery copy is created when you apply an import.';
     }catch(error){recovery=null;$('recovery-status').textContent=`Recovery unavailable: ${error.message}`;}
     $('review-recovery').disabled=!recovery;$('export-recovery').disabled=!recovery;$('export-unreadable').hidden=!unreadable;
+    $('export-artwork-recovery').hidden=!artworkRecovery;
   }
   function showRows(rows) {
     $('project-changes').replaceChildren(...rows.map(row=>{
@@ -83,6 +85,7 @@ export function setupProjectWorkflow({draft,beforeAction,changed,message}) {
   $('review-recovery').onclick=()=>{try{open(draft.prepareImport(recovery.project),'Pre-import recovery copy');}catch(error){report(error);}};
   $('export-recovery').onclick=()=>projectDownload(recovery.project);
   $('export-unreadable').onclick=()=>download(unreadable,'cc-workbench-unreadable-save.json');
+  $('export-artwork-recovery').onclick=()=>download(artworkRecovery,'cc-workbench-before-artwork-update.json');
   $('cancel-import').onclick=$('close-project-dialog').onclick=()=>dialog.close();
   dialog.addEventListener('close',()=>{review=null;});
   refresh();return {refresh};

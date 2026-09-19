@@ -51,3 +51,7 @@ Command keys reserve AF01–AF03 (Africa), AS01–AS03 (Asia), OC01–OC03 (Ocea
 27 landscape assets across NA01–NA03, SA01–SA03 and EU01–EU03: FAR/DISTANT + MID + GROUND for each stage.
 
 All 27 are the Phase 8 regeneration validation batch under `LANDSCAPE_GENERATION_CONTRACT_V1.md`. The completed KEEP / REPAIR / REGENERATE audit remains technical and visual-reference evidence; it does not exempt a layer from standardized regeneration.
+
+## Phase 8 landscape acceptance
+
+North America (NA01–NA03) and South America (SA01–SA03) are approved complete FAR/MID/GROUND sets. South America regression passed on 2026-09-19. SA03's reviewed revision is `c1fb39c909d68b87f200c354dc2c966f96a597c1`; exact layer hashes and approval pointers are in `config/asset-workflow-state.json`. EU01 — Greece / Santorini was explicitly approved on 2026-09-19 at reviewed revision `8556e5a0312e53cb3843f1b69c61a35e698383ef`, preserving its exact images and canonical geometry. EU02 — France / Paris is next; EU03 and Europe regression follow. Legacy packaged assets and deferred character/hazard calibration remain separate.

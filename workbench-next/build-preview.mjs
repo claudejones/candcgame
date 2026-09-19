@@ -13,6 +13,9 @@ if (!target || target === root || target.startsWith(root + path.sep)) {
   throw new Error('Use an explicit preview checkout outside the game repository.');
 }
 const outputRoot = path.join(target, 'dist');
+// This directory is generated output. Remove stale artwork from earlier snapshots.
+await fs.rm(outputRoot,{recursive:true,force:true});
+await fs.mkdir(outputRoot,{recursive:true});
 const context = {window:{}};
 vm.createContext(context);
 const dependencies=['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js'];

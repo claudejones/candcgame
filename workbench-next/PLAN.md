@@ -2,6 +2,8 @@
 
 Status: proposed; parallel branch only. The user's approval is required before replacing the working interface.
 
+Maintenance increment: **Review 05.1 — approved EU01/SA03 artwork refresh**, requested 2026-09-19. Integrated main `b469182…` into `editor-next`, retaining the current UI. The catalog and packaged preview now use the approved FAR/MID/GROUND sets, zero-offset defaults and unchanged source bytes. Explicit old/new source signatures permit bounded draft migration: preserve user edits, migrate untouched defaults, retain the previous saved record before saving the upgraded project. This does not change the runtime/Test/Game implementation sequence below.
+
 Current increment: **Review 05 — whole-project configurations and continent navigation**, requested 2026-09-19. Continent → Stage shows available registry stages and remembers the last stage per continent. Save all / Export all / Import operate on the complete editable configuration. Import validates before a field-level diff, preserves a pre-import recovery copy, and applies as one Undo step. Browser save status is distinct from GitHub. The v4 project records source and artwork provenance; v1/v2/v3 candidate drafts recover without overwriting their old keys. Runtime conversion remains pending.
 
 Next delivery sequence: **runtime adapter + in-scene Design → working Test → working Game → legacy cleanup and cutover review**. Test and Game remain required work; their visible tabs are planned, disabled entry points. No individual stage/asset save workflow is needed for the current scope.
@@ -95,7 +97,7 @@ Milestones 2–6 are incremental changes within the parallel track. Preview prog
 
 ## Branch, preview and cutover safety
 
-- `editor-next` starts at main `1329554…`; additive `workbench-next/` directory initially. Check main/development heads before any later merge and bring in intervening approved asset changes without overwriting them.
+- `editor-next` starts at main `1329554…`; upstream now includes approved EU01/SA03 through `b469182…`. Check main/development heads before later merges, bring in approved asset changes without overwriting them, and provide source-specific migration before replacing a saved draft's baseline.
 - No changes to `src/dev.html`, `src/game.html`, approved images, current storage keys or Pages in milestone 1.
 - Existing Pages deploys **main only after CI**. A branch alone does not create a GitHub Pages preview URL. Use a local candidate server initially. Decide a separate non-production preview route/host before shared browser acceptance; never deploy the branch over the current Pages site.
 - Draft PR triggers the existing pull-request CI without deploying Pages. A later review build may add a dedicated candidate preview workflow, with its destination explicit.
@@ -105,4 +107,4 @@ Milestones 2–6 are incremental changes within the parallel track. Preview prog
 
 ## Next implementation packet
 
-Continue in `editor-next`; read root AGENTS.md, Current Status and this folder. Review the complete project save/import workflow, then build the runtime adapter and in-scene character/hazard/finish/FX editing. Convert one validated complete project snapshot on runtime readiness and every mode transition. Test must then provide deterministic play/pause/reset/step and focused/full-stage/finish/recovery scenarios; Game must start from an explicit complete draft or baseline with diagnostics removed. Use the coverage matrix in AUDIT.md to prevent omissions. This remains a parallel Design increment, not a production importer or approval of replacement. Landscape artwork production stays separate. Main was incorporated through `723a42b…`; preserve subsequent artwork/workflow updates at later integration, and provide explicit draft compatibility handling for changed baselines.
+Continue in `editor-next`; read root AGENTS.md, Current Status and this folder. Review the complete project save/import workflow, then build the runtime adapter and in-scene character/hazard/finish/FX editing. Convert one validated complete project snapshot on runtime readiness and every mode transition. Test must then provide deterministic play/pause/reset/step and focused/full-stage/finish/recovery scenarios; Game must start from an explicit complete draft or baseline with diagnostics removed. Use the coverage matrix in AUDIT.md to prevent omissions. This remains a parallel Design increment, not a production importer or approval of replacement. Landscape artwork production stays separate. Main was incorporated through `b469182…`; preserve later artwork/workflow updates and extend explicit draft compatibility handling for each changed baseline.

@@ -24,6 +24,41 @@
       },
       "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35418116771",
       "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35418134078"
+    },
+    "sa03": {
+      "commit": "c1fb39c909d68b87f200c354dc2c966f96a597c1",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/south-america/SA03_BG_DISTANT_RIO.png": "c838eea5a5f4f295651a3f5e9ee45091f5850d9c19f7a965508360b730650e02",
+        "assets/phase8-validation/south-america/SA03_BG_MID_RIO.png": "9c4e9ed444a920d2bea84d21c3d94912c929b111959fe9d5ae435110c0fb8111",
+        "assets/phase8-validation/south-america/SA03_GROUND_RIO.png": "206ed3d821345a852ff5fe3ea873d5c0306cf0f039bdcef07be57202adc9f77a"
+      },
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35420656908",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35420675177"
+    },
+    "eu01": {
+      "commit": "8556e5a0312e53cb3843f1b69c61a35e698383ef",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/europe/EU01_BG_DISTANT_GREECE.png": "213eceb527830fd1bc534654da698b166c264d5a4b49ff5080eaa5597720b694",
+        "assets/phase8-validation/europe/EU01_BG_MID_GREECE.png": "2ea736336cba3e6c3086a069dd5c031234f5ffd6f7bdfad5f4038cf2430bdfdd",
+        "assets/phase8-validation/europe/EU01_GROUND_GREECE.png": "83f9d5b0bc922bf01677736f05ad6307eabdb645540af4a10c74b15d4b4f7619"
+      },
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35422237867",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35422258302"
+    }
+  },
+  "continentRegressions": {
+    "sa": {
+      "completedAt": "2026-09-19",
+      "reviewedCommit": "c1fb39c909d68b87f200c354dc2c966f96a597c1",
+      "stages": [
+        "sa01",
+        "sa02",
+        "sa03"
+      ],
+      "result": "passed",
+      "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
     }
   }
 }

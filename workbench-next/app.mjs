@@ -327,8 +327,8 @@ window.addEventListener('keydown',event=>{
 });
 
 try{
-  const response=await fetch('./asset-catalog.json');if(!response.ok)throw new Error(`Catalog load failed (${response.status})`);catalog=await response.json();
-  draft=new ProjectDraft(spriteItems,landscapes,catalog.dimensions,projectProvenance(catalog,spriteItems,landscapes));
+  const response=await fetch('./asset-catalog.json',{cache:'no-cache'});if(!response.ok)throw new Error(`Catalog load failed (${response.status})`);catalog=await response.json();
+  draft=new ProjectDraft(spriteItems,landscapes,catalog.dimensions,projectProvenance(catalog,spriteItems,landscapes),catalog.migrations);
   try{
     message(draft.load(localStorage));
   }catch(error){message(`Candidate save was not loaded: ${error.message}. The stored copy is unchanged.`,true);}
