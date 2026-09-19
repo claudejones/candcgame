@@ -18,7 +18,7 @@
       "mid": {"reference": "assets-original/current-generated/NA-assets/NA03_BG_MID_CITY.png", "validation": "assets/phase8-validation/north-america/NA03_BG_MID_CITY.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "cacheKey": "9a6e1445"},
       "ground": {"reference": "assets-original/current-generated/NA-assets/NA03_GROUND_CITY.png", "validation": "assets/phase8-validation/north-america/NA03_GROUND_CITY.png", "width": 2170, "height": 725, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393, "cacheKey": "095aa9cb"}
     }},
-    "sa01": {"label": "South America — Amazon Rainforest", "status": "integrated", "layers": {
+    "sa01": {"label": "South America — Amazon Rainforest", "status": "approved", "layers": {
       "far": {"reference": "assets-original/current-generated/SA-assets/SA01_BG_DISTANT_AMAZON.png", "validation": "assets/phase8-validation/south-america/SA01_BG_DISTANT_AMAZON.png", "width": 2172, "height": 724, "colorTypes": [2, 6], "requireOpaque": true, "cacheKey": "cbe232ba"},
       "mid": {"reference": "assets-original/current-generated/SA-assets/SA01_BG_MID_AMAZON.png", "validation": "assets/phase8-validation/south-america/SA01_BG_MID_AMAZON.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "cacheKey": "8e5653f5"},
       "ground": {"reference": "assets-original/current-generated/SA-assets/SA01_GROUND_AMAZON.png", "validation": "assets/phase8-validation/south-america/SA01_GROUND_AMAZON.png", "width": 2172, "height": 724, "colorType": 6, "requireTransparency": true, "sourceSurfaceY": 393, "cacheKey": "3ca40ce6"}

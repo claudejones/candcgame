@@ -203,3 +203,9 @@ The one-time workflow-support setup implements the streamlined Phase 8 process w
 Every Phase 8 stage and continent closeout must give the user the next fully completed, copy-ready conversation prompt. The assistant resolves the next stage ID, continent, asset filenames, repository authority and scope from the current repository and `config/phase8-landscapes.json`. Placeholder templates or instructions requiring the user to fill in fields are not an acceptable handoff.
 
 The Phase 8 workflow-support setup is project-wide and one-time. It already registers the North America, South America and Europe validation stages. It is maintained as stages advance but is not rerun for each stage or continent.
+
+## 2026-09-18 — SA01 Amazon Rainforest Phase 8 landscapes approved
+
+The user accepted the deployed SA01 FAR/MID/GROUND integration after Design/Test/Game, Contextual Inspector and horizontal-scroll/repeat review. The final MID retains the colorful hanging snake, removes the monkey and has SHA-256 `8e5653f5dfc7dea8254521f445e2609eebf3b1e0c683c64e4ffab38755519f03`. FAR remains `cbe232ba047d06634a9949f8498b9546efecb45eccaed548a054b85ca933039a`; GROUND remains `3ca40ce6a3164d1d330fc18d5d56df42488aab0989055c5bf129066fe214a795`.
+
+The acceptance required correcting a development-bootstrap omission that had left SA01 on legacy 2048-wide scaling and nonzero offsets. The approved mapping now matches the canonical Phase 8 pilot contract: source width 2172, FAR/MID/GROUND offset Y=0, FAR scale contract 1.25, MID/GROUND scale contract 1.00 and ground surface Y=410. Production CI now guards SA01's inclusion in that canonical override. SA01 is closed; SA02 is next and must start in a fresh conversation.
