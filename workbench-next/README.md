@@ -1,6 +1,6 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 8; not the replacement editor**.
+Status: **review increment 8.1; not the replacement editor**.
 Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0` for EU02 and EU03 landscapes (2026-09-19). Production source/assets match this upstream snapshot; candidate-only changes remain under `workbench-next/`. EU02 is approved; EU03 is integrated and awaiting artwork approval.
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
@@ -27,6 +27,14 @@ From the repository root, run `python -m http.server 8080`, then open
 This is a working **landscape and sprite Design proposal**, using repository artwork. It includes both characters, all six states, all nine existing stages' hazards, a shared frame strip, step/play controls, full-atlas view, per-frame crops, before/after comparison, undo/redo, separate draft saving, and export. Frame/atlas playback is an artwork loop; Scene additionally provides the production-derived movement and contact checks described below. Test and Game connections are visibly deferred.
 
 It does not load the old runtime, write the current editor's storage, modify source images/configuration, or change gameplay. The candidate project export has its own format and is **not** a current game-config import. Future runtime integration must convert these complete drafts explicitly. Test and Game remain required next milestones.
+
+## Continuous Scene playback — Review 08.1
+
+**Play scene** now repeats continuously by default. **Loop** repeats the selected hazard pass, proposal action demo or checked stage sequence. Each repeat resets its actor/action schedule and contact result while the landscape and clouds continue on the existing world clock. The preceding result stays visible as **Previous**. This repeats the current scenario; it does not generate a new random course.
+
+**Pause / freeze** retains the exact current time; **Next frame** advances one simulation step while frozen. **Stop** returns the scene to its beginning, frozen, retaining the selected demo/sequence. **Restart** returns to the beginning and plays. Turning Loop off finishes the current pass and stops at its endpoint. **Pause on contact** is an explicit exception: it freezes on the first contact of each pass. Selection, editing focus, project actions and hidden tabs retain their existing pause behavior. Controls wait for scene readiness.
+
+Loop and transport state are preview settings; Save all/Export retain the same v6 project data. Artwork, calibration values, timing-window calculations and production runtime code are unchanged in this update.
 
 ## Assisted calibration — Review 08
 

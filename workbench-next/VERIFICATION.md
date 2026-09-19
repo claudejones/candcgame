@@ -1,5 +1,16 @@
 # Workbench review — verification
 
+## Review 08.1 — continuous Scene playback
+
+User-requested Design transport correction. The finite pass remains available with Loop off; Loop is enabled by default. No calibration numbers or runtime defaults changed.
+
+- 51 Node tests pass. The added renderer check verifies that repeating a hazard retains continuing world/cloud offsets, independently of the restarted encounter time.
+- Actual DOM/canvas handlers verify repeated normal passes, repeated Constance proposal demos and repeated complete checked sequences; no additional animation clock; exact pause/resume and frame stepping; Stop at time zero frozen; Restart; finishing the current pass when Loop is disabled; resuming/stepping into a repeat; and first-contact freeze independently on successive passes.
+- Existing load, context, numeric edit, atlas, hitbox, panning, proposal, sequence, save/import/history and hidden-tab checks pass. Loop/transport actions leave authored project settings unchanged. Tests use jsdom with real canvas/PNG decoding; user browser layout acceptance remains separate.
+- The runtime-order, multiple-rate and timing-window reconciliation identified by the dependent calibration review is explicitly prioritized in PLAN.md. This transport update does not claim to resolve those calibration differences or merge main's eleven pending size/contact proposals.
+
+Publication evidence follows after the exact implementation passes CI and deployment succeeds.
+
 ## Review 08 — assisted calibration
 
 Authorized 2026-09-19. Changes remain inside `workbench-next/`, retaining the existing production/artwork snapshot.

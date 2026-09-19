@@ -85,9 +85,9 @@ export function sceneGeometry({config,stage,draft,character,hazard,time=0,baseli
   return result;
 }
 export function drawDesignScene(canvas,options) {
-  const {config,contract,stage,images,draft,character,hazard,time=0,baseline=false,travel=true,guides=true,boxes=false,contactLatched=false}=options;
+  const {config,contract,stage,images,draft,character,hazard,time=0,worldTime=time,baseline=false,travel=true,guides=true,boxes=false,contactLatched=false}=options;
   const result=sceneGeometry(options);
-  drawLandscape(canvas,{config,contract,stage,images,transforms:(baseline?draft.landscapeBaseline:draft.landscapes)[stage],scroll:travel?time*config.worldSpeed:0,cloudScroll:time*config.worldContract.cloudSpeed,guides});
+  drawLandscape(canvas,{config,contract,stage,images,transforms:(baseline?draft.landscapeBaseline:draft.landscapes)[stage],scroll:travel?worldTime*config.worldSpeed:0,cloudScroll:worldTime*config.worldContract.cloudSpeed,guides});
   const ctx=canvas.getContext('2d');
   const draw=(img,g,color)=>{
     if(!img||!g)return;

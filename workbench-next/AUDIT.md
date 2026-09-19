@@ -69,7 +69,7 @@ The current asset map has **58 image entries**, all resolving to files in this c
 ## Verification boundary
 
 Observed deployed: Design character/landscape/global panels, Test setup/actions, first-load preview absence followed by successful preview after selection. Source audit covers Game entry, save/import, atlas sourcing, runtime controls, and all legacy control IDs. Repeated-pause, cross-mode contamination, full-course draft application, all nine stage visuals, and fresh/mobile performance remain targeted acceptance tests, not claimed reproduced results. No production values were changed for this audit.
-# Current candidate coverage — reviews 06–08
+# Current candidate coverage — reviews 06–08.1
 
 This implementation status supplements the original old/new functionality audit below. A completed preview tool does not establish gameplay parity.
 
@@ -104,3 +104,11 @@ Start with **Calibrate hazards → Optimize stage**. Select a result to see **Be
 - The compact Hand icon and Space + drag pan the zoomed preview without editing the draft.
 
 Test and Game, damage/recovery, FX/finish authoring and full runtime snapshot conversion remain the next delivery milestones. Production files and the working GitHub Pages editor are unchanged.
+
+## Continuous Scene playback — Review 08.1
+
+**Play scene** now repeats continuously by default. **Loop** repeats the selected hazard pass, proposal action demo or checked stage sequence. Each repeat resets its actor/action schedule and contact result while the landscape and clouds continue on the existing world clock. The preceding result stays visible as **Previous**. This repeats the current scenario; it does not generate a new random course.
+
+**Pause / freeze** retains the exact current time; **Next frame** advances one simulation step while frozen. **Stop** returns the scene to its beginning, frozen, retaining the selected demo/sequence. **Restart** returns to the beginning and plays. Turning Loop off finishes the current pass and stops at its endpoint. **Pause on contact** is an explicit exception: it freezes on the first contact of each pass. Selection, editing focus, project actions and hidden tabs retain their existing pause behavior. Controls wait for scene readiness.
+
+Loop and transport state are preview settings; Save all/Export retain the same v6 project data. Artwork, calibration values, timing-window calculations and production runtime code are unchanged in this update.

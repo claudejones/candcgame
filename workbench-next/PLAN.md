@@ -2,7 +2,9 @@
 
 Status: proposed; parallel branch only. The user's approval is required before replacing the working interface.
 
-Current increment: **Review 08 — assisted calibration**, authorized 2026-09-19. Shared pathway/opt-in following, reviewed bounded hazard proposals using both current characters, per-field locks, before/proposed Scene demos, global difficulty profiles and verified Design stage sequences are implemented. v6 preserves earlier saved work. See README for the testing workflow and explicit limits. The optimizer never silently changes character physics or applies proposals. Full Test/Game integration remains next.
+Current increment: **Review 08.1 — continuous Scene playback**. Play now loops the current scenario by default. Pause freezes, Stop returns to the beginning frozen, Restart begins again, and disabling Loop retains a finite pass. The scenery/cloud clock continues across repetitions. Per-pass contacts, automatic proposal/sequence action schedules, readiness and v6 persistence are preserved.
+
+Previous increment: **Review 08 — assisted calibration**, authorized 2026-09-19. Shared pathway/opt-in following, reviewed bounded hazard proposals using both current characters, per-field locks, before/proposed Scene demos, global difficulty profiles and verified Design stage sequences are implemented. v6 preserves earlier saved work. See README for the testing workflow and explicit limits. The optimizer never silently changes character physics or applies proposals. Full Test/Game integration remains next.
 
 Historical increment: **Review 06 — in-scene Design calibration and motion**, explicitly authorized 2026-09-19. Character/hazard Scene view, shared/state/stage placement, collision geometry, HIGH/LOW flight, one fixed-step preview clock, Play/Freeze/Next frame/Restart/slow motion, focused-input retention, companion context, lazy decoded scene loading and synchronized comparison are implemented. Whole-project v5 includes these fields; older saves/imports migrate with existing edits retained and the v4 record preserved. This is pose-loop/pass calibration, not physics/collision gameplay. Test/Game, FX/finish editing and the full production adapter still follow.
 
@@ -135,3 +137,13 @@ Start with **Calibrate hazards → Optimize stage**. Select a result to see **Be
 - The compact Hand icon and Space + drag pan the zoomed preview without editing the draft.
 
 Test and Game, damage/recovery, FX/finish authoring and full runtime snapshot conversion remain the next delivery milestones. Production files and the working GitHub Pages editor are unchanged.
+
+## Immediate next priority — reconcile dependent calibration evidence
+
+The user supplied `main/docs/phase8-qa/DEPENDENT_CALIBRATION_QA.md` and its supporting runtime tests. Review baseline: main `57d6ca4e6932cc0ee5f6d05597245c1c17a74e85`. Its eleven size/contact adjustments are already in main's configuration but documented as awaiting acceptance; editor-next retains its earlier source baseline. Do not merge them automatically or overwrite user drafts.
+
+1. Establish a common validation basis before more tuning. Incorporate the actual runtime collision-check ordering, both characters, all relevant atlas phases, configured speed classes and 60/120 Hz checks. The current runtime reads previously drawn character geometry during collision checks; decide any correction explicitly and apply it consistently across the runtime and editor. Standardize timing-window units/endpoint spans: the current editor counts valid fixed-step samples, while the other regression test measures endpoint spans. This creates a one-step reporting difference (~16.7 ms at 60 Hz); rerun threshold decisions after reconciliation. Clarify the report's 10 ms measurement sampling versus the committed 20 ms regression sampler.
+2. Compare original, legacy-proposed and editor-proposed values on that common baseline, including visible size, support/grounding, both action windows and manual locks. Preserve meaningful artwork size; smaller props or disproportionately small colliders are review decisions, not automatic proof of a good result. Retain the existing runtime ground/finish anchor checks and approved PNGs. Recheck flagged hazards; do not interpret differing pass counts across thresholds/baselines as a direct quality ranking.
+3. Feed the reviewed complete snapshot into the full Test/Game adapter, covering spawn schedules, collisions, damage/recovery, finish behavior and current upstream source-anchor/stage-catalog support. Explicitly migrate baseline changes without losing local edits. Existing production/contract acceptance gates remain distinct from Design preview checks.
+
+Review 08.1 resolves the playback request only; the validation reconciliation and production integration above remain pending. Keep dependent QA evidence and unresolved findings; pause independent competing legacy tuning rather than deleting its report or reverting useful fixes.

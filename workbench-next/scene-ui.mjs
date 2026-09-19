@@ -6,10 +6,10 @@ import {hitBounds} from './frame-editor.mjs';
 import {contains,dragBox,placementForBox,drawHandles} from './hitbox-editor.mjs';
 const $=id=>document.getElementById(id);
 export function setupSceneEditor({config,contract,items,landscapes,catalog,draft,active,reload,changed,message,calibration=()=>null}) {
-  let current=null,who='claude',state='run',inspectorKey='',selectionKey='',target='character',motion=null,result=null,editing=false,drag=null,signature='',sequence=null,demo=null,sequenceIndex=0;
+  let current=null,who='claude',state='run',inspectorKey='',selectionKey='',target='character',motion=null,result=null,editing=false,drag=null,signature='',sequence=null,demo=null,sequenceIndex=0,cycleStart=0,cycleNumber=1,lastResult='';
   const pass=new ContactPass(),hazards=new Map(landscapes.map(s=>[s.stage,items.find(i=>i.stage===s.stage&&i.type==='hazard').id]));
   const cfg=()=>profileConfig(config,draft.calibration);
-  const find=id=>items.find(i=>i.id===id),gameActions=()=>$('scene-motion').value==='encounter';
+  const find=id=>items.find(i=>i.id===id),gameActions=()=>$('scene-motion').value==='encounter',loopEnabled=()=>$('actor-loop').checked;
   function syncContext(selected,stage){
     const key=selected.id+':'+stage;
     if(key!==selectionKey){selectionKey=key;target=selected.type;editing=false;
@@ -22,16 +22,37 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
   const clock=new SceneClock({available:()=>Boolean(active()&&current?.ready&&!document.hidden&&!$('project-dialog').open&&!drag),paint,advance});
   function options(time=clock.time){
     const c=context(),images={...current.images,character:current.images[`character:${c.character.state}`]},proposal=calibration()?.previewFor(c.hazard);
-    return {config:cfg(),contract,draft,...current,...c,images,time,encounters:sequence?.events.map(e=>({...e,item:find(e.id)})),travel:$('actor-travel').checked,flight:$('scene-flight').value,guides:$('actor-guides').checked,boxes:$('actor-boxes').checked||editing,motion:gameActions()?motion:null,looping:false,contactLatched:pass.firstContact!==null,placementOverride:drag?{[drag.item.id]:drag.value}:proposal?{[c.hazard.id]:proposal.value}:null};
+    return {config:cfg(),contract,draft,...current,...c,images,time:time-cycleStart*STEP,worldTime:time,encounters:sequence?.events.map(e=>({...e,item:find(e.id)})),travel:$('actor-travel').checked,flight:$('scene-flight').value,guides:$('actor-guides').checked,boxes:$('actor-boxes').checked||editing,motion:gameActions()?motion:null,looping:false,contactLatched:pass.firstContact!==null,placementOverride:drag?{[drag.item.id]:drag.value}:proposal?{[c.hazard.id]:proposal.value}:null};
+  }
+  function resetActors(){
+    sequenceIndex=0;if(demo)demo.triggered=false;
+    motion=createMotion(config,sequence||demo?'run':state);
+    if(demo&&demo.at===0){motion[demo.action==='jump'?'triggerJump':'triggerSlide']();demo.triggered=true;}
+  }
+  function startPass(time){
+    resetActors();pass.reset();
+    const first=pass.sample(sceneGeometry(options(time)),0,{travel:$('actor-travel').checked});
+    if(sequence){pass.startedAhead=true;pass.complete=false;}
+    return first;
   }
   function advance(time){
+    // Repeat the encounter on its own clock. Scenery/clouds keep the total time,
+    // and the single animation loop retains freeze, speed and catch-up behavior.
+    if(pass.complete){
+      if(!loopEnabled())return false;
+      lastResult=pass.label(sceneGeometry(options(time)),{travel:$('actor-travel').checked});
+      cycleStart=clock.steps;cycleNumber++;
+      const first=startPass(time);
+      return !(first&&$('pause-contact').checked);
+    }
+    const localTime=(clock.steps-cycleStart)*STEP;
     if(gameActions())motion.update(STEP);
-    if(sequence){while(sequenceIndex<sequence.events.length&&time+1e-8>=sequence.events[sequenceIndex].start+sequence.events[sequenceIndex].local[who]){const e=sequence.events[sequenceIndex++];motion[e.action==='jump'?'triggerJump':'triggerSlide']();}}
-    else if(demo&&!demo.triggered&&time+1e-8>=demo.at){motion[demo.action==='jump'?'triggerJump':'triggerSlide']();demo.triggered=true;}
-    const g=sceneGeometry(options(time));
-    if(sequence){const first=g.contact&&pass.firstContact===null;if(first)pass.firstContact=time;pass.complete=time>=sequence.duration;return !(pass.complete||(first&&$('pause-contact').checked));}
-    const first=pass.sample(g,time,{travel:$('actor-travel').checked});
-    return !((first&&$('pause-contact').checked)||pass.complete);
+    if(sequence){while(sequenceIndex<sequence.events.length&&localTime+1e-8>=sequence.events[sequenceIndex].start+sequence.events[sequenceIndex].local[who]){const e=sequence.events[sequenceIndex++];motion[e.action==='jump'?'triggerJump':'triggerSlide']();}}
+    else if(demo&&!demo.triggered&&localTime+1e-8>=demo.at){motion[demo.action==='jump'?'triggerJump':'triggerSlide']();demo.triggered=true;}
+    const g=sceneGeometry(options(time));let first;
+    if(sequence){first=g.contact&&pass.firstContact===null;if(first)pass.firstContact=localTime;pass.complete=localTime>=sequence.duration;}
+    else first=pass.sample(g,localTime,{travel:$('actor-travel').checked});
+    return !((first&&$('pause-contact').checked)||(pass.complete&&!loopEnabled()));
   }
   function entries(selected,stage){
     syncContext(selected,stage);
@@ -55,17 +76,17 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
     $('preview-label').textContent=proposal?(proposal.proposed?'PROPOSED · UNSAVED':'BEFORE · UNSAVED'):sequence?'CHECKED SEQUENCE · DEMO':`${current.stage.toUpperCase()} · WORKING SCENE`;
     if(editing&&current.ready&&!proposal&&!sequence)drawHandles($('preview'),result[target].collision);
     $('preview').classList.toggle('hitbox-editing',editing);
-    $('actor-play').textContent=clock.running?'Pause / freeze':pass.complete?'Replay pass':'Play scene';$('actor-play').setAttribute('aria-pressed',String(clock.running));
-    for(const id of ['actor-play','actor-step','actor-restart','actor-speed','actor-jump','actor-slide','edit-hitbox','edit-target'])$(id).disabled=!current.ready;
-    $('actor-step').disabled=!current.ready||pass.complete;
+    $('actor-play').textContent=clock.running?'Pause / freeze':pass.complete&&!loopEnabled()?'Replay pass':'Play scene';$('actor-play').setAttribute('aria-pressed',String(clock.running));
+    for(const id of ['actor-play','actor-step','actor-restart','actor-stop','actor-loop','actor-speed','actor-jump','actor-slide','edit-hitbox','edit-target'])$(id).disabled=!current.ready;
+    $('actor-step').disabled=!current.ready||(pass.complete&&!loopEnabled());
     $('actor-jump').disabled=$('actor-slide').disabled=!current.ready||!gameActions()||pass.complete||Boolean(sequence);
     $('edit-hitbox').disabled=!current.ready||Boolean(proposal)||Boolean(sequence);
     $('actor-time').textContent=`Step ${clock.steps.toLocaleString()} · ${clock.time.toFixed(2)} s${clock.running?'':' · Frozen'}`;
     const c=context();$('actor-pose').textContent=sequence?`${who==='claude'?'Claude':'Constance'} ${c.character.state} · ${sequenceIndex}/${sequence.events.length} actions`:`${who==='claude'?'Claude':'Constance'} ${c.character.state} ${result.character.frame+1}/${c.character.frames} · ${c.hazard.name} ${result.hazard.frame+1}/${c.hazard.frames}`;
-    const status=$('contact-status'),label=current.ready?pass.label(result,{travel:opts.travel}):'Loading scene…';
+    const status=$('contact-status'),label=current.ready?`${cycleNumber>1?'Pass '+cycleNumber+' · ':''}${pass.label(result,{travel:opts.travel})}${lastResult?' · Previous: '+lastResult:''}`:'Loading scene…';
     if(status.textContent!==label)status.textContent=label;
     status.classList.toggle('contact',result.contact||pass.firstContact!==null);
-    $('scene-playback-help').textContent=sequence?'Checked sequence · actions play automatically for the selected character. Freeze or step to inspect. Exit sequence to edit.':demo?'Proposed timing demo · action plays automatically. Freeze or step to inspect.':gameActions()?'One hazard pass · contact checks without damage. Jump/Slide use game timing. Next frame = 1/60 s.':'Pose loop only · contact checks for this pose; use Game actions to test Jump/Slide clearance.';
+    $('scene-playback-help').textContent=(loopEnabled()?'Loop repeats this pass or sequence. Pause freezes; Stop returns to the start. ':'One pass; stops at the end. ')+(sequence?'Checked sequence · actions play automatically for the selected character. Freeze or step to inspect. Exit sequence to edit.':demo?'Proposed timing demo · action plays automatically. Freeze or step to inspect.':gameActions()?'Jump/Slide use game timing. Next frame = 1/60 s.':'Pose loop only · contact checks for this pose; use Game actions to test Jump/Slide clearance.');
     $('edit-target').value=target;$('edit-target-name').textContent=target==='character'?`${c.character.name} · ${c.character.state}`:c.hazard.name;
     $('edit-hitbox').setAttribute('aria-pressed',String(editing));$('edit-hitbox').textContent=editing?'Finish hitbox editing':'Edit hitbox on scene';
     inspector(false);
@@ -117,7 +138,7 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
   }
   function render(value){
     current=value;syncContext(value.selected,value.stage);motion??=createMotion(config,state);
-    const next=JSON.stringify([draft.placement,draft.frames,draft.value,draft.calibration]);if(signature&&next!==signature)pass.invalidate();signature=next;
+    const next=JSON.stringify([draft.placement,draft.frames,draft.value,draft.calibration]);if(signature&&next!==signature){pass.invalidate();lastResult='';}signature=next;
     $('compare').disabled=false;document.querySelector('.baseline-card').hidden=!$('compare').checked;
     $('preview').classList.remove('editing');$('preview').setAttribute('aria-label',`${current.stage.toUpperCase()} scene with ${who} and ${context().hazard.name}`);
     $('preview-label').textContent=`${current.stage.toUpperCase()} · WORKING SCENE`;
@@ -131,10 +152,10 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
     if(current.ready&&clock.steps===0)pass.sample(sceneGeometry(options()),0,{travel:$('actor-travel').checked});
     calibration()?.refresh();inspector(true);paint();
   }
-  function reset(keep=false){cancelDrag();if(!keep){sequence=null;demo=null;}sequenceIndex=0;if(demo)demo.triggered=false;motion=createMotion(config,sequence||demo?'run':state);if(demo&&demo.at===0){motion[demo.action==='jump'?'triggerJump':'triggerSlide']();demo.triggered=true;}pass.reset();clock.restart();if(current?.ready){pass.sample(sceneGeometry(options()),0,{travel:$('actor-travel').checked});paint();}}
+  function reset(keep=false){cancelDrag();if(!keep){sequence=null;demo=null;}cycleStart=0;cycleNumber=1;lastResult='';resetActors();pass.reset();clock.restart();if(current?.ready){startPass(0);paint();}}
   function replay(){reset(true);if(pass.firstContact!==null&&$('pause-contact').checked)return;clock.play();}
   function choose(next){clock.pause();cancelDrag();target=next;inspectorKey='';inspector(true);paint();}
-  function action(name){cancelDrag();motion[name==='jump'?'triggerJump':'triggerSlide']();const first=pass.sample(sceneGeometry(options()),clock.time,{travel:$('actor-travel').checked});if(first&&$('pause-contact').checked)clock.pause();paint();}
+  function action(name){cancelDrag();motion[name==='jump'?'triggerJump':'triggerSlide']();const first=pass.sample(sceneGeometry(options()),(clock.steps-cycleStart)*STEP,{travel:$('actor-travel').checked});if(first&&$('pause-contact').checked)clock.pause();paint();}
   function point(e){const r=$('preview').getBoundingClientRect();return {x:(e.clientX-r.left)*$('preview').width/r.width,y:(e.clientY-r.top)*$('preview').height/r.height};}
   function cancelDrag(){if(!drag)return;const id=drag.pointer;drag=null;if($('preview').hasPointerCapture?.(id))$('preview').releasePointerCapture(id);paint();}
   $('preview').addEventListener('pointerdown',e=>{
@@ -160,8 +181,10 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
   $('scene-hazard').onchange=()=>{hazards.set(current.stage,$('scene-hazard').value);reload();};
   $('scene-flight').onchange=()=>reset();$('scene-motion').onchange=()=>reset();
   $('pause-contact').onchange=()=>{if($('pause-contact').checked)$('actor-boxes').checked=true;paint();};
-  $('actor-play').onclick=()=>{cancelDrag();if(clock.running)clock.pause();else if(pass.complete)replay();else clock.play();};
+  $('actor-play').onclick=()=>{cancelDrag();if(clock.running)clock.pause();else if(pass.complete&&!loopEnabled())replay();else clock.play();};
   $('actor-step').onclick=()=>{cancelDrag();clock.step();};$('actor-restart').onclick=replay;
+  $('actor-stop').onclick=()=>reset(true);
+  $('actor-loop').onchange=()=>{if(pass.complete&&!loopEnabled())clock.pause();else paint();};
   $('actor-jump').onclick=()=>action('jump');$('actor-slide').onclick=()=>action('slide');
   $('actor-speed').onchange=()=>clock.setSpeed(Number($('actor-speed').value));
   for(const id of ['actor-guides','actor-boxes'])$(id).onchange=paint;
@@ -170,5 +193,5 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
   async function demonstrate(character,action,at){who=character;state='run';$('scene-motion').value='encounter';await reload();demo={action,at:Math.round(at/STEP)*STEP};reset(true);$('actor-travel').checked=true;clock.play();}
   function startSequence(value){sequence=value;state='run';$('scene-motion').value='encounter';$('actor-travel').checked=true;reset(true);pass.startedAhead=true;clock.play();}
   function endSequence(){if(sequence){sequence=null;reset();render(current);}}
-  return {entries,validate,render,demonstrate,startSequence,endSequence,sequenceActive:()=>Boolean(sequence),refresh:()=>{if(current&&active())render(current);},editingItem:()=>current?context()[target]:null,stop:()=>{cancelDrag();clock.pause();},reset,step:()=>{cancelDrag();if(!pass.complete)clock.step();},clock};
+  return {entries,validate,render,demonstrate,startSequence,endSequence,sequenceActive:()=>Boolean(sequence),refresh:()=>{if(current&&active())render(current);},editingItem:()=>current?context()[target]:null,stop:()=>{cancelDrag();clock.pause();},reset,step:()=>{cancelDrag();if(!pass.complete||loopEnabled())clock.step();},clock};
 }

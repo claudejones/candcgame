@@ -157,3 +157,16 @@ test('a real jump raises both drawing and collision geometry; a pass can clear w
   }
   const standing=run(false),jumping=run(true);assert.notEqual(standing.pass.firstContact,null);assert.ok(jumping.largestRise<0);assert.equal(jumping.pass.firstContact,null);assert.match(jumping.pass.label(jumping.g),/Cleared/);
 });
+
+test('repeating an encounter preserves landscape and cloud positions on the continuing world clock',async()=>{
+  const {drawDesignScene}=await import('./scene-model.mjs'),{drawLandscape}=await import('./landscape.mjs');
+  const draft=make(),stage='na01',landscape=landscapes.find(s=>s.stage===stage),images=Object.fromEntries(Object.entries({...landscape.sources,clouds:'clouds'}).map(([key,asset])=>[key,{...catalog.dimensions[asset],asset}]));
+  const record=()=>{const calls=[],ctx={drawImage:(...args)=>calls.push(args)};return {canvas:{getContext:()=>ctx},calls};};
+  const actual=record(),expected=record(),initial=record(),character=items.find(i=>i.id==='character:claude:run'),hazard=items.find(i=>i.id==='hazard:na01:0');
+  const options={config,contract:w.CC_LANDSCAPE_CONTRACT,stage,draft,images,character,hazard,time:0,worldTime:11,guides:false,looping:false};
+  const g=drawDesignScene(actual.canvas,options);
+  drawLandscape(expected.canvas,{...options,transforms:draft.landscapes[stage],scroll:11*config.worldSpeed,cloudScroll:11*config.worldContract.cloudSpeed});
+  drawDesignScene(initial.canvas,{...options,worldTime:0});
+  assert.deepEqual(actual.calls,expected.calls);assert.notDeepEqual(actual.calls,initial.calls);
+  const origin=sceneGeometry({...options,worldTime:0});assert.deepEqual(g.hazard,origin.hazard,'hazard starts a new pass independently of world scrolling');
+});
