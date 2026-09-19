@@ -77,13 +77,14 @@ function navigation() {
   for(const id of ['landscape-views','landscape-properties','scene-tools','landscape-dock','landscape-status'])$(id).hidden=!isLandscape();
   for(const id of ['sprite-views','sprite-properties','frame-boundaries','bounds-control','playback-note'])$(id).hidden=isLandscape();
   const scene=isActorScene();
-  for(const id of ['actor-context','actor-dock','actor-tools','placement-properties'])$(id).hidden=!scene;
+  for(const id of ['actor-context','actor-dock','actor-tools','placement-properties','scene-edit-target'])$(id).hidden=!scene;
   for(const id of ['sprite-properties','frame-boundaries','bounds-control'])$(id).hidden=isLandscape()||scene;
   $('stage-context').hidden=scope==='character'&&!scene;
   $('stage-context-label').textContent=scope==='character'?'Preview stage · character stays shared':'Stage context';
   for(const [id,mode] of [['actor-view','scene'],['frame-view','frame'],['atlas-view','atlas']])$(id).setAttribute('aria-pressed',String(view===mode));
   $('animation-dock').hidden=isLandscape()||scene||selected.frames<2;
   $('preview-area').classList.toggle('landscape-preview',isLandscape()||scene);
+  if(!scene)$('preview').classList.remove('hitbox-editing');
   $('inspector-title').textContent=isLandscape()?'Layer properties':scene?'Scene properties':'Frame properties';
   $('source-size-label').textContent=isLandscape()?'Image size':'Frame size';
   $('source-count-label').textContent=isLandscape()?'Artwork':'Frames';
@@ -281,7 +282,7 @@ for(const scope of ['stage','character']) {
 }
 $('previous').onclick=()=>setFrame(frame-1);$('next').onclick=()=>setFrame(frame+1);
 $('play').onclick=()=>{drag=null;editingBounds=false;setPlaying(!playing);render(false);if(playing)animationRequest=requestAnimationFrame(tick);};
-function spriteView(next){const reload=view==='scene'||next==='scene';stopMotion();drag=null;view=next;if(next==='frame')editingBounds=false;navigation();if(reload)select(selected.id);else render();}
+function spriteView(next){const reload=view==='scene'||next==='scene',target=view==='scene'?actorScene?.editingItem()?.id:null;stopMotion();drag=null;view=next;if(next==='frame')editingBounds=false;navigation();if(reload)select(target||selected.id);else render();}
 $('actor-view').onclick=()=>spriteView('scene');$('frame-view').onclick=()=>spriteView('frame');$('atlas-view').onclick=()=>spriteView('atlas');
 $('compare').onchange=render;$('bounds').onchange=render;
 $('retry').onclick=()=>select(selected.id);
@@ -321,7 +322,7 @@ $('reset-boundaries').onclick=()=>{try{draft.editBounds(selected.id,frame,draft.
 function atlasPoint(event){const rect=$('preview').getBoundingClientRect();return {x:(event.clientX-rect.left)*$('preview').width/rect.width,y:(event.clientY-rect.top)*$('preview').height/rect.height};}
 function cancelDrag(){const previous=drag;drag=null;if(previous&&$('preview').hasPointerCapture(previous.pointer))$('preview').releasePointerCapture(previous.pointer);if(previous)render();}
 $('preview').onpointerdown=event=>{
-  if(isLandscape()||!ready||playing||!editingBounds||view!=='atlas'||event.button!==0)return;
+  if(event.defaultPrevented||isLandscape()||!ready||playing||!editingBounds||view!=='atlas'||event.button!==0)return;
   const point=atlasPoint(event),bounds=draft.bounds(selected.id,frame),rect=$('preview').getBoundingClientRect();
   const handle=hitBounds(point,bounds,8*$('preview').width/rect.width);if(!handle)return;
   event.preventDefault();$('preview').focus();$('preview').setPointerCapture(event.pointerId);

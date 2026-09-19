@@ -157,3 +157,11 @@ User review checklist for this increment:
 The supplied screenshot informed these changes; no new browser interaction or rendered responsive-layout checks have been claimed. Final visual acceptance remains a user review gate.
 
 Review 02 private publication succeeded at the same review URL (version 2, deployment `appgdep_6aae03d0994c819181298034305f7c0c`). Packaged UI/model/plan files were verified byte-for-byte against the candidate source. GitHub implementation commit: `0441baf3ef56aeed19d7de19651a741c025ba40f`; Site source commit: `1e6655173838bfb95fa0c2fd007f12d312777ca8`.
+
+## Review 07 — verification (2026-09-19)
+
+- 46 Node tests pass, including direct production-source movement parity, every character/hazard pose geometry, strict-edge intersection, exact first-contact fixed-step stop during delayed display frames, replay/result invalidation, a calibrated obstacle cleared by a timed jump, hitbox inverse mapping and singular full-height character handling.
+- Optional jsdom + real canvas integration passes: actual load/navigation, frozen/focused edits, real Jump/Slide transitions, first-contact freeze/step/replay, target switching without clock reset, click selection, hitbox drag + Undo/Redo/Save, Hand and Space panning without draft mutation, existing Frame/Atlas, HIGH/LOW, baseline, whole-project save/import and hidden-tab freeze.
+- Generated movement adapter is checked against `src/js/game-runtime.js`; runtime constants and production files remain unchanged. Asset catalog verifies all 58 source paths. No PNG, source config or legacy runtime was modified.
+- Canvas renders were inspected. Browser responsive CSS/layout acceptance remains pending; DOM/canvas checks are not browser layout testing.
+- Publication and exact CI evidence will be recorded after the new snapshot succeeds. The previous live version remains Review 06 until then.

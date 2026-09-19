@@ -1,6 +1,6 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 6; not the replacement editor**.
+Status: **review increment 7; not the replacement editor**.
 Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `e7b2b9625d499b5dae633c94ac83b74166fa4ed0` for EU02 and EU03 landscapes (2026-09-19). Production source/assets match this upstream snapshot; candidate-only changes remain under `workbench-next/`. EU02 is approved; EU03 is integrated and awaiting artwork approval.
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
@@ -28,7 +28,19 @@ This is a working **landscape and sprite Design proposal**, using repository art
 
 It does not load the old runtime, write the current editor's storage, modify source images/configuration, or change gameplay. The candidate project export has its own format and is **not** a current game-config import. Future runtime integration must convert these complete drafts explicitly. Test and Game remain required next milestones.
 
-## In-scene character and hazard calibration — Review 06
+## Contact checks and direct scene editing — Review 07
+
+- **Play scene** runs one selected hazard past the character. Game actions use the production CharacterMachine movement/state methods and ObjectQA intersection rule, extracted into a small generated adapter. Jump integrates the unchanged launch/gravity; Slide uses the current runtime's **0.75 s**. The existing 0.70 s historical-spec discrepancy remains a separate reconciliation; this increment changes no production timings.
+- **Jump / Slide** work during playback or while frozen; Next frame then advances the triggered action. **Replay pass** resets the encounter and starts it again. **Pause on contact** freezes on the first intersecting 1/60-second step, including within a delayed display callback. Contact remains latched for that pass. “Cleared” appears only after an uninterrupted pass started ahead of the character and the full hazard/collider has left the viewport. No lives, damage or hit reaction is triggered.
+- **Scene setup → Playback → Pose loop** retains artwork calibration for individual states. Its contact result applies to that pose, not a gameplay jump. Game actions are the default. The selected character's six state atlases load before controls enable, using the existing loading/decode indicator and cache; unrelated stages/characters are not loaded.
+- Click an actor or choose **Editing → Character / Hazard** in the inspector to switch the editing target without resetting the clock, zoom or pan. The right panel shows placement, grounding/flight clearance, and **Hitbox** for that actor. In Game actions it follows the actual character state. Focusing an input freezes motion for stable editing. Frame/Full atlas open the currently edited actor.
+- **Edit hitbox on scene** shows handles: drag inside to move, edges/corners to resize. All drags use the same production ratios and limits as numeric inputs, are one Undo step, and join existing Save all / Export all / Import. Escape, cancellation, blur, view changes and project actions cancel unfinished drags. At character collision height 1, the production vertical-offset equation has no spare height; reduce height to adjust Y. No collision semantics are silently changed to make dragging unrestricted.
+- **Hand** or **Space + drag** pans the zoomed preview, including the baseline. Fit restores the fitted view. Pan gestures take priority over atlas/hitbox edits and never alter the draft. Actor selection retains the view. Browser-native scrolling remains available.
+- Editing geometry invalidates the historical pass result; replay is required to establish a new clear result. Frozen geometry still shows current overlap. Preview actions, contact results, panning, diagnostic visibility and motion choices are transient, excluded from the v5 project. Existing saves/imports remain compatible.
+
+Checks: `node workbench-next/build-runtime-rules.mjs --check` verifies the generated action adapter against production source. Node tests compare movement through landing and timed slide, collision geometry and contacts, fixed-step catch-up, pass result validity, and hitbox inversion. The optional DOM/canvas integration script exercises actual controls, save/import and pointer events; it does not establish browser CSS/layout acceptance. Complete stage gameplay, damage/recovery, FX/finish and Test/Game remain future milestones.
+
+## In-scene character and hazard calibration — Review 06 (historical increment)
 
 Select **Character → Claude/Constance → state**, or **Stage → hazard**. The new **Scene** view shows the selected character and one selected hazard together on the stage. **Frame** and **Full atlas** retain their existing per-frame editing tools. In Character Scene, Continent/Stage is explicitly a preview context; selecting it never changes shared character settings. Scene companions choose the comparison hazard, or the character/state shown beside a selected hazard.
 
@@ -38,7 +50,7 @@ Select **Character → Claude/Constance → state**, or **Stage → hazard**. Th
 - View options: ground/foot guides, collision boxes, baseline comparison and scroll/hazard travel. Turn travel off to animate poses in place. Frozen numeric edits repaint immediately without advancing time. Playback repaints canvases/readouts without rebuilding focused inspector controls.
 - Comparison uses the same clock and preview selections. Selection/view changes, history, project actions and hiding the browser tab stop motion. Scene controls remain disabled until all selected images finish decoding; failed assets offer Retry.
 
-This is a Design pose/pass preview: Jump, Slide and Hit loop their artwork for calibration. It does not simulate jump physics, timed gameplay actions, collision outcomes or the stage course. Test/Game, FX/finish authoring and the complete production runtime adapter remain separate milestones. Baseline drawing equations are checked directly against the existing production renderer; gameplay geometry uses the canonical Y=410 surface independently of visual landscape offsets.
+Review 06 was a Design pose/pass preview: Jump, Slide and Hit looped their artwork for calibration. Review 07 adds the isolated interaction simulation described above. The original Review 06 scope follows: It does not simulate jump physics, timed gameplay actions, collision outcomes or the stage course. Test/Game, FX/finish authoring and the complete production runtime adapter remain separate milestones. Baseline drawing equations are checked directly against the existing production renderer; gameplay geometry uses the canonical Y=410 surface independently of visual landscape offsets.
 
 **Save all / Export all / Import** now include every placement/collision field across both characters, all states and all stages. Placement edits share Undo/Redo with crops, bounds and landscape edits. New exports use v5. Existing v4 and earlier projects retain their old frame/landscape edits and receive baseline defaults for newly introduced settings; every reset is visible on import review. A v5 browser checkpoint is separate from the retained v4 record, downloadable under **Changes & recovery → Download previous editor save**. Existing artwork migrations still apply; no PNGs or production config values changed.
 
@@ -73,7 +85,7 @@ The preview fits both width and height. Zoom can show actual source pixels with 
 
 - Everything in this increment is under `workbench-next/`.
 - Existing `src/`, `assets/`, `archive/`, `config/`, CI and Pages workflows remain unchanged.
-- Storage key: `cc-workbench-next-project-v4`; pre-import recovery: `cc-workbench-next-before-import-v4`; unreadable-save backup: `cc-workbench-next-unreadable-save-v4`. Older candidate keys are read only for recovery. Layout choices use `cc-workbench-next-layout-v1` separately. No reads/writes to current editor checkpoints.
+- Storage key: `cc-workbench-next-project-v5`; pre-import recovery: `cc-workbench-next-before-import-v5`; unreadable-save backup: `cc-workbench-next-unreadable-save-v5`. Older candidate keys are read only for recovery. Layout choices use `cc-workbench-next-layout-v1` separately. No reads/writes to current editor checkpoints.
 - No production promotion, main merge or Pages deployment before user approval and the existing gates.
 - `tmp/` is intentionally not used: repository policy excludes it from Git.
 - Approved source and archive files remain immutable. Keep the candidate out of the production bundle at eventual integration.

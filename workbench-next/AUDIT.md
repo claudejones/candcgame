@@ -85,3 +85,7 @@ This implementation status supplements the original old/new functionality audit 
 | Stage navigation | Continent → Stage; available metadata only; remembered stage and asset per continent/stage | Expand with stage catalog; readiness/approval summary |
 | Loading | Selected content only; decode-aware count, stale-selection guard, cached reuse, retry | Integrated scene readiness and measured cold-start/stage-switch timings |
 | Test / Game | Visible as planned | Actual gameplay connection and full regression gate |
+
+## Review 07 — Design interaction and direct editing
+
+Implemented in the isolated candidate: production-derived movement/intersection adapter; per-step contact checks, latched contact, optional first-contact freeze, complete-pass clear result and Replay; real Jump and timed Slide; explicit Pose loop alternative; click-to-select/Editing target; numeric placement/grounding and hitbox handles with undo; Hand and Space-drag viewport panning. Editing invalidates prior pass results. Existing v5 persistence includes hitbox edits without schema changes. Browser layout/user acceptance remains pending. Test/Game full stage, damage/recovery/invulnerability, FX/finish and production draft adapter remain deferred; this is not replacement approval. Runtime Slide .75 s is preserved, with historical .70 s reconciliation separate.

@@ -1,6 +1,7 @@
 import {same} from './model.mjs';
 import {croppedBounds,defaultBounds} from './frame-editor.mjs';
 import {drawLandscape} from './landscape.mjs';
+import {intersects} from './runtime-rules.mjs';
 
 export const STEP=1/60;
 export const PLACEMENT_FIELDS={
@@ -41,64 +42,95 @@ export function validatePlacement(value,baseline) {
 
 // Shared pure geometry for the candidate scene. Baseline equations match the
 // production CharacterMachine/ObjectQA; authored layer offsets never move ground 410.
-export function characterGeometry(config,item,frame,bounds,crop,placement) {
+export function characterGeometry(config,item,frame,bounds,crop,placement,motionY=0) {
   const who=item.id.split(':')[1],shared=placement[`character:${who}`],state=placement[item.id];
   const s=shared.masterScale*state.stateScale,cell=config.cell;
   const foot=410+shared.footOffset+placement.groundOffset;
   const base=defaultBounds(item,frame),source=croppedBounds(bounds,crop);
-  const x=config.characterX-cell*s/2+state.offsetX,y=foot-cell*s+state.offsetY;
+  const x=config.characterX-cell*s/2+state.offsetX,y=foot-cell*s+state.offsetY+motionY;
   const dest={x:x+(source.x-base.x)*s,y:y+(source.y-base.y)*s,w:source.w*s,h:source.h*s};
   const meta=config.visibleMeta[item.state][who==='claude'?0:1][frame];
   const vw=Math.max(8,meta.w*s),vh=Math.max(8,meta.h*s),w=vw*state.cw,h=vh*state.ch;
   const collision={x:config.characterX+state.cx*vw-w/2,y:y+meta.top*s+(vh-h)*(1-state.cy),w,h};
-  return {source,dest,collision,foot,scale:s};
+  return {source,dest,collision,foot,scale:s,hitReference:{x:config.characterX,top:y+meta.top*s,w:vw,h:vh}};
 }
-export function hazardGeometry(config,item,frame,bounds,crop,p,{time=0,travel=true,flight='high'}={}) {
+export function hazardGeometry(config,item,frame,bounds,crop,p,{time=0,travel=true,flight='high',looping=true}={}) {
   const source=croppedBounds(bounds,crop),scale=960/config.worldContract.sourceW*p.scale;
   const w=source.w*scale,h=source.h*scale;
   const distance=travel?time*(item.kind==='flying'?config.objectQA.flying.speed:config.worldSpeed):0;
   const loop=config.objectQA.loopDistance;
-  let center=config.objectQA.x-distance%loop;while(center < -w-30)center+=loop;
+  let center=config.objectQA.x-(looping?distance%loop:distance);if(looping)while(center < -w-30)center+=loop;
   center+=p.xOffset;
   const anchor=item.kind==='flying'?410-p[flight==='high'?'highClearance':'lowClearance']:410+p.groundOffset;
   const dest={x:center-w/2,y:anchor-(item.kind==='flying'?h/2:h),w,h};
   const cw=Math.max(4,w*p.cw),ch=Math.max(4,h*p.ch);
   const collision={x:dest.x+(w-cw)/2+p.cx*w,y:item.kind==='flying'?dest.y+(h-ch)/2+p.cy*h:anchor-ch+p.cy*h,w:cw,h:ch};
-  return {source,dest,collision,anchor,scale};
+  return {source,dest,collision,anchor,scale,hitReference:{...dest,anchor,kind:item.kind}};
 }
 export const poseFrame=(item,time,fps=item.fps)=>Math.floor((time+1e-9)*fps)%item.frames;
-export function drawDesignScene(canvas,{config,contract,stage,images,draft,character,hazard,time=0,baseline=false,travel=true,flight='high',guides=true,boxes=false}) {
-  const placements=baseline?draft.placementBaseline:draft.placement;
-  const frames=baseline?draft.frameBaseline:draft.frames,crops=baseline?draft.baseline:draft.value;
+export function sceneGeometry({config,stage,draft,character,hazard,time=0,baseline=false,travel=true,flight='high',motion=null,looping=true,placementOverride=null}) {
+  const placements={...(baseline?draft.placementBaseline:draft.placement),...(!baseline&&placementOverride||{})};
+  const frames=baseline?draft.frameBaseline:draft.frames,crops=baseline?draft.baseline:draft.value,result={};
+  if(character) {
+    const f=motion?motion.frame:poseFrame(character,time),who=character.id.split(':')[1];
+    result.character={...characterGeometry(config,character,f,frames[character.id][f],crops[character.id][f],{...placements,groundOffset:placements[`grounding:${stage}:${who}`].groundOffset},motion?.y||0),frame:f,id:character.id};
+  }
+  if(hazard) {
+    const p=placements[hazard.id],f=poseFrame(hazard,time,p.fps??hazard.fps);
+    result.hazard={...hazardGeometry(config,hazard,f,frames[hazard.id][f],crops[hazard.id][f],p,{time,travel,flight,looping}),frame:f,id:hazard.id};
+  }
+  result.contact=Boolean(result.character&&result.hazard&&intersects(result.character.collision,result.hazard.collision));
+  return result;
+}
+export function drawDesignScene(canvas,options) {
+  const {config,contract,stage,images,draft,character,hazard,time=0,baseline=false,travel=true,guides=true,boxes=false,contactLatched=false}=options;
+  const result=sceneGeometry(options);
   drawLandscape(canvas,{config,contract,stage,images,transforms:(baseline?draft.landscapeBaseline:draft.landscapes)[stage],scroll:travel?time*config.worldSpeed:0,cloudScroll:time*config.worldContract.cloudSpeed,guides});
-  const ctx=canvas.getContext('2d'),result={};
+  const ctx=canvas.getContext('2d');
   const draw=(img,g,color)=>{
-    if(!img)return;
+    if(!img||!g)return;
     const a=g.source,b=g.dest;ctx.drawImage(img,a.x,a.y,a.w,a.h,Math.round(b.x),Math.round(b.y),Math.round(b.w),Math.round(b.h));
     if(boxes){const c=g.collision;ctx.save();ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.strokeRect(c.x,c.y,c.w,c.h);ctx.restore();}
   };
-  if(character&&images.character) {
-    const f=poseFrame(character,time),who=character.id.split(':')[1];
-    const g=characterGeometry(config,character,f,frames[character.id][f],crops[character.id][f],{...placements,groundOffset:placements[`grounding:${stage}:${who}`].groundOffset});
-    draw(images.character,g,'#64d9ff');result.character={...g,frame:f};
-    if(guides){ctx.save();ctx.strokeStyle='#ffffff';ctx.beginPath();ctx.moveTo(config.characterX-30,g.foot+.5);ctx.lineTo(config.characterX+30,g.foot+.5);ctx.stroke();ctx.restore();}
-  }
-  if(hazard&&images.hazard) {
-    const p=placements[hazard.id],f=poseFrame(hazard,time,p.fps??hazard.fps);
-    const g=hazardGeometry(config,hazard,f,frames[hazard.id][f],crops[hazard.id][f],p,{time,travel,flight});
-    draw(images.hazard,g,'#c9ed8a');result.hazard={...g,frame:f};
-  }
+  draw(images.character,result.character,result.contact?'#ff7373':'#64d9ff');
+  draw(images.hazard,result.hazard,result.contact||contactLatched?'#ff7373':'#c9ed8a');
+  if(character&&images.character&&guides){ctx.save();ctx.strokeStyle='#ffffff';ctx.beginPath();ctx.moveTo(config.characterX-30,result.character.foot+.5);ctx.lineTo(config.characterX+30,result.character.foot+.5);ctx.stroke();ctx.restore();}
   return result;
 }
 
+// One encounter, without damage or hit recovery. A changed draft invalidates its
+// historical result; only replaying the full pass can establish a clear result.
+export class ContactPass {
+  constructor(){this.reset();}
+  reset(){this.firstContact=null;this.valid=true;this.complete=false;this.startedAhead=false;}
+  invalidate(){this.reset();this.valid=false;}
+  sample(g,time,{travel=true}={}) {
+    if(!g.character||!g.hazard)return false;
+    const c=g.character.collision,h=g.hazard.collision;
+    if(time===0)this.startedAhead=h.x>=c.x+c.w;
+    const first=g.contact&&this.firstContact===null;
+    if(first)this.firstContact=time;
+    // Wait for the full visible hazard and its hitbox to leave the viewport.
+    this.complete=travel&&Math.max(g.hazard.dest.x+g.hazard.dest.w,h.x+h.w)<0;
+    return first;
+  }
+  label(g,{travel=true}={}){
+    if(!this.valid)return g.contact?'Contact now · replay to check changes':'Settings changed · replay to check';
+    if(this.firstContact!==null)return `Contact detected · ${this.firstContact.toFixed(2)} s`;
+    if(!travel)return 'Stationary preview · no pass result';
+    if(this.complete)return this.startedAhead?'Cleared · no contact':'Incomplete pass · hazard started behind character';
+    return 'Checking pass…';
+  }
+}
+
 export class SceneClock {
-  constructor({available,paint,request=cb=>requestAnimationFrame(cb),cancel=id=>cancelAnimationFrame(id)}) {
-    Object.assign(this,{available,paint,request,cancel});this.steps=0;this.speed=1;this.running=false;this.handle=null;this.last=null;this.carry=0;this.generation=0;
+  constructor({available,paint,advance=()=>true,request=cb=>requestAnimationFrame(cb),cancel=id=>cancelAnimationFrame(id)}) {
+    Object.assign(this,{available,paint,advance,request,cancel});this.steps=0;this.speed=1;this.running=false;this.handle=null;this.last=null;this.carry=0;this.generation=0;
   }
   get time(){return this.steps*STEP;}
   pause(){this.generation++;if(this.handle!==null)this.cancel(this.handle);this.handle=null;this.running=false;this.last=null;this.carry=0;this.paint();}
   restart(){this.pause();this.steps=0;this.paint();}
-  step(){this.pause();if(this.available()){this.steps++;this.paint();}}
+  step(){this.pause();if(this.available()){this.steps++;this.advance(this.time,this.steps);this.paint();}}
   setSpeed(speed){if(![.25,.5,1,2].includes(speed))throw new Error('Unsupported preview speed');this.speed=speed;this.last=null;this.carry=0;this.paint();}
   play(){
     if(this.running||!this.available())return;
@@ -107,7 +139,9 @@ export class SceneClock {
       if(!this.running||generation!==this.generation)return;
       this.handle=null;if(!this.available()){this.pause();return;}
       if(this.last!==null)this.carry+=Math.max(0,now-this.last)/1000*this.speed;
-      this.last=now;const count=Math.floor((this.carry+1e-9)/STEP);this.steps+=count;this.carry=Math.max(0,this.carry-count*STEP);this.paint();
+      this.last=now;const count=Math.floor((this.carry+1e-9)/STEP);this.carry=Math.max(0,this.carry-count*STEP);
+      for(let i=0;i<count;i++){this.steps++;if(this.advance(this.time,this.steps)===false){this.running=false;this.last=null;this.carry=0;break;}}
+      this.paint();
       if(this.running&&generation===this.generation)this.handle=this.request(tick);
     };
     this.handle=this.request(tick);

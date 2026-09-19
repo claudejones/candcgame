@@ -848,3 +848,16 @@ h2 {
 #actor-play {min-width:95px;}
 
 #actor-dock .playback {flex-wrap:wrap;}
+
+.canvas-scroll.pan-ready, .canvas-scroll.pan-ready canvas {cursor:grab;touch-action:none;}
+.canvas-scroll.panning, .canvas-scroll.panning canvas {cursor:grabbing;user-select:none;}
+.canvas-scroll canvas.hitbox-editing {cursor:crosshair;touch-action:none;}
+.canvas-scroll.pan-ready canvas.hitbox-editing {cursor:grab;}
+#scene-edit-target {padding-bottom:12px;margin-bottom:8px;border-bottom:1px solid var(--line);}
+#edit-target-name {display:block;font-size:12px;margin:6px 0;}
+#scene-edit-target p {font-size:11px;}
+.contact-row {display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:8px;font-size:12px;}
+#contact-status {color:var(--accent);}
+#contact-status.contact {color:#ff8e8e;}
+#actor-dock .transport {flex-wrap:wrap;}
+#actor-dock .playback {gap:8px;}
