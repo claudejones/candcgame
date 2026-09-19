@@ -315,7 +315,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "eu03": {
       "label": "Europe — Spain / Barcelona",
-      "status": "pending",
+      "status": "integrated",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/EU-assets/EU03_BG_DISTANT_BARCELONA.png",
@@ -326,7 +326,8 @@ window.CC_LANDSCAPE_REGISTRY = {
             2,
             6
           ],
-          "requireOpaque": true
+          "requireOpaque": true,
+          "cacheKey": "fb3ae596"
         },
         "mid": {
           "reference": "assets-original/current-generated/EU-assets/EU03_BG_MID_BARCELONA.png",
@@ -334,7 +335,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "width": 2172,
           "height": 724,
           "colorType": 6,
-          "requireTransparency": true
+          "requireTransparency": true,
+          "cacheKey": "0fd183d3"
         },
         "ground": {
           "reference": "assets-original/current-generated/EU-assets/EU03_GROUND_BARCELONA.png",
@@ -343,7 +345,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "height": 724,
           "colorType": 6,
           "requireTransparency": true,
-          "sourceSurfaceY": 393
+          "sourceSurfaceY": 393,
+          "cacheKey": "45916a46"
         }
       }
     }
