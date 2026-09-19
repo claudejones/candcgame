@@ -128,91 +128,91 @@
       "imageCalls": "One built-in image generation call per physical output file; parallel image throughput is unmeasured. Sequential generation is permitted while independent preparation or QA runs in parallel.",
       "context": "Fresh scoped worker context; selected stage/job and actual reference pixels only. Return a compact result manifest and exceptions, not raw logs.",
       "skillPolicy": "Use the existing imagegen skill and repository resolver; no duplicate project skill added.",
-      "pilot": "Africa AF01–AF03; AF01 is the first acceptance checkpoint, then AF02 and AF03. Measure the complete trial before increasing concurrency."
+      "pilot": "Africa AF01\u2013AF03; AF01 is the first acceptance checkpoint, then AF02 and AF03. Measure the complete trial before increasing concurrency."
     }
   },
   "factSources": {
     "serengeti": {
-      "title": "UNESCO — Serengeti National Park",
+      "title": "UNESCO \u2014 Serengeti National Park",
       "url": "https://whc.unesco.org/en/list/156/"
     },
     "namib": {
-      "title": "UNESCO — Namib Sand Sea",
+      "title": "UNESCO \u2014 Namib Sand Sea",
       "url": "https://whc.unesco.org/en/list/1430/"
     },
     "marrakesh": {
-      "title": "UNESCO — Medina of Marrakesh",
+      "title": "UNESCO \u2014 Medina of Marrakesh",
       "url": "https://whc.unesco.org/en/list/331/"
     },
     "kyoto": {
-      "title": "UNESCO — Historic Monuments of Ancient Kyoto",
+      "title": "UNESCO \u2014 Historic Monuments of Ancient Kyoto",
       "url": "https://whc.unesco.org/en/list/688/"
     },
     "wulingyuan": {
-      "title": "UNESCO — Wulingyuan Scenic and Historic Interest Area",
+      "title": "UNESCO \u2014 Wulingyuan Scenic and Historic Interest Area",
       "url": "https://whc.unesco.org/en/list/640/"
     },
     "bangkok": {
-      "title": "Tourism Authority of Thailand — Bangkok",
+      "title": "Tourism Authority of Thailand \u2014 Bangkok",
       "url": "https://www.tourismthailand.org/Destinations/Provinces/Bangkok/219"
     },
     "uluru": {
-      "title": "UNESCO — Uluru-Kata Tjuta National Park",
+      "title": "UNESCO \u2014 Uluru-Kata Tjuta National Park",
       "url": "https://whc.unesco.org/en/list/447/"
     },
     "queensland": {
-      "title": "UNESCO — Wet Tropics of Queensland",
+      "title": "UNESCO \u2014 Wet Tropics of Queensland",
       "url": "https://whc.unesco.org/en/list/486/"
     },
     "fiordland": {
-      "title": "UNESCO — Te Wahipounamu",
+      "title": "UNESCO \u2014 Te Wahipounamu",
       "url": "https://whc.unesco.org/en/list/551/"
     },
     "kea": {
-      "title": "New Zealand DOC — Kea",
+      "title": "New Zealand DOC \u2014 Kea",
       "url": "https://www.doc.govt.nz/nature/native-animals/birds/birds-a-z/kea/"
     },
     "antarctic_geography": {
-      "title": "Australian Antarctic Program — Antarctic geography",
+      "title": "Australian Antarctic Program \u2014 Antarctic geography",
       "url": "https://www.antarctica.gov.au/about-antarctica/geography-and-geology/geography/"
     },
     "antarctic_tern": {
-      "title": "Australian Antarctic Program — Antarctic tern",
+      "title": "Australian Antarctic Program \u2014 Antarctic tern",
       "url": "https://www.antarctica.gov.au/about-antarctica/animals/flying-birds/antarctic-tern/"
     },
     "polar_skua": {
-      "title": "Australian Antarctic Program — South polar skua",
+      "title": "Australian Antarctic Program \u2014 South polar skua",
       "url": "https://www.antarctica.gov.au/about-antarctica/animals/flying-birds/south-polar-skua/"
     },
     "petrels": {
-      "title": "Australian Antarctic Program — Petrels and shearwaters",
+      "title": "Australian Antarctic Program \u2014 Petrels and shearwaters",
       "url": "https://www.antarctica.gov.au/about-antarctica/animals/flying-birds/petrels-and-shearwaters/"
     },
     "casey": {
-      "title": "Australian Antarctic Program — Casey research station",
+      "title": "Australian Antarctic Program \u2014 Casey research station",
       "url": "https://www.antarctica.gov.au/antarctic-operations/stations-and-field-locations/casey/"
     },
     "porcupine": {
-      "title": "Mpala Research Centre — Crested Porcupine",
+      "title": "Mpala Research Centre \u2014 Crested Porcupine",
       "url": "https://www.mpalalive.org/field_guide/view/crested_porcupine"
     },
     "roller": {
-      "title": "Mpala Research Centre — Lilac-breasted Roller",
+      "title": "Mpala Research Centre \u2014 Lilac-breasted Roller",
       "url": "https://www.mpalalive.org/field_guide/view/lilac-breasted-roller"
     },
     "sandgrouse": {
-      "title": "Royal Society Interface — Structure and mechanics of water-holding feathers of Namaqua sandgrouse",
+      "title": "Royal Society Interface \u2014 Structure and mechanics of water-holding feathers of Namaqua sandgrouse",
       "url": "https://royalsocietypublishing.org/rsif/article/20/201/20220878/90364/Structure-and-mechanics-of-water-holding-feathers"
     },
     "stork": {
-      "title": "UNEP/CMS — Morocco species list",
+      "title": "UNEP/CMS \u2014 Morocco species list",
       "url": "https://www.cms.int/country/morocco"
     }
   },
   "stages": [
     {
       "id": "AF01",
-      "label": "Tanzania — Serengeti savannah",
+      "label": "Tanzania \u2014 Serengeti savannah",
       "continent": "africa",
       "status": "direction-approved",
       "theme": "SERENGETI",
@@ -288,7 +288,7 @@
           "path": "assets/references/africa/af01/landscape.jpg",
           "sha256": "fd790e26f2006e0b0221b6ab48f76ec683de0bd402187b51b11f542a8f8bb8fc",
           "page": "https://commons.wikimedia.org/wiki/File:Serengeti-Landscape-2012.JPG",
-          "credit": "Bjørn Christian Tørrissen",
+          "credit": "Bj\u00f8rn Christian T\u00f8rrissen",
           "license": "CC BY-SA 3.0"
         },
         {
@@ -304,7 +304,7 @@
           "path": "assets/references/africa/af01/giraffe.jpg",
           "sha256": "5440ee0fa67edb3b762e9bfd8ec96e5c0fdaafaf12a473ecb23d98ad499a8640",
           "page": "https://commons.wikimedia.org/wiki/File:042_Masai_giraffe_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent_(cropped).jpg",
-          "credit": "© Giles Laurent, gileslaurent.com",
+          "credit": "\u00a9 Giles Laurent, gileslaurent.com",
           "license": "CC BY-SA 4.0"
         },
         {
@@ -360,7 +360,7 @@
     },
     {
       "id": "AF02",
-      "label": "Namibia — Sossusvlei dunes",
+      "label": "Namibia \u2014 Sossusvlei dunes",
       "continent": "africa",
       "status": "direction-approved",
       "theme": "SOSSUSVLEI",
@@ -408,12 +408,12 @@
         "namib",
         "sandgrouse"
       ],
-      "referenceStatus": "Source pages and initial image URLs researched; actual inspected per-output reference pack remains required. Direct HTTP retrieval was unavailable in the preparation environment; no downloaded/verified pixels are claimed.",
+      "referenceStatus": "Inspected four downloaded reference photographs; credits and exact hashes in assets/references/africa/af02/REFERENCES.json.",
       "notes": "Desert-edge Namibia species selection; no exact Sossusvlei sighting claim. Clay-plate exaggeration is an authored game prop, not a claimed measured geological feature. Keep the hazard low and avoid a boulder silhouette.",
       "selectionStatus": "ready",
-      "referencesReady": false,
+      "referencesReady": true,
       "brief": {
-        "status": "agent-selected-for-trial; visual-reference-pack-pending",
+        "status": "agent-selected-for-trial; visual-reference-pack-ready",
         "farFocalPoint": "One dominant high dune crest, with a clear sunlit face and shadow edge.",
         "midLifeDetail": "A single oryx near sparse dead camelthorn silhouettes, well behind gameplay.",
         "localReference": [
@@ -445,12 +445,33 @@
           "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png",
           "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png",
           "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png"
+        ],
+        "FAR": [
+          "assets/references/africa/af02/dunes_oryx.jpg"
+        ],
+        "MID": [
+          "assets/references/africa/af02/dunes_oryx.jpg",
+          "assets/references/africa/af02/camelthorn.jpg",
+          "assets/references/africa/af02/clay_pan.jpg"
+        ],
+        "GROUND": [
+          "assets/references/africa/af02/clay_pan.jpg"
+        ],
+        "OBJECT_ATLAS": [
+          "assets/references/africa/af02/clay_pan.jpg",
+          "assets/references/africa/af02/camelthorn.jpg",
+          "assets/worlds/africa/AF01_OBJECT_ATLAS.png"
+        ],
+        "FLYING": [
+          "assets/references/africa/af02/sandgrouse_flight.jpg",
+          "assets/worlds/africa/AF01_HAZARD_ROLLER.png",
+          "assets/characters/G1A_RUN_CYCLE_ATLAS.png"
         ]
       }
     },
     {
       "id": "AF03",
-      "label": "Morocco — Marrakesh medina",
+      "label": "Morocco \u2014 Marrakesh medina",
       "continent": "africa",
       "status": "direction-approved",
       "theme": "MARRAKESH",
@@ -544,7 +565,7 @@
     },
     {
       "id": "AS01",
-      "label": "Japan — Kyoto bamboo foothills",
+      "label": "Japan \u2014 Kyoto bamboo foothills",
       "continent": "asia",
       "status": "direction-approved",
       "theme": "KYOTO",
@@ -615,7 +636,7 @@
     },
     {
       "id": "AS02",
-      "label": "China — Zhangjiajie stone forest",
+      "label": "China \u2014 Zhangjiajie stone forest",
       "continent": "asia",
       "status": "direction-approved",
       "theme": "ZHANGJIAJIE",
@@ -684,7 +705,7 @@
     },
     {
       "id": "AS03",
-      "label": "Thailand — Bangkok riverfront",
+      "label": "Thailand \u2014 Bangkok riverfront",
       "continent": "asia",
       "status": "direction-approved",
       "theme": "BANGKOK",
@@ -755,7 +776,7 @@
     },
     {
       "id": "OC01",
-      "label": "Australia — Uluru red desert",
+      "label": "Australia \u2014 Uluru red desert",
       "continent": "oceania",
       "status": "direction-approved",
       "theme": "ULURU",
@@ -826,7 +847,7 @@
     },
     {
       "id": "OC02",
-      "label": "Australia — Queensland tropical coast",
+      "label": "Australia \u2014 Queensland tropical coast",
       "continent": "oceania",
       "status": "direction-approved",
       "theme": "QUEENSLAND",
@@ -898,7 +919,7 @@
     },
     {
       "id": "OC03",
-      "label": "New Zealand — Fiordland",
+      "label": "New Zealand \u2014 Fiordland",
       "continent": "oceania",
       "status": "direction-approved",
       "theme": "FIORDLAND",
@@ -972,7 +993,7 @@
     },
     {
       "id": "AN01",
-      "label": "Antarctic Peninsula — icy coast",
+      "label": "Antarctic Peninsula \u2014 icy coast",
       "continent": "antarctica",
       "status": "direction-approved",
       "theme": "PENINSULA",
@@ -1045,7 +1066,7 @@
     },
     {
       "id": "AN02",
-      "label": "Ross Island — volcanic shore",
+      "label": "Ross Island \u2014 volcanic shore",
       "continent": "antarctica",
       "status": "direction-approved",
       "theme": "ROSS_ISLAND",
@@ -1116,7 +1137,7 @@
     },
     {
       "id": "AN03",
-      "label": "East Antarctica — coastal research outpost",
+      "label": "East Antarctica \u2014 coastal research outpost",
       "continent": "antarctica",
       "status": "direction-approved",
       "theme": "RESEARCH_OUTPOST",

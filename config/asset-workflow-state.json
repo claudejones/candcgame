@@ -101,7 +101,7 @@
       "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
     }
   },
-  "revision": 43,
+  "revision": 64,
   "runs": {
     "af01-20260919172919-679b96": {
       "runId": "af01-20260919172919-679b96",
@@ -1120,7 +1120,980 @@
         "reviewedCommit": "a09b176dd8531bfb3425c9af534ff197a05a253e"
       },
       "closedAt": "2026-09-19T19:20:15.353Z"
+    },
+    "af02-20260919204119-fb761a": {
+      "runId": "af02-20260919204119-fb761a",
+      "target": "AF02",
+      "command": "build stage AF02",
+      "operation": "produce-only",
+      "status": "ready-to-publish",
+      "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+      "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+      "createdAt": "2026-09-19T20:41:19.697Z",
+      "maxWorkers": 2,
+      "nestedManagers": false,
+      "recoveryRefs": [
+        "af02-landscape-output",
+        "af02-hazard-output",
+        "refs/remotes/origin/work/assets/af02",
+        "work/assets/af02"
+      ],
+      "jobs": {
+        "AF02:FAR": {
+          "id": "AF02:FAR",
+          "runId": "af02-20260919204119-fb761a",
+          "selector": "FAR",
+          "owner": "landscape-worker",
+          "output": "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png",
+          "baseHash": null,
+          "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "9e48031675b075d4e9750bb2ea85d853b67d4e8a3d4c8d9602b4e4f767f4ef40",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "f14feb423148f1d79e0d946b9e216b77eb52e216968919ea99e0ad6cdad79d96",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "1fcf95f0ee6d5882838919c91f9a912bd36b1fad01217ab2de6c463c20920540"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af02/dunes_oryx.jpg": "4868ad095ea62ecaa952d4ec779854103a96fe0f34d90de1b753c54f6fa025a8"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_OBJECT_ATLAS.png": null,
+            "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png": null
+          },
+          "workerPacket": {
+            "runId": "af02-20260919204119-fb761a",
+            "jobId": "AF02:FAR",
+            "target": "AF02",
+            "selector": "FAR",
+            "owner": "landscape-worker",
+            "output": "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png",
+            "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+            "baseHash": null,
+            "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+            "referenceHashes": {
+              "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+              "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+              "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+              "assets/references/africa/af02/dunes_oryx.jpg": "4868ad095ea62ecaa952d4ec779854103a96fe0f34d90de1b753c54f6fa025a8"
+            },
+            "sharedRules": {
+              "profile": {
+                "path": "docs/asset-profiles/landscape.md",
+                "content": "# Landscape operational profile\n\nSource authority: WORLD_RENDERING_SPEC §§1–5, ASSET_PRODUCTION_SPEC general/world/transparency rules, LANDSCAPE_GENERATION_CONTRACT_V1, and the selected Phase 8 prompt-manifest sections. Use this focused profile for ordinary image commands; read full source specs for changes to these rules.\n\n- One crisp pixel-art PNG per generation call. Attach the exact immutable registry reference as pixels; a written path is insufficient. For a revision also attach the current accepted/working layer and preserve its composition except for the requested change. Approved direction updates in the selected prompt take precedence over older reference content.\n- Preserve location, landmark relationships, lighting, palette and pixel-art language. No characters, hazards, HUD, text, checkerboard or baked shared clouds. Approved scene-specific exceptions, such as SA01's decorative snake, remain in its stage lock.\n- New source canvas: 2172×724, 8-bit non-interlaced PNG. MID/GROUND require RGBA and real transparency; FAR is fully opaque. Exact registry dimensions/types override generic prompt dimensions for a preserved approved exception: NA03 GROUND is 2170×725. Never normalize it for convenience.\n- Runtime viewport 960×540; running surface 410; landscape source width 2172; FAR/MID/GROUND offsets all zero; scale multipliers FAR 1.25, MID 1, GROUND 1. Actual draw scale is `960/2172 × multiplier`. MID anchor 621 and GROUND anchor 393 map to 410. Zero offsets do not mean drawing MID/GROUND's canvas top at Y=0.\n- FAR owns opaque skyline/foundation and useful scenery behind MID transparency. MID owns middle-distance silhouettes, intentional sky openings and enough lower authored coverage to overlap GROUND. GROUND owns a continuous level surface at source Y=393 and solid terrain depth to the bottom, with appropriate transparent space above. No synthetic backing or offset changes to hide missing art.\n- Inspect the actual stage configuration before blaming an image: registry activation, inner renderer, outer bootstrap, saved authoring draft and reset must agree. Active stages use the shared contract; pending stages keep their legacy baseline until their full set is integrated. Legacy sprite normalization is unrelated to landscape source width and must not be globally replaced.\n- Full PNG integrity/dimensions/alpha checks plus isolated, repeat and composite review are required. Check MID lower coverage/transition and GROUND surface/depth visually; a fully opaque FAR can hide a bad MID in an aggregate alpha statistic. Edge-delta numbers alone cannot prove a seamless repeat. Inspect in the actual app at scroll offsets and in Inspector previews before asking for acceptance.\n- Approved horizontal-edge-only deterministic repair may correct a repeat seam without moving landmarks/anchors, rescaling, changing dimensions/alpha ownership or hiding a structural defect. Other artwork edits use image generation unless explicitly authorized. The historic NA03 overscan treatment is asset-specific, not blanket permission to stretch future artwork.\n- Correct only the requested layer or proven configuration defect. Never change sibling assets, gameplay, character/hazard calibration or approved image bytes as an optimization. Stop after checks and visual inspection pass; final acceptance belongs to the user on the deployed integrated stage.\n"
+              },
+              "hazardProfile": "# New-stage hazard profile\n\nApplies to new AF/AS/OC/AN files. Source: HAZARD_SPEC and REMAINING_CONTINENTS_PLAN. Existing accepted atlases/calibrations stay unchanged.\n\n- Ground atlas: 2172×724 RGBA; two 1086×724 cells, GROUND1 left / GROUND2 right. Source contact (543,620); at least 32px clear cell gutters. No scenery/labels.\n- Flying atlas: 2172×724 RGBA; four 543×724 cells. Fixed source body anchor (271,362), right-facing source, stable anatomy, four distinct wing poses and continuous loop. Every flock member animates.\n- Record source-facing and intended gameplay-facing separately. Directional hazards approaching from the right face left in gameplay; retain pixels and use the matching `flipX` transform. Nondirectional objects use neither automatic mirroring nor an invented facing.\n- Supply source regions, crops/frame crops, anchors, frame order/FPS and usable starting scale/body bounds. Crops retain anchors. Starting bounds represent solid bodies, excluding decorative wings/tails/leaves. Inspect basic rendering and credible size with the character reference at 960×540/mobile; do not inflate a small species for visibility.\n- Ground uses Y=410 and the explicit source anchor; flying uses the shared HIGH/LOW starting placement. These are provisional metadata, not accepted character-relative calibration. No global physics, clearance or speed changes to rescue art.\n- Validate source integrity/alpha, gutters, ground contact pixels, distinct frame bytes and animation/pose stability. Inspect composition and basic rendering. Structural checks alone do not prove animation quality or collision fairness.\n- End asset production with the versioned asset-ready handoff and exact five-file hashes. The editor-next Workbench agent imports it; the user calibrates and saves. Iterative grounding, flight height, hitbox fairness, Jump/Slide windows, difficulty and spawn-spacing balancing belong there. Repeated zero-hit courses are not an asset handoff gate.\n- Later playable release retains real contact, collision, finish and gameplay validation. Never mark unperformed checks passed. Keep genuine renderer/scheduler bug fixes and regression tests.\n- A GROUND1/GROUND2 revision preserves its sibling's RGBA pixels and metadata exactly. Recover original bytes from Git; never silently regenerate an accepted sibling.\n",
+              "pixelArt": "Match the established crisp pixel-art language; no photorealism, painterly blur, vector-flat redesign, smooth 3D, labels, UI or unrelated assets.",
+              "landscapeContract": "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md",
+              "landscapeSource": [
+                2172,
+                724
+              ],
+              "viewport": [
+                960,
+                540
+              ],
+              "surfaceY": 410,
+              "landscapeOffsets": {
+                "FAR": 0,
+                "MID": 0,
+                "GROUND": 0
+              },
+              "landscapeScaleMultipliers": {
+                "FAR": 1.25,
+                "MID": 1,
+                "GROUND": 1
+              },
+              "landscapeAnchors": {
+                "MID": 621,
+                "GROUND": 393
+              },
+              "groundAtlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 2,
+                "cellWidth": 1086,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "footAnchorY": 620
+              },
+              "flyingAtlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 4,
+                "cellWidth": 543,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "bodyAnchor": {
+                  "x": 271,
+                  "y": 362
+                },
+                "facing": "right",
+                "frames": [
+                  "upstroke apex",
+                  "descending wings forward",
+                  "downstroke apex",
+                  "rising wings swept back"
+                ]
+              },
+              "artDirection": {
+                "authority": "User direction, 2026-09-19; see the composition, identity and scale section of the plan.",
+                "scope": "Remaining-continent proposals; existing approved artwork is not reopened.",
+                "FAR": "One recognizable local landmark or dominant natural formation, readable in the runtime composite behind MID and away from repeat joins.",
+                "MID": "One restrained, unique local sign of life: settlement/frontage, everyday-use detail or static background wildlife. No people or gameplay hazards baked into scenery.",
+                "originality": "Compare identities and visible silhouettes against existing and proposed campaign elements. No reused species/objects, renamed duplicates or recolors as new hazards; shared background materials are not signature elements.",
+                "scale": "Judge visible subjects at 960x540 and normal mobile presentation relative to characters, architecture and depth. Reject subjects that read too small or need implausible enlargement. Preserve canonical transforms and physics.",
+                "requiredStageBriefFields": [
+                  "farFocalPoint",
+                  "midLifeDetail",
+                  "localReference",
+                  "campaignDistinctiveness",
+                  "intendedRelativeScale"
+                ],
+                "selectionReviewStatus": "Africa agent selections resolved; remaining nine proposals still need campaign comparison. Visual size/reference inspection remains stage-specific.",
+                "approval": "Requirements and workflow direction approved. Unresolved selection changes remain review items; generated artwork still requires deployed-stage acceptance."
+              }
+            },
+            "prompt": "AF02 FAR: Sweeping rust-orange dunes with pale distant ridges and clear sky; no savannah scene copied into this desert.\n{\"direction\":\"Sweeping rust-orange dunes with pale distant ridges and clear sky; no savannah scene copied into this desert.\",\"brief\":{\"farFocalPoint\":\"One dominant high dune crest, with a clear sunlit face and shadow edge.\",\"localReference\":[\"namib\",\"sandgrouse\"],\"campaignDistinctiveness\":[\"Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat.\"],\"intendedRelativeScale\":\"Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth.\"}}",
+            "direction": "Sweeping rust-orange dunes with pale distant ridges and clear sky; no savannah scene copied into this desert.",
+            "task": {
+              "direction": "Sweeping rust-orange dunes with pale distant ridges and clear sky; no savannah scene copied into this desert.",
+              "brief": {
+                "farFocalPoint": "One dominant high dune crest, with a clear sunlit face and shadow edge.",
+                "localReference": [
+                  "namib",
+                  "sandgrouse"
+                ],
+                "campaignDistinctiveness": [
+                  "Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat."
+                ],
+                "intendedRelativeScale": "Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth."
+              }
+            },
+            "selectedHazards": null,
+            "preserveSibling": null,
+            "editingSource": null,
+            "continuityFiles": [
+              "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png",
+              "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png"
+            ]
+          },
+          "attempts": 2,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+          "recoveryRef": "refs/remotes/origin/work/assets/af02",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/work/assets/af02",
+            "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+            "contentHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:04:10.801Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T20:48:17.500Z",
+          "priorRecoveryEvidence": [
+            {
+              "ref": "af02-landscape-output",
+              "commit": "5983ad83ad96e848a5a712a5ef14cf95e458f87e",
+              "contentHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ],
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          }
+        },
+        "AF02:MID": {
+          "id": "AF02:MID",
+          "runId": "af02-20260919204119-fb761a",
+          "selector": "MID",
+          "owner": "landscape-worker",
+          "output": "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png",
+          "baseHash": null,
+          "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "9e48031675b075d4e9750bb2ea85d853b67d4e8a3d4c8d9602b4e4f767f4ef40",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "f14feb423148f1d79e0d946b9e216b77eb52e216968919ea99e0ad6cdad79d96",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "1fcf95f0ee6d5882838919c91f9a912bd36b1fad01217ab2de6c463c20920540"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af02/dunes_oryx.jpg": "4868ad095ea62ecaa952d4ec779854103a96fe0f34d90de1b753c54f6fa025a8",
+            "assets/references/africa/af02/camelthorn.jpg": "06927857a3351493caeb0358410c22d885847e67d7c40977fb7c5407b141da25",
+            "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_OBJECT_ATLAS.png": null,
+            "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png": null
+          },
+          "workerPacket": {
+            "runId": "af02-20260919204119-fb761a",
+            "jobId": "AF02:MID",
+            "target": "AF02",
+            "selector": "MID",
+            "owner": "landscape-worker",
+            "output": "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png",
+            "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+            "baseHash": null,
+            "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+            "referenceHashes": {
+              "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+              "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+              "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+              "assets/references/africa/af02/dunes_oryx.jpg": "4868ad095ea62ecaa952d4ec779854103a96fe0f34d90de1b753c54f6fa025a8",
+              "assets/references/africa/af02/camelthorn.jpg": "06927857a3351493caeb0358410c22d885847e67d7c40977fb7c5407b141da25",
+              "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356"
+            },
+            "sharedRules": {
+              "profile": {
+                "path": "docs/asset-profiles/landscape.md",
+                "content": "# Landscape operational profile\n\nSource authority: WORLD_RENDERING_SPEC §§1–5, ASSET_PRODUCTION_SPEC general/world/transparency rules, LANDSCAPE_GENERATION_CONTRACT_V1, and the selected Phase 8 prompt-manifest sections. Use this focused profile for ordinary image commands; read full source specs for changes to these rules.\n\n- One crisp pixel-art PNG per generation call. Attach the exact immutable registry reference as pixels; a written path is insufficient. For a revision also attach the current accepted/working layer and preserve its composition except for the requested change. Approved direction updates in the selected prompt take precedence over older reference content.\n- Preserve location, landmark relationships, lighting, palette and pixel-art language. No characters, hazards, HUD, text, checkerboard or baked shared clouds. Approved scene-specific exceptions, such as SA01's decorative snake, remain in its stage lock.\n- New source canvas: 2172×724, 8-bit non-interlaced PNG. MID/GROUND require RGBA and real transparency; FAR is fully opaque. Exact registry dimensions/types override generic prompt dimensions for a preserved approved exception: NA03 GROUND is 2170×725. Never normalize it for convenience.\n- Runtime viewport 960×540; running surface 410; landscape source width 2172; FAR/MID/GROUND offsets all zero; scale multipliers FAR 1.25, MID 1, GROUND 1. Actual draw scale is `960/2172 × multiplier`. MID anchor 621 and GROUND anchor 393 map to 410. Zero offsets do not mean drawing MID/GROUND's canvas top at Y=0.\n- FAR owns opaque skyline/foundation and useful scenery behind MID transparency. MID owns middle-distance silhouettes, intentional sky openings and enough lower authored coverage to overlap GROUND. GROUND owns a continuous level surface at source Y=393 and solid terrain depth to the bottom, with appropriate transparent space above. No synthetic backing or offset changes to hide missing art.\n- Inspect the actual stage configuration before blaming an image: registry activation, inner renderer, outer bootstrap, saved authoring draft and reset must agree. Active stages use the shared contract; pending stages keep their legacy baseline until their full set is integrated. Legacy sprite normalization is unrelated to landscape source width and must not be globally replaced.\n- Full PNG integrity/dimensions/alpha checks plus isolated, repeat and composite review are required. Check MID lower coverage/transition and GROUND surface/depth visually; a fully opaque FAR can hide a bad MID in an aggregate alpha statistic. Edge-delta numbers alone cannot prove a seamless repeat. Inspect in the actual app at scroll offsets and in Inspector previews before asking for acceptance.\n- Approved horizontal-edge-only deterministic repair may correct a repeat seam without moving landmarks/anchors, rescaling, changing dimensions/alpha ownership or hiding a structural defect. Other artwork edits use image generation unless explicitly authorized. The historic NA03 overscan treatment is asset-specific, not blanket permission to stretch future artwork.\n- Correct only the requested layer or proven configuration defect. Never change sibling assets, gameplay, character/hazard calibration or approved image bytes as an optimization. Stop after checks and visual inspection pass; final acceptance belongs to the user on the deployed integrated stage.\n"
+              },
+              "hazardProfile": "# New-stage hazard profile\n\nApplies to new AF/AS/OC/AN files. Source: HAZARD_SPEC and REMAINING_CONTINENTS_PLAN. Existing accepted atlases/calibrations stay unchanged.\n\n- Ground atlas: 2172×724 RGBA; two 1086×724 cells, GROUND1 left / GROUND2 right. Source contact (543,620); at least 32px clear cell gutters. No scenery/labels.\n- Flying atlas: 2172×724 RGBA; four 543×724 cells. Fixed source body anchor (271,362), right-facing source, stable anatomy, four distinct wing poses and continuous loop. Every flock member animates.\n- Record source-facing and intended gameplay-facing separately. Directional hazards approaching from the right face left in gameplay; retain pixels and use the matching `flipX` transform. Nondirectional objects use neither automatic mirroring nor an invented facing.\n- Supply source regions, crops/frame crops, anchors, frame order/FPS and usable starting scale/body bounds. Crops retain anchors. Starting bounds represent solid bodies, excluding decorative wings/tails/leaves. Inspect basic rendering and credible size with the character reference at 960×540/mobile; do not inflate a small species for visibility.\n- Ground uses Y=410 and the explicit source anchor; flying uses the shared HIGH/LOW starting placement. These are provisional metadata, not accepted character-relative calibration. No global physics, clearance or speed changes to rescue art.\n- Validate source integrity/alpha, gutters, ground contact pixels, distinct frame bytes and animation/pose stability. Inspect composition and basic rendering. Structural checks alone do not prove animation quality or collision fairness.\n- End asset production with the versioned asset-ready handoff and exact five-file hashes. The editor-next Workbench agent imports it; the user calibrates and saves. Iterative grounding, flight height, hitbox fairness, Jump/Slide windows, difficulty and spawn-spacing balancing belong there. Repeated zero-hit courses are not an asset handoff gate.\n- Later playable release retains real contact, collision, finish and gameplay validation. Never mark unperformed checks passed. Keep genuine renderer/scheduler bug fixes and regression tests.\n- A GROUND1/GROUND2 revision preserves its sibling's RGBA pixels and metadata exactly. Recover original bytes from Git; never silently regenerate an accepted sibling.\n",
+              "pixelArt": "Match the established crisp pixel-art language; no photorealism, painterly blur, vector-flat redesign, smooth 3D, labels, UI or unrelated assets.",
+              "landscapeContract": "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md",
+              "landscapeSource": [
+                2172,
+                724
+              ],
+              "viewport": [
+                960,
+                540
+              ],
+              "surfaceY": 410,
+              "landscapeOffsets": {
+                "FAR": 0,
+                "MID": 0,
+                "GROUND": 0
+              },
+              "landscapeScaleMultipliers": {
+                "FAR": 1.25,
+                "MID": 1,
+                "GROUND": 1
+              },
+              "landscapeAnchors": {
+                "MID": 621,
+                "GROUND": 393
+              },
+              "groundAtlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 2,
+                "cellWidth": 1086,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "footAnchorY": 620
+              },
+              "flyingAtlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 4,
+                "cellWidth": 543,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "bodyAnchor": {
+                  "x": 271,
+                  "y": 362
+                },
+                "facing": "right",
+                "frames": [
+                  "upstroke apex",
+                  "descending wings forward",
+                  "downstroke apex",
+                  "rising wings swept back"
+                ]
+              },
+              "artDirection": {
+                "authority": "User direction, 2026-09-19; see the composition, identity and scale section of the plan.",
+                "scope": "Remaining-continent proposals; existing approved artwork is not reopened.",
+                "FAR": "One recognizable local landmark or dominant natural formation, readable in the runtime composite behind MID and away from repeat joins.",
+                "MID": "One restrained, unique local sign of life: settlement/frontage, everyday-use detail or static background wildlife. No people or gameplay hazards baked into scenery.",
+                "originality": "Compare identities and visible silhouettes against existing and proposed campaign elements. No reused species/objects, renamed duplicates or recolors as new hazards; shared background materials are not signature elements.",
+                "scale": "Judge visible subjects at 960x540 and normal mobile presentation relative to characters, architecture and depth. Reject subjects that read too small or need implausible enlargement. Preserve canonical transforms and physics.",
+                "requiredStageBriefFields": [
+                  "farFocalPoint",
+                  "midLifeDetail",
+                  "localReference",
+                  "campaignDistinctiveness",
+                  "intendedRelativeScale"
+                ],
+                "selectionReviewStatus": "Africa agent selections resolved; remaining nine proposals still need campaign comparison. Visual size/reference inspection remains stage-specific.",
+                "approval": "Requirements and workflow direction approved. Unresolved selection changes remain review items; generated artwork still requires deployed-stage acceptance."
+              }
+            },
+            "prompt": "AF02 MID: Sparse weathered dead-tree silhouettes, dune shoulders and pale clay-pan patches, with enough lower frontage for overlap.\n{\"direction\":\"Sparse weathered dead-tree silhouettes, dune shoulders and pale clay-pan patches, with enough lower frontage for overlap.\",\"brief\":{\"midLifeDetail\":\"A single oryx near sparse dead camelthorn silhouettes, well behind gameplay.\",\"localReference\":[\"namib\",\"sandgrouse\"],\"campaignDistinctiveness\":[\"Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat.\"],\"intendedRelativeScale\":\"Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth.\"}}",
+            "direction": "Sparse weathered dead-tree silhouettes, dune shoulders and pale clay-pan patches, with enough lower frontage for overlap.",
+            "task": {
+              "direction": "Sparse weathered dead-tree silhouettes, dune shoulders and pale clay-pan patches, with enough lower frontage for overlap.",
+              "brief": {
+                "midLifeDetail": "A single oryx near sparse dead camelthorn silhouettes, well behind gameplay.",
+                "localReference": [
+                  "namib",
+                  "sandgrouse"
+                ],
+                "campaignDistinctiveness": [
+                  "Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat."
+                ],
+                "intendedRelativeScale": "Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth."
+              }
+            },
+            "selectedHazards": null,
+            "preserveSibling": null,
+            "editingSource": null,
+            "continuityFiles": [
+              "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png",
+              "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png"
+            ]
+          },
+          "attempts": 1,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+          "recoveryRef": "refs/remotes/origin/work/assets/af02",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/work/assets/af02",
+            "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+            "contentHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:04:10.889Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T21:00:45.738Z",
+          "priorRecoveryEvidence": [
+            {
+              "ref": "af02-landscape-output",
+              "commit": "d9c40c08b55b7b9a4c659a28e188b58b30b7bdcf",
+              "contentHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ],
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          }
+        },
+        "AF02:GROUND": {
+          "id": "AF02:GROUND",
+          "runId": "af02-20260919204119-fb761a",
+          "selector": "GROUND",
+          "owner": "landscape-worker",
+          "output": "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png",
+          "baseHash": null,
+          "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "9e48031675b075d4e9750bb2ea85d853b67d4e8a3d4c8d9602b4e4f767f4ef40",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "f14feb423148f1d79e0d946b9e216b77eb52e216968919ea99e0ad6cdad79d96",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "1fcf95f0ee6d5882838919c91f9a912bd36b1fad01217ab2de6c463c20920540"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_OBJECT_ATLAS.png": null,
+            "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png": null
+          },
+          "workerPacket": {
+            "runId": "af02-20260919204119-fb761a",
+            "jobId": "AF02:GROUND",
+            "target": "AF02",
+            "selector": "GROUND",
+            "owner": "landscape-worker",
+            "output": "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png",
+            "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+            "baseHash": null,
+            "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+            "referenceHashes": {
+              "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+              "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+              "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+              "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356"
+            },
+            "sharedRules": {
+              "profile": {
+                "path": "docs/asset-profiles/landscape.md",
+                "content": "# Landscape operational profile\n\nSource authority: WORLD_RENDERING_SPEC §§1–5, ASSET_PRODUCTION_SPEC general/world/transparency rules, LANDSCAPE_GENERATION_CONTRACT_V1, and the selected Phase 8 prompt-manifest sections. Use this focused profile for ordinary image commands; read full source specs for changes to these rules.\n\n- One crisp pixel-art PNG per generation call. Attach the exact immutable registry reference as pixels; a written path is insufficient. For a revision also attach the current accepted/working layer and preserve its composition except for the requested change. Approved direction updates in the selected prompt take precedence over older reference content.\n- Preserve location, landmark relationships, lighting, palette and pixel-art language. No characters, hazards, HUD, text, checkerboard or baked shared clouds. Approved scene-specific exceptions, such as SA01's decorative snake, remain in its stage lock.\n- New source canvas: 2172×724, 8-bit non-interlaced PNG. MID/GROUND require RGBA and real transparency; FAR is fully opaque. Exact registry dimensions/types override generic prompt dimensions for a preserved approved exception: NA03 GROUND is 2170×725. Never normalize it for convenience.\n- Runtime viewport 960×540; running surface 410; landscape source width 2172; FAR/MID/GROUND offsets all zero; scale multipliers FAR 1.25, MID 1, GROUND 1. Actual draw scale is `960/2172 × multiplier`. MID anchor 621 and GROUND anchor 393 map to 410. Zero offsets do not mean drawing MID/GROUND's canvas top at Y=0.\n- FAR owns opaque skyline/foundation and useful scenery behind MID transparency. MID owns middle-distance silhouettes, intentional sky openings and enough lower authored coverage to overlap GROUND. GROUND owns a continuous level surface at source Y=393 and solid terrain depth to the bottom, with appropriate transparent space above. No synthetic backing or offset changes to hide missing art.\n- Inspect the actual stage configuration before blaming an image: registry activation, inner renderer, outer bootstrap, saved authoring draft and reset must agree. Active stages use the shared contract; pending stages keep their legacy baseline until their full set is integrated. Legacy sprite normalization is unrelated to landscape source width and must not be globally replaced.\n- Full PNG integrity/dimensions/alpha checks plus isolated, repeat and composite review are required. Check MID lower coverage/transition and GROUND surface/depth visually; a fully opaque FAR can hide a bad MID in an aggregate alpha statistic. Edge-delta numbers alone cannot prove a seamless repeat. Inspect in the actual app at scroll offsets and in Inspector previews before asking for acceptance.\n- Approved horizontal-edge-only deterministic repair may correct a repeat seam without moving landmarks/anchors, rescaling, changing dimensions/alpha ownership or hiding a structural defect. Other artwork edits use image generation unless explicitly authorized. The historic NA03 overscan treatment is asset-specific, not blanket permission to stretch future artwork.\n- Correct only the requested layer or proven configuration defect. Never change sibling assets, gameplay, character/hazard calibration or approved image bytes as an optimization. Stop after checks and visual inspection pass; final acceptance belongs to the user on the deployed integrated stage.\n"
+              },
+              "hazardProfile": "# New-stage hazard profile\n\nApplies to new AF/AS/OC/AN files. Source: HAZARD_SPEC and REMAINING_CONTINENTS_PLAN. Existing accepted atlases/calibrations stay unchanged.\n\n- Ground atlas: 2172×724 RGBA; two 1086×724 cells, GROUND1 left / GROUND2 right. Source contact (543,620); at least 32px clear cell gutters. No scenery/labels.\n- Flying atlas: 2172×724 RGBA; four 543×724 cells. Fixed source body anchor (271,362), right-facing source, stable anatomy, four distinct wing poses and continuous loop. Every flock member animates.\n- Record source-facing and intended gameplay-facing separately. Directional hazards approaching from the right face left in gameplay; retain pixels and use the matching `flipX` transform. Nondirectional objects use neither automatic mirroring nor an invented facing.\n- Supply source regions, crops/frame crops, anchors, frame order/FPS and usable starting scale/body bounds. Crops retain anchors. Starting bounds represent solid bodies, excluding decorative wings/tails/leaves. Inspect basic rendering and credible size with the character reference at 960×540/mobile; do not inflate a small species for visibility.\n- Ground uses Y=410 and the explicit source anchor; flying uses the shared HIGH/LOW starting placement. These are provisional metadata, not accepted character-relative calibration. No global physics, clearance or speed changes to rescue art.\n- Validate source integrity/alpha, gutters, ground contact pixels, distinct frame bytes and animation/pose stability. Inspect composition and basic rendering. Structural checks alone do not prove animation quality or collision fairness.\n- End asset production with the versioned asset-ready handoff and exact five-file hashes. The editor-next Workbench agent imports it; the user calibrates and saves. Iterative grounding, flight height, hitbox fairness, Jump/Slide windows, difficulty and spawn-spacing balancing belong there. Repeated zero-hit courses are not an asset handoff gate.\n- Later playable release retains real contact, collision, finish and gameplay validation. Never mark unperformed checks passed. Keep genuine renderer/scheduler bug fixes and regression tests.\n- A GROUND1/GROUND2 revision preserves its sibling's RGBA pixels and metadata exactly. Recover original bytes from Git; never silently regenerate an accepted sibling.\n",
+              "pixelArt": "Match the established crisp pixel-art language; no photorealism, painterly blur, vector-flat redesign, smooth 3D, labels, UI or unrelated assets.",
+              "landscapeContract": "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md",
+              "landscapeSource": [
+                2172,
+                724
+              ],
+              "viewport": [
+                960,
+                540
+              ],
+              "surfaceY": 410,
+              "landscapeOffsets": {
+                "FAR": 0,
+                "MID": 0,
+                "GROUND": 0
+              },
+              "landscapeScaleMultipliers": {
+                "FAR": 1.25,
+                "MID": 1,
+                "GROUND": 1
+              },
+              "landscapeAnchors": {
+                "MID": 621,
+                "GROUND": 393
+              },
+              "groundAtlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 2,
+                "cellWidth": 1086,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "footAnchorY": 620
+              },
+              "flyingAtlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 4,
+                "cellWidth": 543,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "bodyAnchor": {
+                  "x": 271,
+                  "y": 362
+                },
+                "facing": "right",
+                "frames": [
+                  "upstroke apex",
+                  "descending wings forward",
+                  "downstroke apex",
+                  "rising wings swept back"
+                ]
+              },
+              "artDirection": {
+                "authority": "User direction, 2026-09-19; see the composition, identity and scale section of the plan.",
+                "scope": "Remaining-continent proposals; existing approved artwork is not reopened.",
+                "FAR": "One recognizable local landmark or dominant natural formation, readable in the runtime composite behind MID and away from repeat joins.",
+                "MID": "One restrained, unique local sign of life: settlement/frontage, everyday-use detail or static background wildlife. No people or gameplay hazards baked into scenery.",
+                "originality": "Compare identities and visible silhouettes against existing and proposed campaign elements. No reused species/objects, renamed duplicates or recolors as new hazards; shared background materials are not signature elements.",
+                "scale": "Judge visible subjects at 960x540 and normal mobile presentation relative to characters, architecture and depth. Reject subjects that read too small or need implausible enlargement. Preserve canonical transforms and physics.",
+                "requiredStageBriefFields": [
+                  "farFocalPoint",
+                  "midLifeDetail",
+                  "localReference",
+                  "campaignDistinctiveness",
+                  "intendedRelativeScale"
+                ],
+                "selectionReviewStatus": "Africa agent selections resolved; remaining nine proposals still need campaign comparison. Visual size/reference inspection remains stage-specific.",
+                "approval": "Requirements and workflow direction approved. Unresolved selection changes remain review items; generated artwork still requires deployed-stage acceptance."
+              }
+            },
+            "prompt": "AF02 GROUND: Flat firm sand/clay trail with stratified ochre depth; dune slopes remain scenery rather than changing the running surface.\n{\"direction\":\"Flat firm sand/clay trail with stratified ochre depth; dune slopes remain scenery rather than changing the running surface.\",\"brief\":{\"localReference\":[\"namib\",\"sandgrouse\"],\"campaignDistinctiveness\":[\"Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat.\"],\"intendedRelativeScale\":\"Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth.\"}}",
+            "direction": "Flat firm sand/clay trail with stratified ochre depth; dune slopes remain scenery rather than changing the running surface.",
+            "task": {
+              "direction": "Flat firm sand/clay trail with stratified ochre depth; dune slopes remain scenery rather than changing the running surface.",
+              "brief": {
+                "localReference": [
+                  "namib",
+                  "sandgrouse"
+                ],
+                "campaignDistinctiveness": [
+                  "Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat."
+                ],
+                "intendedRelativeScale": "Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth."
+              }
+            },
+            "selectedHazards": null,
+            "preserveSibling": null,
+            "editingSource": null,
+            "continuityFiles": [
+              "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png",
+              "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png"
+            ]
+          },
+          "attempts": 2,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+          "recoveryRef": "work/assets/af02",
+          "candidateRecovery": {
+            "sha256": "d6e58e046623d036f592ee2b7a0aed13670481cd453f71f1d3d8117a8f607202",
+            "commit": "2820a408e005e6889f7272dc0cfd0f44f6349483",
+            "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
+            "technicalQa": "failed",
+            "assetReady": false,
+            "supersededBySha256": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b"
+          },
+          "recoveryEvidence": {
+            "ref": "work/assets/af02",
+            "commit": "df639664698d7582d3f500988b03bf2c66b8d8f3",
+            "contentHash": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+            "localCommitVerified": true,
+            "remoteRefVerified": false,
+            "verifiedAt": null
+          },
+          "durable": false,
+          "completedAt": "2026-09-19T21:17:56.265Z",
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          }
+        },
+        "AF02:OBJECT_ATLAS": {
+          "id": "AF02:OBJECT_ATLAS",
+          "runId": "af02-20260919204119-fb761a",
+          "selector": "OBJECT_ATLAS",
+          "owner": "hazard-worker",
+          "output": "assets/worlds/africa/AF02_OBJECT_ATLAS.png",
+          "baseHash": null,
+          "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "9e48031675b075d4e9750bb2ea85d853b67d4e8a3d4c8d9602b4e4f767f4ef40",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "f14feb423148f1d79e0d946b9e216b77eb52e216968919ea99e0ad6cdad79d96",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "1fcf95f0ee6d5882838919c91f9a912bd36b1fad01217ab2de6c463c20920540"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356",
+            "assets/references/africa/af02/camelthorn.jpg": "06927857a3351493caeb0358410c22d885847e67d7c40977fb7c5407b141da25",
+            "assets/worlds/africa/AF01_OBJECT_ATLAS.png": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png": null
+          },
+          "workerPacket": {
+            "runId": "af02-20260919204119-fb761a",
+            "jobId": "AF02:OBJECT_ATLAS",
+            "target": "AF02",
+            "selector": "OBJECT_ATLAS",
+            "owner": "hazard-worker",
+            "output": "assets/worlds/africa/AF02_OBJECT_ATLAS.png",
+            "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+            "baseHash": null,
+            "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+            "referenceHashes": {
+              "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+              "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+              "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+              "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356",
+              "assets/references/africa/af02/camelthorn.jpg": "06927857a3351493caeb0358410c22d885847e67d7c40977fb7c5407b141da25",
+              "assets/worlds/africa/AF01_OBJECT_ATLAS.png": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569"
+            },
+            "sharedRules": {
+              "profile": {
+                "path": "docs/asset-profiles/landscape.md",
+                "content": "# Landscape operational profile\n\nSource authority: WORLD_RENDERING_SPEC §§1–5, ASSET_PRODUCTION_SPEC general/world/transparency rules, LANDSCAPE_GENERATION_CONTRACT_V1, and the selected Phase 8 prompt-manifest sections. Use this focused profile for ordinary image commands; read full source specs for changes to these rules.\n\n- One crisp pixel-art PNG per generation call. Attach the exact immutable registry reference as pixels; a written path is insufficient. For a revision also attach the current accepted/working layer and preserve its composition except for the requested change. Approved direction updates in the selected prompt take precedence over older reference content.\n- Preserve location, landmark relationships, lighting, palette and pixel-art language. No characters, hazards, HUD, text, checkerboard or baked shared clouds. Approved scene-specific exceptions, such as SA01's decorative snake, remain in its stage lock.\n- New source canvas: 2172×724, 8-bit non-interlaced PNG. MID/GROUND require RGBA and real transparency; FAR is fully opaque. Exact registry dimensions/types override generic prompt dimensions for a preserved approved exception: NA03 GROUND is 2170×725. Never normalize it for convenience.\n- Runtime viewport 960×540; running surface 410; landscape source width 2172; FAR/MID/GROUND offsets all zero; scale multipliers FAR 1.25, MID 1, GROUND 1. Actual draw scale is `960/2172 × multiplier`. MID anchor 621 and GROUND anchor 393 map to 410. Zero offsets do not mean drawing MID/GROUND's canvas top at Y=0.\n- FAR owns opaque skyline/foundation and useful scenery behind MID transparency. MID owns middle-distance silhouettes, intentional sky openings and enough lower authored coverage to overlap GROUND. GROUND owns a continuous level surface at source Y=393 and solid terrain depth to the bottom, with appropriate transparent space above. No synthetic backing or offset changes to hide missing art.\n- Inspect the actual stage configuration before blaming an image: registry activation, inner renderer, outer bootstrap, saved authoring draft and reset must agree. Active stages use the shared contract; pending stages keep their legacy baseline until their full set is integrated. Legacy sprite normalization is unrelated to landscape source width and must not be globally replaced.\n- Full PNG integrity/dimensions/alpha checks plus isolated, repeat and composite review are required. Check MID lower coverage/transition and GROUND surface/depth visually; a fully opaque FAR can hide a bad MID in an aggregate alpha statistic. Edge-delta numbers alone cannot prove a seamless repeat. Inspect in the actual app at scroll offsets and in Inspector previews before asking for acceptance.\n- Approved horizontal-edge-only deterministic repair may correct a repeat seam without moving landmarks/anchors, rescaling, changing dimensions/alpha ownership or hiding a structural defect. Other artwork edits use image generation unless explicitly authorized. The historic NA03 overscan treatment is asset-specific, not blanket permission to stretch future artwork.\n- Correct only the requested layer or proven configuration defect. Never change sibling assets, gameplay, character/hazard calibration or approved image bytes as an optimization. Stop after checks and visual inspection pass; final acceptance belongs to the user on the deployed integrated stage.\n"
+              },
+              "hazardProfile": "# New-stage hazard profile\n\nApplies to new AF/AS/OC/AN files. Source: HAZARD_SPEC and REMAINING_CONTINENTS_PLAN. Existing accepted atlases/calibrations stay unchanged.\n\n- Ground atlas: 2172×724 RGBA; two 1086×724 cells, GROUND1 left / GROUND2 right. Source contact (543,620); at least 32px clear cell gutters. No scenery/labels.\n- Flying atlas: 2172×724 RGBA; four 543×724 cells. Fixed source body anchor (271,362), right-facing source, stable anatomy, four distinct wing poses and continuous loop. Every flock member animates.\n- Record source-facing and intended gameplay-facing separately. Directional hazards approaching from the right face left in gameplay; retain pixels and use the matching `flipX` transform. Nondirectional objects use neither automatic mirroring nor an invented facing.\n- Supply source regions, crops/frame crops, anchors, frame order/FPS and usable starting scale/body bounds. Crops retain anchors. Starting bounds represent solid bodies, excluding decorative wings/tails/leaves. Inspect basic rendering and credible size with the character reference at 960×540/mobile; do not inflate a small species for visibility.\n- Ground uses Y=410 and the explicit source anchor; flying uses the shared HIGH/LOW starting placement. These are provisional metadata, not accepted character-relative calibration. No global physics, clearance or speed changes to rescue art.\n- Validate source integrity/alpha, gutters, ground contact pixels, distinct frame bytes and animation/pose stability. Inspect composition and basic rendering. Structural checks alone do not prove animation quality or collision fairness.\n- End asset production with the versioned asset-ready handoff and exact five-file hashes. The editor-next Workbench agent imports it; the user calibrates and saves. Iterative grounding, flight height, hitbox fairness, Jump/Slide windows, difficulty and spawn-spacing balancing belong there. Repeated zero-hit courses are not an asset handoff gate.\n- Later playable release retains real contact, collision, finish and gameplay validation. Never mark unperformed checks passed. Keep genuine renderer/scheduler bug fixes and regression tests.\n- A GROUND1/GROUND2 revision preserves its sibling's RGBA pixels and metadata exactly. Recover original bytes from Git; never silently regenerate an accepted sibling.\n",
+              "pixelArt": "Match the established crisp pixel-art language; no photorealism, painterly blur, vector-flat redesign, smooth 3D, labels, UI or unrelated assets.",
+              "landscapeContract": "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md",
+              "landscapeSource": [
+                2172,
+                724
+              ],
+              "viewport": [
+                960,
+                540
+              ],
+              "surfaceY": 410,
+              "landscapeOffsets": {
+                "FAR": 0,
+                "MID": 0,
+                "GROUND": 0
+              },
+              "landscapeScaleMultipliers": {
+                "FAR": 1.25,
+                "MID": 1,
+                "GROUND": 1
+              },
+              "landscapeAnchors": {
+                "MID": 621,
+                "GROUND": 393
+              },
+              "groundAtlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 2,
+                "cellWidth": 1086,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "footAnchorY": 620
+              },
+              "flyingAtlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 4,
+                "cellWidth": 543,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "bodyAnchor": {
+                  "x": 271,
+                  "y": 362
+                },
+                "facing": "right",
+                "frames": [
+                  "upstroke apex",
+                  "descending wings forward",
+                  "downstroke apex",
+                  "rising wings swept back"
+                ]
+              },
+              "artDirection": {
+                "authority": "User direction, 2026-09-19; see the composition, identity and scale section of the plan.",
+                "scope": "Remaining-continent proposals; existing approved artwork is not reopened.",
+                "FAR": "One recognizable local landmark or dominant natural formation, readable in the runtime composite behind MID and away from repeat joins.",
+                "MID": "One restrained, unique local sign of life: settlement/frontage, everyday-use detail or static background wildlife. No people or gameplay hazards baked into scenery.",
+                "originality": "Compare identities and visible silhouettes against existing and proposed campaign elements. No reused species/objects, renamed duplicates or recolors as new hazards; shared background materials are not signature elements.",
+                "scale": "Judge visible subjects at 960x540 and normal mobile presentation relative to characters, architecture and depth. Reject subjects that read too small or need implausible enlargement. Preserve canonical transforms and physics.",
+                "requiredStageBriefFields": [
+                  "farFocalPoint",
+                  "midLifeDetail",
+                  "localReference",
+                  "campaignDistinctiveness",
+                  "intendedRelativeScale"
+                ],
+                "selectionReviewStatus": "Africa agent selections resolved; remaining nine proposals still need campaign comparison. Visual size/reference inspection remains stage-specific.",
+                "approval": "Requirements and workflow direction approved. Unresolved selection changes remain review items; generated artwork still requires deployed-stage acceptance."
+              }
+            },
+            "prompt": "AF02 OBJECT_ATLAS: \n{\"hazards\":{\"GROUND1\":{\"label\":\"Curled clay-pan crust plates\",\"direction\":\"Low thin curled polygonal clay plates with open cracks; stylized shallow trip obstacle, not a solid stone block or oversized geological cliff.\",\"cell\":0,\"animation\":\"static\"},\"GROUND2\":{\"label\":\"Forked dead camelthorn snag\",\"direction\":\"Upright sparse Y-shaped branch with open negative space; no horizontal log, dense root ball or boulder base.\",\"cell\":1,\"animation\":\"static\"}},\"atlas\":{\"width\":2172,\"height\":724,\"columns\":2,\"cellWidth\":1086,\"cellHeight\":724,\"minimumCellGutter\":32,\"footAnchorY\":620},\"brief\":{\"localReference\":[\"namib\",\"sandgrouse\"],\"campaignDistinctiveness\":[\"Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat.\"],\"intendedRelativeScale\":\"Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth.\"}}",
+            "direction": null,
+            "task": {
+              "hazards": {
+                "GROUND1": {
+                  "label": "Curled clay-pan crust plates",
+                  "direction": "Low thin curled polygonal clay plates with open cracks; stylized shallow trip obstacle, not a solid stone block or oversized geological cliff.",
+                  "cell": 0,
+                  "animation": "static"
+                },
+                "GROUND2": {
+                  "label": "Forked dead camelthorn snag",
+                  "direction": "Upright sparse Y-shaped branch with open negative space; no horizontal log, dense root ball or boulder base.",
+                  "cell": 1,
+                  "animation": "static"
+                }
+              },
+              "atlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 2,
+                "cellWidth": 1086,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "footAnchorY": 620
+              },
+              "brief": {
+                "localReference": [
+                  "namib",
+                  "sandgrouse"
+                ],
+                "campaignDistinctiveness": [
+                  "Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat."
+                ],
+                "intendedRelativeScale": "Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth."
+              }
+            },
+            "selectedHazards": [
+              "GROUND1",
+              "GROUND2"
+            ],
+            "preserveSibling": null,
+            "editingSource": null,
+            "continuityFiles": []
+          },
+          "attempts": 8,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+          "recoveryRef": "work/assets/af02",
+          "recoveryEvidence": {
+            "ref": "work/assets/af02",
+            "commit": "731823ba1019b6d99c9d7585215929d387e8b12b",
+            "contentHash": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+            "localCommitVerified": true,
+            "remoteRefVerified": false,
+            "verifiedAt": null
+          },
+          "durable": false,
+          "completedAt": "2026-09-19T20:52:06.397Z",
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          },
+          "priorRecoveryEvidence": [
+            {
+              "ref": "af02-hazard-output",
+              "commit": "454d1e6d10190adf8883c0985a8e57b0b54a9af8",
+              "contentHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ],
+          "correctionHistory": [
+            {
+              "priorResultHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+              "priorRecoveryEvidence": {
+                "ref": "refs/remotes/origin/work/assets/af02",
+                "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+                "contentHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+                "localCommitVerified": true,
+                "remoteRefVerified": true,
+                "verifiedAt": "2026-09-19T21:04:10.975Z"
+              },
+              "priorTechnicalQa": {
+                "status": "failed",
+                "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
+                "reason": "Ground contact outside tolerance and stray alpha in a cell gutter; requires source-image correction before asset-ready."
+              },
+              "authorization": "Explicit user yes to documented AF02 cleanup"
+            }
+          ]
+        },
+        "AF02:FLYING": {
+          "id": "AF02:FLYING",
+          "runId": "af02-20260919204119-fb761a",
+          "selector": "FLYING",
+          "owner": "hazard-worker",
+          "output": "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png",
+          "baseHash": null,
+          "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "9e48031675b075d4e9750bb2ea85d853b67d4e8a3d4c8d9602b4e4f767f4ef40",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "f14feb423148f1d79e0d946b9e216b77eb52e216968919ea99e0ad6cdad79d96",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "1fcf95f0ee6d5882838919c91f9a912bd36b1fad01217ab2de6c463c20920540"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af02/sandgrouse_flight.jpg": "16151a3df305578080e8333feed0f3763d1e1e80576334697bf06d2974a97a21",
+            "assets/worlds/africa/AF01_HAZARD_ROLLER.png": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b",
+            "assets/characters/G1A_RUN_CYCLE_ATLAS.png": "b7cb1ca55534f888e4802c7c55892fc4ebfafc5d601ec5e7926d18ffa4322037"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_OBJECT_ATLAS.png": null
+          },
+          "workerPacket": {
+            "runId": "af02-20260919204119-fb761a",
+            "jobId": "AF02:FLYING",
+            "target": "AF02",
+            "selector": "FLYING",
+            "owner": "hazard-worker",
+            "output": "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png",
+            "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+            "baseHash": null,
+            "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+            "referenceHashes": {
+              "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+              "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+              "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+              "assets/references/africa/af02/sandgrouse_flight.jpg": "16151a3df305578080e8333feed0f3763d1e1e80576334697bf06d2974a97a21",
+              "assets/worlds/africa/AF01_HAZARD_ROLLER.png": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b",
+              "assets/characters/G1A_RUN_CYCLE_ATLAS.png": "b7cb1ca55534f888e4802c7c55892fc4ebfafc5d601ec5e7926d18ffa4322037"
+            },
+            "sharedRules": {
+              "profile": {
+                "path": "docs/asset-profiles/landscape.md",
+                "content": "# Landscape operational profile\n\nSource authority: WORLD_RENDERING_SPEC §§1–5, ASSET_PRODUCTION_SPEC general/world/transparency rules, LANDSCAPE_GENERATION_CONTRACT_V1, and the selected Phase 8 prompt-manifest sections. Use this focused profile for ordinary image commands; read full source specs for changes to these rules.\n\n- One crisp pixel-art PNG per generation call. Attach the exact immutable registry reference as pixels; a written path is insufficient. For a revision also attach the current accepted/working layer and preserve its composition except for the requested change. Approved direction updates in the selected prompt take precedence over older reference content.\n- Preserve location, landmark relationships, lighting, palette and pixel-art language. No characters, hazards, HUD, text, checkerboard or baked shared clouds. Approved scene-specific exceptions, such as SA01's decorative snake, remain in its stage lock.\n- New source canvas: 2172×724, 8-bit non-interlaced PNG. MID/GROUND require RGBA and real transparency; FAR is fully opaque. Exact registry dimensions/types override generic prompt dimensions for a preserved approved exception: NA03 GROUND is 2170×725. Never normalize it for convenience.\n- Runtime viewport 960×540; running surface 410; landscape source width 2172; FAR/MID/GROUND offsets all zero; scale multipliers FAR 1.25, MID 1, GROUND 1. Actual draw scale is `960/2172 × multiplier`. MID anchor 621 and GROUND anchor 393 map to 410. Zero offsets do not mean drawing MID/GROUND's canvas top at Y=0.\n- FAR owns opaque skyline/foundation and useful scenery behind MID transparency. MID owns middle-distance silhouettes, intentional sky openings and enough lower authored coverage to overlap GROUND. GROUND owns a continuous level surface at source Y=393 and solid terrain depth to the bottom, with appropriate transparent space above. No synthetic backing or offset changes to hide missing art.\n- Inspect the actual stage configuration before blaming an image: registry activation, inner renderer, outer bootstrap, saved authoring draft and reset must agree. Active stages use the shared contract; pending stages keep their legacy baseline until their full set is integrated. Legacy sprite normalization is unrelated to landscape source width and must not be globally replaced.\n- Full PNG integrity/dimensions/alpha checks plus isolated, repeat and composite review are required. Check MID lower coverage/transition and GROUND surface/depth visually; a fully opaque FAR can hide a bad MID in an aggregate alpha statistic. Edge-delta numbers alone cannot prove a seamless repeat. Inspect in the actual app at scroll offsets and in Inspector previews before asking for acceptance.\n- Approved horizontal-edge-only deterministic repair may correct a repeat seam without moving landmarks/anchors, rescaling, changing dimensions/alpha ownership or hiding a structural defect. Other artwork edits use image generation unless explicitly authorized. The historic NA03 overscan treatment is asset-specific, not blanket permission to stretch future artwork.\n- Correct only the requested layer or proven configuration defect. Never change sibling assets, gameplay, character/hazard calibration or approved image bytes as an optimization. Stop after checks and visual inspection pass; final acceptance belongs to the user on the deployed integrated stage.\n"
+              },
+              "hazardProfile": "# New-stage hazard profile\n\nApplies to new AF/AS/OC/AN files. Source: HAZARD_SPEC and REMAINING_CONTINENTS_PLAN. Existing accepted atlases/calibrations stay unchanged.\n\n- Ground atlas: 2172×724 RGBA; two 1086×724 cells, GROUND1 left / GROUND2 right. Source contact (543,620); at least 32px clear cell gutters. No scenery/labels.\n- Flying atlas: 2172×724 RGBA; four 543×724 cells. Fixed source body anchor (271,362), right-facing source, stable anatomy, four distinct wing poses and continuous loop. Every flock member animates.\n- Record source-facing and intended gameplay-facing separately. Directional hazards approaching from the right face left in gameplay; retain pixels and use the matching `flipX` transform. Nondirectional objects use neither automatic mirroring nor an invented facing.\n- Supply source regions, crops/frame crops, anchors, frame order/FPS and usable starting scale/body bounds. Crops retain anchors. Starting bounds represent solid bodies, excluding decorative wings/tails/leaves. Inspect basic rendering and credible size with the character reference at 960×540/mobile; do not inflate a small species for visibility.\n- Ground uses Y=410 and the explicit source anchor; flying uses the shared HIGH/LOW starting placement. These are provisional metadata, not accepted character-relative calibration. No global physics, clearance or speed changes to rescue art.\n- Validate source integrity/alpha, gutters, ground contact pixels, distinct frame bytes and animation/pose stability. Inspect composition and basic rendering. Structural checks alone do not prove animation quality or collision fairness.\n- End asset production with the versioned asset-ready handoff and exact five-file hashes. The editor-next Workbench agent imports it; the user calibrates and saves. Iterative grounding, flight height, hitbox fairness, Jump/Slide windows, difficulty and spawn-spacing balancing belong there. Repeated zero-hit courses are not an asset handoff gate.\n- Later playable release retains real contact, collision, finish and gameplay validation. Never mark unperformed checks passed. Keep genuine renderer/scheduler bug fixes and regression tests.\n- A GROUND1/GROUND2 revision preserves its sibling's RGBA pixels and metadata exactly. Recover original bytes from Git; never silently regenerate an accepted sibling.\n",
+              "pixelArt": "Match the established crisp pixel-art language; no photorealism, painterly blur, vector-flat redesign, smooth 3D, labels, UI or unrelated assets.",
+              "landscapeContract": "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md",
+              "landscapeSource": [
+                2172,
+                724
+              ],
+              "viewport": [
+                960,
+                540
+              ],
+              "surfaceY": 410,
+              "landscapeOffsets": {
+                "FAR": 0,
+                "MID": 0,
+                "GROUND": 0
+              },
+              "landscapeScaleMultipliers": {
+                "FAR": 1.25,
+                "MID": 1,
+                "GROUND": 1
+              },
+              "landscapeAnchors": {
+                "MID": 621,
+                "GROUND": 393
+              },
+              "groundAtlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 2,
+                "cellWidth": 1086,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "footAnchorY": 620
+              },
+              "flyingAtlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 4,
+                "cellWidth": 543,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "bodyAnchor": {
+                  "x": 271,
+                  "y": 362
+                },
+                "facing": "right",
+                "frames": [
+                  "upstroke apex",
+                  "descending wings forward",
+                  "downstroke apex",
+                  "rising wings swept back"
+                ]
+              },
+              "artDirection": {
+                "authority": "User direction, 2026-09-19; see the composition, identity and scale section of the plan.",
+                "scope": "Remaining-continent proposals; existing approved artwork is not reopened.",
+                "FAR": "One recognizable local landmark or dominant natural formation, readable in the runtime composite behind MID and away from repeat joins.",
+                "MID": "One restrained, unique local sign of life: settlement/frontage, everyday-use detail or static background wildlife. No people or gameplay hazards baked into scenery.",
+                "originality": "Compare identities and visible silhouettes against existing and proposed campaign elements. No reused species/objects, renamed duplicates or recolors as new hazards; shared background materials are not signature elements.",
+                "scale": "Judge visible subjects at 960x540 and normal mobile presentation relative to characters, architecture and depth. Reject subjects that read too small or need implausible enlargement. Preserve canonical transforms and physics.",
+                "requiredStageBriefFields": [
+                  "farFocalPoint",
+                  "midLifeDetail",
+                  "localReference",
+                  "campaignDistinctiveness",
+                  "intendedRelativeScale"
+                ],
+                "selectionReviewStatus": "Africa agent selections resolved; remaining nine proposals still need campaign comparison. Visual size/reference inspection remains stage-specific.",
+                "approval": "Requirements and workflow direction approved. Unresolved selection changes remain review items; generated artwork still requires deployed-stage acceptance."
+              }
+            },
+            "prompt": "AF02 FLYING: \n{\"hazard\":{\"label\":\"Namaqua sandgrouse\",\"path\":\"assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png\",\"frames\":4,\"creatures\":1},\"atlas\":{\"width\":2172,\"height\":724,\"columns\":4,\"cellWidth\":543,\"cellHeight\":724,\"minimumCellGutter\":32,\"bodyAnchor\":{\"x\":271,\"y\":362},\"facing\":\"right\",\"frames\":[\"upstroke apex\",\"descending wings forward\",\"downstroke apex\",\"rising wings swept back\"]},\"brief\":{\"localReference\":[\"namib\",\"sandgrouse\"],\"campaignDistinctiveness\":[\"Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat.\"],\"intendedRelativeScale\":\"Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth.\"}}",
+            "direction": null,
+            "task": {
+              "hazard": {
+                "label": "Namaqua sandgrouse",
+                "path": "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png",
+                "frames": 4,
+                "creatures": 1
+              },
+              "atlas": {
+                "width": 2172,
+                "height": 724,
+                "columns": 4,
+                "cellWidth": 543,
+                "cellHeight": 724,
+                "minimumCellGutter": 32,
+                "bodyAnchor": {
+                  "x": 271,
+                  "y": 362
+                },
+                "facing": "right",
+                "frames": [
+                  "upstroke apex",
+                  "descending wings forward",
+                  "downstroke apex",
+                  "rising wings swept back"
+                ]
+              },
+              "brief": {
+                "localReference": [
+                  "namib",
+                  "sandgrouse"
+                ],
+                "campaignDistinctiveness": [
+                  "Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat."
+                ],
+                "intendedRelativeScale": "Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth."
+              }
+            },
+            "selectedHazards": [
+              "FLYING"
+            ],
+            "preserveSibling": null,
+            "editingSource": null,
+            "continuityFiles": []
+          },
+          "attempts": 2,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+          "recoveryRef": "work/assets/af02",
+          "candidateRecovery": {
+            "sha256": "fcb97b5d07bc46f37b514fdd7c83d976fd447333ddbda70bd0b9f7a941823ad3",
+            "commit": "044ab72ecd44cbb4a008777be30625e73621f419",
+            "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
+            "technicalQa": "failed",
+            "assetReady": false,
+            "supersededBySha256": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085"
+          },
+          "recoveryEvidence": {
+            "ref": "work/assets/af02",
+            "commit": "3d979e61751ff279084fd01a03a41bb9570cfac7",
+            "contentHash": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+            "localCommitVerified": true,
+            "remoteRefVerified": false,
+            "verifiedAt": null
+          },
+          "durable": false,
+          "completedAt": "2026-09-19T21:17:56.423Z",
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          }
+        }
+      },
+      "resumeNote": "All source validation and prospective composition/animation/basic-rendering checks passed. Publish the exact five assets and v1 handoff; leave calibration and release pending.",
+      "awaitingDecision": {
+        "type": "deterministic-source-cleanup",
+        "authorized": true,
+        "evidence": "docs/phase8-qa/AF02_ASSET_QA.md",
+        "authorizedBy": "Explicit user yes in conversation",
+        "status": "applied"
+      },
+      "updatedAt": "2026-09-19T21:21:52.186Z"
     }
   },
-  "activeRunId": null
+  "activeRunId": "af02-20260919204119-fb761a"
 }

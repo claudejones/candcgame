@@ -1,0 +1,62 @@
+{
+  "stage": "AF02",
+  "verification": "Coordinator inspected all four downloaded reference images on 2026-09-19. Source photograph bytes retained unchanged; reference use only.",
+  "assets": [
+    {
+      "id": "dunes_oryx",
+      "path": "assets/references/africa/af02/dunes_oryx.jpg",
+      "bytes": 253169,
+      "width": 1280,
+      "height": 720,
+      "sha256": "4868ad095ea62ecaa952d4ec779854103a96fe0f34d90de1b753c54f6fa025a8",
+      "credit": "Christoph Str\u00e4ssler",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Oryx_in_front_of_Big_Daddy_Dune,_Sossusvlei,_Namibia.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Oryx_in_front_of_Big_Daddy_Dune%2C_Sossusvlei%2C_Namibia.jpg/1280px-Oryx_in_front_of_Big_Daddy_Dune%2C_Sossusvlei%2C_Namibia.jpg",
+      "inspection": "Dominant dune crest, terracotta planes and smaller oryx below, long straight horns."
+    },
+    {
+      "id": "camelthorn",
+      "path": "assets/references/africa/af02/camelthorn.jpg",
+      "bytes": 239500,
+      "width": 1280,
+      "height": 853,
+      "sha256": "06927857a3351493caeb0358410c22d885847e67d7c40977fb7c5407b141da25",
+      "credit": "Mark Fischer",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Deadvlei_Tree_(49186683317).jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Deadvlei_Tree_%2849186683317%29.jpg/1280px-Deadvlei_Tree_%2849186683317%29.jpg",
+      "inspection": "Weathered branching camelthorn, sparse angular open limbs on pale clay pan; use structure, not cloudy sky."
+    },
+    {
+      "id": "clay_pan",
+      "path": "assets/references/africa/af02/clay_pan.jpg",
+      "bytes": 2395082,
+      "width": 2896,
+      "height": 1944,
+      "sha256": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356",
+      "credit": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:SOS_-_Eroded_clay_surface_at_Dead_Vlei,_Namibia,_2007.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/7/72/SOS_-_Eroded_clay_surface_at_Dead_Vlei%2C_Namibia%2C_2007.jpg",
+      "inspection": "Pale thin eroded clay crust with ochre substrate. Curled trip plates remain authored stylization."
+    },
+    {
+      "id": "sandgrouse_flight",
+      "path": "assets/references/africa/af02/sandgrouse_flight.jpg",
+      "bytes": 29960,
+      "width": 677,
+      "height": 400,
+      "sha256": "16151a3df305578080e8333feed0f3763d1e1e80576334697bf06d2974a97a21",
+      "credit": "Alan Manson",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Pterocles_namaqua_-Northern_Cape,_South_Africa_-flying-8.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Pterocles_namaqua_-Northern_Cape%2C_South_Africa_-flying-8.jpg",
+      "inspection": "Compact right-facing bird, small head, buff-brown mottled body, long pointed dark wings. Appearance reference from South Africa, no exact Sossusvlei sighting claim."
+    }
+  ]
+}
