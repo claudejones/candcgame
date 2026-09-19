@@ -204,7 +204,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "sa03": {
       "label": "South America — Rio de Janeiro",
-      "status": "integrated",
+      "status": "approved",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/SA-assets/SA03_BG_DISTANT_RIO.png",
