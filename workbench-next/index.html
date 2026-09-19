@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>C&C · Workbench Next · Sprite review</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="../src/js/game-config.js"></script>
+  <script defer src="../src/js/config-schema.js"></script>
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><b>C<span>&</span>C</b><div>AROUND THE WORLD<small>Production workbench</small></div></div>
+    <nav aria-label="Workspace mode"><button class="mode active" aria-pressed="true">Design</button><button class="mode" disabled title="Gameplay connection is a later milestone">Test <small>Planned</small></button><button class="mode" disabled title="Gameplay connection is a later milestone">Game <small>Planned</small></button></nav>
+    <div class="review-badge">EDITOR NEXT <span>Review 01</span></div>
+  </header>
+  <div class="review-note">Sprite workspace proposal · Working frame and crop tools · Gameplay integration comes later <a href="./PLAN.md">Migration plan ↗</a></div>
+  <main class="workspace">
+    <aside class="navigator" aria-label="Project assets">
+      <div class="section-label">PROJECT</div><h1>Asset studio</h1><p class="muted">One frame workflow, every sprite.</p>
+      <label class="field">Stage<select id="stage"></select></label>
+      <div class="section-label spaced">CHARACTERS <span>GLOBAL</span></div>
+      <div id="characters" class="asset-list"></div>
+      <div class="section-label spaced">STAGE HAZARDS <span id="stage-code"></span></div>
+      <div id="hazards" class="asset-list"></div>
+      <div class="nav-footer"><span class="status-dot"></span> Approved source images<p>9 available stages · 21 planned</p><a href="./AUDIT.md">Read the functionality audit ↗</a></div>
+    </aside>
+    <section class="studio" aria-label="Sprite workspace">
+      <div class="studio-heading"><div><div class="section-label" id="breadcrumb">CHARACTERS / CLAUDE</div><h2 id="asset-title">Run cycle</h2></div><span class="chip">FRAME INSPECTION</span></div>
+      <div id="states" class="state-tabs" aria-label="Character state"></div>
+      <div class="view-toolbar"><div class="segmented" aria-label="Preview view"><button id="frame-view" aria-pressed="true">Frame</button><button id="atlas-view" aria-pressed="false">Full atlas</button></div><label class="check"><input type="checkbox" id="compare"> Compare baseline</label><label class="check"><input type="checkbox" id="bounds" checked> Crop outline</label></div>
+      <div id="preview-area" class="preview-area">
+        <div class="preview-card baseline-card" hidden><span class="preview-tag">BASELINE</span><canvas id="baseline" width="700" height="700" aria-label="Baseline sprite frame"></canvas></div>
+        <div class="preview-card"><span class="preview-tag" id="preview-label">WORKING DRAFT</span><canvas id="preview" width="700" height="700" aria-label="Selected sprite preview"></canvas><div id="loading" role="status">Loading source image…</div><button id="retry" hidden>Retry image</button></div>
+      </div>
+      <div class="source-line"><span id="asset-health" role="status">Checking image…</span><span>Source pixels · fixed frame scale</span></div>
+      <section class="animation-dock" aria-label="Animation frames"><div class="playback"><div class="transport"><button id="previous" aria-label="Previous frame">←</button><button id="play">Play frames</button><button id="next" aria-label="Next frame">→</button></div><strong id="frame-label">Frame 1 / 4</strong><label>Preview speed<select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div><div id="filmstrip" class="filmstrip"></div><p id="playback-note" class="muted">Artwork preview. Use Test for actual movement and timing.</p></section>
+    </section>
+    <aside class="inspector" aria-label="Frame properties">
+      <div class="section-label">INSPECTOR</div><h2>Frame properties</h2><p class="muted" id="scope">Changes apply to this frame only.</p>
+      <section><h3>Fine crop <span>SOURCE PX</span></h3><div class="crop-grid">
+        <label class="field">Left<input type="number" min="0" step="1" id="crop-l"></label><label class="field">Right<input type="number" min="0" step="1" id="crop-r"></label><label class="field">Top<input type="number" min="0" step="1" id="crop-t"></label><label class="field">Bottom<input type="number" min="0" step="1" id="crop-b"></label>
+      </div><button class="subtle" id="reset-frame">Reset frame to baseline</button><p class="muted">Crop removes pixels. Image size, anchors and gameplay remain unchanged.</p></section>
+      <section><h3>Source</h3><dl><dt>Frame size</dt><dd id="source-size">—</dd><dt>Frames</dt><dd id="source-frames">—</dd><dt>Image</dt><dd id="source-file">—</dd></dl></section>
+      <section class="next-panel"><h3>Next: scene integration</h3><p>Scale, position, grounding and collision will share a live scene preview in the next Design milestone.</p><p>Test and Game stay on the existing workbench until parity is verified.</p></section>
+      <div id="message" role="status" class="message">Candidate draft is separate from your current editor.</div>
+    </aside>
+  </main>
+  <footer class="savebar"><div><strong id="save-status">No unsaved changes</strong><span id="change-count">0 frames changed from baseline</span></div><div class="save-actions"><button id="undo" disabled>Undo</button><button id="redo" disabled>Redo</button><button id="export">Export candidate crops</button><button class="primary" id="save" disabled>Save candidate draft</button></div></footer>
+</body>
+</html>
