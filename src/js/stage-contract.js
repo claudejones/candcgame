@@ -22,6 +22,7 @@
       const anchor=i<2?{x:543,y:620}:{x:271,y:362};
       if(h.sourceAnchor?.x!==anchor.x||h.sourceAnchor?.y!==anchor.y)throw new Error(`${stage.id}: source anchor ${i}`);
       if(!Number.isFinite(h.scale)||h.scale<=0)throw new Error(`${stage.id}: scale ${i}`);
+      if(h.flipX!==undefined&&typeof h.flipX!=='boolean')throw new Error(`${stage.id}: flipX ${i}`);
       if(h.flightOffsetY)for(const mode of ['high','low'])if(!Number.isFinite(h.flightOffsetY[mode]))throw new Error(`${stage.id}: flight offset ${mode}`);
       for(const k of ['cw','ch','cx','cy'])if(!Number.isFinite(h[k]))throw new Error(`${stage.id}: collision ${i}/${k}`);
       if(h.cw<=0||h.ch<=0||h.cw>1||h.ch>1)throw new Error(`${stage.id}: collision dimensions ${i}`);
@@ -61,12 +62,25 @@
   function continents(catalog,config){return catalog.continents.map(c=>({...c,stages:c.stages.filter(id=>active(catalog.stages[id])&&config.worldProfiles[id])})).filter(c=>c.stages.length);}
   function place(def,centerX,targetY,crop,scale,legacy){
     if(!def.sourceAnchor)return legacy;
-    return {dx:centerX-(def.sourceAnchor.x-(crop.l||0))*scale,dy:targetY-(def.sourceAnchor.y-(crop.t||0))*scale};
+    const anchorX=def.sourceAnchor.x-(crop.l||0);
+    const width=(def.rect?.w??def.frameW)-(crop.l||0)-(crop.r||0);
+    return {dx:centerX-(def.flipX?width-anchorX:anchorX)*scale,dy:targetY-(def.sourceAnchor.y-(crop.t||0))*scale};
+  }
+  function drawSprite(ctx,img,g,flipX){
+    const x=Math.round(g.dx),y=Math.round(g.dy),w=Math.round(g.dw),h=Math.round(g.dh);
+    if(flipX){
+      ctx.save();ctx.translate(x+w,y);ctx.scale(-1,1);
+      ctx.drawImage(img,g.sx,g.sy,g.sw,g.sh,0,0,w,h);ctx.restore();
+    }else ctx.drawImage(img,g.sx,g.sy,g.sw,g.sh,x,y,w,h);
   }
   function mergeKnown(current,incoming){
     const result=clone(current);
-    for(const [id,value] of Object.entries(incoming))if(Object.hasOwn(current,id))result[id]=Array.isArray(value)?clone(value):{...result[id],...clone(value)};
+    for(const [id,value] of Object.entries(incoming))if(Object.hasOwn(current,id))result[id]=Array.isArray(value)?value.map(item=>{
+      const saved=clone(item),fallback=current[id].find(def=>def.name===item.name);
+      if(saved.flipX===undefined&&fallback?.flipX!==undefined)saved.flipX=fallback.flipX;
+      return saved;
+    }):{...result[id],...clone(value)};
     return result;
   }
-  return Object.freeze({active,validateRelease,install,sources,continents,place,mergeKnown});
+  return Object.freeze({active,validateRelease,install,sources,continents,place,drawSprite,mergeKnown});
 });

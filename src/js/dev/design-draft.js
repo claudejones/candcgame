@@ -11,7 +11,14 @@
   const validPayload=p=>p&&p.schemaVersion===canonical.schemaVersion&&p.coordinateContract?.viewport?.w===960&&p.coordinateContract?.viewport?.h===540&&p.coordinateContract?.groundSurfaceY===410&&p.stages;
   function sanitizeCrop(crop){for(const side of ["l","r","t","b"])crop[side]=Math.max(0,Number(crop[side])||0);return crop;}function sanitizeStages(stages){for(const stage of Object.values(stages))for(const h of stage.hazards||[]){sanitizeCrop(h.crop);for(const crop of h.animation?.frameCrops||[])sanitizeCrop(crop);}return stages;}
   const migrations=[];
-  function migrate(stages){migrations.push(...window.CC_LANDSCAPE_CONTRACT.migrateStages(stages,defaults,window.CC_LANDSCAPE_REGISTRY));return stages;}
+  function migrate(stages){
+    migrations.push(...window.CC_LANDSCAPE_CONTRACT.migrateStages(stages,defaults,window.CC_LANDSCAPE_REGISTRY));
+    for(const [id,stage] of Object.entries(stages))for(const h of stage.hazards||[]){
+      const fallback=defaults[id]?.hazards.find(def=>def.name===h.name);
+      if(h.transform.flipX===undefined&&fallback?.transform.flipX!==undefined)h.transform.flipX=fallback.transform.flipX;
+    }
+    return stages;
+  }
   function loadSaved(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return{stages:clone(defaults),globals:clone(defaultGlobals)};const p=JSON.parse(raw);if(!validPayload(p))return{stages:clone(defaults),globals:clone(defaultGlobals)};retain(p);const merged=clone(defaults);for(const id of window.GAME_SCHEMA.STAGE_IDS)if(p.stages[id])merged[id]=p.stages[id];migrate(merged);return{stages:sanitizeStages(merged),globals:p.globals||clone(defaultGlobals)};}catch(e){console.warn("Ignoring invalid local design config",e);return{stages:clone(defaults),globals:clone(defaultGlobals)};}}
   const loaded=loadSaved();let savedStages=loaded.stages,savedGlobals=clone(loaded.globals),drafts=clone(savedStages),globals=clone(savedGlobals);
   function payload(stages=drafts,g=globals){return{schemaVersion:canonical.schemaVersion,coordinateContract:canonical.coordinateContract,globals:clone(g),stages:{...clone(retainedStages),...clone(stages)}};}

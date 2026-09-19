@@ -281,7 +281,8 @@ window.CC_STAGE_CATALOG = {
             "cw": 0.5959849435382685,
             "ch": 0.6073170731707317,
             "cx": 0.19949811794228356,
-            "cy": 0
+            "cy": 0,
+            "flipX": true
           },
           {
             "name": "Lilac-breasted roller",
@@ -309,7 +310,8 @@ window.CC_STAGE_CATALOG = {
             "flightOffsetY": {
               "high": 22,
               "low": 0
-            }
+            },
+            "flipX": true
           }
         ],
         "evidence": "docs/phase8-qa/AF01_STAGE_QA.md"
