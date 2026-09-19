@@ -14,7 +14,7 @@ Use the Sites hosting skill and reuse the exact Site project ID above. Never cre
 
 Run `node workbench-next/build-preview.mjs /absolute/path/to/separate-preview-checkout` from the candidate repository. The helper copies candidate UI, its two read-only configuration dependencies and only the 25 images used by the 39 character-state/hazard selections. It preserves source paths and source PNG bytes; it does not include the old runtime, game routes or unused landscapes.
 
-The separate checkout's `.openai/hosting.json` contains the exact `project_id` above and `static: {"directory":"public"}`. Commit/push that checkout to the Site's source repository, package static output with the hosting helper, save the exact pushed revision, and deploy privately. Renew credentials for the same project when needed; never record tokens here or in Git.
+The separate checkout's `.openai/hosting.json` contains the exact `project_id` above and `static: {"directory":"dist"}`. Commit/push that checkout to the Site's source repository, package static output with the hosting helper, save the exact pushed revision, and deploy privately. Renew credentials for the same project when needed; never record tokens here or in Git.
 
 The reserved origin is not evidence of successful publication. Confirm a native Sites deployment response reports success and its URL before handing the preview to the user.
 
