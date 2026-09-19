@@ -11,6 +11,8 @@ Requested 2026-09-19 for configuration testing. Incorporated main `e7b2b9625d499
 
 User review: refresh the private preview, look for Review 05.3, then choose Europe → EU02 / EU03. Check FAR/MID/GROUND, Scene and Play scroll. Use Compare baseline when reviewing preserved custom transforms. Existing saved edits should load; Save all retains a downloadable pre-update checkpoint in Changes & recovery.
 
+Publication succeeded at https://candc-workbench-next.claudejones.chatgpt.site (saved version 8, deployment `appgdep_6aae36c57f408191a59f43500490466e`). Site source: `1a2d519aba24187132b423a195ddaf5d678794fc`; GitHub implementation: `bfe280780f06d15befe0ca380769f81a14295e87`. [Production CI passed for that exact implementation](https://github.com/claudejones/candcgame/actions/runs/35428766964). Syntax and DOM references pass. The 73-file archive contains 53 source-identical PNGs and excludes the six superseded EU02/EU03 landscape files. Source provenance and the hosting manifest were verified before saving. Native deployment status is `succeeded`; browser/user acceptance remains pending.
+
 ## Review 05.2 — landscape playback
 
 Requested 2026-09-19. The existing 0–4,800 px slider now supports Play/Pause, Restart and end-of-range Replay. Landscape and clouds use the current runtime speeds (120 and 8 px/s); cloud scale, height, opacity, layer order and stage visibility are preserved. Baseline and draft share one preview time. Code changes are confined to `workbench-next/`; approved artwork, game runtime and project format are unchanged.
