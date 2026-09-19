@@ -12,7 +12,7 @@
   <header class="topbar">
     <div class="brand"><b>C<span>&</span>C</b><div>AROUND THE WORLD<small>Production workbench</small></div></div>
     <nav aria-label="Workspace mode"><button class="mode active" aria-pressed="true">Design</button><button class="mode" disabled title="Next: connect the complete draft to gameplay tests">Test <small>Planned</small></button><button class="mode" disabled title="After Test: clean playable preview of your complete draft">Game <small>Planned</small></button></nav>
-    <div class="review-badge">EDITOR NEXT <span>Review 05.1 · EU01 synced</span></div>
+    <div class="review-badge">EDITOR NEXT <span>Review 05.2 · Landscape playback</span></div>
   </header>
   <div class="review-note">Design preview · Saves stay in this browser <a href="./PLAN.md">Roadmap · Design → Test → Game ↗</a></div>
   <main class="workspace" id="workspace">
@@ -53,7 +53,7 @@
         <div class="preview-card baseline-card" hidden><span class="preview-tag">BASELINE</span><div class="canvas-scroll"><canvas id="baseline" width="960" height="540" aria-label="Baseline preview"></canvas></div></div>
         <div class="preview-card"><span class="preview-tag" id="preview-label">WORKING DRAFT</span><div class="canvas-scroll"><canvas id="preview" width="960" height="540" tabindex="0" aria-label="Selected asset preview" aria-describedby="atlas-help"></canvas></div><div id="loading" role="status">Loading assets…</div><button id="retry" hidden>Retry images</button></div>
       </div>
-      <div id="landscape-dock" class="landscape-dock"><label class="scroll-control" for="scene-scroll">Scroll preview<input type="range" id="scene-scroll" min="0" max="4800" value="0" step="10"><output id="scroll-value" for="scene-scroll">0 px</output></label></div>
+      <div id="landscape-dock" class="landscape-dock landscape-transport"><div class="transport"><button id="scene-play" aria-pressed="false" disabled>Play scroll</button><button id="scene-restart" title="Play again from 0 px" aria-label="Restart landscape preview from 0 pixels" disabled>Restart</button></div><label class="scroll-control" for="scene-scroll"><span class="visually-hidden">Scroll preview</span><input type="range" id="scene-scroll" min="0" max="4800" value="0" step="10" disabled><output id="scroll-value" for="scene-scroll">0 / 4,800 px</output></label></div>
       <section id="animation-dock" class="animation-dock" aria-label="Animation frames" hidden>
         <div class="playback"><div class="transport"><button id="previous" aria-label="Previous frame">←</button><button id="play">Play</button><button id="next" aria-label="Next frame">→</button></div><strong id="frame-label">Frame 1 / 4</strong><label>Speed<select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div>
         <details id="frames-panel" data-pref open><summary>Frame strip</summary><div id="filmstrip" class="filmstrip"></div></details>

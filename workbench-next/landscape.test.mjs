@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {createHash} from 'node:crypto';
 import {Draft,AssetSelection,descriptors,STORAGE_KEY} from './model.mjs';
-import {DesignDraft,DESIGN_STORAGE_KEY,LAYERS,landscapeDescriptors,layerGeometry,tileLayer} from './landscape.mjs';
+import {DesignDraft,DESIGN_STORAGE_KEY,LAYERS,landscapeDescriptors,layerGeometry,tileLayer,drawLandscape} from './landscape.mjs';
 
 const context={window:{}}; vm.createContext(context);
 for(const file of ['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js']) {
@@ -54,6 +54,35 @@ test('candidate tile placement matches the existing renderer at rest and through
       production.tileFull(image,offset,geometry.y,geometry.scale,1);
       tileLayer({drawImage(...args){actual.push(args);}},image,geometry,offset);
       assert.deepEqual(actual,expected,`${scene.stage}/${layer} scroll ${scroll}`);
+    }
+  }
+});
+
+test('cloud movement matches runtime elapsed-time drift, order, opacity and stage visibility',()=>{
+  const runtime=fs.readFileSync(new URL('../src/js/game-runtime.js',import.meta.url),'utf8');
+  const update=runtime.slice(runtime.indexOf(' update(dt,worldScrolls='),runtime.indexOf(' analyzeRows('));
+  const tile=runtime.slice(runtime.indexOf(' tileFull('),runtime.indexOf('\n draw(){',runtime.indexOf(' tileFull(')));
+  const production=new Function('CONFIG',`return ({${update},${tile}});`)(config);
+  const wc=config.worldContract;
+  const image=key=>{const data=png(key);return {width:data.readUInt32BE(16),height:data.readUInt32BE(20)};};
+  for(const scene of scenes) {
+    const p=config.worldProfiles[scene.stage];
+    const images={...Object.fromEntries(LAYERS.map(layer=>[layer,image(scene.sources[layer])])),clouds:image('clouds')};
+    for(const seconds of [0,1,10,40,1000]) {
+      production.worldX=0;production.cloudX=0;production.update(seconds,true);
+      const expected=[],actual=[];
+      production.ctx={drawImage(...args){expected.push([this.globalAlpha,...args]);}};
+      if(p.clouds!==false)production.tileFull(images.clouds,production.cloudX,wc.cloudY,960/(p.sourceW||wc.sourceW)*wc.cloudScale,wc.cloudOpacity);
+      const ctx={drawImage(...args){actual.push([this.globalAlpha,...args]);}};
+      const options={config,contract,stage:scene.stage,transforms:scene.baseline,images,scroll:production.worldX};
+      const canvas={getContext:()=>ctx};drawLandscape(canvas,options);
+      assert.deepEqual(actual.filter(call=>call[1]===images.clouds),expected,`${scene.stage}: ${seconds}s`);
+      assert.deepEqual([...new Set(actual.map(call=>call[1]))],p.clouds===false
+        ?[images.far,images.mid,images.ground]:[images.far,images.clouds,images.mid,images.ground]);
+      actual.length=0;drawLandscape(canvas,{...options,visible:{far:true,mid:true,ground:true,clouds:false}});
+      assert.equal(actual.some(call=>call[1]===images.clouds),false);
+      actual.length=0;drawLandscape(canvas,{...options,view:'layer',layer:'ground'});
+      assert.ok(actual.every(call=>call[1]===images.ground));
     }
   }
 });

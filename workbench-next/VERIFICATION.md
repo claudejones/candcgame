@@ -1,5 +1,16 @@
 # Workbench review — verification
 
+## Review 05.2 — landscape playback
+
+Requested 2026-09-19. The existing 0–4,800 px slider now supports Play/Pause, Restart and end-of-range Replay. Landscape and clouds use the current runtime speeds (120 and 8 px/s); cloud scale, height, opacity, layer order and stage visibility are preserved. Baseline and draft share one preview time. Code changes are confined to `workbench-next/`; approved artwork, game runtime and project format are unchanged.
+
+- 34 Node tests pass. New transport cases cover elapsed-time speed, pause/resume without a time jump, exact endpoint, replay/restart, bounded scrubbing, unavailable previews, duplicate-loop prevention and stale callbacks after context changes.
+- Cloud draw calls match the actual runtime update/tile methods across all nine stage profiles at five times, including repeat boundaries. Layer isolation and hidden clouds remain respected. Existing landscape geometry, asset hashes and complete project save/import/migration checks still pass.
+- Playback repaints canvases and transport only; it does not rebuild inspectors or rewrite focused transform inputs on animation ticks. Asset changes, Source view, history/project actions and hidden tabs stop playback. Preview position and cloud phase remain outside authored configuration.
+- Design Pause deliberately freezes clouds for inspection; production pause behavior is unchanged. The 4,800 px endpoint is the preview range, not a full stage simulation. Test/Game remain pending.
+
+Browser interaction and responsive visual acceptance remain pending. Review Stage → Landscape → Scene: Play scroll, pause, scrub, restart, compare the baseline, then switch stages or open Source. Clouds should drift behind MID, the endpoint should stop cleanly, and frame controls should still work in Character/Hazard views.
+
 ## Review 05.1 — approved EU01/SA03 snapshot refresh
 
 Requested 2026-09-19 after the user found stale EU01 images despite a hard refresh. Cause: the private prototype packaged an older GitHub snapshot. Merged approved main `b469182fd6ee76c346a959cfde82a5b108b048ed` into the parallel editor; production source/configuration/artwork match that upstream tree, and new editor logic remains under `workbench-next/`.

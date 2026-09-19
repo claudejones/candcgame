@@ -5,6 +5,7 @@ import {croppedBounds,frameViewBox,drawSprite,hitBounds,dragBounds} from './fram
 import {ProjectDraft,projectProvenance,StageSelection} from './project.mjs';
 import {setupProjectWorkflow} from './project-ui.mjs';
 import {setupWorkspace} from './workspace-ui.mjs';
+import {LandscapePlayback} from './landscape-playback.mjs';
 
 const $ = id => document.getElementById(id);
 const config = structuredClone(window.GAME_CONFIG);
@@ -26,6 +27,11 @@ let catalog;
 let editingBounds=false,drag=null;
 const workspace=setupWorkspace();
 const isLandscape = () => selected.type === 'landscape';
+const scrollPlayback=new LandscapePlayback({speed:config.worldSpeed,end:Number($('scene-scroll').max),
+  read:()=>sceneState[stage].scroll,
+  write:value=>{sceneState[stage].scroll=value;paintLandscape();},
+  available:()=>isLandscape()&&ready&&sceneState[stage].view!=='source'&&!document.hidden&&!$('project-dialog').open,
+  changed:()=>updateScrollControls()});
 
 function message(text, error = false) { $('message').textContent = text; $('message').classList.toggle('error', error); }
 function saveState() {
@@ -78,6 +84,7 @@ function navigation() {
 
 async function select(id) {
   if(!catalog)return;
+  scrollPlayback.pause();
   selection.remember(selected,frame);
   selected=items.find(item=>item.id===id); if(!selected)throw new Error('Unknown sprite');
   drag=null;editingBounds=false;
@@ -198,10 +205,6 @@ function renderLandscape() {
   $('compare').disabled=state.view==='source';
   document.querySelector('.baseline-card').hidden=!compare;
   $('preview-label').textContent=state.view==='source'?`${layer.toUpperCase()} · ORIGINAL SOURCE`:state.view==='layer'?`${layer.toUpperCase()} · WORKING DRAFT`:'SCENE · WORKING DRAFT';
-  const options={config,contract,stage,images:sceneImages,...state,
-    visible:state.view==='layer'?{...state.visible,[layer]:true}:state.visible};
-  drawLandscape($('preview'),{...options,transforms:draft.landscapes[stage]});
-  if(compare)drawLandscape($('baseline'),{...options,transforms:draft.landscapeBaseline[stage]});
   const source=sceneImages[layer];
   $('source-size').textContent=source?`${source.naturalWidth} × ${source.naturalHeight}`:'Loading…';
   $('source-file').textContent=catalog?.assets[selected.sources[layer]].split('/').pop().split('?')[0]||'—';
@@ -212,12 +215,35 @@ function renderLandscape() {
     $(`visible-${name}`).disabled=!ready || state.view!=='scene' || (name==='clouds' && config.worldProfiles[stage].clouds===false);
   }
   $('scene-guides').checked=state.guides;$('scene-guides').disabled=!ready || state.view==='source';
-  $('scene-scroll').value=state.scroll;$('scene-scroll').disabled=!ready || state.view==='source';
-  $('scroll-value').textContent=`${state.scroll} px`;
   $('preview').setAttribute('aria-label',`${stage.toUpperCase()} ${state.view==='scene'?'combined landscape':layer+' '+state.view}`);
+  paintLandscape();
+}
+
+function updateScrollControls() {
+  const available=isLandscape()&&ready&&sceneState[stage].view!=='source';
+  const position=sceneState[stage].scroll;
+  $('scene-play').disabled=!available;$('scene-restart').disabled=!available;$('scene-scroll').disabled=!available;
+  $('scene-play').textContent=scrollPlayback.running?'Pause':position>=scrollPlayback.end?'Replay':'Play scroll';
+  $('scene-play').setAttribute('aria-pressed',String(scrollPlayback.running));
+  $('scene-play').title=scrollPlayback.running?'Freeze landscape and clouds for inspection':`Preview at gameplay speed: ${config.worldSpeed} px/s; clouds ${config.worldContract.cloudSpeed} px/s`;
+  $('scene-scroll').value=position;
+  $('scroll-value').textContent=`${Math.round(position).toLocaleString()} / ${scrollPlayback.end.toLocaleString()} px`;
+}
+
+// Playback repaints the two canvases and transport only. Inspector inputs stay mounted
+// and retain focus and uncommitted typing while the landscape is moving.
+function paintLandscape() {
+  if(!draft||!isLandscape())return;
+  const state=sceneState[stage];
+  const options={config,contract,stage,images:sceneImages,...state,
+    visible:state.view==='layer'?{...state.visible,[state.layer]:true}:state.visible};
+  drawLandscape($('preview'),{...options,transforms:draft.landscapes[stage]});
+  if($('compare').checked&&state.view!=='source')drawLandscape($('baseline'),{...options,transforms:draft.landscapeBaseline[stage]});
+  updateScrollControls();
 }
 
 function setPlaying(next) {cancelAnimationFrame(animationRequest);animationRequest=0;playing=next;lastTick=0;$('play').textContent=playing?'Pause':'Play';$('play').setAttribute('aria-pressed',String(playing));}
+function stopMotion(){scrollPlayback.pause();setPlaying(false);}
 function setFrame(number) {if(isLandscape()||!ready)return;drag=null;setPlaying(false);frame=(number+selected.frames)%selected.frames;render();}
 function tick(now) {
   if(playing&&image){
@@ -247,10 +273,13 @@ function spriteView(next){drag=null;view=next;$('frame-view').setAttribute('aria
 $('frame-view').onclick=()=>spriteView('frame');$('atlas-view').onclick=()=>spriteView('atlas');
 $('compare').onchange=render;$('bounds').onchange=render;
 $('retry').onclick=()=>select(selected.id);
-for(const mode of ['scene','layer','source'])$(`${mode}-view`).onclick=()=>{sceneState[stage].view=mode;render();};
+for(const mode of ['scene','layer','source'])$(`${mode}-view`).onclick=()=>{if(mode==='source')scrollPlayback.pause();sceneState[stage].view=mode;render();};
 for(const name of [...LAYERS,'clouds'])$(`visible-${name}`).onchange=()=>{sceneState[stage].visible[name]=$(`visible-${name}`).checked;render();};
 $('scene-guides').onchange=()=>{sceneState[stage].guides=$('scene-guides').checked;render();};
-$('scene-scroll').oninput=()=>{sceneState[stage].scroll=Number($('scene-scroll').value);render();};
+$('scene-scroll').onpointerdown=()=>scrollPlayback.pause();
+$('scene-scroll').oninput=()=>scrollPlayback.seek(Number($('scene-scroll').value));
+$('scene-play').onclick=()=>{if(scrollPlayback.running)scrollPlayback.pause();else scrollPlayback.play();};
+$('scene-restart').onclick=()=>scrollPlayback.play(true);
 for(const field of ['scale','x','y','parallax'])$(`layer-${field}`).onchange=()=>{
   try {
     const raw=$(`layer-${field}`).value;if(raw.trim()==='')throw new Error('Enter a transform value.');
@@ -309,7 +338,7 @@ $('preview').onkeydown=event=>{
 };
 function history(direction) {
   const edit=(direction==='undo'?draft.past:draft.future).at(-1);if(!edit)return;
-  cancelDrag();setPlaying(false);draft[direction]();
+  cancelDrag();stopMotion();draft[direction]();
   if(edit.kind==='project'){render();message(`${direction==='undo'?'Undid':'Redid'} the complete project import.`);return;}
   selection.remember(selected,frame);
   if(edit.kind==='landscape') {sceneState[edit.stage].layer=edit.layer;sceneState[edit.stage].view='scene';select(`landscape:${edit.stage}`);}
@@ -318,7 +347,8 @@ function history(direction) {
 }
 $('undo').onclick=()=>history('undo');$('redo').onclick=()=>history('redo');
 window.addEventListener('beforeunload',event=>{if(draft?.dirty){event.preventDefault();event.returnValue='';}});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){setPlaying(false);render();}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){stopMotion();render();}});
+window.addEventListener('pagehide',stopMotion);
 window.addEventListener('keydown',event=>{
   if($('project-dialog').open)return;
   if(['INPUT','SELECT','TEXTAREA','BUTTON','CANVAS','SUMMARY'].includes(document.activeElement?.tagName))return;
@@ -332,6 +362,6 @@ try{
   try{
     message(draft.load(localStorage));
   }catch(error){message(`Candidate save was not loaded: ${error.message}. The stored copy is unchanged.`,true);}
-  projectWorkflow=setupProjectWorkflow({draft,beforeAction:()=>{cancelDrag();setPlaying(false);render();},changed:()=>render(),message});
+  projectWorkflow=setupProjectWorkflow({draft,beforeAction:()=>{cancelDrag();stopMotion();render();},changed:()=>render(),message});
   await select(selected.id);
 }catch(error){$('loading').classList.add('failed');$('loading').textContent=error.message;message('Could not start the Design workspace. Serve the repository over HTTP and reload.',true);}

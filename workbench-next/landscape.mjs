@@ -52,7 +52,8 @@ export function tileLayer(ctx, image, geometry, scroll = 0, offsetX = 0, alpha =
 }
 
 export function drawLandscape(canvas, {config, contract, stage, transforms, images, layer='far', view='scene',
-  visible={far:true,mid:true,ground:true,clouds:true}, scroll=0, guides=false}) {
+  visible={far:true,mid:true,ground:true,clouds:true}, scroll=0,
+  cloudScroll=config.worldSpeed>0?scroll/config.worldSpeed*config.worldContract.cloudSpeed:0, guides=false}) {
   const ctx = canvas.getContext('2d');
   const source = images[layer];
   if (view === 'source' && source) {
@@ -65,7 +66,7 @@ export function drawLandscape(canvas, {config, contract, stage, transforms, imag
     if (!visible[name] || (view === 'layer' && name !== layer) || !images[name]) continue;
     if (name === 'clouds') {
       const p=config.worldProfiles[stage], wc=config.worldContract;
-      if (p.clouds !== false) tileLayer(ctx,images.clouds,{scale:960/(p.sourceW||wc.sourceW)*wc.cloudScale,y:wc.cloudY},0,0,wc.cloudOpacity);
+      if (p.clouds !== false) tileLayer(ctx,images.clouds,{scale:960/(p.sourceW||wc.sourceW)*wc.cloudScale,y:wc.cloudY},cloudScroll,0,wc.cloudOpacity);
     } else tileLayer(ctx,images[name],geometry[name],scroll*transforms[name].parallax,transforms[name].x);
   }
   if (guides) {

@@ -69,13 +69,13 @@ The current asset map has **58 image entries**, all resolving to files in this c
 ## Verification boundary
 
 Observed deployed: Design character/landscape/global panels, Test setup/actions, first-load preview absence followed by successful preview after selection. Source audit covers Game entry, save/import, atlas sourcing, runtime controls, and all legacy control IDs. Repeated-pause, cross-mode contamination, full-course draft application, all nine stage visuals, and fresh/mobile performance remain targeted acceptance tests, not claimed reproduced results. No production values were changed for this audit.
-# Current candidate coverage — review 05
+# Current candidate coverage — review 05.2
 
 This implementation status supplements the original old/new functionality audit below. A completed preview tool does not establish gameplay parity.
 
 | Authoring workflow | Available in candidate | Still required before cutover |
 |---|---|---|
-| Landscapes | All nine stage sets; scene/layer/source views; FAR/MID/GROUND scale, X/Y, parallax; visibility, guide, repeat scroll; baseline comparison | Runtime adapter parity across Design/Test/Game; live cloud motion |
+| Landscapes | All nine stage sets; scene/layer/source views; FAR/MID/GROUND scale, X/Y, parallax; visibility, guide, repeat scroll; Play/Pause/Restart with runtime-speed cloud drift; synchronized baseline comparison | Runtime adapter parity across Design/Test/Game and full-course/finish behavior |
 | Character animation | Both characters, six states, every frame, editable per-frame atlas bounds, crops, atlas and baseline views | Scale/position, global vs stage grounding, gameplay timing |
 | Hazard animation | All 27 hazards, editable frame bounds/crops/atlas/comparison | Placement/flight, collision and spawn behavior |
 | FX | Not yet connected | Stun-star frames and attachment/state behavior |

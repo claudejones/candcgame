@@ -1,6 +1,6 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 5.1; not the replacement editor**.
+Status: **review increment 5.2; not the replacement editor**.
 Branch: `editor-next`. Audit baseline: `132955434f7835064e5d28d8761521111ce0dbf5`; upstream refreshed through main `b469182fd6ee76c346a959cfde82a5b108b048ed` for the approved EU01 and SA03 landscapes (2026-09-19). Production source/assets match this upstream snapshot; candidate-only changes remain under `workbench-next/`.
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
@@ -27,6 +27,12 @@ From the repository root, run `python -m http.server 8080`, then open
 This is a working **landscape and sprite Design proposal**, using repository artwork. It includes both characters, all six states, all nine existing stages' hazards, a shared frame strip, step/play controls, full-atlas view, per-frame crops, before/after comparison, undo/redo, separate draft saving, and export. Jump/Hit playback here is an explicitly labeled artwork loop, not simulated gameplay or a timing change. Test and Game connections are visibly deferred.
 
 It does not load the old runtime, write the current editor's storage, modify source images/configuration, or change gameplay. The candidate project export has its own format and is **not** a current game-config import. Future runtime integration must convert these complete drafts explicitly. Test and Game remain required next milestones.
+
+## Landscape playback
+
+Review 05.2 adds **Play scroll / Pause**, **Restart** and **Replay** beside the existing slider. In Stage → Landscape → Scene, Play moves from the current position to the preview endpoint of 4,800 px (40 seconds from zero at the unchanged 120 px/s world speed). Restart begins at zero immediately; Replay starts over after reaching the endpoint. The shared clouds drift at the runtime's 8 px/s, with existing stage visibility, scale, height and opacity. Layer view isolates the selected layer; Source remains static. This range checks landscape repetition and is not a full gameplay course or finish sequence.
+
+Scrubbing pauses and sets both world and cloud positions consistently. Baseline comparison uses the same time. Pause freezes the complete Design preview for inspection; it does not redefine gameplay pause behavior. Playback stops on asset/stage selection, Source view, history/project actions and a hidden browser tab. Controls wait for the selected assets to load. Playback and visibility are temporary preview state, never saved configurations. Inspector fields retain focus while the canvas moves.
 
 ## One project, all configurations
 
