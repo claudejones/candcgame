@@ -16,8 +16,8 @@ const scenes=landscapeDescriptors(config,registry,contract), sprites=descriptors
 const catalog=JSON.parse(fs.readFileSync(new URL('./asset-catalog.json',import.meta.url)));
 const png=key=>fs.readFileSync(new URL(catalog.assets[key].split('?')[0],import.meta.url));
 
-test('all ten landscapes resolve; active source hashes and geometry match the registry',()=>{
-  assert.equal(scenes.length,10);
+test('all eleven landscapes resolve; active source hashes and geometry match the registry',()=>{
+  assert.equal(scenes.length,11);
   for(const scene of scenes) {
     const p=config.worldProfiles[scene.stage];
     for(const layer of LAYERS) {

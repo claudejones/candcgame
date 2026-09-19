@@ -39,3 +39,7 @@ This Workbench increment consumes that shared contract without promoting new art
 Record source facing and gameplay facing separately. Directional creatures/vehicles approaching from the right should face left. Mirror only those whose source requires it. Preserve source pixels, source-space crop coordinates and animation order; reflect the collision X offset and anchor placement with the art. Full atlas stays unmirrored; Frame and Scene show gameplay facing. Objects with no meaningful front do not need automatic flipping.
 
 The AF01 integration audit also found the SA02 llama and EU02 bicycle need mirroring; existing NA/SA/EU birds already face left. Workbench defaults now mirror those two plus AF01's porcupine/roller. A saved per-hazard override is available. Runtime promotion of the additional llama/bicycle settings remains part of the eventual approved Workbench configuration handoff; production main was not retuned by this increment.
+
+## First real handoff — AF02
+
+Review 12 imports `config/asset-handoffs/af02.json` from upstream `bf5d788` using the shared v1 importer. All five hashes and provisional metadata are preserved. Known older project migration routes are retargeted together with the new ten-stage route; AF02 starts with empty calibration certificates. Import updates only the isolated Workbench. Production AF02 activation stays pending. Claude can select Africa → AF02, review/calibrate and Save all / Export all. No AF03 import or asset generation is included.

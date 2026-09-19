@@ -13,7 +13,7 @@ export function landscapeDescriptors(config, registry, contract) {
     return {id:`landscape:${stage}`, type:'landscape', stage, name:'Landscape',
       status:preview ? 'asset-ready · calibration pending' : active ? metadata.status : 'legacy',
       sources:Object.fromEntries(LAYERS.map(layer => [layer, profile[`${layer}Key`]])),
-      expected:active ? clone(metadata.layers) : null,
+      expected:preview ? Object.fromEntries(LAYERS.map(layer=>[layer,{width:preview.assets[layer.toUpperCase()].width,height:preview.assets[layer.toUpperCase()].height,cacheKey:preview.assets[layer.toUpperCase()].sha256.slice(0,8)}])) : active ? clone(metadata.layers) : null,
       baseline:Object.fromEntries(LAYERS.map(layer => [layer, {
         scale:profile[`${layer}Scale`], x:0,
         y:profile[layer === 'far' ? 'farY' : `${layer}YOffset`],

@@ -12,7 +12,8 @@ const canvases=new WeakMap(),contexts=new WeakMap();
 const backing=node=>{if(!canvases.has(node))canvases.set(node,createCanvas(node.width,node.height));return canvases.get(node);};
 for(const key of ['width','height']){const original=Object.getOwnPropertyDescriptor(w.HTMLCanvasElement.prototype,key);Object.defineProperty(w.HTMLCanvasElement.prototype,key,{get:original.get,set(v){original.set.call(this,v);if(canvases.has(this))canvases.get(this)[key]=v;}});}
 w.HTMLCanvasElement.prototype.getContext=function(){if(!contexts.has(this)){const ctx=backing(this).getContext('2d');contexts.set(this,new Proxy(ctx,{get(target,key){if(key==='drawImage')return (img,...args)=>target.drawImage(img.bitmap||canvases.get(img)||img,...args);const value=Reflect.get(target,key,target);return typeof value==='function'?value.bind(target):value;},set(target,key,value){target[key]=value;return true;}}));}return contexts.get(this);};
-class ImageStub {set src(url){this.url=url;const p=path.resolve(root+'/workbench-next',url.split('?')[0]);this.promise=loadImage(p).then(img=>{this.bitmap=img;this.width=this.naturalWidth=img.width;this.height=this.naturalHeight=img.height;this.onload?.();}).catch(e=>{this.onerror?.(e);throw e;});}decode(){return this.promise;}}
+const requestedImages=new Set();
+class ImageStub {set src(url){requestedImages.add(url.split('?')[0]);this.url=url;const p=path.resolve(root+'/workbench-next',url.split('?')[0]);this.promise=loadImage(p).then(img=>{this.bitmap=img;this.width=this.naturalWidth=img.width;this.height=this.naturalHeight=img.height;this.onload?.();}).catch(e=>{this.onerror?.(e);throw e;});}decode(){return this.promise;}}
 let rafId=0;const raf=new Map();
 Object.assign(globalThis,{window:w,document:w.document,localStorage:w.localStorage,Option:w.Option,Image:ImageStub,ResizeObserver:class{observe(){}},requestAnimationFrame:cb=>{raf.set(++rafId,cb);return rafId;},cancelAnimationFrame:id=>raf.delete(id),fetch:async()=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(root+'/workbench-next/asset-catalog.json'))})});
 w.HTMLElement.prototype.scrollIntoView=function(){};w.HTMLDialogElement.prototype.showModal=function(){this.open=true;};w.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new w.Event('close'));};
@@ -20,6 +21,7 @@ for(const name of JSON.parse(fs.readFileSync(new URL('./source-files.json',impor
 const $=id=>w.document.getElementById(id),wait=async()=>{for(let i=0;i<300;i++){if($('loading').hidden)return;if($('loading').classList.contains('failed'))throw new Error($('loading').textContent);await new Promise(r=>setTimeout(r,10));}throw new Error('Loading timeout: '+$('message').textContent);};
 const click=id=>$(id).click(),change=(node,value)=>{node.value=value;node.dispatchEvent(new w.Event('change',{bubbles:true}));};
 w.localStorage.setItem('cc-workbench-next-project-v7',fs.readFileSync(root+'/workbench-next/fixtures/review10-project.json','utf8'));
+w.localStorage.setItem('cc-workbench-next-project-v8',fs.readFileSync(root+'/workbench-next/fixtures/review11-project.json','utf8'));
 await import(root+'/workbench-next/app.mjs');await wait();
 click('character-tab');await wait();assert.equal($('actor-loop').checked,true);click('actor-loop');assert.equal($('actor-dock').hidden,false);assert.equal($('stage-context').hidden,false);assert.equal($('actor-play').disabled,false);
 const ground=()=>w.document.querySelector('input[data-placement="grounding:na01:claude"]');assert.ok(ground());assert.equal(ground().disabled,true);w.document.querySelector('[data-character-follow="claude"]').click();assert.equal(ground().disabled,false);assert.equal($('pathway-follow-claude').checked,false);change(ground(),'-12');assert.match($('save-status').textContent,/Unsaved/);
@@ -157,14 +159,14 @@ console.log('Continuous playback flow passed: default Loop, repeated passes/prop
 // Review 09: a complete grouped result list, filters, hidden selection and scoped Apply.
 await restore(baseline);await $('optimize-all').onclick();
 const cards=()=>$('cal-results').querySelectorAll('.cal-result'),groups=()=>$('cal-results').querySelectorAll('.cal-stage-group');
-assert.equal(cards().length,30);assert.equal(groups().length,10);assert.equal($('cal-results').querySelectorAll('.cal-continent-group').length,4);
-assert.equal($('cal-results').querySelectorAll('.cal-profile-badges span').length,30*3);
+assert.equal(cards().length,33);assert.equal(groups().length,11);assert.equal($('cal-results').querySelectorAll('.cal-continent-group').length,4);
+assert.equal($('cal-results').querySelectorAll('.cal-profile-badges span').length,33*3);
 click('cal-collapse');assert.ok([...groups()].every(g=>!g.open));click('cal-expand');assert.ok([...groups()].every(g=>g.open));
-change($('cal-filter'),'attention');assert.ok(cards().length>0&&cards().length<30);assert.ok([...cards()].every(c=>c.querySelector('.cal-verdict').textContent.includes('adjustment')));
-change($('cal-filter'),'ready');assert.ok(cards().length>0&&cards().length<30);assert.ok([...cards()].every(c=>c.querySelectorAll('.cal-profile-badges .pass').length===3));
+change($('cal-filter'),'attention');assert.ok(cards().length>0&&cards().length<33);assert.ok([...cards()].every(c=>c.querySelector('.cal-verdict').textContent.includes('adjustment')));
+change($('cal-filter'),'ready');assert.ok(cards().length>0&&cards().length<33);assert.ok([...cards()].every(c=>c.querySelectorAll('.cal-profile-badges .pass').length===3));
 click('cal-clear-filters');change($('cal-continent'),'Europe');assert.equal(cards().length,9);assert.equal(groups().length,3);
 $('cal-search').value='barrel';$('cal-search').dispatchEvent(new w.Event('input'));assert.equal(cards().length,1);assert.match(cards()[0].textContent,/Barrel/);assert.equal(groups()[0].open,true);
-$('cal-search').value='no such hazard';$('cal-search').dispatchEvent(new w.Event('input'));assert.equal(cards().length,0);assert.equal($('cal-empty').hidden,false);click('cal-clear-filters');assert.equal(cards().length,30);
+$('cal-search').value='no such hazard';$('cal-search').dispatchEvent(new w.Event('input'));assert.equal(cards().length,0);assert.equal($('cal-empty').hidden,false);click('cal-clear-filters');assert.equal(cards().length,33);
 const selectResult=id=>{const box=[...cards()].find(c=>c.dataset.resultId===id).querySelector('input');box.checked=true;box.dispatchEvent(new w.Event('change'));};
 selectResult('hazard:na01:0');selectResult('hazard:eu01:1');change($('cal-continent'),'Europe');assert.match($('cal-selection').textContent,/2 selected.*1 hidden by filters/);assert.match($('apply-stage').textContent,/NA01 \(1\)/);assert.match($('apply-reviewed').textContent,/\(2\)/);
 change($('cal-filter'),'selected');assert.equal(cards().length,1);click('apply-stage');click('save');const scoped=JSON.parse(w.localStorage.getItem(key));assert.deepEqual(scoped.placement['hazard:eu01:1'],baseline.placement['hazard:eu01:1'],'stage apply cannot change a hidden selected stage');assert.match($('apply-reviewed').textContent,/\(1\)/);
@@ -177,10 +179,10 @@ assert.equal([...cards()].find(c=>c.dataset.resultId==='hazard:na01:0').querySel
 // A changed reference is checked without replacing the user's manual edit.
 change($('pathway-y'),String(Number($('pathway-y').value)+1));assert.match($('cal-results').textContent,/Needs recheck/);click('save');const manual=JSON.parse(w.localStorage.getItem(key));await $('recheck-results').onclick();assert.doesNotMatch($('cal-results').textContent,/Needs recheck/);click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement,manual.placement);assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).calibration,manual.calibration);
 await restore(calibrated);
-console.log('Review 09 DOM flow passed: 30 grouped hazards, all-profile badges, search/filter/empty states, expansion, hidden selection counts, stage-scoped apply, independent difficulty demos, targeted timing rechecks and unchanged manual settings.');
+console.log('Review 09 DOM flow passed: 33 grouped hazards, all-profile badges, search/filter/empty states, expansion, hidden selection counts, stage-scoped apply, independent difficulty demos, targeted timing rechecks and unchanged manual settings.');
 // Review 11: the complete AF01 asset set, gameplay facing, frame/atlas distinction and persistence.
-change($('continent'),'Africa');await wait();assert.equal($('stage').value,'af01');assert.equal($('stage').options.length,1);
-click('layer-far');await wait();assert.equal($('preview').width,960);assert.equal($('preview').height,540);assert.match($('landscape-status').textContent,/Integrated/);
+change($('continent'),'Africa');await wait();assert.equal($('stage').value,'af01');assert.equal($('stage').options.length,2);
+click('layer-far');await wait();assert.equal($('preview').width,960);assert.equal($('preview').height,540);assert.match($('landscape-status').textContent,/Approved/);
 if(output)fs.writeFileSync(path.join(output,'af01-landscape.png'),backing($('preview')).toBuffer('image/png'));
 const afHazards=[...$('hazards').querySelectorAll('button')];assert.equal(afHazards.length,3);assert.match(afHazards[1].textContent,/porcupine/);assert.match(afHazards[2].textContent,/roller/);
 afHazards[1].click();await wait();click('actor-view');await wait();assert.equal(w.document.querySelector('[data-facing="hazard:af01:1"]').checked,true);
@@ -197,5 +199,29 @@ await restore(baseline);await restore(afSaved);assert.equal(mirror().checked,fal
 click('frame-view');await wait();assert.match($('preview-label').textContent,/MIRRORED/);for(const button of $('filmstrip').querySelectorAll('button'))button.click();assert.match($('frame-label').textContent,/Frame 4/);if(output)fs.writeFileSync(path.join(output,'af01-roller-frame4.png'),backing($('preview')).toBuffer('image/png'));
 click('actor-view');await wait();
 console.log('Review 11 DOM flow passed: old browser save migration, Africa navigation, all five image files, anchored/mirrored ground and flying previews, HIGH/LOW, original atlas, four frames, override/undo/redo/save/import.');
+// Review 12: real asset-ready import through landscape, hazard and project workflows.
+change($('stage'),'af02');await wait();assert.match($('asset-scope').textContent,/CALIBRATION PENDING/);
+click('layer-far');await wait();assert.match($('asset-title').textContent,/Sossusvlei/);assert.match($('source-frames').textContent,/Asset ready/);assert.match($('landscape-status').textContent,/Assets imported.*release remains pending/);
+for(const layer of ['far','mid','ground']){click('layer-'+layer);await wait();assert.match($('asset-health').textContent,/Ready.*decoded/);}
+if(output)fs.writeFileSync(path.join(output,'af02-landscape.png'),backing($('preview')).toBuffer('image/png'));
+const af02Buttons=[...$('hazards').querySelectorAll('button')];assert.deepEqual(af02Buttons.map(b=>b.textContent.replace(/1 frame.*|4 frames.*/,'')),['Curled clay-pan crust plates','Forked dead camelthorn snag','Namaqua sandgrouse']);
+for(let i=0;i<3;i++){
+ [...$('hazards').querySelectorAll('button')][i].click();await wait();click('actor-view');await wait();
+ assert.equal(w.document.querySelector(`[data-facing="hazard:af02:${i}"]`).checked,i===2);
+ if(output)fs.writeFileSync(path.join(output,`af02-hazard-${i}.png`),backing($('preview')).toBuffer('image/png'));
+}
+change($('scene-flight'),'high');change($('scene-character'),'claude');await wait();click('actor-play');tick(0);tick(1000);click('actor-play');const af02Frozen=$('actor-time').textContent;click('actor-step');assert.notEqual($('actor-time').textContent,af02Frozen);click('actor-stop');
+change($('scene-flight'),'low');change($('scene-character'),'constance');await wait();
+if(output)fs.writeFileSync(path.join(output,'af02-sandgrouse-low.png'),backing($('preview')).toBuffer('image/png'));
+const pathBefore=Number($('pathway-y').value);change($('pathway-y'),String(pathBefore+8));
+const af02Mirror=()=>w.document.querySelector('[data-facing="hazard:af02:2"]');af02Mirror().click();assert.equal(af02Mirror().checked,false);click('undo');assert.equal(af02Mirror().checked,true);click('redo');assert.equal(af02Mirror().checked,false);click('save');
+const af02Saved=JSON.parse(w.localStorage.getItem(key));assert.equal(af02Saved.calibration.stages.af02.pathY,pathBefore+8);assert.equal(af02Saved.placement['hazard:af02:2'].flipX,false);
+await restore(baseline);await restore(af02Saved);assert.equal(af02Mirror().checked,false);assert.equal(Number($('pathway-y').value),pathBefore+8);af02Mirror().click();
+click('frame-view');await wait();assert.match($('preview-label').textContent,/MIRRORED/);assert.equal($('filmstrip').querySelectorAll('button').length,4);
+for(const button of $('filmstrip').querySelectorAll('button'))button.click();assert.match($('frame-label').textContent,/Frame 4/);
+if(output)fs.writeFileSync(path.join(output,'af02-sandgrouse-frame4.png'),backing($('preview')).toBuffer('image/png'));
+click('atlas-view');assert.match($('preview-label').textContent,/ORIGINAL PIXELS/);click('actor-view');await wait();
+assert.equal([...requestedImages].filter(url=>url.includes('/AF02_')).length,5);assert.ok([...requestedImages].every(url=>!url.includes('/AF03_')));
+console.log('Review 12 DOM flow passed: real v8 browser migration, all five AF02 images, three layers/hazards, pending labels, two characters, HIGH/LOW, playback/freeze/step, mirroring, four frames/original atlas, stage pathway and save/import.');
 click('actor-restart');click('actor-play');click('actor-play');assert.equal(raf.size,1);Object.defineProperty(w.document,'hidden',{configurable:true,value:true});w.document.dispatchEvent(new w.Event('visibilitychange'));assert.equal(raf.size,0);assert.match($('actor-time').textContent,/Frozen/);
 console.log('DOM flow passed: load, context, edits, fixed playback, action transitions, first-contact freeze, replay, selection without reset, hitbox drag/undo/save, Hand/Space panning, atlas return, HIGH/LOW, compare, save/import and hidden-tab freeze.');

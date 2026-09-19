@@ -43,7 +43,16 @@ test('whole-stage requests resolve three jobs; approved builds never reopen artw
     assert.equal(resolve(`generate ${approved} MID`).operation,'read');
   }
   assert.equal(resolve('generate SA02').operation,resolve('build SA02').operation);
-  assert.match(handoff(),/^(In claudejones\/candcgame:|Phase 8 registered landscapes are approved)/);
+  assert.match(handoff(),/^(In claudejones\/candcgame:|In the candcgame Workbench conversation: import asset handoff config\/asset-handoffs\/[a-z]{2}\d{2}\.json for [A-Z]{2}\d{2}\.$|Phase 8 registered landscapes are approved)/);
+});
+test('a closed asset-ready stage hands off to Workbench before advancing production',()=>{
+  const state={active:null,activeRunId:null,approvedRevisions:{af01:{commit:'c'}},runs:{af02:{
+    target:'AF02',status:'ready-for-calibration',closedAt:'2026-09-19T21:00:00Z',
+    handoff:{path:'config/asset-handoffs/af02.json'}
+  }}};
+  assert.equal(handoff(state),'In the candcgame Workbench conversation: import asset handoff config/asset-handoffs/af02.json for AF02.');
+  state.approvedRevisions.af02={commit:'d'};
+  assert.equal(handoff(state),'In claudejones/candcgame: build stage AF03.');
 });
 test('revision keeps existing edit source and explicit direction',()=>{
   const p=resolve('revise SA01 MID: keep the snake; remove the monkey');

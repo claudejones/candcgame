@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import {createHash} from 'node:crypto';
 import {descriptors} from './model.mjs';
 import {landscapeDescriptors} from './landscape.mjs';
-import {ProjectDraft,projectProvenance,PRE_FACING_FORMAT,PROJECT_STORAGE_KEY} from './project.mjs';
+import {ProjectDraft,projectProvenance,PRE_FACING_FORMAT,PROJECT_STORAGE_KEY,ARTWORK_RECOVERY_KEY} from './project.mjs';
 import {defaultBounds,drawSprite,frameViewBox} from './frame-editor.mjs';
 import {hazardGeometry} from './scene-model.mjs';
 import {placementForBox} from './hitbox-editor.mjs';
@@ -18,12 +18,54 @@ const legacy=()=>JSON.parse(fs.readFileSync(new URL('./fixtures/review10-project
 const memory=()=>{const map=new Map();return {getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,v)};};
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-8,`${a} != ${b}`);
 
-test('AF01 integrates exactly its five released images; pending stages stay absent and prior tuning stays unchanged',()=>{
- const release=w.CC_STAGE_CATALOG.stages.af01.release;assert.equal(stages.length,10);assert.equal(items.filter(i=>i.type==='hazard').length,30);
+test('AF02 consumes the exact asset handoff without promoting a production release',()=>{
+ const handoff=JSON.parse(fs.readFileSync(new URL('../config/asset-handoffs/af02.json',import.meta.url)));
+ assert.deepEqual(JSON.parse(JSON.stringify(config.workbenchAssetReady.af02)),handoff);
+ assert.equal(w.CC_STAGE_CATALOG.stages.af02.status,'pending');assert.equal(w.CC_STAGE_CATALOG.stages.af02.release,undefined);
+ assert.equal(w.CC_LANDSCAPE_REGISTRY.stages.af02.status,'pending');
+ const d=make(),scene=stages.find(s=>s.stage==='af02');assert.match(scene.status,/asset-ready.*calibration pending/);
+ for(const asset of Object.values(handoff.assets)){const data=fs.readFileSync(new URL('../'+asset.path,import.meta.url));assert.equal(createHash('sha256').update(data).digest('hex'),asset.sha256);}
+ for(const layer of ['far','mid','ground'])assert.equal(scene.baseline[layer].y,0);
+ handoff.hazards.forEach((h,index)=>{
+  const item=items.find(i=>i.id===`hazard:af02:${index}`),p=d.placement[item.id];assert.equal(item.name,h.name);
+  assert.deepEqual(item.sourceAnchor,h.sourceAnchor);assert.equal(p.scale,h.scale);assert.equal(p.flipX,index===2);
+  for(let frame=0;frame<item.frames;frame++)for(const flight of ['high','low']){
+   assert.deepEqual(d.value[item.id][frame],h.crop);
+   const g=hazardGeometry(config,item,frame,d.frames[item.id][frame],d.value[item.id][frame],p,{travel:false,startX:650,flight});
+   assert.ok(Object.values(g.dest).every(Number.isFinite));assert.ok(Object.values(g.collision).every(Number.isFinite));assert.ok(g.dest.w>0&&g.dest.h>0);
+  }
+ });
+ assert.equal(d.placement['hazard:af02:2'].highOffsetY,0);assert.equal(d.placement['hazard:af02:2'].lowOffsetY,0);
+ assert.equal(d.calibration.hazards['hazard:af02:0'].stamp,'');
+ const production={window:{}};vm.createContext(production);
+ for(const f of ['src/js/game-config.js','src/js/landscape-registry.js','src/js/stage-catalog.js','src/js/stage-contract.js'])vm.runInContext(fs.readFileSync(new URL('../'+f,import.meta.url),'utf8'),production);
+ assert.equal(production.window.GAME_CONFIG.worldProfiles.af02,undefined);
+});
+
+test('ten-stage v8 saves gain AF02 while retaining edited AF01 and a recoverable pre-import copy',()=>{
+ const p=JSON.parse(fs.readFileSync(new URL('./fixtures/review11-project.json',import.meta.url)));
+ p.placement['hazard:af01:2'].highOffsetY=17;p.placement['hazard:af01:2'].flipX=false;
+ p.placement['grounding:af01:constance'].groundOffset=-9;p.calibration.stages.af01.pathY+=12;p.calibration.stages.af01.characterFollow.constance=false;
+ p.calibration.hazards['hazard:af01:2'].locks=['highOffsetY','flipX'];p.calibration.profiles.easy.count=9;p.design.landscapes.af01.mid.x=14;
+ const store=memory(),raw=JSON.stringify(p);store.setItem(PROJECT_STORAGE_KEY,raw);const d=make();assert.match(d.load(store),/AF02.*starting settings/);
+ for(const [id,value] of Object.entries(p.placement))assert.deepEqual(d.placement[id],value);
+ for(const [id,value] of Object.entries(p.calibration.stages))assert.deepEqual(d.calibration.stages[id],value);
+ for(const [id,value] of Object.entries(p.calibration.hazards))assert.deepEqual(d.calibration.hazards[id],value);
+ assert.deepEqual(d.calibration.profiles,p.calibration.profiles);
+ for(const [id,value] of Object.entries(p.design.frames))assert.deepEqual(d.frames[id],value);
+ for(const [id,value] of Object.entries(p.design.sprites.crops))assert.deepEqual(d.value[id],value);
+ for(const [id,value] of Object.entries(p.design.landscapes))assert.deepEqual(d.landscapes[id],value);
+ assert.equal(store.getItem(PROJECT_STORAGE_KEY),raw);d.save(store);assert.equal(store.getItem(ARTWORK_RECOVERY_KEY),raw);
+ const reload=make();reload.load(store);assert.deepEqual(reload.export(),d.export());
+ const malformed=structuredClone(p);delete malformed.placement['hazard:af01:1'];assert.throws(()=>reload.prepareImport(malformed));
+});
+
+test('AF01 integrates exactly its five released images; unimported stages stay absent and prior tuning stays unchanged',()=>{
+ const release=w.CC_STAGE_CATALOG.stages.af01.release;assert.equal(stages.length,11);assert.equal(items.filter(i=>i.type==='hazard').length,33);
  for(const asset of Object.values(release.assets)){const data=fs.readFileSync(new URL('../'+asset.path,import.meta.url));assert.equal(createHash('sha256').update(data).digest('hex'),asset.sha256);}
- assert.equal(config.worldProfiles.af02,undefined);assert.equal(catalog.assets.af02Bird,undefined);
+ assert.equal(config.worldProfiles.af03,undefined);assert.equal(catalog.assets.af03Bird,undefined);
  const d=make();for(const [id,p] of Object.entries(legacy().placement))for(const [k,v] of Object.entries(p))assert.equal(d.placement[id][k],v,`${id}/${k} preserved`);
- assert.deepEqual(items.filter(i=>i.type==='hazard'&&d.placement[i.id].flipX).map(i=>i.id),['hazard:sa02:1','hazard:eu02:1','hazard:af01:1','hazard:af01:2']);
+ assert.deepEqual(items.filter(i=>i.type==='hazard'&&d.placement[i.id].flipX).map(i=>i.id),['hazard:sa02:1','hazard:eu02:1','hazard:af01:1','hazard:af01:2','hazard:af02:2']);
  assert.equal(d.placement['hazard:af01:2'].highOffsetY,22);assert.equal(d.placement['hazard:af01:2'].highClearance,68);
 });
 

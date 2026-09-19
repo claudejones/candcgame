@@ -90,7 +90,10 @@ export function importAssetHandoff({bundle,sourceRoot,targetRoot=defaultRoot}){
     const landscapeRevision=currentLandscapeRevision(root);delete landscapeRevision[id];
     const atlasDimensions=clone(oldCatalog.dimensions);
     const migration={id:`asset-ready-${id}-${bundle.assets.FAR.sha256.slice(0,8)}`,note:`Added ${id.toUpperCase()} asset-ready preview; existing edits and calibration are retained. New stage calibration is pending.`,fromProvenance:from,toProvenance:to,landscapeRevision,atlasDimensions};
-    writeAtomic(migrationsFile,JSON.stringify([...oldMigrations,migration],null,2)+'\n');
+    // ProjectDraft validates direct, exact provenance routes. Carry known older
+    // routes forward as well so skipping a preview update never strands a save.
+    const retained=oldMigrations.map(item=>isDeepStrictEqual(item.toProvenance,from)?{...item,toProvenance:clone(to)}:item);
+    writeAtomic(migrationsFile,JSON.stringify([...retained,migration],null,2)+'\n');
     execFileSync(process.execPath,[path.join(root,'workbench-next/build-catalog.cjs')],{cwd:root,stdio:'pipe'});
     return {stageId:id,status:'imported',assets:ASSET_KEYS.length,calibration:'pending',release:'pending'};
   }catch(error){

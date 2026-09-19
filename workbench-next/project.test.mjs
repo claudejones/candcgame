@@ -94,8 +94,8 @@ test('Continent → Stage remembers each continent and includes only available s
   assert.equal(selection.groups.size,4);assert.equal(selection.groups.get('Europe').length,3);
   selection.remember('na03');assert.equal(selection.choose('South America'),'sa01');selection.remember('sa02');
   assert.equal(selection.choose('North America'),'na03');assert.equal(selection.choose('South America'),'sa02');
-  assert.equal(selection.choose('Europe'),'eu01');assert.equal(selection.choose('Africa'),'af01');assert.throws(()=>selection.remember('af02'));assert.throws(()=>selection.choose('Unavailable'));
-  assert.equal(landscapes.length,10);
+  assert.equal(selection.choose('Europe'),'eu01');assert.equal(selection.choose('Africa'),'af01');selection.remember('af02');assert.equal(selection.choose('Africa'),'af02');assert.throws(()=>selection.remember('af03'));assert.throws(()=>selection.choose('Unavailable'));
+  assert.equal(landscapes.length,11);
 });
 
 function beforeArtworkRefresh(Type=FrameDraft,previous=catalog.migrations[0]) {
@@ -168,6 +168,6 @@ test('every supported pre-refresh Design export receives Europe defaults without
     assert.equal(target.transform('eu03','mid').y,23);assert.equal(target.crop('character:constance:slide',1).l,62);
     for(const stage of ['eu02','eu03'])assert.deepEqual(target.transform(stage,'far'),target.landscapeBaseline[stage].far);
     assert.equal(target.transform('eu03','ground').y,0);
-    assert.ok(review.notes.some(note=>note.includes('Source & status')||note.includes('Added AF01')));
+    assert.ok(review.notes.some(note=>note.includes('Source & status')||note.includes('Added AF01')||note.includes('Added AF02')));
   }
 });

@@ -105,7 +105,7 @@ async function select(id) {
   navigation();
   $('breadcrumb').textContent=selected.type==='character'?`CHARACTERS / ${selected.name.toUpperCase()}`:`${stage.toUpperCase()} / ${isLandscape()?'LANDSCAPE':'HAZARDS'}`;
   $('asset-title').textContent=isLandscape()?registry.stages[stage].label.split('—').at(-1).trim():selected.type==='character'?`${selected.state[0].toUpperCase()+selected.state.slice(1)} animation`:selected.name;
-  $('asset-scope').textContent=selected.type==='character'?'GLOBAL CHARACTER':`STAGE ${stage.toUpperCase()}`;
+  $('asset-scope').textContent=selected.type==='character'?'GLOBAL CHARACTER':`STAGE ${stage.toUpperCase()}${config.workbenchAssetReady?.[stage]?' · CALIBRATION PENDING':''}`;
   if(!isLandscape()) {
     $('preview').setAttribute('aria-label','Selected sprite preview');
     $('source-size').textContent=`${selected.region.w} × ${selected.region.h}`;
@@ -223,8 +223,9 @@ function renderLandscape() {
   const source=sceneImages[layer];
   $('source-size').textContent=source?`${source.naturalWidth} × ${source.naturalHeight}`:'Loading…';
   $('source-file').textContent=catalog?.assets[selected.sources[layer]].split('/').pop().split('?')[0]||'—';
-  $('source-frames').textContent=selected.status==='approved'?'Approved landscape':selected.status==='integrated'?'Integrated · awaiting review':'Legacy landscape';
-  $('landscape-status').textContent=selected.status==='legacy'?'Current legacy artwork and placement. Phase 8 landscape replacement is pending.':selected.status==='approved'?'Approved landscape artwork and baseline. Visibility, guides and scroll are preview controls.':'Integrated landscape artwork awaiting approval. Visibility, guides and scroll are preview controls.';
+  const assetReady=Boolean(config.workbenchAssetReady?.[stage]);
+  $('source-frames').textContent=assetReady?'Asset ready · calibration pending':selected.status==='approved'?'Approved landscape':selected.status==='integrated'?'Integrated · awaiting review':'Legacy landscape';
+  $('landscape-status').textContent=assetReady?'Assets imported. Review the landscape, calibrate the hazards, then Save all. Gameplay release remains pending.':selected.status==='legacy'?'Current legacy artwork and placement. Phase 8 landscape replacement is pending.':selected.status==='approved'?'Approved landscape artwork and baseline. Visibility, guides and scroll are preview controls.':'Integrated landscape artwork awaiting approval. Visibility, guides and scroll are preview controls.';
   for(const name of [...LAYERS,'clouds']) {
     $(`visible-${name}`).checked=state.visible[name];
     $(`visible-${name}`).disabled=!ready || state.view!=='scene' || (name==='clouds' && config.worldProfiles[stage].clouds===false);

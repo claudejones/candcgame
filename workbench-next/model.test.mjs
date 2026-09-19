@@ -26,7 +26,7 @@ test('stage and character navigation remember independent assets, states and fra
 test('every character/state and hazard descriptor addresses a real PNG frame',()=>{
   const catalog=JSON.parse(fs.readFileSync(new URL('./asset-catalog.json',import.meta.url)));
   assert.equal(items.filter(i=>i.type==='character').length,12);
-  assert.equal(items.filter(i=>i.type==='hazard').length,30);
+  assert.equal(items.filter(i=>i.type==='hazard').length,33);
   for(const item of items){
     const data=fs.readFileSync(new URL(catalog.assets[item.asset].split('?')[0],import.meta.url));
     assert.equal(data.toString('ascii',1,4),'PNG');

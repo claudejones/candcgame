@@ -2,7 +2,17 @@
 
 Status: proposed; parallel branch only. The user's approval is required before replacing the working interface.
 
-## AF01 integration and hazard facing — Review 11
+## AF02 asset-ready import — Review 12
+
+AF02 is available under **Africa → AF02 · Namibia — Sossusvlei dunes**. The exact `config/asset-handoffs/af02.json` v1 handoff supplies FAR/MID/GROUND, Curled clay-pan crust plates, Forked dead camelthorn snag and four-frame Namaqua sandgrouse. All five PNGs retain their source hashes. Landscape offsets are zero, and crops, source anchors, provisional scale/body bounds, animation and HIGH/LOW offsets come directly from the handoff. The bird mirrors toward the player in Frame and Scene; Full atlas retains right-facing source pixels.
+
+This is the first real asset-ready import. It adds AF02 to Design only and clearly labels calibration as pending. The production catalog/landscape registry still leave AF02 pending, with no release, finish or gameplay certification. AF01's upstream artwork acceptance is now reflected; its calibration and all existing Workbench defaults are preserved. Unimported stages remain absent. Full Test/Game integration remains pending.
+
+The v8 project format is unchanged. Known ten-stage v8 saves and all previously supported older saves gain AF02's starting settings while retaining existing crops, frames, transforms, placement, stage pathway links, difficulty profiles and locks. Save all preserves the old v8 record as an artwork-update recovery copy. Import remains a whole-project replacement with a changes review. Existing migration routes are carried forward on every stage import so users can skip intermediate previews safely. No optimization proposals are applied by importing assets.
+
+Import verification covers exact hashes and rendering geometry, both characters, all four bird frames, HIGH/LOW, mirroring/Undo/Redo, stage pathway edits and save/import. The importer is idempotent for identical handoffs and rejects conflicting bytes/metadata. These checks establish an editable stage, not accepted artwork or calibrated gameplay.
+
+## AF01 integration and hazard facing — Review 11 (historical)
 
 AF01 is available under **Africa → AF01 · Tanzania — Serengeti savannah** with FAR/MID/GROUND, Termite mound, Crested porcupine and the four-frame Lilac-breasted roller. All five images are byte-identical to upstream `a09b176dd8531bfb3425c9af534ff197a05a253e`. The imported release remains integrated/awaiting art acceptance; Workbench calibration is a separate user step. AF02/AF03 and other pending stages remain absent from selectors and image requests.
 

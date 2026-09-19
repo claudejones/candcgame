@@ -2,6 +2,9 @@
 // calibration without changing the production catalog state or release checks.
 (() => {
   const handoffs=window.CC_WORKBENCH_ASSET_HANDOFFS||{},config=window.GAME_CONFIG;
+  // Register released stages before appending preview-only stages. The schema
+  // captures this complete list, and existing continent navigation stays stable.
+  window.CC_STAGE_CONTRACT.install(config,window.CC_STAGE_CATALOG,window.CC_LANDSCAPE_REGISTRY);
   const sources={}; config.workbenchAssetReady=config.workbenchAssetReady||{};
   const crop=value=>({l:value?.l||0,r:value?.r||0,t:value?.t||0,b:value?.b||0});
   for(const [id,bundle] of Object.entries(handoffs)){

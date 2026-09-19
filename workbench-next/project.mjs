@@ -135,7 +135,7 @@ export class ProjectDraft extends FrameDraft {
     validatePlacement(state.placement,this.placementBaseline);validateCalibration(state.calibration,this.calibrationBaseline,state.placement);
     const check=new FrameDraft(allItems,this.definitions,this.dimensions);check.restore({...check.export(),sprites:{...check.export().sprites,crops:state.crops},frames:state.frames,landscapes:state.landscapes});
     const added=this.definitions.filter(i=>!stageIds.has(i.stage));
-    if(added.length)notes.unshift(`Added ${added.map(i=>i.stage.toUpperCase()).join(', ')} with release defaults. Existing stages, crops, bounds, placement, pathway links, difficulty profiles and hazard locks are retained.`);
+    if(added.length)notes.unshift(`Added ${added.map(i=>i.stage.toUpperCase()).join(', ')} with starting settings. Existing stages, crops, bounds, placement, pathway links, difficulty profiles and hazard locks are retained.${added.some(i=>this.config?.workbenchAssetReady?.[i.stage])?' Imported asset-ready stages need calibration.':''}`);
     const upgraded=payload?.format!==PROJECT_FORMAT;
     if(upgraded)notes.unshift('Updated project format. Existing edits are retained. Missing facing and flight corrections inherit the integrated defaults; new certificates require rechecking.');
     if(payload?.format===PRE_CHARACTER_LINK_FORMAT)notes.push('Both characters keep following their stage pathway; positions are preserved.');

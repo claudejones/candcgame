@@ -6,6 +6,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
 import {importAssetHandoff} from './import-asset-handoff.mjs';
 import {descriptors} from './model.mjs';
 import {landscapeDescriptors} from './landscape.mjs';
@@ -17,7 +18,12 @@ function target(){
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'cc-handoff-target-'));fs.cpSync(path.join(repo,'workbench-next'),path.join(root,'workbench-next'),{recursive:true});fs.symlinkSync(path.join(repo,'src'),path.join(root,'src'),'dir');
  const assets=path.join(root,'assets');fs.mkdirSync(assets);for(const name of fs.readdirSync(path.join(repo,'assets')))if(name!=='worlds')fs.symlinkSync(path.join(repo,'assets',name),path.join(assets,name),'dir');
  const worlds=path.join(assets,'worlds');fs.mkdirSync(worlds);for(const name of fs.readdirSync(path.join(repo,'assets/worlds')))if(name!=='africa')fs.symlinkSync(path.join(repo,'assets/worlds',name),path.join(worlds,name),'dir');
- const africa=path.join(worlds,'africa');fs.mkdirSync(africa);for(const name of fs.readdirSync(path.join(repo,'assets/worlds/africa')))fs.symlinkSync(path.join(repo,'assets/worlds/africa',name),path.join(africa,name));return root;
+ const africa=path.join(worlds,'africa');fs.mkdirSync(africa);for(const name of fs.readdirSync(path.join(repo,'assets/worlds/africa')))if(!name.startsWith('AF02_'))fs.symlinkSync(path.join(repo,'assets/worlds/africa',name),path.join(africa,name));
+ // Exercise a new import independently of stages already imported in the repo.
+ fs.writeFileSync(path.join(root,'workbench-next/imported-handoffs.json'),'{}\n');fs.writeFileSync(path.join(root,'workbench-next/imported-handoffs.js'),'window.CC_WORKBENCH_ASSET_HANDOFFS={};\n');
+ const prior=JSON.parse(fs.readFileSync(path.join(repo,'workbench-next/fixtures/review11-project.json'))).provenance;
+ const migrations=JSON.parse(fs.readFileSync(path.join(root,'workbench-next/project-migrations.json'))).filter(m=>!m.id.startsWith('asset-ready-')).map(m=>({...m,toProvenance:prior}));
+ fs.writeFileSync(path.join(root,'workbench-next/project-migrations.json'),JSON.stringify(migrations));execFileSync(process.execPath,[path.join(root,'workbench-next/build-catalog.cjs')]);return root;
 }
 function fixture(){
  const source=fs.mkdtempSync(path.join(os.tmpdir(),'cc-handoff-source-')),catalog=(()=>{const c={window:{}};vm.createContext(c);vm.runInContext(fs.readFileSync(path.join(repo,'src/js/stage-catalog.js'),'utf8'),c);return c.window.CC_STAGE_CATALOG;})(),files=catalog.stages.af02.files;
@@ -43,12 +49,14 @@ test('real AF01 bytes are a compatibility no-op that preserves Workbench setting
 });
 
 test('synthetic AF02 asset-ready import is preview-only, migrates old calibration, and is idempotent',()=>{
- const root=target(),{source,bundle}=fixture(),before=environment(repo),old=new ProjectDraft(before.items,before.stages,before.catalog.dimensions,projectProvenance(before.catalog,before.items,before.stages),before.catalog.migrations,before.config);
+ const root=target(),{source,bundle}=fixture(),before=environment(root),old=new ProjectDraft(before.items,before.stages,before.catalog.dimensions,projectProvenance(before.catalog,before.items,before.stages),before.catalog.migrations,before.config);
  old.editPlacement('hazard:eu02:1',{...old.placement['hazard:eu02:1'],cx:.234});const calibration=structuredClone(old.calibration);calibration.hazards['hazard:eu02:1'].locks=['cx'];calibration.stages.na01.pathY+=19;old.editCalibration(calibration);const saved=old.export();
  const result=importAssetHandoff({bundle,sourceRoot:source,targetRoot:root});assert.deepEqual(result,{stageId:'af02',status:'imported',assets:5,calibration:'pending',release:'pending'});
  const after=environment(root);assert.ok(after.config.worldProfiles.af02);assert.equal(after.w.CC_STAGE_CATALOG.stages.af02.status,'pending');assert.equal(after.config.workbenchAssetReady.af02.downstream.release,'pending');assert.equal(after.items.filter(item=>item.stage==='af02'&&item.type==='hazard').length,3);
  const next=new ProjectDraft(after.items,after.stages,after.catalog.dimensions,projectProvenance(after.catalog,after.items,after.stages),after.catalog.migrations,after.config),store=memory();next.applyImport(next.prepareImport(saved),store);
  assert.equal(next.placement['hazard:eu02:1'].cx,.234);assert.deepEqual(next.calibration.hazards['hazard:eu02:1'].locks,['cx']);assert.equal(next.calibration.stages.na01.pathY,calibration.stages.na01.pathY);assert.ok(next.calibration.stages.af02);assert.equal(next.calibration.hazards['hazard:af02:0'].stamp,'');
+ const older=JSON.parse(fs.readFileSync(path.join(repo,'workbench-next/fixtures/review10-project.json')));older.placement['hazard:na01:0'].scale=.27;
+ assert.equal(next.prepareImport(older).after.placement['hazard:na01:0'].scale,.27,'known pre-AF01 saves survive a later stage import');
  assert.equal(importAssetHandoff({bundle,sourceRoot:source,targetRoot:root}).status,'already-imported');const changed=structuredClone(bundle);changed.knownIssues=['Different note'];assert.throws(()=>importAssetHandoff({bundle:changed,sourceRoot:source,targetRoot:root}),/different bytes or metadata/);fs.rmSync(root,{recursive:true,force:true});fs.rmSync(source,{recursive:true,force:true});
 });
 

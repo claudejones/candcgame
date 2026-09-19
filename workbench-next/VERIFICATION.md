@@ -1,5 +1,13 @@
 # Workbench review — verification
 
+## Review 12 — AF02 asset-ready handoff
+
+- All 66 Workbench tests pass: exact AF02 hashes/metadata, source anchors, mirroring, all frames/HIGH/LOW, original ten-stage v8 save preservation and recovery, older v7 migration, malformed import rejection, import atomicity/idempotency and continued rejection of conflicting handoffs.
+- All 43 upstream runtime/workflow tests pass. The v1 handoff validator, generated catalog/registry and whitespace checks pass. Production files and all source image bytes remain identical to imported main.
+- AF02 remains pending in the production stage catalog and landscape registry. Only the Workbench adapter activates its Design preview. All eleven stages/33 hazards can be selected; AF03 is absent.
+- The complete DOM/canvas workflow passes: original v8 browser-save migration, 33 grouped hazards, all five AF02 images, three layers/hazards, explicit pending status, both characters, HIGH/LOW, playback/freeze/step, source/gameplay facing, stage pathway and Save/Import. Rendered AF02 scenery and hazard/frame views were inspected. This is not browser CSS/layout acceptance.
+- Publication evidence follows after deployment. This import does not certify collision fairness, difficulty, artwork acceptance or gameplay release.
+
 ## Review 11 — AF01 integration and facing
 
 - All 61 Workbench tests pass, including actual nine-stage v7 save migration, no lost numeric tuning, five release hashes, pending-stage exclusion, all production preview geometry at every frame/HIGH/LOW, mirrored anchor/collider invariants, inverse hitbox dragging, anchor crop rejection and frame-canvas transform restoration.
