@@ -9,6 +9,8 @@ Implemented from the user's approved refinement on 2026-09-19. Production/config
 - Rendered original and adjusted barrel frames using the candidate drawing code. Visual inspection confirms frame 3's neighboring sliver can be excluded and frame 4's left edge recovered. The same source pixels and registration are retained. No default calibration or PNG was changed to produce this test.
 - UI: landscape layers and character states moved left; one toolbar; image area fits available width/height; zoom, View options, collapsible inspector/filmstrip, and persistent Focus view.
 
+Review 04 private publication succeeded at https://candc-workbench-next.claudejones.chatgpt.site (saved version 4, deployment `appgdep_6aae1633fce48191a0665232b63bfda6`). Site source: `3a70a9bee0dacf1ff3fafea1d69f24b314fa2a1e`; GitHub implementation: `398ce53d656b048fc7ca307696cba92d7b328264`. Archive entrypoint, manifest and application bytes match the pushed source. Native publication success confirms availability, not browser interaction acceptance.
+
 Browser interaction/responsive screenshots are still pending. Pure geometry tests and offline sprite rendering do not substitute for browser visual acceptance. Review at your normal laptop window: choose an asset, open Edit bounds on atlas, drag and Undo, compare/reset/save/reload, collapse panels/frame strip, and toggle Focus view. Verify both Character and Stage navigation remain usable. Production cutover remains unapproved.
 
 
