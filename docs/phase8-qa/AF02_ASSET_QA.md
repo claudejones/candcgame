@@ -1,35 +1,46 @@
-# AF02 — asset production checkpoint
+# AF02 — asset-ready QA
 
-Status: **source candidates saved; technical cleanup awaiting user authorization**. This is not an asset-ready handoff, artwork acceptance, calibrated stage or playable release.
+Status: **asset-ready, published and ready for Workbench calibration**. Artwork acceptance, calibration and playable release remain pending.
 
-## Recovered and generated files
+## Exact reviewed files
 
-All five candidates are native 2172×724 PNGs. FAR and MID were recovered without regeneration. GROUND and FLYING each received one initial generation and one targeted imagegen edit; their strongest exact-canvas candidates are retained. The previous OBJECT_ATLAS candidate had eight attempts recorded before this resume and is preserved for a measured correction.
+| Asset | SHA-256 |
+| --- | --- |
+| FAR | `4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361` |
+| MID | `f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832` |
+| GROUND | `073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b` |
+| OBJECT_ATLAS | `aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca` |
+| FLYING | `c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085` |
 
-| Asset | SHA-256 | Current source review |
-| --- | --- | --- |
-| FAR | `4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361` | Passed existing isolation, repeat and canonical-size review; preserve bytes. |
-| MID | `f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832` | Recovered oryx/camelthorn composition, genuine transparency, lower overlap and repeat reviewed; preserve bytes. |
-| GROUND | `d6e58e046623d036f592ee2b7a0aed13670481cd453f71f1d3d8117a8f607202` | Art/depth present; source surface fails the locked Y=393 ownership requirement. |
-| OBJECT_ATLAS | `a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816` | Clay plates and open-Y snag are present; strict contact/gutter validation fails. |
-| FLYING | `fcb97b5d07bc46f37b514fdd7c83d976fd447333ddbda70bd0b9f7a941823ad3` | Four distinct right-facing sandgrouse poses with stable body reference; strict any-alpha gutters fail. |
+## Checks performed on these bytes
 
-Paths are `assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png`, `AF02_BG_MID_SOSSUSVLEI.png`, `AF02_GROUND_SOSSUSVLEI.png`, `AF02_OBJECT_ATLAS.png`, and `AF02_HAZARD_SANDGROUSE.png` in that directory. Photographic references and credits are in `assets/references/africa/af02/REFERENCES.json`.
+- All five images: native 2172×724 PNG, integrity/chunk/CRC/decompression checks passed; required RGB/RGBA formats retained.
+- Ground: rows 0–392 fully transparent; rows 393–723 fully opaque, including the bottom overscan. Both ground-hazard substantive bounds end at source Y=620. Ground contact and all cell gutter checks passed.
+- Flying: four distinct frames, fixed body reference and readable upstroke/descending/downstroke/rising poses inspected. A common union crop retains all four silhouettes and gives provisional body bounds a stable reference. Source-facing right is preserved; gameplay-facing left uses flipX=true.
+- Canonical prospective scenery reviewed at scroll offsets 0, 480 and 955, plus the isolated repeat join. No fully transparent coverage holes. Preserved MID alpha makes the minimum composite alpha 252/255 in part of the overlap; fully opaque ground owns the lower band.
+- Basic rendering reviewed with Claude and Constance at 960×540 and 640×360, including both shared HIGH/LOW starting placements and all four bird frames. Scales/body bounds are usable provisional metadata, not calibrated collision or action windows.
+- Complete dune/oryx/camelthorn composition and layer repeat continuity passed source review. FAR and MID bytes remain unchanged.
 
-## Proposed deterministic correction — not applied
+## Authorized source cleanup
 
-The landscape profile allows horizontal-edge repeat repair but requires explicit authorization for other edits outside imagegen. The imagegen skill also defaults to built-in image editing. Targeted imagegen edits have reproduced small canvas/alpha/anchor defects. Ask for approval of these precise operations before using code to change the source pixels:
+The user explicitly approved the measured AF02-only deterministic cleanup. Built-in imagegen produced the artwork; this correction did not regenerate it. Flying alpha=1 residue was removed. Object alpha=1 residue was removed and the two cells were translated +7/−8 source pixels. Ground source rows 399–723 were copied to destination 393–717; the bottom row was copied through 723; the upper band was made transparent and the terrain band fully opaque. Canvas dimensions and substantive terrain/hazard RGB were preserved without interpolation.
 
-1. **FLYING:** set alpha=1 pixels to alpha=0 (10,872 pixels, each currently only 1/255 opacity). Preserve all RGB, alpha>1 pixels, anatomy, body placement, frame order and dimensions. The alpha>1 bounds are already inside the required 32-pixel cell gutters.
-2. **OBJECT_ATLAS:** remove alpha=1 residue (5,408 pixels), then translate the left cell artwork down 7 source pixels and the right cell artwork up 8. The substantive bounding-box bottoms move from 613/628 to 620/620. Preserve both cell sizes, RGB and substantive alpha values; no interpolation, scale change or redraw.
-3. **GROUND:** copy source rows 399–723 to destination rows 393–717 (up 6 source pixels, no interpolation). Make rows 0–392 fully transparent. Copy the original bottom row into destination rows 718–723 and set alpha=255 throughout rows 393–723. Preserve the resulting terrain RGB and the 2172×724 canvas. This produces the required flat source surface and solid bottom overscan; do not rescale or redraw it. Recheck actual row coverage and horizontal repeats afterward.
+The pre-cleanup checkpoint, generation prompts/attempts and before/after hashes are in `AF02_SOURCE_CHECKPOINT.json`. References/credits remain in `assets/references/africa/af02/REFERENCES.json`. This permission applies to these three corrections only; it does not change the general asset-editing rules.
 
-FAR/MID, approved assets, landscape transforms, character physics and runtime activation remain unchanged. These are source-file corrections; provisional editor grounding, flight heights, collision fairness, action timing and spawn balancing remain separate.
+## Handoff and limits
 
-## Pending checks and next operation
+`config/asset-handoffs/af02.json` is the v1 Workbench handoff. The landscape transforms remain canonical (all offsets zero); source regions, crops, anchors, scale/body bounds, facing and 8 FPS animation metadata are provided. The bird uses the shared HIGH/LOW placement with zero additional offset. The source body rectangles are provisional and should be calibrated in editor-next.
 
-After explicit authorization, apply only the three corrections above, rerun PNG/atlas/source coverage checks, inspect the complete prospective 960×540 and mobile composition with both character references and HIGH/LOW starting placements, and finish the v1 `config/asset-handoffs/af02.json`. The flying metadata must retain sourceFacing right, gameplayFacing left and flipX true.
+No production stage-release or landscape activation is changed. No contact/collision fairness, action-window, difficulty, spawn-spacing, finish, zero-hit gameplay or playable-release pass is claimed. The user notifies the Workbench agent to import this bundle, then calibrates and saves. Later playable release keeps its existing strict validation gates.
 
-Do not create an asset-ready bundle with false passed checks. No full-stage gameplay simulation, release validation, Production CI or Pages acceptance is claimed by this recovery checkpoint. Once source checks pass, publish the complete handoff through the required development CI → identical main tree → main CI → Pages path and verify the exact durable files. The user then notifies the Workbench agent for import and calibration.
+## Publication
 
-Resume prompt: `In claudejones/candcgame: resume AF02.` A resume alone does not replace the outstanding explicit authorization for deterministic source edits.
+Source revision: `b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484`.
+
+- Development Production CI: https://github.com/claudejones/candcgame/actions/runs/35470261538 — success.
+- Main Production CI, identical source tree/SHA: https://github.com/claudejones/candcgame/actions/runs/35470309023 — success.
+- Pages for that exact SHA: https://github.com/claudejones/candcgame/actions/runs/35470339782 — success.
+- All five PNGs fetched from `https://claudejones.github.io/candcgame/assets/worlds/africa/` with their content-hash queries matched the table above.
+- The remote v1 bundle and all image jobs were verified before the run closed as `ready-for-calibration`. The active run was cleared; approval records and production activation remain unchanged.
+
+User handoff: `In the candcgame Workbench conversation: import asset handoff config/asset-handoffs/af02.json for AF02.`

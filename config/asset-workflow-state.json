@@ -101,7 +101,7 @@
       "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
     }
   },
-  "revision": 59,
+  "revision": 73,
   "runs": {
     "af01-20260919172919-679b96": {
       "runId": "af01-20260919172919-679b96",
@@ -1126,7 +1126,7 @@
       "target": "AF02",
       "command": "build stage AF02",
       "operation": "produce-only",
-      "status": "working",
+      "status": "ready-for-calibration",
       "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
       "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
       "createdAt": "2026-09-19T20:41:19.697Z",
@@ -1136,7 +1136,8 @@
         "af02-landscape-output",
         "af02-hazard-output",
         "refs/remotes/origin/work/assets/af02",
-        "work/assets/af02"
+        "work/assets/af02",
+        "refs/remotes/origin/modular-parity-validation"
       ],
       "jobs": {
         "AF02:FAR": {
@@ -1288,14 +1289,14 @@
           "interruptions": 0,
           "status": "completed",
           "resultHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
-          "recoveryRef": "refs/remotes/origin/work/assets/af02",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
           "recoveryEvidence": {
-            "ref": "refs/remotes/origin/work/assets/af02",
-            "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
             "contentHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
             "localCommitVerified": true,
             "remoteRefVerified": true,
-            "verifiedAt": "2026-09-19T21:04:10.801Z"
+            "verifiedAt": "2026-09-19T21:24:00.277Z"
           },
           "durable": true,
           "completedAt": "2026-09-19T20:48:17.500Z",
@@ -1307,8 +1308,20 @@
               "localCommitVerified": true,
               "remoteRefVerified": false,
               "verifiedAt": null
+            },
+            {
+              "ref": "refs/remotes/origin/work/assets/af02",
+              "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+              "contentHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+              "localCommitVerified": true,
+              "remoteRefVerified": true,
+              "verifiedAt": "2026-09-19T21:04:10.801Z"
             }
-          ]
+          ],
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          }
         },
         "AF02:MID": {
           "id": "AF02:MID",
@@ -1463,14 +1476,14 @@
           "interruptions": 0,
           "status": "completed",
           "resultHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
-          "recoveryRef": "refs/remotes/origin/work/assets/af02",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
           "recoveryEvidence": {
-            "ref": "refs/remotes/origin/work/assets/af02",
-            "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
             "contentHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
             "localCommitVerified": true,
             "remoteRefVerified": true,
-            "verifiedAt": "2026-09-19T21:04:10.889Z"
+            "verifiedAt": "2026-09-19T21:24:00.350Z"
           },
           "durable": true,
           "completedAt": "2026-09-19T21:00:45.738Z",
@@ -1482,8 +1495,20 @@
               "localCommitVerified": true,
               "remoteRefVerified": false,
               "verifiedAt": null
+            },
+            {
+              "ref": "refs/remotes/origin/work/assets/af02",
+              "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+              "contentHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+              "localCommitVerified": true,
+              "remoteRefVerified": true,
+              "verifiedAt": "2026-09-19T21:04:10.889Z"
             }
-          ]
+          ],
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          }
         },
         "AF02:GROUND": {
           "id": "AF02:GROUND",
@@ -1628,19 +1653,44 @@
               "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png"
             ]
           },
-          "attempts": 0,
+          "attempts": 2,
           "dispatches": 1,
           "interruptions": 0,
-          "status": "running",
-          "resultHash": null,
-          "recoveryRef": null,
+          "status": "completed",
+          "resultHash": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
           "candidateRecovery": {
             "sha256": "d6e58e046623d036f592ee2b7a0aed13670481cd453f71f1d3d8117a8f607202",
             "commit": "2820a408e005e6889f7272dc0cfd0f44f6349483",
             "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
             "technicalQa": "failed",
-            "assetReady": false
-          }
+            "assetReady": false,
+            "supersededBySha256": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b"
+          },
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+            "contentHash": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:24:00.426Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T21:17:56.265Z",
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          },
+          "priorRecoveryEvidence": [
+            {
+              "ref": "work/assets/af02",
+              "commit": "df639664698d7582d3f500988b03bf2c66b8d8f3",
+              "contentHash": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ]
         },
         "AF02:OBJECT_ATLAS": {
           "id": "AF02:OBJECT_ATLAS",
@@ -1815,22 +1865,21 @@
           "dispatches": 1,
           "interruptions": 0,
           "status": "completed",
-          "resultHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
-          "recoveryRef": "refs/remotes/origin/work/assets/af02",
+          "resultHash": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
           "recoveryEvidence": {
-            "ref": "refs/remotes/origin/work/assets/af02",
-            "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
-            "contentHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+            "contentHash": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
             "localCommitVerified": true,
             "remoteRefVerified": true,
-            "verifiedAt": "2026-09-19T21:04:10.975Z"
+            "verifiedAt": "2026-09-19T21:24:00.501Z"
           },
           "durable": true,
           "completedAt": "2026-09-19T20:52:06.397Z",
           "technicalQa": {
-            "status": "failed",
-            "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
-            "reason": "Ground contact outside tolerance and stray alpha in a cell gutter; requires source-image correction before asset-ready."
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
           },
           "priorRecoveryEvidence": [
             {
@@ -1840,6 +1889,33 @@
               "localCommitVerified": true,
               "remoteRefVerified": false,
               "verifiedAt": null
+            },
+            {
+              "ref": "work/assets/af02",
+              "commit": "731823ba1019b6d99c9d7585215929d387e8b12b",
+              "contentHash": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ],
+          "correctionHistory": [
+            {
+              "priorResultHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+              "priorRecoveryEvidence": {
+                "ref": "refs/remotes/origin/work/assets/af02",
+                "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+                "contentHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+                "localCommitVerified": true,
+                "remoteRefVerified": true,
+                "verifiedAt": "2026-09-19T21:04:10.975Z"
+              },
+              "priorTechnicalQa": {
+                "status": "failed",
+                "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
+                "reason": "Ground contact outside tolerance and stray alpha in a cell gutter; requires source-image correction before asset-ready."
+              },
+              "authorization": "Explicit user yes to documented AF02 cleanup"
             }
           ]
         },
@@ -2013,29 +2089,71 @@
             "editingSource": null,
             "continuityFiles": []
           },
-          "attempts": 0,
+          "attempts": 2,
           "dispatches": 1,
           "interruptions": 0,
-          "status": "running",
-          "resultHash": null,
-          "recoveryRef": null,
+          "status": "completed",
+          "resultHash": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
           "candidateRecovery": {
             "sha256": "fcb97b5d07bc46f37b514fdd7c83d976fd447333ddbda70bd0b9f7a941823ad3",
             "commit": "044ab72ecd44cbb4a008777be30625e73621f419",
             "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
             "technicalQa": "failed",
-            "assetReady": false
-          }
+            "assetReady": false,
+            "supersededBySha256": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085"
+          },
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+            "contentHash": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:24:00.575Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T21:17:56.423Z",
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          },
+          "priorRecoveryEvidence": [
+            {
+              "ref": "work/assets/af02",
+              "commit": "3d979e61751ff279084fd01a03a41bb9570cfac7",
+              "contentHash": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ]
         }
       },
-      "resumeNote": "All five source candidates are saved. FAR/MID pass; GROUND and hazard source technical cleanup requires explicit user authorization. See docs/phase8-qa/AF02_ASSET_QA.md. Do not regenerate or mark pending checks passed.",
+      "resumeNote": "Asset-ready handoff published and verified. User notifies Workbench agent to import config/asset-handoffs/af02.json; calibration and release remain pending.",
       "awaitingDecision": {
         "type": "deterministic-source-cleanup",
-        "authorized": false,
-        "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+        "authorized": true,
+        "evidence": "docs/phase8-qa/AF02_ASSET_QA.md",
+        "authorizedBy": "Explicit user yes in conversation",
+        "status": "applied"
       },
-      "updatedAt": "2026-09-19T21:13:28.448Z"
+      "updatedAt": "2026-09-19T21:26:20.848Z",
+      "handoff": {
+        "path": "config/asset-handoffs/af02.json",
+        "sha256": "d32310ff880914b941741cf772b964e44ef94c36635e8f7b39eedaeb3aca48e6",
+        "recoveryRef": "refs/remotes/origin/main",
+        "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+        "remoteRefVerified": true
+      },
+      "closedAt": "2026-09-19T21:26:20.916Z",
+      "publication": {
+        "sourceCommit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+        "developmentCi": "https://github.com/claudejones/candcgame/actions/runs/35470261538",
+        "mainCi": "https://github.com/claudejones/candcgame/actions/runs/35470309023",
+        "pages": "https://github.com/claudejones/candcgame/actions/runs/35470339782",
+        "deployedImageHashesVerified": true
+      }
     }
   },
-  "activeRunId": "af02-20260919204119-fb761a"
+  "activeRunId": null
 }

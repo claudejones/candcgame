@@ -1,7 +1,7 @@
 {
   "stageId": "af02",
-  "status": "candidates-only",
-  "deterministicCleanupAuthorized": false,
+  "status": "source-validation-complete",
+  "deterministicCleanupAuthorized": true,
   "evidence": "docs/phase8-qa/AF02_ASSET_QA.md",
   "results": {
     "FAR": {
@@ -647,5 +647,46 @@
         "failedMessage": "Cell 0: content enters 32px gutter"
       }
     }
+  },
+  "authorization": "Explicit user yes to documented AF02-only cleanup",
+  "resultsDescription": "Pre-cleanup candidate and generation evidence; current final bytes are identified in cleanupAudit and the asset-ready handoff.",
+  "cleanupAudit": {
+    "AF02_GROUND_SOSSUSVLEI.png": {
+      "beforeSha256": "d6e58e046623d036f592ee2b7a0aed13670481cd453f71f1d3d8117a8f607202",
+      "afterSha256": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+      "size": [
+        2172,
+        724
+      ],
+      "authorizedBy": "User yes to documented cleanup in this conversation",
+      "substantiveRgbPreserved": true
+    },
+    "AF02_OBJECT_ATLAS.png": {
+      "beforeSha256": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+      "afterSha256": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+      "size": [
+        2172,
+        724
+      ],
+      "authorizedBy": "User yes to documented cleanup in this conversation",
+      "substantiveRgbPreserved": true
+    },
+    "AF02_HAZARD_SANDGROUSE.png": {
+      "beforeSha256": "fcb97b5d07bc46f37b514fdd7c83d976fd447333ddbda70bd0b9f7a941823ad3",
+      "afterSha256": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+      "size": [
+        2172,
+        724
+      ],
+      "authorizedBy": "User yes to documented cleanup in this conversation",
+      "substantiveRgbPreserved": true
+    }
+  },
+  "finalHandoff": "config/asset-handoffs/af02.json",
+  "checks": {
+    "technical": true,
+    "composition": true,
+    "animation": true,
+    "basicRendering": true
   }
 }

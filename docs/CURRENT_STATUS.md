@@ -17,7 +17,9 @@ From AF02, production ends with five validated PNGs and `config/asset-handoffs/<
 
 ## Next action
 
-**AF02 source candidates saved; cleanup authorization pending:** all five native 2172×724 PNGs are recoverable on `work/assets/af02`. FAR/MID source reviews passed; GROUND surface and hazard contact/alpha-gutter checks still fail. The measured correction proposal and exact hashes are in `docs/phase8-qa/AF02_ASSET_QA.md`. No asset-ready bundle or gameplay activation has been created. Active run: `af02-20260919204119-fb761a`. Resume with `In claudejones/candcgame: resume AF02.`; obtain the outstanding explicit authorization before deterministic pixel edits.
+**AF02 asset-ready and published:** the five validated 2172×724 PNGs and `config/asset-handoffs/af02.json` are ready for Workbench import. Source revision `b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484` passed development/main Production CI and Pages; all five deployed image hashes match. The asset run is closed as `ready-for-calibration`. Artwork acceptance, calibration and playable release remain pending; production activation is unchanged.
+
+Next user action: `In the candcgame Workbench conversation: import asset handoff config/asset-handoffs/af02.json for AF02.` After import, the user calibrates and saves. Do not begin AF03 until the user explicitly advances. Source/evidence: `docs/phase8-qa/AF02_ASSET_QA.md`.
 
 **AF01 remains approved:** reviewed revision `a09b176dd8531bfb3425c9af534ff197a05a253e`, including the porcupine/roller facing correction. Its exact five PNG hashes, reviewed geometry and approval remain unchanged. Evidence: `docs/phase8-qa/AF01_STAGE_QA.md`.
 
