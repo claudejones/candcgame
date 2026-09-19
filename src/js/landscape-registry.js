@@ -278,7 +278,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "eu02": {
       "label": "Europe — France / Paris",
-      "status": "pending",
+      "status": "integrated",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/EU-assets/EU02_BG_DISTANT_PARIS.png",
@@ -289,7 +289,8 @@ window.CC_LANDSCAPE_REGISTRY = {
             2,
             6
           ],
-          "requireOpaque": true
+          "requireOpaque": true,
+          "cacheKey": "dc76bae1"
         },
         "mid": {
           "reference": "assets-original/current-generated/EU-assets/EU02_BG_MID_PARIS.png",
@@ -297,7 +298,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "width": 2172,
           "height": 724,
           "colorType": 6,
-          "requireTransparency": true
+          "requireTransparency": true,
+          "cacheKey": "9919b9dd"
         },
         "ground": {
           "reference": "assets-original/current-generated/EU-assets/EU02_GROUND_PARIS.png",
@@ -306,7 +308,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "height": 724,
           "colorType": 6,
           "requireTransparency": true,
-          "sourceSurfaceY": 393
+          "sourceSurfaceY": 393,
+          "cacheKey": "52f12eeb"
         }
       }
     },
