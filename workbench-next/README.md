@@ -1,6 +1,6 @@
 # C&C production workbench — parallel development
 
-Status: **review increment 1; not the replacement editor**.
+Status: **review increment 2; not the replacement editor**.
 Branch: `editor-next`. Baseline: `132955434f7835064e5d28d8761521111ce0dbf5` (main, 2026-09-19).
 
 Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration and acceptance gates.
@@ -10,6 +10,10 @@ Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration 
 [Open the private design preview](https://candc-workbench-next.claudejones.chatgpt.site). Publication is confirmed; user visual acceptance remains pending.
 
 Private preview publication is authorized as a separate Site. See [PREVIEW_HOSTING.md](PREVIEW_HOSTING.md) for its identity and repeatable packaging. This does not authorize replacing the working editor or deploying this branch over GitHub Pages.
+
+GitHub remains the source of truth and GitHub Pages is the final delivery destination after approval. The ChatGPT Site is only a temporary review host; no hosting-specific API is required by the editor.
+
+Review 02 separates **Stage** and **Character** sub-tabs, remembers each character's state/frame and each stage's selected hazard/frame during the session, labels global versus stage scope, and reduces headings/spacing. The stage selector appears only in Stage. Crop editing waits for the selected image to finish loading.
 
 From the repository root, run `python -m http.server 8080`, then open
 `http://localhost:8080/workbench-next/`.

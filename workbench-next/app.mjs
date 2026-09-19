@@ -1,10 +1,11 @@
-import {Draft, descriptors, same, sourceFrame, validateAtlas, STORAGE_KEY} from './model.mjs';
+import {AssetSelection, Draft, descriptors, same, sourceFrame, validateAtlas, STORAGE_KEY} from './model.mjs';
 
 const $ = id => document.getElementById(id);
 const config = window.GAME_CONFIG;
 const items = descriptors(config, window.GAME_SCHEMA);
 const draft = new Draft(items);
 const cache = new Map();
+const selection = new AssetSelection(items);
 let selected = items.find(item => item.id === 'character:claude:run');
 let stage = 'na01', frame = 0, view = 'frame', playing = false, image = null, lastTick = 0, requestId = 0, animationRequest = 0;
 let catalog;
@@ -26,9 +27,17 @@ function button(label, pressed, action, description) {
 }
 
 function navigation() {
+  const scope = selected.type === 'character' ? 'character' : 'stage';
+  for (const name of ['stage','character']) {
+    const active = name === scope;
+    $(`${name}-tab`).setAttribute('aria-selected',String(active));
+    $(`${name}-tab`).tabIndex = active ? 0 : -1;
+    $(`${name}-panel`).hidden = !active;
+  }
   $('stage-code').textContent = stage.toUpperCase();
+  $('stage').value = stage;
   $('characters').replaceChildren(...['claude','constance'].map(who => button(who === 'claude' ? 'Claude' : 'Constance',
-    selected.id.startsWith(`character:${who}:`),()=>select(`character:${who}:${selected.state || 'run'}`),'6 animation states')));
+    selected.id.startsWith(`character:${who}:`),()=>select(selection.characterId(who)),'6 animation states')));
   $('hazards').replaceChildren(...items.filter(item=>item.stage === stage).map(item=>button(item.name,selected.id===item.id,
     ()=>select(item.id),`${item.frames} frame${item.frames===1?'':'s'} · ${item.kind}`)));
   $('states').hidden = selected.type !== 'character';
@@ -48,11 +57,15 @@ async function loadImage(source) {
 }
 
 async function select(id) {
+  selection.remember(selected,frame);
   selected=items.find(item=>item.id===id); if(!selected)throw new Error('Unknown sprite');
-  setPlaying(false);frame=0;image=null;const token=++requestId;
+  setPlaying(false);frame=selection.frameFor(id);image=null;const token=++requestId;
+  if(selected.stage)stage=selected.stage;
+  selection.remember(selected,frame);
   navigation();
   $('breadcrumb').textContent=selected.type==='character'?`CHARACTERS / ${selected.name.toUpperCase()}`:`${stage.toUpperCase()} / HAZARDS`;
   $('asset-title').textContent=selected.type==='character'?`${selected.state[0].toUpperCase()+selected.state.slice(1)} animation`:selected.name;
+  $('asset-scope').textContent=selected.type==='character'?'GLOBAL CHARACTER':`STAGE ${stage.toUpperCase()}`;
   $('source-size').textContent=`${selected.region.w} × ${selected.region.h}`;
   $('source-frames').textContent=selected.frames;
   $('source-file').textContent=catalog.assets[selected.asset].split('/').pop();
@@ -108,10 +121,10 @@ function render(updateThumbnails = true) {
   $('frame-label').textContent=`Frame ${frame+1} / ${selected.frames}`;
   $('scope').textContent=`${selected.name} · ${selected.state || stage.toUpperCase()} · frame ${frame+1} only`;
   for(const side of ['l','r','t','b']){
-    const input=$(`crop-${side}`);input.value=crop[side];input.disabled=playing;
+    const input=$(`crop-${side}`);input.value=crop[side];input.disabled=playing||!image;
     input.max=(['l','r'].includes(side)?selected.region.w:selected.region.h)-1;
   }
-  $('reset-frame').disabled=playing||same(crop,selected.crops[frame]);
+  $('reset-frame').disabled=playing||!image||same(crop,selected.crops[frame]);
   const showCompare=$('compare').checked&&view==='frame';
   document.querySelector('.baseline-card').hidden=!showCompare;
   $('compare').disabled=view==='atlas';
@@ -135,7 +148,16 @@ function tick(now) {
 
 for(const [id,profile] of Object.entries(config.worldProfiles))$('stage').add(new Option(`${id.toUpperCase()} · ${profile.label.split('—')[1]?.trim()||profile.label}`,id));
 $('stage').value=stage;
-$('stage').onchange=()=>{stage=$('stage').value;if(selected.type==='hazard')select(`hazard:${stage}:0`);else navigation();};
+$('stage').onchange=()=>select(selection.stageId($('stage').value));
+for(const scope of ['stage','character']) {
+  $(`${scope}-tab`).onclick=()=>select(scope==='stage'?selection.stageId(stage):selection.characterId());
+  $(`${scope}-tab`).onkeydown=event=>{
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+    event.preventDefault();
+    const target=event.key==='Home'?'stage':event.key==='End'?'character':scope==='stage'?'character':'stage';
+    $(`${target}-tab`).focus();$(`${target}-tab`).click();
+  };
+}
 $('previous').onclick=()=>setFrame(frame-1);$('next').onclick=()=>setFrame(frame+1);
 $('play').onclick=()=>{setPlaying(!playing);render(false);if(playing)animationRequest=requestAnimationFrame(tick);};
 $('frame-view').onclick=()=>{view='frame';$('frame-view').setAttribute('aria-pressed','true');$('atlas-view').setAttribute('aria-pressed','false');render();};

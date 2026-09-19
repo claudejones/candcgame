@@ -14,6 +14,26 @@ Proposed desktop organization: persistent mode/project/save bar; left project tr
 
 Character and hazard animation share a frame strip, previous/next, play/pause, preview speed, atlas/current-frame views, per-frame crop, and baseline comparison. Asset-specific properties stay separate: character state/grounding/FX versus hazard spawn/flight/collision. Artwork looping is not a substitute for physics/timed-state testing.
 
+## Organization refinement — review 02
+
+User direction, 2026-09-19: Asset studio has two sub-tabs, **Stage** and **Character**. The stage selector belongs only inside Stage; it must not imply ownership of shared characters. The layout uses smaller headings, closer spacing and independently scrolling work panels to leave more room for the artwork.
+
+| Scope | Current review | Later Design integration |
+|---|---|---|
+| Stage | Stage selector and that stage's hazards, with the shared frame tools | Landscape layers, finish scene, stage settings, hazard placement/collision |
+| Character | Claude/Constance and six animation states, shared across stages | Character source/animation properties and FX; global defaults clearly labeled |
+| Scene context | Deferred | Grounding or overrides involving a character in a particular stage explicitly show both stage and character; they must not silently edit global character defaults |
+
+Switching sub-tabs restores the last character/state/frame or the selected stage's last hazard/frame. Each character and stage retains its own selection for this session. Navigation state is not authored configuration. Stage switching never changes the remembered character animation or its crop edits. Sub-tabs support keyboard navigation and expose the active panel to assistive technology.
+
+Next usability refinements, in order:
+
+1. Complete draft recovery: candidate import with validation/diff, clear browser-save versus repository status, and export/import round-trip before runtime integration.
+2. Connect an in-scene view for scale, position, grounding and collision, while retaining the same frame tools in both sub-tabs. Audit every enabled field against a visible change and saved value.
+3. Use collapsible inspector sections and adjustable panel widths as scene controls grow; retain frame controls and Save without page-wide scrolling at normal laptop sizes.
+4. Add stage search/filter and asset readiness/approval summaries when the full 21-stage catalog is available. Load the chosen scene first and show progress/retry in that viewport.
+5. Connect Test and Game only after the adapter preserves existing behavior; remove legacy dependencies after parity evidence, then request cutover approval.
+
 ## Loading experience — required
 
 User requirement confirmed 2026-09-19: lazy loading must show a visible loading indicator until the selected content is ready.
@@ -69,6 +89,7 @@ Milestones 2–6 are incremental changes within the parallel track. Preview prog
 - No changes to `src/dev.html`, `src/game.html`, approved images, current storage keys or Pages in milestone 1.
 - Existing Pages deploys **main only after CI**. A branch alone does not create a GitHub Pages preview URL. Use a local candidate server initially. Decide a separate non-production preview route/host before shared browser acceptance; never deploy the branch over the current Pages site.
 - Draft PR triggers the existing pull-request CI without deploying Pages. A later review build may add a dedicated candidate preview workflow, with its destination explicit.
+- The existing private ChatGPT Site is a temporary review host. **The approved editor's delivery destination is the existing GitHub repository and GitHub Pages site.** Candidate code uses relative paths and static web files; it has no ChatGPT hosting dependency. Final route replacement still requires the user's approval and existing CI/Pages gates.
 - Baseline stays available until cutover approval. At cutover retain a known-good editor route/snapshot and rollback instructions; never delete archive/source preservation areas.
 - No broad Git branch/history cleanup in this track. Remove files only when the dependency audit and parity tests prove they are obsolete.
 

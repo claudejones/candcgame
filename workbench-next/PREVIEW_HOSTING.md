@@ -7,6 +7,7 @@ Authorized 2026-09-19 after the user requested proceeding with a clickable inter
 - Live URL: https://candc-workbench-next.claudejones.chatgpt.site
 - GitHub source authority: `claudejones/candcgame`, branch `editor-next`.
 - Existing GitHub Pages workbench/game remain untouched. Site deployment is publication of this review increment only; it is not editor cutover approval.
+- Final approved delivery is this GitHub repository and its GitHub Pages site. This Site is a temporary review host; the editor uses portable static files and relative asset paths.
 
 ## Reproduce / update
 

@@ -2,10 +2,26 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import {Draft,descriptors,sourceFrame,validateAtlas,STORAGE_KEY} from './model.mjs';
+import {AssetSelection,Draft,descriptors,sourceFrame,validateAtlas,STORAGE_KEY} from './model.mjs';
 const context={window:{}}; vm.createContext(context);
 for(const file of ['game-config.js','config-schema.js']) vm.runInContext(fs.readFileSync(new URL(`../src/js/${file}`,import.meta.url),'utf8'),context);
 const items=descriptors(context.window.GAME_CONFIG,context.window.GAME_SCHEMA);
+
+test('stage and character navigation remember independent assets, states and frames',()=>{
+  const selection=new AssetSelection(items);
+  const remember=(id,frame)=>selection.remember(items.find(item=>item.id===id),frame);
+  remember('character:constance:slide',1);
+  remember('hazard:sa03:2',0);
+  remember('hazard:na01:1',0);
+  assert.equal(selection.characterId(),'character:constance:slide');
+  assert.equal(selection.frameFor(selection.characterId()),1);
+  assert.equal(selection.stageId('sa03'),'hazard:sa03:2');
+  assert.equal(selection.stageId('na01'),'hazard:na01:1');
+  remember('character:claude:jump',2);
+  assert.equal(selection.characterId('constance'),'character:constance:slide');
+  assert.equal(selection.characterId('claude'),'character:claude:jump');
+  assert.equal(selection.stageId('sa03'),'hazard:sa03:2');
+});
 
 test('every character/state and hazard descriptor addresses a real PNG frame',()=>{
   const catalog=JSON.parse(fs.readFileSync(new URL('./asset-catalog.json',import.meta.url)));

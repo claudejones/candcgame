@@ -42,6 +42,30 @@ export function validateAtlas(item, width, height) {
   }
 }
 
+// Navigation is session-only; it never becomes authored game configuration.
+export class AssetSelection {
+  constructor(items) {
+    this.characters = new Map();
+    this.stages = new Map();
+    this.frames = new Map();
+    this.character = 'claude';
+    for (const item of items) {
+      if (item.type === 'character' && item.state === 'run') this.characters.set(item.id.split(':')[1], item.id);
+      if (item.type === 'hazard' && !this.stages.has(item.stage)) this.stages.set(item.stage, item.id);
+    }
+  }
+  remember(item, frame) {
+    this.frames.set(item.id, frame);
+    if (item.type === 'character') {
+      this.character = item.id.split(':')[1];
+      this.characters.set(this.character, item.id);
+    } else this.stages.set(item.stage, item.id);
+  }
+  characterId(who = this.character) { return this.characters.get(who); }
+  stageId(stage) { return this.stages.get(stage); }
+  frameFor(id) { return this.frames.get(id) ?? 0; }
+}
+
 export class Draft {
   constructor(items) {
     this.items = new Map(items.map(item => [item.id,item]));

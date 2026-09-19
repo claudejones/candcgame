@@ -1,4 +1,4 @@
-# Review increment 1 — verification
+# Workbench review — verification
 
 Date: 2026-09-19. Baseline: main `132955434f7835064e5d28d8761521111ce0dbf5`.
 
@@ -37,3 +37,18 @@ User authorized a separate clickable preview on 2026-09-19. `PREVIEW_HOSTING.md`
 The preview remains a Design/sprite review increment. Publication success must be confirmed by the Sites deployment response; it does not count as user visual approval or approval to replace the working editor.
 
 Private preview deployment succeeded on 2026-09-19: https://candc-workbench-next.claudejones.chatgpt.site . Site source revision: `95d78b7ef1df0e2d786b55261d4593eccf2f7375`. The native deployment response confirms publication; browser visual testing and user approval remain pending.
+
+## Review 02 — compact layout and asset scopes
+
+Implemented from the user's sidebar screenshot and feedback on 2026-09-19. Stage and Character are separate accessible sub-tabs; only Stage shows the stage selector. Global character and stage-specific asset scope are visible. Headings, panel padding and section gaps are smaller; desktop workspace height follows the actual header/footer rather than a fixed subtraction.
+
+All five model tests pass, including a new navigation regression for remembered character states/frames and independent stage hazard selections. Existing crop isolation, undo/redo, atlas bounds and draft persistence tests still pass. Application syntax checks pass. Crop fields and reset remain disabled during image loading/failure.
+
+User review checklist for this increment:
+
+1. Character → Constance → Slide → frame 2. Switch to Stage → SA03 → Tropical Parakeets, then another stage. Returning to Character restores Constance/Slide/frame 2; returning to SA03 restores its selected hazard.
+2. Verify Stage has no character list and Character has no stage selector. Character crops remain unchanged when the stage changes.
+3. At a laptop viewport, check the smaller heading and gaps, independent panel scrolling and reachable frame/save controls. At narrow widths, both sub-tabs and their active controls remain available.
+4. Tab to the sub-tabs and use Left/Right or Home/End. Confirm only the active panel's controls receive keyboard focus.
+
+The supplied screenshot informed these changes; no new browser interaction or rendered responsive-layout checks have been claimed. Final visual acceptance remains a user review gate.

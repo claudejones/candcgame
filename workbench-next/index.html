@@ -12,21 +12,29 @@
   <header class="topbar">
     <div class="brand"><b>C<span>&</span>C</b><div>AROUND THE WORLD<small>Production workbench</small></div></div>
     <nav aria-label="Workspace mode"><button class="mode active" aria-pressed="true">Design</button><button class="mode" disabled title="Gameplay connection is a later milestone">Test <small>Planned</small></button><button class="mode" disabled title="Gameplay connection is a later milestone">Game <small>Planned</small></button></nav>
-    <div class="review-badge">EDITOR NEXT <span>Review 01</span></div>
+    <div class="review-badge">EDITOR NEXT <span>Review 02</span></div>
   </header>
   <div class="review-note">Sprite workspace proposal · Working frame and crop tools · Gameplay integration comes later <a href="./PLAN.md">Migration plan ↗</a></div>
   <main class="workspace">
     <aside class="navigator" aria-label="Project assets">
-      <div class="section-label">PROJECT</div><h1>Asset studio</h1><p class="muted">One frame workflow, every sprite.</p>
-      <label class="field">Stage<select id="stage"></select></label>
-      <div class="section-label spaced">CHARACTERS <span>GLOBAL</span></div>
-      <div id="characters" class="asset-list"></div>
-      <div class="section-label spaced">STAGE HAZARDS <span id="stage-code"></span></div>
-      <div id="hazards" class="asset-list"></div>
+      <div class="section-label">PROJECT</div><h1>Asset studio</h1>
+      <div class="asset-tabs" role="tablist" aria-label="Asset scope">
+        <button id="stage-tab" role="tab" aria-selected="false" aria-controls="stage-panel" tabindex="-1">Stage</button>
+        <button id="character-tab" role="tab" aria-selected="true" aria-controls="character-panel">Character</button>
+      </div>
+      <section id="stage-panel" class="asset-panel" role="tabpanel" aria-labelledby="stage-tab" hidden>
+        <label class="field">Stage<select id="stage"></select></label>
+        <div class="section-label spaced">HAZARDS <span id="stage-code"></span></div>
+        <div id="hazards" class="asset-list"></div>
+      </section>
+      <section id="character-panel" class="asset-panel" role="tabpanel" aria-labelledby="character-tab">
+        <p class="scope-note">Shared across all stages</p>
+        <div id="characters" class="asset-list"></div>
+      </section>
       <div class="nav-footer"><span class="status-dot"></span> Approved source images<p>9 available stages · 21 planned</p><a href="./AUDIT.md">Read the functionality audit ↗</a></div>
     </aside>
     <section class="studio" aria-label="Sprite workspace">
-      <div class="studio-heading"><div><div class="section-label" id="breadcrumb">CHARACTERS / CLAUDE</div><h2 id="asset-title">Run cycle</h2></div><span class="chip">FRAME INSPECTION</span></div>
+      <div class="studio-heading"><div><div class="section-label" id="breadcrumb">CHARACTERS / CLAUDE</div><h2 id="asset-title">Run cycle</h2></div><span class="chip" id="asset-scope">GLOBAL CHARACTER</span></div>
       <div id="states" class="state-tabs" aria-label="Character state"></div>
       <div class="view-toolbar"><div class="segmented" aria-label="Preview view"><button id="frame-view" aria-pressed="true">Frame</button><button id="atlas-view" aria-pressed="false">Full atlas</button></div><label class="check"><input type="checkbox" id="compare"> Compare baseline</label><label class="check"><input type="checkbox" id="bounds" checked> Crop outline</label></div>
       <div id="preview-area" class="preview-area">
