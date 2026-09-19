@@ -6,7 +6,9 @@
 - All 43 upstream runtime/workflow tests pass. The v1 handoff validator, generated catalog/registry and whitespace checks pass. Production files and all source image bytes remain identical to imported main.
 - AF02 remains pending in the production stage catalog and landscape registry. Only the Workbench adapter activates its Design preview. All eleven stages/33 hazards can be selected; AF03 is absent.
 - The complete DOM/canvas workflow passes: original v8 browser-save migration, 33 grouped hazards, all five AF02 images, three layers/hazards, explicit pending status, both characters, HIGH/LOW, playback/freeze/step, source/gameplay facing, stage pathway and Save/Import. Rendered AF02 scenery and hazard/frame views were inspected. This is not browser CSS/layout acceptance.
-- Publication evidence follows after deployment. This import does not certify collision fairness, difficulty, artwork acceptance or gameplay release.
+- This import does not certify collision fairness, difficulty, artwork acceptance or gameplay release.
+
+Review 12 publication succeeded on 2026-09-19 at https://candc-workbench-next.claudejones.chatgpt.site (saved version 17, deployment `appgdep_6aaf03275fa88191bbf51127dc32d75a`). Site source `9a9a9d7a28fb530dcb1615aa49c4ae521f07fa6d` packages GitHub implementation `38fade7ad10cfe040e2f75f08213458e4d0a3c39`; [Production CI passed for that exact implementation](https://github.com/claudejones/candcgame/actions/runs/35471384407). The validated archive has 97 files and 63 unchanged PNGs, with all five AF02 hashes matching the v1 handoff. Native deployment status: `succeeded`. All 66 Workbench tests, 43 upstream runtime/workflow tests and the complete DOM/canvas flow pass. Known ten-stage v8 and earlier saves retain existing calibration when AF02 is added. Production AF02 activation, artwork acceptance, calibration and playable release remain pending; full Test/Game remains planned. Main and GitHub Pages were not published by this Workbench update.
 
 ## Review 11 — AF01 integration and facing
 
