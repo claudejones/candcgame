@@ -6,6 +6,7 @@
   const requested = (params.get("mode") || "design").toLowerCase();
   let mode = VALID_MODES.includes(requested) ? requested : "design";
 
+  if(window.CC_STAGE_CATALOG)window.CC_STAGE_CONTRACT.install(window.GAME_CONFIG,window.CC_STAGE_CATALOG,window.CC_LANDSCAPE_REGISTRY);
   window.CC_LANDSCAPE_CONTRACT.apply(window.GAME_CONFIG, window.CC_LANDSCAPE_REGISTRY);
 
   const listeners = new Set();

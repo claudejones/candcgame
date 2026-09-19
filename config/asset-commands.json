@@ -87,7 +87,8 @@
         "GROUND2",
         "FLYING"
       ],
-      "proposal": "config/remaining-continent-proposal.json"
+      "proposal": "config/remaining-continent-proposal.json",
+      "profile": "docs/asset-profiles/hazard.md"
     },
     "object": {
       "state": "registration-required",

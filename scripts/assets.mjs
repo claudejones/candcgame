@@ -69,6 +69,7 @@ function futureSharedRules(plan) {
   const shared=plan.shared ?? {};
   return {
     profile:{path:catalog.families.landscape.profile,content:read(catalog.families.landscape.profile)},
+    hazardProfile:read('docs/asset-profiles/hazard.md'),
     pixelArt:'Match the established crisp pixel-art language; no photorealism, painterly blur, vector-flat redesign, smooth 3D, labels, UI or unrelated assets.',
     landscapeContract:shared.landscapeContract ?? null,
     landscapeSource:shared.landscapeSource ?? null,
@@ -173,7 +174,7 @@ export function futurePacket(command, family, stage, words, state, plan=proposal
     packet.protectedOutputs=Object.values(files).filter(Boolean);
     packet.continuityOutputs=layers.map(layer=>files[layer]).filter(Boolean);
     packet.specHash=hashValue(stage);
-    packet.specSources=['config/remaining-continent-proposal.json',plan.plan,plan.shared?.landscapeContract].filter(Boolean);
+    packet.specSources=['config/remaining-continent-proposal.json',plan.plan,plan.shared?.landscapeContract,catalog.families.landscape.profile,'docs/asset-profiles/hazard.md'].filter(Boolean);
   }
   return packet;
 }
@@ -199,7 +200,7 @@ function nextStage(prefix,state=workflow()) {
     return {command:'resume',stage:state.runs[state.activeRunId].target};
   }
   if (state.active && (!prefix || state.active.stage.startsWith(prefix))) return {command:'resume', stage:state.active.stage};
-  const entry = Object.entries(registry().stages).find(([id, s]) => s.status !== 'approved' && (!prefix || id.toUpperCase().startsWith(prefix)));
+  const entry = Object.entries(registry().stages).find(([id, s]) => s.status !== 'approved' && s.scope!=='full-stage' && (!prefix || id.toUpperCase().startsWith(prefix)));
   return entry ? {command:'build landscape', stage:entry[0].toUpperCase()} : null;
 }
 export function handoff(state=workflow()) {
@@ -212,6 +213,7 @@ export function handoff(state=workflow()) {
   return 'Phase 8 registered landscapes are approved. Complete the required readiness gates before generating other assets.';
 }
 function stageSummary(id) {
+  const planned=futureStage(id);if(planned)return futureReadiness(planned);
   const s = registry().stages[id.toLowerCase()];
   if (!s) {
     const future=futureStage(id);
@@ -404,6 +406,7 @@ function main(args) {
     run(['scripts/sync-landscape-registry.cjs','--check']);
     run(['scripts/validate-phase8-pngs.js','--stage',stage,...(layer?['--layer',layer]:[])]);
     run(['scripts/landscape-runtime-state.cjs',stage]);
+    if(futureStage(stage))run(['scripts/validate-stage-assets.cjs',stage]);
     execFileSync('python',['scripts/phase8-stage-qa.py',stage,'--skip-png',...(layer?['--layer',layer]:[])],{cwd:ROOT,stdio:['ignore','pipe','pipe']});
     return {stage:stage.toUpperCase(),localChecks:'passed',previews:`tmp/phase8-qa/${stage}/`,remaining:'Inspect the composite and repeat previews, then verify the deployed runtime and user acceptance.'};
   }

@@ -3,7 +3,7 @@
 
   if(!window.CC_APP || !window.CC_APP.isDevelopment) throw new Error("Asset Navigator requires development bootstrap");
 
-  const CONTINENTS = Object.freeze([
+  const CONTINENTS = Object.freeze(window.CC_STAGE_CATALOG?window.CC_STAGE_CONTRACT.continents(window.CC_STAGE_CATALOG,window.GAME_CONFIG):[
     {id:"north-america", label:"North America", stages:["na01","na02","na03"]},
     {id:"south-america", label:"South America", stages:["sa01","sa02","sa03"]},
     {id:"europe", label:"Europe", stages:["eu01","eu02","eu03"]}

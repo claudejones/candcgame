@@ -22,7 +22,7 @@ Type these messages into the conversation with the agent. The user does not need
 | See NA01's layer filenames in the current conversation | `help NA01` |
 | Resume AF01 work within the current conversation | `resume AF01` |
 
-AF01 is the current readiness example: its direction and theme are approved, while references, hazard selections and production gates remain pending. `build stage AF01` returns a readiness packet and does not enable gameplay or asset generation.
+AF01 is the current readiness example: its direction and theme are approved, with Africa hazard choices resolved, while actual reference pixels and calibration/contract promotion remain pending. `build stage AF01` returns a readiness packet and does not enable gameplay or asset generation.
 
 ## If a conversation reaches its limit
 
@@ -40,7 +40,7 @@ At an intentional interruption, the agent must save and verify the recovery chec
 
 ## User commands
 
-The table below uses the short form for a conversation already working in this repository. For the first message in a fresh conversation, add `In claudejones/candcgame:` as shown above. AF01 is the current readiness example; its packet remains blocked until references, runtime 21, profile validation and production gates are complete. Legacy landscape commands remain supported for recovery and explicit approved-asset replacement.
+The table below uses the short form for a conversation already working in this repository. For the first message in a fresh conversation, add `In claudejones/candcgame:` as shown above. AF01 is the current readiness example; its packet remains blocked until actual reference pixels and calibration/contract promotion are complete. Legacy landscape commands remain supported for recovery and explicit approved-asset replacement.
 
 | Command | Result |
 | --- | --- |
@@ -70,13 +70,23 @@ Omitting a layer selects FAR, MID and GROUND. Keys are case-insensitive; `NA1` a
 | OC | Oceania / Australia | OC01, OC02, OC03 | Approved themes; readiness pending; AU is an alias |
 | AN | Antarctica | AN01, AN02, AN03 | Approved themes; readiness pending |
 
-Only the existing nine NA/SA/EU stages are authorized for Phase 8 production, and all 27 landscape layers are approved. Reserving keys does not invent future themes or references. The remaining-continent direction, workflow and themes are approved for planning, but replacement hazard choices/references and production gates remain pending. Approved existing assets stay locked. Character, hazard, object, UI and shared-effect families are discoverable with `help character` etc.; selectors may resolve to a focused readiness packet, while gameplay/production commands remain blocked until runtime 21 and profile validation are implemented.
+Only the existing nine NA/SA/EU stages are authorized for Phase 8 production, and all 27 landscape layers are approved. Reserving keys does not invent future themes or references. The remaining-continent direction, workflow and themes are approved for planning, but replacement hazard choices/references and production gates remain pending. Approved existing assets stay locked. Character, hazard, object, UI and shared-effect families are discoverable with `help character` etc.; selectors may resolve to a focused readiness packet, while the new-stage runtime/validation tooling is implemented but generation still waits for references and contract promotion.
 
 ## V3 readiness and delegation
 
-`build stage AF01` and equivalent future-stage requests resolve a readiness-aware packet: the packet identifies the stage, proposed theme, missing references, hazards and required gates. It does not enable gameplay, create production assets or authorize generation while any reference, runtime 21 or profile-validation gate is pending. A hazard selector can resolve its proposed identity and focused references for review; it remains blocked from production until those gates pass.
+`build stage AF01` and equivalent future-stage requests resolve a readiness-aware packet: the packet identifies the stage, proposed theme, missing references, hazards and required gates. It does not enable gameplay, create production assets or authorize generation while any reference or calibration/contract-promotion gate is pending. A hazard selector can resolve its proposed identity and focused references for review; it remains blocked from production until those gates pass.
 
 When a later build is eligible, one coordinator may delegate narrowly scoped stage work to at most two workers. The coordinator starts the run with `node scripts/assets.mjs coordinator start <expectedRevision> "<asset command>"`, then starts each pinned job with `coordinator start-job <runId> <jobId> <expectedRevision>`. Workers return an isolated result manifest through `coordinator result <runId> <jobId> <expectedRevision> <result-manifest.json>`; this verifies the owned bytes and immutable local commit evidence only. The coordinator must then fetch the remote ref and run `node scripts/assets.mjs coordinator verify-recovery <runId> <jobId> <expectedRevision> <fetchedRemoteRef>`; only that remote byte match marks the job durable. The coordinator records the selected checkpoint with `coordinator checkpoint <runId> <phase> <expectedRevision> [recoveryRef]`; `ready-to-publish` requires complete matching local outputs; it does not require an extra recovery publication. `awaiting-approval` requires verified durable jobs and the existing deployed review evidence. Workers receive a pinned stage/file packet and actual references, and return outputs in isolated worktrees. The coordinator imports one completed file at a time before result verification, so another worker's in-progress file cannot trigger an unowned-output change. The coordinator owns the shared registry, checkpoints, releases, plan and decision log; no nested continent managers are used. This delegation rule does not claim parallel image throughput or establish a fixed usage budget.
+
+## Africa trial and full-stage integration
+
+The test covers **AF01–AF03**, with shared setup completed once. AF01 is the first deployed acceptance checkpoint, followed by AF02 and AF03. Two workers may handle separate asset groups within one stage. Do not describe this as simultaneous three-stage production. Measure elapsed time, attempts, repeated setup and available usage for each stage and the whole trial; do not promise a subscription percentage.
+
+The coordinator handles remaining reference retrieval from the catalog's `referenceSources` and the recorded Phase 8 calibration/promotion gate. `status` is read-only, not an instruction to perform that setup or evidence that generation is ready. Do not hand it to the user as if it starts production. Actual downloaded image pixels must be inspected and added to the selected job's reference paths before marking `referencesReady`.
+
+For a new complete stage, build all five files and measured metadata. Run `node scripts/validate-stage-assets.cjs AF01` for source/atlas checks. Metadata in `config/stage-releases.json` includes the five path/SHA-256 pairs, three calibrated runtime hazard definitions (sourceAnchor, source region, crop, scale, collision, animation), finish placement, a 75–85s signature and completed technical/composition/contact/animation/collision/finish checks. These values are agent-measured, never a user template or invented defaults. Use `node scripts/integrate-stage.mjs "build stage AF01" <measured-release.json>` with the resolved command; single-cell revisions require the original atlas at HEAD and preserve sibling RGBA/metadata. Then run the existing targeted `check`, inspect the actual scene, publish and request one complete-stage review including hazards. Normal integration still uses one publication snapshot.
+
+On acceptance, update both the new-stage release status and landscape registry, plus the exact five-file approval/checkpoint record. Rollback restores those same files/metadata from the recorded accepted revision; no branch resets. AF02 and AF03 follow AF01 through ordinary filled handoff commands. New stages remain absent from gameplay until their complete measured release is integrated. Source/animation validators do not grant visual acceptance.
 
 ## Agent startup and lookup
 

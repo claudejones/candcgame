@@ -6,7 +6,7 @@ const vm = require('node:vm');
 const ROOT = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(ROOT, file), 'utf8');
 
-function load(mode = 'runtime', registryOverride) {
+function load(mode = 'runtime', registryOverride, catalogOverride) {
   const events = {}, frame = {src:'http://localhost/src/index.html'};
   const context = {URL, URLSearchParams, console,
     document:{documentElement:{dataset:{}},getElementById:()=>frame},
@@ -14,10 +14,11 @@ function load(mode = 'runtime', registryOverride) {
     window:{location:{search:mode==='baseline'?'':'?landscapes=phase8',href:'http://localhost/src/dev.html'},
       addEventListener:(name,fn)=>{events[name]=fn;}}};
   vm.createContext(context);
-  for (const file of ['game-config.js','landscape-registry.js','landscape-contract.js']) {
+  for (const file of ['game-config.js','landscape-registry.js','landscape-contract.js','stage-catalog.js','stage-contract.js']) {
     vm.runInContext(read(`src/js/${file}`), context, {filename:file});
   }
   if (registryOverride) context.window.CC_LANDSCAPE_REGISTRY=structuredClone(registryOverride);
+  if (catalogOverride) context.window.CC_STAGE_CATALOG=structuredClone(catalogOverride);
   if (mode==='host') {
     vm.runInContext(read('src/js/bootstrap/development-bootstrap.js'), context);
     events.DOMContentLoaded();
@@ -36,6 +37,7 @@ function state(id, {preview=false}={}) {
   const active=runtime.contract.active(runtime.registry,id);
   if (!active && !preview) throw new Error(`${id}: pending; integrate the complete set before verifying runtime activation`);
   if (!active) {
+    for(const c of [runtime,host])if(!c.config.worldProfiles[id])c.config.worldProfiles[id]={label:c.registry.stages[id].label,farKey:id+'Far',midKey:id+'Mid',groundKey:id+'Ground'};
     runtime.contract.applyStage(runtime.config,runtime.registry,id,true);
     host.contract.applyStage(host.config,host.registry,id,true);
   }
