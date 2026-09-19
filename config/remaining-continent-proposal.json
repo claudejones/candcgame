@@ -1239,10 +1239,11 @@
   },
   "calibrationFollowUp": {
     "status": "delegated-review-and-adjustments-pending",
-    "owner": "separate auto-calibration workstream",
+    "owner": "editor-next auto-calibration workstream",
     "evidence": "docs/phase8-qa/DEPENDENT_CALIBRATION_QA.md",
     "baselineCommit": "57d6ca4e6932cc0ee5f6d05597245c1c17a74e85",
     "blocksAssetGeneration": false,
-    "authorization": "User explicitly instructed remaining-stage production to proceed while the other agent reviews calibration. Do not record existing calibration as visually accepted or overwrite concurrent calibration work."
+    "authorization": "User explicitly instructed remaining-stage production to proceed while the other agent reviews calibration. Do not record existing calibration as visually accepted or overwrite concurrent calibration work.",
+    "legacyTuning": "paused; preserve eleven comparison candidates and regression evidence; no silent promotion, overwrite or rollback"
   }
 }
