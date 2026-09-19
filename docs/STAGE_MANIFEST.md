@@ -19,7 +19,7 @@ Known landscape families:
 
 Known approved hazards include macaws, Andean flamingo, and tropical parakeets. SA02 village/mid correction and ground seam correction were incorporated during QA.
 
-## Europe — assets produced and integrated for QA
+## Europe — landscape sets approved; legacy hazards integrated for QA
 - EU01 — Greece / Santorini
   - DISTANT Greece
   - MID Greece
@@ -56,4 +56,6 @@ All 27 are the Phase 8 regeneration validation batch under `LANDSCAPE_GENERATION
 
 ## Phase 8 landscape acceptance
 
-North America (NA01–NA03) and South America (SA01–SA03) are approved complete FAR/MID/GROUND sets. South America regression passed on 2026-09-19. SA03's reviewed revision is `c1fb39c909d68b87f200c354dc2c966f96a597c1`; exact layer hashes and approval pointers are in `config/asset-workflow-state.json`. EU01 — Greece / Santorini was explicitly approved on 2026-09-19 at reviewed revision `8556e5a0312e53cb3843f1b69c61a35e698383ef`, preserving its exact images and canonical geometry. EU02 — France / Paris is next; EU03 and Europe regression follow. Legacy packaged assets and deferred character/hazard calibration remain separate.
+All nine FAR/MID/GROUND sets in North America (NA01–NA03), South America (SA01–SA03) and Europe (EU01–EU03) are explicitly approved. All three continent landscape regression gates have passed; Europe closed on 2026-09-19 following EU03 approval. EU03's exact reviewed artwork revision is `94f94669bd2773b2ef9881c59e4adb710aeced60`. Exact hashes and approval pointers are in `config/asset-workflow-state.json`; Europe regression evidence is in `docs/phase8-qa/EU03_LANDSCAPE_QA.md`.
+
+Approved validation assets remain under `assets/phase8-validation/`. Legacy packaged assets and required dependent character/hazard calibration remain separate. Full Phase 8 contract promotion is not claimed by landscape acceptance; additional continent production still requires approved scope, themes and references.

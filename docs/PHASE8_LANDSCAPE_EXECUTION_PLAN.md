@@ -4,7 +4,7 @@ Active, 2026-09-19. Operational steps and command lookup are maintained once in 
 
 ## Scope and order
 
-Phase 8 is the existing nine NA/SA/EU stages: 27 FAR/MID/GROUND layers. North America and South America are complete, including the South America regression. EU01 and EU02 are approved. Next are EU03 and the Europe regression. The other four continents/36 landscape layers need approved themes, references and authorization after this validation phase. The command system is project-wide; no repeat setup per continent.
+Phase 8 is the existing nine NA/SA/EU stages: 27 FAR/MID/GROUND layers. All nine landscape stage sets are approved, and North America, South America and Europe landscape regressions have passed. EU03 and Europe were closed on 2026-09-19. Required dependent gameplay calibration and full contract promotion remain pending. The other four continents/36 landscape layers need approved themes, references and authorization after this validation phase. The command system is project-wide; no repeat setup per continent.
 
 ## Authority and approval
 

@@ -1,29 +1,6 @@
 {
   "schemaVersion": 1,
-  "active": {
-    "stage": "EU03",
-    "phase": "awaiting-approval",
-    "command": "build landscape EU03",
-    "selectedLayers": [
-      "FAR",
-      "MID",
-      "GROUND"
-    ],
-    "files": {
-      "assets/phase8-validation/europe/EU03_BG_DISTANT_BARCELONA.png": "fb3ae5964f53f73d761872fad20dee8e98afc4696966f6879dd5ea2845757f09",
-      "assets/phase8-validation/europe/EU03_BG_MID_BARCELONA.png": "0fd183d36bc48ca61a5cabce90c7874e36332c22e4bbcc548a8b3e3fee15421c",
-      "assets/phase8-validation/europe/EU03_GROUND_BARCELONA.png": "45916a46209dd8b5ede78c6e1f41fc9af641ee5155177c7be18296fda37745ff"
-    },
-    "stageSpec": "3fd57012dc1216399b77a071c2728f6c79a6cb5b6c4df51a4961ddd98ab7629d",
-    "recoveryBranch": "work/assets/eu03",
-    "baseCommit": "c02c80f5a889b4b5879f860121233edb6a356d5b",
-    "developmentCommit": "b8cdabef418bbde2f73d1562db60923c5836c67d",
-    "deployedCommit": "94f94669bd2773b2ef9881c59e4adb710aeced60",
-    "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35428163510",
-    "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35428215455",
-    "pages": "https://github.com/claudejones/candcgame/actions/runs/35428236249",
-    "reviewUrl": "https://claudejones.github.io/candcgame/src/dev.html"
-  },
+  "active": null,
   "approvedRevisions": {
     "na01": {
       "commit": "660aa55e35b378e613e07d8315074552620fcb61"
@@ -80,6 +57,18 @@
       },
       "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35426252658",
       "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35426273472"
+    },
+    "eu03": {
+      "commit": "94f94669bd2773b2ef9881c59e4adb710aeced60",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/europe/EU03_BG_DISTANT_BARCELONA.png": "fb3ae5964f53f73d761872fad20dee8e98afc4696966f6879dd5ea2845757f09",
+        "assets/phase8-validation/europe/EU03_BG_MID_BARCELONA.png": "0fd183d36bc48ca61a5cabce90c7874e36332c22e4bbcc548a8b3e3fee15421c",
+        "assets/phase8-validation/europe/EU03_GROUND_BARCELONA.png": "45916a46209dd8b5ede78c6e1f41fc9af641ee5155177c7be18296fda37745ff"
+      },
+      "qa": "docs/phase8-qa/EU03_LANDSCAPE_QA.md",
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35428215455",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35428236249"
     }
   },
   "continentRegressions": {

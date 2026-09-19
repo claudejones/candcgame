@@ -1,6 +1,6 @@
 # EU03 Barcelona landscape QA
 
-2026-09-19 — Integrated and deployed for review. User artwork acceptance pending.
+2026-09-19 — Explicitly approved by the user; Europe landscape regression passed.
 
 Scope: EU03 FAR/MID/GROUND, their registry/cache references, and workflow/QA records. Recovered all three images from the interrupted matching ready-to-publish checkpoint. No artwork regenerated. Approved sibling stages, gameplay, character/hazard calibration, packaged production assets and archives are unchanged.
 
@@ -29,4 +29,14 @@ Scope: EU03 FAR/MID/GROUND, their registry/cache references, and workflow/QA rec
 - All three deployed cache-key image URLs, both entry pages and the generated registry match the validated local bytes.
 - Live Inspector: FAR scale 0.5524861878453038; MID/GROUND scale 0.4419889502762431; all X/Y offsets zero; MID/GROUND parallax 0.2/1. Runtime monitor confirms canonical Y=410 and rendered 410.
 - Design composite, source previews and Game-mode startup/rendering inspected. Test gameplay scrolls through repeated layer boundaries without uncovered scenery gaps. Shared cloud behavior remains intact.
-- These technical checks do not approve the artwork. EU03 remains `integrated` and `awaiting-approval`.
+- User explicitly approved this exact deployed artwork on 2026-09-19. EU03 is `approved`; its active checkpoint is closed. All three image hashes and canonical geometry are unchanged.
+- The unlimited-lives Test run reached 0:00 / FINISH RELEASE / 0 active hazards / 21 cleared; character CELEBRATE and final landscape continuity were inspected.
+
+
+## Europe regression and closeout
+
+- EU01, EU02 and EU03: all nine source PNGs pass integrity, dimensions, alpha and coverage checks. All three active canonical composites pass without uncovered pixels; exact image hashes match the approved revision records.
+- Eight runtime regression tests pass, covering host/inner startup, actual renderer geometry, saved-config/import migration, reset and packaged baseline isolation.
+- Live cross-stage review retains the approved Santorini, Paris and Barcelona compositions. Inspector values remain FAR scale 0.5524861878453038; MID/GROUND scale 0.4419889502762431; all X/Y offsets zero; parallax 0/0.2/1. Ground remains canonical/rendered 410. EU03 Design/Test/Game and complete-course scrolling evidence are recorded above.
+- Approval changes only status/approval records, closeout documentation and generated cache references. No image, gameplay or calibration changes.
+- Europe is closed. All nine registered stage landscape sets and three continent landscape gates have passed. Required dependent character/hazard calibration and full Phase 8 contract promotion remain separate unfinished work; this landscape approval does not claim those tasks complete or authorize remaining-continent production.
