@@ -28,13 +28,24 @@ Development-branch CI never deploys Pages. Pull-request CI never deploys Pages. 
 
 Rerunning an older workflow run is not a valid way to publish a newer commit: a rerun retains the original run's SHA.
 
-## Binary asset transfer
+## Established connected publication route
 
-Prefer a normal authenticated Git commit/push. Check its availability once before expensive generation. When unavailable, use the connected GitHub object's binary-safe upload and text-blob/tree route as a fallback, not a mandatory ritual. Verify text/blob IDs and the final tree internally; do not stream image encodings or full API objects into the conversation. Recheck both shared branch heads before writing and never force-update them. If a concurrent change appears, reconcile it and revalidate before promotion.
+The ChatGPT GitHub connection authenticates the connected tools; it does not supply terminal `git push` credentials. Connected publication has succeeded in this project, including SA02. In these sessions use that route directly. Do not test terminal authentication, ask the user to reconnect a working connector, or search prior chats for upload instructions during routine startup. A separate environment with already configured authenticated Git may use its normal push path.
+
+At publication, use the connected GitHub tools (tool prefixes may vary by environment):
+
+1. Read both branch refs and their commit trees with `github_fetch`. Start from the current development tree and preserve concurrent changes.
+2. Create changed UTF-8 files with `github_create_blob` using `encoding: utf-8`. For PNGs, pass the exact binary-safe tool result's Base64 data directly in tool orchestration memory to `github_create_blob` using `encoding: base64`; never print that data or relay it through model text. Reuse already uploaded, verified blobs. Require returned blob IDs to match local Git object IDs. If the environment lacks a byte-preserving binary source, report that specific transfer blocker rather than improvise a text relay or transform the image.
+3. Use `github_create_tree`, require the resulting tree to match the validated local snapshot, then `github_create_commit` and `github_update_ref` with `force: false`. Follow the development/main gates above. Recheck both refs immediately before branch writes; reconcile concurrent changes before continuing.
+4. Read push-triggered checks with `github_fetch` at `https://api.github.com/repos/claudejones/candcgame/actions/runs?head_sha=<COMMIT_SHA>&per_page=20`. Inspect only run name, head SHA, status, conclusion and URL. A reader limited to pull-request runs is not evidence that push CI is unavailable. Preserve exact-SHA verification for both Production CI and Pages.
+
+Resolve tool schemas when needed at publication, not through open-ended pre-generation research. Keep responses and polling compact; the user needs the outcome and review link.
 
 Do not route PNG or other binary assets through shell-output capture, Base64 text relays or another interface that can truncate large outputs. Upload large binaries through a binary-safe Git/GitHub path, then confirm the committed blob matches the local file before promotion.
 
 Production CI reads `config/phase8-landscapes.json`, verifies the generated runtime registry and cache keys, exercises actual host/renderer startup and saved-config/reset behavior, and runs the PNG/composite checks over stages marked `integrated` or `approved`. Offline previews consume the renderer's shared geometry; a pending stage's prospective preview is not deployment evidence. PNG checks retain full chunk/CRC/decompression/scanline integrity, dimensions and alpha/coverage requirements. A failure blocks main validation and automatic Pages deployment. Local single-image iterations use targeted checks; the full automatic CI gate remains.
+
+CI currently runs on every push to either shared branch; successful main CI triggers Pages. Approval metadata therefore triggers automatic checks even when PNGs are unchanged. This is publication of the acceptance record, not another visual approval gate. For an approval-only diff, verify the image/geometry invariants and required automatic runs; do not repeat local artwork QA or browser review unless a concrete unexpected change appears. Required continent regression remains in scope.
 
 ## Required handoff evidence
 
