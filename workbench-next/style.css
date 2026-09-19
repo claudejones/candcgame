@@ -373,6 +373,52 @@ h3 span {
   image-rendering:pixelated;
   padding:25px;
 }
+.preview-area.landscape-preview {
+  height:auto;
+  align-items:stretch;
+}
+.landscape-preview .preview-card {
+  aspect-ratio:16/9;
+}
+.landscape-preview canvas {
+  position:absolute;
+  inset:0;
+  padding:0;
+}
+.scene-tools {
+  border-top:1px solid var(--line);
+  padding-top:14px;
+}
+.layer-visibility {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 14px;
+  align-items:center;
+  font-size:11px;
+}
+.layer-visibility>span {
+  color:var(--muted);
+}
+.scroll-control {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:18px 0 12px;
+  font-size:11px;
+}
+.scroll-control input {
+  flex:1;
+  width:auto;
+  min-width:40px;
+  accent-color:var(--accent);
+  padding:0;
+}
+.scroll-control output {
+  min-width:54px;
+  text-align:right;
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
 .preview-tag {
   position:absolute;
   top:12px;

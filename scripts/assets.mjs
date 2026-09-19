@@ -40,7 +40,7 @@ function nextStage(prefix) {
 }
 export function handoff() {
   const next = nextStage();
-  return next ? `In ${catalog.repository}: ${next.command} ${next.stage}. Follow AGENTS.md.` :
+  return next ? `In ${catalog.repository}: ${next.command} ${next.stage}.` :
     'Phase 8 registered landscapes are approved. Complete the continent gates; define and approve the next production scope before generating other assets.';
 }
 function stageSummary(id) {

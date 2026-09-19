@@ -2,6 +2,8 @@
 
 Status: proposed; parallel branch only. The user's approval is required before replacing the working interface.
 
+Current increment: **Review 03 — landscapes connected**, 2026-09-19. The user explicitly prioritized completing Stage landscapes before further cosmetic refinement. FAR/MID/GROUND, scene/layer/source views, visual transforms, repeat/parallax scroll, comparison and combined landscape/sprite draft persistence are implemented. They use current GitHub artwork and the shared production geometry function. A full runtime adapter, gameplay entities, finish scenes, FX, import UI and Test/Game remain pending. See VERIFICATION.md for evidence and limits.
+
 ## Product direction
 
 Keep **Design / Test / Game**. Give each a clear job and use the same authored snapshot and renderer.
@@ -20,7 +22,7 @@ User direction, 2026-09-19: Asset studio has two sub-tabs, **Stage** and **Chara
 
 | Scope | Current review | Later Design integration |
 |---|---|---|
-| Stage | Stage selector and that stage's hazards, with the shared frame tools | Landscape layers, finish scene, stage settings, hazard placement/collision |
+| Stage | Stage selector, landscapes (FAR/MID/GROUND with shared geometry) and hazards with frame tools | Finish scene, stage settings, hazard placement/collision |
 | Character | Claude/Constance and six animation states, shared across stages | Character source/animation properties and FX; global defaults clearly labeled |
 | Scene context | Deferred | Grounding or overrides involving a character in a particular stage explicitly show both stage and character; they must not silently edit global character defaults |
 
@@ -95,4 +97,4 @@ Milestones 2–6 are incremental changes within the parallel track. Preview prog
 
 ## Next implementation packet
 
-Continue in `editor-next`; read root AGENTS.md, Current Status and this folder. Review milestone 1 with Claude, then implement milestone 2. The sprite proposal is a design increment, not a complete editor, gameplay preview, production configuration importer or approval of the new interface. SA02 landscape production remains a separate track and is not started here.
+Continue in `editor-next`; read root AGENTS.md, Current Status and this folder. Review the landscape workspace, complete the remaining state/import contracts, then build the runtime adapter and in-scene character/hazard/finish editing. Use the current coverage matrix in AUDIT.md to prevent omissions. This is a Design increment, not a complete editor, gameplay preview, production configuration importer or approval of the replacement. Landscape artwork production remains a separate track. Main was incorporated through `723a42b…`; do not overwrite subsequent artwork/workflow changes at later integration.

@@ -1,5 +1,24 @@
 # Workbench review — verification
 
+## Review 03 — landscape workspace
+
+Upstream main incorporated through `723a42b88b44ef610da94222babee51e65018402`, including the approved SA02 files and registry. New editor changes remain confined to `workbench-next/`; production files match that upstream snapshot exactly. No artwork was edited.
+
+Passed on 2026-09-19:
+
+- 13 Node tests across model, landscape and asset-loader suites; application/module syntax checks.
+- All 27 landscape sources exist. Active landscapes match registry PNG dimensions and SHA-256 cache revisions, including the NA03 GROUND size exception. Approved NA01–NA03, SA01 and SA02 retain zero offsets and 1.25/1/1 multipliers. Pending SA03/EU stages retain legacy profiles and are labeled accordingly.
+- Candidate geometry calls the same production geometry function. Tile draw calls match the existing renderer for all nine stages/layers at four scroll positions, including repeat boundaries.
+- Mixed sprite/layer undo and redo, edits across multiple stages, exact combined save/export/reload, invalid-draft atomic rejection, and failed writes retaining dirty state. Existing v1 candidate crop saves migrate without deleting or overwriting their original key.
+- Loading waits for every required image decode; progress counts decoded assets; stale selections cannot report readiness or progress; successful assets are cached and failed requests can retry.
+- Rendered and visually inspected a nine-stage contact sheet using the candidate canvas renderer and exact source PNGs. This verifies landscape composition, not browser layout or interactive gameplay. No synthetic world backing or artwork correction was added to conceal legacy composition gaps.
+
+User review: open Stage → Stage landscape; choose Scene/Layer/Source and FAR/MID/GROUND. Change an offset, scale or parallax (use Scroll preview), compare baseline, Undo, save and reload. Switch stages and Character to verify independent selection/editing. Confirm loading and retry feedback and fit at your normal window size.
+
+Browser interaction/responsive visual acceptance remains pending. Character/hazard/finish placement, collision, FX, live cloud motion, import UI and Test/Game are not implemented by this increment. The candidate is still a parallel review editor; no cutover is approved.
+
+## Earlier review evidence
+
 Date: 2026-09-19. Baseline: main `132955434f7835064e5d28d8761521111ce0dbf5`.
 
 Main advanced during the audit to `7fe0e6bb2716c1ffa597ddc9f7792d79b4824e53`; the intervening change only appends command/resume documentation in `docs/ASSET_COMMAND_WORKFLOW.md`. Runtime/editor code is unchanged. This branch stays pinned to the recorded audit baseline; the later merge must retain that documentation update.

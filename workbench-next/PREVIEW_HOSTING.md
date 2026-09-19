@@ -13,7 +13,7 @@ Authorized 2026-09-19 after the user requested proceeding with a clickable inter
 
 Use the Sites hosting skill and reuse the exact Site project ID above. Never create a replacement Site to recover a missing scratch checkout.
 
-Run `node workbench-next/build-preview.mjs /absolute/path/to/separate-preview-checkout` from the candidate repository. The helper copies candidate UI, its two read-only configuration dependencies and only the 25 images used by the 39 character-state/hazard selections. It preserves source paths and source PNG bytes; it does not include the old runtime, game routes or unused landscapes.
+Run `node workbench-next/build-preview.mjs /absolute/path/to/separate-preview-checkout` from the candidate repository. Review 03 copies the candidate UI, four read-only configuration/landscape dependencies and 53 PNGs covering 39 sprite/state selections, 27 landscape layers and shared clouds. It preserves source paths, cache revisions and PNG bytes; it excludes the old runtime and game routes. Packaging assets does not preload them: the browser requests only the selected content.
 
 The separate checkout's `.openai/hosting.json` contains the exact `project_id` above and `static: {"directory":"dist"}`. Commit/push that checkout to the Site's source repository, package static output with the hosting helper, save the exact pushed revision, and deploy privately. Renew credentials for the same project when needed; never record tokens here or in Git.
 
@@ -23,6 +23,6 @@ Publication confirmed successful on 2026-09-19. Version 1 uses Site source commi
 
 Review 02 publication succeeded on 2026-09-19 at the same live URL. Site source commit: `1e6655173838bfb95fa0c2fd007f12d312777ca8`; saved version: 2; deployment ID: `appgdep_6aae03d0994c819181298034305f7c0c`. Canonical editor implementation commit: `0441baf3ef56aeed19d7de19651a741c025ba40f` on `editor-next`.
 
-Sprite navigation, six states for both characters, stage hazards, frame playback/stepping, full-atlas view, crop comparison, per-frame edits, undo/redo, separate local saves and candidate export. A visible spinner covers image download/decode until the selected frame is drawn. Test/Game and in-scene editing are later milestones.
+Landscape scene/layer/source views, layer transforms and scroll/parallax, six states for both characters, stage hazards, frame playback/stepping, full-atlas view, comparison, per-frame edits, unified undo/redo, separate browser saves and candidate export. A visible loading count covers image download/decode until the selected scene/frame is drawn. Test/Game, gameplay entities and finish editing are later milestones.
 
 The static preview does not have a compatible managed development server. Automated browser visual QA is still pending; do not use a cloud browser on the live Sites URL. User visual review can proceed once publication succeeds.

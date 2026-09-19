@@ -51,7 +51,7 @@ export class AssetSelection {
     this.character = 'claude';
     for (const item of items) {
       if (item.type === 'character' && item.state === 'run') this.characters.set(item.id.split(':')[1], item.id);
-      if (item.type === 'hazard' && !this.stages.has(item.stage)) this.stages.set(item.stage, item.id);
+      if (item.stage && !this.stages.has(item.stage)) this.stages.set(item.stage, item.id);
     }
   }
   remember(item, frame) {

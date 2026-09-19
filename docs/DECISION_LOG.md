@@ -221,3 +221,13 @@ The audit found independent hardcoded canonical-stage lists in the host and inne
 A compact machine checkpoint records selected scope, file/metadata hashes and recovery/approved revision pointers. Selected work must reach verified Git storage before an interrupted handoff; temporary previews are not durable work and remain uncommitted. Prefer normal authenticated Git; the binary-safe object route is a fallback established once, with no encoded-image chat relay. Existing development/main CI and exact-revision Pages gates remain; report them briefly. One deployed integrated-stage user decision remains the artwork approval gate. No routine prompt/candidate/process pre-approval or speculative extra image optimization is added.
 
 Live setup verification also exposed cached scripts after a successful Pages deployment. Registry sync therefore generates content-versioned script URLs in both entry pages, including the registry and its consumers. CI rejects stale versions. These derived HTML updates are part of the same automatic sync, not additional manual image-production steps.
+
+## 2026-09-19 — SA02 Andes landscape stage approved
+
+The user explicitly approved SA02 after deployed integrated-stage review. Lock the FAR, MID and GROUND bytes from reviewed main revision `29176df173eeb78cd0436bfa98a13f22317bb07d`, with exact hashes and CI/Pages evidence in `docs/SA02_LANDSCAPE_QA.md` and `config/asset-workflow-state.json`. Preserve canonical zero offsets and existing gameplay/calibration. SA02 is closed; SA03 Rio de Janeiro is the next stage.
+
+## 2026-09-19 — Apply SA02 workflow lessons before SA03
+
+SA02 completed generation, deployment and explicit visual approval. Its startup exposed repeated terminal-authentication/transfer investigation and excessive setup output. Routine asset startup now uses the focused command route instead of the cumulative specification list and proceeds to generation; connected GitHub publication is the established route for ChatGPT connector sessions, superseding the earlier normal-Git-first startup advice. The active GitHub workflow records the object-publication and push-CI lookup procedure. The handoff generator now emits only the repository and resolved command; following AGENTS.md is automatic.
+
+Existing development/main CI and Pages gates are preserved. Approval-only commits still trigger automatic checks, but unchanged approved images and geometry do not require a second local artwork/browser review or user acceptance. These are narrow execution corrections, not a claim that the earlier conversation-limit warning has been diagnosed or that context limits cannot recur. SA02 artwork, runtime, approval and SA03 production state are unchanged by this update.

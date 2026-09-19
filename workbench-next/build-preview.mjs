@@ -15,12 +15,14 @@ if (!target || target === root || target.startsWith(root + path.sep)) {
 const outputRoot = path.join(target, 'dist');
 const context = {window:{}};
 vm.createContext(context);
-for (const filename of ['game-config.js', 'config-schema.js']) {
+const dependencies=['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js'];
+for (const filename of dependencies) {
   vm.runInContext(await fs.readFile(path.join(root, 'src/js', filename), 'utf8'), context);
 }
 const items = descriptors(context.window.GAME_CONFIG, context.window.GAME_SCHEMA);
 const catalog = JSON.parse(await fs.readFile(path.join(source, 'asset-catalog.json'), 'utf8'));
-const keys = [...new Set(items.map(item => item.asset))];
+const landscapeKeys=Object.values(context.window.GAME_CONFIG.worldProfiles).flatMap(p=>[p.farKey,p.midKey,p.groundKey]);
+const keys = [...new Set([...items.map(item => item.asset),...landscapeKeys,'clouds'])];
 const assets = Object.fromEntries(keys.map(key => [key,catalog.assets[key]]));
 
 async function copy(relative) {
@@ -28,16 +30,16 @@ async function copy(relative) {
   await fs.mkdir(path.dirname(destination), {recursive:true});
   await fs.copyFile(path.join(root, relative), destination);
 }
-for (const filename of ['index.html','app.mjs','model.mjs','style.css','AUDIT.md','PLAN.md']) {
+for (const filename of ['index.html','app.mjs','model.mjs','landscape.mjs','asset-loader.mjs','style.css','AUDIT.md','PLAN.md']) {
   await copy(`workbench-next/${filename}`);
 }
-for (const filename of ['game-config.js','config-schema.js']) await copy(`src/js/${filename}`);
+for (const filename of dependencies) await copy(`src/js/${filename}`);
 for (const sourcePath of Object.values(assets)) {
-  const relative = path.relative(root,path.resolve(source,sourcePath));
+  const relative = path.relative(root,path.resolve(source,sourcePath.split('?')[0]));
   if (!relative.startsWith('assets' + path.sep)) throw new Error('Unexpected asset location');
   await copy(relative);
 }
 await fs.writeFile(path.join(outputRoot,'workbench-next/asset-catalog.json'),JSON.stringify({source:catalog.source,assets},null,2)+'\n');
 await fs.writeFile(path.join(outputRoot,'index.html'),'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C&C Workbench — Design Preview</title><meta http-equiv="refresh" content="0;url=./workbench-next/"><a href="./workbench-next/">Open the C&C editor preview</a></html>\n');
 await fs.writeFile(path.join(target,'README.md'),'# C&C Workbench preview\n\nDerived publication of `claudejones/candcgame`, branch `editor-next`.\nEdit the GitHub source, then run its `workbench-next/build-preview.mjs` against this checkout.\nThis private preview does not replace the GitHub Pages game/editor.\n');
-console.log(`Prepared sprite preview: ${keys.length} images, ${items.length} sprite/state definitions.`);
+console.log(`Prepared Design preview: ${keys.length} images, 9 landscapes and ${items.length} sprite/state definitions. Images load on selection.`);

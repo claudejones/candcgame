@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>C&C · Workbench Next · Sprite review</title>
+  <title>C&C · Workbench Next · Design review</title>
   <link rel="stylesheet" href="./style.css">
   <script defer src="../src/js/game-config.js"></script>
   <script defer src="../src/js/config-schema.js"></script>
+  <script defer src="../src/js/landscape-registry.js"></script>
+  <script defer src="../src/js/landscape-contract.js"></script>
   <script type="module" src="./app.mjs"></script>
 </head>
 <body>
   <header class="topbar">
     <div class="brand"><b>C<span>&</span>C</b><div>AROUND THE WORLD<small>Production workbench</small></div></div>
     <nav aria-label="Workspace mode"><button class="mode active" aria-pressed="true">Design</button><button class="mode" disabled title="Gameplay connection is a later milestone">Test <small>Planned</small></button><button class="mode" disabled title="Gameplay connection is a later milestone">Game <small>Planned</small></button></nav>
-    <div class="review-badge">EDITOR NEXT <span>Review 02</span></div>
+    <div class="review-badge">EDITOR NEXT <span>Review 03</span></div>
   </header>
-  <div class="review-note">Sprite workspace proposal · Working frame and crop tools · Gameplay integration comes later <a href="./PLAN.md">Migration plan ↗</a></div>
+  <div class="review-note">Design preview · Landscapes and sprite tools · Test/Game integration comes later <a href="./PLAN.md">Migration plan ↗</a></div>
   <main class="workspace">
     <aside class="navigator" aria-label="Project assets">
       <div class="section-label">PROJECT</div><h1>Asset studio</h1>
@@ -24,6 +26,8 @@
       </div>
       <section id="stage-panel" class="asset-panel" role="tabpanel" aria-labelledby="stage-tab" hidden>
         <label class="field">Stage<select id="stage"></select></label>
+        <div class="section-label spaced">LANDSCAPE</div>
+        <div id="landscapes" class="asset-list"></div>
         <div class="section-label spaced">HAZARDS <span id="stage-code"></span></div>
         <div id="hazards" class="asset-list"></div>
       </section>
@@ -31,29 +35,41 @@
         <p class="scope-note">Shared across all stages</p>
         <div id="characters" class="asset-list"></div>
       </section>
-      <div class="nav-footer"><span class="status-dot"></span> Approved source images<p>9 available stages · 21 planned</p><a href="./AUDIT.md">Read the functionality audit ↗</a></div>
+      <div class="nav-footer"><span class="status-dot"></span> GitHub source artwork<p>9 available stages · 21 planned</p><a href="./AUDIT.md">Read the functionality audit ↗</a></div>
     </aside>
-    <section class="studio" aria-label="Sprite workspace">
+    <section class="studio" aria-label="Asset workspace">
       <div class="studio-heading"><div><div class="section-label" id="breadcrumb">CHARACTERS / CLAUDE</div><h2 id="asset-title">Run cycle</h2></div><span class="chip" id="asset-scope">GLOBAL CHARACTER</span></div>
       <div id="states" class="state-tabs" aria-label="Character state"></div>
-      <div class="view-toolbar"><div class="segmented" aria-label="Preview view"><button id="frame-view" aria-pressed="true">Frame</button><button id="atlas-view" aria-pressed="false">Full atlas</button></div><label class="check"><input type="checkbox" id="compare"> Compare baseline</label><label class="check"><input type="checkbox" id="bounds" checked> Crop outline</label></div>
+      <div id="landscape-layers" class="state-tabs" aria-label="Layer to edit" hidden>
+        <button id="layer-far" aria-pressed="true">FAR</button><button id="layer-mid" aria-pressed="false">MID</button><button id="layer-ground" aria-pressed="false">GROUND</button>
+      </div>
+      <div class="view-toolbar"><div id="sprite-views" class="segmented" aria-label="Sprite view"><button id="frame-view" aria-pressed="true">Frame</button><button id="atlas-view" aria-pressed="false">Full atlas</button></div><div id="landscape-views" class="segmented" aria-label="Landscape view" hidden><button id="scene-view" aria-pressed="true">Scene</button><button id="layer-view" aria-pressed="false">Layer</button><button id="source-view" aria-pressed="false">Source</button></div><label class="check"><input type="checkbox" id="compare"> Compare baseline</label><label class="check" id="bounds-control"><input type="checkbox" id="bounds" checked> Crop outline</label></div>
       <div id="preview-area" class="preview-area">
         <div class="preview-card baseline-card" hidden><span class="preview-tag">BASELINE</span><canvas id="baseline" width="700" height="700" aria-label="Baseline sprite frame"></canvas></div>
         <div class="preview-card"><span class="preview-tag" id="preview-label">WORKING DRAFT</span><canvas id="preview" width="700" height="700" aria-label="Selected sprite preview"></canvas><div id="loading" role="status">Loading source image…</div><button id="retry" hidden>Retry image</button></div>
       </div>
-      <div class="source-line"><span id="asset-health" role="status">Checking image…</span><span>Source pixels · fixed frame scale</span></div>
-      <section class="animation-dock" aria-label="Animation frames"><div class="playback"><div class="transport"><button id="previous" aria-label="Previous frame">←</button><button id="play">Play frames</button><button id="next" aria-label="Next frame">→</button></div><strong id="frame-label">Frame 1 / 4</strong><label>Preview speed<select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div><div id="filmstrip" class="filmstrip"></div><p id="playback-note" class="muted">Artwork preview. Use Test for actual movement and timing.</p></section>
+      <div class="source-line"><span id="asset-health" role="status">Checking image…</span><span id="preview-context">Source pixels · fixed frame scale</span></div>
+      <section id="scene-tools" class="scene-tools" aria-label="Scene preview controls" hidden>
+        <div class="layer-visibility"><span>Show</span><label class="check"><input type="checkbox" id="visible-far" checked> FAR</label><label class="check"><input type="checkbox" id="visible-mid" checked> MID</label><label class="check"><input type="checkbox" id="visible-ground" checked> GROUND</label><label class="check"><input type="checkbox" id="visible-clouds" checked> Clouds</label><label class="check"><input type="checkbox" id="scene-guides"> Ground guide</label></div>
+        <label class="scroll-control" for="scene-scroll">Scroll preview<input type="range" id="scene-scroll" min="0" max="4800" value="0" step="10"><output id="scroll-value" for="scene-scroll">0 px</output></label>
+        <p class="muted" id="landscape-status"></p>
+      </section>
+      <section id="animation-dock" class="animation-dock" aria-label="Animation frames"><div class="playback"><div class="transport"><button id="previous" aria-label="Previous frame">←</button><button id="play">Play frames</button><button id="next" aria-label="Next frame">→</button></div><strong id="frame-label">Frame 1 / 4</strong><label>Preview speed<select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div><div id="filmstrip" class="filmstrip"></div><p id="playback-note" class="muted">Artwork preview. Use Test for actual movement and timing.</p></section>
     </section>
     <aside class="inspector" aria-label="Frame properties">
-      <div class="section-label">INSPECTOR</div><h2>Frame properties</h2><p class="muted" id="scope">Changes apply to this frame only.</p>
-      <section><h3>Fine crop <span>SOURCE PX</span></h3><div class="crop-grid">
+      <div class="section-label">INSPECTOR</div><h2 id="inspector-title">Frame properties</h2><p class="muted" id="scope">Changes apply to this frame only.</p>
+      <section id="landscape-properties" hidden><h3>Layer transform <span id="editing-layer">FAR</span></h3><div class="crop-grid">
+        <label class="field">Scale multiplier<input type="number" id="layer-scale" min="0.1" max="4" step="0.01"></label><label class="field">Parallax<input type="number" id="layer-parallax" min="0" max="2" step="0.01"></label>
+        <label class="field">Offset X<input type="number" id="layer-x" min="-1920" max="1920" step="1"></label><label class="field">Offset Y<input type="number" id="layer-y" min="-1080" max="1080" step="1"></label>
+      </div><button class="subtle" id="reset-layer">Reset layer to baseline</button><p class="muted" id="transform-note">Visual offsets use scene pixels. The gameplay surface stays at Y = 410.</p></section>
+      <section id="sprite-properties"><h3>Fine crop <span>SOURCE PX</span></h3><div class="crop-grid">
         <label class="field">Left<input type="number" min="0" step="1" id="crop-l"></label><label class="field">Right<input type="number" min="0" step="1" id="crop-r"></label><label class="field">Top<input type="number" min="0" step="1" id="crop-t"></label><label class="field">Bottom<input type="number" min="0" step="1" id="crop-b"></label>
       </div><button class="subtle" id="reset-frame">Reset frame to baseline</button><p class="muted">Crop removes pixels. Image size, anchors and gameplay remain unchanged.</p></section>
-      <section><h3>Source</h3><dl><dt>Frame size</dt><dd id="source-size">—</dd><dt>Frames</dt><dd id="source-frames">—</dd><dt>Image</dt><dd id="source-file">—</dd></dl></section>
-      <section class="next-panel"><h3>Next: scene integration</h3><p>Scale, position, grounding and collision will share a live scene preview in the next Design milestone.</p><p>Test and Game stay on the existing workbench until parity is verified.</p></section>
+      <section><h3>Source</h3><dl><dt id="source-size-label">Frame size</dt><dd id="source-size">—</dd><dt id="source-count-label">Frames</dt><dd id="source-frames">—</dd><dt>Image</dt><dd id="source-file">—</dd></dl></section>
+      <section class="next-panel"><h3>Next: gameplay integration</h3><p>Character grounding, hazard placement, collision and finish scenes are the next Design connections.</p><p>Test and Game remain planned in this review.</p></section>
       <div id="message" role="status" class="message">Candidate draft is separate from your current editor.</div>
     </aside>
   </main>
-  <footer class="savebar"><div><strong id="save-status">No unsaved changes</strong><span id="change-count">0 frames changed from baseline</span></div><div class="save-actions"><button id="undo" disabled>Undo</button><button id="redo" disabled>Redo</button><button id="export">Export candidate crops</button><button class="primary" id="save" disabled>Save candidate draft</button></div></footer>
+  <footer class="savebar"><div><strong id="save-status">No unsaved changes</strong><span id="change-count">0 changes from baseline</span></div><div class="save-actions"><button id="undo" disabled>Undo</button><button id="redo" disabled>Redo</button><button id="export">Export design draft</button><button class="primary" id="save" disabled>Save browser draft</button></div></footer>
 </body>
 </html>
