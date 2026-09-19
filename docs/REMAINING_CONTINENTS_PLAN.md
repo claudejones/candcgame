@@ -14,13 +14,13 @@ The user has approved the stage themes, production scope and workflow direction.
 
 ## Proposed lineup
 
-Themes are approved. Hazard entries are the original proposals with selection issues listed in the catalog; they must not be read as an accepted final hazard lineup. Order: Africa, Asia, Oceania, Antarctica; one stage per production conversation.
+Themes are approved. Africa hazard choices have been resolved by agent research/design review below; their artwork still awaits production and acceptance. The other nine hazard entries remain proposals with flagged selection issues. Order: Africa, Asia, Oceania, Antarctica; one stage per production conversation.
 
 | Key | Theme | Ground hazard 1 | Ground hazard 2 | Flying hazard |
 | --- | --- | --- | --- | --- |
-| AF01 | Tanzania — Serengeti savannah | Termite mound | Fallen acacia log | Lilac-breasted roller |
-| AF02 | Namibia — Sossusvlei dunes | Weathered sandstone block | Dry branch snag | Pale chanting goshawk |
-| AF03 | Morocco — Marrakesh medina | Terracotta storage jar | Produce crate | Replacement pending; pigeons excluded |
+| AF01 | Tanzania — Serengeti savannah | Termite mound | Crested porcupine | Lilac-breasted roller |
+| AF02 | Namibia — Sossusvlei dunes | Curled clay-pan crust plates | Forked dead camelthorn snag | Namaqua sandgrouse |
+| AF03 | Morocco — Marrakesh medina | Terracotta storage jar | Low tagine brazier | White stork; pigeons excluded |
 | AS01 | Japan — Kyoto bamboo foothills | Bamboo bundle | Mossy stone | Japanese white-eye |
 | AS02 | China — Zhangjiajie stone forest | Rock outcrop | Weathered stump | Red-billed blue magpie |
 | AS03 | Thailand — Bangkok riverfront | Market basket | Parked handcart | House swift |
@@ -44,7 +44,7 @@ The user confirmed these requirements on 2026-09-19. They constrain all remainin
 - **Choose for believable scale and readability.** Review the actual 960×540 composite and normal mobile presentation with the characters, nearby architecture and other objects visible. Large features must retain their apparent mass at their intended depth; small creatures must not disappear or become implausibly giant to function as hazards. Frame/canvas dimensions alone are not visible subject size. Prefer a more suitable subject if it cannot read at a credible scale. Keep canonical landscape transforms and gameplay physics unchanged.
 - **Resolve these choices in the focused stage brief.** Record the FAR focal point, MID life detail, local reference, comparison against existing/proposed elements and intended relative size before generation. Carry these fields into the future command packet; check their appearance in the existing composite review. This is agent work within the planned content review and single deployed-stage approval, not an extra user approval gate or another general-purpose QA document.
 
-The initial catalog has not passed that comparison. NA03 already uses pigeons; AF03's rock pigeon is rejected and removed as a generation choice. Its reserved flying filename is now species-neutral until the agent resolves a distinct, suitable replacement. Repeated logs, stones/outcrops and crates/baskets across the initial proposal and existing NA02/SA01/SA02/EU01 hazards need replacement or a demonstrably different design; a local material or color change is insufficient. Also compare swift versus existing swallows, parrot-family choices versus existing macaws/parakeets, and small birds such as the white-eye for credible gameplay scale. These are unresolved selection risks, not claims that those designs passed. Do not generate from the initial lineup unchanged.
+Africa selections now remove the repeated log, stone block, crate and pigeon, with comparisons recorded in each stage brief. The other nine proposed stages have not passed that comparison. NA03 already uses pigeons; AF03's rock pigeon is rejected and removed as a generation choice. Its reserved flying filename is now species-neutral until the agent resolves a distinct, suitable replacement. Repeated logs, stones/outcrops and crates/baskets across the initial proposal and existing NA02/SA01/SA02/EU01 hazards need replacement or a demonstrably different design; a local material or color change is insufficient. Also compare swift versus existing swallows, parrot-family choices versus existing macaws/parakeets, and small birds such as the white-eye for credible gameplay scale. These are unresolved selection risks, not claims that those designs passed. Do not generate from the initial lineup unchanged.
 
 ## Deliverables and filenames
 
@@ -73,7 +73,7 @@ No generated image is accepted on dimensions alone. Inspect ownership, repeat se
 
 ## New-hazard pilot contract
 
-This common direction is approved for the new-asset pilot only. It does not resize or normalize existing approved atlases. Its measured scale/contact/collision results remain unverified until AF01; validate that pilot before applying the contract to the other eleven stages.
+This common direction is approved for the new-asset pilot only. It does not resize or normalize existing approved atlases. Its measured scale/contact/collision results remain unverified until AF01; use AF01 as the first checkpoint of the AF01–AF03 Africa trial before applying lessons to AF02/AF03 and later continents.
 
 Ground atlas:
 - 2172×724 RGBA PNG, two side-by-side 1086×724 cells. GROUND1 occupies the left cell, GROUND2 the right.
@@ -96,23 +96,17 @@ Final per-object scale, fine crop, contact and collision values are measured dur
 
 ## One-time implementation handoff
 
-The current application supports nine stages in more places than the landscape registry. Verified extension points include:
-- src/js/config-schema.js: literal STAGE_IDS and canonical/configuration validation.
-- src/js/game-config.js: world profiles, hazard definitions and finish/stage settings.
-- src/js/dev/asset-navigator.js and src/index.html: continent/stage options.
-- src/js/dev/hazard-editor.js: atlas-path lookup.
-- src/js/game-runtime.js: stage seeds, titles, source loading and legacy reset defaults.
-- scripts/assets.mjs and config/asset-commands.json: existing landscape execution remains available; full-stage and hazard packets report readiness and remain blocked until their prerequisites pass.
-- .github/workflows/production-ci.yml: a literal nine-stage expectation.
-- Saved/imported/exported authoring configurations and packaged/development bootstraps must tolerate registered additions without losing the existing stages.
+The shared setup now registers all 21 stage identities while retaining only the existing nine as playable. `scripts/stage-catalog.cjs` generates `src/js/stage-catalog.js` from the command catalog, proposal, landscape registry and measured `config/stage-releases.json`. Pending entries have no image requests, playable profile or selectable editor stage.
 
-The approved implementation scope is below. Workflow V3 implements bounded delegation, per-file recovery and focused readiness packets. Runtime/editor expansion and hazard validation remain work to complete before new-stage generation:
-1. Introduce a shared stage/asset catalog consumed by the relevant runtime, editor, resolver and validators. Keep content approval, reference readiness, file availability, integration state and user acceptance distinct. Register new stages as pending; no empty or placeholder stage is promoted as playable.
-2. Extend the existing landscape contract/registry beyond its Phase 8 name without duplicating the geometry logic or changing accepted file paths. Promote the validated geometry contract only after its existing gate is satisfied.
-3. Focused full-stage/hazard packets and per-file checkpoints are implemented in Workflow V3. Complete atlas/source-region metadata and animation/contact/collision validators before enabling new hazards; retain the existing publisher and whole-stage review.
-4. Full-stage command resolution is implemented. Complete the production integration path before marking the packet ready; a resolved command is not evidence that generation, hazard QA or the 21-stage runtime is enabled. Keep existing landscape-only commands unchanged.
-5. Replace hardcoded stage counts with catalog-based validation while still explicitly protecting all nine accepted stage records and their assets. Exercise stage selection, loading, reset, save/import/export, hazard inspection, source previews and finish behavior. Preserve gameplay constants and the production/development boundary.
-6. Supply one working, copy-ready AF01 command once prerequisites are satisfied. Pilot the complete new workflow on AF01, including two ground hazards and the flying animation, before repeating it for AF02–AN03.
+Implemented once for all continents:
+1. Catalog-driven new-stage profile/source installation, continent selectors, title/seed mapping, source-preview URLs and complete-stage release validation. Old stage signatures and mechanics stay intact; each new release supplies its own validated signature.
+2. The existing landscape registry and geometry implementation accept pending new-stage paths; no copied geometry engine or renamed accepted asset. Contract promotion remains a separate evidence gate.
+3. Explicit ground-foot and flying-body source anchors shared by preview/gameplay placement, including asymmetric crop and scale. Existing hazards retain their legacy placement. Saved/imported authoring retains old edits and registered additions.
+4. `validate-stage-assets.cjs` reuses the complete PNG integrity checker, then checks atlas alpha, gutters, foot contact and distinct frame bytes. Visual pose/scale/collision/loop judgment is still performed on generated art; a structural pass cannot claim it.
+5. `integrate-stage.mjs` accepts measured release metadata and an eligible explicit command, checks all five hashes, preserves unselected files/metadata and compares unselected ground-cell pixels to Git before integration. Registry sync updates the host and inner renderer together. CI validates active releases and explicitly protects the original nine stages.
+6. Africa is the three-stage trial: **AF01 → AF02 → AF03**. AF01 is the first user-review checkpoint. At most two workers operate within one active stage; this is not three simultaneous stage builds. Reuse setup across the trial and measure totals across all three stages.
+
+The setup tests use clearly synthetic metadata/atlas fixtures; no future-stage artwork, actual gameplay calibration or user acceptance is claimed. Actual reference pixels still need to be retrieved, inspected and attached; their researched source pages/initial image URLs are recorded in the catalog. Direct image downloads returned HTTP 403 or HTML in this preparation environment, so reference readiness remains false. Agents handle retrieval, not the user. Existing Phase 8 dependent calibration/contract promotion also remains pending.
 
 Coordinate the shared catalog with the separately active production-editor redesign. Reuse its agreed integration points when available; this plan is not authorization to merge or replace that editor. Recheck live branches before writes and preserve approved EU03 and concurrent editor work.
 
@@ -152,7 +146,7 @@ Use the single operational procedure in `ASSET_COMMAND_WORKFLOW.md`. One coordin
 
 The coordinator resolves and pins shared art direction, actual reference pixels and source revisions once. Each worker gets only its assigned file packet and permitted output paths, uses an isolated working directory/worktree, and returns a small manifest with hashes, evidence and exceptions. Workers never write the shared registry/state or move shared branch refs. The coordinator verifies results and durable recovery objects before assembling the complete stage. Resume reuses verified files and identifies missing or stale work; it never treats a remembered worker conversation as saved assets.
 
-Use existing image generation and the established connected publisher. There is no new image API runner, copied skill, per-continent setup or user-facing agent-management command. Concurrent image throughput is unmeasured; serialize image calls if necessary while independent preparation/checks overlap. Do not promise a subscription usage percentage. For AF01 record elapsed time, image attempts, repeated setup/context volume and reported usage when available; use the result to decide whether more concurrency helps. Keep summaries short and stop optional optimization after acceptance.
+Use existing image generation and the established connected publisher. There is no new image API runner, copied skill, per-continent setup or user-facing agent-management command. Concurrent image throughput is unmeasured; serialize image calls if necessary while independent preparation/checks overlap. Do not promise a subscription usage percentage. Across AF01–AF03 record elapsed time, image attempts, repeated setup/context volume and reported usage when available; record AF01 separately as the initial checkpoint. Decide whether more concurrency helps only after the complete Africa trial. Keep summaries short and stop optional optimization after acceptance.
 
 ## Gate and readiness record
 
@@ -160,14 +154,14 @@ Use existing image generation and the established connected publisher. There is 
 | --- | --- |
 | Remaining 12 themes, five-file stage scope, visual rules and bounded parallel workflow direction | User approved on 2026-09-19 |
 | New-atlas direction | Approved for AF01 pilot; measured integration still required |
-| Flagged hazard replacements/duplicates and detailed local scene choices | Resolve and review concrete selections; recorded per stage |
+| Africa selections | Agent-selected and locally researched; artwork/visible scale acceptance pending. Other continents still need selection review |
 | All 27 NA/SA/EU landscapes and three continent landscape regressions | Approved/passed |
 | Dependent calibration and formal landscape-contract promotion | Pending |
-| Actual stage-specific visual/species reference packs | Pending agent preparation |
+| Actual stage-specific visual/species reference packs | Source research/initial image URLs recorded for Africa; pixel retrieval/inspection pending |
 | Workflow V3 job checkpoints and focused stage/hazard readiness packets | Implemented; tested separately from image production |
-| Shared 21-stage runtime/editor integration and hazard validators | Pending; generation blocked |
-| AF01 complete-stage production pilot | Pending |
-| Remaining 11 stage sets | Follow a successful AF01 pilot |
+| Shared 21-stage runtime/editor support and hazard validation tooling | Implemented and fixture-tested; no pending stage exposed as playable |
+| Africa AF01–AF03 production trial | Pending; AF01 first checkpoint, two workers within one active stage |
+| Asia, Oceania, Antarctica | Follow evaluation of the complete Africa trial |
 
 Approval authorizes implementation of the scoped plan. It does not pre-approve generated artwork or waive a release gate. The next production step is to resolve the reported prerequisites, not to repeat plan approval or regenerate accepted landscapes. The coordinator supplies one concrete next prompt and any genuinely unresolved content choices; the user supplies no technical checkpoint fields.
 
@@ -190,3 +184,11 @@ Sources below informed geography and selected wildlife. Scenery composition, obj
 - [Australian Antarctic Program — South polar skua](https://www.antarctica.gov.au/about-antarctica/animals/flying-birds/south-polar-skua/)
 - [Australian Antarctic Program — Petrels and shearwaters](https://www.antarctica.gov.au/about-antarctica/animals/flying-birds/petrels-and-shearwaters/)
 - [Australian Antarctic Program — Casey research station](https://www.antarctica.gov.au/antarctic-operations/stations-and-field-locations/casey/)
+
+### Africa research and interpretation
+
+- [Mpala crested porcupine](https://www.mpalalive.org/field_guide/view/crested_porcupine) supports Tanzania-range/savanna suitability and a low quilled body; it is nocturnal, so depict it resting by shaded cover. It replaces the log, not a large charging mammal.
+- [Mpala lilac-breasted roller](https://www.mpalalive.org/field_guide/view/lilac-breasted-roller) supports a solitary open-savanna bird. Preserve its small core body; a colorful subject does not justify giant scale.
+- [Namaqua sandgrouse research](https://royalsocietypublishing.org/rsif/article/20/201/20220878/90364/Structure-and-mechanics-of-water-holding-feathers) supports Namibia/desert-edge suitability; do not describe the appearance reference as an exact Sossusvlei sighting.
+- [UNEP/CMS Morocco](https://www.cms.int/country/morocco) supports white stork as a Morocco-level choice. Keep straight neck/trailing legs and black-and-white wing profile distinct from the existing pink flamingo. The reference photo is from Temara.
+- The thin curled clay-plate obstacle and low tagine brazier are stylized design choices, not claims of measured natural formations or exact museum objects. Reject or revise them if actual-size review fails. No extra user pre-approval is required for routine reference/design refinement.

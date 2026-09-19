@@ -2,6 +2,7 @@
   "use strict";
   if(!window.CC_APP?.isDevelopment)throw new Error("Hazard editor requires development bootstrap");
   const ATLAS={na01Hazards:"../assets/worlds/north-america/NA01_HAZARD_ATLAS.png",na01Bird:"../assets/worlds/north-america/NA01_HAZARD_VULTURE.png",na02Hazards:"../assets/worlds/north-america/NA02_HAZARD_ATLAS.png",na02Bird:"../assets/worlds/north-america/NA02_HAZARD_EAGLE.png",na03Hazards:"../assets/worlds/north-america/NA03_HAZARD_ATLAS.png",na03Bird:"../assets/worlds/north-america/NA03_HAZARD_PIGEONS.png",sa01Hazards:"../assets/worlds/south-america/SA01_OBJECT_ATLAS.png",sa01Bird:"../assets/worlds/south-america/SA01_HAZARD_MACAWS.png",sa02Hazards:"../assets/worlds/south-america/SA02_OBJECT_ATLAS.png",sa02Bird:"../assets/worlds/south-america/SA02_HAZARD_ANDEAN_FLAMINGO.png",sa03Hazards:"../assets/worlds/south-america/SA03_OBJECT_ATLAS.png",sa03Bird:"../assets/worlds/south-america/SA03_HAZARD_TROPICAL_PARAKEETS.png",eu01Hazards:"../assets/worlds/europe/EU01_OBJECT_ATLAS_CRATE.png",eu01Barrel:"../assets/worlds/europe/EU01_HAZARD_ROLLING_BARREL.png",eu01Bird:"../assets/worlds/europe/EU01_HAZARD_AEGEAN_GULLS.png",eu02Hazards:"../assets/worlds/europe/EU02_OBJECT_ATLAS.png",eu02Bird:"../assets/worlds/europe/EU02_HAZARD_SWALLOWS.png",eu03Hazards:"../assets/worlds/europe/EU03_OBJECT_ATLAS.png",eu03Bird:"../assets/worlds/europe/EU03_HAZARD_BATS.png"};
+  if(window.CC_STAGE_CATALOG)Object.assign(ATLAS,window.CC_STAGE_CONTRACT.sources(window.CC_STAGE_CATALOG));
   const runtime=()=>document.getElementById("sharedRuntime")?.contentWindow;
   let activeFrame=0,playing=false,timer=0,lastAdvance=0;
   const selected=()=>{const s=window.CC_DESIGN_SELECTION.current;if(s.type!=="hazard")return null;return{s,h:window.CC_DESIGN_DRAFT.getStage(s.stageId).hazards[s.assetIndex]};};
@@ -15,6 +16,7 @@
     if(!w?.GAME_CONFIG)return false;
     w.GAME_CONFIG.activeWorld=stageId;w.GAME_CONFIG.objectQA.activeIndex[stageId]=index;
     const d=w.GAME_CONFIG.objectQA.defs[stageId][index];
+    if(h.atlas.sourceAnchor)d.sourceAnchor={...h.atlas.sourceAnchor};
     d.scale=h.transform.scale;d.cw=h.collision.w;d.ch=h.collision.h;d.cx=h.collision.x;d.cy=h.collision.y;d.frames=h.atlas.frames;d.fps=h.animation?.fps||w.GAME_CONFIG.objectQA.flying.fps;d.frameCrops=h.animation?.frameCrops;
     if(d.kind==="ground")d.groundOffset=h.gameplayAnchor.adjustmentY+h.transform.offsetY;
     else{w.GAME_CONFIG.objectQA.flying.highClearance=window.GAME_CONFIG.objectQA.flying.highClearance-h.transform.offsetY;w.GAME_CONFIG.objectQA.flying.lowClearance=window.GAME_CONFIG.objectQA.flying.lowClearance-h.transform.offsetY;}

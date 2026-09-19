@@ -99,7 +99,7 @@ test('synthetic ready future state gives jobs only to production commands and ke
   assert.ok(!JSON.stringify(mutation.result.packet).includes('SOSSUSVLEI'));
   mutation=startJob({root:ROOT,statePath,expectedRevision:mutation.state.revision,runId,jobId:'AF01:OBJECT_ATLAS'});
   assert.match(mutation.result.packet.prompt,/Termite mound/);
-  assert.match(mutation.result.packet.prompt,/Fallen acacia log/);
+  assert.match(mutation.result.packet.prompt,/Crested porcupine/);
   assert.deepEqual(mutation.result.packet.selectedHazards,['GROUND1','GROUND2']);
   for(const command of ['publish','resume','verify','approve','rollback']) {
     const packet=futurePacket(command,'stage',stage,[],state,plan);

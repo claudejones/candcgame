@@ -28,6 +28,10 @@ function sync(check = false) {
   if (check) {
     if (!fs.existsSync(file) || fs.readFileSync(file, "utf8") !== expected) throw new Error("Runtime registry is stale. Run node scripts/sync-landscape-registry.cjs");
   } else fs.writeFileSync(file, expected);
+  const stageCatalog=require('./stage-catalog.cjs');
+  const stageFile=path.join(root,'src/js/stage-catalog.js'),stageExpected=stageCatalog.render(stageCatalog.build(root));
+  if(check){if(!fs.existsSync(stageFile)||fs.readFileSync(stageFile,'utf8')!==stageExpected)throw new Error('Stage catalog is stale. Run registry sync');}
+  else fs.writeFileSync(stageFile,stageExpected);
   let runtimePageVersion;
   for (const page of ['src/index.html', 'src/dev.html']) {
     const file = path.join(root, page), current = fs.readFileSync(file, 'utf8');
