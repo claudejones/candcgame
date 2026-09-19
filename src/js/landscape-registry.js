@@ -167,7 +167,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "sa02": {
       "label": "South America — Andes Mountains",
-      "status": "pending",
+      "status": "integrated",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/SA-assets/SA02_BG_DISTANT_ANDES.png",
@@ -178,7 +178,8 @@ window.CC_LANDSCAPE_REGISTRY = {
             2,
             6
           ],
-          "requireOpaque": true
+          "requireOpaque": true,
+          "cacheKey": "f43e5e39"
         },
         "mid": {
           "reference": "assets-original/current-generated/SA-assets/SA02_BG_MID_ANDES.png",
@@ -186,7 +187,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "width": 2172,
           "height": 724,
           "colorType": 6,
-          "requireTransparency": true
+          "requireTransparency": true,
+          "cacheKey": "1d06ee2e"
         },
         "ground": {
           "reference": "assets-original/current-generated/SA-assets/SA02_GROUND_ANDES.png",
@@ -195,7 +197,8 @@ window.CC_LANDSCAPE_REGISTRY = {
           "height": 724,
           "colorType": 6,
           "requireTransparency": true,
-          "sourceSurfaceY": 393
+          "sourceSurfaceY": 393,
+          "cacheKey": "0994eb04"
         }
       }
     },
