@@ -59,5 +59,239 @@
     "na01Objects": "../assets/worlds/north-america/NA01_OBJECT_ATLAS.png",
     "na02Objects": "../assets/worlds/north-america/NA02_OBJECT_ATLAS.png",
     "na03Objects": "../assets/worlds/north-america/NA03_OBJECT_ATLAS.png"
+  },
+  "dimensions": {
+    "eu01Far": {
+      "width": 2048,
+      "height": 682
+    },
+    "eu01Mid": {
+      "width": 2048,
+      "height": 682
+    },
+    "eu01Ground": {
+      "width": 2048,
+      "height": 682
+    },
+    "eu01Hazards": {
+      "width": 1774,
+      "height": 887
+    },
+    "eu01Barrel": {
+      "width": 2172,
+      "height": 724
+    },
+    "eu01Bird": {
+      "width": 2172,
+      "height": 724
+    },
+    "eu02Far": {
+      "width": 2048,
+      "height": 682
+    },
+    "eu02Mid": {
+      "width": 2048,
+      "height": 682
+    },
+    "eu02Ground": {
+      "width": 2048,
+      "height": 682
+    },
+    "eu02Hazards": {
+      "width": 1536,
+      "height": 1024
+    },
+    "eu02Bird": {
+      "width": 2172,
+      "height": 724
+    },
+    "eu03Far": {
+      "width": 2048,
+      "height": 682
+    },
+    "eu03Mid": {
+      "width": 2048,
+      "height": 682
+    },
+    "eu03Ground": {
+      "width": 2048,
+      "height": 682
+    },
+    "eu03Hazards": {
+      "width": 2172,
+      "height": 724
+    },
+    "eu03Bird": {
+      "width": 1774,
+      "height": 887
+    },
+    "sa01Far": {
+      "width": 2172,
+      "height": 724
+    },
+    "sa01Mid": {
+      "width": 2172,
+      "height": 724
+    },
+    "sa01Ground": {
+      "width": 2172,
+      "height": 724
+    },
+    "sa01Hazards": {
+      "width": 1774,
+      "height": 887
+    },
+    "sa01Bird": {
+      "width": 2172,
+      "height": 724
+    },
+    "sa02Far": {
+      "width": 2172,
+      "height": 724
+    },
+    "sa02Mid": {
+      "width": 2172,
+      "height": 724
+    },
+    "sa02Ground": {
+      "width": 2172,
+      "height": 724
+    },
+    "sa02Hazards": {
+      "width": 2172,
+      "height": 724
+    },
+    "sa02Bird": {
+      "width": 2172,
+      "height": 724
+    },
+    "sa03Far": {
+      "width": 2079,
+      "height": 756
+    },
+    "sa03Mid": {
+      "width": 2048,
+      "height": 744
+    },
+    "sa03Ground": {
+      "width": 2172,
+      "height": 724
+    },
+    "sa03Hazards": {
+      "width": 1774,
+      "height": 887
+    },
+    "sa03Bird": {
+      "width": 2172,
+      "height": 724
+    },
+    "finishMarker": {
+      "width": 1211,
+      "height": 1299
+    },
+    "na01Hazards": {
+      "width": 1774,
+      "height": 887
+    },
+    "na01Bird": {
+      "width": 2048,
+      "height": 682
+    },
+    "na02Hazards": {
+      "width": 1774,
+      "height": 887
+    },
+    "na02Bird": {
+      "width": 2048,
+      "height": 682
+    },
+    "na03Hazards": {
+      "width": 1774,
+      "height": 887
+    },
+    "na03Bird": {
+      "width": 2048,
+      "height": 682
+    },
+    "run": {
+      "width": 2800,
+      "height": 1400
+    },
+    "idle": {
+      "width": 1400,
+      "height": 1400
+    },
+    "jump": {
+      "width": 2100,
+      "height": 1400
+    },
+    "slide": {
+      "width": 1400,
+      "height": 1400
+    },
+    "hit": {
+      "width": 2100,
+      "height": 1400
+    },
+    "celebrate": {
+      "width": 2800,
+      "height": 1400
+    },
+    "stars": {
+      "width": 960,
+      "height": 300
+    },
+    "mid": {
+      "width": 2172,
+      "height": 724
+    },
+    "ground": {
+      "width": 2172,
+      "height": 724
+    },
+    "na02Far": {
+      "width": 2172,
+      "height": 724
+    },
+    "na02Mid": {
+      "width": 2172,
+      "height": 724
+    },
+    "na02Ground": {
+      "width": 2172,
+      "height": 724
+    },
+    "na03Far": {
+      "width": 2172,
+      "height": 724
+    },
+    "na03Mid": {
+      "width": 2172,
+      "height": 724
+    },
+    "na03Ground": {
+      "width": 2170,
+      "height": 725
+    },
+    "far": {
+      "width": 2172,
+      "height": 724
+    },
+    "clouds": {
+      "width": 2048,
+      "height": 682
+    },
+    "na01Objects": {
+      "width": 2048,
+      "height": 682
+    },
+    "na02Objects": {
+      "width": 2048,
+      "height": 682
+    },
+    "na03Objects": {
+      "width": 2048,
+      "height": 682
+    }
   }
 }

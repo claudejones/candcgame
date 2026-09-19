@@ -2,7 +2,11 @@
 
 Status: proposed; parallel branch only. The user's approval is required before replacing the working interface.
 
-Current increment: **Review 03 — landscapes connected**, 2026-09-19. The user explicitly prioritized completing Stage landscapes before further cosmetic refinement. FAR/MID/GROUND, scene/layer/source views, visual transforms, repeat/parallax scroll, comparison and combined landscape/sprite draft persistence are implemented. They use current GitHub artwork and the shared production geometry function. A full runtime adapter, gameplay entities, finish scenes, FX, import UI and Test/Game remain pending. See VERIFICATION.md for evidence and limits.
+Current increment: **Review 04 — atlas frame boundaries and preview space**, approved for implementation 2026-09-19. Every character/hazard frame has an editable source rectangle independent of fine crop and neighboring frames. Numeric edits, atlas drag/resize, keyboard nudges, reset, mixed Undo/Redo and v3 browser persistence/export are implemented. Fine crop remains nonnegative; expanding the source rectangle reveals more artwork. Source-image bytes and production defaults are unchanged.
+
+Navigation now owns landscape FAR/MID/GROUND and character states. The center has one compact view/zoom/options/focus toolbar and fits the canvas to both available dimensions. Inspector groups and the frame strip collapse independently; Focus view hides both side panels; choices use a separate layout key. Preview visibility remains outside authored configuration. Browser acceptance is still required.
+
+Previous increment: **Review 03 — landscapes connected**, 2026-09-19. The user explicitly prioritized completing Stage landscapes before further cosmetic refinement. FAR/MID/GROUND, scene/layer/source views, visual transforms, repeat/parallax scroll, comparison and combined landscape/sprite draft persistence are implemented. They use current GitHub artwork and the shared production geometry function. A full runtime adapter, gameplay entities, finish scenes, FX, import UI and Test/Game remain pending. See VERIFICATION.md for evidence and limits.
 
 ## Product direction
 

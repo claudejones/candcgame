@@ -1,5 +1,17 @@
 # Workbench review — verification
 
+## Review 04 — frame boundaries and fitted workspace
+
+Implemented from the user's approved refinement on 2026-09-19. Production/config/artwork remain untouched; this increment changes only `workbench-next/` on its existing upstream baseline.
+
+- 19 tests pass: prior landscape/loading/crop checks plus independent per-frame boundaries, retained character rows/crops, atlas limits, drag transaction undo, v3 exact save/restore (including a crop exceeding the old cell width), atomic invalid-draft rejection, failed writes, v1/v2 recovery without overwriting older keys, and fitting within both available dimensions.
+- Application/module syntax checks and HTML unique-ID/literal-selector checks pass.
+- Rendered original and adjusted barrel frames using the candidate drawing code. Visual inspection confirms frame 3's neighboring sliver can be excluded and frame 4's left edge recovered. The same source pixels and registration are retained. No default calibration or PNG was changed to produce this test.
+- UI: landscape layers and character states moved left; one toolbar; image area fits available width/height; zoom, View options, collapsible inspector/filmstrip, and persistent Focus view.
+
+Browser interaction/responsive screenshots are still pending. Pure geometry tests and offline sprite rendering do not substitute for browser visual acceptance. Review at your normal laptop window: choose an asset, open Edit bounds on atlas, drag and Undo, compare/reset/save/reload, collapse panels/frame strip, and toggle Focus view. Verify both Character and Stage navigation remain usable. Production cutover remains unapproved.
+
+
 ## Review 03 — landscape workspace
 
 Upstream main incorporated through `723a42b88b44ef610da94222babee51e65018402`, including the approved SA02 files and registry. New editor changes remain confined to `workbench-next/`; production files match that upstream snapshot exactly. No artwork was edited.

@@ -16,7 +16,8 @@ for(const file of ['game-config.js','landscape-registry.js','landscape-contract.
 assets=context.window.CC_LANDSCAPE_CONTRACT.sources(context.window.GAME_CONFIG,context.window.CC_LANDSCAPE_REGISTRY,assets);
 for(const source of Object.values(assets))if(!fs.existsSync(path.resolve(__dirname,source.split('?')[0])))throw new Error(`Missing selected asset: ${source}`);
 if (!assets.run || !assets.na01Bird) throw new Error('Incomplete catalog.');
-const output = JSON.stringify({ source: 'game-runtime ASSET_SOURCES + active landscape registry', assets }, null, 2) + '\n';
+const dimensions=Object.fromEntries(Object.entries(assets).map(([key,source])=>{const data=fs.readFileSync(path.resolve(__dirname,source.split('?')[0]));return [key,{width:data.readUInt32BE(16),height:data.readUInt32BE(20)}];}));
+const output = JSON.stringify({ source: 'game-runtime ASSET_SOURCES + active landscape registry', assets, dimensions }, null, 2) + '\n';
 const target = path.join(__dirname, 'asset-catalog.json');
 if (process.argv.includes('--check')) {
   if (fs.readFileSync(target, 'utf8') !== output) throw new Error('Candidate catalog is stale.');

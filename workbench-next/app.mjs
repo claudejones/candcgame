@@ -1,6 +1,8 @@
-import {AssetSelection, descriptors, same, sourceFrame, validateAtlas, STORAGE_KEY} from './model.mjs';
-import {DesignDraft, DESIGN_STORAGE_KEY, LAYERS, landscapeDescriptors, drawLandscape} from './landscape.mjs';
+import {AssetSelection, descriptors, same, validateAtlas, STORAGE_KEY} from './model.mjs';
+import {DESIGN_STORAGE_KEY, LAYERS, landscapeDescriptors, drawLandscape} from './landscape.mjs';
 import {AssetLoader} from './asset-loader.mjs';
+import {FrameDraft,FRAME_STORAGE_KEY,croppedBounds,frameViewBox,drawSprite,hitBounds,dragBounds} from './frame-editor.mjs';
+import {setupWorkspace} from './workspace-ui.mjs';
 
 const $ = id => document.getElementById(id);
 const config = structuredClone(window.GAME_CONFIG);
@@ -9,7 +11,7 @@ contract.apply(config,registry);
 const spriteItems = descriptors(config, window.GAME_SCHEMA);
 const landscapes = landscapeDescriptors(config,registry,contract);
 const items = [...landscapes,...spriteItems];
-const draft = new DesignDraft(spriteItems,landscapes);
+let draft;
 const loader = new AssetLoader();
 const selection = new AssetSelection(items);
 let selected = landscapes[0];
@@ -18,10 +20,13 @@ let sceneImages = {}, ready = false;
 const sceneState = Object.fromEntries(landscapes.map(item=>[item.stage,{layer:'far',view:'scene',scroll:0,
   visible:{far:true,mid:true,ground:true,clouds:true},guides:false}]));
 let catalog;
+let editingBounds=false,drag=null;
+const workspace=setupWorkspace();
 const isLandscape = () => selected.type === 'landscape';
 
 function message(text, error = false) { $('message').textContent = text; $('message').classList.toggle('error', error); }
 function saveState() {
+  if(!draft)return;
   $('save-status').textContent = draft.dirty ? 'Unsaved browser draft changes' : 'Browser draft · no unsaved changes';
   $('change-count').textContent = `${draft.changedFrames} sprite frames · ${draft.changedLayers} landscape layers changed`;
   $('save').disabled = !draft.dirty;
@@ -46,7 +51,13 @@ function navigation() {
   }
   $('stage-code').textContent = stage.toUpperCase();
   $('stage').value = stage;
-  $('landscapes').replaceChildren(button('Stage landscape',isLandscape(),()=>select(`landscape:${stage}`),'FAR · MID · GROUND'));
+  $('landscapes').replaceChildren(...LAYERS.map(layer=>{
+    const node=button(layer.toUpperCase(),isLandscape()&&sceneState[stage].layer===layer,()=>{
+      sceneState[stage].layer=layer;
+      if(isLandscape()){navigation();render();}else select(`landscape:${stage}`);
+      $(`layer-${layer}`).focus();
+    });node.id=`layer-${layer}`;return node;
+  }));
   $('characters').replaceChildren(...['claude','constance'].map(who => button(who === 'claude' ? 'Claude' : 'Constance',
     selected.id.startsWith(`character:${who}:`),()=>select(selection.characterId(who)),'6 animation states')));
   $('hazards').replaceChildren(...spriteItems.filter(item=>item.stage === stage).map(item=>button(item.name,selected.id===item.id,
@@ -54,8 +65,9 @@ function navigation() {
   $('states').hidden = selected.type !== 'character';
   $('states').replaceChildren(...Object.keys(config.state).map(state=>button(state[0].toUpperCase()+state.slice(1),state===selected.state,
     ()=>select(`character:${selected.id.split(':')[1]}:${state}`))));
-  for(const id of ['landscape-layers','landscape-views','landscape-properties','scene-tools'])$(id).hidden=!isLandscape();
-  for(const id of ['sprite-views','sprite-properties','animation-dock','bounds-control'])$(id).hidden=isLandscape();
+  for(const id of ['landscape-views','landscape-properties','scene-tools','landscape-dock','landscape-status'])$(id).hidden=!isLandscape();
+  for(const id of ['sprite-views','sprite-properties','frame-boundaries','bounds-control','playback-note'])$(id).hidden=isLandscape();
+  $('animation-dock').hidden=isLandscape()||selected.frames<2;
   $('preview-area').classList.toggle('landscape-preview',isLandscape());
   $('inspector-title').textContent=isLandscape()?'Layer properties':'Frame properties';
   $('source-size-label').textContent=isLandscape()?'Image size':'Frame size';
@@ -67,6 +79,7 @@ async function select(id) {
   if(!catalog)return;
   selection.remember(selected,frame);
   selected=items.find(item=>item.id===id); if(!selected)throw new Error('Unknown sprite');
+  drag=null;editingBounds=false;
   setPlaying(false);frame=selection.frameFor(id);image=null;sceneImages={};ready=false;
   if(selected.stage)stage=selected.stage;
   selection.remember(selected,frame);
@@ -98,6 +111,8 @@ async function select(id) {
         sceneImages=loaded;$('asset-health').textContent=`Ready · ${entries.length} images decoded`;
       } else {
         validateAtlas(selected,loaded.sprite.naturalWidth,loaded.sprite.naturalHeight);image=loaded.sprite;
+        const size=draft.size(selected.id);
+        if(size.width!==image.naturalWidth||size.height!==image.naturalHeight)throw new Error('Decoded atlas differs from its registered size.');
         $('asset-health').textContent=`Loaded · ${image.naturalWidth} × ${image.naturalHeight} · frames verified`;
         $('play').disabled=selected.frames<2;$('previous').disabled=selected.frames<2;$('next').disabled=selected.frames<2;
       }
@@ -111,25 +126,22 @@ async function select(id) {
   });
 }
 
-function drawFrame(canvas, number, crop) {
-  const r=selected.region;canvas.width=r.w;canvas.height=r.h;
-  const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;ctx.clearRect(0,0,r.w,r.h);
-  if(!image)return;
-  const source=sourceFrame(selected,number,crop);
-  // Fixed source cell coordinates: crops never auto-enlarge the visible sprite.
-  ctx.drawImage(image,source.x,source.y,source.w,source.h,crop.l,crop.t,source.w,source.h);
-  if($('bounds').checked){ctx.strokeStyle='#c9ed8a';ctx.lineWidth=Math.max(2,r.w/230);ctx.strokeRect(crop.l+1,crop.t+1,source.w-2,source.h-2);}
+function activeBounds(number=frame){return drag&&number===frame?drag.current:draft.bounds(selected.id,number);}
+function drawFrame(canvas, number, crop, baseline=false) {
+  const frames=draft.frames[selected.id].map((b,i)=>drag&&i===frame?drag.current:b);
+  drawSprite(canvas,image,selected,number,baseline?draft.frameBaseline[selected.id][number]:activeBounds(number),crop,frameViewBox(selected,frames),$('bounds').checked);
 }
 
 function drawAtlas(canvas) {
   if(!image){canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);return;}
   canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
   const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;ctx.drawImage(image,0,0);
-  const r=selected.region;ctx.lineWidth=Math.max(3,image.naturalWidth/450);
+  const unit=Math.max(2,image.naturalWidth/500);ctx.lineWidth=unit;
   for(let i=0;i<selected.frames;i++){
-    ctx.strokeStyle=i===frame?'#c9ed8a':'#7ec7bb88';ctx.strokeRect(r.x+i*r.w+2,r.y+2,r.w-4,r.h-4);
+    const r=activeBounds(i);ctx.strokeStyle=i===frame?'#c9ed8a':'#7ec7bb88';ctx.strokeRect(r.x,r.y,r.w,r.h);
   }
-  if($('bounds').checked){const crop=sourceFrame(selected,frame,draft.crop(selected.id,frame));ctx.strokeStyle='#ffc987';ctx.strokeRect(crop.x+2,crop.y+2,crop.w-4,crop.h-4);}
+  if($('bounds').checked){const crop=croppedBounds(activeBounds(),draft.crop(selected.id,frame));ctx.strokeStyle='#ffc987';ctx.setLineDash([unit*2,unit*2]);ctx.strokeRect(crop.x,crop.y,crop.w,crop.h);ctx.setLineDash([]);}
+  if(editingBounds){const r=activeBounds();ctx.fillStyle='#c9ed8a';const side=unit*4;for(const x of [r.x,r.x+r.w/2,r.x+r.w])for(const y of [r.y,r.y+r.h/2,r.y+r.h]){if(x===r.x+r.w/2&&y===r.y+r.h/2)continue;ctx.fillRect(x-side/2,y-side/2,side,side);}}
 }
 
 function makeFilmstrip() {
@@ -140,23 +152,34 @@ function makeFilmstrip() {
 }
 
 function render(updateThumbnails = true) {
-  if(isLandscape()){renderLandscape();saveState();return;}
+  if(!draft)return;
+  if(isLandscape()){renderLandscape();saveState();workspace.fit();return;}
   const crop=draft.crop(selected.id,frame);
+  const bounds=activeBounds();
   $('frame-label').textContent=`Frame ${frame+1} / ${selected.frames}`;
   $('scope').textContent=`${selected.name} · ${selected.state || stage.toUpperCase()} · frame ${frame+1} only`;
   for(const side of ['l','r','t','b']){
     const input=$(`crop-${side}`);input.value=crop[side];input.disabled=playing||!image;
-    input.max=(['l','r'].includes(side)?selected.region.w:selected.region.h)-1;
+    input.max=(['l','r'].includes(side)?bounds.w:bounds.h)-1;
   }
+  for(const field of ['x','y','w','h']){$(`frame-${field}`).value=bounds[field];$(`frame-${field}`).disabled=playing||!ready;}
+  $('edit-boundaries').disabled=!ready||playing;
+  $('edit-boundaries').textContent=editingBounds?'Finish editing bounds':'Edit bounds on atlas';$('edit-boundaries').setAttribute('aria-pressed',String(editingBounds));
+  $('preview').classList.toggle('editing',editingBounds&&view==='atlas');
+  $('reset-boundaries').disabled=!ready||playing||same(bounds,draft.frameBaseline[selected.id][frame]);
+  $('source-size').textContent=`${bounds.w} × ${bounds.h}`;
+  const overlaps=draft.frames[selected.id].map((b,i)=>i!==frame&&bounds.x<b.x+b.w&&bounds.x+bounds.w>b.x&&bounds.y<b.y+b.h&&bounds.y+bounds.h>b.y?i+1:null).filter(Boolean);
+  $('boundary-warning').textContent=overlaps.length?`Boundary overlaps frame ${overlaps.join(', ')}. Check the atlas for neighboring artwork.`:'';
   $('reset-frame').disabled=playing||!image||same(crop,selected.crops[frame]);
   const showCompare=$('compare').checked&&view==='frame';
   document.querySelector('.baseline-card').hidden=!showCompare;
   $('compare').disabled=view==='atlas';
   $('preview-label').textContent=view==='atlas'?'SOURCE ATLAS · ACTIVE FRAME':'WORKING DRAFT';
   if(view==='frame')drawFrame($('preview'),frame,crop);else drawAtlas($('preview'));
-  if(showCompare)drawFrame($('baseline'),frame,selected.crops[frame]);
+  if(showCompare)drawFrame($('baseline'),frame,selected.crops[frame],true);
   [...$('filmstrip').children].forEach((b,i)=>{b.setAttribute('aria-pressed',String(i===frame));if(updateThumbnails)drawFrame(b.querySelector('canvas'),i,draft.crop(selected.id,i));});
   saveState();
+  workspace.fit();
 }
 
 function renderLandscape() {
@@ -193,8 +216,8 @@ function renderLandscape() {
   $('preview').setAttribute('aria-label',`${stage.toUpperCase()} ${state.view==='scene'?'combined landscape':layer+' '+state.view}`);
 }
 
-function setPlaying(next) {cancelAnimationFrame(animationRequest);animationRequest=0;playing=next;lastTick=0;$('play').textContent=playing?'Pause frames':'Play frames';$('play').setAttribute('aria-pressed',String(playing));}
-function setFrame(number) {if(isLandscape()||!ready)return;setPlaying(false);frame=(number+selected.frames)%selected.frames;render();}
+function setPlaying(next) {cancelAnimationFrame(animationRequest);animationRequest=0;playing=next;lastTick=0;$('play').textContent=playing?'Pause':'Play';$('play').setAttribute('aria-pressed',String(playing));}
+function setFrame(number) {if(isLandscape()||!ready)return;drag=null;setPlaying(false);frame=(number+selected.frames)%selected.frames;render();}
 function tick(now) {
   if(playing&&image){
     if(!lastTick)lastTick=now;
@@ -217,12 +240,11 @@ for(const scope of ['stage','character']) {
   };
 }
 $('previous').onclick=()=>setFrame(frame-1);$('next').onclick=()=>setFrame(frame+1);
-$('play').onclick=()=>{setPlaying(!playing);render(false);if(playing)animationRequest=requestAnimationFrame(tick);};
-$('frame-view').onclick=()=>{view='frame';$('frame-view').setAttribute('aria-pressed','true');$('atlas-view').setAttribute('aria-pressed','false');render();};
-$('atlas-view').onclick=()=>{view='atlas';$('frame-view').setAttribute('aria-pressed','false');$('atlas-view').setAttribute('aria-pressed','true');render();};
+$('play').onclick=()=>{drag=null;editingBounds=false;setPlaying(!playing);render(false);if(playing)animationRequest=requestAnimationFrame(tick);};
+function spriteView(next){drag=null;view=next;$('frame-view').setAttribute('aria-pressed',String(view==='frame'));$('atlas-view').setAttribute('aria-pressed',String(view==='atlas'));if(next==='frame')editingBounds=false;render();}
+$('frame-view').onclick=()=>spriteView('frame');$('atlas-view').onclick=()=>spriteView('atlas');
 $('compare').onchange=render;$('bounds').onchange=render;
 $('retry').onclick=()=>select(selected.id);
-for(const layer of LAYERS)$(`layer-${layer}`).onclick=()=>{sceneState[stage].layer=layer;render();};
 for(const mode of ['scene','layer','source'])$(`${mode}-view`).onclick=()=>{sceneState[stage].view=mode;render();};
 for(const name of [...LAYERS,'clouds'])$(`visible-${name}`).onchange=()=>{sceneState[stage].visible[name]=$(`visible-${name}`).checked;render();};
 $('scene-guides').onchange=()=>{sceneState[stage].guides=$('scene-guides').checked;render();};
@@ -243,35 +265,76 @@ for(const side of ['l','r','t','b'])$(`crop-${side}`).onchange=()=>{
     message(`Updated frame ${frame+1}. Other frames are unchanged.`);
   }catch(error){message(error.message,true);}render();
 };
-$('reset-frame').onclick=()=>{draft.edit(selected.id,frame,selected.crops[frame]);message('This frame restored to its approved baseline crop.');render();};
+$('reset-frame').onclick=()=>{try{draft.edit(selected.id,frame,selected.crops[frame]);message('This frame restored to its baseline crop.');}catch(error){message(`Reset the frame boundary first: ${error.message}`,true);}render();};
+for(const field of ['x','y','w','h'])$(`frame-${field}`).onchange=()=>{
+  try{
+    const raw=$(`frame-${field}`).value;if(raw.trim()==='')throw new Error('Enter a frame boundary value.');
+    draft.editBounds(selected.id,frame,{...draft.bounds(selected.id,frame),[field]:Number(raw)});
+    message(`Updated frame ${frame+1} boundary. Other frames are unchanged.`);
+  }catch(error){message(error.message,true);}render();
+};
+$('edit-boundaries').onclick=()=>{setPlaying(false);editingBounds=!editingBounds;if(editingBounds)$('frame-boundaries').open=true;spriteView(editingBounds?'atlas':'frame');};
+$('reset-boundaries').onclick=()=>{try{draft.editBounds(selected.id,frame,draft.frameBaseline[selected.id][frame]);message('Frame boundary restored to baseline.');}catch(error){message(`Reset crop first: ${error.message}`,true);}render();};
+function atlasPoint(event){const rect=$('preview').getBoundingClientRect();return {x:(event.clientX-rect.left)*$('preview').width/rect.width,y:(event.clientY-rect.top)*$('preview').height/rect.height};}
+function cancelDrag(){const previous=drag;drag=null;if(previous&&$('preview').hasPointerCapture(previous.pointer))$('preview').releasePointerCapture(previous.pointer);if(previous)render();}
+$('preview').onpointerdown=event=>{
+  if(isLandscape()||!ready||playing||!editingBounds||view!=='atlas'||event.button!==0)return;
+  const point=atlasPoint(event),bounds=draft.bounds(selected.id,frame),rect=$('preview').getBoundingClientRect();
+  const handle=hitBounds(point,bounds,8*$('preview').width/rect.width);if(!handle)return;
+  event.preventDefault();$('preview').focus();$('preview').setPointerCapture(event.pointerId);
+  drag={pointer:event.pointerId,id:selected.id,frame,start:bounds,point,handle,current:bounds};
+};
+$('preview').onpointermove=event=>{
+  if(!drag||event.pointerId!==drag.pointer)return;
+  const point=atlasPoint(event);
+  drag.current=dragBounds(drag.start,drag.handle,point.x-drag.point.x,point.y-drag.point.y,draft.size(drag.id),draft.crop(drag.id,drag.frame));
+  render(false);
+};
+$('preview').onpointerup=event=>{
+  if(!drag||event.pointerId!==drag.pointer)return;
+  const edit=drag;drag=null;$('preview').releasePointerCapture(event.pointerId);
+  try{draft.editBounds(edit.id,edit.frame,edit.current);message(`Updated frame ${edit.frame+1} boundary. Undo restores the complete drag.`);}catch(error){message(error.message,true);}render();
+};
+$('preview').onpointercancel=cancelDrag;$('preview').onlostpointercapture=cancelDrag;
+$('preview').onkeydown=event=>{
+  if(event.key==='Escape'){cancelDrag();return;}
+  if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key)||isLandscape()||!ready)return;
+  event.preventDefault();
+  if(editingBounds&&view==='atlas'){
+    const step=event.shiftKey?10:1,dx=event.key==='ArrowLeft'?-step:event.key==='ArrowRight'?step:0,dy=event.key==='ArrowUp'?-step:event.key==='ArrowDown'?step:0;
+    draft.editBounds(selected.id,frame,dragBounds(draft.bounds(selected.id,frame),'move',dx,dy,draft.size(selected.id),draft.crop(selected.id,frame)));render();
+  }else if(event.key==='ArrowLeft'||event.key==='ArrowRight')setFrame(frame+(event.key==='ArrowLeft'?-1:1));
+};
 function history(direction) {
   const edit=(direction==='undo'?draft.past:draft.future).at(-1);if(!edit)return;
-  setPlaying(false);draft[direction]();
+  cancelDrag();setPlaying(false);draft[direction]();
   selection.remember(selected,frame);
   if(edit.kind==='landscape') {sceneState[edit.stage].layer=edit.layer;sceneState[edit.stage].view='scene';select(`landscape:${edit.stage}`);}
   else {selection.frames.set(edit.id,edit.frame);if(selected.id===edit.id)frame=edit.frame;select(edit.id);}
   message(`${direction==='undo'?'Undid':'Redid'} ${edit.kind==='landscape'?edit.stage.toUpperCase()+' '+edit.layer.toUpperCase():'sprite frame '+(edit.frame+1)} change.`);
 }
 $('undo').onclick=()=>history('undo');$('redo').onclick=()=>history('redo');
-$('save').onclick=()=>{try{draft.save(localStorage);message('Landscapes and sprite crops saved in this browser. GitHub source is unchanged.');}catch(error){message(`Save failed: ${error.message}. Export the design draft to retain your work.`,true);}saveState();};
+$('save').onclick=()=>{try{draft.save(localStorage);message('Frame boundaries, crops and landscapes saved in this browser. GitHub source is unchanged.');}catch(error){message(`Save failed: ${error.message}. Export the design draft to retain your work.`,true);}saveState();};
 $('export').onclick=()=>{
   const blob=new Blob([JSON.stringify(draft.export(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
   a.href=url;a.download='cc-workbench-next-design-draft.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-  message('Exported candidate landscapes and sprite crops. This is not a production game-config import.');
+  message('Exported candidate boundaries, crops and landscapes. This is not a production game-config import.');
 };
-window.addEventListener('beforeunload',event=>{if(draft.dirty){event.preventDefault();event.returnValue='';}});
+window.addEventListener('beforeunload',event=>{if(draft?.dirty){event.preventDefault();event.returnValue='';}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){setPlaying(false);render();}});
 window.addEventListener('keydown',event=>{
-  if(['INPUT','SELECT','TEXTAREA','BUTTON'].includes(document.activeElement?.tagName))return;
+  if(['INPUT','SELECT','TEXTAREA','BUTTON','CANVAS','SUMMARY'].includes(document.activeElement?.tagName))return;
   if(event.key==='ArrowLeft'){event.preventDefault();setFrame(frame-1);}
   if(event.key==='ArrowRight'){event.preventDefault();setFrame(frame+1);}
 });
 
 try{
   const response=await fetch('./asset-catalog.json');if(!response.ok)throw new Error(`Catalog load failed (${response.status})`);catalog=await response.json();
+  draft=new FrameDraft(spriteItems,landscapes,catalog.dimensions);$('export').disabled=false;
   try{
-    const saved=localStorage.getItem(DESIGN_STORAGE_KEY), old=localStorage.getItem(STORAGE_KEY);
-    if(saved){draft.restore(JSON.parse(saved));message('Restored the browser draft: landscapes and sprite crops.');}
+    const saved=localStorage.getItem(FRAME_STORAGE_KEY), previous=localStorage.getItem(DESIGN_STORAGE_KEY), old=localStorage.getItem(STORAGE_KEY);
+    if(saved){draft.restore(JSON.parse(saved));message('Restored the browser draft: frame boundaries, landscapes and sprite crops.');}
+    else if(previous){draft.restore(JSON.parse(previous));message('Recovered the previous Design draft. Save to keep it with frame boundaries; the old copy is retained.');}
     else if(old){draft.restoreSpriteDraft(JSON.parse(old));message('Recovered previous sprite crops. Save browser draft to include landscapes; the old saved copy is retained.');}
   }catch(error){message(`Candidate save was not loaded: ${error.message}. The stored copy is unchanged.`,true);}
   await select(selected.id);
