@@ -359,6 +359,25 @@ h3 span {
   left:calc(50% - 50px);
   z-index:2;
 }
+#loading::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  margin: 0 auto 14px;
+  border: 2px solid #4d655b;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: loading-spin .8s linear infinite;
+}
+#loading.failed::before {
+  display: none;
+}
+@keyframes loading-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #loading::before { animation: none; }
+}
 .source-line {
   display:flex;
   justify-content:space-between;

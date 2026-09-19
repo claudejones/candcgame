@@ -38,7 +38,11 @@ function navigation() {
 
 async function loadImage(source) {
   if(!cache.has(source))cache.set(source,new Promise((resolve,reject)=>{
-    const img=new Image(); img.onload=()=>resolve(img);img.onerror=()=>{cache.delete(source);reject(new Error('Image could not be loaded.'));};img.src=source;
+    const img=new Image();
+    img.onload=async()=>{
+      try{await img.decode();resolve(img);}catch{cache.delete(source);reject(new Error('Image could not be decoded.'));}
+    };
+    img.onerror=()=>{cache.delete(source);reject(new Error('Image could not be loaded.'));};img.src=source;
   }));
   return cache.get(source);
 }
@@ -53,19 +57,21 @@ async function select(id) {
   $('source-frames').textContent=selected.frames;
   $('source-file').textContent=catalog.assets[selected.asset].split('/').pop();
   $('playback-note').textContent=selected.artworkLoop?'Artwork loop only. Jump, Slide and Hit gameplay timing is tested in the runtime.':'Artwork preview. Use Test for actual movement, collisions and timing.';
-  $('loading').hidden=false;$('loading').textContent='Loading source image…';$('retry').hidden=true;$('asset-health').textContent='Loading image…';
+  $('loading').hidden=false;$('loading').classList.remove('failed');$('loading').textContent=`Loading ${selected.name}${selected.state?' · '+selected.state:''}…`;$('retry').hidden=true;$('asset-health').textContent='Loading image…';
+  $('preview-area').setAttribute('aria-busy','true');
   $('play').disabled=true;$('previous').disabled=true;$('next').disabled=true;
   makeFilmstrip();render();
   try {
     const loaded=await loadImage(catalog.assets[selected.asset]);
     if(token!==requestId)return;
     validateAtlas(selected,loaded.naturalWidth,loaded.naturalHeight);image=loaded;
-    $('loading').hidden=true;$('asset-health').textContent=`Loaded · ${image.naturalWidth} × ${image.naturalHeight} · frames verified`;
+    $('asset-health').textContent=`Loaded · ${image.naturalWidth} × ${image.naturalHeight} · frames verified`;
     $('play').disabled=selected.frames<2;$('previous').disabled=selected.frames<2;$('next').disabled=selected.frames<2;
     render();
+    $('loading').hidden=true;$('preview-area').setAttribute('aria-busy','false');
   } catch(error) {
     if(token!==requestId)return;
-    $('loading').textContent=error.message;$('retry').hidden=false;$('asset-health').textContent='Image unavailable · try again';
+    $('loading').classList.add('failed');$('loading').textContent=error.message;$('retry').hidden=false;$('asset-health').textContent='Image unavailable · try again';$('preview-area').setAttribute('aria-busy','false');
   }
 }
 

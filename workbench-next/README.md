@@ -7,6 +7,8 @@ Read [AUDIT.md](AUDIT.md) for findings and [PLAN.md](PLAN.md) for the migration 
 
 ## Review this increment
 
+Private preview publication is authorized as a separate Site. See [PREVIEW_HOSTING.md](PREVIEW_HOSTING.md) for its identity and repeatable packaging. This does not authorize replacing the working editor or deploying this branch over GitHub Pages.
+
 From the repository root, run `python -m http.server 8080`, then open
 `http://localhost:8080/workbench-next/`.
 
@@ -30,6 +32,8 @@ It does not load the old runtime, write the current editor's storage, modify ima
 `node workbench-next/build-catalog.cjs --check`
 
 `node --check workbench-next/app.mjs`
+
+`node workbench-next/build-preview.mjs /absolute/path/to/separate-preview-checkout`
 
 `build-catalog.cjs` reads the existing runtime source map without executing the runtime and writes this candidate's asset catalog. It is a transitional read-only bridge; milestone 2 replaces it with a shared authoritative registry. Run it again when source paths change. Candidate code uses the real config's cell sizes, frame counts and crop defaults.
 
