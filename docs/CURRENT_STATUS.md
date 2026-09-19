@@ -60,7 +60,7 @@ The first NA03 recovery deployment used image-attachment proxy copies that had b
 
 The one-time, project-wide Phase 8 workflow-support setup is complete: temporary candidate/review workspaces are ignored, `config/phase8-landscapes.json` is the machine-readable stage registry, PNG validation is registry-driven, and `scripts/phase8-stage-qa.py` produces compact technical evidence plus isolated, duplicated-wrap and canonical composite previews. Production CI validates every registry stage marked `integrated` or `approved`. The same setup already covers SA01–SA03 and EU01–EU03 and must not be repeated per continent.
 
-The next production step is SA01 under the integrated-stage workflow in a fresh conversation. SA02 and SA03 follow one stage at a time, with a final South America continent regression after all three stage approvals.
+SA01 FAR/MID/GROUND has passed internal registry-driven PNG validation, isolated-layer review, duplicated-wrap review and the canonical 960x540/Y410 composite with zero uncovered pixels. The accepted validation assets are mapped into the development Design/Test/Game build with content-hash cache keys. SA01 is integrated and awaiting its explicit deployed-stage user approval; it remains pending until the user responds `APPROVED`. Do not begin SA02 in the SA01 conversation.
 
 Current pilot QA evidence: NA01's yellow legacy seam, red rendered GROUND surface and cyan rendered MID base coincide at canonical Y=410, so the cyan guide (drawn last) visually covers the other two. This is expected alignment, not a missing ground guide. Legacy NA02 retains separated calibration values, so its three evidence lines remain visibly distinct.
 

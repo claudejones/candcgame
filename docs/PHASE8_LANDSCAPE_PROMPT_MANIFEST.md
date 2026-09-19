@@ -144,6 +144,8 @@ Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets pas
 
 - Reference: `assets-original/current-generated/SA-assets/SA01_BG_DISTANT_AMAZON.png`
 - Candidate: `assets/phase8-validation/south-america/SA01_BG_DISTANT_AMAZON.png`
+- Status: INTEGRATED — deployed-stage approval pending
+- Candidate SHA-256: `cbe232ba047d06634a9949f8498b9546efecb45eccaed548a054b85ca933039a`
 - Layer directive: FAR
 - Stage lock: Preserve the vast layered Amazon canopy, winding pale-blue river channels, humid blue-green distant hills and atmospheric jungle depth. Retain the dense emerald palette and tiny distant bird accents only if they remain subtle background detail; do not add close trunks, vines or gameplay terrain.
 
@@ -151,6 +153,8 @@ Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets pas
 
 - Reference: `assets-original/current-generated/SA-assets/SA01_BG_MID_AMAZON.png`
 - Candidate: `assets/phase8-validation/south-america/SA01_BG_MID_AMAZON.png`
+- Status: INTEGRATED — deployed-stage approval pending
+- Candidate SHA-256: `253ec4cd9beec3e6f6ea6fcdaa417fc3afbc8a2474d11668535b3bab39d773ab`
 - Layer directive: MID
 - Stage lock: Preserve the tall tropical trees, hanging vines, palms, broad leaves, red floral accents, layered undergrowth and dense dark-green jungle silhouette. Retain controlled transparent canopy openings; do not add distant hills, sky, river or the running trail.
 
@@ -158,6 +162,8 @@ Continent status: COMPLETE — NA01, NA02 and NA03 FAR/MID/GROUND stage sets pas
 
 - Reference: `assets-original/current-generated/SA-assets/SA01_GROUND_AMAZON.png`
 - Candidate: `assets/phase8-validation/south-america/SA01_GROUND_AMAZON.png`
+- Status: INTEGRATED — deployed-stage approval pending
+- Candidate SHA-256: `3ca40ce6a3164d1d330fc18d5d56df42488aab0989055c5bf129066fe214a795`
 - Layer directive: GROUND
 - Stage lock: Preserve the dark jungle-soil running edge, tangled roots, rounded stones, vines, ferns and tropical ground plants. Keep rich continuous earthy depth below the surface without swallowing the MID foliage; do not add tree canopies or water.
 
