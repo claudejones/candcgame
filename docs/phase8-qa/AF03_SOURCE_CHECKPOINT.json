@@ -1,0 +1,24 @@
+{
+  "stageId": "AF03",
+  "status": "working",
+  "recoveryNote": "Recovered FAR bytes preserved. Other four assets were not produced in the recovered workspace. Inspected reference packet is being restored before generation.",
+  "recoveredAssets": {
+    "FAR": {
+      "path": "assets/worlds/africa/AF03_BG_DISTANT_MARRAKESH.png",
+      "sha256": "5fdeabcba60cdb3b998c2cb0584c57c02581ddb0f8f18e0be9c0e18d6730c0a4",
+      "width": 2172,
+      "height": 724,
+      "technicalValidation": "passed: validate-phase8-pngs.js --stage af03 --layer far",
+      "compositionReview": "pending"
+    }
+  },
+  "remaining": [
+    "MID",
+    "GROUND",
+    "OBJECT_ATLAS",
+    "FLYING"
+  ],
+  "readiness": "not-asset-ready",
+  "calibration": "pending",
+  "release": "pending"
+}
