@@ -6,6 +6,7 @@ const CONFIG=window.GAME_CONFIG;
 
 const landscapeParams=new URLSearchParams(window.location.search);
 const PHASE8_PILOT=landscapeParams.get("landscapes")==="phase8"||landscapeParams.get("phase8Pilot")==="na01";
+if(window.CC_STAGE_CATALOG)window.CC_STAGE_CONTRACT.install(CONFIG,window.CC_STAGE_CATALOG,window.CC_LANDSCAPE_REGISTRY);
 if(PHASE8_PILOT){
  window.CC_LANDSCAPE_CONTRACT.apply(CONFIG,window.CC_LANDSCAPE_REGISTRY);
  CONFIG.activeWorld="na01";
@@ -48,17 +49,7 @@ class Scene{
  constructor(ctx,a){
    this.ctx=ctx;this.a=a;this.worldX=0;this.cloudX=0;
    // WORLD_LAYER_CONTRACT_01 — authored geometry, never inferred from alpha.
-   this.geometry={
-     na01:{midBaseSourceY:621,groundSurfaceSourceY:393},
-     na02:{midBaseSourceY:621,groundSurfaceSourceY:393},
-     na03:{midBaseSourceY:621,groundSurfaceSourceY:393},
-     sa01:{midBaseSourceY:621,groundSurfaceSourceY:393},
-     sa02:{midBaseSourceY:621,groundSurfaceSourceY:393},
-     sa03:{midBaseSourceY:621,groundSurfaceSourceY:393},
-     eu01:{midBaseSourceY:621,groundSurfaceSourceY:393},
-     eu02:{midBaseSourceY:621,groundSurfaceSourceY:393},
-     eu03:{midBaseSourceY:621,groundSurfaceSourceY:393}
-   };
+   this.geometry=Object.fromEntries(Object.keys(CONFIG.worldProfiles).map(id=>[id,{midBaseSourceY:621,groundSurfaceSourceY:393}]));
  }
  profile(){return CONFIG.worldProfiles[CONFIG.activeWorld]}
  update(dt,worldScrolls=true){
@@ -271,7 +262,8 @@ class CharacterMachine{
    const gScale=baseScale*p.groundScale;
    const gY=p.seamY-CONFIG.worldContract.groundSurfaceSourceY*gScale+p.groundYOffset;
    const renderedSurfaceY=gY+CONFIG.worldContract.groundSurfaceSourceY*gScale;
-   const footY=renderedSurfaceY+CONFIG.worldContract.footOffset[this.character]+(p.characterGrounding?.[this.character]||0);
+   const gameplaySurfaceY=window.CC_LANDSCAPE_CONTRACT.gameplaySurface(CONFIG,window.CC_LANDSCAPE_REGISTRY,CONFIG.activeWorld,renderedSurfaceY);
+   const footY=gameplaySurfaceY+CONFIG.worldContract.footOffset[this.character]+(p.characterGrounding?.[this.character]||0);
    const dy=footY-dh+this.y+stateRenderY;
 
    ctx.drawImage(img,sx+cL,sy+cT,srcW,srcH,
@@ -332,22 +324,23 @@ class ObjectQA{
  active(){const list=this.defs();if(!list.length)return null;const i=Math.max(0,Math.min(list.length-1,CONFIG.objectQA.activeIndex[CONFIG.activeWorld]||0));return list[i]}
  setIndex(delta){const list=this.defs();if(!list.length)return;let i=CONFIG.objectQA.activeIndex[CONFIG.activeWorld]||0;i=(i+delta+list.length)%list.length;CONFIG.objectQA.activeIndex[CONFIG.activeWorld]=i;CONFIG.objectQA.flying.t=0;CONFIG.objectQA.flying.frame=0;CONFIG.objectQA.flying.travel=0;this.collisionLatched=false;this.lastCollision=false;}
  resetPass(){CONFIG.objectQA.scrollOrigin=this.scene.worldX;CONFIG.objectQA.x=650;CONFIG.objectQA.flying.t=0;CONFIG.objectQA.flying.travel=0;this.collisionLatched=false;this.lastCollision=false;this.lastObjectBox=null;}
- surfaceY(){return this.scene.lastRenderedSurfaceY ?? CONFIG.worldProfiles[CONFIG.activeWorld].seamY}
+ surfaceY(){return window.CC_LANDSCAPE_CONTRACT.gameplaySurface(CONFIG,window.CC_LANDSCAPE_REGISTRY,CONFIG.activeWorld,this.scene.lastRenderedSurfaceY ?? CONFIG.worldProfiles[CONFIG.activeWorld].seamY)}
  screenX(drawW){if(!CONFIG.objectQA.scrollWithWorld)return CONFIG.objectQA.x;const q=CONFIG.objectQA;const phase=((this.scene.worldX-q.scrollOrigin)%q.loopDistance+q.loopDistance)%q.loopDistance;let x=q.x-phase;while(x < -drawW-30)x += q.loopDistance;return x;}
  characterBox(){const who=this.character.character,state=this.character.state,q=CONFIG.objectQA.characterCollision[who][state];const vw=Math.max(8,this.character.last.visibleWidth||40),vh=Math.max(8,this.character.last.visibleHeight||70);const top=this.character.last.visibleTop??((this.character.last.footY??this.surfaceY())-vh);const w=vw*q.w,h=vh*q.h,cx=(this.character.last.centerX??CONFIG.characterX)+(q.x*vw),y=top+(vh-h)*(1-q.y);return{x:cx-w/2,y,w,h};}
  intersects(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
- update(dt){const d=this.active();if(!d)return;const f=CONFIG.objectQA.flying;if(d.frames){if(Number.isInteger(d.previewFrame))f.frame=Math.max(0,Math.min(d.frames-1,d.previewFrame));else{f.t+=dt;f.frame=Math.floor(f.t*f.fps)%d.frames;}}if(d.kind==="flying"&&CONFIG.objectQA.scrollWithWorld)f.travel+=dt*f.speed;}
+ update(dt){const d=this.active();if(!d)return;const f=CONFIG.objectQA.flying;if(d.frames){if(Number.isInteger(d.previewFrame))f.frame=Math.max(0,Math.min(d.frames-1,d.previewFrame));else{f.t+=dt;f.frame=Math.floor(f.t*(d.fps||f.fps))%d.frames;}}if(d.kind==="flying"&&CONFIG.objectQA.scrollWithWorld)f.travel+=dt*f.speed;}
  draw(){
    const d=this.active();if(!d)return;const img=this.a[d.atlasKey];if(!img)return;const baseScale=CONFIG.canvas.w/CONFIG.worldContract.sourceW;const s=baseScale*d.scale;let sw,sh,sx,sy,dw,dh,dx,dy,anchorY,cL=0,cR=0,cT=0,cB=0;
-   const crop=d.crop||(d.crop={l:0,r:0,t:0,b:0});
+   const crop=d.frameCrops?.[CONFIG.objectQA.flying.frame]||d.crop||(d.crop={l:0,r:0,t:0,b:0});
    if(d.kind==="flying"){
      const cellW=d.frameW,cellH=d.frameH;cL=Math.max(0,Math.min(cellW-1,crop.l||0));cR=Math.max(0,Math.min(cellW-1-cL,crop.r||0));cT=Math.max(0,Math.min(cellH-1,crop.t||0));cB=Math.max(0,Math.min(cellH-1-cT,crop.b||0));
-     sw=Math.max(1,cellW-cL-cR);sh=Math.max(1,cellH-cT-cB);sx=CONFIG.objectQA.flying.frame*cellW+cL;sy=cT;dw=sw*s;dh=sh*s;const f=CONFIG.objectQA.flying;let centerX=CONFIG.objectQA.scrollWithWorld?CONFIG.objectQA.x-f.travel:CONFIG.objectQA.x;while(centerX < -dw-30){f.travel-=CONFIG.objectQA.loopDistance;centerX=CONFIG.objectQA.x-f.travel;}dx=centerX-dw/2;const clearance=f.mode==="high"?f.highClearance:f.lowClearance;anchorY=this.surfaceY()-clearance;dy=anchorY-dh/2;
+     sw=Math.max(1,cellW-cL-cR);sh=Math.max(1,cellH-cT-cB);sx=CONFIG.objectQA.flying.frame*cellW+cL;sy=cT;dw=sw*s;dh=sh*s;const f=CONFIG.objectQA.flying;let centerX=CONFIG.objectQA.scrollWithWorld?CONFIG.objectQA.x-f.travel:CONFIG.objectQA.x;while(centerX < -dw-30){f.travel-=CONFIG.objectQA.loopDistance;centerX=CONFIG.objectQA.x-f.travel;}dx=centerX-dw/2;const clearance=f.mode==="high"?f.highClearance:f.lowClearance;anchorY=this.surfaceY()-clearance+(d.flightOffsetY?.[f.mode]||0);dy=anchorY-dh/2;
    }else{
      const r=d.rect||{x:0,y:0,w:d.frameW,h:d.frameH},rw=d.frames&&d.frameW?d.frameW:r.w,rh=d.frames&&d.frameH?d.frameH:r.h;cL=Math.max(0,Math.min(rw-1,crop.l||0));cR=Math.max(0,Math.min(rw-1-cL,crop.r||0));cT=Math.max(0,Math.min(rh-1,crop.t||0));cB=Math.max(0,Math.min(rh-1-cT,crop.b||0));sw=Math.max(1,rw-cL-cR);sh=Math.max(1,rh-cT-cB);sx=(d.frames&&d.frameW?CONFIG.objectQA.flying.frame*d.frameW:r.x)+cL;sy=(d.frames&&d.frameH?0:r.y)+cT;dw=sw*s;dh=sh*s;const centerX=this.screenX(dw);const groundOffset=Number.isFinite(d.groundOffset)?d.groundOffset:CONFIG.objectQA.groundOffset;anchorY=this.surfaceY()+groundOffset;dx=centerX-dw/2;dy=anchorY-dh;
    }
-   this.ctx.drawImage(img,sx,sy,sw,sh,Math.round(dx),Math.round(dy),Math.round(dw),Math.round(dh));
-   const cw=Math.max(4,dw*d.cw),ch=Math.max(4,dh*d.ch),cx=dx+(dw-cw)/2+d.cx*dw,cy=d.kind==="flying"?dy+(dh-ch)/2+d.cy*dh:anchorY-ch+d.cy*dh;const ob={x:cx,y:cy,w:cw,h:ch},cb=this.characterBox();
+   if(d.sourceAnchor){const placed=window.CC_STAGE_CONTRACT.place(d,dx+dw/2,anchorY,crop,s,{dx,dy});dx=placed.dx;dy=placed.dy;}
+   window.CC_STAGE_CONTRACT.drawSprite(this.ctx,img,{sx,sy,sw,sh,dx,dy,dw,dh},d.flipX);
+   const cw=Math.max(4,dw*d.cw),ch=Math.max(4,dh*d.ch),cx=dx+(dw-cw)/2+(d.flipX?-d.cx:d.cx)*dw,cy=d.kind==="flying"?dy+(dh-ch)/2+d.cy*dh:anchorY-ch+d.cy*dh;const ob={x:cx,y:cy,w:cw,h:ch},cb=this.characterBox();
    // A new pass is detected when the looping hazard jumps from off-screen left back to the right.
    if(this.lastObjectBox && ob.x>this.lastObjectBox.x+CONFIG.objectQA.loopDistance*.5)this.collisionLatched=false;
    this.lastObjectBox=ob;this.lastCharacterBox=cb;this.lastCollision=this.intersects(ob,cb);
@@ -366,7 +359,7 @@ class GameplayDirector{
  cfg(){return CONFIG.spawnDirector}
  finishCfg(){return CONFIG.finish.stages[CONFIG.activeWorld]}
  rand(){this.rngState=(1664525*this.rngState+1013904223)>>>0;return this.rngState/4294967296}
- stageSeed(){const offsets={na01:101,na02:202,na03:303,sa01:401,sa02:502,sa03:603,eu01:701,eu02:802,eu03:903};return (this.cfg().seed+(offsets[CONFIG.activeWorld]||0))>>>0}
+ stageSeed(){const offsets={na01:101,na02:202,na03:303,sa01:401,sa02:502,sa03:603,eu01:701,eu02:802,eu03:903};return (this.cfg().seed+(window.CC_STAGE_CATALOG?.stages[CONFIG.activeWorld]?.seedOffset??offsets[CONFIG.activeWorld]??0))>>>0}
  phaseAt(t){const s=this.cfg();if(t<s.phases.warmup[1])return "WARM-UP";if(t<s.phases.establish[1])return "ESTABLISH";if(t<s.phases.develop[1])return "DEVELOP";if(t<s.phases.pressure[1])return "PRESSURE";if(t<s.phases.signature[1])return "SIGNATURE";return "FINISH RELEASE"}
  defs(){return CONFIG.objectQA.defs[CONFIG.activeWorld]||[]}
  buildPlan(){
@@ -420,9 +413,11 @@ class GameplayDirector{
      add(75.2,g1,null,"normal","EU01 SIGNATURE");add(77.1,b,"high","normal","EU01 SIGNATURE");add(79.1,g2,null,"normal","EU01 SIGNATURE");add(81.2,b,"low","fast","EU01 SIGNATURE");add(83.4,g1,null,"normal","EU01 SIGNATURE");
    }else if(CONFIG.activeWorld==="eu02"){
      add(75.2,b,"high","normal","EU02 SIGNATURE");add(77.2,g1,null,"normal","EU02 SIGNATURE");add(79.3,g2,null,"normal","EU02 SIGNATURE");add(81.4,b,"low","fast","EU02 SIGNATURE");add(83.5,g1,null,"normal","EU02 SIGNATURE");
-   }else{
+   }else if(CONFIG.activeWorld==="eu03"){
      add(75.2,g2,null,"normal","EU03 SIGNATURE");add(77.2,b,"low","fast","EU03 SIGNATURE");add(79.3,g1,null,"normal","EU03 SIGNATURE");add(81.4,b,"high","normal","EU03 SIGNATURE");add(83.5,g2,null,"normal","EU03 SIGNATURE");
    }
+   const newStage=window.CC_STAGE_CATALOG?.stages[CONFIG.activeWorld];
+   if(newStage&&!newStage.legacy){for(const e of newStage.release.signature){add(e.time,({GROUND1:g1,GROUND2:g2,FLYING:b})[e.hazard],e.mode||null,e.speedClass,CONFIG.activeWorld.toUpperCase()+' SIGNATURE');}}
    s.planned=this.enforceReactionQueue(plan.sort((a,b)=>a.time-b.time));s.nextPlanIndex=0;
  }
  enforceReactionQueue(plan){
@@ -468,16 +463,17 @@ class GameplayDirector{
  }
  geom(inst,d){
    const baseScale=CONFIG.canvas.w/CONFIG.worldContract.sourceW,sc=baseScale*d.scale;let sw,sh,sx,sy,dw,dh,dx,dy,anchorY;
-   const crop=d.crop||(d.crop={l:0,r:0,t:0,b:0});
+   const crop=d.frameCrops?.[inst.frame]||d.crop||(d.crop={l:0,r:0,t:0,b:0});
    if(d.kind==="flying"){
      const cellW=d.frameW,cellH=d.frameH,cL=Math.max(0,Math.min(cellW-1,crop.l||0)),cR=Math.max(0,Math.min(cellW-1-cL,crop.r||0)),cT=Math.max(0,Math.min(cellH-1,crop.t||0)),cB=Math.max(0,Math.min(cellH-1-cT,crop.b||0));
      sw=Math.max(1,cellW-cL-cR);sh=Math.max(1,cellH-cT-cB);sx=inst.frame*cellW+cL;sy=cT;dw=sw*sc;dh=sh*sc;dx=inst.x-dw/2;
-     const clearance=inst.mode==="high"?CONFIG.objectQA.flying.highClearance:CONFIG.objectQA.flying.lowClearance;anchorY=this.objectQA.surfaceY()-clearance;dy=anchorY-dh/2;
+     const clearance=inst.mode==="high"?CONFIG.objectQA.flying.highClearance:CONFIG.objectQA.flying.lowClearance;anchorY=this.objectQA.surfaceY()-clearance+(d.flightOffsetY?.[inst.mode]||0);dy=anchorY-dh/2;
    }else{
      const r=d.rect||{x:0,y:0,w:d.frameW,h:d.frameH},rw=d.frames&&d.frameW?d.frameW:r.w,rh=d.frames&&d.frameH?d.frameH:r.h,cL=Math.max(0,Math.min(rw-1,crop.l||0)),cR=Math.max(0,Math.min(rw-1-cL,crop.r||0)),cT=Math.max(0,Math.min(rh-1,crop.t||0)),cB=Math.max(0,Math.min(rh-1-cT,crop.b||0));
      sw=Math.max(1,rw-cL-cR);sh=Math.max(1,rh-cT-cB);sx=(d.frames&&d.frameW?inst.frame*d.frameW:r.x)+cL;sy=(d.frames&&d.frameH?0:r.y)+cT;dw=sw*sc;dh=sh*sc;dx=inst.x-dw/2;anchorY=this.objectQA.surfaceY()+(Number.isFinite(d.groundOffset)?d.groundOffset:CONFIG.objectQA.groundOffset);dy=anchorY-dh;
    }
-   const cw=Math.max(4,dw*d.cw),ch=Math.max(4,dh*d.ch),cx=dx+(dw-cw)/2+d.cx*dw,cy=d.kind==="flying"?dy+(dh-ch)/2+d.cy*dh:anchorY-ch+d.cy*dh;
+   if(d.sourceAnchor){const placed=window.CC_STAGE_CONTRACT.place(d,inst.x,anchorY,crop,sc,{dx,dy});dx=placed.dx;dy=placed.dy;}
+   const cw=Math.max(4,dw*d.cw),ch=Math.max(4,dh*d.ch),cx=dx+(dw-cw)/2+(d.flipX?-d.cx:d.cx)*dw,cy=d.kind==="flying"?dy+(dh-ch)/2+d.cy*dh:anchorY-ch+d.cy*dh;
    return{sw,sh,sx,sy,dw,dh,dx,dy,box:{x:cx,y:cy,w:cw,h:ch}};
  }
  triggerHit(inst){
@@ -495,7 +491,16 @@ class GameplayDirector{
    // Each authored event has a target arrival time at the player. Spawn early enough that
    // the COMPLETE hazard starts beyond the right edge, then naturally enters the viewport.
    // Off-screen queued hazards do not consume the on-screen visibility budget.
-   while(s.nextPlanIndex<s.planned.length){
+   const expansionStage=window.CC_STAGE_CATALOG?.stages[CONFIG.activeWorld];
+   if(expansionStage&&!expansionStage.legacy){
+     // Mixed-speed hazards have different off-screen travel times. Dispatch each
+     // new-stage event when due, retaining the authored arrival order in planned.
+     for(const ev of s.planned){
+       if(ev.spawned)continue;
+       const d=this.defs().find(x=>x.name===ev.defName);if(!d)continue;
+       if(ev.time-s.elapsed<=this.travelLeadFor(ev,d)){this.spawnPlanned(ev);s.nextPlanIndex++;}
+     }
+   }else while(s.nextPlanIndex<s.planned.length){
      const ev=s.planned[s.nextPlanIndex],d=this.defs().find(x=>x.name===ev.defName);
      if(!d){s.nextPlanIndex++;continue}
      const lead=this.travelLeadFor(ev,d);
@@ -503,7 +508,7 @@ class GameplayDirector{
      else break;
    }
    const cb=this.objectQA.characterBox();
-   for(const inst of s.active){const d=this.defFor(inst);if(!d)continue;const speed=this.speedFor(inst,d);if(d.frames){inst.t+=dt;inst.frame=Math.floor(inst.t*CONFIG.objectQA.flying.fps)%d.frames;}if(canAdvance)inst.x-=speed*dt;const g=this.geom(inst,d);if(this.objectQA.intersects(g.box,cb))this.triggerHit(inst);if(!inst.passed&&inst.x<CONFIG.characterX-90){inst.passed=true;s.cleared++;}}
+   for(const inst of s.active){const d=this.defFor(inst);if(!d)continue;const speed=this.speedFor(inst,d);if(d.frames){inst.t+=dt;inst.frame=Math.floor(inst.t*(d.fps||CONFIG.objectQA.flying.fps))%d.frames;}if(canAdvance)inst.x-=speed*dt;const g=this.geom(inst,d);if(this.objectQA.intersects(g.box,cb))this.triggerHit(inst);if(!inst.passed&&inst.x<CONFIG.characterX-90){inst.passed=true;s.cleared++;}}
    s.active=s.active.filter(inst=>inst.x>-260);
    if(this.recoveryT<=0&&this.character.state==="hit"&&!s.failed)this.character.setState("run");
    if(s.elapsed>=s.stageDuration){this.finished=true;s.enabled=false;s.lastEvent=`FINISH — ${CONFIG.worldProfiles[CONFIG.activeWorld].label}`;this.character.setState("celebrate");}
@@ -516,12 +521,12 @@ class GameplayDirector{
  drawHUD(){
    const s=this.cfg(),hud=document.getElementById("gameplayHud"),fail=document.getElementById("runFail"),actions=document.getElementById("gameplayActions");if(!hud)return;const active=s.enabled||this.finished||s.failed||s.elapsed>0;hud.classList.toggle("hidden",!active);fail&&fail.classList.toggle("show",!!s.failed);actions&&actions.classList.toggle("show",!!s.enabled&&!s.failed&&!this.finished);const jumpBtn=document.getElementById("gameJumpBtn"),slideBtn=document.getElementById("gameSlideBtn"),pauseBtn=document.getElementById("gamePauseBtn");if(jumpBtn)jumpBtn.disabled=!!s.paused;if(slideBtn)slideBtn.disabled=!!s.paused;if(pauseBtn){pauseBtn.textContent=s.paused?"RESUME":"PAUSE";pauseBtn.setAttribute("aria-label",s.paused?"Resume game":"Pause game");}if(!active)return;
    const lifeHud=document.getElementById("lifeHud");if(lifeHud){const lives=Math.max(0,Math.min(s.startingLives,s.lives));lifeHud.classList.remove("lives-3","lives-2","lives-1","lives-0");lifeHud.classList.add("lives-"+lives);const hearts=lifeHud.querySelectorAll(".life-heart");const pulseMap={3:"1.35s",2:".90s",1:".58s"};hearts.forEach((h,i)=>{const isFull=i<lives;const isActive=isFull&&i===lives-1;h.classList.toggle("full",isFull);h.classList.toggle("empty",!isFull);h.classList.toggle("active",isActive);h.style.setProperty("--pulse-speed",pulseMap[lives]||"1.35s");});}
-   const stageTitle=document.getElementById("stageHudTitle");if(stageTitle){const stageMap={na01:"NORTH AMERICA • STAGE 1",na02:"NORTH AMERICA • STAGE 2",na03:"NORTH AMERICA • STAGE 3",sa01:"SOUTH AMERICA • STAGE 1",sa02:"SOUTH AMERICA • STAGE 2",sa03:"SOUTH AMERICA • STAGE 3",eu01:"EUROPE • STAGE 1",eu02:"EUROPE • STAGE 2",eu03:"EUROPE • STAGE 3"};stageTitle.textContent=stageMap[CONFIG.activeWorld]||"AROUND THE WORLD";}
+   const stageTitle=document.getElementById("stageHudTitle");if(stageTitle){const stageMap={na01:"NORTH AMERICA • STAGE 1",na02:"NORTH AMERICA • STAGE 2",na03:"NORTH AMERICA • STAGE 3",sa01:"SOUTH AMERICA • STAGE 1",sa02:"SOUTH AMERICA • STAGE 2",sa03:"SOUTH AMERICA • STAGE 3",eu01:"EUROPE • STAGE 1",eu02:"EUROPE • STAGE 2",eu03:"EUROPE • STAGE 3"};stageTitle.textContent=stageMap[CONFIG.activeWorld]||window.CC_STAGE_CATALOG?.stages[CONFIG.activeWorld]?.label.toUpperCase()||"AROUND THE WORLD";}
    const marker=document.getElementById("progressMarker");if(marker){const p=Math.max(0,Math.min(1,s.elapsed/Math.max(.001,s.stageDuration)));marker.style.left=`${4.8+p*86.95}%`;marker.classList.toggle("claude",this.character.character==="claude");marker.classList.toggle("constance",this.character.character==="constance");}
  }
  draw(){
    const s=this.cfg();if(!s.enabled&&!this.finished&&!s.failed&&s.elapsed<=0){this.drawHUD();return}
-   for(const inst of s.active){const d=this.defFor(inst);if(!d)continue;const img=this.a[d.atlasKey],g=this.geom(inst,d);this.ctx.drawImage(img,g.sx,g.sy,g.sw,g.sh,Math.round(g.dx),Math.round(g.dy),Math.round(g.dw),Math.round(g.dh));if(CONFIG.objectQA.showBounds){this.ctx.save();this.ctx.strokeStyle=inst.hit?"#ff4d4d":"#43e07b";this.ctx.lineWidth=2;this.ctx.strokeRect(g.box.x+.5,g.box.y+.5,g.box.w,g.box.h);this.ctx.restore();}}
+   for(const inst of s.active){const d=this.defFor(inst);if(!d)continue;const img=this.a[d.atlasKey],g=this.geom(inst,d);window.CC_STAGE_CONTRACT.drawSprite(this.ctx,img,g,d.flipX);if(CONFIG.objectQA.showBounds){this.ctx.save();this.ctx.strokeStyle=inst.hit?"#ff4d4d":"#43e07b";this.ctx.lineWidth=2;this.ctx.strokeRect(g.box.x+.5,g.box.y+.5,g.box.w,g.box.h);this.ctx.restore();}}
    const fg=this.finishGeom();if(fg&&fg.dx<CONFIG.canvas.w+200&&fg.dx+fg.dw>-200){this.ctx.drawImage(fg.img,Math.round(fg.dx),Math.round(fg.dy),Math.round(fg.dw),Math.round(fg.dh));this.lastFinishBox=fg.trigger;if(CONFIG.finish.showBounds){this.ctx.save();this.ctx.strokeStyle="#ffd646";this.ctx.lineWidth=2;this.ctx.strokeRect(fg.trigger.x+.5,fg.trigger.y+.5,fg.trigger.w,fg.trigger.h);this.ctx.restore();}}
    this.drawHUD();
  }
@@ -752,7 +757,7 @@ class Lab{
    const buildFullQASnapshot=()=>({
      schema:"CC_WORLD_QA_SNAPSHOT_12",
      activeContext:{
-       continent:CONFIG.activeWorld.startsWith("eu")?"europe":(CONFIG.activeWorld.startsWith("sa")?"south-america":"north-america"),
+       continent:window.CC_STAGE_CATALOG?.stages[CONFIG.activeWorld]?.continent||(CONFIG.activeWorld.startsWith("eu")?"europe":(CONFIG.activeWorld.startsWith("sa")?"south-america":"north-america")),
        stage:CONFIG.activeWorld,
        character:this.character.character,
        characterState:this.character.state,
@@ -862,10 +867,10 @@ class Lab{
      if(Number.isFinite(c.worldSpeed))CONFIG.worldSpeed=c.worldSpeed;
 
      if(w.contract)CONFIG.worldContract=JSON.parse(JSON.stringify(w.contract));
-     if(w.profiles)CONFIG.worldProfiles=JSON.parse(JSON.stringify(w.profiles));
+     if(w.profiles)CONFIG.worldProfiles=window.CC_STAGE_CONTRACT.mergeKnown(CONFIG.worldProfiles,w.profiles);
 
      if(h.definitions){
-       CONFIG.objectQA.defs=JSON.parse(JSON.stringify(h.definitions));
+       CONFIG.objectQA.defs=window.CC_STAGE_CONTRACT.mergeKnown(CONFIG.objectQA.defs,h.definitions);
        const legacyGround=(h.qaPreview&&Number.isFinite(h.qaPreview.groundOffset))?h.qaPreview.groundOffset:((h.qaPreview&&Number.isFinite(h.qaPreview.legacyGroundOffsetFallback))?h.qaPreview.legacyGroundOffsetFallback:CONFIG.objectQA.groundOffset);
        Object.values(CONFIG.objectQA.defs).flat().forEach(d=>{if(d.kind==="ground"&&!Number.isFinite(d.groundOffset))d.groundOffset=legacyGround;});
      }
@@ -890,10 +895,13 @@ class Lab{
        if(snap.gameplay.spawnDirector){const incoming=JSON.parse(JSON.stringify(snap.gameplay.spawnDirector));incoming.enabled=false;incoming.paused=false;incoming.active=[];incoming.distance=0;incoming.elapsed=0;CONFIG.spawnDirector={...CONFIG.spawnDirector,...incoming};}
        if(snap.gameplay.hitRecovery)CONFIG.hitRecovery={...CONFIG.hitRecovery,...JSON.parse(JSON.stringify(snap.gameplay.hitRecovery))};
        if(snap.gameplay.actions)CONFIG.actions={...CONFIG.actions,...JSON.parse(JSON.stringify(snap.gameplay.actions))};
-       if(snap.gameplay.finish)CONFIG.finish=JSON.parse(JSON.stringify(snap.gameplay.finish));
+       if(snap.gameplay.finish)CONFIG.finish={...CONFIG.finish,...JSON.parse(JSON.stringify(snap.gameplay.finish)),stages:window.CC_STAGE_CONTRACT.mergeKnown(CONFIG.finish.stages,snap.gameplay.finish.stages||{})};
      }
      for(const p of Object.values(CONFIG.worldProfiles)){p.characterGrounding=p.characterGrounding||{claude:0,constance:0};if(!Number.isFinite(p.characterGrounding.claude))p.characterGrounding.claude=0;if(!Number.isFinite(p.characterGrounding.constance))p.characterGrounding.constance=0;}
      for(const list of Object.values(CONFIG.objectQA.defs)){for(const d of list){d.crop=d.crop||{l:0,r:0,t:0,b:0};}}
+     for(const [id,p] of Object.entries(CONFIG.worldProfiles))if(window.CC_LANDSCAPE_CONTRACT.active(window.CC_LANDSCAPE_REGISTRY,id)&&(PHASE8_PILOT||!window.CC_STAGE_CATALOG?.stages[id]?.legacy)&&(p.landscapeContract!==window.CC_LANDSCAPE_REGISTRY.contractVersion||p.sourceW!==2172)){
+       const grounding={...p.characterGrounding};window.CC_LANDSCAPE_CONTRACT.applyStage(CONFIG,window.CC_LANDSCAPE_REGISTRY,id);p.characterGrounding=grounding;
+     }
      if(ctx.stage&&CONFIG.worldProfiles[ctx.stage])CONFIG.activeWorld=ctx.stage;
      if(ctx.character&&(ctx.character==="claude"||ctx.character==="constance"))this.character.character=ctx.character;
      const restoredState=(ctx.characterState&&CONFIG.state[ctx.characterState])?ctx.characterState:"run";
@@ -1007,6 +1015,9 @@ class Lab{
     $("qaLayersAllOn").onclick=()=>{WORLD_LAYER_QA.far=true;WORLD_LAYER_QA.clouds=true;WORLD_LAYER_QA.mid=true;WORLD_LAYER_QA.ground=true;syncWorldLayerQA();redrawWorld();};
     syncWorldLayerQA();
 
+   const stageOptions=Object.entries(CONFIG.worldProfiles).map(([id,p])=>{const o=document.createElement('option');o.value=id;o.textContent=p.label;return o;});
+   $('stageSelect').replaceChildren(...stageOptions);
+   if(window.CC_STAGE_CATALOG){const groups=window.CC_STAGE_CONTRACT.continents(window.CC_STAGE_CATALOG,CONFIG);$('continentSelect').replaceChildren(...groups.map(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.label;return o;}));}
    $("stageSelect").onchange=()=>{
      CONFIG.activeWorld=$("stageSelect").value;
      this.scene.worldX=0;
@@ -1276,7 +1287,7 @@ class Lab{
    $("cloudOpacityValue").textContent=CONFIG.worldContract.cloudOpacity.toFixed(2);
    $("claudeGlobalFootValue").textContent=CONFIG.worldContract.footOffset.claude;$("constanceGlobalFootValue").textContent=CONFIG.worldContract.footOffset.constance;
    const stageGround=CONFIG.worldProfiles[CONFIG.activeWorld].characterGrounding||(CONFIG.worldProfiles[CONFIG.activeWorld].characterGrounding={claude:0,constance:0});$("claudeStageFootValue").textContent=stageGround.claude||0;$("constanceStageFootValue").textContent=stageGround.constance||0;
-   $("continentSelect").value=CONFIG.activeWorld.startsWith("eu")?"europe":(CONFIG.activeWorld.startsWith("sa")?"south-america":"north-america");
+   $("continentSelect").value=window.CC_STAGE_CATALOG?.stages[CONFIG.activeWorld]?.continent||(CONFIG.activeWorld.startsWith("eu")?"europe":(CONFIG.activeWorld.startsWith("sa")?"south-america":"north-america"));
    const hazardCrop=(this.objectQA.active()?.crop)||{l:0,r:0,t:0,b:0};$("hazardCropValue").textContent=`${hazardCrop.l||0} / ${hazardCrop.r||0} / ${hazardCrop.t||0} / ${hazardCrop.b||0}`;
    $("guidesToggle").textContent=CONFIG.worldContract.showGuides?"Hide Calibration Guides":"Show Calibration Guides";
    const hq=CONFIG.objectQA.characterCollision[who][state];
@@ -1411,7 +1422,10 @@ let ASSET_SOURCES={
  na02Objects:"../assets/worlds/north-america/NA02_OBJECT_ATLAS.png",
  na03Objects:"../assets/worlds/north-america/NA03_OBJECT_ATLAS.png"
 };
-if(PHASE8_PILOT)ASSET_SOURCES=window.CC_LANDSCAPE_CONTRACT.sources(CONFIG,window.CC_LANDSCAPE_REGISTRY,ASSET_SOURCES);
+if(window.CC_STAGE_CATALOG)Object.assign(ASSET_SOURCES,window.CC_STAGE_CONTRACT.sources(window.CC_STAGE_CATALOG));
+if(PHASE8_PILOT){
+ ASSET_SOURCES=window.CC_LANDSCAPE_CONTRACT.sources(CONFIG,window.CC_LANDSCAPE_REGISTRY,ASSET_SOURCES);
+}
 window.CC_ASSET_SOURCES=Object.freeze({...ASSET_SOURCES});
 const store=new AssetStore(ASSET_SOURCES);
 

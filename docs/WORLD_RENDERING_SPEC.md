@@ -189,4 +189,4 @@ Before integration:
 - visual landscape offsets do not redefine gameplay ground;
 - source anchors and runtime mapping are documented and testable.
 
-Existing NA/SA/EU landscape values remain compatibility evidence until their assets are regenerated against this contract.
+Approved NA/SA/EU landscape values and hashes are the accepted artwork baseline for this contract. Dependent character/hazard calibration and full contract promotion remain pending; they do not authorize reopening approved landscape artwork.

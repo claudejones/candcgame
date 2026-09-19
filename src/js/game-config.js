@@ -36,27 +36,27 @@ window.GAME_CONFIG={
      na01:[
        {name:"Cactus",kind:"ground",atlasKey:"na01Hazards",rect:{x:0,y:0,w:887,h:887},scale:.22,groundOffset:28,cw:.32,ch:.66,cx:0,cy:-.08},
        {name:"Cattle Bones",kind:"ground",atlasKey:"na01Hazards",rect:{x:887,y:0,w:887,h:887},scale:.26,groundOffset:30,cw:.62,ch:.22,cx:0,cy:-.06},
-       {name:"Vulture",kind:"flying",atlasKey:"na01Bird",frameW:512,frameH:682,frames:4,scale:.34,cw:.56,ch:.38,cx:-.08,cy:.12}
+       {name:"Vulture",kind:"flying",atlasKey:"na01Bird",frameW:512,frameH:682,frames:4,scale:.285,cw:.56,ch:.38,cx:-.08,cy:.12}
      ],
      na02:[
-       {name:"Fallen Log",kind:"ground",atlasKey:"na02Hazards",rect:{x:0,y:0,w:887,h:887},scale:.22,groundOffset:36,cw:.70,ch:.30,cx:0,cy:-.14},
+       {name:"Fallen Log",kind:"ground",atlasKey:"na02Hazards",rect:{x:0,y:0,w:887,h:887},scale:.215,groundOffset:35.697238,cw:.70,ch:.30,cx:0,cy:-.14},
        {name:"Boulder",kind:"ground",atlasKey:"na02Hazards",rect:{x:887,y:0,w:887,h:887},scale:.20,groundOffset:36,cw:.52,ch:.52,cx:.04,cy:-.12},
-       {name:"Eagle",kind:"flying",atlasKey:"na02Bird",frameW:512,frameH:682,frames:4,scale:.34,cw:.60,ch:.46,cx:-.06,cy:.06}
+       {name:"Eagle",kind:"flying",atlasKey:"na02Bird",frameW:512,frameH:682,frames:4,scale:.31,cw:.60,ch:.46,cx:-.06,cy:.06}
      ],
      na03:[
        {name:"Fire Hydrant",kind:"ground",atlasKey:"na03Hazards",rect:{x:0,y:0,w:887,h:887},scale:.22,groundOffset:32,cw:.32,ch:.70,cx:-.08,cy:-.02},
        {name:"Street Barricade",kind:"ground",atlasKey:"na03Hazards",rect:{x:887,y:0,w:887,h:887},scale:.18,groundOffset:26,cw:.60,ch:.64,cx:-.02,cy:0},
-       {name:"Pigeons",kind:"flying",atlasKey:"na03Bird",frameW:512,frameH:682,frames:4,scale:.32,cw:.68,ch:.54,cx:0,cy:.06}
+       {name:"Pigeons",kind:"flying",atlasKey:"na03Bird",frameW:512,frameH:682,frames:4,scale:.265,cw:.68,ch:.54,cx:0,cy:.06}
      ],
      sa01:[
        {name:"Giant Root / Stump",kind:"ground",atlasKey:"sa01Hazards",rect:{x:0,y:0,w:887,h:887},scale:.17,groundOffset:36,cw:.58,ch:.64,cx:0,cy:-.08,crop:{l:0,r:0,t:0,b:0}},
        {name:"Tropical Plant Cluster",kind:"ground",atlasKey:"sa01Hazards",rect:{x:887,y:0,w:887,h:887},scale:.20,groundOffset:38,cw:.74,ch:.42,cx:0,cy:-.08,crop:{l:0,r:0,t:0,b:0}},
-       {name:"Macaws",kind:"flying",atlasKey:"sa01Bird",frameW:543,frameH:724,frames:4,scale:.30,cw:.52,ch:.48,cx:.02,cy:.08,crop:{l:0,r:0,t:0,b:0}}
+       {name:"Macaws",kind:"flying",atlasKey:"sa01Bird",frameW:543,frameH:724,frames:4,scale:.265,cw:.52,ch:.48,cx:.02,cy:.08,crop:{l:0,r:0,t:0,b:0}}
      ],
      sa02:[
        {name:"Rock Outcrop",kind:"ground",atlasKey:"sa02Hazards",rect:{x:0,y:0,w:1086,h:724},scale:.22,groundOffset:26,cw:.46,ch:.52,cx:.16,cy:-.08,crop:{l:0,r:0,t:0,b:0}},
        {name:"Llama / Alpaca",kind:"ground",atlasKey:"sa02Hazards",rect:{x:1086,y:0,w:1086,h:724},scale:.26,groundOffset:28,cw:.26,ch:.64,cx:-.06,cy:-.06,crop:{l:0,r:0,t:0,b:0}},
-       {name:"Andean Flamingo",kind:"flying",atlasKey:"sa02Bird",frameW:543,frameH:724,frames:4,scale:.34,cw:.64,ch:.40,cx:.04,cy:.04,crop:{l:0,r:0,t:0,b:0}}
+       {name:"Andean Flamingo",kind:"flying",atlasKey:"sa02Bird",frameW:543,frameH:724,frames:4,scale:.33,cw:.64,ch:.40,cx:.04,cy:.04,crop:{l:0,r:0,t:0,b:0}}
      ],
      sa03:[
        {name:"Beach Vendor Cart",kind:"ground",atlasKey:"sa03Hazards",rect:{x:0,y:0,w:887,h:887},scale:.20,groundOffset:40,cw:.42,ch:.64,cx:-.02,cy:-.04,crop:{l:0,r:3,t:0,b:0}},
@@ -64,19 +64,19 @@ window.GAME_CONFIG={
        {name:"Tropical Parakeets",kind:"flying",atlasKey:"sa03Bird",frameW:543,frameH:724,frames:4,scale:.30,cw:.60,ch:.52,cx:0,cy:.04,crop:{l:0,r:0,t:0,b:0}}
      ],
      eu01:[
-       {name:"Market Crates & Baskets",kind:"ground",atlasKey:"eu01Hazards",rect:{x:0,y:0,w:1774,h:887},scale:.18,groundOffset:34,cw:.68,ch:.54,cx:0,cy:-.05,crop:{l:0,r:0,t:0,b:0}},
+       {name:"Market Crates & Baskets",kind:"ground",atlasKey:"eu01Hazards",rect:{x:0,y:0,w:1774,h:887},scale:.118,groundOffset:32.218785,cw:.68,ch:.54,cx:0,cy:-.05,crop:{l:0,r:0,t:0,b:0}},
        {name:"Rolling Wooden Barrel",kind:"ground",atlasKey:"eu01Barrel",frameW:543,frameH:724,frames:4,scale:.20,groundOffset:34,cw:.62,ch:.58,cx:0,cy:-.05,crop:{l:0,r:0,t:0,b:0}},
        {name:"Aegean Gulls",kind:"flying",atlasKey:"eu01Bird",frameW:543,frameH:724,frames:4,scale:.30,cw:.62,ch:.48,cx:0,cy:.05,crop:{l:0,r:0,t:0,b:0}}
      ],
      eu02:[
-       {name:"Paris Café Table & Chairs",kind:"ground",atlasKey:"eu02Hazards",rect:{x:0,y:0,w:1536,h:512},scale:.20,groundOffset:34,cw:.70,ch:.58,cx:0,cy:-.05,crop:{l:0,r:0,t:0,b:0}},
-       {name:"Paris Bicycle",kind:"ground",atlasKey:"eu02Hazards",rect:{x:0,y:512,w:1536,h:512},scale:.20,groundOffset:34,cw:.70,ch:.50,cx:0,cy:-.05,crop:{l:0,r:0,t:0,b:0}},
+       {name:"Paris Café Table & Chairs",kind:"ground",atlasKey:"eu02Hazards",rect:{x:0,y:0,w:1536,h:512},scale:.14,groundOffset:33.761326,cw:.70,ch:.58,cx:0,cy:-.05,crop:{l:0,r:0,t:0,b:0}},
+       {name:"Paris Bicycle",kind:"ground",atlasKey:"eu02Hazards",rect:{x:0,y:512,w:1536,h:512},scale:.15,groundOffset:33.248619,cw:.70,ch:.50,cx:0,cy:-.05,crop:{l:0,r:0,t:0,b:0}},
        {name:"European Swallows",kind:"flying",atlasKey:"eu02Bird",frameW:543,frameH:724,frames:4,scale:.30,cw:.62,ch:.48,cx:0,cy:.05,crop:{l:0,r:0,t:0,b:0}}
      ],
      eu03:[
-       {name:"Gaudí Mosaic Bench",kind:"ground",atlasKey:"eu03Hazards",rect:{x:0,y:0,w:1086,h:724},scale:.20,groundOffset:34,cw:.74,ch:.48,cx:0,cy:-.05,crop:{l:0,r:0,t:0,b:0}},
+       {name:"Gaudí Mosaic Bench",kind:"ground",atlasKey:"eu03Hazards",rect:{x:0,y:0,w:1086,h:724},scale:.175,groundOffset:33.116022,cw:.74,ch:.48,cx:0,cy:-.05,crop:{l:0,r:0,t:0,b:0}},
        {name:"Barcelona Drinking Fountain",kind:"ground",atlasKey:"eu03Hazards",rect:{x:1086,y:0,w:1086,h:724},scale:.20,groundOffset:34,cw:.42,ch:.72,cx:0,cy:-.04,crop:{l:0,r:0,t:0,b:0}},
-       {name:"Mediterranean Bats",kind:"flying",atlasKey:"eu03Bird",frameW:443.5,frameH:887,frames:4,scale:.30,cw:.62,ch:.50,cx:0,cy:.04,crop:{l:0,r:0,t:0,b:0}}
+       {name:"Mediterranean Bats",kind:"flying",atlasKey:"eu03Bird",frameW:443.5,frameH:887,frames:4,scale:.23,cw:.62,ch:.50,cx:0,cy:.04,crop:{l:0,r:0,t:0,b:0}}
      ]
    },
    flying:{mode:"high",highClearance:68,lowClearance:18,speed:170,fps:8,frame:0,t:0,travel:0}

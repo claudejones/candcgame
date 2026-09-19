@@ -20,7 +20,7 @@ const items = [...landscapes,...spriteItems];
 let draft,projectWorkflow,actorScene,calibrationUI;
 const loader = new AssetLoader();
 const selection = new AssetSelection(items);
-const stageSelection = new StageSelection(landscapes,registry);
+const stageSelection = new StageSelection(landscapes,registry,window.CC_STAGE_CATALOG);
 let selected = landscapes[0];
 let stage = selected.stage, frame = 0, view = 'scene', playing = false, image = null, lastTick = 0, animationRequest = 0;
 let sceneImages = {}, ready = false;
@@ -150,7 +150,7 @@ async function select(id) {
 function activeBounds(number=frame){return drag&&number===frame?drag.current:draft.bounds(selected.id,number);}
 function drawFrame(canvas, number, crop, baseline=false) {
   const frames=draft.frames[selected.id].map((b,i)=>drag&&i===frame?drag.current:b);
-  drawSprite(canvas,image,selected,number,baseline?draft.frameBaseline[selected.id][number]:activeBounds(number),crop,frameViewBox(selected,frames),$('bounds').checked);
+  drawSprite(canvas,image,selected,number,baseline?draft.frameBaseline[selected.id][number]:activeBounds(number),crop,frameViewBox(selected,frames),$('bounds').checked,(baseline?draft.placementBaseline:draft.placement)[selected.id]?.flipX);
 }
 
 function drawAtlas(canvas) {
@@ -197,7 +197,7 @@ function render(updateThumbnails = true) {
   const showCompare=$('compare').checked&&view==='frame';
   document.querySelector('.baseline-card').hidden=!showCompare;
   $('compare').disabled=view==='atlas';
-  $('preview-label').textContent=view==='atlas'?'SOURCE ATLAS · ACTIVE FRAME':'WORKING DRAFT';
+  $('preview-label').textContent=view==='atlas'?'SOURCE ATLAS · ORIGINAL PIXELS':selected.type==='hazard'?(draft.placement[selected.id].flipX?'GAMEPLAY FACING · MIRRORED':'GAMEPLAY FACING · SOURCE DIRECTION'):'WORKING DRAFT';
   if(view==='frame')drawFrame($('preview'),frame,crop);else drawAtlas($('preview'));
   if(showCompare)drawFrame($('baseline'),frame,selected.crops[frame],true);
   [...$('filmstrip').children].forEach((b,i)=>{b.setAttribute('aria-pressed',String(i===frame));if(updateThumbnails)drawFrame(b.querySelector('canvas'),i,draft.crop(selected.id,i));});

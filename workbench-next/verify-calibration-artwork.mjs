@@ -7,10 +7,12 @@ import {createRequire} from 'node:module';
 import {descriptors} from './model.mjs';
 import {landscapeDescriptors} from './landscape.mjs';
 import {ProjectDraft,projectProvenance} from './project.mjs';
+import {hazardGeometry} from './scene-model.mjs';
+import {effectivePlacement} from './calibration-settings.mjs';
 import {measureArtwork,optimizeHazard,analyzeHazard,meetsProfile,makeSequence} from './calibration-engine.mjs';
 const {createCanvas,loadImage}=createRequire(path.resolve(process.argv[2]||'.','package.json'))('@napi-rs/canvas');
 const context={window:{}};vm.createContext(context);
-for(const f of ['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js'])vm.runInContext(fs.readFileSync(new URL('../src/js/'+f,import.meta.url),'utf8'),context);
+for(const f of JSON.parse(fs.readFileSync(new URL('./source-files.json',import.meta.url),'utf8')))vm.runInContext(fs.readFileSync(new URL('../'+f,import.meta.url),'utf8'),context);
 const w=context.window,config=w.GAME_CONFIG;w.CC_LANDSCAPE_CONTRACT.apply(config,w.CC_LANDSCAPE_REGISTRY);
 const items=descriptors(config,w.GAME_SCHEMA),stages=landscapeDescriptors(config,w.CC_LANDSCAPE_REGISTRY,w.CC_LANDSCAPE_CONTRACT),catalog=JSON.parse(fs.readFileSync(new URL('./asset-catalog.json',import.meta.url)));
 const draft=new ProjectDraft(items,stages,catalog.dimensions,projectProvenance(catalog,items,stages),catalog.migrations,config),proposals=[],sequences=[];
@@ -19,8 +21,8 @@ for(const item of items.filter(i=>i.type==='hazard')){
  const r=await optimizeHazard({config,draft,items,item,art});proposals.push(r);draft.placement[item.id]=r.placement;
  for(const profile of ['easy','standard','hard'])if(meetsProfile(r.beforeProfiles[profile]))assert.ok(meetsProfile(r.profiles[profile]),item.id+' must retain '+profile);
  if(item.kind==='ground'&&r.changes.some(c=>c.field==='groundOffset')){
-  const frame=draft.frames[item.id][0],crop=draft.value[item.id][0],height=(frame.h-crop.t-crop.b)*960/config.worldContract.sourceW*r.placement.scale;
-  assert.ok(Math.abs(410+r.placement.groundOffset-(1-art.bottom)*height-draft.calibration.stages[item.stage].pathY)<1e-7,'visible support meets path');
+  const g=hazardGeometry(config,item,0,draft.frames[item.id][0],draft.value[item.id][0],effectivePlacement(draft,item),{travel:false});
+  assert.ok(Math.abs(g.dest.y+art.bottom*g.dest.h-draft.calibration.stages[item.stage].pathY)<1e-7,'visible support meets path');
  }
 }
 for(const profile of ['easy','standard','hard']){

@@ -7,7 +7,7 @@ import {DesignDraft,DESIGN_STORAGE_KEY,landscapeDescriptors} from './landscape.m
 import {FrameDraft,FRAME_STORAGE_KEY,frameViewBox,drawSprite,hitBounds,dragBounds} from './frame-editor.mjs';
 import {fitSize} from './workspace-ui.mjs';
 const context={window:{}};vm.createContext(context);
-for(const file of ['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js'])vm.runInContext(fs.readFileSync(new URL('../src/js/'+file,import.meta.url),'utf8'),context);
+for(const file of JSON.parse(fs.readFileSync(new URL('./source-files.json',import.meta.url),'utf8')))vm.runInContext(fs.readFileSync(new URL('../'+file,import.meta.url),'utf8'),context);
 const config=context.window.GAME_CONFIG,registry=context.window.CC_LANDSCAPE_REGISTRY,contract=context.window.CC_LANDSCAPE_CONTRACT;
 contract.apply(config,registry);
 const sprites=descriptors(config,context.window.GAME_SCHEMA),landscapes=landscapeDescriptors(config,registry,contract);

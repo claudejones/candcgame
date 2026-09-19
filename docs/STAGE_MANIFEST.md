@@ -19,7 +19,7 @@ Known landscape families:
 
 Known approved hazards include macaws, Andean flamingo, and tropical parakeets. SA02 village/mid correction and ground seam correction were incorporated during QA.
 
-## Europe — assets produced and integrated for QA
+## Europe — landscape sets approved; legacy hazards integrated for QA
 - EU01 — Greece / Santorini
   - DISTANT Greece
   - MID Greece
@@ -43,17 +43,19 @@ Known approved hazards include macaws, Andean flamingo, and tropical parakeets. 
   - Mediterranean bats
 
 ## Remaining continents
-Four continents / 12 stages remain to be specified and produced. Their exact stage identities/themes must be taken from an approved product/stage specification once recovered or explicitly approved; do not invent them from memory.
+Four continents / 12 stages remain planned for future production. Their direction, workflow and themes are approved as the planning baseline; Africa replacement choices are agent-selected; actual references, contract promotion and production acceptance remain pending. Do not generate them until those gates are complete.
 
-Command keys reserve AF01–AF03 (Africa), AS01–AS03 (Asia), OC01–OC03 (Oceania/Australia; AU alias), and AN01–AN03 (Antarctica). These are identifiers, not approved themes or generation authorization. `config/asset-commands.json` is the key catalog; `help keys` lists it. Phase 8 remains NA/SA/EU only.
+Command keys reserve AF01–AF03 (Africa), AS01–AS03 (Asia), OC01–OC03 (Oceania/Australia; AU alias), and AN01–AN03 (Antarctica). The approved theme mappings are in the remaining-continent plan; keys alone do not authorize generation before readiness passes. `config/asset-commands.json` is the key catalog; `help keys` lists it. Phase 8 remains NA/SA/EU only.
 
-Planning authorized on 2026-09-19: [REMAINING_CONTINENTS_PLAN.md](REMAINING_CONTINENTS_PLAN.md) and `config/remaining-continent-proposal.json` propose all 12 themes, their three landscapes, two ground hazards and one flying hazard per stage. These are explicitly unapproved proposals. The catalog has exact proposed paths and focused stage briefs but is not loaded by the runtime or enabled production commands. Preserve the existing Phase 8 promotion and user-review gates.
+Planning authorized on 2026-09-19: [REMAINING_CONTINENTS_PLAN.md](REMAINING_CONTINENTS_PLAN.md) and `config/remaining-continent-proposal.json` define the approved planning direction, workflow and 12 themes, with three landscapes, two ground hazards and one flying hazard per stage. Replacement hazard selections/references and production gates remain pending. The shared generated catalog registers all 21 identities. Pending stages remain absent from runtime profiles, image requests and gameplay selectors until a complete measured stage release is integrated. Preserve the existing Phase 8 promotion and user-review gates.
 
 ## Current landscape audit scope
 27 landscape assets across NA01–NA03, SA01–SA03 and EU01–EU03: FAR/DISTANT + MID + GROUND for each stage.
 
-All 27 are the Phase 8 regeneration validation batch under `LANDSCAPE_GENERATION_CONTRACT_V1.md`. The completed KEEP / REPAIR / REGENERATE audit remains technical and visual-reference evidence; it does not exempt a layer from standardized regeneration.
+All 27 are the approved Phase 8 landscape set governed by `LANDSCAPE_GENERATION_CONTRACT_V1.md`. The completed KEEP / REPAIR / REGENERATE audit remains technical and visual-reference evidence; dependent calibration and contract promotion remain separate gates.
 
 ## Phase 8 landscape acceptance
 
-North America (NA01–NA03) and South America (SA01–SA03) are approved complete FAR/MID/GROUND sets. South America regression passed on 2026-09-19. SA03's reviewed revision is `c1fb39c909d68b87f200c354dc2c966f96a597c1`; exact layer hashes and approval pointers are in `config/asset-workflow-state.json`. EU01 — Greece / Santorini was explicitly approved on 2026-09-19 at reviewed revision `8556e5a0312e53cb3843f1b69c61a35e698383ef`, preserving its exact images and canonical geometry. EU02 — France / Paris is next; EU03 and Europe regression follow. Legacy packaged assets and deferred character/hazard calibration remain separate.
+All nine FAR/MID/GROUND sets in North America (NA01–NA03), South America (SA01–SA03) and Europe (EU01–EU03) are explicitly approved. All three continent landscape regression gates have passed; Europe closed on 2026-09-19 following EU03 approval. EU03's exact reviewed artwork revision is `94f94669bd2773b2ef9881c59e4adb710aeced60`. Exact hashes and approval pointers are in `config/asset-workflow-state.json`; Europe regression evidence is in `docs/phase8-qa/EU03_LANDSCAPE_QA.md`.
+
+Approved validation assets remain under `assets/phase8-validation/`. Legacy packaged assets and required dependent character/hazard calibration remain separate. Full Phase 8 contract promotion is not claimed by landscape acceptance; additional continent production still requires approved scope, themes and references.

@@ -2,6 +2,7 @@
   "use strict";
   if(!window.CC_APP?.isDevelopment)throw new Error("Hazard editor requires development bootstrap");
   const ATLAS={na01Hazards:"../assets/worlds/north-america/NA01_HAZARD_ATLAS.png",na01Bird:"../assets/worlds/north-america/NA01_HAZARD_VULTURE.png",na02Hazards:"../assets/worlds/north-america/NA02_HAZARD_ATLAS.png",na02Bird:"../assets/worlds/north-america/NA02_HAZARD_EAGLE.png",na03Hazards:"../assets/worlds/north-america/NA03_HAZARD_ATLAS.png",na03Bird:"../assets/worlds/north-america/NA03_HAZARD_PIGEONS.png",sa01Hazards:"../assets/worlds/south-america/SA01_OBJECT_ATLAS.png",sa01Bird:"../assets/worlds/south-america/SA01_HAZARD_MACAWS.png",sa02Hazards:"../assets/worlds/south-america/SA02_OBJECT_ATLAS.png",sa02Bird:"../assets/worlds/south-america/SA02_HAZARD_ANDEAN_FLAMINGO.png",sa03Hazards:"../assets/worlds/south-america/SA03_OBJECT_ATLAS.png",sa03Bird:"../assets/worlds/south-america/SA03_HAZARD_TROPICAL_PARAKEETS.png",eu01Hazards:"../assets/worlds/europe/EU01_OBJECT_ATLAS_CRATE.png",eu01Barrel:"../assets/worlds/europe/EU01_HAZARD_ROLLING_BARREL.png",eu01Bird:"../assets/worlds/europe/EU01_HAZARD_AEGEAN_GULLS.png",eu02Hazards:"../assets/worlds/europe/EU02_OBJECT_ATLAS.png",eu02Bird:"../assets/worlds/europe/EU02_HAZARD_SWALLOWS.png",eu03Hazards:"../assets/worlds/europe/EU03_OBJECT_ATLAS.png",eu03Bird:"../assets/worlds/europe/EU03_HAZARD_BATS.png"};
+  if(window.CC_STAGE_CATALOG)Object.assign(ATLAS,window.CC_STAGE_CONTRACT.sources(window.CC_STAGE_CATALOG));
   const runtime=()=>document.getElementById("sharedRuntime")?.contentWindow;
   let activeFrame=0,playing=false,timer=0,lastAdvance=0;
   const selected=()=>{const s=window.CC_DESIGN_SELECTION.current;if(s.type!=="hazard")return null;return{s,h:window.CC_DESIGN_DRAFT.getStage(s.stageId).hazards[s.assetIndex]};};
@@ -15,8 +16,11 @@
     if(!w?.GAME_CONFIG)return false;
     w.GAME_CONFIG.activeWorld=stageId;w.GAME_CONFIG.objectQA.activeIndex[stageId]=index;
     const d=w.GAME_CONFIG.objectQA.defs[stageId][index];
+    if(h.atlas.sourceAnchor)d.sourceAnchor={...h.atlas.sourceAnchor};
+    if(h.transform.flipX!==undefined)d.flipX=h.transform.flipX;
     d.scale=h.transform.scale;d.cw=h.collision.w;d.ch=h.collision.h;d.cx=h.collision.x;d.cy=h.collision.y;d.frames=h.atlas.frames;d.fps=h.animation?.fps||w.GAME_CONFIG.objectQA.flying.fps;d.frameCrops=h.animation?.frameCrops;
     if(d.kind==="ground")d.groundOffset=h.gameplayAnchor.adjustmentY+h.transform.offsetY;
+    else if(h.gameplayAnchor.adjustmentByMode)d.flightOffsetY={...h.gameplayAnchor.adjustmentByMode};
     else{w.GAME_CONFIG.objectQA.flying.highClearance=window.GAME_CONFIG.objectQA.flying.highClearance-h.transform.offsetY;w.GAME_CONFIG.objectQA.flying.lowClearance=window.GAME_CONFIG.objectQA.flying.lowClearance-h.transform.offsetY;}
     if(d.rect)d.rect={...h.atlas.sourceRegion};else{d.frameW=h.atlas.sourceRegion.w;d.frameH=h.atlas.sourceRegion.h;}
     const base=h.crop,frames=h.animation?.frameCrops||[base];
@@ -40,7 +44,7 @@
 
   function drawCroppedFrame(canvas,h){
     const src=ATLAS[h.atlas.key];if(!src)return;
-    const img=new Image();img.onload=()=>{const r=h.atlas.sourceRegion,frames=h.atlas.frames||1,crop=frames>1?h.animation.frameCrops[activeFrame]:h.crop,l=Math.max(0,crop?.l||0),rr=Math.max(0,crop?.r||0),t=Math.max(0,crop?.t||0),b=Math.max(0,crop?.b||0),sw=Math.max(1,r.w-l-rr),sh=Math.max(1,r.h-t-b),sx=r.x+(frames>1?activeFrame*r.w:0)+l,sy=r.y+t;canvas.width=260;canvas.height=150;const c=canvas.getContext("2d");c.imageSmoothingEnabled=false;c.clearRect(0,0,canvas.width,canvas.height);const scale=Math.min((canvas.width-12)/sw,(canvas.height-12)/sh),dw=Math.max(1,Math.round(sw*scale)),dh=Math.max(1,Math.round(sh*scale)),dx=Math.round((canvas.width-dw)/2),dy=Math.round((canvas.height-dh)/2);c.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh);};img.src=src;
+    const img=new Image();img.onload=()=>{const r=h.atlas.sourceRegion,frames=h.atlas.frames||1,crop=frames>1?h.animation.frameCrops[activeFrame]:h.crop,l=Math.max(0,crop?.l||0),rr=Math.max(0,crop?.r||0),t=Math.max(0,crop?.t||0),b=Math.max(0,crop?.b||0),sw=Math.max(1,r.w-l-rr),sh=Math.max(1,r.h-t-b),sx=r.x+(frames>1?activeFrame*r.w:0)+l,sy=r.y+t;canvas.width=260;canvas.height=150;const c=canvas.getContext("2d");c.imageSmoothingEnabled=false;c.clearRect(0,0,canvas.width,canvas.height);const scale=Math.min((canvas.width-12)/sw,(canvas.height-12)/sh),dw=Math.max(1,Math.round(sw*scale)),dh=Math.max(1,Math.round(sh*scale)),dx=Math.round((canvas.width-dw)/2),dy=Math.round((canvas.height-dh)/2);window.CC_STAGE_CONTRACT.drawSprite(c,img,{sx,sy,sw,sh,dx,dy,dw,dh},h.transform.flipX);};img.src=src;
   }
 
   function setPlaying(next){

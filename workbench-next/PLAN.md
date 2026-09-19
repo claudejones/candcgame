@@ -2,7 +2,21 @@
 
 Status: proposed; parallel branch only. The user's approval is required before replacing the working interface.
 
-Current increment: **Review 10 — stage grounding links**. Each stage has independent follow policies for Claude and Constance. Both controls expose the same setting; the inspector shows the total stage offset. Link toggles preserve positions and migrate v6 saves without changing artwork or calibration values. v7 persists the links.
+## AF01 integration and hazard facing — Review 11
+
+AF01 is available under **Africa → AF01 · Tanzania — Serengeti savannah** with FAR/MID/GROUND, Termite mound, Crested porcupine and the four-frame Lilac-breasted roller. All five images are byte-identical to upstream `a09b176dd8531bfb3425c9af534ff197a05a253e`. The imported release remains integrated/awaiting art acceptance; Workbench calibration is a separate user step. AF02/AF03 and other pending stages remain absent from selectors and image requests.
+
+The Workbench uses AF01's explicit source anchors, cropped registration, mirrored rendering/collision X offsets and HIGH/LOW placement corrections (HIGH +22, LOW 0). Frame and Scene show gameplay facing; Full atlas shows original pixels and source coordinates. **Mirror horizontally** in the hazard Scene inspector is saved with the project, supports Undo/Redo and reflects hitbox drag conversion. Crop/bounds edits cannot remove an explicit source anchor. The same geometry drives previews, contact checks, optimization and generated sequences. The optimizer accounts for source anchors when finding a support point or flight height.
+
+A visual audit found the SA02 llama and EU02 bicycle face right; their Workbench defaults now mirror them toward the player. Existing birds face left and retain source direction. The complete list of mirrored defaults is SA02 llama, EU02 bicycle, AF01 porcupine and AF01 roller. Artwork bytes and frame order do not change. Mirror overrides remain per hazard. Recheck timing after a facing change because the collider is reflected with the visible body.
+
+**v8** includes facing and per-hazard HIGH/LOW placement corrections. Known nine-stage saves/exports are validated against their original stage set before AF01 defaults are added. Existing crops, bounds, numeric placement, pathway links, profiles and locks are retained. v7/v6/v5/v4 browser records remain recoverable; a newer save does not overwrite them. Import still replaces the whole project after review, including any resets of AF01 when importing an older nine-stage file. Unknown provenance and malformed/missing old entries are rejected before mutation.
+
+Upstream production/runtime changes are incorporated on the isolated editor branch. `source-config.js` explicitly retains the Workbench's earlier eleven numerical hazard defaults instead of silently promoting the other agent's comparison candidates. Upstream code/config/evidence is otherwise unchanged. The selected runtime source files are declared once in `source-files.json`; catalog and preview builds use that same boot order. Production main/Pages and approved source images are not changed by this Workbench publication. Full Test/Game integration remains pending.
+
+[Asset production handoff and required workflow changes](ASSET_HANDOFF.md) distinguishes artwork/metadata QA from later calibration. The current upstream release validator still requires gameplay checks; the production-workflow owner must introduce a separate asset-ready handoff before those checks can be removed from asset completion. No skipped checks may be labeled passed.
+
+Previous increment: **Review 10 — stage grounding links**. Each stage has independent follow policies for Claude and Constance. Both controls expose the same setting; the inspector shows the total stage offset. Link toggles preserve positions and migrate v6 saves without changing artwork or calibration values. v7 persists the links.
 
 ## Stage grounding — Review 10
 

@@ -7,7 +7,8 @@ import {calibrationDefaults,validateCalibration,upgradeCalibration,characterPath
 export const PREVIOUS_PROJECT_FORMAT='cc-workbench-next-project-v4';
 export const PRE_CALIBRATION_FORMAT='cc-workbench-next-project-v5';
 export const PRE_CHARACTER_LINK_FORMAT='cc-workbench-next-project-v6';
-export const PROJECT_FORMAT='cc-workbench-next-project-v7';
+export const PRE_FACING_FORMAT='cc-workbench-next-project-v7';
+export const PROJECT_FORMAT='cc-workbench-next-project-v8';
 export const PROJECT_STORAGE_KEY=PROJECT_FORMAT;
 export const RECOVERY_KEY='cc-workbench-next-before-import-v4';
 export const UNREADABLE_KEY='cc-workbench-next-unreadable-save-v4';
@@ -83,54 +84,63 @@ export class ProjectDraft extends FrameDraft {
   decode(payload) {
     let design=payload,legacy=true,migration=null;
     const supported=this.migrations.filter(item=>same(item.toProvenance,this.provenance));
-    if([PROJECT_FORMAT,PRE_CHARACTER_LINK_FORMAT,PRE_CALIBRATION_FORMAT,PREVIOUS_PROJECT_FORMAT].includes(payload?.format)) {
+    const projectFormats=[PROJECT_FORMAT,PRE_FACING_FORMAT,PRE_CHARACTER_LINK_FORMAT,PRE_CALIBRATION_FORMAT,PREVIOUS_PROJECT_FORMAT];
+    const placementFormats=projectFormats.filter(f=>f!==PREVIOUS_PROJECT_FORMAT);
+    const calibrationFormats=[PROJECT_FORMAT,PRE_FACING_FORMAT,PRE_CHARACTER_LINK_FORMAT];
+    if(projectFormats.includes(payload?.format)) {
       const fields=['format','purpose','provenance','design','savedAt'],required=['format','provenance','design'];
-      if([PROJECT_FORMAT,PRE_CHARACTER_LINK_FORMAT,PRE_CALIBRATION_FORMAT].includes(payload.format)){fields.push('placement');required.push('placement');}
-      if([PROJECT_FORMAT,PRE_CHARACTER_LINK_FORMAT].includes(payload.format)){fields.push('calibration');required.push('calibration');}
+      if(placementFormats.includes(payload.format)){fields.push('placement');required.push('placement');}
+      if(calibrationFormats.includes(payload.format)){fields.push('calibration');required.push('calibration');}
       keys(payload,fields,required);
       if(!same(payload.provenance,this.provenance)) {
         migration=supported.find(item=>same(item.fromProvenance,payload.provenance));
         if(!migration)throw new Error('This project uses different artwork or source defaults. Keep the file for a compatible editor; nothing has been changed.');
       }
-      if(payload.savedAt!==undefined && (typeof payload.savedAt!=='string' || !Number.isFinite(Date.parse(payload.savedAt))))throw new Error('Saved date is invalid.');
+      if(payload.savedAt!==undefined&&(typeof payload.savedAt!=='string'||!Number.isFinite(Date.parse(payload.savedAt))))throw new Error('Saved date is invalid.');
       design=payload.design;legacy=false;
       if(design?.format!==FRAME_FORMAT)throw new Error('Project configuration version is invalid.');
     }
     validateShape(design);
-    if(legacy && design.format!==FORMAT && !same(design.landscapeRevision,this.landscapeRevision))migration=supported.find(item=>same(item.landscapeRevision,design.landscapeRevision) && (design.format===DESIGN_FORMAT || same(item.atlasDimensions,design.atlasDimensions)));
-    const definitions=migration?this.definitions.map(item=>({...item,baseline:migration.landscapeRevision[item.stage].baseline,revision:migration.landscapeRevision[item.stage].revision})):this.definitions;
-    const candidate=new FrameDraft([...this.items.values()],definitions,migration?.atlasDimensions||this.dimensions);
-    if(design.format===FORMAT) {
-      const sprites=new Draft([...this.items.values()]);sprites.restore(design);
-      candidate.value=clone(sprites.value);
-    }else candidate.restore(design);
+    if(legacy&&design.format!==FORMAT&&!same(design.landscapeRevision,this.landscapeRevision))migration=supported.find(item=>same(item.landscapeRevision,design.landscapeRevision)&&(design.format===DESIGN_FORMAT||same(item.atlasDimensions,design.atlasDimensions)));
+    const allItems=[...this.items.values()],sourceItemsFor=m=>allItems.filter(i=>i.type==='character'||Object.hasOwn(m.landscapeRevision,i.stage));
+    if(legacy&&design.format===FORMAT&&!same(Object.keys(design.crops).sort(),allItems.map(i=>i.id).sort()))migration=supported.find(m=>same(Object.keys(design.crops).sort(),sourceItemsFor(m).map(i=>i.id).sort()));
+    const sourceItems=migration?sourceItemsFor(migration):allItems;
+    const definitions=migration?this.definitions.filter(i=>Object.hasOwn(migration.landscapeRevision,i.stage)).map(i=>({...i,...clone(migration.landscapeRevision[i.stage])})):this.definitions;
+    const candidate=new FrameDraft(sourceItems,definitions,migration?.atlasDimensions||this.dimensions);
+    if(design.format===FORMAT){const sprites=new Draft(sourceItems);sprites.restore(design);candidate.value=clone(sprites.value);}else candidate.restore(design);
     const notes=[];
     if(legacy)notes.push('Older draft: source hashes were not recorded. Available baseline, frame and landscape checks passed.');
-    if(design.format===DESIGN_FORMAT || design.format===FORMAT)notes.push('This older file has no atlas boundary edits. Boundaries will use the baseline; any resets appear below.');
-    if(design.format===FORMAT)notes.push('This sprite-only file has no landscapes. Landscape values will use the baseline; any resets appear below.');
-    if(migration) {
+    if(design.format===DESIGN_FORMAT||design.format===FORMAT)notes.push('This older file has no atlas boundary edits. Boundaries use the baseline; resulting resets appear below.');
+    if(design.format===FORMAT)notes.push('This sprite-only file has no landscapes. Landscape values use the baseline.');
+    if(migration){
       const updated=[];
-      for(const stage of Object.keys(this.landscapeBaseline)) {
-        const before=migration.landscapeRevision[stage];
-        if(same(before,this.landscapeRevision[stage]))continue;
-        updated.push(stage.toUpperCase());
-        for(const layer of LAYERS)for(const field of Object.keys(before.baseline[layer])) {
-          // Adopt new defaults only where the user left the old default unchanged.
-          if(candidate.landscapes[stage][layer][field]===before.baseline[layer][field])candidate.landscapes[stage][layer][field]=this.landscapeBaseline[stage][layer][field];
-        }
+      for(const stage of Object.keys(candidate.landscapes)){
+        const before=migration.landscapeRevision[stage];if(same(before,this.landscapeRevision[stage]))continue;updated.push(stage.toUpperCase());
+        for(const layer of LAYERS)for(const field of Object.keys(before.baseline[layer]))if(candidate.landscapes[stage][layer][field]===before.baseline[layer][field])candidate.landscapes[stage][layer][field]=this.landscapeBaseline[stage][layer][field];
       }
-      const converted={...candidate.export(),landscapeRevision:clone(this.landscapeRevision),atlasDimensions:clone(this.dimensions)};
-      const check=new FrameDraft([...this.items.values()],this.definitions,this.dimensions);check.restore(converted);
-      notes.push(`Landscape artwork updated for ${updated.join(' and ')}. Untouched settings now use the new baseline defaults; your custom adjustments and all sprite edits are retained. Review adjusted landscapes with the new artwork; see Source & status for artwork approval.`);
+      if(updated.length)notes.push(`Landscape artwork updated for ${updated.join(' and ')}. Untouched settings use new defaults; custom adjustments and sprite edits are retained. Review Source & status for artwork approval.`);
     }
-    candidate.placement=[PROJECT_FORMAT,PRE_CHARACTER_LINK_FORMAT,PRE_CALIBRATION_FORMAT].includes(payload?.format)?clone(validatePlacement(payload.placement,this.placementBaseline)):clone(this.placementBaseline);
-    const hasCalibration=[PROJECT_FORMAT,PRE_CHARACTER_LINK_FORMAT].includes(payload?.format);
-    candidate.calibration=hasCalibration?(payload.format===PRE_CHARACTER_LINK_FORMAT?upgradeCalibration(payload.calibration,this.calibrationBaseline,candidate.placement):clone(validateCalibration(payload.calibration,this.calibrationBaseline,candidate.placement))):calibrationDefaults(candidate.placement,this.definitions,this.config);
-    if(!hasCalibration)for(const [id,h] of Object.entries(candidate.calibration.hazards))h.locks=Object.keys(candidate.placement[id]).filter(k=>candidate.placement[id][k]!==this.placementBaseline[id][k]);
+    const stageIds=new Set(definitions.map(i=>i.stage)),itemIds=new Set(sourceItems.map(i=>i.id));
+    const sourcePlacement=Object.fromEntries(Object.entries(this.placementBaseline).filter(([id])=>id.startsWith('character:')||itemIds.has(id)||(id.startsWith('grounding:')&&stageIds.has(id.split(':')[1]))).map(([id,p])=>[id,clone(p)]));
+    if(payload?.format!==PROJECT_FORMAT)for(const [id,p] of Object.entries(sourcePlacement))if(id.startsWith('hazard:'))for(const key of ['flipX','highOffsetY','lowOffsetY'])delete p[key];
+    const hasPlacement=placementFormats.includes(payload?.format),hasCalibration=calibrationFormats.includes(payload?.format);
+    candidate.placement=hasPlacement?clone(validatePlacement(payload.placement,sourcePlacement)):clone(sourcePlacement);
+    const sourceCalibration=calibrationDefaults(candidate.placement,definitions,this.config);
+    candidate.calibration=hasCalibration?(payload.format===PRE_CHARACTER_LINK_FORMAT?upgradeCalibration(payload.calibration,sourceCalibration,candidate.placement):clone(validateCalibration(payload.calibration,sourceCalibration,candidate.placement))):sourceCalibration;
+    if(!hasCalibration)for(const [id,h] of Object.entries(candidate.calibration.hazards))h.locks=Object.keys(candidate.placement[id]).filter(k=>candidate.placement[id][k]!==sourcePlacement[id][k]);
+    // Validate the old stage set first, then add only genuinely new defaults.
+    // Imports remain whole-project replacements; every addition/reset is reviewable.
+    const state={crops:{...clone(this.baseline),...candidate.value},frames:{...clone(this.frameBaseline),...candidate.frames},landscapes:{...clone(this.landscapeBaseline),...candidate.landscapes},placement:clone(this.placementBaseline),calibration:{...clone(candidate.calibration),stages:{...clone(this.calibrationBaseline.stages),...candidate.calibration.stages},hazards:{...clone(this.calibrationBaseline.hazards),...candidate.calibration.hazards}}};
+    for(const [id,p] of Object.entries(candidate.placement))state.placement[id]={...state.placement[id],...p};
+    validatePlacement(state.placement,this.placementBaseline);validateCalibration(state.calibration,this.calibrationBaseline,state.placement);
+    const check=new FrameDraft(allItems,this.definitions,this.dimensions);check.restore({...check.export(),sprites:{...check.export().sprites,crops:state.crops},frames:state.frames,landscapes:state.landscapes});
+    const added=this.definitions.filter(i=>!stageIds.has(i.stage));
+    if(added.length)notes.unshift(`Added ${added.map(i=>i.stage.toUpperCase()).join(', ')} with release defaults. Existing stages, crops, bounds, placement, pathway links, difficulty profiles and hazard locks are retained.`);
     const upgraded=payload?.format!==PROJECT_FORMAT;
-    if(payload?.format===PRE_CHARACTER_LINK_FORMAT)notes.unshift('Stage character links added. Both characters keep following their stage pathway. All positions, custom settings and hazard locks are retained; earlier check certificates need rechecking.');
-    else if(upgraded)notes.unshift('Earlier project: calibration starts from your current settings. Existing edits are retained; manually changed hazard fields are locked against optimization.');
-    return {state:snapshot(candidate),notes,legacy,migrated:Boolean(migration)||upgraded};
+    if(upgraded)notes.unshift('Updated project format. Existing edits are retained. Missing facing and flight corrections inherit the integrated defaults; new certificates require rechecking.');
+    if(payload?.format===PRE_CHARACTER_LINK_FORMAT)notes.push('Both characters keep following their stage pathway; positions are preserved.');
+    if(!hasCalibration)notes.push('Calibration starts from your current settings; manually changed hazard fields stay locked against optimization.');
+    return {state,notes,legacy,migrated:Boolean(migration)||upgraded};
   }
   prepareImport(payload) {
     const decoded=this.decode(payload),before=snapshot(this);
@@ -154,7 +164,7 @@ export class ProjectDraft extends FrameDraft {
   changedRows(){return changesBetween({crops:this.baseline,frames:this.frameBaseline,landscapes:this.landscapeBaseline,placement:this.placementBaseline,calibration:this.calibrationBaseline},snapshot(this),this.items);}
   load(storage) {
     this.expectedRaw=storage.getItem(PROJECT_STORAGE_KEY);
-    const choices=[[PROJECT_STORAGE_KEY,this.expectedRaw],[PRE_CHARACTER_LINK_FORMAT,storage.getItem(PRE_CHARACTER_LINK_FORMAT)],[PRE_CALIBRATION_FORMAT,storage.getItem(PRE_CALIBRATION_FORMAT)],[PREVIOUS_PROJECT_FORMAT,storage.getItem(PREVIOUS_PROJECT_FORMAT)],[FRAME_STORAGE_KEY,storage.getItem(FRAME_STORAGE_KEY)],[DESIGN_STORAGE_KEY,storage.getItem(DESIGN_STORAGE_KEY)],[STORAGE_KEY,storage.getItem(STORAGE_KEY)]];
+    const choices=[[PROJECT_STORAGE_KEY,this.expectedRaw],[PRE_FACING_FORMAT,storage.getItem(PRE_FACING_FORMAT)],[PRE_CHARACTER_LINK_FORMAT,storage.getItem(PRE_CHARACTER_LINK_FORMAT)],[PRE_CALIBRATION_FORMAT,storage.getItem(PRE_CALIBRATION_FORMAT)],[PREVIOUS_PROJECT_FORMAT,storage.getItem(PREVIOUS_PROJECT_FORMAT)],[FRAME_STORAGE_KEY,storage.getItem(FRAME_STORAGE_KEY)],[DESIGN_STORAGE_KEY,storage.getItem(DESIGN_STORAGE_KEY)],[STORAGE_KEY,storage.getItem(STORAGE_KEY)]];
     const entry=choices.find(([,raw])=>raw!==null);
     if(!entry)return 'Ready. Save all keeps every editable setting in this browser.';
     try {
@@ -178,14 +188,14 @@ export class ProjectDraft extends FrameDraft {
 
 // Navigation is derived from available stage metadata, with one remembered stage per continent.
 export class StageSelection {
-  constructor(landscapes,registry) {
+  constructor(landscapes,registry,stageCatalog=null) {
     this.groups=new Map();this.last=new Map();
     for(const item of landscapes) {
       const label=registry.stages[item.stage]?.label;
       if(!label?.includes('—'))throw new Error(`Continent label missing for ${item.stage}.`);
-      const continent=label.split('—')[0].trim();
+      const continent=stageCatalog?.continents.find(c=>c.stages.includes(item.stage))?.label||label.split('—')[0].trim();
       if(!this.groups.has(continent))this.groups.set(continent,[]);
-      this.groups.get(continent).push({id:item.stage,label:label.split('—').slice(1).join('—').trim()});
+      this.groups.get(continent).push({id:item.stage,label:label.startsWith(continent+' —')?label.split('—').slice(1).join('—').trim():label});
     }
     this.stage=landscapes[0].stage;this.remember(this.stage);
   }

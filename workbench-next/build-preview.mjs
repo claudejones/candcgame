@@ -18,9 +18,9 @@ await fs.rm(outputRoot,{recursive:true,force:true});
 await fs.mkdir(outputRoot,{recursive:true});
 const context = {window:{}};
 vm.createContext(context);
-const dependencies=['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js'];
+const dependencies=JSON.parse(await fs.readFile(path.join(source,'source-files.json'),'utf8'));
 for (const filename of dependencies) {
-  vm.runInContext(await fs.readFile(path.join(root, 'src/js', filename), 'utf8'), context);
+  vm.runInContext(await fs.readFile(path.join(root, filename), 'utf8'), context);
 }
 const items = descriptors(context.window.GAME_CONFIG, context.window.GAME_SCHEMA);
 const catalog = JSON.parse(await fs.readFile(path.join(source, 'asset-catalog.json'), 'utf8'));
@@ -33,10 +33,10 @@ async function copy(relative) {
   await fs.mkdir(path.dirname(destination), {recursive:true});
   await fs.copyFile(path.join(root, relative), destination);
 }
-for (const filename of ['index.html','app.mjs','model.mjs','landscape.mjs','landscape-playback.mjs','scene-model.mjs','scene-ui.mjs','runtime-rules.mjs','hitbox-editor.mjs','calibration-settings.mjs','calibration-engine.mjs','calibration-ui.mjs','calibration-results.mjs','frame-editor.mjs','project.mjs','project-ui.mjs','workspace-ui.mjs','asset-loader.mjs','style.css','AUDIT.md','PLAN.md']) {
+for (const filename of ['index.html','app.mjs','model.mjs','landscape.mjs','landscape-playback.mjs','scene-model.mjs','scene-ui.mjs','runtime-rules.mjs','hitbox-editor.mjs','calibration-settings.mjs','calibration-engine.mjs','calibration-ui.mjs','calibration-results.mjs','frame-editor.mjs','project.mjs','project-ui.mjs','workspace-ui.mjs','asset-loader.mjs','style.css','AUDIT.md','PLAN.md','ASSET_HANDOFF.md']) {
   await copy(`workbench-next/${filename}`);
 }
-for (const filename of dependencies) await copy(`src/js/${filename}`);
+for (const filename of dependencies) await copy(filename);
 for (const sourcePath of Object.values(assets)) {
   const relative = path.relative(root,path.resolve(source,sourcePath.split('?')[0]));
   if (!relative.startsWith('assets' + path.sep)) throw new Error('Unexpected asset location');
@@ -45,4 +45,4 @@ for (const sourcePath of Object.values(assets)) {
 await fs.writeFile(path.join(outputRoot,'workbench-next/asset-catalog.json'),JSON.stringify({...catalog,assets},null,2)+'\n');
 await fs.writeFile(path.join(outputRoot,'index.html'),'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C&C Workbench — Design Preview</title><meta http-equiv="refresh" content="0;url=./workbench-next/"><a href="./workbench-next/">Open the C&C editor preview</a></html>\n');
 await fs.writeFile(path.join(target,'README.md'),'# C&C Workbench preview\n\nDerived publication of `claudejones/candcgame`, branch `editor-next`.\nEdit the GitHub source, then run its `workbench-next/build-preview.mjs` against this checkout.\nThis private preview does not replace the GitHub Pages game/editor.\n');
-console.log(`Prepared Design preview: ${keys.length} images, 9 landscapes and ${items.length} sprite/state definitions. Images load on selection.`);
+console.log(`Prepared Design preview: ${keys.length} images, ${Object.keys(context.window.GAME_CONFIG.worldProfiles).length} landscapes and ${items.length} sprite/state definitions. Images load on selection.`);

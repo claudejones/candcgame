@@ -7,8 +7,8 @@ import {Draft,AssetSelection,descriptors,STORAGE_KEY} from './model.mjs';
 import {DesignDraft,DESIGN_STORAGE_KEY,LAYERS,landscapeDescriptors,layerGeometry,tileLayer,drawLandscape} from './landscape.mjs';
 
 const context={window:{}}; vm.createContext(context);
-for(const file of ['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js']) {
-  vm.runInContext(fs.readFileSync(new URL(`../src/js/${file}`,import.meta.url),'utf8'),context);
+for(const file of JSON.parse(fs.readFileSync(new URL('./source-files.json',import.meta.url),'utf8'))) {
+  vm.runInContext(fs.readFileSync(new URL(`../${file}`,import.meta.url),'utf8'),context);
 }
 const config=context.window.GAME_CONFIG, registry=context.window.CC_LANDSCAPE_REGISTRY, contract=context.window.CC_LANDSCAPE_CONTRACT;
 const legacy=JSON.parse(JSON.stringify(config.worldProfiles)); contract.apply(config,registry);
@@ -16,8 +16,8 @@ const scenes=landscapeDescriptors(config,registry,contract), sprites=descriptors
 const catalog=JSON.parse(fs.readFileSync(new URL('./asset-catalog.json',import.meta.url)));
 const png=key=>fs.readFileSync(new URL(catalog.assets[key].split('?')[0],import.meta.url));
 
-test('all nine landscapes resolve; active source hashes and geometry match the registry',()=>{
-  assert.equal(scenes.length,9);
+test('all ten landscapes resolve; active source hashes and geometry match the registry',()=>{
+  assert.equal(scenes.length,10);
   for(const scene of scenes) {
     const p=config.worldProfiles[scene.stage];
     for(const layer of LAYERS) {

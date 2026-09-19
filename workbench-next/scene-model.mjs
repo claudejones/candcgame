@@ -9,6 +9,7 @@ export const PLACEMENT_FIELDS={
   masterScale:['Master scale',.01,2,.001],footOffset:['Shared foot offset',-300,300,1],
   stateScale:['State scale',.05,5,.01],offsetX:['State offset X',-960,960,1],offsetY:['State offset Y',-540,540,1],
   groundOffset:['Grounding offset',-300,300,1],scale:['Scale multiplier',.01,4,.01],xOffset:['Placement offset X',-960,960,1],
+  flipX:['Mirror horizontally',false,true],highOffsetY:['HIGH placement correction',-300,300,1],lowOffsetY:['LOW placement correction',-300,300,1],
   highClearance:['HIGH clearance',-300,500,1],lowClearance:['LOW clearance',-300,500,1],fps:['Animation FPS',.1,60,.1],
   cw:['Collision width',.01,2,.01],ch:['Collision height',.01,2,.01],cx:['Collision offset X',-2,2,.01],cy:['Collision offset Y',-2,2,.01]
 };
@@ -25,7 +26,7 @@ export function placementDefaults(config,items) {
   }
   for(const item of items.filter(x=>x.type==='hazard')) {
     const d=config.objectQA.defs[item.stage][Number(item.id.split(':')[2])];
-    out[item.id]={scale:d.scale,xOffset:0,...(item.kind==='ground'?{groundOffset:d.groundOffset??config.objectQA.groundOffset}:{highClearance:config.objectQA.flying.highClearance,lowClearance:config.objectQA.flying.lowClearance}),...(item.frames>1?{fps:d.fps??config.objectQA.flying.fps}:{}),cw:d.cw,ch:d.ch,cx:d.cx,cy:d.cy};
+    out[item.id]={scale:d.scale,xOffset:0,flipX:d.flipX===true,...(item.kind==='ground'?{groundOffset:d.groundOffset??config.objectQA.groundOffset}:{highClearance:config.objectQA.flying.highClearance,lowClearance:config.objectQA.flying.lowClearance,highOffsetY:d.flightOffsetY?.high||0,lowOffsetY:d.flightOffsetY?.low||0}),...(item.frames>1?{fps:d.fps??config.objectQA.flying.fps}:{}),cw:d.cw,ch:d.ch,cx:d.cx,cy:d.cy};
   }
   return out;
 }
@@ -34,6 +35,7 @@ export function validatePlacement(value,baseline) {
   for(const [id,fields] of Object.entries(baseline)) {
     if(!value[id]||!same(Object.keys(value[id]).sort(),Object.keys(fields).sort()))throw new Error(`Invalid placement fields: ${id}`);
     for(const [key,n] of Object.entries(value[id])) {
+      if(key==='flipX'){if(typeof n!=='boolean')throw new Error('Hazard mirror must be true or false.');continue;}
       const [label,min,max]=PLACEMENT_FIELDS[key];
       if(!Number.isFinite(n)||n<min||n>max)throw new Error(`${label} must be between ${min} and ${max}.`);
     }
@@ -62,11 +64,15 @@ export function hazardGeometry(config,item,frame,bounds,crop,p,{time=0,travel=tr
   const loop=config.objectQA.loopDistance;
   let center=startX-(looping?distance%loop:distance);if(looping)while(center < -w-30)center+=loop;
   center+=p.xOffset;
-  const anchor=item.kind==='flying'?410-p[flight==='high'?'highClearance':'lowClearance']:410+p.groundOffset;
+  const anchor=item.kind==='flying'?410-p[flight==='high'?'highClearance':'lowClearance']+(p[flight==='high'?'highOffsetY':'lowOffsetY']||0):410+p.groundOffset;
   const dest={x:center-w/2,y:anchor-(item.kind==='flying'?h/2:h),w,h};
+  if(item.sourceAnchor){
+    const base=defaultBounds(item,frame),ax=base.x+item.sourceAnchor.x-source.x,ay=base.y+item.sourceAnchor.y-source.y;
+    dest.x=center-(p.flipX?source.w-ax:ax)*scale;dest.y=anchor-ay*scale;
+  }
   const cw=Math.max(4,w*p.cw),ch=Math.max(4,h*p.ch);
-  const collision={x:dest.x+(w-cw)/2+p.cx*w,y:item.kind==='flying'?dest.y+(h-ch)/2+p.cy*h:anchor-ch+p.cy*h,w:cw,h:ch};
-  return {source,dest,collision,anchor,scale,hitReference:{...dest,anchor,kind:item.kind}};
+  const collision={x:dest.x+(w-cw)/2+(p.flipX?-p.cx:p.cx)*w,y:item.kind==='flying'?dest.y+(h-ch)/2+p.cy*h:anchor-ch+p.cy*h,w:cw,h:ch};
+  return {source,dest,collision,anchor,scale,flipX:p.flipX===true,hitReference:{...dest,anchor,kind:item.kind,flipX:p.flipX===true}};
 }
 export const poseFrame=(item,time,fps=item.fps)=>((Math.floor((time+1e-9)*fps)%item.frames)+item.frames)%item.frames;
 export function sceneGeometry({config,stage,draft,character,hazard,time=0,baseline=false,travel=true,flight='high',motion=null,looping=true,placementOverride=null,hazardTime=time,hazardPhase=0,encounters=null}) {
@@ -91,7 +97,8 @@ export function drawDesignScene(canvas,options) {
   const ctx=canvas.getContext('2d');
   const draw=(img,g,color)=>{
     if(!img||!g)return;
-    const a=g.source,b=g.dest;ctx.drawImage(img,a.x,a.y,a.w,a.h,Math.round(b.x),Math.round(b.y),Math.round(b.w),Math.round(b.h));
+    const a=g.source,b=g.dest,x=Math.round(b.x),y=Math.round(b.y),w=Math.round(b.w),h=Math.round(b.h);
+    if(g.flipX){ctx.save();ctx.translate(x+w,y);ctx.scale(-1,1);ctx.drawImage(img,a.x,a.y,a.w,a.h,0,0,w,h);ctx.restore();}else ctx.drawImage(img,a.x,a.y,a.w,a.h,x,y,w,h);
     if(boxes){const c=g.collision;ctx.save();ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.strokeRect(c.x,c.y,c.w,c.h);ctx.restore();}
   };
   draw(images.character,result.character,result.contact?'#ff7373':'#64d9ff');

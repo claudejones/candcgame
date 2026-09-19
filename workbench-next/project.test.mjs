@@ -7,7 +7,7 @@ import {DesignDraft,DESIGN_STORAGE_KEY,landscapeDescriptors} from './landscape.m
 import {FrameDraft,FRAME_STORAGE_KEY} from './frame-editor.mjs';
 import {ProjectDraft,StageSelection,projectProvenance,PROJECT_STORAGE_KEY,RECOVERY_KEY,UNREADABLE_KEY,ARTWORK_RECOVERY_KEY} from './project.mjs';
 const context={window:{}};vm.createContext(context);
-for(const file of ['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js'])vm.runInContext(fs.readFileSync(new URL('../src/js/'+file,import.meta.url),'utf8'),context);
+for(const file of JSON.parse(fs.readFileSync(new URL('./source-files.json',import.meta.url),'utf8')))vm.runInContext(fs.readFileSync(new URL('../'+file,import.meta.url),'utf8'),context);
 const config=context.window.GAME_CONFIG,registry=context.window.CC_LANDSCAPE_REGISTRY,contract=context.window.CC_LANDSCAPE_CONTRACT;
 contract.apply(config,registry);
 const sprites=descriptors(config,context.window.GAME_SCHEMA),landscapes=landscapeDescriptors(config,registry,contract);
@@ -90,24 +90,30 @@ test('unreadable saves remain recoverable and JSON key order does not affect com
   assert.equal(target.prepareImport(reorder(target.export())).rows.length,0);
 });
 test('Continent → Stage remembers each continent and includes only available stages',()=>{
-  const selection=new StageSelection(landscapes,registry);
-  assert.equal(selection.groups.size,3);assert.equal(selection.groups.get('Europe').length,3);
+  const selection=new StageSelection(landscapes,registry,context.window.CC_STAGE_CATALOG);
+  assert.equal(selection.groups.size,4);assert.equal(selection.groups.get('Europe').length,3);
   selection.remember('na03');assert.equal(selection.choose('South America'),'sa01');selection.remember('sa02');
   assert.equal(selection.choose('North America'),'na03');assert.equal(selection.choose('South America'),'sa02');
-  assert.equal(selection.choose('Europe'),'eu01');assert.throws(()=>selection.choose('Unavailable'));
-  assert.equal(landscapes.length,9);
+  assert.equal(selection.choose('Europe'),'eu01');assert.equal(selection.choose('Africa'),'af01');assert.throws(()=>selection.remember('af02'));assert.throws(()=>selection.choose('Unavailable'));
+  assert.equal(landscapes.length,10);
 });
 
 function beforeArtworkRefresh(Type=FrameDraft,previous=catalog.migrations[0]) {
-  const definitions=landscapes.map(item=>({...item,...previous.landscapeRevision[item.stage]}));
-  return new Type(sprites,definitions,previous.atlasDimensions);
+  const definitions=landscapes.filter(i=>previous.landscapeRevision[i.stage]).map(item=>({...item,...previous.landscapeRevision[item.stage]}));
+  return new Type(sprites.filter(i=>i.type==='character'||previous.landscapeRevision[i.stage]),definitions,previous.atlasDimensions);
+}
+function historicalProject(design,migration){
+ const p=create().export();p.format='cc-workbench-next-project-v7';p.provenance=structuredClone(migration.fromProvenance);p.design=design;
+ for(const id of Object.keys(p.placement)){const [type,stage]=id.split(':');if((type==='hazard'||type==='grounding')&&!migration.landscapeRevision[stage])delete p.placement[id];else if(type==='hazard')for(const k of ['flipX','highOffsetY','lowOffsetY'])delete p.placement[id][k];}
+ for(const id of Object.keys(p.calibration.stages))if(!migration.landscapeRevision[id])delete p.calibration.stages[id];
+ for(const id of Object.keys(p.calibration.hazards))if(!migration.landscapeRevision[id.split(':')[1]])delete p.calibration.hazards[id];return p;
 }
 test('approved landscape refresh preserves saved sprite edits and custom settings while migrating untouched defaults',()=>{
   const old=beforeArtworkRefresh();old.editBounds('hazard:eu01:1',3,{x:1574,y:0,w:598,h:724});
   old.edit('character:constance:slide',1,{l:63,r:0,t:0,b:0});
   old.editLayer('sa03','mid',{...old.transform('sa03','mid'),y:17});
   old.editLayer('na01','ground',{...old.transform('na01','ground'),x:21});
-  const previous={...create().export(),provenance:catalog.migrations[0].fromProvenance,design:old.export(),savedAt:'2026-09-19T05:00:00.000Z'};
+  const previous={...historicalProject(old.export(),catalog.migrations[0]),savedAt:'2026-09-19T05:00:00.000Z'};
   const raw=JSON.stringify(previous),saved=storage([[PROJECT_STORAGE_KEY,raw]]),target=create();
   assert.match(target.load(saved),/Landscape artwork updated/);assert.equal(target.dirty,true);
   assert.equal(target.crop('character:constance:slide',1).l,63);assert.equal(target.bounds('hazard:eu01:1',3).x,1574);
@@ -126,7 +132,7 @@ test('older Design imports receive the same bounded artwork migration; unknown s
     target.applyImport(review,storage());assert.equal(target.crop('character:claude:run',1).l,9);
     assert.equal(target.transform('eu01','far').y,0);assert.equal(target.transform('sa03','ground').y,0);
   }
-  const payload={...create().export(),provenance:structuredClone(catalog.migrations[0].fromProvenance),design:beforeArtworkRefresh().export()};
+  const payload=historicalProject(beforeArtworkRefresh().export(),catalog.migrations[0]);
   payload.provenance.assets.run.sha256='unexpected';assert.throws(()=>create().prepareImport(payload),/different artwork/);
   const target=create();target.provenance.baseline='future-unsupported-source';assert.throws(()=>target.prepareImport({...payload,provenance:catalog.migrations[0].fromProvenance}),/different artwork/);
 });
@@ -139,7 +145,7 @@ test('EU02/EU03 refresh retains Review 05.1/05.2 saved edits and recovers the pr
   old.editLayer('eu01','far',{...old.transform('eu01','far'),scale:1.3});
   old.editBounds('hazard:eu01:1',3,{x:1574,y:0,w:598,h:724});
   old.edit('character:claude:run',0,{l:7,r:0,t:0,b:0});
-  const raw=JSON.stringify({...create().export(),provenance:migration.fromProvenance,design:old.export(),savedAt:'2026-09-19T06:00:00.000Z'});
+  const raw=JSON.stringify({...historicalProject(old.export(),migration),savedAt:'2026-09-19T06:00:00.000Z'});
   const saved=storage([[PROJECT_STORAGE_KEY,raw]]),target=create();
   assert.match(target.load(saved),/EU02 and EU03/);assert.equal(target.dirty,true);
   assert.equal(target.transform('eu02','mid').y,19);assert.equal(target.transform('eu02','mid').parallax,0.35);
@@ -162,6 +168,6 @@ test('every supported pre-refresh Design export receives Europe defaults without
     assert.equal(target.transform('eu03','mid').y,23);assert.equal(target.crop('character:constance:slide',1).l,62);
     for(const stage of ['eu02','eu03'])assert.deepEqual(target.transform(stage,'far'),target.landscapeBaseline[stage].far);
     assert.equal(target.transform('eu03','ground').y,0);
-    assert.ok(review.notes.some(note=>note.includes('Source & status')));
+    assert.ok(review.notes.some(note=>note.includes('Source & status')||note.includes('Added AF01')));
   }
 });

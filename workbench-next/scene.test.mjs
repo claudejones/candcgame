@@ -8,7 +8,7 @@ import {defaultBounds} from './frame-editor.mjs';
 import {ProjectDraft,projectProvenance,PROJECT_STORAGE_KEY,PREVIOUS_PROJECT_FORMAT} from './project.mjs';
 import {SceneClock,STEP,characterGeometry,hazardGeometry,poseFrame} from './scene-model.mjs';
 const context={window:{}};vm.createContext(context);
-for(const f of ['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js'])vm.runInContext(fs.readFileSync(new URL('../src/js/'+f,import.meta.url),'utf8'),context);
+for(const f of JSON.parse(fs.readFileSync(new URL('./source-files.json',import.meta.url),'utf8')))vm.runInContext(fs.readFileSync(new URL('../'+f,import.meta.url),'utf8'),context);
 const w=context.window,config=w.GAME_CONFIG;w.CC_LANDSCAPE_CONTRACT.apply(config,w.CC_LANDSCAPE_REGISTRY);
 const items=descriptors(config,w.GAME_SCHEMA),landscapes=landscapeDescriptors(config,w.CC_LANDSCAPE_REGISTRY,w.CC_LANDSCAPE_CONTRACT),catalog=JSON.parse(fs.readFileSync(new URL('./asset-catalog.json',import.meta.url)));
 const make=()=>new ProjectDraft(items,landscapes,catalog.dimensions,projectProvenance(catalog,items,landscapes),catalog.migrations,config);
@@ -20,7 +20,7 @@ const calls=geometry=>[geometry.source.x,geometry.source.y,geometry.source.w,geo
 
 test('every character pose matches production draw geometry; stage grounding is independent of artwork offsets',()=>{
   const draft=make(),cfg=structuredClone(config);
-  const Character=new Function('CONFIG','CHAR','worldSourceW',charClass+';return CharacterMachine;')(cfg,{claude:{row:0},constance:{row:1}},()=>cfg.worldProfiles[cfg.activeWorld].sourceW||cfg.worldContract.sourceW);
+  const Character=new Function('CONFIG','CHAR','worldSourceW','window',charClass+';return CharacterMachine;')(cfg,{claude:{row:0},constance:{row:1}},()=>cfg.worldProfiles[cfg.activeWorld].sourceW||cfg.worldContract.sourceW,w);
   for(const stage of ['na01','sa03','eu03'])for(const item of items.filter(i=>i.type==='character'))for(let frame=0;frame<item.frames;frame++) {
     cfg.activeWorld=stage;const who=item.id.split(':')[1],expected=[];
     const actor=new Character({[item.state]:{}});Object.assign(actor,{character:who,state:item.state,frame});actor.starsVisible=()=>false;
@@ -34,14 +34,15 @@ test('every character pose matches production draw geometry; stage grounding is 
 
 test('all hazard poses, HIGH/LOW anchors and traveling passes match production geometry and collision boxes',()=>{
   const draft=make(),cfg=structuredClone(config);cfg.objectQA.showBounds=false;cfg.objectQA.scrollWithWorld=true;
-  const ObjectQA=new Function('CONFIG',objectClass+';return ObjectQA;')(cfg);
+  const runtimeWindow={...w,CC_STAGE_CONTRACT:{...w.CC_STAGE_CONTRACT,drawSprite(ctx,img,g,flipX){ctx.facing=flipX===true;ctx.drawImage(img,g.sx,g.sy,g.sw,g.sh,Math.round(g.dx),Math.round(g.dy),Math.round(g.dw),Math.round(g.dh));}}};
+  const ObjectQA=new Function('CONFIG','window',objectClass+';return ObjectQA;')(cfg,runtimeWindow);
   for(const item of items.filter(i=>i.type==='hazard'))for(const flight of ['high','low'])for(const time of [0,2,8,25])for(let frame=0;frame<item.frames;frame++) {
     cfg.activeWorld=item.stage;cfg.objectQA.activeIndex[item.stage]=Number(item.id.split(':')[2]);
     Object.assign(cfg.objectQA.flying,{frame,travel:time*cfg.objectQA.flying.speed,mode:flight});
     const expected=[],scene={worldX:time*cfg.worldSpeed,lastRenderedSurfaceY:410};
     const object=new ObjectQA({drawImage(...args){expected.push(args.slice(1));}},{[item.asset]:{}},scene,{});object.characterBox=()=>({x:0,y:0,w:1,h:1});object.draw();
     const g=hazardGeometry(cfg,item,frame,defaultBounds(item,frame),item.crops[frame],draft.placement[item.id],{time,flight});
-    assert.deepEqual(calls(g),expected[0],`${item.id}/${frame}/${flight}/${time}`);
+    assert.deepEqual(calls(g),expected[0],`${item.id}/${frame}/${flight}/${time}`);assert.equal(g.flipX,object.ctx.facing);
     for(const k of ['x','y','w','h'])assert.ok(Math.abs(g.collision[k]-object.lastObjectBox[k])<1e-8,k);
   }
 });
@@ -95,7 +96,7 @@ const {dragBox,placementForBox}=await import('./hitbox-editor.mjs');
 
 test('generated action adapter stays identical to production source and movement through Jump/Slide/landing',async()=>{
   const {execFileSync}=await import('node:child_process');execFileSync(process.execPath,[new URL('./build-runtime-rules.mjs',import.meta.url).pathname,'--check']);
-  const cfg=structuredClone(config),Character=new Function('CONFIG','CHAR','worldSourceW',charClass+';return CharacterMachine;')(cfg,{},()=>2048);
+  const cfg=structuredClone(config),Character=new Function('CONFIG','CHAR','worldSourceW','window',charClass+';return CharacterMachine;')(cfg,{},()=>2048);
   for(const initial of Object.keys(config.state)){
     const actual=createMotion(cfg,initial),expected=new Character({});
     if(initial==='jump')expected.triggerJump();else if(initial==='slide')expected.triggerSlide();else expected.setState(initial);

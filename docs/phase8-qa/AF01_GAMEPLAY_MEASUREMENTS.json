@@ -1,0 +1,724 @@
+{
+  "stage": "af01",
+  "provenance": {
+    "inputs": {
+      "src/js/game-runtime.js": "fa2bd0718d0ebd8c40135aa0fe5371a948c36a017d90744d7c29b9e0b6f64b20",
+      "src/js/game-config.js": "24706e398dd14da5bb742bf0f738e61cbf27d2a39a00bf4479a0f497f7abec1e",
+      "src/js/stage-contract.js": "57a901bfe9ba45d43d7e8b925a77a7ad2da1ab9ba43e26c33c1fc28d5a906edf",
+      "src/js/stage-catalog.js": "3906322666844072b682f721a1516e510bb6f16eea12110eab09c6717e8c54e0",
+      "config/stage-releases.json": "e336a3c2269572e03e08231e2dbd299eee1a062b81408b1a96634c8cea38f786"
+    },
+    "assets": {
+      "FAR": {
+        "path": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
+        "sha256": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868"
+      },
+      "MID": {
+        "path": "assets/worlds/africa/AF01_BG_MID_SERENGETI.png",
+        "sha256": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811"
+      },
+      "GROUND": {
+        "path": "assets/worlds/africa/AF01_GROUND_SERENGETI.png",
+        "sha256": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527"
+      },
+      "OBJECT_ATLAS": {
+        "path": "assets/worlds/africa/AF01_OBJECT_ATLAS.png",
+        "sha256": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569"
+      },
+      "FLYING": {
+        "path": "assets/worlds/africa/AF01_HAZARD_ROLLER.png",
+        "sha256": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b"
+      }
+    }
+  },
+  "mode": "integrated-runtime",
+  "inputLeadStepSeconds": 0.01,
+  "simulationRangeSeconds": [
+    -1.9,
+    1.9
+  ],
+  "sampleRatesHz": [
+    60,
+    120
+  ],
+  "speeds": {
+    "slow": 150,
+    "normal": 170,
+    "fast": 210
+  },
+  "results": [
+    {
+      "hazard": "Termite mound",
+      "who": "claude",
+      "mode": null,
+      "action": "jump",
+      "threatensRunningPlayer": true,
+      "window": {
+        "start": 0.42,
+        "end": 0.56,
+        "width": 0.14,
+        "minimumGap": 0.45
+      }
+    },
+    {
+      "hazard": "Termite mound",
+      "who": "constance",
+      "mode": null,
+      "action": "jump",
+      "threatensRunningPlayer": true,
+      "window": {
+        "start": 0.42,
+        "end": 0.55,
+        "width": 0.13,
+        "minimumGap": 0.88
+      }
+    },
+    {
+      "hazard": "Crested porcupine",
+      "who": "claude",
+      "mode": null,
+      "action": "jump",
+      "threatensRunningPlayer": true,
+      "window": {
+        "start": 0.55,
+        "end": 0.68,
+        "width": 0.13,
+        "minimumGap": 0.65
+      }
+    },
+    {
+      "hazard": "Crested porcupine",
+      "who": "constance",
+      "mode": null,
+      "action": "jump",
+      "threatensRunningPlayer": true,
+      "window": {
+        "start": 0.55,
+        "end": 0.66,
+        "width": 0.11,
+        "minimumGap": 0.28
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "who": "claude",
+      "mode": "high",
+      "action": "slide",
+      "threatensRunningPlayer": true,
+      "window": {
+        "start": 0.32,
+        "end": 0.59,
+        "width": 0.27,
+        "minimumGap": 5.47
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "who": "claude",
+      "mode": "low",
+      "action": "jump",
+      "threatensRunningPlayer": true,
+      "window": {
+        "start": 0.37,
+        "end": 0.69,
+        "width": 0.32,
+        "minimumGap": 1.94
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "who": "constance",
+      "mode": "high",
+      "action": "slide",
+      "threatensRunningPlayer": true,
+      "window": {
+        "start": 0.3,
+        "end": 0.53,
+        "width": 0.23,
+        "minimumGap": 2.66
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "who": "constance",
+      "mode": "low",
+      "action": "jump",
+      "threatensRunningPlayer": true,
+      "window": {
+        "start": 0.37,
+        "end": 0.69,
+        "width": 0.32,
+        "minimumGap": 0.99
+      }
+    }
+  ],
+  "geometry": [
+    {
+      "hazard": "Termite mound",
+      "mode": null,
+      "frame": 0,
+      "sw": 461,
+      "sh": 497,
+      "sx": 313,
+      "sy": 127,
+      "dw": 38.896874999999994,
+      "dh": 41.934374999999996,
+      "dx": 630.59375,
+      "dy": 368.403125,
+      "box": {
+        "x": 636.5,
+        "y": 370.175,
+        "w": 26.999999999999996,
+        "h": 39.824999999999996
+      }
+    },
+    {
+      "hazard": "Crested porcupine",
+      "mode": null,
+      "frame": 0,
+      "sw": 797,
+      "sh": 410,
+      "sx": 1231,
+      "sy": 213,
+      "dw": 74.71875,
+      "dh": 38.4375,
+      "dx": 612.59375,
+      "dy": 371.84375,
+      "box": {
+        "x": 612.78125,
+        "y": 386.65625,
+        "w": 44.53125,
+        "h": 23.34375
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "mode": "high",
+      "frame": 0,
+      "sw": 424,
+      "sh": 458,
+      "sx": 35,
+      "sy": 95,
+      "dw": 59.625,
+      "dh": 64.40625,
+      "dx": 623.5625,
+      "dy": 326.453125,
+      "box": {
+        "x": 628.34375,
+        "y": 357.390625,
+        "w": 28.828125,
+        "h": 12.65625
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "mode": "high",
+      "frame": 1,
+      "sw": 424,
+      "sh": 458,
+      "sx": 578,
+      "sy": 95,
+      "dw": 59.625,
+      "dh": 64.40625,
+      "dx": 623.5625,
+      "dy": 326.453125,
+      "box": {
+        "x": 628.34375,
+        "y": 357.390625,
+        "w": 28.828125,
+        "h": 12.65625
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "mode": "high",
+      "frame": 2,
+      "sw": 424,
+      "sh": 458,
+      "sx": 1121,
+      "sy": 95,
+      "dw": 59.625,
+      "dh": 64.40625,
+      "dx": 623.5625,
+      "dy": 326.453125,
+      "box": {
+        "x": 628.34375,
+        "y": 357.390625,
+        "w": 28.828125,
+        "h": 12.65625
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "mode": "high",
+      "frame": 3,
+      "sw": 424,
+      "sh": 458,
+      "sx": 1664,
+      "sy": 95,
+      "dw": 59.625,
+      "dh": 64.40625,
+      "dx": 623.5625,
+      "dy": 326.453125,
+      "box": {
+        "x": 628.34375,
+        "y": 357.390625,
+        "w": 28.828125,
+        "h": 12.65625
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "mode": "low",
+      "frame": 0,
+      "sw": 424,
+      "sh": 458,
+      "sx": 35,
+      "sy": 95,
+      "dw": 59.625,
+      "dh": 64.40625,
+      "dx": 623.5625,
+      "dy": 354.453125,
+      "box": {
+        "x": 628.34375,
+        "y": 385.390625,
+        "w": 28.828125,
+        "h": 12.65625
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "mode": "low",
+      "frame": 1,
+      "sw": 424,
+      "sh": 458,
+      "sx": 578,
+      "sy": 95,
+      "dw": 59.625,
+      "dh": 64.40625,
+      "dx": 623.5625,
+      "dy": 354.453125,
+      "box": {
+        "x": 628.34375,
+        "y": 385.390625,
+        "w": 28.828125,
+        "h": 12.65625
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "mode": "low",
+      "frame": 2,
+      "sw": 424,
+      "sh": 458,
+      "sx": 1121,
+      "sy": 95,
+      "dw": 59.625,
+      "dh": 64.40625,
+      "dx": 623.5625,
+      "dy": 354.453125,
+      "box": {
+        "x": 628.34375,
+        "y": 385.390625,
+        "w": 28.828125,
+        "h": 12.65625
+      }
+    },
+    {
+      "hazard": "Lilac-breasted roller",
+      "mode": "low",
+      "frame": 3,
+      "sw": 424,
+      "sh": 458,
+      "sx": 1664,
+      "sy": 95,
+      "dw": 59.625,
+      "dh": 64.40625,
+      "dx": 623.5625,
+      "dy": 354.453125,
+      "box": {
+        "x": 628.34375,
+        "y": 385.390625,
+        "w": 28.828125,
+        "h": 12.65625
+      }
+    }
+  ],
+  "characters": [
+    {
+      "who": "claude",
+      "state": "run",
+      "draws": [
+        [
+          "run",
+          0,
+          0,
+          700,
+          700,
+          155,
+          300,
+          130,
+          130
+        ]
+      ],
+      "box": {
+        "x": 203.8902,
+        "y": 364.3536,
+        "w": 32.2196,
+        "h": 64.6464
+      },
+      "visible": {
+        "visibleTop": 361.65999999999997,
+        "footY": 429,
+        "centerX": 220,
+        "renderScale": 0.185,
+        "visibleHeight": 67.34,
+        "visibleWidth": 57.535
+      }
+    },
+    {
+      "who": "claude",
+      "state": "slide",
+      "draws": [
+        [
+          "slide",
+          0,
+          0,
+          700,
+          700,
+          175,
+          338,
+          91,
+          91
+        ]
+      ],
+      "box": {
+        "x": 191.79489999999998,
+        "y": 378.10650000000004,
+        "w": 61.538399999999996,
+        "h": 50.8935
+      },
+      "visible": {
+        "visibleTop": 378.10650000000004,
+        "footY": 429,
+        "centerX": 220,
+        "renderScale": 0.1295,
+        "visibleHeight": 50.8935,
+        "visibleWidth": 85.47
+      }
+    },
+    {
+      "who": "constance",
+      "state": "run",
+      "draws": [
+        [
+          "run",
+          0,
+          700,
+          700,
+          700,
+          157,
+          305,
+          125,
+          125
+        ]
+      ],
+      "box": {
+        "x": 204.72772,
+        "y": 362.69599999999997,
+        "w": 30.54456,
+        "h": 67.304
+      },
+      "visible": {
+        "visibleTop": 362.69599999999997,
+        "footY": 430,
+        "centerX": 220,
+        "renderScale": 0.179,
+        "visibleHeight": 67.304,
+        "visibleWidth": 56.564
+      }
+    },
+    {
+      "who": "constance",
+      "state": "slide",
+      "draws": [
+        [
+          "slide",
+          0,
+          700,
+          700,
+          700,
+          172,
+          334,
+          96,
+          96
+        ]
+      ],
+      "box": {
+        "x": 189.07094800000002,
+        "y": 374.1595538,
+        "w": 63.67746,
+        "h": 55.840446199999995
+      },
+      "visible": {
+        "visibleTop": 370.59527,
+        "footY": 430,
+        "centerX": 220,
+        "renderScale": 0.13783,
+        "visibleHeight": 59.40473,
+        "visibleWidth": 90.96780000000001
+      }
+    }
+  ],
+  "course": [
+    {
+      "who": "claude",
+      "hz": 60,
+      "finished": true,
+      "hits": 0,
+      "hitEvents": [],
+      "elapsed": 90,
+      "finalState": "celebrate",
+      "plannedHazards": 21,
+      "signature": [
+        {
+          "time": 75.3,
+          "defName": "Termite mound",
+          "mode": null,
+          "speedClass": "normal"
+        },
+        {
+          "time": 77.3,
+          "defName": "Lilac-breasted roller",
+          "mode": "high",
+          "speedClass": "normal"
+        },
+        {
+          "time": 79.3,
+          "defName": "Crested porcupine",
+          "mode": null,
+          "speedClass": "normal"
+        },
+        {
+          "time": 81.4,
+          "defName": "Lilac-breasted roller",
+          "mode": "low",
+          "speedClass": "fast"
+        },
+        {
+          "time": 83.4,
+          "defName": "Termite mound",
+          "mode": null,
+          "speedClass": "normal"
+        }
+      ],
+      "finish": {
+        "geometry": {
+          "img": {
+            "width": 1211,
+            "height": 1299
+          },
+          "dw": 124.88437499999999,
+          "dh": 133.959375,
+          "dx": 174.8828125,
+          "dy": 282.33124999999995,
+          "trigger": {
+            "x": 209.325,
+            "y": 0,
+            "w": 56,
+            "h": 540
+          }
+        },
+        "visibleContactY": 409.99999999999994,
+        "poleX": 220
+      }
+    },
+    {
+      "who": "claude",
+      "hz": 120,
+      "finished": true,
+      "hits": 0,
+      "hitEvents": [],
+      "elapsed": 90,
+      "finalState": "celebrate",
+      "plannedHazards": 21,
+      "signature": [
+        {
+          "time": 75.3,
+          "defName": "Termite mound",
+          "mode": null,
+          "speedClass": "normal"
+        },
+        {
+          "time": 77.3,
+          "defName": "Lilac-breasted roller",
+          "mode": "high",
+          "speedClass": "normal"
+        },
+        {
+          "time": 79.3,
+          "defName": "Crested porcupine",
+          "mode": null,
+          "speedClass": "normal"
+        },
+        {
+          "time": 81.4,
+          "defName": "Lilac-breasted roller",
+          "mode": "low",
+          "speedClass": "fast"
+        },
+        {
+          "time": 83.4,
+          "defName": "Termite mound",
+          "mode": null,
+          "speedClass": "normal"
+        }
+      ],
+      "finish": {
+        "geometry": {
+          "img": {
+            "width": 1211,
+            "height": 1299
+          },
+          "dw": 124.88437499999999,
+          "dh": 133.959375,
+          "dx": 174.8828125,
+          "dy": 282.33124999999995,
+          "trigger": {
+            "x": 209.325,
+            "y": 0,
+            "w": 56,
+            "h": 540
+          }
+        },
+        "visibleContactY": 409.99999999999994,
+        "poleX": 220
+      }
+    },
+    {
+      "who": "constance",
+      "hz": 60,
+      "finished": true,
+      "hits": 0,
+      "hitEvents": [],
+      "elapsed": 90,
+      "finalState": "celebrate",
+      "plannedHazards": 21,
+      "signature": [
+        {
+          "time": 75.3,
+          "defName": "Termite mound",
+          "mode": null,
+          "speedClass": "normal"
+        },
+        {
+          "time": 77.3,
+          "defName": "Lilac-breasted roller",
+          "mode": "high",
+          "speedClass": "normal"
+        },
+        {
+          "time": 79.3,
+          "defName": "Crested porcupine",
+          "mode": null,
+          "speedClass": "normal"
+        },
+        {
+          "time": 81.4,
+          "defName": "Lilac-breasted roller",
+          "mode": "low",
+          "speedClass": "fast"
+        },
+        {
+          "time": 83.4,
+          "defName": "Termite mound",
+          "mode": null,
+          "speedClass": "normal"
+        }
+      ],
+      "finish": {
+        "geometry": {
+          "img": {
+            "width": 1211,
+            "height": 1299
+          },
+          "dw": 124.88437499999999,
+          "dh": 133.959375,
+          "dx": 174.8828125,
+          "dy": 282.33124999999995,
+          "trigger": {
+            "x": 209.325,
+            "y": 0,
+            "w": 56,
+            "h": 540
+          }
+        },
+        "visibleContactY": 409.99999999999994,
+        "poleX": 220
+      }
+    },
+    {
+      "who": "constance",
+      "hz": 120,
+      "finished": true,
+      "hits": 0,
+      "hitEvents": [],
+      "elapsed": 90,
+      "finalState": "celebrate",
+      "plannedHazards": 21,
+      "signature": [
+        {
+          "time": 75.3,
+          "defName": "Termite mound",
+          "mode": null,
+          "speedClass": "normal"
+        },
+        {
+          "time": 77.3,
+          "defName": "Lilac-breasted roller",
+          "mode": "high",
+          "speedClass": "normal"
+        },
+        {
+          "time": 79.3,
+          "defName": "Crested porcupine",
+          "mode": null,
+          "speedClass": "normal"
+        },
+        {
+          "time": 81.4,
+          "defName": "Lilac-breasted roller",
+          "mode": "low",
+          "speedClass": "fast"
+        },
+        {
+          "time": 83.4,
+          "defName": "Termite mound",
+          "mode": null,
+          "speedClass": "normal"
+        }
+      ],
+      "finish": {
+        "geometry": {
+          "img": {
+            "width": 1211,
+            "height": 1299
+          },
+          "dw": 124.88437499999999,
+          "dh": 133.959375,
+          "dx": 174.8828125,
+          "dy": 282.33124999999995,
+          "trigger": {
+            "x": 209.325,
+            "y": 0,
+            "w": 56,
+            "h": 540
+          }
+        },
+        "visibleContactY": 409.99999999999994,
+        "poleX": 220
+      }
+    }
+  ],
+  "passed": true
+}

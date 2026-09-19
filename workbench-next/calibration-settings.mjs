@@ -1,4 +1,4 @@
-export const CALIBRATION_VERSION=3;
+export const CALIBRATION_VERSION=4;
 export const PROFILES=['easy','standard','hard'];
 export const AUTO_FIELDS=['groundOffset','highClearance','lowClearance','cw','ch','cx','cy'];
 export const PROFILE_FIELDS={groundSpeed:[40,260],flyingSpeed:[50,320],minWindowMs:[16,600],spacingSeconds:[.5,8],reactionSeconds:[.5,6],count:[2,24],maxVisible:[1,2]};
@@ -33,12 +33,12 @@ export function effectivePlacement(draft,item,baseline=false){
  return p;
 }
 export function profileConfig(config,calibration){const p=calibration?.profiles[calibration.profile];return p?{...config,worldSpeed:p.groundSpeed,objectQA:{...config.objectQA,flying:{...config.objectQA.flying,speed:p.flyingSpeed}}}:config;}
-const fingerprint=value=>{const input=JSON.stringify(value);let h=2166136261;for(let i=0;i<input.length;i++)h=Math.imul(h^input.charCodeAt(i),16777619);return `cal3-${(h>>>0).toString(16)}`;};
+const fingerprint=value=>{const input=JSON.stringify(value);let h=2166136261;for(let i=0;i<input.length;i++)h=Math.imul(h^input.charCodeAt(i),16777619);return `cal4-${(h>>>0).toString(16)}`;};
 // Profile selection and spawn density do not change a hazard's geometry or action window.
 export function timingProfileStamp(calibration,item,profile){const p=calibration.profiles[profile];return fingerprint([item.kind==='flying'?p.flyingSpeed:p.groundSpeed,p.minWindowMs]);}
 export function calibrationStamp(draft,item,config){return fingerprint([calibrationReferenceStamp(draft,item,config),PROFILES.map(profile=>timingProfileStamp(draft.calibration,item,profile))]);}
 export function calibrationReferenceStamp(draft,item,config){
  const chars=Object.fromEntries(Object.entries(draft.placement).filter(([id])=>id.startsWith('character:')||id.startsWith(`grounding:${item.stage}:`)));
  const characterFrames=Object.fromEntries(Object.entries(draft.frames).filter(([id])=>id.startsWith('character:'))),characterCrops=Object.fromEntries(Object.entries(draft.value).filter(([id])=>id.startsWith('character:')));
- return fingerprint([CALIBRATION_VERSION,chars,characterFrames,characterCrops,draft.placement[item.id],draft.frames[item.id],draft.value[item.id],draft.provenance?.assets[item.asset],draft.calibration.stages[item.stage],draft.calibration.hazards[item.id].follow,draft.calibration.hazards[item.id].locks,config.jump,config.actions,config.state,config.visibleMeta]);
+ return fingerprint([CALIBRATION_VERSION,chars,characterFrames,characterCrops,draft.placement[item.id],draft.frames[item.id],draft.value[item.id],draft.provenance?.assets[item.asset],item.sourceAnchor,draft.calibration.stages[item.stage],draft.calibration.hazards[item.id].follow,draft.calibration.hazards[item.id].locks,config.jump,config.actions,config.state,config.visibleMeta]);
 }

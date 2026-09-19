@@ -1,0 +1,279 @@
+{
+  "runId": "af01-20260919172919-679b96",
+  "jobId": "AF01:FLYING",
+  "status": "blocked-no-structural-pass-after-two-attempt-cap",
+  "bestArtCandidate": "/workspace/scratch/b1988fd1efd9/generated_images/exec-39d99ca0-6705-433f-af13-ee19c8ad5039.png",
+  "reason": "Both built-in generations have useful four-phase art but fail exact dimensions and alpha-gutter constraints. No deterministic pixel edits performed.",
+  "references": [
+    "/workspace/scratch/b1988fd1efd9/af01-hazards/assets/worlds/north-america/NA01_HAZARD_VULTURE.png",
+    "/workspace/scratch/b1988fd1efd9/af01-hazards/assets/references/africa/af01/lilac_breasted_roller_flight.jpg"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "mode": "fresh",
+      "started": "2026-09-19T17:49:12.687Z",
+      "finished": "2026-09-19T17:49:44.683Z",
+      "path": "/workspace/scratch/b1988fd1efd9/generated_images/exec-c5ae2f95-7f60-438f-944d-1e63fea73c15.png",
+      "prompt": "Exact 2172x724 RGBA four-cell atlas. Same single right-facing lilac-breasted roller in each 543x724 cell, stable core centered local(271,362), >=32px gutters. Frames: upstroke apex; descending-forward; downstroke apex; rising-swept-back. Authentic lilac/turquoise roller anatomy; crisp approved pixel art; genuine transparency; no scenery, trails, flock, labels, guides, dividers, text, or background.",
+      "visualAssessment": "Passes subject identity and four readable independent ordered wing phases. Broadly stable core. Fails exact width and alpha gutters; frame 1 is especially oversized.",
+      "sha256": "e1d01ca3c17e19b0e847aa93fc77c017e42107d43e37bf3b60922b0c27ee76ec",
+      "dimensions": {
+        "width": 2171,
+        "height": 724,
+        "channels": 4
+      },
+      "cells": [
+        {
+          "cell": 0,
+          "anyAlpha": {
+            "minX": 0,
+            "minY": 36,
+            "maxX": 542,
+            "maxY": 701,
+            "pixels": 122361,
+            "gutters": {
+              "left": 0,
+              "right": 0,
+              "top": 36,
+              "bottom": 22
+            }
+          },
+          "substantiveAlpha": {
+            "minX": 35,
+            "minY": 120,
+            "maxX": 506,
+            "maxY": 536,
+            "pixels": 109957,
+            "gutters": {
+              "left": 35,
+              "right": 36,
+              "top": 120,
+              "bottom": 187
+            }
+          }
+        },
+        {
+          "cell": 1,
+          "anyAlpha": {
+            "minX": 1,
+            "minY": 69,
+            "maxX": 536,
+            "maxY": 691,
+            "pixels": 92967,
+            "gutters": {
+              "left": 1,
+              "right": 6,
+              "top": 69,
+              "bottom": 32
+            }
+          },
+          "substantiveAlpha": {
+            "minX": 36,
+            "minY": 202,
+            "maxX": 517,
+            "maxY": 536,
+            "pixels": 81867,
+            "gutters": {
+              "left": 36,
+              "right": 25,
+              "top": 202,
+              "bottom": 187
+            }
+          }
+        },
+        {
+          "cell": 2,
+          "anyAlpha": {
+            "minX": 2,
+            "minY": 182,
+            "maxX": 508,
+            "maxY": 699,
+            "pixels": 77591,
+            "gutters": {
+              "left": 2,
+              "right": 34,
+              "top": 182,
+              "bottom": 24
+            }
+          },
+          "substantiveAlpha": {
+            "minX": 16,
+            "minY": 376,
+            "maxX": 506,
+            "maxY": 672,
+            "pixels": 67756,
+            "gutters": {
+              "left": 16,
+              "right": 36,
+              "top": 376,
+              "bottom": 51
+            }
+          }
+        },
+        {
+          "cell": 3,
+          "anyAlpha": {
+            "minX": 0,
+            "minY": 77,
+            "maxX": 509,
+            "maxY": 699,
+            "pixels": 88913,
+            "gutters": {
+              "left": 0,
+              "right": 32,
+              "top": 77,
+              "bottom": 24
+            }
+          },
+          "substantiveAlpha": {
+            "minX": 34,
+            "minY": 200,
+            "maxX": 506,
+            "maxY": 536,
+            "pixels": 78901,
+            "gutters": {
+              "left": 34,
+              "right": 35,
+              "top": 200,
+              "bottom": 187
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempt": 2,
+      "mode": "fresh",
+      "started": "2026-09-19T17:50:14.212Z",
+      "finished": "2026-09-19T17:50:44.985Z",
+      "path": "/workspace/scratch/b1988fd1efd9/generated_images/exec-39d99ca0-6705-433f-af13-ee19c8ad5039.png",
+      "prompt": "Exact 2172x724 RGBA four-cell atlas with compact roller in each cell, stable body centered local(271,362), maximum bounds local x64..479 and y64..659. Same four ordered phases. Authentic lilac/turquoise roller identity and crisp approved pixel art. Clean transparency; no scenery, trails, duplicates, labels, guides, dividers, text, or background.",
+      "visualAssessment": "Preferred art source. Four readable independent ordered wing phases, strong roller identity, compact bodies, and broadly stable cores. Fails exact dimensions and alpha gutters; some substantive feather pixels exceed requested margins.",
+      "sha256": "833dd5edffad21729732b5716ceeffda6678cc569bf06cf88cc0df5eddfa221a",
+      "dimensions": {
+        "width": 2170,
+        "height": 725,
+        "channels": 4
+      },
+      "cells": [
+        {
+          "cell": 0,
+          "anyAlpha": {
+            "minX": 20,
+            "minY": 21,
+            "maxX": 540,
+            "maxY": 682,
+            "pixels": 102747,
+            "gutters": {
+              "left": 20,
+              "right": 2,
+              "top": 21,
+              "bottom": 42
+            }
+          },
+          "substantiveAlpha": {
+            "minX": 23,
+            "minY": 116,
+            "maxX": 480,
+            "maxY": 526,
+            "pixels": 92599,
+            "gutters": {
+              "left": 23,
+              "right": 62,
+              "top": 116,
+              "bottom": 198
+            }
+          }
+        },
+        {
+          "cell": 1,
+          "anyAlpha": {
+            "minX": 4,
+            "minY": 85,
+            "maxX": 533,
+            "maxY": 662,
+            "pixels": 87343,
+            "gutters": {
+              "left": 4,
+              "right": 9,
+              "top": 85,
+              "bottom": 62
+            }
+          },
+          "substantiveAlpha": {
+            "minX": 29,
+            "minY": 172,
+            "maxX": 501,
+            "maxY": 525,
+            "pixels": 78255,
+            "gutters": {
+              "left": 29,
+              "right": 41,
+              "top": 172,
+              "bottom": 199
+            }
+          }
+        },
+        {
+          "cell": 2,
+          "anyAlpha": {
+            "minX": 6,
+            "minY": 265,
+            "maxX": 542,
+            "maxY": 698,
+            "pixels": 74757,
+            "gutters": {
+              "left": 6,
+              "right": 0,
+              "top": 265,
+              "bottom": 26
+            }
+          },
+          "substantiveAlpha": {
+            "minX": 29,
+            "minY": 355,
+            "maxX": 504,
+            "maxY": 659,
+            "pixels": 66122,
+            "gutters": {
+              "left": 29,
+              "right": 38,
+              "top": 355,
+              "bottom": 65
+            }
+          }
+        },
+        {
+          "cell": 3,
+          "anyAlpha": {
+            "minX": 2,
+            "minY": 77,
+            "maxX": 529,
+            "maxY": 642,
+            "pixels": 77696,
+            "gutters": {
+              "left": 2,
+              "right": 11,
+              "top": 77,
+              "bottom": 82
+            }
+          },
+          "substantiveAlpha": {
+            "minX": 56,
+            "minY": 165,
+            "maxX": 527,
+            "maxY": 526,
+            "pixels": 68826,
+            "gutters": {
+              "left": 56,
+              "right": 13,
+              "top": 165,
+              "bottom": 198
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -49,6 +49,14 @@
       ground:{scale:scale*p.groundScale, y:p.seamY-w.groundSurfaceSourceY*scale*p.groundScale+p.groundYOffset}
     };
   }
+  function gameplaySurface(config, registry, id = config.activeWorld, legacySurface) {
+    const profile = config.worldProfiles[id];
+    if (active(registry, id) && profile?.landscapeContract === registry.contractVersion) {
+      return registry.viewport.groundSurfaceY;
+    }
+    if (Number.isFinite(legacySurface)) return legacySurface;
+    return profile.seamY + profile.groundYOffset;
+  }
   function assertCanonical(config, registry, id) {
     const p = config.worldProfiles[id], expected = defaults(registry);
     for (const key of ["sourceW", "seamY", "farY", "farScale", "midYOffset", "midScale", "groundYOffset", "groundScale", "landscapeContract"]) {
@@ -78,5 +86,5 @@
     }
     return migrated;
   }
-  return Object.freeze({active, defaults, applyStage, apply, sources, geometry, assertCanonical, migrateStages});
+  return Object.freeze({active, defaults, applyStage, apply, sources, geometry, gameplaySurface, assertCanonical, migrateStages});
 });

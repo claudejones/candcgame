@@ -20,7 +20,7 @@ export function placementForBox(item,g,box,p){
     // height there is no spare height, so its vertical position is fixed.
     next.cy=Math.abs(r.h-h)<1e-8?p.cy:clamp('cy',1-(box.y-r.top)/(r.h-h));
   }else{
-    next.cx=clamp('cx',(box.x-r.x-(r.w-w)/2)/r.w);
+    next.cx=clamp('cx',(r.flipX?-1:1)*(box.x-r.x-(r.w-w)/2)/r.w);
     next.cy=clamp('cy',(box.y-(r.kind==='flying'?r.y+(r.h-h)/2:r.anchor-h))/r.h);
   }
   return next;

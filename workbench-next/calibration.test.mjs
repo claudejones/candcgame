@@ -10,7 +10,7 @@ import {calibrationStamp,calibrationReferenceStamp,timingProfileStamp,PROFILES,e
 import {analyzeHazard,optimizeHazard,meetsProfile,makeSequence} from './calibration-engine.mjs';
 import {createMotion} from './runtime-rules.mjs';
 const context={window:{}};vm.createContext(context);
-for(const name of ['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js'])vm.runInContext(fs.readFileSync(new URL('../src/js/'+name,import.meta.url),'utf8'),context);
+for(const name of JSON.parse(fs.readFileSync(new URL('./source-files.json',import.meta.url),'utf8')))vm.runInContext(fs.readFileSync(new URL('../'+name,import.meta.url),'utf8'),context);
 const w=context.window,config=w.GAME_CONFIG;w.CC_LANDSCAPE_CONTRACT.apply(config,w.CC_LANDSCAPE_REGISTRY);
 const items=descriptors(config,w.GAME_SCHEMA),stages=landscapeDescriptors(config,w.CC_LANDSCAPE_REGISTRY,w.CC_LANDSCAPE_CONTRACT),catalog=JSON.parse(fs.readFileSync(new URL('./asset-catalog.json',import.meta.url)));
 const make=()=>new ProjectDraft(items,stages,catalog.dimensions,projectProvenance(catalog,items,stages),catalog.migrations,config);
@@ -34,9 +34,9 @@ test('shared path moves both characters and linked ground/HIGH/LOW hazards; loca
  assert.equal(d.calibration.stages.eu01.pathY,d.calibration.stages.eu01.originY);
 });
 
-test('v5 migration retains all edits and locks only custom hazard fields; v7 round trips calibration in one transaction',()=>{
+test('v5 migration retains all edits and locks only custom hazard fields; v8 round trips calibration in one transaction',()=>{
  const old=make(),store=memory();old.editPlacement(hazard.id,{...old.placement[hazard.id],cw:.25});old.editPlacement('grounding:na01:claude',{groundOffset:12});
- const payload=old.export();payload.format=PRE_CALIBRATION_FORMAT;delete payload.calibration;const raw=JSON.stringify(payload);store.setItem(PRE_CALIBRATION_FORMAT,raw);
+ const payload=old.export();payload.format=PRE_CALIBRATION_FORMAT;for(const [id,p] of Object.entries(payload.placement))if(id.startsWith('hazard:'))for(const k of ['flipX','highOffsetY','lowOffsetY'])delete p[k];delete payload.calibration;const raw=JSON.stringify(payload);store.setItem(PRE_CALIBRATION_FORMAT,raw);
  const d=make();d.load(store);assert.equal(d.placement[hazard.id].cw,.25);assert.deepEqual(d.calibration.hazards[hazard.id].locks,['cw']);assert.equal(d.calibration.stages.na01.pathY,d.calibration.stages.na01.originY);
  const before=d.export(),c=structuredClone(d.calibration),p=structuredClone(d.placement);c.profile='hard';c.profiles.hard.count=14;c.stages.na01.pathY+=8;p[hazard.id].ch=.3;d.editCalibration(c,p);const after=d.export();
  d.undo();assert.deepEqual(d.export(),before);d.redo();assert.deepEqual(d.export(),after);d.save(store);assert.equal(store.getItem(PRE_CALIBRATION_FORMAT),raw);assert.ok(store.getItem(PROJECT_STORAGE_KEY));
@@ -109,7 +109,7 @@ test('per-stage character links preserve every pose, rebase atomically, and pers
 
 test('v6 migration preserves current geometry and automation; invalid link imports cannot mutate a draft',()=>{
  const old=make(),c=structuredClone(old.calibration);c.stages.na01.pathY+=27;c.profile='hard';c.profiles.easy.minWindowMs=190;c.hazards[hazard.id].follow=false;c.hazards[hazard.id].locks=['cw'];old.editCalibration(c);old.editPlacement('grounding:na01:claude',{groundOffset:-11});
- const payload=old.export();payload.format=PRE_CHARACTER_LINK_FORMAT;payload.calibration.version=1;for(const stage of Object.values(payload.calibration.stages))delete stage.characterFollow;
+ const payload=old.export();payload.format=PRE_CHARACTER_LINK_FORMAT;for(const [id,p] of Object.entries(payload.placement))if(id.startsWith('hazard:'))for(const k of ['flipX','highOffsetY','lowOffsetY'])delete p[k];payload.calibration.version=1;for(const stage of Object.values(payload.calibration.stages))delete stage.characterFollow;
  const store=memory(),raw=JSON.stringify({...payload,savedAt:'2026-09-19T12:00:00.000Z'});store.setItem(PRE_CHARACTER_LINK_FORMAT,raw);const d=make();d.load(store);assert.deepEqual(d.export(),old.export());assert.equal(d.migrated,true);assert.equal(d.dirty,true);
  const geometry=draft=>sceneGeometry({config,stage:'na01',draft,character:find('character:claude:run'),hazard});assert.deepEqual(geometry(d),geometry(old));d.save(store);assert.equal(store.getItem(PRE_CHARACTER_LINK_FORMAT),raw);assert.ok(store.getItem(PROJECT_STORAGE_KEY));
  const baseline=d.export();for(const mutate of [x=>x.calibration.stages.na01.characterFollow.claude='false',x=>delete x.calibration.stages.eu01.characterFollow.constance,x=>x.calibration.stages.na01.characterFollow.other=true,x=>x.calibration.version=1]){const bad=structuredClone(baseline);mutate(bad);assert.throws(()=>d.prepareImport(bad));assert.deepEqual(d.export(),baseline);}

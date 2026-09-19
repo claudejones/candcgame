@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {AssetSelection,Draft,descriptors,sourceFrame,validateAtlas,STORAGE_KEY} from './model.mjs';
 const context={window:{}}; vm.createContext(context);
-for(const file of ['game-config.js','config-schema.js']) vm.runInContext(fs.readFileSync(new URL(`../src/js/${file}`,import.meta.url),'utf8'),context);
+for(const file of JSON.parse(fs.readFileSync(new URL('./source-files.json',import.meta.url),'utf8'))) vm.runInContext(fs.readFileSync(new URL(`../${file}`,import.meta.url),'utf8'),context);
 const items=descriptors(context.window.GAME_CONFIG,context.window.GAME_SCHEMA);
 
 test('stage and character navigation remember independent assets, states and frames',()=>{
@@ -26,9 +26,9 @@ test('stage and character navigation remember independent assets, states and fra
 test('every character/state and hazard descriptor addresses a real PNG frame',()=>{
   const catalog=JSON.parse(fs.readFileSync(new URL('./asset-catalog.json',import.meta.url)));
   assert.equal(items.filter(i=>i.type==='character').length,12);
-  assert.equal(items.filter(i=>i.type==='hazard').length,27);
+  assert.equal(items.filter(i=>i.type==='hazard').length,30);
   for(const item of items){
-    const data=fs.readFileSync(new URL(catalog.assets[item.asset],import.meta.url));
+    const data=fs.readFileSync(new URL(catalog.assets[item.asset].split('?')[0],import.meta.url));
     assert.equal(data.toString('ascii',1,4),'PNG');
     validateAtlas(item,data.readUInt32BE(16),data.readUInt32BE(20));
     for(let frame=0;frame<item.frames;frame++) assert.ok(sourceFrame(item,frame).w>0);

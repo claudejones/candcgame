@@ -1,5 +1,13 @@
 # Workbench review — verification
 
+## Review 11 — AF01 integration and facing
+
+- All 61 Workbench tests pass, including actual nine-stage v7 save migration, no lost numeric tuning, five release hashes, pending-stage exclusion, all production preview geometry at every frame/HIGH/LOW, mirrored anchor/collider invariants, inverse hitbox dragging, anchor crop rejection and frame-canvas transform restoration.
+- All 37 upstream runtime/workflow tests pass. AF01 structural asset validation and generated registry/catalog checks pass. The upstream production files remain identical to the imported main revision.
+- Full-artwork calibration checks cover 30 hazards: 22 shared proposals meet all three difficulties; eight remain correctly flagged. All 30 stage/profile sequence combinations verify for both characters at 60 Hz. These are Design checks, not full production gameplay acceptance.
+- The complete DOM/canvas flow passes, including automatic migration from a real v7 browser save, Africa navigation, all five images, HIGH/LOW, mirrored Frame versus original Full atlas, frame stepping and facing override/Undo/Redo/save/import. Rendered AF01 scenery, porcupine Scene and roller HIGH/Frame views were inspected. This is not browser-layout acceptance. Publication evidence follows after deployment. No full Test/Game implementation or user artwork acceptance is claimed.
+
+
 ## Review 10 — stage grounding links
 
 - Rendering and all solver character paths honor each stage's independent character links; actor-cache keys include the effective shifts.

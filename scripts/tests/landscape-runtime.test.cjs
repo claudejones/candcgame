@@ -11,7 +11,7 @@ test('actual host and inner startup agree for every active stage; pending stays 
     }
     const legacy=load('baseline').config;
     for(const [id,s] of Object.entries(registry.stages)) {
-      if(s.status==='pending') assert.deepEqual(clone(config.worldProfiles[id]),clone(legacy.worldProfiles[id]));
+      if(s.status==='pending') assert.equal(config.worldProfiles[id],legacy.worldProfiles[id]);
     }
     if(mode==='host') assert.equal(new URL(frame.src).searchParams.get('landscapes'),'phase8');
   }
@@ -21,13 +21,10 @@ test('actual host and inner startup agree for every active stage; pending stays 
     assert.equal(state(pending,{preview:true}).mode,'prospective-preview');
   }
 });
-test('activating any registered future stage requires no additional hardcoded stage list',()=>{
-  const registry=clone(load().registry);
-  for(const s of Object.values(registry.stages)) s.status='integrated';
-  for(const mode of ['runtime','host']) {
-    const c=load(mode,registry);
-    for(const id of Object.keys(registry.stages)) c.contract.assertCanonical(c.config,registry,id);
-  }
+test('new pending stages cannot activate with landscape status alone',()=>{
+  const registry=clone(load().registry);registry.stages.af01.status='integrated';
+  const catalog=clone(load().context.window.CC_STAGE_CATALOG);catalog.stages.af01.status='pending';delete catalog.stages.af01.release;
+  for(const mode of ['runtime','host'])assert.throws(()=>load(mode,registry,catalog),/Missing runtime profile: af01/);
 });
 test('bad source width, offsets or scale fail the actual runtime geometry gate',()=>{
   for(const [key,value] of Object.entries({sourceW:2048,farY:-14,midYOffset:-42,groundYOffset:-8,farScale:1,midScale:0.9})) {

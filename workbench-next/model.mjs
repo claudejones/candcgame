@@ -23,7 +23,7 @@ export function descriptors(config, schema) {
   for (const [stage, value] of Object.entries(canonical.stages)) {
     value.hazards.forEach((h, i) => items.push({id:`hazard:${stage}:${i}`,type:'hazard',stage,name:h.name,kind:h.kind,
       asset:h.atlas.key,frames:h.atlas.frames,fps:h.animation.fps,region:clone(h.atlas.sourceRegion),
-      crops:clone(h.animation.frameCrops)}));
+      crops:clone(h.animation.frameCrops),sourceAnchor:h.atlas.sourceAnchor?clone(h.atlas.sourceAnchor):null,flipX:h.transform.flipX===true}));
   }
   return items;
 }

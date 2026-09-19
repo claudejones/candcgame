@@ -1,4 +1,4 @@
-import {MAX_IMPORT_BYTES,RECOVERY_KEY,UNREADABLE_KEY,ARTWORK_RECOVERY_KEY,PREVIOUS_PROJECT_FORMAT,PRE_CALIBRATION_FORMAT,PRE_CHARACTER_LINK_FORMAT} from './project.mjs';
+import {MAX_IMPORT_BYTES,RECOVERY_KEY,UNREADABLE_KEY,ARTWORK_RECOVERY_KEY,PREVIOUS_PROJECT_FORMAT,PRE_CALIBRATION_FORMAT,PRE_CHARACTER_LINK_FORMAT,PRE_FACING_FORMAT} from './project.mjs';
 import {PLACEMENT_FIELDS} from './scene-model.mjs';
 const $=id=>document.getElementById(id);
 function download(text,name) {
@@ -22,7 +22,7 @@ export function setupProjectWorkflow({draft,beforeAction,changed,message}) {
     recovery=null;unreadable=draft.failedSave||null;
     try {
       artworkRecovery=draft.migrated&&draft.expectedRaw?draft.expectedRaw:localStorage.getItem(ARTWORK_RECOVERY_KEY);
-      previousEditor=localStorage.getItem(PRE_CHARACTER_LINK_FORMAT)||localStorage.getItem(PRE_CALIBRATION_FORMAT)||localStorage.getItem(PREVIOUS_PROJECT_FORMAT);
+      previousEditor=localStorage.getItem(PRE_FACING_FORMAT)||localStorage.getItem(PRE_CHARACTER_LINK_FORMAT)||localStorage.getItem(PRE_CALIBRATION_FORMAT)||localStorage.getItem(PREVIOUS_PROJECT_FORMAT);
       const raw=localStorage.getItem(RECOVERY_KEY);
       if(raw){recovery=JSON.parse(raw);draft.decode(recovery.project);}
       unreadable ||= localStorage.getItem(UNREADABLE_KEY);

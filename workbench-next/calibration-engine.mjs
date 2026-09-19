@@ -61,12 +61,13 @@ function suggestions(config,draft,items,item,art){
  const before=draft.placement[item.id],policy=draft.calibration.hazards[item.id],locked=new Set([...policy.locks,...(!policy.follow?['groundOffset','highClearance','lowClearance']:[])]),p={...before};
  const set=(k,v)=>{if(!locked.has(k))p[k]=v;};
  set('cw',clamp((art.right-art.left)*.85,.05,1.2));set('ch',clamp((art.bottom-art.top)*.85,.05,1.2));set('cx',clamp((art.left+art.right)/2-.5,-1,1));set('cy',item.kind==='ground'?-(1-art.bottom):clamp((art.top+art.bottom)/2-.5,-1,1));
- const b=croppedBounds(draft.frames[item.id][0],draft.value[item.id][0]),h=b.h*960/config.worldContract.sourceW*p.scale,path=draft.calibration.stages[item.stage].pathY,shift=policy.follow?pathShift(draft,item.stage):0;
- if(item.kind==='ground')set('groundOffset',clamp(path-410+(1-art.bottom)*h-shift,-300,300));
+ const path=draft.calibration.stages[item.stage].pathY;
+ const geometry=flight=>hazardGeometry(config,item,0,draft.frames[item.id][0],draft.value[item.id][0],effectivePlacement({...draft,placement:{...draft.placement,[item.id]:p}},item),{flight,travel:false});
+ if(item.kind==='ground'){const g=geometry('high');set('groundOffset',clamp(p.groundOffset+path-(g.dest.y+art.bottom*g.dest.h),-300,300));}
  else{
   const slideTops=[];for(const who of ['claude','constance']){const it=items.find(i=>i.id===`character:${who}:slide`);for(let frame=0;frame<it.frames;frame++)slideTops.push(characterGeometry(config,it,frame,draft.frames[it.id][frame],draft.value[it.id][frame],{...draft.placement,groundOffset:draft.placement[`grounding:${item.stage}:${who}`].groundOffset+characterPathShift(draft,item.stage,who)}).collision.y);}
-  set('highClearance',clamp(410+h*p.ch/2+p.cy*h-Math.min(...slideTops)+5+shift,-300,500));
-  set('lowClearance',clamp(410+h*p.ch/2+p.cy*h-(path-4)+shift,-300,500));
+  const high=geometry('high').collision;set('highClearance',clamp(p.highClearance+high.y+high.h-Math.min(...slideTops)+5,-300,500));
+  const low=geometry('low').collision;set('lowClearance',clamp(p.lowClearance+low.y+low.h-(path-4),-300,500));
  }
  return p;
 }

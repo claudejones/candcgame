@@ -18,15 +18,23 @@ export function frameViewBox(item,frames) {
   // One common registration space for every pose, with room beyond the original cell.
   let x=-64,y=-64,right=item.region.w+64,bottom=item.region.h+64;
   frames.forEach((b,i)=>{const base=defaultBounds(item,i);x=Math.min(x,b.x-base.x);y=Math.min(y,b.y-base.y);right=Math.max(right,b.x-base.x+b.w);bottom=Math.max(bottom,b.y-base.y+b.h);});
+  if(item.type==='hazard'){const ax=item.sourceAnchor?.x??item.region.w/2,left=x;x=Math.min(x,2*ax-right);right=Math.max(right,2*ax-left);}
   return {x,y,w:right-x,h:bottom-y};
 }
-export function drawSprite(canvas,image,item,frame,bounds,crop,box,outline=false) {
+export function drawSprite(canvas,image,item,frame,bounds,crop,box,outline=false,flipX=false) {
   canvas.width=Math.ceil(box.w);canvas.height=Math.ceil(box.h);
   const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;if(!image)return;
   const source=croppedBounds(bounds,crop),base=defaultBounds(item,frame);
-  const x=source.x-base.x-box.x,y=source.y-base.y-box.y;
-  ctx.drawImage(image,source.x,source.y,source.w,source.h,x,y,source.w,source.h);
+  const ax=item.sourceAnchor?.x??item.region.w/2;
+  const x=(flipX?2*ax-(source.x-base.x)-source.w:source.x-base.x)-box.x,y=source.y-base.y-box.y;
+  if(flipX){ctx.save();ctx.translate(x+source.w,y);ctx.scale(-1,1);ctx.drawImage(image,source.x,source.y,source.w,source.h,0,0,source.w,source.h);ctx.restore();}else ctx.drawImage(image,source.x,source.y,source.w,source.h,x,y,source.w,source.h);
   if(outline){ctx.strokeStyle='#c9ed8a';ctx.lineWidth=2;ctx.strokeRect(x,y,source.w,source.h);}
+}
+function validateFrame(item,frame,bounds,crop,size){
+  validateBounds(bounds,size,crop);
+  if(item.sourceAnchor){const base=defaultBounds(item,frame),source=croppedBounds(bounds,crop),x=base.x+item.sourceAnchor.x,y=base.y+item.sourceAnchor.y;
+    if(x<source.x||x>=source.x+source.w||y<source.y||y>=source.y+source.h)throw new Error('The frame and crop must retain the hazard source anchor.');
+  }
 }
 export function hitBounds(point,bounds,tolerance) {
   const {x,y,w,h}=bounds;
@@ -53,7 +61,7 @@ export class FrameDraft extends DesignDraft {
     super(items,landscapes);this.definitions=landscapes;this.dimensions=dimensions;
     this.frameBaseline=Object.fromEntries(items.map(item=>[item.id,Array.from({length:item.frames},(_,i)=>defaultBounds(item,i))]));
     this.frames=clone(this.frameBaseline);this.savedFrames=clone(this.frames);
-    for(const item of items)for(const [i,bounds] of this.frames[item.id].entries())validateBounds(bounds,this.size(item.id),this.crop(item.id,i));
+    for(const item of items)for(const [i,bounds] of this.frames[item.id].entries())validateFrame(item,i,bounds,this.crop(item.id,i),this.size(item.id));
   }
   size(id){return this.dimensions[this.items.get(id).asset];}
   bounds(id,frame){return clone(this.frames[id][frame]);}
@@ -61,13 +69,13 @@ export class FrameDraft extends DesignDraft {
   get changedFrames(){return [...this.items.keys()].reduce((n,id)=>n+this.frames[id].filter((b,i)=>!same(b,this.frameBaseline[id][i])||!same(this.value[id][i],this.baseline[id][i])).length,0);}
   edit(id,frame,crop) {
     if(!this.frames[id]?.[frame])throw new Error('Unknown frame.');
-    validateCrop(crop,this.frames[id][frame]);
+    validateFrame(this.items.get(id),frame,this.frames[id][frame],crop,this.size(id));
     if(same(crop,this.value[id][frame]))return;
     this.past.push({id,frame,before:this.crop(id,frame),after:clone(crop)});this.future=[];this.value[id][frame]=clone(crop);
   }
   editBounds(id,frame,bounds) {
     if(!this.frames[id]?.[frame])throw new Error('Unknown frame.');
-    validateBounds(bounds,this.size(id),this.crop(id,frame));
+    validateFrame(this.items.get(id),frame,bounds,this.crop(id,frame),this.size(id));
     if(same(bounds,this.frames[id][frame]))return;
     this.past.push({kind:'bounds',id,frame,before:this.bounds(id,frame),after:clone(bounds)});this.future=[];this.frames[id][frame]=clone(bounds);
   }
@@ -83,7 +91,7 @@ export class FrameDraft extends DesignDraft {
     if(!payload.sprites?.crops || !same(Object.keys(payload.sprites.crops).sort(),[...this.items.keys()].sort()))throw new Error('Sprite crop set does not match this editor.');
     for(const [id,item] of this.items) {
       if(!Array.isArray(frames[id]) || frames[id].length!==item.frames || !Array.isArray(payload.sprites.crops[id]) || payload.sprites.crops[id].length!==item.frames)throw new Error('Wrong frame count.');
-      frames[id].forEach((b,i)=>validateBounds(b,this.size(id),payload.sprites.crops[id][i]));
+      frames[id].forEach((b,i)=>validateFrame(item,i,b,payload.sprites.crops[id][i],this.size(id)));
     }
     // Validate landscape/provenance independently; new fine crops use the edited bounds.
     const check=new DesignDraft([...this.items.values()],this.definitions);

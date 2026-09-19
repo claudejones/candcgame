@@ -125,9 +125,12 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
         grounding.querySelector('.field').firstChild.textContent='Total stage offset · Y';
         link.onchange=()=>calibration()?.setCharacterFollow(who,link.checked);groups.push(grounding);
       }else {
-        const fields=['scale','xOffset',...(selected.kind==='ground'?['groundOffset']:['highClearance','lowClearance']),...(selected.frames>1?['fps']:[])];
+        const fields=['scale','xOffset',...(selected.kind==='ground'?['groundOffset']:['highClearance','lowClearance','highOffsetY','lowOffsetY']),...(selected.frames>1?['fps']:[])];
         const automation=document.createElement('div');automation.className='group-content';
         for(const [field,text] of [['follow','Follow shared pathway'],['enabled','Include in generated sequences']]){const label=document.createElement('label');label.className='check';const input=document.createElement('input');input.type='checkbox';input.dataset.policy=field;input.dataset.hazard=selected.id;label.append(input,document.createTextNode(text));automation.append(label);input.onchange=()=>{const checked=input.checked;clock.pause();const cal=structuredClone(draft.calibration);cal.hazards[selected.id][field]=checked;const placements=structuredClone(draft.placement);if(field==='follow'){const d=pathShift(draft,stage)*(checked?-1:1),p=placements[selected.id];if(selected.kind==='ground')p.groundOffset+=d;else{p.highClearance-=d;p.lowClearance-=d;}}try{draft.editCalibration(cal,placements);}catch(error){message(error.message,true);}render(current);changed();};}groups.push(automation);
+        const facing=document.createElement('label');facing.className='check';const mirror=document.createElement('input');mirror.type='checkbox';mirror.dataset.facing=selected.id;facing.append(mirror,document.createTextNode('Mirror horizontally'));automation.append(facing);
+        const facingHelp=document.createElement('p');facingHelp.className='scope-note';facingHelp.textContent='Scene and Frame use gameplay facing. Full atlas shows source pixels. Mirroring also reflects the hitbox.';automation.append(facingHelp);
+        mirror.onchange=()=>{const flipX=mirror.checked;clock.pause();try{draft.editPlacement(selected.id,{...draft.placement[selected.id],flipX});}catch(error){message(error.message,true);}render(current);changed();};
         const checked=document.createElement('p');checked.id='hazard-check-status';checked.className='scope-note';groups.push(checked);
         groups.push(group('Hazard placement',selected.id,fields,`${stage.toUpperCase()} · ${selected.name}. Positive grounding moves down.`));
       }
@@ -144,6 +147,7 @@ export function setupSceneEditor({config,contract,items,landscapes,catalog,draft
       $('placement-properties').querySelector('[data-grounding-help]').textContent=link.checked?'Includes this stage’s pathway shift. Uncheck Follow stage pathway to edit independently. Global foot and state artwork corrections stay separate.':'Independent offset for this character in this stage. Positive Y moves down. Relinking keeps its position and follows future pathway changes.';
     }
     for(const lock of $('placement-properties').querySelectorAll('[data-lock]')){lock.checked=draft.calibration.hazards[lock.dataset.lock].locks.includes(lock.dataset.lockField);lock.disabled=Boolean(calibration()?.isPreview())||Boolean(sequence);}
+    for(const input of $('placement-properties').querySelectorAll('[data-facing]')){input.checked=draft.placement[input.dataset.facing].flipX;input.disabled=!current.ready||Boolean(calibration()?.isPreview())||Boolean(sequence);}
     for(const input of $('placement-properties').querySelectorAll('[data-policy]')){input.checked=draft.calibration.hazards[input.dataset.hazard][input.dataset.policy];input.disabled=Boolean(calibration()?.isPreview())||Boolean(sequence);}
     if($('hazard-check-status')){const policy=draft.calibration.hazards[selected.id];$('hazard-check-status').textContent=calibration()?.checkStatus(selected)??(policy.stamp?(policy.stamp===calibrationStamp(draft,selected,config)?'Applied calibration · all difficulties checked':'Needs recheck · reference, hazard or timing target changed'):'Not calibrated · optimize to propose a starting point');}
 
