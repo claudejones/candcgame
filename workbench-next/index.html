@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>C&C · Workbench Next · Design review</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="../src/js/game-config.js"></script><script defer src="../src/js/config-schema.js"></script>
+  <script defer src="../src/js/landscape-registry.js"></script><script defer src="../src/js/landscape-contract.js"></script>
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><b>C<span>&</span>C</b><div>AROUND THE WORLD<small>Production workbench</small></div></div>
+    <nav aria-label="Workspace mode"><button class="mode active" aria-pressed="true">Design</button><button class="mode" disabled title="Next: connect the complete draft to gameplay tests">Test <small>Planned</small></button><button class="mode" disabled title="After Test: clean playable preview of your complete draft">Game <small>Planned</small></button></nav>
+    <div class="review-badge">EDITOR NEXT <span>Review 09 · Shared calibration</span></div>
+  </header>
+  <div class="review-note">Design preview · Saves stay in this browser <a href="./PLAN.md">Roadmap · Design → Test → Game ↗</a></div>
+  <main class="workspace" id="workspace">
+    <aside class="navigator" aria-label="Project assets">
+      <div class="section-label">PROJECT</div><h1>Asset studio</h1>
+      <div class="asset-tabs" role="tablist" aria-label="Asset scope">
+        <button id="stage-tab" role="tab" aria-selected="true" aria-controls="stage-panel">Stage</button>
+        <button id="character-tab" role="tab" aria-selected="false" aria-controls="character-panel" tabindex="-1">Character</button>
+      </div>
+      <div id="stage-context"><p class="scope-note" id="stage-context-label">Stage context</p>        <label class="field continent-field">Continent<select id="continent"></select></label>
+        <label class="field">Stage<select id="stage"></select></label>
+</div>
+      <section id="stage-panel" class="asset-panel" role="tabpanel" aria-labelledby="stage-tab">
+        <details id="landscape-nav" class="nav-group" data-pref open><summary>Landscape</summary><div id="landscapes" class="asset-list"></div></details>
+        <details id="hazard-nav" class="nav-group" data-pref open><summary>Hazards <span id="stage-code"></span></summary><div id="hazards" class="asset-list"></div></details>
+      </section>
+      <section id="character-panel" class="asset-panel" role="tabpanel" aria-labelledby="character-tab" hidden>
+        <p class="scope-note">Shared across all stages</p><div id="characters" class="asset-list"></div>
+        <div class="section-label spaced">ANIMATION STATE</div><div id="states" class="asset-list state-list" aria-label="Character state"></div>
+      </section>
+      <details id="actor-context" class="nav-group" open hidden><summary>Scene setup</summary><div class="group-content">
+        <label class="field">Playback<select id="scene-motion"><option value="encounter">Game actions</option><option value="pose">Pose loop</option></select></label><div id="scene-character-choice"><label class="field">Character<select id="scene-character"><option value="claude">Claude</option><option value="constance">Constance</option></select></label><label class="field">Starting state<select id="scene-state"></select></label></div>
+        <label class="field" id="scene-hazard-choice">Hazard<select id="scene-hazard"></select></label>
+        <label class="field" id="scene-flight-choice">Flying pass<select id="scene-flight"><option value="high">HIGH</option><option value="low">LOW</option></select></label>
+        <p class="muted">Preview context only. Select an asset above to edit its properties.</p>
+      </div></details>
+      <details id="calibration-panel" class="nav-group" open><summary>Calibrate hazards</summary><div class="group-content">
+        <label class="field">Shared pathway Y<input id="pathway-y" type="number" min="-200" max="1200" step="1"></label><p class="muted">Moves both characters and linked hazards. Artwork corrections stay separate.</p>
+        <div class="cal-actions"><button id="optimize-stage">Optimize stage</button><button id="optimize-all">Optimize all</button><button id="cancel-optimization" hidden>Cancel</button></div>
+        <progress id="cal-progress" max="1" value="0" hidden></progress><p id="cal-status" role="status" class="muted">One shared calibration, checked against Easy, Standard and Hard. Review before applying.</p>
+        <p id="cal-profile" class="muted"></p><p id="cal-counts" role="status"></p>
+        <div id="cal-result-tools" hidden>
+          <label class="field">Find results<input id="cal-search" type="search" placeholder="Hazard, stage or continent"></label>
+          <label class="field">Continent<select id="cal-continent"><option value="">All continents</option></select></label>
+          <label class="field">Show<select id="cal-filter"><option value="all">All results</option><option value="attention">Needs attention</option><option value="ready">Ready to apply</option><option value="selected">Selected to apply</option><option value="applied">Applied</option></select></label>
+          <div class="cal-actions"><button id="cal-expand">Expand stages</button><button id="cal-collapse">Collapse stages</button><button id="cal-clear-filters">Clear filters</button></div>
+          <p id="cal-showing" class="muted"></p><button id="recheck-results">Recheck results</button>
+        </div>
+        <p id="cal-empty" class="muted" hidden>No matching hazards. Clear filters to see all results.</p><div id="cal-results" class="cal-results"></div>
+        <div class="cal-actions"><button id="apply-stage" disabled>Apply selected in stage (0)</button><button id="apply-reviewed" disabled>Apply all selected (0)</button></div><p id="cal-selection" class="muted" role="status"></p>
+      </div></details>
+      <details id="difficulty-panel" class="nav-group"><summary>Difficulty · global</summary><div class="group-content">
+        <label class="field">Preview difficulty<select id="difficulty-profile"><option value="easy">Easy</option><option value="standard" selected>Standard</option><option value="hard">Hard</option></select></label>
+        <details><summary>Edit this difficulty</summary><div id="difficulty-fields"></div></details><p class="muted">Switch difficulty to preview its speed and sequence. Shared calibration stays fixed. Editing speed or timing targets rechecks affected results; spacing and count only affect sequences.</p>
+        <button id="generate-sequence">Generate stage sequence</button><button id="play-sequence" hidden>Watch checked sequence</button><button id="stop-sequence" hidden>Return to single pass</button><p id="sequence-status" role="status" class="muted"></p><ol id="sequence-list"></ol>
+      </div></details>
+      <div class="nav-footer"><span id="stage-availability">9 available stages · 21 planned</span><p><a href="./AUDIT.md">Functionality audit ↗</a></p></div>
+    </aside>
+    <section class="studio" aria-label="Asset workspace">
+      <div class="studio-heading"><div><div class="section-label" id="breadcrumb">NA01 / LANDSCAPE</div><h2 id="asset-title">Desert</h2></div><span class="chip" id="asset-scope">STAGE NA01</span></div>
+      <div class="view-toolbar">
+        <div id="sprite-views" class="segmented" aria-label="Sprite view" hidden><button id="actor-view" aria-pressed="true">Scene</button><button id="frame-view" aria-pressed="false">Frame</button><button id="atlas-view" aria-pressed="false">Full atlas</button></div>
+        <div id="landscape-views" class="segmented" aria-label="Landscape view"><button id="scene-view" aria-pressed="true">Scene</button><button id="layer-view" aria-pressed="false">Layer</button><button id="source-view" aria-pressed="false">Source</button></div>
+        <button id="pan-tool" aria-pressed="false" title="Pan · Space + drag" aria-label="Pan preview (Space + drag)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v6-8a1.5 1.5 0 0 1 3 0v8-6a1.5 1.5 0 0 1 3 0v7-3a1.5 1.5 0 0 1 3 0v6c0 5-3 7-7 7-3 0-5-2-7-5l-3-4c-1-2 1-3 2-2l3 3"/></svg></button><label class="zoom-control">Zoom<select id="zoom"><option value="fit">Fit</option><option value="0.5">50%</option><option value="1">100%</option><option value="2">200%</option></select></label>
+        <details class="view-options" id="view-options"><summary>View options</summary><div class="options-popover">
+          <label class="check"><input type="checkbox" id="compare"> Compare baseline</label>
+          <label class="check" id="bounds-control" hidden><input type="checkbox" id="bounds" checked> Crop outline</label>
+          <div id="actor-tools" hidden><label class="check"><input type="checkbox" id="actor-guides" checked> Ground / foot guides</label><label class="check"><input type="checkbox" id="actor-boxes"> Collision boxes</label><label class="check"><input type="checkbox" id="actor-travel" checked> Scroll and hazard travel</label></div>
+          <div id="scene-tools"><div class="section-label">SHOW LAYERS</div><div class="layer-visibility">
+            <label class="check"><input type="checkbox" id="visible-far" checked> FAR</label><label class="check"><input type="checkbox" id="visible-mid" checked> MID</label><label class="check"><input type="checkbox" id="visible-ground" checked> GROUND</label><label class="check"><input type="checkbox" id="visible-clouds" checked> Clouds</label><label class="check"><input type="checkbox" id="scene-guides"> Ground guide</label>
+          </div></div>
+        </div></details>
+        <button id="focus-view" aria-pressed="false">Focus view</button>
+      </div>
+      <div id="preview-area" class="preview-area">
+        <div class="preview-card baseline-card" hidden><span class="preview-tag">BASELINE</span><div class="canvas-scroll"><canvas id="baseline" width="960" height="540" aria-label="Baseline preview"></canvas></div></div>
+        <div class="preview-card"><span class="preview-tag" id="preview-label">WORKING DRAFT</span><div class="canvas-scroll"><canvas id="preview" width="960" height="540" tabindex="0" aria-label="Selected asset preview" aria-describedby="atlas-help"></canvas></div><div id="loading" role="status">Loading assets…</div><button id="retry" hidden>Retry images</button></div>
+      </div>
+      <div id="actor-dock" class="animation-dock" hidden>
+        <div class="playback"><div class="transport"><button id="actor-play" aria-pressed="false" disabled>Play scene</button><button id="actor-step" title="Freeze, then advance the entire scene by 1/60 second" disabled>Next frame</button><button id="actor-stop" title="Return to the beginning, frozen" disabled>Stop</button><button id="actor-restart" title="Return to the beginning and play" disabled>Restart</button><button id="actor-jump" disabled>Jump</button><button id="actor-slide" disabled>Slide</button></div><label>Speed<select id="actor-speed"><option value="0.25">¼×</option><option value="0.5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div>
+        <div class="scene-readout"><span id="actor-time">Step 0 · 0.00 s</span><span id="actor-pose"></span></div>
+        <div class="contact-row"><label class="check"><input id="actor-loop" type="checkbox" checked disabled> Loop</label><output id="contact-status" role="status">Ready</output><label class="check"><input id="pause-contact" type="checkbox"> Pause on contact</label></div><p class="muted scene-note" id="scene-playback-help">Loop repeats this pass or sequence. Pause freezes; Stop returns to the start. Next frame = 1/60 s.</p>
+      </div>
+      <div id="landscape-dock" class="landscape-dock landscape-transport"><div class="transport"><button id="scene-play" aria-pressed="false" disabled>Play scroll</button><button id="scene-restart" title="Play again from 0 px" aria-label="Restart landscape preview from 0 pixels" disabled>Restart</button></div><label class="scroll-control" for="scene-scroll"><span class="visually-hidden">Scroll preview</span><input type="range" id="scene-scroll" min="0" max="4800" value="0" step="10" disabled><output id="scroll-value" for="scene-scroll">0 / 4,800 px</output></label></div>
+      <section id="animation-dock" class="animation-dock" aria-label="Animation frames" hidden>
+        <div class="playback"><div class="transport"><button id="previous" aria-label="Previous frame">←</button><button id="play">Play</button><button id="next" aria-label="Next frame">→</button></div><strong id="frame-label">Frame 1 / 4</strong><label>Speed<select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div>
+        <details id="frames-panel" data-pref open><summary>Frame strip</summary><div id="filmstrip" class="filmstrip"></div></details>
+      </section>
+    </section>
+    <aside class="inspector" aria-label="Selected asset properties">
+      <div class="section-label">INSPECTOR</div><h2 id="inspector-title">Layer properties</h2><p class="muted" id="scope"></p>
+      <section id="proposal-review" hidden><strong id="proposal-name"></strong><p id="proposal-context" class="muted"></p><table id="proposal-profiles"><caption>Shared settings · all difficulties</caption><thead><tr><th scope="col">Difficulty</th><th scope="col">Before</th><th scope="col">Proposed</th></tr></thead><tbody></tbody></table><p id="proposal-outcome"></p><p id="proposal-summary" class="muted"></p><div id="proposal-fields"></div><div class="cal-actions"><button id="proposal-current" aria-pressed="false">Before · your snapshot</button><button id="proposal-next" aria-pressed="true">Proposed · not applied</button><button id="proposal-demo-claude">Demo Claude</button><button id="proposal-demo-constance">Demo Constance</button><button id="proposal-exit">Exit proposal</button></div><p id="proposal-demo-help" class="muted"></p></section><div id="scene-edit-target" hidden><label class="field">Editing<select id="edit-target"><option value="character">Character</option><option value="hazard">Hazard</option></select></label><strong id="edit-target-name"></strong><button id="edit-hitbox" class="subtle" aria-pressed="false">Edit hitbox on scene</button><p class="muted">Click an actor to select it. Drag hitbox edges or corners to resize; drag inside to move. Space + drag pans. Escape cancels a drag.</p></div><div id="placement-properties" hidden></div>
+      <details id="landscape-properties" class="inspector-group" data-pref open><summary>Layer transform <span id="editing-layer">FAR</span></summary><div class="group-content"><div class="crop-grid">
+        <label class="field">Scale multiplier<input type="number" id="layer-scale" min="0.1" max="4" step="0.01"></label><label class="field">Parallax<input type="number" id="layer-parallax" min="0" max="2" step="0.01"></label>
+        <label class="field">Offset X<input type="number" id="layer-x" min="-1920" max="1920" step="1"></label><label class="field">Offset Y<input type="number" id="layer-y" min="-1080" max="1080" step="1"></label>
+      </div><button class="subtle" id="reset-layer">Reset layer to baseline</button><p class="muted" id="transform-note"></p></div></details>
+      <details id="frame-boundaries" class="inspector-group" data-pref open hidden><summary>Atlas frame boundary</summary><div class="group-content"><div class="crop-grid">
+        <label class="field">Source X<input type="number" id="frame-x" min="0" step="0.5" disabled></label><label class="field">Source Y<input type="number" id="frame-y" min="0" step="0.5" disabled></label>
+        <label class="field">Width<input type="number" id="frame-w" min="1" step="0.5" disabled></label><label class="field">Height<input type="number" id="frame-h" min="1" step="0.5" disabled></label>
+      </div><button id="edit-boundaries" class="subtle" aria-pressed="false">Edit bounds on atlas</button><button id="reset-boundaries" class="subtle">Reset frame boundary</button><p class="muted" id="atlas-help">Selected frame only. Drag an edge or corner to resize; drag inside to move. Arrow keys nudge; Shift moves 10 px. Escape cancels a drag.</p><p id="boundary-warning" class="warning" role="status"></p></div></details>
+      <details id="sprite-properties" class="inspector-group" data-pref open hidden><summary>Fine crop <span>SOURCE PX</span></summary><div class="group-content"><div class="crop-grid">
+        <label class="field">Left<input type="number" min="0" step="1" id="crop-l"></label><label class="field">Right<input type="number" min="0" step="1" id="crop-r"></label><label class="field">Top<input type="number" min="0" step="1" id="crop-t"></label><label class="field">Bottom<input type="number" min="0" step="1" id="crop-b"></label>
+      </div><button class="subtle" id="reset-frame">Reset crop to baseline</button><p class="muted">Trims inside this frame. To reveal more artwork, expand its atlas boundary.</p></div></details>
+      <details id="source-panel" class="inspector-group" data-pref><summary>Source &amp; status</summary><div class="group-content"><div id="asset-health" role="status" class="muted">Checking images…</div><dl><dt id="source-size-label">Image size</dt><dd id="source-size">—</dd><dt id="source-count-label">Artwork</dt><dd id="source-frames">—</dd><dt>Image</dt><dd id="source-file">—</dd></dl><p class="muted" id="preview-context"></p><p class="muted" id="landscape-status"></p><p class="muted" id="playback-note"></p></div></details>
+      <div id="message" role="status" class="message">Candidate draft is separate from your current editor.</div>
+    </aside>
+  </main>
+  <footer class="savebar"><div><strong id="save-status" role="status">Opening project…</strong><span id="change-count">All stages and characters</span></div><div class="save-actions"><button id="undo" disabled>Undo</button><button id="redo" disabled>Redo</button><button id="changes" disabled>Changes &amp; recovery</button><button id="import" disabled>Import</button><button id="export" disabled>Export all</button><button class="primary" id="save" disabled>Save all</button></div></footer>
+  <input id="import-file" type="file" accept=".json,application/json" hidden>
+  <dialog id="project-dialog" aria-labelledby="project-dialog-title" aria-describedby="project-dialog-description">
+    <div class="dialog-heading"><h2 id="project-dialog-title">Project changes</h2><button id="close-project-dialog" aria-label="Close project changes">×</button></div>
+    <p id="project-dialog-description"></p>
+    <p id="project-provenance" class="muted"></p>
+    <p id="project-scope" class="muted">One file includes every landscape, character and hazard setting available in this editor: transforms, frame boundaries, crops, grounding, scale, position and collision geometry. Artwork stays in the project. Calibration, field locks and global difficulty profiles are included. Full Test/Game integration remains planned.</p>
+    <div id="import-notes" class="warning"></div>
+    <p id="project-summary" role="status"></p>
+    <div class="change-table-wrap"><table class="change-table"><thead><tr><th scope="col">Asset</th><th scope="col">Setting</th><th scope="col" id="before-heading">Baseline</th><th scope="col">After</th></tr></thead><tbody id="project-changes"></tbody></table></div>
+    <details id="recovery-panel"><summary>Recovery copies</summary><p id="recovery-status"></p><div class="recovery-actions"><button id="review-recovery" disabled>Review pre-import copy</button><button id="export-recovery" disabled>Download pre-import copy</button><button id="export-artwork-recovery" hidden>Download copy before artwork update</button><button id="export-previous-editor" hidden>Download previous editor save</button><button id="export-unreadable" hidden>Download unreadable save</button></div></details>
+    <p id="project-dialog-error" class="error" role="alert"></p>
+    <div class="dialog-actions"><button id="cancel-import">Close</button><button id="apply-import" class="primary" hidden>Apply all changes</button></div>
+  </dialog>
+</body>
+</html>

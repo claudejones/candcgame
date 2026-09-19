@@ -1,0 +1,167 @@
+import fs from 'node:fs';import path from 'node:path';import vm from 'node:vm';import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {fileURLToPath} from 'node:url';
+// Optional DOM integration check. Supply a directory containing installed jsdom and @napi-rs/canvas.
+// This exercises real application handlers with a DOM and canvas; it is not browser layout QA.
+const root=fileURLToPath(new URL('..',import.meta.url));
+const qaRequire=createRequire(path.resolve(process.argv[2]||root,'package.json'));
+const {JSDOM}=qaRequire('jsdom');
+let canvas;try{canvas=qaRequire('@napi-rs/canvas');}catch{canvas=createRequire(import.meta.url)('@napi-rs/canvas');}
+const {createCanvas,loadImage}=canvas;
+const output=process.argv[3];if(output)fs.mkdirSync(output,{recursive:true});
+const dom=new JSDOM(fs.readFileSync(root+'/workbench-next/index.html','utf8'),{url:'https://preview.local/workbench-next/',pretendToBeVisual:true,runScripts:'outside-only'}),w=dom.window;
+const canvases=new WeakMap(),contexts=new WeakMap();
+const backing=node=>{if(!canvases.has(node))canvases.set(node,createCanvas(node.width,node.height));return canvases.get(node);};
+for(const key of ['width','height']){const original=Object.getOwnPropertyDescriptor(w.HTMLCanvasElement.prototype,key);Object.defineProperty(w.HTMLCanvasElement.prototype,key,{get:original.get,set(v){original.set.call(this,v);if(canvases.has(this))canvases.get(this)[key]=v;}});}
+w.HTMLCanvasElement.prototype.getContext=function(){if(!contexts.has(this)){const ctx=backing(this).getContext('2d');contexts.set(this,new Proxy(ctx,{get(target,key){if(key==='drawImage')return (img,...args)=>target.drawImage(img.bitmap||canvases.get(img)||img,...args);const value=Reflect.get(target,key,target);return typeof value==='function'?value.bind(target):value;},set(target,key,value){target[key]=value;return true;}}));}return contexts.get(this);};
+class ImageStub {set src(url){this.url=url;const p=path.resolve(root+'/workbench-next',url.split('?')[0]);this.promise=loadImage(p).then(img=>{this.bitmap=img;this.width=this.naturalWidth=img.width;this.height=this.naturalHeight=img.height;this.onload?.();}).catch(e=>{this.onerror?.(e);throw e;});}decode(){return this.promise;}}
+let rafId=0;const raf=new Map();
+Object.assign(globalThis,{window:w,document:w.document,localStorage:w.localStorage,Option:w.Option,Image:ImageStub,ResizeObserver:class{observe(){}},requestAnimationFrame:cb=>{raf.set(++rafId,cb);return rafId;},cancelAnimationFrame:id=>raf.delete(id),fetch:async()=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(root+'/workbench-next/asset-catalog.json'))})});
+w.HTMLElement.prototype.scrollIntoView=function(){};w.HTMLDialogElement.prototype.showModal=function(){this.open=true;};w.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new w.Event('close'));};
+for(const name of ['game-config.js','config-schema.js','landscape-registry.js','landscape-contract.js'])vm.runInContext(fs.readFileSync(root+'/src/js/'+name,'utf8'),dom.getInternalVMContext());
+const $=id=>w.document.getElementById(id),wait=async()=>{for(let i=0;i<300;i++){if($('loading').hidden)return;if($('loading').classList.contains('failed'))throw new Error($('loading').textContent);await new Promise(r=>setTimeout(r,10));}throw new Error('Loading timeout: '+$('message').textContent);};
+const click=id=>$(id).click(),change=(node,value)=>{node.value=value;node.dispatchEvent(new w.Event('change',{bubbles:true}));};
+await import(root+'/workbench-next/app.mjs');await wait();
+click('character-tab');await wait();assert.equal($('actor-loop').checked,true);click('actor-loop');assert.equal($('actor-dock').hidden,false);assert.equal($('stage-context').hidden,false);assert.equal($('actor-play').disabled,false);
+const ground=()=>w.document.querySelector('input[data-placement="grounding:na01:claude"]');assert.ok(ground());change(ground(),'-12');assert.match($('save-status').textContent,/Unsaved/);
+click('actor-step');assert.match($('actor-time').textContent,/Step 1 .*0.02 s/);
+click('actor-play');assert.equal(raf.size,1);const tick=time=>{const entries=[...raf];raf.clear();for(const [,cb] of entries)cb(time);};tick(0);tick(1000);assert.match($('actor-time').textContent,/Step 61/);
+const focused=ground();focused.focus();focused.value='-13';tick(1100);assert.equal(raf.size,0);assert.equal(w.document.activeElement,focused);assert.equal(focused.value,'-13');change(focused,'-13');
+assert.equal(raf.size,0);const frozen=$('actor-time').textContent;await new Promise(r=>setTimeout(r,25));assert.equal($('actor-time').textContent,frozen);
+change($('actor-speed'),'0.25');click('actor-play');tick(2000);tick(3000);click('actor-play');assert.match($('actor-time').textContent,/Step 76/);
+click('actor-restart');assert.match($('actor-time').textContent,/Step 0/);assert.equal($('actor-play').textContent,'Pause / freeze');click('actor-play');
+click('save');const {PROJECT_STORAGE_KEY:key}=await import('./project.mjs');assert.equal(JSON.parse(w.localStorage.getItem(key)).placement['grounding:na01:claude'].groundOffset,-13);
+change($('continent'),'Europe');await wait();assert.equal($('actor-dock').hidden,false);assert.ok(w.document.querySelector('input[data-placement="grounding:eu01:claude"]'));
+change($('stage'),'eu03');await wait();change(w.document.querySelector('input[data-placement="grounding:eu03:claude"]'),'-19');
+if(output)fs.writeFileSync(path.join(output,'scene-character.png'),backing($('preview')).toBuffer('image/png'));
+click('frame-view');await wait();assert.equal($('actor-dock').hidden,true);assert.equal($('stage-context').hidden,true);click('atlas-view');assert.equal($('atlas-view').getAttribute('aria-pressed'),'true');click('actor-view');await wait();
+click('stage-tab');await wait();const hazardButtons=[...$('hazards').querySelectorAll('button')];hazardButtons[2].click();await wait();assert.equal($('actor-dock').hidden,false);assert.equal($('scene-flight-choice').hidden,false);change($('scene-flight'),'low');change($('scene-character'),'constance');await wait();change($('scene-state'),'slide');await wait();
+click('actor-boxes');click('compare');assert.equal(w.document.querySelector('.baseline-card').hidden,false);
+const scale=w.document.querySelector('input[data-placement="hazard:eu03:2"][data-field="scale"]');change(scale,'.4');click('undo');assert.equal(scale.value,'0.3');click('redo');assert.equal(scale.value,'0.4');
+click('actor-play');tick(0);tick(1000);click('actor-play');if(output)fs.writeFileSync(path.join(output,'scene-hazard.png'),backing($('preview')).toBuffer('image/png'));
+click('changes');assert.equal($('project-dialog').open,true);assert.match($('project-changes').textContent,/Placement/);assert.equal(raf.size,0);click('close-project-dialog');
+click('save');const saved=JSON.parse(w.localStorage.getItem(key));assert.equal(saved.placement['hazard:eu03:2'].scale,.4);assert.equal(saved.placement['grounding:eu03:claude'].groundOffset,-19);assert.equal(saved.placement['grounding:na01:claude'].groundOffset,-13);
+const beforeImport=JSON.stringify(saved);change(w.document.querySelector('input[data-placement="hazard:eu03:2"][data-field="scale"]'),'0.5');
+Object.defineProperty($('import-file'),'files',{configurable:true,value:[{name:'roundtrip.json',size:beforeImport.length,text:async()=>beforeImport}]});
+await $('import-file').onchange();assert.equal($('project-dialog').open,true);assert.match($('project-changes').textContent,/0.5/);click('apply-import');
+assert.equal(w.document.querySelector('input[data-placement="hazard:eu03:2"][data-field="scale"]').value,'0.4');click('undo');assert.equal(w.document.querySelector('input[data-placement="hazard:eu03:2"][data-field="scale"]').value,'0.5');click('redo');
+// Review 07: actual contact checks, actor selection, hitbox edits and display panning.
+change($('continent'),'North America');await wait();change($('stage'),'na01');await wait();
+[...$('hazards').querySelectorAll('button')][0].click();await wait();change($('scene-character'),'claude');await wait();change($('scene-state'),'run');await wait();change($('actor-speed'),'1');
+click('pause-contact');click('actor-restart');tick(0);tick(10000);
+assert.equal(raf.size,0);assert.match($('contact-status').textContent,/Contact detected/);const contactStep=Number($('actor-time').textContent.match(/Step ([0-9,]+)/)[1].replaceAll(',',''));assert.ok(contactStep>100&&contactStep<300);if(output)fs.writeFileSync(path.join(output,'scene-contact.png'),backing($('preview')).toBuffer('image/png'));
+click('actor-step');assert.match($('actor-time').textContent,new RegExp('Step '+(contactStep+1)));
+click('actor-restart');assert.match($('actor-time').textContent,/Step 0/);click('actor-play');
+click('actor-jump');click('actor-step');assert.match($('actor-pose').textContent,/Claude jump/);assert.match($('edit-target-name').textContent,/Cactus/);
+change($('edit-target'),'character');assert.match($('edit-target-name').textContent,/jump/);const afterSwitch=$('actor-time').textContent;change($('edit-target'),'hazard');assert.equal($('actor-time').textContent,afterSwitch);
+click('actor-slide');assert.match($('actor-pose').textContent,/Claude slide/);click('actor-play');tick(0);tick(800);click('actor-play');assert.match($('actor-pose').textContent,/Claude run/);
+click('actor-restart');click('actor-play');
+const captures=new WeakMap();w.HTMLElement.prototype.setPointerCapture=function(id){captures.set(this,id);};w.HTMLElement.prototype.hasPointerCapture=function(id){return captures.get(this)===id;};w.HTMLElement.prototype.releasePointerCapture=function(){captures.delete(this);};
+$('preview').getBoundingClientRect=()=>({left:0,top:0,width:960,height:540});
+const pointer=(node,type,x,y)=>node.dispatchEvent(new w.MouseEvent(type,{bubbles:true,cancelable:true,clientX:x,clientY:y,button:0}));
+click('save');const start=JSON.parse(w.localStorage.getItem(key));
+const {descriptors}=await import('./model.mjs'),{hazardGeometry}=await import('./scene-model.mjs');
+const hazard=descriptors(w.GAME_CONFIG,w.GAME_SCHEMA).find(i=>i.id==='hazard:na01:0'),g=hazardGeometry(w.GAME_CONFIG,hazard,0,start.design.frames[hazard.id][0],start.design.sprites.crops[hazard.id][0],start.placement[hazard.id],{looping:false});
+change($('edit-target'),'character');pointer($('preview'),'pointerdown',g.collision.x+g.collision.w/2,g.collision.y+g.collision.h/2);assert.equal($('edit-target').value,'hazard');
+click('edit-hitbox');const x=g.collision.x+g.collision.w/2,y=g.collision.y+g.collision.h/2;
+pointer($('preview'),'pointerdown',x,y);pointer($('preview'),'pointermove',x+12,y+5);pointer($('preview'),'pointerup',x+12,y+5);
+click('save');const moved=JSON.parse(w.localStorage.getItem(key));assert.notEqual(moved.placement[hazard.id].cx,start.placement[hazard.id].cx);assert.match($('contact-status').textContent,/Settings changed/);
+click('undo');click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement[hazard.id],start.placement[hazard.id]);click('redo');
+const movedGeometry=hazardGeometry(w.GAME_CONFIG,hazard,0,start.design.frames[hazard.id][0],start.design.sprites.crops[hazard.id][0],moved.placement[hazard.id],{looping:false}),edge=movedGeometry.collision.x+movedGeometry.collision.w,midY=movedGeometry.collision.y+movedGeometry.collision.h/2;
+pointer($('preview'),'pointerdown',edge,midY);pointer($('preview'),'pointermove',edge+8,midY);pointer($('preview'),'pointerup',edge+8,midY);click('save');assert.ok(JSON.parse(w.localStorage.getItem(key)).placement[hazard.id].cw>moved.placement[hazard.id].cw);click('undo');
+pointer($('preview'),'pointerdown',x+12,y+5);pointer($('preview'),'pointermove',x+22,y+15);w.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape'}));click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement[hazard.id],moved.placement[hazard.id]);
+if(output)fs.writeFileSync(path.join(output,'scene-handles.png'),backing($('preview')).toBuffer('image/png'));
+const area=$('preview').parentElement;area.scrollLeft=150;area.scrollTop=90;change($('zoom'),'2');click('pan-tool');
+pointer($('preview'),'pointerdown',x,y);pointer(area,'pointermove',x+30,y-20);pointer(area,'pointerup',x+30,y-20);assert.equal(area.scrollLeft,120);assert.equal(area.scrollTop,110);click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement[hazard.id],moved.placement[hazard.id]);click('pan-tool');
+const stableTime=$('actor-time').textContent;change($('edit-target'),'character');assert.equal(area.scrollLeft,120);assert.equal($('zoom').value,'2');assert.equal($('actor-time').textContent,stableTime);
+$('preview').focus();w.dispatchEvent(new w.KeyboardEvent('keydown',{code:'Space',key:' ',cancelable:true}));pointer($('preview'),'pointerdown',10,10);pointer(area,'pointermove',20,20);pointer(area,'pointerup',20,20);w.dispatchEvent(new w.KeyboardEvent('keyup',{code:'Space',key:' '}));assert.equal(area.scrollLeft,110);
+// Review 08: actual proposal, field-lock, batch apply, migration and checked-sequence controls.
+const {ProjectDraft,projectProvenance}=await import('./project.mjs'),{landscapeDescriptors}=await import('./landscape.mjs');
+const calibrationConfig=structuredClone(w.GAME_CONFIG);w.CC_LANDSCAPE_CONTRACT.apply(calibrationConfig,w.CC_LANDSCAPE_REGISTRY);
+const allItems=descriptors(calibrationConfig,w.GAME_SCHEMA),landscapes=landscapeDescriptors(calibrationConfig,w.CC_LANDSCAPE_REGISTRY,w.CC_LANDSCAPE_CONTRACT),catalog=JSON.parse(fs.readFileSync(root+'/workbench-next/asset-catalog.json'));
+const baseline=new ProjectDraft(allItems,landscapes,catalog.dimensions,projectProvenance(catalog,allItems,landscapes),catalog.migrations,calibrationConfig).export();
+const restore=async payload=>{const text=JSON.stringify(payload);Object.defineProperty($('import-file'),'files',{configurable:true,value:[{name:'calibration.json',size:text.length,text:async()=>text}]});await $('import-file').onchange();assert.equal($('project-dialog-error').textContent,'');click('apply-import');assert.equal($('project-dialog-error').textContent,'');};
+await restore(baseline);change($('edit-target'),'hazard');change($('zoom'),'1');
+const cancelled=$('optimize-all').onclick();click('cancel-optimization');await cancelled;assert.match($('cal-status').textContent,/Cancelled/);assert.equal($('cal-results').children.length,0);
+await $('optimize-stage').onclick();assert.equal($('cal-results').querySelectorAll('.cal-result').length,3);assert.match($('cal-status').textContent,/3 proposals/);click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement,baseline.placement,'analysis makes no edits');
+await $('cal-results').querySelector('button').onclick();await wait();assert.equal($('proposal-review').hidden,false);assert.match($('preview-label').textContent,/PROPOSED/);assert.equal($('edit-hitbox').disabled,true);assert.equal(w.document.querySelector('input[data-placement][data-field="cw"]').disabled,true);
+// Review 08.2: explicit review actions, separate Before demos, and reliable exit cleanup.
+assert.equal($('cal-results').querySelector('button').textContent,'Close comparison');
+assert.equal($('cal-results').querySelector('button').getAttribute('aria-expanded'),'true');
+assert.match($('cal-profile').textContent,/Standard.*120 ms.*120.*170/);
+assert.match($('proposal-outcome').textContent,/Before:.*Proposed:/);
+assert.match($('proposal-summary').textContent,/Before —.*Proposed —/);
+assert.match($('proposal-demo-help').textContent,/visual reference, not a separate test/);
+click('proposal-current');assert.equal($('proposal-current').getAttribute('aria-pressed'),'true');assert.equal($('proposal-next').getAttribute('aria-pressed'),'false');
+assert.match($('proposal-demo-claude').textContent,/Demo Before/);
+await $('proposal-demo-claude').onclick();await wait();tick(0);tick(12000);assert.match($('contact-status').textContent,/Before.*Claude.*Cleared/);assert.match($('scene-playback-help').textContent,/Before timing demo/);
+click('proposal-next');assert.equal($('proposal-next').getAttribute('aria-pressed'),'true');assert.match($('proposal-demo-claude').textContent,/Demo Proposed/);
+const assertExited=()=>{assert.equal($('proposal-review').hidden,true);assert.equal($('compare').checked,false);assert.equal(w.document.querySelector('.baseline-card').hidden,true);assert.match($('preview-label').textContent,/WORKING SCENE/);assert.equal(raf.size,0);assert.match($('actor-time').textContent,/Step 0/);assert.doesNotMatch($('scene-playback-help').textContent,/timing demo/);assert.equal($('edit-hitbox').disabled,false);assert.equal(w.document.querySelector('input[data-placement][data-field="cw"]').disabled,false);};
+await $('proposal-demo-constance').onclick();await wait();tick(0);tick(2000);assert.equal(raf.size,1);click('proposal-exit');assertExited();
+assert.equal($('cal-results').querySelector('button').textContent,'Review proposal →');assert.equal($('cal-results').querySelector('button').getAttribute('aria-expanded'),'false');
+await $('cal-results').querySelector('button').onclick();await wait();await $('cal-results').querySelector('button').onclick();assertExited();
+click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement,baseline.placement,'review, demos and exit do not apply proposals');
+await $('cal-results').querySelector('button').onclick();await wait();
+if(output)fs.writeFileSync(path.join(output,'calibration-proposal.png'),backing($('preview')).toBuffer('image/png'));
+await $('proposal-demo-claude').onclick();await wait();tick(0);tick(12000);assert.match($('contact-status').textContent,/Cleared/);assert.equal(raf.size,0);click('actor-restart');tick(20000);tick(32000);assert.match($('contact-status').textContent,/Cleared/,'demo replay repeats the action');
+await $('proposal-demo-constance').onclick();await wait();tick(0);tick(12000);assert.match($('contact-status').textContent,/Cleared/);
+// A proposed action repeats on its encounter clock while the world clock continues.
+click('actor-loop');await $('proposal-demo-constance').onclick();await wait();tick(0);tick(30000);assert.equal(raf.size,1);assert.match($('contact-status').textContent,/Pass [2-9].*Previous: Cleared/);assert.doesNotMatch($('contact-status').textContent,/Contact detected/);click('actor-stop');assert.equal(raf.size,0);assert.match($('actor-time').textContent,/Step 0/);click('actor-loop');
+const firstSelection=$('cal-results').querySelector('input[type="checkbox"]');firstSelection.checked=true;firstSelection.dispatchEvent(new w.Event('change'));
+change($('difficulty-profile'),'hard');assert.equal($('proposal-review').hidden,false);assert.doesNotMatch($('cal-results').textContent,/Needs recheck/);assert.match($('cal-profile').textContent,/Hard.*80 ms.*144.*204/);assert.equal($('cal-results').querySelector('input[type="checkbox"]').checked,true);assert.match($('proposal-profiles').querySelector('tr.current').textContent,/Hard/);
+await $('proposal-demo-claude').onclick();await wait();tick(0);tick(12000);assert.match($('contact-status').textContent,/Proposed.*Claude.*Cleared/);
+change($('difficulty-profile'),'easy');await $('proposal-demo-constance').onclick();await wait();tick(0);tick(12000);assert.match($('contact-status').textContent,/Proposed.*Constance.*Cleared/);change($('difficulty-profile'),'standard');
+assert.equal($('proposal-profiles').querySelectorAll('tbody tr').length,3);
+for(const box of $('cal-results').querySelectorAll('input[type="checkbox"]')){box.checked=true;box.dispatchEvent(new w.Event('change'));}assert.match($('apply-stage').textContent,/NA01 \(3\)/);assert.match($('cal-selection').textContent,/3 selected.*still need adjustment/);click('apply-stage');assertExited();assert.match($('cal-status').textContent,/3 applied/);assert.equal($('apply-reviewed').disabled,true);click('save');const calibrated=JSON.parse(w.localStorage.getItem(key));assert.notDeepEqual(calibrated.placement,baseline.placement);assert.equal(calibrated.calibration.hazards['hazard:na01:0'].locks.length,0);
+click('undo');click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement,baseline.placement);click('redo');click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement,calibrated.placement);
+await $('generate-sequence').onclick();assert.equal($('play-sequence').hidden,false);assert.match($('sequence-status').textContent,/both characters/);assert.equal($('sequence-list').children.length,8);
+await $('play-sequence').onclick();await wait();assert.equal($('actor-jump').disabled,true);assert.equal(w.document.querySelector('input[data-placement]').disabled,true);tick(0);tick(2000);click('actor-play');const seqFrozen=$('actor-time').textContent;click('actor-step');assert.notEqual($('actor-time').textContent,seqFrozen);click('actor-play');tick(3000);tick(130000);assert.match($('contact-status').textContent,/Cleared/);assert.equal(raf.size,0);click('stop-sequence');
+change($('scene-character'),'claude');await wait();await $('play-sequence').onclick();await wait();tick(0);tick(130000);assert.match($('contact-status').textContent,/Cleared/);click('stop-sequence');
+// Full checked sequences also repeat, preserving their automatic action schedule.
+click('actor-loop');await $('play-sequence').onclick();await wait();tick(0);tick(130000);assert.equal(raf.size,1);assert.match($('contact-status').textContent,/Pass [2-9].*Previous: Cleared/);assert.doesNotMatch($('contact-status').textContent,/Contact detected/);click('actor-stop');assert.equal(raf.size,0);assert.match($('actor-time').textContent,/Step 0/);click('stop-sequence');click('actor-loop');
+const pathwayY=Number($('pathway-y').value);change($('pathway-y'),String(pathwayY+10));assert.match($('sequence-status').textContent,/Regenerate/);assert.equal($('play-sequence').hidden,true);assert.match($('cal-results').textContent,/Needs recheck/);
+const follow=w.document.querySelector('[data-policy="follow"]');assert.ok(follow);follow.click();click('save');const unlinked=JSON.parse(w.localStorage.getItem(key));assert.equal(unlinked.placement[hazard.id].groundOffset,calibrated.placement[hazard.id].groundOffset+10);assert.equal(unlinked.calibration.hazards[hazard.id].follow,false);
+change($('pathway-y'),String(pathwayY+20));click('save');assert.equal(JSON.parse(w.localStorage.getItem(key)).placement[hazard.id].groundOffset,unlinked.placement[hazard.id].groundOffset);
+const cw=w.document.querySelector('[data-placement="hazard:na01:0"][data-field="cw"]');change(cw,'.27');click('save');assert.ok(JSON.parse(w.localStorage.getItem(key)).calibration.hazards[hazard.id].locks.includes('cw'));
+const widthLock=w.document.querySelector('[data-lock="hazard:na01:0"][data-lock-field="cw"]');assert.equal(widthLock.checked,true);widthLock.click();assert.equal(widthLock.checked,false);
+change($('difficulty-profile'),'hard');assert.equal(w.document.querySelector('[data-profile="groundSpeed"]').value,'144');click('save');assert.equal(JSON.parse(w.localStorage.getItem(key)).calibration.profile,'hard');
+await restore(calibrated);click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).calibration,calibrated.calibration);
+console.log('Proposal review flow passed: explicit buttons, profile context, Before and Proposed demos, exit during playback, same-button close, profile switching without invalidation, selection counts, and unchanged draft until Apply.');
+console.log('Calibration DOM flow passed: proposals without mutation, before/proposed canvas, both character demos/replay, batch apply/undo/redo, sequence freeze/step/clear for both, invalidation, unlink without jump, manual locks, global profile, whole-project restoration.');
+// Review 08.1: continuous transport, exact freeze/resume/step, Stop and per-pass contacts.
+click('actor-stop');click('actor-loop');if($('pause-contact').checked)click('pause-contact');change($('actor-speed'),'1');
+click('actor-play');tick(0);tick(25000);assert.equal(raf.size,1);assert.match($('actor-time').textContent,/Step 1,500/);assert.match($('contact-status').textContent,/Pass [2-9].*Previous: Contact detected/);
+click('actor-play');const loopFrozen=$('actor-time').textContent;tick(60000);assert.equal($('actor-time').textContent,loopFrozen);click('actor-step');assert.match($('actor-time').textContent,/Step 1,501/);click('actor-play');tick(100000);tick(101000);assert.match($('actor-time').textContent,/Step 1,561/);
+// Turning Loop off finishes the current pass without rewinding the world clock.
+click('actor-loop');assert.equal(raf.size,1);tick(130000);assert.equal(raf.size,0);assert.doesNotMatch($('actor-time').textContent,/Step 0/);assert.match($('contact-status').textContent,/Contact detected/);
+click('actor-stop');assert.equal(raf.size,0);assert.match($('actor-time').textContent,/Step 0.*Frozen/);assert.doesNotMatch($('contact-status').textContent,/Previous:/);assert.equal($('actor-play').textContent,'Play scene');
+// One-pass behavior remains explicit; Loop can then resume into the following pass.
+click('actor-play');tick(0);tick(25000);assert.equal(raf.size,0);click('actor-loop');click('actor-step');assert.match($('contact-status').textContent,/Pass 2/);assert.equal(raf.size,0);click('actor-stop');
+click('pause-contact');click('actor-play');tick(0);tick(25000);assert.equal(raf.size,0);assert.match($('contact-status').textContent,/Contact detected/);assert.doesNotMatch($('contact-status').textContent,/Pass 2/);
+click('actor-play');tick(30000);tick(55000);assert.equal(raf.size,0);assert.match($('contact-status').textContent,/Pass 2.*Contact detected/);click('actor-stop');click('pause-contact');
+click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement,calibrated.placement);assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).calibration,calibrated.calibration);
+console.log('Continuous playback flow passed: default Loop, repeated passes/proposal demos/checked sequences, no duplicate clock, freeze/resume/step, finish current pass on Loop off, Stop reset, per-pass contact freeze and unchanged project settings.');
+// Review 09: a complete grouped result list, filters, hidden selection and scoped Apply.
+await restore(baseline);await $('optimize-all').onclick();
+const cards=()=>$('cal-results').querySelectorAll('.cal-result'),groups=()=>$('cal-results').querySelectorAll('.cal-stage-group');
+assert.equal(cards().length,27);assert.equal(groups().length,9);assert.equal($('cal-results').querySelectorAll('.cal-continent-group').length,3);
+assert.equal($('cal-results').querySelectorAll('.cal-profile-badges span').length,81);
+click('cal-collapse');assert.ok([...groups()].every(g=>!g.open));click('cal-expand');assert.ok([...groups()].every(g=>g.open));
+change($('cal-filter'),'attention');assert.ok(cards().length>0&&cards().length<27);assert.ok([...cards()].every(c=>c.querySelector('.cal-verdict').textContent.includes('adjustment')));
+change($('cal-filter'),'ready');assert.ok(cards().length>0&&cards().length<27);assert.ok([...cards()].every(c=>c.querySelectorAll('.cal-profile-badges .pass').length===3));
+click('cal-clear-filters');change($('cal-continent'),'Europe');assert.equal(cards().length,9);assert.equal(groups().length,3);
+$('cal-search').value='barrel';$('cal-search').dispatchEvent(new w.Event('input'));assert.equal(cards().length,1);assert.match(cards()[0].textContent,/Barrel/);assert.equal(groups()[0].open,true);
+$('cal-search').value='no such hazard';$('cal-search').dispatchEvent(new w.Event('input'));assert.equal(cards().length,0);assert.equal($('cal-empty').hidden,false);click('cal-clear-filters');assert.equal(cards().length,27);
+const selectResult=id=>{const box=[...cards()].find(c=>c.dataset.resultId===id).querySelector('input');box.checked=true;box.dispatchEvent(new w.Event('change'));};
+selectResult('hazard:na01:0');selectResult('hazard:eu01:1');change($('cal-continent'),'Europe');assert.match($('cal-selection').textContent,/2 selected.*1 hidden by filters/);assert.match($('apply-stage').textContent,/NA01 \(1\)/);assert.match($('apply-reviewed').textContent,/\(2\)/);
+change($('cal-filter'),'selected');assert.equal(cards().length,1);click('apply-stage');click('save');const scoped=JSON.parse(w.localStorage.getItem(key));assert.deepEqual(scoped.placement['hazard:eu01:1'],baseline.placement['hazard:eu01:1'],'stage apply cannot change a hidden selected stage');assert.match($('apply-reviewed').textContent,/\(1\)/);
+click('cal-clear-filters');change($('cal-filter'),'applied');assert.equal(cards().length,1);assert.equal(cards()[0].dataset.resultId,'hazard:na01:0');assert.equal(cards()[0].querySelector('button').disabled,true);click('cal-clear-filters');
+// Changing flying speed rechecks only flying results for that profile, retaining shared settings.
+const waitRecheck=async()=>{await new Promise(r=>setTimeout(r,100));for(let i=0;i<500;i++){if($('cal-progress').hidden)return;await new Promise(r=>setTimeout(r,10));}throw new Error('Recheck did not finish');};
+const groundBadges=[...cards()].find(c=>c.dataset.resultId==='hazard:na01:0').querySelector('.cal-profile-badges').textContent;
+const flySpeed=w.document.querySelector('[data-profile="flyingSpeed"]');change(flySpeed,String(Number(flySpeed.value)+1));
+assert.equal([...cards()].find(c=>c.dataset.resultId==='hazard:na01:0').querySelector('.cal-profile-badges').textContent,groundBadges);assert.match([...cards()].find(c=>c.dataset.resultId==='hazard:na01:2').querySelector('.cal-profile-badges').textContent,/Standard Recheck/);await waitRecheck();assert.match($('cal-status').textContent,/Rechecked affected/);assert.doesNotMatch($('hazard-check-status').textContent,/need refresh|Needs recheck/);assert.doesNotMatch($('cal-results').textContent,/Recheck/);click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement,scoped.placement);
+// A changed reference is checked without replacing the user's manual edit.
+change($('pathway-y'),String(Number($('pathway-y').value)+1));assert.match($('cal-results').textContent,/Needs recheck/);click('save');const manual=JSON.parse(w.localStorage.getItem(key));await $('recheck-results').onclick();assert.doesNotMatch($('cal-results').textContent,/Needs recheck/);click('save');assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).placement,manual.placement);assert.deepEqual(JSON.parse(w.localStorage.getItem(key)).calibration,manual.calibration);
+await restore(calibrated);
+console.log('Review 09 DOM flow passed: 27 grouped hazards, all-profile badges, search/filter/empty states, expansion, hidden selection counts, stage-scoped apply, independent difficulty demos, targeted timing rechecks and unchanged manual settings.');
+click('actor-restart');click('actor-play');click('actor-play');assert.equal(raf.size,1);Object.defineProperty(w.document,'hidden',{configurable:true,value:true});w.document.dispatchEvent(new w.Event('visibilitychange'));assert.equal(raf.size,0);assert.match($('actor-time').textContent,/Frozen/);
+console.log('DOM flow passed: load, context, edits, fixed playback, action transitions, first-contact freeze, replay, selection without reset, hitbox drag/undo/save, Hand/Space panning, atlas return, HIGH/LOW, compare, save/import and hidden-tab freeze.');
