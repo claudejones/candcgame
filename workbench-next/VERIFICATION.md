@@ -5,7 +5,7 @@
 - Explicit Review proposal / Close comparison controls and selected-state accessibility replace hazard-name-only buttons. Exit, apply and stale-input invalidation restore the working scene, hide comparison, clear the timed demo and restore editing.
 - Actual DOM/canvas checks exercise Before and Proposed demos separately, labeled outcomes, exit during an active demo, toggling the same result closed, profile-change cleanup, selected/needs-adjustment counts, batch apply, Undo/Redo and unchanged settings until Apply. Existing transport, loading, atlas, hitbox, panning, sequence and persistence flows pass.
 - All 51 Node tests pass. No new solver, physics, artwork, schema or production-runtime changes. Existing 60 Hz timing-window and collision-order limitations still apply; runtime reconciliation remains pending. DOM/canvas checks are not browser layout acceptance.
-- Publication evidence is recorded after the matching preview deployment completes.
+Publication succeeded at https://candc-workbench-next.claudejones.chatgpt.site (saved version 13, deployment `appgdep_6aaecce737348191b014a650d9872ae0`). Site source `f8e27c947deabdef3640ab94f9112fc4cb1e3a77` packages GitHub implementation `cdc834a960bbcdd7b4efa7099e863acc2c5cf683`; [Production CI passed for that exact implementation](https://github.com/claudejones/candcgame/actions/runs/35459533629). The validated archive has 80 files and 53 unchanged PNGs. Native deployment status: `succeeded`.
 
 ## Review 08.1 — continuous Scene playback
 
