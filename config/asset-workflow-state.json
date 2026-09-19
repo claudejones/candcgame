@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "active": null,
+  "approvedRevisions": {
+    "na01": {"commit": "660aa55e35b378e613e07d8315074552620fcb61"},
+    "na02": {"commit": "660aa55e35b378e613e07d8315074552620fcb61"},
+    "na03": {"commit": "660aa55e35b378e613e07d8315074552620fcb61"},
+    "sa01": {"commit": "660aa55e35b378e613e07d8315074552620fcb61"}
+  }
+}

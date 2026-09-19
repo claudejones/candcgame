@@ -8,20 +8,12 @@
 - Never modify an original merely to make integration easier.
 
 ## Approval workflow
-For each remaining stage:
-1. Confirm that the stage specification, immutable visual references and layer prompts are already locked. Ask the user only when a material visual direction is missing or conflicting.
-2. Generate FAR, MID and GROUND sequentially. The assistant may reject, replace and regenerate working validation assets without separate user approval.
-3. Run technical QA on each layer and inspect isolated, duplicated-wrap and canonical composite output internally.
-4. Stop iterating when the layers satisfy the contract and the integrated stage has no identified technical or visual defect. Do not optimize acceptable artwork merely because another variation is possible.
-5. Commit and deploy the internally accepted complete stage once through the exact-tree CI/Pages path.
-6. Present the deployed FAR/MID/GROUND stage in gameplay/test and Contextual Inspector for one user accept/revise decision.
-7. If revision is requested, replace only the responsible layer or configuration and repeat the integrated-stage gate. After approval, record final hashes and status once.
-8. After all three stages are approved, run a continent-level regression without reopening approved assets unless a concrete defect is found.
+Use `ASSET_COMMAND_WORKFLOW.md` for command execution and `PHASE8_LANDSCAPE_EXECUTION_PLAN.md` for Phase 8 scope/gates. Locked directions authorize internal generation, correction, direct replacement and deployment testing. One deployed integrated-stage visual acceptance closes the stage; no routine candidate/prompt pre-approval. Stop when the specified result passes. A requested revision changes only the affected layer/configuration.
 
 Working Phase 8 validation assets may be replaced directly under `assets/phase8-validation/`; Git history is the rollback mechanism. `assets-original/` remains immutable. Rejected candidates and review renders are temporary working material and are not committed by default.
 
 ## World assets
-Read `WORLD_RENDERING_SPEC.md` before producing or repairing any landscape.
+For routine registered landscape commands, use `asset-profiles/landscape.md` and the resolver's selected prompt sections. Read `WORLD_RENDERING_SPEC.md` when changing its rules or diagnosing a conflict. Keep the focused profile synchronized with the source specifications.
 
 Critical principles:
 - FAR, MID and GROUND are coordinated parts of one stage composition.

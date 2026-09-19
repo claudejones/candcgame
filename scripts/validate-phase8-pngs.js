@@ -10,9 +10,12 @@ const args = process.argv.slice(2);
 const stageIndex = args.indexOf("--stage");
 const stageArg = stageIndex >= 0 ? args[stageIndex + 1]?.toLowerCase() : null;
 const jsonOutput = args.includes("--json");
+const layerIndex = args.indexOf("--layer");
+const layerArg = layerIndex >= 0 ? args[layerIndex + 1]?.toLowerCase() : null;
 
 if (stageIndex >= 0 && !stageArg) throw new Error("--stage requires a stage id");
 if (stageArg && !registry.stages[stageArg]) throw new Error(`unknown Phase 8 stage: ${stageArg}`);
+if (layerIndex >= 0 && (!stageArg || !["far", "mid", "ground"].includes(layerArg))) throw new Error("--layer requires --stage and FAR, MID or GROUND");
 
 const selectedStages = stageArg
   ? [[stageArg, registry.stages[stageArg]]]
@@ -122,7 +125,9 @@ function validatePng(stageId, layerName, spec) {
 
 const results = [];
 for (const [stageId, stage] of selectedStages) {
-  for (const [layerName, spec] of Object.entries(stage.layers)) results.push(validatePng(stageId, layerName, spec));
+  for (const [layerName, spec] of Object.entries(stage.layers)) {
+    if (!layerArg || layerName === layerArg) results.push(validatePng(stageId, layerName, spec));
+  }
 }
 
 if (jsonOutput) process.stdout.write(JSON.stringify({schemaVersion: registry.schemaVersion, results}, null, 2) + "\n");

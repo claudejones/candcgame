@@ -6,6 +6,8 @@ Scope: 27 validation-batch images for NA01–NA03, SA01–SA03 and EU01–EU03
 
 ## How to execute a prompt
 
+Resolve ordinary commands with `scripts/assets.mjs`; it reads only the selected job sections into the task packet. Workflow steps are maintained in `ASSET_COMMAND_WORKFLOW.md`. This document owns art direction, not a second publication process. Runtime geometry is confirmed by the active registry/shared renderer contract.
+
 For each job, the image-generation call must:
 
 1. Attach the exact `Reference` PNG through the image tool's referenced-image mechanism. A path written in prompt text is not a substitute for attaching the pixels.
@@ -48,7 +50,7 @@ Create the MID parallax layer on a transparent 2172 x 724 canvas. Preserve the r
 ### GROUND directive
 
 ```text
-Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one continuous playable surface at the shared V1 source anchor Y=393, pending pilot confirmation. Preserve the reference's terrain/walkway material and decorative edge language. Provide substantial continuous terrain depth from the surface through the bottom overscan; never end early or expose empty backing below. Keep the region above the surface transparent except for approved low vegetation, props or edge details that belong to the ground silhouette. Exclude characters, hazards and finish marker.
+Create the GROUND gameplay layer on a transparent 2172 x 724 canvas. Author one continuous playable surface at the confirmed source anchor Y=393. Preserve the reference's terrain/walkway material and decorative edge language. Provide substantial continuous terrain depth from the surface through the bottom overscan; never end early or expose empty backing below. Keep the region above the surface transparent except for approved low vegetation, props or edge details that belong to the ground silhouette. Exclude characters, hazards and finish marker.
 ```
 
 ## North America
@@ -283,7 +285,7 @@ Before a complete stage can be published for user review, record:
 - final validation paths, SHA-256 values and Git blob SHAs;
 - expected dimensions, bit depth, color type and alpha bounds per layer;
 - FAR opacity or MID/GROUND intentional transparency;
-- GROUND surface evidence at source Y=393, pending pilot confirmation;
+- GROUND surface evidence at confirmed source Y=393;
 - bottom coverage and transition-row coverage;
 - horizontal repeat/seam inspection;
 - isolated-layer and duplicated-wrap previews;

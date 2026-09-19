@@ -83,6 +83,8 @@ The gameplay surface remains 410 even if a permitted visual offset is used for a
 
 FAR normally maps its source top to logical Y=0. MID uses an explicit authored source/composition anchor defined by its asset metadata/schema.
 
+For integrated Phase 8 landscapes, `config/phase8-landscapes.json` supplies source width 2172, FAR/MID/GROUND offsets 0, scale multipliers 1.25/1/1 and MID/GROUND anchors 621/393. `landscape-contract.js` applies the same mapping in the development host, inner renderer and offline QA. `landscape-registry.js` is generated data, never hand-maintained. Pending stages and packaged legacy presentation retain their existing baseline until activated. Legacy saved landscape transforms migrate to this versioned contract without clearing unrelated authoring data. A zero MID/GROUND offset is relative to its anchor-derived draw position, not a canvas-top origin.
+
 ## 4. Responsive viewport scaling
 The logical viewport never changes from 960x540.
 

@@ -4,12 +4,10 @@
 
 const CONFIG=window.GAME_CONFIG;
 
-const PHASE8_PILOT=new URLSearchParams(window.location.search).get("phase8Pilot")==="na01";
+const landscapeParams=new URLSearchParams(window.location.search);
+const PHASE8_PILOT=landscapeParams.get("landscapes")==="phase8"||landscapeParams.get("phase8Pilot")==="na01";
 if(PHASE8_PILOT){
- for(const id of ["na01","na02","na03"]){
-  const p=CONFIG.worldProfiles[id];
-  Object.assign(p,{sourceW:2172,seamY:410,farY:0,farScale:1.25,midYOffset:0,midScale:1,groundYOffset:0,groundScale:1,characterGrounding:{claude:0,constance:0}});
- }
+ window.CC_LANDSCAPE_CONTRACT.apply(CONFIG,window.CC_LANDSCAPE_REGISTRY);
  CONFIG.activeWorld="na01";
 }
 const worldSourceW=()=>CONFIG.worldProfiles[CONFIG.activeWorld]?.sourceW||CONFIG.worldContract.sourceW;
@@ -129,20 +127,21 @@ class Scene{
    c.clearRect(0,0,CONFIG.canvas.w,CONFIG.canvas.h);
    const baseScale=W/worldSourceW();
    const far=this.a[p.farKey];
-   const farScale=baseScale*p.farScale;
-   if(WORLD_LAYER_QA.far)this.tileFull(far,0,p.farY,farScale,1);
+   const layerGeometry=window.CC_LANDSCAPE_CONTRACT.geometry(CONFIG);
+   const farScale=layerGeometry.far.scale;
+   if(WORLD_LAYER_QA.far)this.tileFull(far,0,layerGeometry.far.y,farScale,1);
    if(WORLD_LAYER_QA.clouds&&p.clouds!==false){
      const clouds=this.a.clouds;
      const cloudScale=baseScale*wc.cloudScale;
      this.tileFull(clouds,this.cloudX,wc.cloudY,cloudScale,wc.cloudOpacity);
    }
    const mid=this.a[p.midKey];
-   const midScale=baseScale*p.midScale;
-   const midY=p.seamY-wc.midBaselineSourceY*midScale+p.midYOffset;
+   const midScale=layerGeometry.mid.scale;
+   const midY=layerGeometry.mid.y;
    if(WORLD_LAYER_QA.mid)this.tileFull(mid,this.worldX*p.midParallax,midY,midScale,1);
    const ground=this.a[p.groundKey];
-   const groundScale=baseScale*p.groundScale;
-   const groundY=p.seamY-wc.groundSurfaceSourceY*groundScale+p.groundYOffset;
+   const groundScale=layerGeometry.ground.scale;
+   const groundY=layerGeometry.ground.y;
    const renderedSurfaceY=groundY+wc.groundSurfaceSourceY*groundScale;
    // Production ground assets are transparent overlays. Do not synthesize or paint
    // a sampled fill behind them; let the approved world layers remain visible.
@@ -1061,7 +1060,7 @@ class Lab{
      try{await navigator.clipboard.writeText(txt);$("status").textContent="Copied current world profile.";}catch(e){$("status").textContent=txt;}
    };
    const defaults={na01:{seamY:408,farY:58,farScale:1,midYOffset:0,midScale:1,midParallax:.20,groundYOffset:0,groundScale:1,groundParallax:1},na02:{seamY:428,farY:74,farScale:1,midYOffset:-35,midScale:1,midParallax:.20,groundYOffset:-43,groundScale:1,groundParallax:1},na03:{seamY:407,farY:66,farScale:1,midYOffset:22,midScale:1,midParallax:.20,groundYOffset:0,groundScale:1,groundParallax:1},sa01:{seamY:408,farY:-8,farScale:1,midYOffset:-34,midScale:1,midParallax:.20,groundYOffset:-8,groundScale:1,groundParallax:1},sa02:{seamY:420,farY:0,farScale:1,midYOffset:-30,midScale:1,midParallax:.20,groundYOffset:-70,groundScale:1,groundParallax:1},sa03:{seamY:408,farY:0,farScale:1,midYOffset:-40,midScale:1,midParallax:.20,groundYOffset:-30,groundScale:1,groundParallax:1},eu01:{seamY:408,farY:0,farScale:1,midYOffset:0,midScale:1,midParallax:.20,groundYOffset:0,groundScale:1,groundParallax:1},eu02:{seamY:408,farY:0,farScale:1,midYOffset:0,midScale:1,midParallax:.20,groundYOffset:0,groundScale:1,groundParallax:1},eu03:{seamY:408,farY:0,farScale:1,midYOffset:0,midScale:1,midParallax:.20,groundYOffset:0,groundScale:1,groundParallax:1}};
-   $("worldReset").onclick=()=>{Object.assign(world(),defaults[CONFIG.activeWorld]);world().characterGrounding={claude:0,constance:0};redrawWorld();};
+    $("worldReset").onclick=()=>{if(!(PHASE8_PILOT&&window.CC_LANDSCAPE_CONTRACT.applyStage(CONFIG,window.CC_LANDSCAPE_REGISTRY,CONFIG.activeWorld)))Object.assign(world(),defaults[CONFIG.activeWorld]);world().characterGrounding={claude:0,constance:0};redrawWorld();};
 
 
    const objectRedraw=()=>{this.draw();this.renderUI();};
@@ -1350,7 +1349,7 @@ class Lab{
  }
 }
 
-const ASSET_SOURCES={
+let ASSET_SOURCES={
  eu01Far:"../assets/worlds/europe/EU01_BG_DISTANT_GREECE.png",
  eu01Mid:"../assets/worlds/europe/EU01_BG_MID_GREECE.png",
  eu01Ground:"../assets/worlds/europe/EU01_GROUND_GREECE.png",
@@ -1367,9 +1366,9 @@ const ASSET_SOURCES={
  eu03Ground:"../assets/worlds/europe/EU03_GROUND_BARCELONA.png",
  eu03Hazards:"../assets/worlds/europe/EU03_OBJECT_ATLAS.png",
  eu03Bird:"../assets/worlds/europe/EU03_HAZARD_BATS.png",
- sa01Far:PHASE8_PILOT?"../assets/phase8-validation/south-america/SA01_BG_DISTANT_AMAZON.png?v=cbe232ba":"../assets/worlds/south-america/SA01_BG_DISTANT_AMAZON.png",
- sa01Mid:PHASE8_PILOT?"../assets/phase8-validation/south-america/SA01_BG_MID_AMAZON.png?v=8e5653f5":"../assets/worlds/south-america/SA01_BG_MID_AMAZON.png",
- sa01Ground:PHASE8_PILOT?"../assets/phase8-validation/south-america/SA01_GROUND_AMAZON.png?v=3ca40ce6":"../assets/worlds/south-america/SA01_GROUND_AMAZON.png",
+ sa01Far:"../assets/worlds/south-america/SA01_BG_DISTANT_AMAZON.png",
+ sa01Mid:"../assets/worlds/south-america/SA01_BG_MID_AMAZON.png",
+ sa01Ground:"../assets/worlds/south-america/SA01_GROUND_AMAZON.png",
  sa01Hazards:"../assets/worlds/south-america/SA01_OBJECT_ATLAS.png",
  sa01Bird:"../assets/worlds/south-america/SA01_HAZARD_MACAWS.png",
  sa02Far:"../assets/worlds/south-america/SA02_BG_DISTANT_ANDES.png",
@@ -1397,21 +1396,22 @@ const ASSET_SOURCES={
  hit:"../assets/characters/G1E_HIT_ATLAS.png",
  celebrate:"../assets/characters/G1F_CELEBRATE_ATLAS.png",
  stars:"../assets/characters/FX_STUN_STARS_ATLAS.png",
- mid:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png":"../assets/worlds/north-america/NA01_BG_MID_DESERT.png",
- ground:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA01_GROUND_DESERT.png":"../assets/worlds/north-america/NA01_GROUND_DESERT.png",
- na02Far:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA02_BG_DISTANT_MOUNTAINS.png?v=259b8f38-verified":"../assets/worlds/north-america/NA02_BG_DISTANT_MOUNTAINS.png",
- na02Mid:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA02_BG_MID_PINES.png?v=cc4a6f43-verified":"../assets/worlds/north-america/NA02_BG_MID_PINES.png",
- na02Ground:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA02_GROUND_TRAIL.png?v=f6ada52c-verified":"../assets/worlds/north-america/NA02_GROUND_TRAIL.png",
- na03Far:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA03_BG_DISTANT_NYC.png?v=be8f72c6":"../assets/worlds/north-america/NA03_BG_DISTANT_NYC.png",
- na03Mid:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA03_BG_MID_CITY.png?v=9a6e1445":"../assets/worlds/north-america/NA03_BG_MID_CITY.png",
- na03Ground:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA03_GROUND_CITY.png?v=095aa9cb":"../assets/worlds/north-america/NA03_GROUND_CITY.png",
- far:PHASE8_PILOT?"../assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png":"../assets/worlds/north-america/NA01_BG_DISTANT_MESAS.png",
+ mid:"../assets/worlds/north-america/NA01_BG_MID_DESERT.png",
+ ground:"../assets/worlds/north-america/NA01_GROUND_DESERT.png",
+ na02Far:"../assets/worlds/north-america/NA02_BG_DISTANT_MOUNTAINS.png",
+ na02Mid:"../assets/worlds/north-america/NA02_BG_MID_PINES.png",
+ na02Ground:"../assets/worlds/north-america/NA02_GROUND_TRAIL.png",
+ na03Far:"../assets/worlds/north-america/NA03_BG_DISTANT_NYC.png",
+ na03Mid:"../assets/worlds/north-america/NA03_BG_MID_CITY.png",
+ na03Ground:"../assets/worlds/north-america/NA03_GROUND_CITY.png",
+ far:"../assets/worlds/north-america/NA01_BG_DISTANT_MESAS.png",
  clouds:"../assets/shared/NA_CLOUD_LAYER.png"
 ,
  na01Objects:"../assets/worlds/north-america/NA01_OBJECT_ATLAS.png",
  na02Objects:"../assets/worlds/north-america/NA02_OBJECT_ATLAS.png",
  na03Objects:"../assets/worlds/north-america/NA03_OBJECT_ATLAS.png"
 };
+if(PHASE8_PILOT)ASSET_SOURCES=window.CC_LANDSCAPE_CONTRACT.sources(CONFIG,window.CC_LANDSCAPE_REGISTRY,ASSET_SOURCES);
 window.CC_ASSET_SOURCES=Object.freeze({...ASSET_SOURCES});
 const store=new AssetStore(ASSET_SOURCES);
 
