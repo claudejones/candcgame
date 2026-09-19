@@ -1,43 +1,6 @@
 {
   "schemaVersion": 1,
-  "active": {
-    "stage": "SA02",
-    "phase": "awaiting-approval",
-    "command": "build landscape SA02",
-    "selectedLayers": [
-      "FAR",
-      "MID",
-      "GROUND"
-    ],
-    "files": {
-      "assets/phase8-validation/south-america/SA02_BG_DISTANT_ANDES.png": "f43e5e39890fe666d624952b5bc0164157125ccce79f8c2d4fa3aa2c94f7929c",
-      "assets/phase8-validation/south-america/SA02_BG_MID_ANDES.png": "1d06ee2e304cfb448f961d95335081376ca9c29f7ca9a749d3c3f2f341f96b86",
-      "assets/phase8-validation/south-america/SA02_GROUND_ANDES.png": "0994eb04706f0fc3c58386c4c087d460f8a722f58a1a245744e58be20f172908"
-    },
-    "stageSpec": "3afa40f35595e8ab29c844890841547865e105a996eaa62fe117f546c18f3795",
-    "recoveryBranch": "work/assets/sa02",
-    "baseCommit": "29176df173eeb78cd0436bfa98a13f22317bb07d",
-    "deployedCommit": "29176df173eeb78cd0436bfa98a13f22317bb07d",
-    "developmentCommit": "15da5ab68b611e806c4e7fd68c3bdcee89131638",
-    "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35418079717",
-    "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35418116771",
-    "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35418134078",
-    "reviewUrl": "https://claudejones.github.io/candcgame/src/dev.html",
-    "verification": {
-      "deployedByteHashesMatch": true,
-      "inspectorOffsets": {
-        "far": 0,
-        "mid": 0,
-        "ground": 0
-      },
-      "artworkApproved": false,
-      "liveModes": [
-        "design",
-        "test",
-        "game"
-      ]
-    }
-  },
+  "active": null,
   "approvedRevisions": {
     "na01": {
       "commit": "660aa55e35b378e613e07d8315074552620fcb61"
@@ -50,6 +13,17 @@
     },
     "sa01": {
       "commit": "660aa55e35b378e613e07d8315074552620fcb61"
+    },
+    "sa02": {
+      "commit": "29176df173eeb78cd0436bfa98a13f22317bb07d",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/south-america/SA02_BG_DISTANT_ANDES.png": "f43e5e39890fe666d624952b5bc0164157125ccce79f8c2d4fa3aa2c94f7929c",
+        "assets/phase8-validation/south-america/SA02_BG_MID_ANDES.png": "1d06ee2e304cfb448f961d95335081376ca9c29f7ca9a749d3c3f2f341f96b86",
+        "assets/phase8-validation/south-america/SA02_GROUND_ANDES.png": "0994eb04706f0fc3c58386c4c087d460f8a722f58a1a245744e58be20f172908"
+      },
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35418116771",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35418134078"
     }
   }
 }

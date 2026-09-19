@@ -167,7 +167,7 @@ window.CC_LANDSCAPE_REGISTRY = {
     },
     "sa02": {
       "label": "South America — Andes Mountains",
-      "status": "integrated",
+      "status": "approved",
       "layers": {
         "far": {
           "reference": "assets-original/current-generated/SA-assets/SA02_BG_DISTANT_ANDES.png",
