@@ -14,6 +14,21 @@ Proposed desktop organization: persistent mode/project/save bar; left project tr
 
 Character and hazard animation share a frame strip, previous/next, play/pause, preview speed, atlas/current-frame views, per-frame crop, and baseline comparison. Asset-specific properties stay separate: character state/grounding/FX versus hazard spawn/flight/collision. Artwork looping is not a substitute for physics/timed-state testing.
 
+## Loading experience — required
+
+User requirement confirmed 2026-09-19: lazy loading must show a visible loading indicator until the selected content is ready.
+
+- Load shared essentials and the selected stage/asset first; defer other stages. Background prefetch must never delay the selected content's ready state.
+- Show a spinner and a clear label such as **Loading SA02 — Andes…** in the affected viewport/preview. Show real progress such as **6 of 9 assets ready** when the required asset count is known; never simulate a percentage.
+- Keep the indicator visible through download, image decoding and configuration application. Remove it only when the current selection can render its first complete frame. Expose an accessible loading status and busy state.
+- Keep navigation and unrelated editing available. Disable Start/Play and controls that require the unfinished content. Gameplay timers must not begin behind the loading indicator.
+- Stage changes use the same behavior. Reuse cached decoded assets immediately; do not force a loading animation or minimum delay for ready content.
+- Rapid selection changes must not let an older load replace the latest selection or dismiss its indicator.
+- On failure, replace the spinner with a useful error and **Retry**. An unrelated deferred-stage failure must not block the active stage or leave an endless spinner.
+- Measure cold startup and stage-switch readiness before/after. The expected benefit is a shorter initial wait by loading fewer assets up front; total download work is deferred, not automatically reduced.
+
+Acceptance: with a deliberately slow required asset, loading stays visible and Start stays disabled until the full selected scene is ready; failure gives Retry; cached re-entry is immediate; switching selections during a load never displays stale content.
+
 ## Architecture
 
 `Editor UI → validated Draft Store → snapshot adapter → Runtime commands/state → renderer`
@@ -29,11 +44,11 @@ Runtime API: `ready`, `getState`, `applySnapshot`, `setContext`, `setCharacterPr
 | Milestone | Deliverable | Exit evidence |
 |---|---|---|
 | 1 · Audit + design review | This audit, plan, isolated branch, working sprite-workspace proposal with approved art | Character/hazard frame selection, crop independence, undo/redo and separate saves verified; user reviews layout direction |
-| 2 · Reliable state foundation | Complete schema/field map, isolated draft store, import/export migration, shared asset registry, visible readiness/error states | Invalid imports cannot mutate state; stage/global saves correct; reload/export/import round-trip; old local saves untouched |
+| 2 · Reliable state foundation | Complete schema/field map, isolated draft store, import/export migration, shared asset registry, loading indicator and readiness/error states | Invalid imports cannot mutate state; stage/global saves correct; reload/export/import round-trip; old local saves untouched; loading/ready/failure states explicit |
 | 3 · Direct runtime adapter | Extract commands/state from current Lab handlers; controlled candidate runtime host without legacy panel dependencies | Same snapshot produces same scene and gameplay; boot with no legacy controls; canonical surface, character anchors and constants preserved |
 | 4 · Complete Design | Scene navigation, consistent sprite dock, landscape and finish scene previews, FX, Stage/Gameplay settings with protected defaults | Both characters × six states × every frame; all current hazards; each field mapped to runtime + save + export; no blank silent previews |
 | 5 · Complete Test + Game | Explicit mode transitions, simulation stepping, focused/full-course/finish/recovery scenarios, clean Game preview | Design→Test→Game→Design; pause/resume/step; HIGH/LOW; collision latch; failure/retry; finish and progress; no QA state in Game |
-| 6 · Loading and cleanup | Active-stage loading/cache, stable forms/focus, visible failures, remove proven obsolete live code | Cold/warm loading measured before/after; unrelated-stage asset failure does not prevent active stage; no hidden-control references; production does not import editor code |
+| 6 · Loading and cleanup | Active-stage lazy loading/cache with progress indicator, stable forms/focus, retryable failures, remove proven obsolete live code | Loading-experience acceptance checks pass; cold/warm loading measured before/after; unrelated-stage asset failure does not prevent active stage; no hidden-control references; production does not import editor code |
 | 7 · Candidate acceptance + cutover | Exact-SHA candidate build, regression report, export/recovery instructions, approval | Existing Production CI passes, user approves candidate, then normal validated promotion + Pages gate; verify deployed SHA; retain rollback route |
 
 Milestones 2–6 are incremental changes within the parallel track. Preview progress after each usable increment. Do not combine runtime extraction, gameplay tuning and artwork replacement into one change.
