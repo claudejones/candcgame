@@ -1,0 +1,230 @@
+{
+  "version": 1,
+  "snapshot": {
+    "treeSha": "4a183ead4d3cf3bbecba695898dabc81a54e1e5c",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "blobSha": "28ad32614d09d34adb1071d59daea8f0bc716e56",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-command-output-budgets.json",
+        "blobSha": "191a36033514bcba711ea1314e896f4c17afe246",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-runs/af01-20260919172919-679b96/af01_far-b5522723f915ccdc.json",
+        "blobSha": "eebfa4da8ccbfad51a9f77d6c2dbd200ae2d5ac2",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-runs/af01-20260919172919-679b96/af01_flying-a44999b260e8d8dd.json",
+        "blobSha": "8ce1da68e2548638aec05625ae158f949d80d9eb",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-runs/af01-20260919172919-679b96/af01_ground-c9278e13f8cae3c4.json",
+        "blobSha": "34e84a0def39fda080c26ea29f80beb7493c3563",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-runs/af01-20260919172919-679b96/af01_mid-996b299d9420da11.json",
+        "blobSha": "4fb4d7dc9438f31838dbf3aa4bfca4bd99314b68",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-runs/af01-20260919172919-679b96/af01_object_atlas-1f2405dc82213261.json",
+        "blobSha": "609020c58496c003f11a92f386b192b5f889411f",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-runs/af02-20260919204119-fb761a/af02_far-b8ddc11c2bd6a856.json",
+        "blobSha": "530e7cd81d16c0a0221d84c29bc85c56422d2dc3",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-runs/af02-20260919204119-fb761a/af02_flying-67a6571a2f97ff4e.json",
+        "blobSha": "f05a2338989122d59c1d6a6a083e3c4a3ac9a944",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-runs/af02-20260919204119-fb761a/af02_ground-426fc02c8c820af6.json",
+        "blobSha": "66ca8a6c8274bebdc08f94f9ceee89ebb1163b9e",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-runs/af02-20260919204119-fb761a/af02_mid-5eac0982fbe77cc4.json",
+        "blobSha": "468e7f04d5c7d4c5ed61ed2e2e5c92eb4c41c729",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-runs/af02-20260919204119-fb761a/af02_object_atlas-d0fe63107db70645.json",
+        "blobSha": "973e93b9ecc3dba246e9e8c0b649368bc2b85cbd",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-workflow-state.json",
+        "blobSha": "f706727a42dad90a974a60c65161ec2a60ab6d51",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_COMMAND_WORKFLOW.md",
+        "blobSha": "9156c70591bf98fcbb99c8b73f74515256dd0616",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_EXECUTION_REFERENCE.md",
+        "blobSha": "991ebbc2b8cd173024c1277de05d3cefa0aec84e",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_PRODUCTION_SPEC.md",
+        "blobSha": "f4fa9c1c4417a47f6698bbea51f777a0a7c5c880",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_TECHNICAL_FINISHING.md",
+        "blobSha": "6027cef0c2ad978e01e2f602f9e362adfb964cf5",
+        "reuse": true
+      },
+      {
+        "path": "docs/CURRENT_STATUS.md",
+        "blobSha": "58a4f2d53cef62af55a9f54d1435bd6da7a96f4b",
+        "reuse": true
+      },
+      {
+        "path": "docs/DECISION_LOG.md",
+        "blobSha": "698d1ecdc2a14b735636bd7258671466f8a01c8c",
+        "reuse": true
+      },
+      {
+        "path": "docs/GITHUB_WORKFLOW.md",
+        "blobSha": "c947c96bbaab0b49066df84f53181b77b014735d",
+        "reuse": true
+      },
+      {
+        "path": "docs/asset-profiles/hazard.md",
+        "blobSha": "326055f8a12f02f5eb095f31b302fa1ff57b0710",
+        "reuse": true
+      },
+      {
+        "path": "docs/asset-profiles/landscape.md",
+        "blobSha": "dc2cec30d43e106bf84b96e5a7d9ff3a224ae0a8",
+        "reuse": true
+      },
+      {
+        "path": "docs/phase8-qa/WORKFLOW_OPTIMIZATION_QA.md",
+        "blobSha": "20bc69b3c1da018afa4d1ee503f9f05e54434aaa",
+        "reuse": true
+      },
+      {
+        "path": "scripts/asset-jobs.mjs",
+        "blobSha": "b064fca6cb5ebedcd6ad62a05ce27d54ccb01c0e",
+        "reuse": true
+      },
+      {
+        "path": "scripts/assets.mjs",
+        "blobSha": "8f69456d45d8c330bd411e62d5c8a5912befd1ab",
+        "reuse": true
+      },
+      {
+        "path": "scripts/connected-publication-checkpoint.cjs",
+        "blobSha": "1d78b66e422d9e2e6caac0c4b6a5ef9d31df1924",
+        "reuse": true
+      },
+      {
+        "path": "scripts/connected-publisher.cjs",
+        "blobSha": "58c2bbcc89dd4c7290e4d2f59eb2442c35934c17",
+        "reuse": true
+      },
+      {
+        "path": "scripts/tests/asset-commands.test.mjs",
+        "blobSha": "81f33863c1ffda4a696a63b7d507f0274189d4e0",
+        "reuse": true
+      },
+      {
+        "path": "scripts/tests/asset-jobs.test.mjs",
+        "blobSha": "2648f4f5bf4e7069e718373b559e755ddefcb910",
+        "reuse": true
+      },
+      {
+        "path": "scripts/tests/connected-publication-checkpoint.test.cjs",
+        "blobSha": "62505ec7af6641fd2e3a720b1597b87c60e90c41",
+        "reuse": true
+      },
+      {
+        "path": "scripts/tests/connected-publisher.test.cjs",
+        "blobSha": "27ad93975fa1a207c79e8e7745dd990bd2849328",
+        "reuse": true
+      },
+      {
+        "path": "scripts/tests/validation-cache.test.cjs",
+        "blobSha": "fcffee045d777ce3d5782a48665b04532cbeeba0",
+        "reuse": true
+      },
+      {
+        "path": "scripts/validate-asset-handoff.cjs",
+        "blobSha": "6243c737c1a341270a04a21098656bdd45ad6629",
+        "reuse": true
+      },
+      {
+        "path": "scripts/validate-stage-assets.cjs",
+        "blobSha": "7de51cbb6e515a1558d177930507769953355c28",
+        "reuse": true
+      },
+      {
+        "path": "scripts/validation-cache.cjs",
+        "blobSha": "c24b8a0baa677cad5975c58bbc39f5da8a9ba492",
+        "reuse": true
+      }
+    ]
+  },
+  "state": {
+    "version": 1,
+    "snapshotTree": "4a183ead4d3cf3bbecba695898dabc81a54e1e5c",
+    "phase": "dev-ref",
+    "blobs": {
+      "AGENTS.md": "28ad32614d09d34adb1071d59daea8f0bc716e56",
+      "config/asset-command-output-budgets.json": "191a36033514bcba711ea1314e896f4c17afe246",
+      "config/asset-workflow-runs/af01-20260919172919-679b96/af01_far-b5522723f915ccdc.json": "eebfa4da8ccbfad51a9f77d6c2dbd200ae2d5ac2",
+      "config/asset-workflow-runs/af01-20260919172919-679b96/af01_flying-a44999b260e8d8dd.json": "8ce1da68e2548638aec05625ae158f949d80d9eb",
+      "config/asset-workflow-runs/af01-20260919172919-679b96/af01_ground-c9278e13f8cae3c4.json": "34e84a0def39fda080c26ea29f80beb7493c3563",
+      "config/asset-workflow-runs/af01-20260919172919-679b96/af01_mid-996b299d9420da11.json": "4fb4d7dc9438f31838dbf3aa4bfca4bd99314b68",
+      "config/asset-workflow-runs/af01-20260919172919-679b96/af01_object_atlas-1f2405dc82213261.json": "609020c58496c003f11a92f386b192b5f889411f",
+      "config/asset-workflow-runs/af02-20260919204119-fb761a/af02_far-b8ddc11c2bd6a856.json": "530e7cd81d16c0a0221d84c29bc85c56422d2dc3",
+      "config/asset-workflow-runs/af02-20260919204119-fb761a/af02_flying-67a6571a2f97ff4e.json": "f05a2338989122d59c1d6a6a083e3c4a3ac9a944",
+      "config/asset-workflow-runs/af02-20260919204119-fb761a/af02_ground-426fc02c8c820af6.json": "66ca8a6c8274bebdc08f94f9ceee89ebb1163b9e",
+      "config/asset-workflow-runs/af02-20260919204119-fb761a/af02_mid-5eac0982fbe77cc4.json": "468e7f04d5c7d4c5ed61ed2e2e5c92eb4c41c729",
+      "config/asset-workflow-runs/af02-20260919204119-fb761a/af02_object_atlas-d0fe63107db70645.json": "973e93b9ecc3dba246e9e8c0b649368bc2b85cbd",
+      "config/asset-workflow-state.json": "f706727a42dad90a974a60c65161ec2a60ab6d51",
+      "docs/ASSET_COMMAND_WORKFLOW.md": "9156c70591bf98fcbb99c8b73f74515256dd0616",
+      "docs/ASSET_EXECUTION_REFERENCE.md": "991ebbc2b8cd173024c1277de05d3cefa0aec84e",
+      "docs/ASSET_PRODUCTION_SPEC.md": "f4fa9c1c4417a47f6698bbea51f777a0a7c5c880",
+      "docs/ASSET_TECHNICAL_FINISHING.md": "6027cef0c2ad978e01e2f602f9e362adfb964cf5",
+      "docs/CURRENT_STATUS.md": "58a4f2d53cef62af55a9f54d1435bd6da7a96f4b",
+      "docs/DECISION_LOG.md": "698d1ecdc2a14b735636bd7258671466f8a01c8c",
+      "docs/GITHUB_WORKFLOW.md": "c947c96bbaab0b49066df84f53181b77b014735d",
+      "docs/asset-profiles/hazard.md": "326055f8a12f02f5eb095f31b302fa1ff57b0710",
+      "docs/asset-profiles/landscape.md": "dc2cec30d43e106bf84b96e5a7d9ff3a224ae0a8",
+      "docs/phase8-qa/WORKFLOW_OPTIMIZATION_QA.md": "20bc69b3c1da018afa4d1ee503f9f05e54434aaa",
+      "scripts/asset-jobs.mjs": "b064fca6cb5ebedcd6ad62a05ce27d54ccb01c0e",
+      "scripts/assets.mjs": "8f69456d45d8c330bd411e62d5c8a5912befd1ab",
+      "scripts/connected-publication-checkpoint.cjs": "1d78b66e422d9e2e6caac0c4b6a5ef9d31df1924",
+      "scripts/connected-publisher.cjs": "58c2bbcc89dd4c7290e4d2f59eb2442c35934c17",
+      "scripts/tests/asset-commands.test.mjs": "81f33863c1ffda4a696a63b7d507f0274189d4e0",
+      "scripts/tests/asset-jobs.test.mjs": "2648f4f5bf4e7069e718373b559e755ddefcb910",
+      "scripts/tests/connected-publication-checkpoint.test.cjs": "62505ec7af6641fd2e3a720b1597b87c60e90c41",
+      "scripts/tests/connected-publisher.test.cjs": "27ad93975fa1a207c79e8e7745dd990bd2849328",
+      "scripts/tests/validation-cache.test.cjs": "fcffee045d777ce3d5782a48665b04532cbeeba0",
+      "scripts/validate-asset-handoff.cjs": "6243c737c1a341270a04a21098656bdd45ad6629",
+      "scripts/validate-stage-assets.cjs": "7de51cbb6e515a1558d177930507769953355c28",
+      "scripts/validation-cache.cjs": "c24b8a0baa677cad5975c58bbc39f5da8a9ba492"
+    },
+    "initialDevHead": "bf5d7884782f9e5f2c41a87ee2173b9e10c3fd56",
+    "initialDevTree": "795fb6e622476cb1d1416d2c7e55c50083fde36b",
+    "initialMainHead": "bf5d7884782f9e5f2c41a87ee2173b9e10c3fd56",
+    "remoteTree": "4a183ead4d3cf3bbecba695898dabc81a54e1e5c",
+    "devCommit": "cac6b2a884dd35f6f92e4307b715058973503e69"
+  }
+}
