@@ -2,15 +2,13 @@
 
 GitHub (`claudejones/candcgame`) is authoritative. Before changes read this file and `docs/CURRENT_STATUS.md` once. Preserve concurrent work and distinguish specifications, implementation and decision history. Explicit user directions govern scope; identify conflicts with locked requirements before modifying production.
 
-## Direct asset finish (takes precedence for finish commands)
+## Asset production
 
-For `finish AF03` or another expansion stage, run `node scripts/assets.mjs finish <STAGE>` from current main. Read only `docs/ASSET_FINISH.md` for this operation. One agent; no workers, coordinator state, historical packets or full regression suite. Use the returned pinned source manifest. Never silently regenerate missing sources. Asset-only branch publication is distinct from main/gameplay release; see the finish procedure.
+For new stage artwork and the explicitly authorized fresh AF03 run, use `docs/ASSET_COMMAND_WORKFLOW.md`. One agent generates five images sequentially and saves each completed image to Git. Review and refine every image prompt before using it. No worker dispatch, coordinator reconstruction, old-output recovery, gameplay calibration or shared-branch deployment belongs in this flow.
 
-## Routine asset commands
+`generate AF03 fresh` is a natural-language agent instruction defined in that document, not a shell subcommand. Start from current main on a new branch; preserve the old AF03 branches and artwork. A fresh run may use the approved brief and reference photographs, never old AF03 generated outputs. If this new run is interrupted, continue its own saved files only; do not restart its completed images.
 
-Resolve `help`, `status`, `build`, `generate`, `regenerate`, `revise`, `verify`, `publish`, `resume`, `approve`, `rollback` with `node scripts/assets.mjs <command>`. Read `docs/ASSET_COMMAND_WORKFLOW.md` once for production. This replaces the full-spec startup list below for routine commands. Read only the selected operation/file rules and actual reference images. Resume/status/publication must not preload generation profiles or old runs. Use the known connected publication route; do not probe terminal credentials or search chat history during ordinary startup.
-
-At every stage/continent closeout run `node scripts/assets.mjs handoff` and provide the next fully completed command. The user supplies no workflow fields and need not append “Follow AGENTS.md.” Setup applies across continents. Git is durable; scratch is not. Resume must inspect the stage recovery branch, even when main says no active work. Never regenerate recoverable completed bytes.
+Existing CLI helpers are utilities, not a mandatory orchestration pipeline. `finish`/legacy recovery is used only when explicitly requested for an old run. For new production, this section and ASSET_COMMAND_WORKFLOW.md take precedence over historical worker/recovery procedures. Status reports must name the branch inspected; old manifest status does not describe the fresh run.
 
 ## Scope and safeguards
 
@@ -21,11 +19,9 @@ At every stage/continent closeout run `node scripts/assets.mjs handoff` and prov
 - Retain genuine renderer/scheduler fixes and regression tests. Pause independent legacy hazard tuning. Preserve the eleven comparison candidates and calibration evidence; no silent promotion, overwrite or rollback. Coordinate handoff contract changes with the actual importer.
 - Update concise CURRENT_STATUS when baseline/next action changes; append durable decisions to DECISION_LOG. Do not erase history or duplicate it in startup packets.
 
-## Delegation and output
+## Execution and output
 
-One coordinator, at most two focused workers, no nested managers. Use fresh scoped context and actual references. Prefer `gpt-5.6-sol` medium for production, `gpt-5.6-luna` for narrow support when available. Workers own isolated outputs; coordinator owns shared registry/state/integration/publication. Help/status and single-image edits stay single-agent. Operation details: `docs/ASSET_EXECUTION_REFERENCE.md` (selected section only).
-
-Keep outputs bounded: concise results, paths and failures; no full state/catalog/API/binary dumps. Read unchanged material once. Reuse validated unchanged local work; CI is independent. Measure attempts, output size and recovery reuse; do not claim a fixed context capacity or subscription usage percentage. Diagnose repeated defects before another generation; narrowly scoped finishing follows `docs/ASSET_TECHNICAL_FINISHING.md`.
+Asset production uses one agent, one image at a time, without subagents. Keep outputs bounded: concise results, paths and failures; no full state/catalog/API/binary dumps. Read unchanged material once. Each saved image has a path, hash and actual check result. Diagnose a failed image and revise its prompt before one focused retry; if that fails, save progress and report the specific blocker. Never loop or regenerate passing images. Narrowly scoped finishing follows `docs/ASSET_TECHNICAL_FINISHING.md`.
 
 ## System changes or concrete rule conflicts
 

@@ -1,5 +1,7 @@
 # Direct asset completion
 
+Legacy recovery only. The user has authorized fresh AF03 generation; use ASSET_COMMAND_WORKFLOW.md for that request. Do not select this procedure automatically for the fresh run.
+
 User command: `In claudejones/candcgame: finish AF03.` This procedure overrides normal worker dispatch and shared-branch publication for asset-only completion. It does not change geometry, acceptance, calibration or release requirements.
 
 1. Run current main's `node scripts/assets.mjs finish AF03`. It reads only the five-source manifest and verifies bytes. It performs no network request, generation or coordinator reconstruction. If a pinned Git object is absent, fetch only the recorded recovery branch once. If a local source is missing and its manifest has `source.backup`, materialize the exact Library ID, extract only the named ZIP member, verify its SHA-256, and update the local locator. This is a direct recovery reference, not a search. Otherwise recover that exact source by hash; do not silently recreate it. Report a specific unrecoverable file.
