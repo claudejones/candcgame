@@ -183,7 +183,7 @@
   "state": {
     "version": 1,
     "snapshotTree": "4a183ead4d3cf3bbecba695898dabc81a54e1e5c",
-    "phase": "dev-ref",
+    "phase": "main-ref",
     "blobs": {
       "AGENTS.md": "28ad32614d09d34adb1071d59daea8f0bc716e56",
       "config/asset-command-output-budgets.json": "191a36033514bcba711ea1314e896f4c17afe246",
@@ -225,6 +225,8 @@
     "initialDevTree": "795fb6e622476cb1d1416d2c7e55c50083fde36b",
     "initialMainHead": "bf5d7884782f9e5f2c41a87ee2173b9e10c3fd56",
     "remoteTree": "4a183ead4d3cf3bbecba695898dabc81a54e1e5c",
-    "devCommit": "cac6b2a884dd35f6f92e4307b715058973503e69"
+    "devCommit": "cac6b2a884dd35f6f92e4307b715058973503e69",
+    "devRunUrl": "https://github.com/claudejones/candcgame/actions/runs/35479505186",
+    "mainCommit": "f141ff29adc01689d0a879361728d2fa9169b53c"
   }
 }
