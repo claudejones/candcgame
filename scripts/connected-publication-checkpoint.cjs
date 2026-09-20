@@ -31,7 +31,7 @@
       if(current.sha!==head)throw new Error('Publication recovery branch changed concurrently; inspect before continuing.');
       const content=JSON.stringify({version:1,snapshot:source,state},null,2)+'\n';
       const blob=await adapter.createBlob({content,encoding:'utf-8'});
-      const tree=await adapter.createTree({baseTreeSha:current.treeSha,entries:[{path,mode:'100644',type:'blob',sha:blob}]});
+      const tree=await adapter.createTree({baseTreeSha:snapshot.treeSha,entries:[{path,mode:'100644',type:'blob',sha:blob}]});
       const commit=await adapter.createCommit({message:`Checkpoint publication: ${state.phase}`,treeSha:tree,parents:[head]});
       const latest=await adapter.fetchRef(`heads/${branch}`);
       if(latest.sha!==head)throw new Error('Publication recovery branch changed concurrently; no ref updated.');
