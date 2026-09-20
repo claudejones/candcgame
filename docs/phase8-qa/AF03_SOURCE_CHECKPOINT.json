@@ -1,23 +1,58 @@
 {
   "stageId": "AF03",
-  "status": "working",
-  "recoveryNote": "Recovered FAR bytes preserved. Other four assets were not produced in the recovered workspace. Inspected reference packet is being restored before generation.",
-  "recoveredAssets": {
+  "status": "recovery-blocked",
+  "runId": "af03-20260919233101-b1ef45",
+  "recoveryBranch": "work/assets/af03",
+  "recoveryNote": "On 2026-09-20 the workspace reset during an interrupted backup. FAR and the six inspected reference photographs are durable in this branch. Four new source images had been generated and locally committed, but their final tree was not published. No matching files remain in the accessible workspace, and the recent generated-image Library lookup returned no results. Do not claim these four sources are durable or silently regenerate them. The recorded hashes below describe missing exact bytes, not retrievable artifacts.",
+  "durableAssets": {
     "FAR": {
       "path": "assets/worlds/africa/AF03_BG_DISTANT_MARRAKESH.png",
       "sha256": "5fdeabcba60cdb3b998c2cb0584c57c02581ddb0f8f18e0be9c0e18d6730c0a4",
-      "width": 2172,
-      "height": 724,
-      "technicalValidation": "passed: validate-phase8-pngs.js --stage af03 --layer far",
-      "compositionReview": "pending"
+      "technicalValidation": "passed"
     }
   },
-  "remaining": [
-    "MID",
-    "GROUND",
-    "OBJECT_ATLAS",
-    "FLYING"
-  ],
+  "referenceManifest": "assets/references/africa/af03/REFERENCES.json",
+  "missingGeneratedSources": {
+    "MID": {
+      "sha256": "d3546e24222d627ab3c47fe93a739ddda96315a00959449a77ebaca8e3af92d2",
+      "size": [
+        2172,
+        724
+      ],
+      "attempts": 3,
+      "notes": "Selected v2 passed PNG check; apparent red fringe was alpha1-2 and invisible in actual FAR composite. v3 unnecessary edit rejected."
+    },
+    "GROUND": {
+      "sha256": "19e02e9c97bd9c254dd8d771b065703850dc29afc97a8a1c93b11538f7ae2ad0",
+      "size": [
+        2171,
+        724
+      ],
+      "attempts": 1,
+      "cleanup": "Add one edge-continuation column; source row399 maps to393 (shift6px upward), extend bottom6rows, set above393 alpha0 and terrain alpha255."
+    },
+    "OBJECT_ATLAS": {
+      "sha256": "e3a57dbb705fc56d97183b83740228469c685362e6401b73e58d45ab88f7e3a8",
+      "size": [
+        2171,
+        724
+      ],
+      "attempts": 2,
+      "cleanup": "Exact2172x724 canvas. Retain largest four-connected alpha>0 component per cell; remove detached residue. Jar height610 to588 nearest-neighbor, preserve aspect ratio; brazier unchanged pixels. Center at localx543 and align bottomy620."
+    },
+    "FLYING": {
+      "sha256": "d104fe4788dcedb78b452ba571bcb956a85a7b30ddcf6c23d9fe229f7750b593",
+      "size": [
+        2172,
+        724
+      ],
+      "attempts": 1,
+      "cleanup": "Keep largest connected bird component in each frame, clear detached residue. Uniform nearest-neighbor scale0.895 about fixed anchor271,362 to satisfy32px gutters. Four distinct right-facing white-stork wing poses had passed source visual inspection."
+    }
+  },
+  "unpublishedLocalCommit": "7250773",
+  "unpublishedTree": "bae11acedd10796b4393544dacfa4d2a49bc9a85",
+  "nextAction": "Recover exact missing source bytes if possible; otherwise report loss and obtain user direction before regeneration. Do not skip validation, mark checks passed or manufacture an asset-ready handoff. No deterministic cleanup approval was received.",
   "readiness": "not-asset-ready",
   "calibration": "pending",
   "release": "pending"
