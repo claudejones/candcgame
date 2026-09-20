@@ -1,9 +1,9 @@
 {
   "stageId": "AF03",
-  "status": "recovery-blocked",
+  "status": "authorized-recreation-in-progress",
   "runId": "af03-20260919233101-b1ef45",
   "recoveryBranch": "work/assets/af03",
-  "recoveryNote": "On 2026-09-20 the workspace reset during an interrupted backup. FAR and the six inspected reference photographs are durable in this branch. Four new source images had been generated and locally committed, but their final tree was not published. No matching files remain in the accessible workspace, and the recent generated-image Library lookup returned no results. Do not claim these four sources are durable or silently regenerate them. The recorded hashes below describe missing exact bytes, not retrievable artifacts.",
+  "recoveryNote": "User explicitly authorized recreating the four missing AF03 images on 2026-09-20. FAR is retained. Every new raw source is saved immediately before QA or another generation.",
   "durableAssets": {
     "FAR": {
       "path": "assets/worlds/africa/AF03_BG_DISTANT_MARRAKESH.png",
@@ -52,8 +52,19 @@
   },
   "unpublishedLocalCommit": "7250773",
   "unpublishedTree": "bae11acedd10796b4393544dacfa4d2a49bc9a85",
-  "nextAction": "Recover exact missing source bytes if possible; otherwise report loss and obtain user direction before regeneration. Do not skip validation, mark checks passed or manufacture an asset-ready handoff. No deterministic cleanup approval was received.",
+  "nextAction": "Reuse saved recreatedSources; perform their QA. Recreate only the remaining missing files under the user's authorization and save each immediately. The user-approved current technical-finishing policy applies within its narrow bounds.",
   "readiness": "not-asset-ready",
   "calibration": "pending",
-  "release": "pending"
+  "release": "pending",
+  "recreatedSources": {
+    "MID": {
+      "path": "assets-original/africa/af03/AF03_BG_MID_MARRAKESH_SOURCE.png",
+      "sha256": "c291a17ed2e76cd1beca7ec4a6da9a262ee3c464a8f82df1869f82dd6d3b521d",
+      "size": [
+        2171,
+        724
+      ],
+      "status": "raw-source-saved; technical-and-visual-QA-pending"
+    }
+  }
 }
