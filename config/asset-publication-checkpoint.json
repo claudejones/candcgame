@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "snapshot": {
+    "treeSha": "a27942a1207c6afffb492935b29828ecccbeb902",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "blobSha": "1502c24600d76e0239efb283c021c01ae1853290",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-finish/af03.json",
+        "blobSha": "599dd802f80dacfc21c14a37fa0b4e8764bf6458",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_COMMAND_WORKFLOW.md",
+        "blobSha": "332641d91c243e8367c469cfe20c47354dbce630",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_FINISH.md",
+        "blobSha": "9094b8c2dc045b7d20afad17d4570a28e9fc829b",
+        "reuse": true
+      },
+      {
+        "path": "docs/CURRENT_STATUS.md",
+        "blobSha": "b10f7b69cdcd85ac0cb880d1e2e1a6f3caf1d029",
+        "reuse": true
+      },
+      {
+        "path": "docs/DECISION_LOG.md",
+        "blobSha": "e09c4d22d56307e4ebfe7b523022f33e82de01f4",
+        "reuse": true
+      },
+      {
+        "path": "docs/GITHUB_WORKFLOW.md",
+        "blobSha": "2660bc3ebcb3121c9627d69a31dc8c89369348b5",
+        "reuse": true
+      },
+      {
+        "path": "scripts/asset-finish.mjs",
+        "blobSha": "5899959d25a21c7f2004f70130ded670ad6a8c9d",
+        "reuse": true
+      },
+      {
+        "path": "scripts/asset-only-publisher.cjs",
+        "blobSha": "6fe1bba6883c8977b5386c2afaf6be3fb5fb3e1b",
+        "reuse": true
+      },
+      {
+        "path": "scripts/asset-prompts.mjs",
+        "blobSha": "aa347bdfd621f7142e943b2c1359ebbf5d11fbae",
+        "reuse": true
+      },
+      {
+        "path": "scripts/assets.mjs",
+        "blobSha": "d2e6fe845f9b0a9c200db171a11b9d292fd5d561",
+        "reuse": true
+      },
+      {
+        "path": "scripts/tests/asset-finish.test.mjs",
+        "blobSha": "58678c3f000508067fd988810ad4d97292afaf91",
+        "reuse": true
+      }
+    ]
+  },
+  "state": {
+    "version": 1,
+    "snapshotTree": "a27942a1207c6afffb492935b29828ecccbeb902",
+    "phase": "dev-ref",
+    "blobs": {
+      "AGENTS.md": "1502c24600d76e0239efb283c021c01ae1853290",
+      "config/asset-finish/af03.json": "599dd802f80dacfc21c14a37fa0b4e8764bf6458",
+      "docs/ASSET_COMMAND_WORKFLOW.md": "332641d91c243e8367c469cfe20c47354dbce630",
+      "docs/ASSET_FINISH.md": "9094b8c2dc045b7d20afad17d4570a28e9fc829b",
+      "docs/CURRENT_STATUS.md": "b10f7b69cdcd85ac0cb880d1e2e1a6f3caf1d029",
+      "docs/DECISION_LOG.md": "e09c4d22d56307e4ebfe7b523022f33e82de01f4",
+      "docs/GITHUB_WORKFLOW.md": "2660bc3ebcb3121c9627d69a31dc8c89369348b5",
+      "scripts/asset-finish.mjs": "5899959d25a21c7f2004f70130ded670ad6a8c9d",
+      "scripts/asset-only-publisher.cjs": "6fe1bba6883c8977b5386c2afaf6be3fb5fb3e1b",
+      "scripts/asset-prompts.mjs": "aa347bdfd621f7142e943b2c1359ebbf5d11fbae",
+      "scripts/assets.mjs": "d2e6fe845f9b0a9c200db171a11b9d292fd5d561",
+      "scripts/tests/asset-finish.test.mjs": "58678c3f000508067fd988810ad4d97292afaf91"
+    },
+    "initialDevHead": "78204b7ec5537c4c532e2246fd55ecc6487bd912",
+    "initialDevTree": "c02a9d41e825d95cba3d85f0c1516308d93313e1",
+    "initialMainHead": "10c0e706d4d5990bd0d433cd1674c0ae2dd413c8",
+    "remoteTree": "a27942a1207c6afffb492935b29828ecccbeb902",
+    "devCommit": "9697d1c49abb0eadceb1a9648e5c431b1a0ab230"
+  }
+}
