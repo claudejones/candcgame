@@ -2,6 +2,10 @@
 
 GitHub (`claudejones/candcgame`) is authoritative. Before changes read this file and `docs/CURRENT_STATUS.md` once. Preserve concurrent work and distinguish specifications, implementation and decision history. Explicit user directions govern scope; identify conflicts with locked requirements before modifying production.
 
+## Direct asset finish (takes precedence for finish commands)
+
+For `finish AF03` or another expansion stage, run `node scripts/assets.mjs finish <STAGE>` from current main. Read only `docs/ASSET_FINISH.md` for this operation. One agent; no workers, coordinator state, historical packets or full regression suite. Use the returned pinned source manifest. Never silently regenerate missing sources. Asset-only branch publication is distinct from main/gameplay release; see the finish procedure.
+
 ## Routine asset commands
 
 Resolve `help`, `status`, `build`, `generate`, `regenerate`, `revise`, `verify`, `publish`, `resume`, `approve`, `rollback` with `node scripts/assets.mjs <command>`. Read `docs/ASSET_COMMAND_WORKFLOW.md` once for production. This replaces the full-spec startup list below for routine commands. Read only the selected operation/file rules and actual reference images. Resume/status/publication must not preload generation profiles or old runs. Use the known connected publication route; do not probe terminal credentials or search chat history during ordinary startup.

@@ -2,6 +2,10 @@
 
 Updated 2026-09-20. GitHub is authoritative; resolve live heads before writes. Commands: `node scripts/assets.mjs help`. Workflow: ASSET_COMMAND_WORKFLOW.md. Historical decisions/QA are not startup reading.
 
+## Direct completion update
+
+AF03 has a pinned five-source inventory at `config/asset-finish/af03.json`. `node scripts/assets.mjs finish AF03` bypasses legacy worker recovery. It verifies sources only, not artwork readiness. GROUND/FLYING locators are local and must be preserved remotely before further edits; missing locators block automatic regeneration. No new artwork was produced by this update. See ASSET_FINISH.md.
+
 ## Current production and recovery
 
 - NA01–03, SA01–03 and EU01–03 landscapes are approved (27 layers). AF01 is approved, including facing corrections. Exact reviewed revisions/hashes remain in workflow state. Preserve SA01 MID snake/no monkey and NA03 GROUND's 2170×725 exception.

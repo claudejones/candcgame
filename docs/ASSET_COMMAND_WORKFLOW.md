@@ -8,6 +8,7 @@ GitHub repository: `claudejones/candcgame`. Type commands to the agent, not a te
 | `help AS01` | Selected stage and readiness |
 | `status AF03` | Current checkpoint and recovery state |
 | `build stage AS01` | Resolve missing selections/references, then build five assets and an asset-ready handoff when eligible |
+| `finish AF03` | Direct single-agent completion from the selected source manifest; see ASSET_FINISH.md |
 | `resume AF03` | Inspect durable recovery state and continue unfinished work; never restart completed images |
 | `regenerate landscape NA01 FAR` | Replace only the explicitly requested approved layer |
 | `revise landscape SA01 MID: keep the snake; remove the monkey` | Edit only that layer to direction |
@@ -17,6 +18,8 @@ GitHub repository: `claudejones/candcgame`. Type commands to the agent, not a te
 | `rollback SA01` | Restore the recorded approved stage through a new guarded commit |
 
 Supported keys: NA01–03 North America; SA01–03 South America; EU01–03 Europe; AF01–03 Africa; AS01–03 Asia; OC01–03 Oceania/Australia (AU alias); AN01–03 Antarctica. Keys are case-insensitive; NA1/NA-01 mean NA01. FAR/DISTANT/BG_FAR/BG_DISTANT and MID/BG_MID are aliases. Omit a landscape layer for FAR+MID+GROUND. Discover other families with `help character`, `help hazard`, etc.; discoverability does not grant readiness or generation authority.
+
+For `finish`, the direct ASSET_FINISH.md procedure takes precedence over worker dispatch and shared-branch publication below.
 
 ## Agent execution
 

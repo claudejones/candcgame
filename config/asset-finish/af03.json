@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "stageId": "AF03",
+  "note": "Source inventory only. Three Git-backed sources and two verified local sources; local sources must be saved durably before further edits. No artwork QA or release acceptance is implied. Do not dispatch workers or read legacy run packets.",
+  "assets": {
+    "FAR": {
+      "output": "assets/worlds/africa/AF03_BG_DISTANT_MARRAKESH.png",
+      "source": {
+        "sha256": "5fdeabcba60cdb3b998c2cb0584c57c02581ddb0f8f18e0be9c0e18d6730c0a4",
+        "git": {
+          "commit": "bcd88d910f44fb11844f82bba25bd57d4ff52243",
+          "path": "assets/worlds/africa/AF03_BG_DISTANT_MARRAKESH.png"
+        }
+      },
+      "nextAction": "Preserve source, check technical geometry and visual result; record only performed checks."
+    },
+    "MID": {
+      "output": "assets/worlds/africa/AF03_BG_MID_MARRAKESH.png",
+      "source": {
+        "sha256": "8dfe0b29a1087379032f9734076d9019b65015d9ceb874705b9c45b954df1420",
+        "git": {
+          "commit": "bcd88d910f44fb11844f82bba25bd57d4ff52243",
+          "path": "assets-original/africa/af03/AF03_BG_MID_MARRAKESH_SOURCE_EDIT1.png"
+        }
+      },
+      "nextAction": "Preserve source, check technical geometry and visual result; record only performed checks."
+    },
+    "OBJECT_ATLAS": {
+      "output": "assets/worlds/africa/AF03_OBJECT_ATLAS.png",
+      "source": {
+        "sha256": "3284375343abbdc4967fef9a674aaae4fb9d42078f14293613ff0685379d2c24",
+        "git": {
+          "commit": "bcd88d910f44fb11844f82bba25bd57d4ff52243",
+          "path": "assets-original/africa/af03/AF03_OBJECT_ATLAS_SOURCE_EDIT2.png"
+        }
+      },
+      "nextAction": "Preserve source, check technical geometry and visual result; record only performed checks."
+    },
+    "GROUND": {
+      "output": "assets/worlds/africa/AF03_GROUND_MARRAKESH.png",
+      "source": {
+        "sha256": "20274e441fe24aa8c12c48c53152894f0cdabf669126af72886fb7cba41265b8",
+        "local": "/workspace/scratch/5ca8d80b3c15/af03-landscape-qa/AF03_GROUND_SOURCE.png"
+      },
+      "nextAction": "Preserve source, check technical geometry and visual result; record only performed checks."
+    },
+    "FLYING": {
+      "output": "assets/worlds/africa/AF03_HAZARD_FLYING.png",
+      "source": {
+        "sha256": "f1615424a0b557b07ad6a49c538672a4ff9770bc276d1a46c83b6e5d3ebfe28e",
+        "local": "/workspace/scratch/19bca995d82a/generated_images/exec-9d522cfb-3a97-4328-b35a-400571c780a7.png"
+      },
+      "nextAction": "Preserve source, check technical geometry and visual result; record only performed checks."
+    }
+  }
+}
