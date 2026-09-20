@@ -65,6 +65,15 @@
         724
       ],
       "status": "raw-source-saved; technical-and-visual-QA-pending"
+    },
+    "OBJECT_ATLAS": {
+      "path": "assets-original/africa/af03/AF03_OBJECT_ATLAS_SOURCE.png",
+      "sha256": "0e8ad3d4cc0da851780e7d8926d8f28de9bc3f10b1cce5680a6b7d68e42ab21e",
+      "size": [
+        2170,
+        725
+      ],
+      "status": "raw-source-saved; technical-and-visual-QA-pending"
     }
   }
 }
