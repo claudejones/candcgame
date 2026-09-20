@@ -34,8 +34,8 @@ export function finishView(root,stageId,{verify=false}={}) {
       if (hash(bytes)!==item.source.sha256) throw new Error('saved source hash changed');
       const finalPath=path.join(root,item.output);
       const installed=fs.existsSync(finalPath) && hash(fs.readFileSync(finalPath))===item.source.sha256;
-      assets.push({key,state:installed?'selected-bytes-installed':'source-verified',durable:Boolean(item.source.git),source:item.source.git || item.source.local,nextAction:item.nextAction || 'Check selected image and record evidence'});
-    } catch(error) { assets.push({key,state:'recovery-blocked',reason:error.message.split('\n')[0],nextAction:'Recover this exact source; do not regenerate automatically'}); }
+      assets.push({key,state:installed?'selected-bytes-installed':'source-verified',durable:Boolean(item.source.git || item.source.backup?.verified),source:item.source.git || item.source.local,...(item.source.backup?{backup:item.source.backup}:{}),nextAction:item.nextAction || 'Check selected image and record evidence'});
+    } catch(error) { assets.push({key,state:'recovery-blocked',reason:error.message.split('\n')[0],...(item.source?.backup?{backup:item.source.backup}:{}),nextAction:item.source?.backup?'Materialize the named backup, extract the named member, verify SHA-256 and update local locator':'Recover this exact source; do not regenerate automatically'}); }
   }
   const bundle=`config/asset-handoffs/${stageId.toLowerCase()}.json`;
   let handoff={state:'pending',path:bundle,...(verify?{reason:'Install the selected bytes and update manifest hashes before handoff verification'}:{})};

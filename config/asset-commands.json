@@ -190,6 +190,11 @@
       "example": "rollback SA01",
       "summary": "Restore the saved last-approved stage snapshot through a new commit; preserve unrelated work.",
       "operation": "restore"
+    },
+    "finish": {
+      "example": "finish AF03",
+      "description": "Complete selected sources through the single-agent asset-only handoff",
+      "operation": "direct-finish"
     }
   },
   "coordination": {

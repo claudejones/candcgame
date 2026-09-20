@@ -4,7 +4,7 @@ Updated 2026-09-20. GitHub is authoritative; resolve live heads before writes. C
 
 ## Direct completion update
 
-AF03 has a pinned five-source inventory at `config/asset-finish/af03.json`. `node scripts/assets.mjs finish AF03` bypasses legacy worker recovery. It verifies sources only, not artwork readiness. GROUND/FLYING locators are local and must be preserved remotely before further edits; missing locators block automatic regeneration. No new artwork was produced by this update. See ASSET_FINISH.md.
+AF03 has a pinned five-source inventory at `config/asset-finish/af03.json`. `node scripts/assets.mjs finish AF03` bypasses legacy worker recovery. It verifies sources only, not artwork readiness. GROUND/FLYING have a verified durable backup referenced by exact Library ID/member in the manifest; use it directly if their local locators vanish. No new artwork was produced by this update. See ASSET_FINISH.md.
 
 ## Current production and recovery
 
