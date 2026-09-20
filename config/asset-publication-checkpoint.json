@@ -18,7 +18,7 @@
   "state": {
     "version": 1,
     "snapshotTree": "c02a9d41e825d95cba3d85f0c1516308d93313e1",
-    "phase": "dev-ref",
+    "phase": "main-ref",
     "blobs": {
       "scripts/connected-publication-checkpoint.cjs": "36038b2fa2056a49209364813cfb394d2822a7d2",
       "scripts/tests/connected-publication-checkpoint.test.cjs": "090620da5e2268a7ca93e611fd469d00a90c0ab3"
@@ -27,6 +27,8 @@
     "initialDevTree": "4a183ead4d3cf3bbecba695898dabc81a54e1e5c",
     "initialMainHead": "f141ff29adc01689d0a879361728d2fa9169b53c",
     "remoteTree": "c02a9d41e825d95cba3d85f0c1516308d93313e1",
-    "devCommit": "78204b7ec5537c4c532e2246fd55ecc6487bd912"
+    "devCommit": "78204b7ec5537c4c532e2246fd55ecc6487bd912",
+    "devRunUrl": "https://github.com/claudejones/candcgame/actions/runs/35479903078",
+    "mainCommit": "10c0e706d4d5990bd0d433cd1674c0ae2dd413c8"
   }
 }
