@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "snapshot": {
+    "treeSha": "a72ab6498697eb976cb08ddef0d0eb9af190136b",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "blobSha": "136327a3c38518d31da64a654ec0a3fbd12d77e9",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_COMMAND_WORKFLOW.md",
+        "blobSha": "eaf8fd5424ec7c9b95432bd70fd5f82034b7512c",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_FINISH.md",
+        "blobSha": "cfb1f564fb8eaa3185a284c466d9b407613d75e4",
+        "reuse": true
+      },
+      {
+        "path": "docs/CURRENT_STATUS.md",
+        "blobSha": "d833e8e4ad238413be62785e21b59774896e514f",
+        "reuse": true
+      },
+      {
+        "path": "docs/DECISION_LOG.md",
+        "blobSha": "3af143a5ed90b028eb77b0a225dd94dc1e3a3c38",
+        "reuse": true
+      }
+    ]
+  },
+  "state": {
+    "version": 1,
+    "snapshotTree": "a72ab6498697eb976cb08ddef0d0eb9af190136b",
+    "phase": "dev-ref",
+    "blobs": {
+      "AGENTS.md": "136327a3c38518d31da64a654ec0a3fbd12d77e9",
+      "docs/ASSET_COMMAND_WORKFLOW.md": "eaf8fd5424ec7c9b95432bd70fd5f82034b7512c",
+      "docs/ASSET_FINISH.md": "cfb1f564fb8eaa3185a284c466d9b407613d75e4",
+      "docs/CURRENT_STATUS.md": "d833e8e4ad238413be62785e21b59774896e514f",
+      "docs/DECISION_LOG.md": "3af143a5ed90b028eb77b0a225dd94dc1e3a3c38"
+    },
+    "initialDevHead": "ab6e690d885942258e548f22b81e4c400356b29e",
+    "initialDevTree": "1eb0cfda6fd5de09c42d00419b252a47a0545c4d",
+    "initialMainHead": "c36d20218ef8a7f6abd624a659b89107bb9b2bcf",
+    "remoteTree": "a72ab6498697eb976cb08ddef0d0eb9af190136b",
+    "devCommit": "2fc11170f65533236988462326d5a79aee3adaa0"
+  }
+}

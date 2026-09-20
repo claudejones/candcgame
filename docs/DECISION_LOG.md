@@ -322,3 +322,8 @@ User authorized implementation after repeated AF03 recovery stalls. Added a sing
 ## 2026-09-20 — Audit all completion and future-generation entry points
 
 Registered finish in the catalog and resolver, routed help/handoff/status through selected-source completion, aligned future generation closeout with asset-only publication, and made a verified asset-ready branch take precedence over stale AF03 coordinator state at the Asia gate. Pinned a durable backup of the local GROUND/FLYING sources and restored it to verify both hashes. No artwork generated, edited or accepted. Remaining Asia choices/references stay pending.
+
+
+## 2026-09-20 — Fresh sequential AF03 authorized
+
+The user explicitly requested replacing the unfinished AF03 recovery effort with five freshly generated images, handled sequentially by one agent. New asset production reviews each prompt, generates/checks/saves that image to Git, then advances. One diagnosed revision is allowed before reporting a blocker. Existing approved visual and source contracts and the v1 Workbench importer remain. Old AF03 branches/artwork are preserved but not reused for this run. Asset delivery ends at the verified source branch and a precise Workbench import prompt; no workers, coordinator state, gameplay tuning or main/Pages deployment is required. This changes the active instructions, not evidence of successful new generation.
