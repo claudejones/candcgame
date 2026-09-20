@@ -68,7 +68,7 @@
   "state": {
     "version": 1,
     "snapshotTree": "a27942a1207c6afffb492935b29828ecccbeb902",
-    "phase": "main-ref",
+    "phase": "complete",
     "blobs": {
       "AGENTS.md": "1502c24600d76e0239efb283c021c01ae1853290",
       "config/asset-finish/af03.json": "599dd802f80dacfc21c14a37fa0b4e8764bf6458",
@@ -89,6 +89,8 @@
     "remoteTree": "a27942a1207c6afffb492935b29828ecccbeb902",
     "devCommit": "9697d1c49abb0eadceb1a9648e5c431b1a0ab230",
     "devRunUrl": "https://github.com/claudejones/candcgame/actions/runs/35484058863",
-    "mainCommit": "174236438fabe06517461a619ace1de7874fc90b"
+    "mainCommit": "174236438fabe06517461a619ace1de7874fc90b",
+    "mainRunUrl": "https://github.com/claudejones/candcgame/actions/runs/35484103600",
+    "pagesRunUrl": "https://github.com/claudejones/candcgame/actions/runs/35484129522"
   }
 }
