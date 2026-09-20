@@ -2,6 +2,17 @@
 
 GitHub (`claudejones/candcgame`) is authoritative. Before changes read this file and `docs/CURRENT_STATUS.md` once. Preserve concurrent work and distinguish specifications, implementation and decision history. Explicit user directions govern scope; identify conflicts with locked requirements before modifying production.
 
+## AF03 completion entry override — 2026-09-20
+
+This recovery checkout preserves asset bytes; its older workflow scripts and delegation instructions are not the execution authority for finishing AF03. For `finish AF03` or any request to complete this interrupted stage:
+
+1. Read `AGENTS.md` and `docs/ASSET_FINISH.md` from current **main** (direct-finish implementation introduced at `174236438fabe06517461a619ace1de7874fc90b`). Use main's `scripts/assets.mjs finish AF03` and selected-source manifest. Do not run this recovery checkout's older resolver.
+2. Use **one agent, zero workers**. Do not dispatch landscape/hazard workers, reconstruct coordinator jobs, or read historical worker packets. This overrides the delegation section below for AF03 completion.
+3. Preserve this branch and all saved images. Read only the source files/commits named by the finish manifest. Verify locally recovered sources and save their bytes durably before editing. Missing bytes are a specific recovery blocker, never permission to silently regenerate.
+4. Follow main's targeted asset checks and dedicated asset-only publication procedure. No gameplay calibration, full software regression run, main promotion or Pages wait is required for the artwork handoff.
+
+The older sections below remain historical operating context for this recovery snapshot; the entry override governs AF03 finish. Do not merge or reset this branch merely to update tools.
+
 ## Routine asset commands
 
 Resolve `help`, `status`, `build`, `generate`, `regenerate`, `revise`, `verify`, `publish`, `resume`, `approve`, `rollback` with `node scripts/assets.mjs <command>`. Read `docs/ASSET_COMMAND_WORKFLOW.md` once for production. This replaces the full-spec startup list below for routine commands. Read only the selected operation/file rules and actual reference images. Resume/status/publication must not preload generation profiles or old runs. Use the known connected publication route; do not probe terminal credentials or search chat history during ordinary startup.
