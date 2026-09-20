@@ -317,3 +317,8 @@ User approved implementing the audit of AF01/AF02 inefficiencies before the next
 ## 2026-09-20 — Direct asset finish and image-specific prompts
 
 User authorized implementation after repeated AF03 recovery stalls. Added a single-agent, pinned-source `finish` route, five scoped image templates and a dedicated asset-only branch publisher. No image generation, art acceptance or gameplay calibration performed by this change. Full shared-branch CI remains for software/runtime changes; asset-only handoffs use targeted validation and verified Git bytes, with Workbench importing from the exact source commit. AF03 manifest identifies three Git-backed sources and two local sources awaiting durable preservation. The latter must not be described as durably saved or silently regenerated if unavailable. Prompt tests validate scope, not future generation quality.
+
+
+## 2026-09-20 — Audit all completion and future-generation entry points
+
+Registered finish in the catalog and resolver, routed help/handoff/status through selected-source completion, aligned future generation closeout with asset-only publication, and made a verified asset-ready branch take precedence over stale AF03 coordinator state at the Asia gate. Pinned a durable backup of the local GROUND/FLYING sources and restored it to verify both hashes. No artwork generated, edited or accepted. Remaining Asia choices/references stay pending.
