@@ -1,0 +1,119 @@
+{
+  "runId": "af02-20260919204119-fb761a",
+  "jobId": "AF02:MID",
+  "target": "AF02",
+  "selector": "MID",
+  "owner": "landscape-worker",
+  "output": "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png",
+  "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+  "baseHash": null,
+  "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+  "referenceHashes": {
+    "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+    "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+    "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+    "assets/references/africa/af02/dunes_oryx.jpg": "4868ad095ea62ecaa952d4ec779854103a96fe0f34d90de1b753c54f6fa025a8",
+    "assets/references/africa/af02/camelthorn.jpg": "06927857a3351493caeb0358410c22d885847e67d7c40977fb7c5407b141da25",
+    "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356"
+  },
+  "sharedRules": {
+    "profile": {
+      "path": "docs/asset-profiles/landscape.md",
+      "content": "# Landscape operational profile\n\nSource authority: WORLD_RENDERING_SPEC §§1–5, ASSET_PRODUCTION_SPEC general/world/transparency rules, LANDSCAPE_GENERATION_CONTRACT_V1, and the selected Phase 8 prompt-manifest sections. Use this focused profile for ordinary image commands; read full source specs for changes to these rules.\n\n- One crisp pixel-art PNG per generation call. Attach the exact immutable registry reference as pixels; a written path is insufficient. For a revision also attach the current accepted/working layer and preserve its composition except for the requested change. Approved direction updates in the selected prompt take precedence over older reference content.\n- Preserve location, landmark relationships, lighting, palette and pixel-art language. No characters, hazards, HUD, text, checkerboard or baked shared clouds. Approved scene-specific exceptions, such as SA01's decorative snake, remain in its stage lock.\n- New source canvas: 2172×724, 8-bit non-interlaced PNG. MID/GROUND require RGBA and real transparency; FAR is fully opaque. Exact registry dimensions/types override generic prompt dimensions for a preserved approved exception: NA03 GROUND is 2170×725. Never normalize it for convenience.\n- Runtime viewport 960×540; running surface 410; landscape source width 2172; FAR/MID/GROUND offsets all zero; scale multipliers FAR 1.25, MID 1, GROUND 1. Actual draw scale is `960/2172 × multiplier`. MID anchor 621 and GROUND anchor 393 map to 410. Zero offsets do not mean drawing MID/GROUND's canvas top at Y=0.\n- FAR owns opaque skyline/foundation and useful scenery behind MID transparency. MID owns middle-distance silhouettes, intentional sky openings and enough lower authored coverage to overlap GROUND. GROUND owns a continuous level surface at source Y=393 and solid terrain depth to the bottom, with appropriate transparent space above. No synthetic backing or offset changes to hide missing art.\n- Inspect the actual stage configuration before blaming an image: registry activation, inner renderer, outer bootstrap, saved authoring draft and reset must agree. Active stages use the shared contract; pending stages keep their legacy baseline until their full set is integrated. Legacy sprite normalization is unrelated to landscape source width and must not be globally replaced.\n- Full PNG integrity/dimensions/alpha checks plus isolated, repeat and composite review are required. Check MID lower coverage/transition and GROUND surface/depth visually; a fully opaque FAR can hide a bad MID in an aggregate alpha statistic. Edge-delta numbers alone cannot prove a seamless repeat. Inspect in the actual app at scroll offsets and in Inspector previews before asking for acceptance.\n- Approved horizontal-edge-only deterministic repair may correct a repeat seam without moving landmarks/anchors, rescaling, changing dimensions/alpha ownership or hiding a structural defect. Other artwork edits use image generation unless explicitly authorized. The historic NA03 overscan treatment is asset-specific, not blanket permission to stretch future artwork.\n- Correct only the requested layer or proven configuration defect. Never change sibling assets, gameplay, character/hazard calibration or approved image bytes as an optimization. Stop after checks and visual inspection pass; final acceptance belongs to the user on the deployed integrated stage.\n"
+    },
+    "hazardProfile": "# New-stage hazard profile\n\nApplies to new AF/AS/OC/AN files. Source: HAZARD_SPEC and REMAINING_CONTINENTS_PLAN. Existing accepted atlases/calibrations stay unchanged.\n\n- Ground atlas: 2172×724 RGBA; two 1086×724 cells, GROUND1 left / GROUND2 right. Source contact (543,620); at least 32px clear cell gutters. No scenery/labels.\n- Flying atlas: 2172×724 RGBA; four 543×724 cells. Fixed source body anchor (271,362), right-facing source, stable anatomy, four distinct wing poses and continuous loop. Every flock member animates.\n- Record source-facing and intended gameplay-facing separately. Directional hazards approaching from the right face left in gameplay; retain pixels and use the matching `flipX` transform. Nondirectional objects use neither automatic mirroring nor an invented facing.\n- Supply source regions, crops/frame crops, anchors, frame order/FPS and usable starting scale/body bounds. Crops retain anchors. Starting bounds represent solid bodies, excluding decorative wings/tails/leaves. Inspect basic rendering and credible size with the character reference at 960×540/mobile; do not inflate a small species for visibility.\n- Ground uses Y=410 and the explicit source anchor; flying uses the shared HIGH/LOW starting placement. These are provisional metadata, not accepted character-relative calibration. No global physics, clearance or speed changes to rescue art.\n- Validate source integrity/alpha, gutters, ground contact pixels, distinct frame bytes and animation/pose stability. Inspect composition and basic rendering. Structural checks alone do not prove animation quality or collision fairness.\n- End asset production with the versioned asset-ready handoff and exact five-file hashes. The editor-next Workbench agent imports it; the user calibrates and saves. Iterative grounding, flight height, hitbox fairness, Jump/Slide windows, difficulty and spawn-spacing balancing belong there. Repeated zero-hit courses are not an asset handoff gate.\n- Later playable release retains real contact, collision, finish and gameplay validation. Never mark unperformed checks passed. Keep genuine renderer/scheduler bug fixes and regression tests.\n- A GROUND1/GROUND2 revision preserves its sibling's RGBA pixels and metadata exactly. Recover original bytes from Git; never silently regenerate an accepted sibling.\n",
+    "pixelArt": "Match the established crisp pixel-art language; no photorealism, painterly blur, vector-flat redesign, smooth 3D, labels, UI or unrelated assets.",
+    "landscapeContract": "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md",
+    "landscapeSource": [
+      2172,
+      724
+    ],
+    "viewport": [
+      960,
+      540
+    ],
+    "surfaceY": 410,
+    "landscapeOffsets": {
+      "FAR": 0,
+      "MID": 0,
+      "GROUND": 0
+    },
+    "landscapeScaleMultipliers": {
+      "FAR": 1.25,
+      "MID": 1,
+      "GROUND": 1
+    },
+    "landscapeAnchors": {
+      "MID": 621,
+      "GROUND": 393
+    },
+    "groundAtlas": {
+      "width": 2172,
+      "height": 724,
+      "columns": 2,
+      "cellWidth": 1086,
+      "cellHeight": 724,
+      "minimumCellGutter": 32,
+      "footAnchorY": 620
+    },
+    "flyingAtlas": {
+      "width": 2172,
+      "height": 724,
+      "columns": 4,
+      "cellWidth": 543,
+      "cellHeight": 724,
+      "minimumCellGutter": 32,
+      "bodyAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "facing": "right",
+      "frames": [
+        "upstroke apex",
+        "descending wings forward",
+        "downstroke apex",
+        "rising wings swept back"
+      ]
+    },
+    "artDirection": {
+      "authority": "User direction, 2026-09-19; see the composition, identity and scale section of the plan.",
+      "scope": "Remaining-continent proposals; existing approved artwork is not reopened.",
+      "FAR": "One recognizable local landmark or dominant natural formation, readable in the runtime composite behind MID and away from repeat joins.",
+      "MID": "One restrained, unique local sign of life: settlement/frontage, everyday-use detail or static background wildlife. No people or gameplay hazards baked into scenery.",
+      "originality": "Compare identities and visible silhouettes against existing and proposed campaign elements. No reused species/objects, renamed duplicates or recolors as new hazards; shared background materials are not signature elements.",
+      "scale": "Judge visible subjects at 960x540 and normal mobile presentation relative to characters, architecture and depth. Reject subjects that read too small or need implausible enlargement. Preserve canonical transforms and physics.",
+      "requiredStageBriefFields": [
+        "farFocalPoint",
+        "midLifeDetail",
+        "localReference",
+        "campaignDistinctiveness",
+        "intendedRelativeScale"
+      ],
+      "selectionReviewStatus": "Africa agent selections resolved; remaining nine proposals still need campaign comparison. Visual size/reference inspection remains stage-specific.",
+      "approval": "Requirements and workflow direction approved. Unresolved selection changes remain review items; generated artwork still requires deployed-stage acceptance."
+    }
+  },
+  "prompt": "AF02 MID: Sparse weathered dead-tree silhouettes, dune shoulders and pale clay-pan patches, with enough lower frontage for overlap.\n{\"direction\":\"Sparse weathered dead-tree silhouettes, dune shoulders and pale clay-pan patches, with enough lower frontage for overlap.\",\"brief\":{\"midLifeDetail\":\"A single oryx near sparse dead camelthorn silhouettes, well behind gameplay.\",\"localReference\":[\"namib\",\"sandgrouse\"],\"campaignDistinctiveness\":[\"Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat.\"],\"intendedRelativeScale\":\"Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth.\"}}",
+  "direction": "Sparse weathered dead-tree silhouettes, dune shoulders and pale clay-pan patches, with enough lower frontage for overlap.",
+  "task": {
+    "direction": "Sparse weathered dead-tree silhouettes, dune shoulders and pale clay-pan patches, with enough lower frontage for overlap.",
+    "brief": {
+      "midLifeDetail": "A single oryx near sparse dead camelthorn silhouettes, well behind gameplay.",
+      "localReference": [
+        "namib",
+        "sandgrouse"
+      ],
+      "campaignDistinctiveness": [
+        "Thin pale curled plates vs existing solid rocks; forked vertical snag vs existing horizontal log/root mass; compact sandgrouse avoids the goshawk/eagle silhouette repeat."
+      ],
+      "intendedRelativeScale": "Dune height and distance must read clearly; keep oryx anatomy and proportions plausible relative to nearby vegetation. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth."
+    }
+  },
+  "selectedHazards": null,
+  "preserveSibling": null,
+  "editingSource": null,
+  "continuityFiles": [
+    "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png",
+    "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png"
+  ]
+}

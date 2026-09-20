@@ -1,0 +1,117 @@
+{
+  "runId": "af01-20260919172919-679b96",
+  "jobId": "AF01:FAR",
+  "target": "AF01",
+  "selector": "FAR",
+  "owner": "landscape-worker",
+  "output": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
+  "baseCommit": "bafef40d77c7069e819c10689a5ac49efaa7b28b",
+  "baseHash": null,
+  "specHash": "f6afd7f9943adce8945f6955ab40c0850ac7a31e5e65686cbb746b3eb6366da3",
+  "referenceHashes": {
+    "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+    "assets/references/africa/af01/landscape.jpg": "fd790e26f2006e0b0221b6ab48f76ec683de0bd402187b51b11f542a8f8bb8fc",
+    "assets/references/africa/af01/kopje.jpg": "00d9484077c980afcef6b15d7bc906258dfe6b479dc21208b8a4ed6718a43352"
+  },
+  "sharedRules": {
+    "profile": {
+      "path": "docs/asset-profiles/landscape.md",
+      "content": "# Landscape operational profile\n\nSource authority: WORLD_RENDERING_SPEC §§1–5, ASSET_PRODUCTION_SPEC general/world/transparency rules, LANDSCAPE_GENERATION_CONTRACT_V1, and the selected Phase 8 prompt-manifest sections. Use this focused profile for ordinary image commands; read full source specs for changes to these rules.\n\n- One crisp pixel-art PNG per generation call. Attach the exact immutable registry reference as pixels; a written path is insufficient. For a revision also attach the current accepted/working layer and preserve its composition except for the requested change. Approved direction updates in the selected prompt take precedence over older reference content.\n- Preserve location, landmark relationships, lighting, palette and pixel-art language. No characters, hazards, HUD, text, checkerboard or baked shared clouds. Approved scene-specific exceptions, such as SA01's decorative snake, remain in its stage lock.\n- New source canvas: 2172×724, 8-bit non-interlaced PNG. MID/GROUND require RGBA and real transparency; FAR is fully opaque. Exact registry dimensions/types override generic prompt dimensions for a preserved approved exception: NA03 GROUND is 2170×725. Never normalize it for convenience.\n- Runtime viewport 960×540; running surface 410; landscape source width 2172; FAR/MID/GROUND offsets all zero; scale multipliers FAR 1.25, MID 1, GROUND 1. Actual draw scale is `960/2172 × multiplier`. MID anchor 621 and GROUND anchor 393 map to 410. Zero offsets do not mean drawing MID/GROUND's canvas top at Y=0.\n- FAR owns opaque skyline/foundation and useful scenery behind MID transparency. MID owns middle-distance silhouettes, intentional sky openings and enough lower authored coverage to overlap GROUND. GROUND owns a continuous level surface at source Y=393 and solid terrain depth to the bottom, with appropriate transparent space above. No synthetic backing or offset changes to hide missing art.\n- Inspect the actual stage configuration before blaming an image: registry activation, inner renderer, outer bootstrap, saved authoring draft and reset must agree. Active stages use the shared contract; pending stages keep their legacy baseline until their full set is integrated. Legacy sprite normalization is unrelated to landscape source width and must not be globally replaced.\n- Full PNG integrity/dimensions/alpha checks plus isolated, repeat and composite review are required. Check MID lower coverage/transition and GROUND surface/depth visually; a fully opaque FAR can hide a bad MID in an aggregate alpha statistic. Edge-delta numbers alone cannot prove a seamless repeat. Inspect in the actual app at scroll offsets and in Inspector previews before asking for acceptance.\n- Approved horizontal-edge-only deterministic repair may correct a repeat seam without moving landmarks/anchors, rescaling, changing dimensions/alpha ownership or hiding a structural defect. Other artwork edits use image generation unless explicitly authorized. The historic NA03 overscan treatment is asset-specific, not blanket permission to stretch future artwork.\n- Correct only the requested layer or proven configuration defect. Never change sibling assets, gameplay, character/hazard calibration or approved image bytes as an optimization. Stop after checks and visual inspection pass; final acceptance belongs to the user on the deployed integrated stage.\n"
+    },
+    "hazardProfile": "# New-stage hazard profile\n\nApplies only to new AF/AS/OC/AN files. Existing accepted atlases and calibrations stay unchanged. Source: HAZARD_SPEC and REMAINING_CONTINENTS_PLAN.\n\n- Two distinct static grounded hazards in one 2172×724 RGBA atlas: two 1086×724 cells, left GROUND1 / right GROUND2. Source contact (543,620), at least 32px clear cell gutters. No scenery or labels.\n- One flying creature in four horizontal 543×724 cells on a 2172×724 RGBA canvas. Source body anchor (271,362). Right-facing, stable core anatomy, four visibly distinct wing poses and continuous loop. Every creature in a flock must animate.\n- World ground stays Y=410. Ground placement is `410 + adjustment - (sourceAnchorY - cropTop) × scale`. Flying placement uses the existing HIGH/LOW clearance and its source body anchor. Crop must retain the anchor; changing crop must not move the contact/body point.\n- Judge visible animal/object size relative to the actual character at 960×540 and mobile display. Do not enlarge a small species to disguise poor readability. No new speed/physics or independent ground movement.\n- Measure scale, crop and collision on the generated pixels. Collision encloses the solid readable obstacle; decorative wings/tails/leaves are not automatically solid. Inspect both characters, Jump/Slide, HIGH/LOW and finish behavior.\n- Verify the full timed action across the complete hazard pass for both characters and configured flying speeds; a jump apex or indefinitely held Slide is insufficient. Keep the character reference and physics fixed, calibrate the hazard, and inspect the resulting size. Timing-window evidence is not a difficulty setting or visual approval.\n- Run `node scripts/validate-stage-assets.cjs AF01` (resolved stage), inspect atlas/animation and contacts. Structural alpha/distinct-frame checks do not prove wing poses, anatomical stability or collision fairness.\n- Coordinator supplies measured release metadata to `scripts/integrate-stage.mjs`; each check is recorded only after it was performed on the same hashes. A complete five-file stage is integrated together. User acceptance occurs after deployment.\n- A GROUND1/GROUND2 revision must preserve the sibling cell pixels and metadata exactly. Recover its original bytes from Git; compare the sibling RGBA pixels after assembly. Never regenerate an accepted sibling silently.\n",
+    "pixelArt": "Match the established crisp pixel-art language; no photorealism, painterly blur, vector-flat redesign, smooth 3D, labels, UI or unrelated assets.",
+    "landscapeContract": "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md",
+    "landscapeSource": [
+      2172,
+      724
+    ],
+    "viewport": [
+      960,
+      540
+    ],
+    "surfaceY": 410,
+    "landscapeOffsets": {
+      "FAR": 0,
+      "MID": 0,
+      "GROUND": 0
+    },
+    "landscapeScaleMultipliers": {
+      "FAR": 1.25,
+      "MID": 1,
+      "GROUND": 1
+    },
+    "landscapeAnchors": {
+      "MID": 621,
+      "GROUND": 393
+    },
+    "groundAtlas": {
+      "width": 2172,
+      "height": 724,
+      "columns": 2,
+      "cellWidth": 1086,
+      "cellHeight": 724,
+      "minimumCellGutter": 32,
+      "footAnchorY": 620
+    },
+    "flyingAtlas": {
+      "width": 2172,
+      "height": 724,
+      "columns": 4,
+      "cellWidth": 543,
+      "cellHeight": 724,
+      "minimumCellGutter": 32,
+      "bodyAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "facing": "right",
+      "frames": [
+        "upstroke apex",
+        "descending wings forward",
+        "downstroke apex",
+        "rising wings swept back"
+      ]
+    },
+    "artDirection": {
+      "authority": "User direction, 2026-09-19; see the composition, identity and scale section of the plan.",
+      "scope": "Remaining-continent proposals; existing approved artwork is not reopened.",
+      "FAR": "One recognizable local landmark or dominant natural formation, readable in the runtime composite behind MID and away from repeat joins.",
+      "MID": "One restrained, unique local sign of life: settlement/frontage, everyday-use detail or static background wildlife. No people or gameplay hazards baked into scenery.",
+      "originality": "Compare identities and visible silhouettes against existing and proposed campaign elements. No reused species/objects, renamed duplicates or recolors as new hazards; shared background materials are not signature elements.",
+      "scale": "Judge visible subjects at 960x540 and normal mobile presentation relative to characters, architecture and depth. Reject subjects that read too small or need implausible enlargement. Preserve canonical transforms and physics.",
+      "requiredStageBriefFields": [
+        "farFocalPoint",
+        "midLifeDetail",
+        "localReference",
+        "campaignDistinctiveness",
+        "intendedRelativeScale"
+      ],
+      "selectionReviewStatus": "Africa agent selections resolved; remaining nine proposals still need campaign comparison. Visual size/reference inspection remains stage-specific.",
+      "approval": "Requirements and workflow direction approved. Unresolved selection changes remain review items; generated artwork still requires deployed-stage acceptance."
+    }
+  },
+  "prompt": "AF01 FAR: Warm open plains, low distant kopjes and a broad blue sky; scenery continues behind MID openings.\n{\"direction\":\"Warm open plains, low distant kopjes and a broad blue sky; scenery continues behind MID openings.\",\"brief\":{\"farFocalPoint\":\"A prominent granite kopje with a recognizable stacked-rock silhouette above the savannah.\",\"localReference\":[\"serengeti\",\"porcupine\",\"roller\"],\"campaignDistinctiveness\":[\"Termite mound: tapering earth tower, not an angular rock. Porcupine: low body/quill fan, not a log or llama. Roller: single bird with lilac breast/turquoise wings, not a parrot flock.\"],\"intendedRelativeScale\":\"The kopje must retain visual mass behind MID; the giraffe should read as a large animal at middle distance, not a miniature beside a tree. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth.\"}}",
+  "direction": "Warm open plains, low distant kopjes and a broad blue sky; scenery continues behind MID openings.",
+  "task": {
+    "direction": "Warm open plains, low distant kopjes and a broad blue sky; scenery continues behind MID openings.",
+    "brief": {
+      "farFocalPoint": "A prominent granite kopje with a recognizable stacked-rock silhouette above the savannah.",
+      "localReference": [
+        "serengeti",
+        "porcupine",
+        "roller"
+      ],
+      "campaignDistinctiveness": [
+        "Termite mound: tapering earth tower, not an angular rock. Porcupine: low body/quill fan, not a log or llama. Roller: single bird with lilac breast/turquoise wings, not a parrot flock."
+      ],
+      "intendedRelativeScale": "The kopje must retain visual mass behind MID; the giraffe should read as a large animal at middle distance, not a miniature beside a tree. Hazard size is judged relative to the actual character; no fixed pixel dimensions are accepted before composite review. Small bird bodies remain smaller than characters; stork wings may exceed character height at the same apparent depth."
+    }
+  },
+  "selectedHazards": null,
+  "preserveSibling": null,
+  "editingSource": null,
+  "continuityFiles": [
+    "assets/worlds/africa/AF01_BG_MID_SERENGETI.png",
+    "assets/worlds/africa/AF01_GROUND_SERENGETI.png"
+  ]
+}

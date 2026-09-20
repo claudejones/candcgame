@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {help,resolve as route,stageKey,handoff,futurePacket,ROOT} from '../assets.mjs';
+import {execFileSync} from 'node:child_process';
+import {commandView,help,resolve as route,stageKey,handoff,futurePacket,ROOT} from '../assets.mjs';
 import {createRun,startJob} from '../asset-jobs.mjs';
 const resolve=input=>route(input,{active:null,approvedRevisions:{}});
 
@@ -43,7 +44,7 @@ test('whole-stage requests resolve three jobs; approved builds never reopen artw
     assert.equal(resolve(`generate ${approved} MID`).operation,'read');
   }
   assert.equal(resolve('generate SA02').operation,resolve('build SA02').operation);
-  assert.match(handoff(),/^(In claudejones\/candcgame:|In the candcgame Workbench conversation: import asset handoff config\/asset-handoffs\/[a-z]{2}\d{2}\.json for [A-Z]{2}\d{2}\.$|Phase 8 registered landscapes are approved)/);
+  assert.match(handoff({active:null,activeRunId:null,runs:{},approvedRevisions:{}}),/^(In claudejones\/candcgame:|In the candcgame Workbench conversation: import asset handoff config\/asset-handoffs\/[a-z]{2}\d{2}\.json for [A-Z]{2}\d{2}\.$|Phase 8 registered landscapes are approved)/);
 });
 test('a closed asset-ready stage hands off to Workbench before advancing production',()=>{
   const state={active:null,activeRunId:null,approvedRevisions:{af01:{commit:'c'}},runs:{af02:{
@@ -140,4 +141,43 @@ test('reference readiness cannot enable generation with an empty downloaded imag
     assert.equal(packet.jobs,undefined);
     assert.match(packet.blockers.join(' '),/reference image is empty/);
   } finally { fs.rmSync(temp,{recursive:true,force:true}); }
+});
+
+test('default views stay within concrete budgets and omit profiles, plans, and full stage specifications',(t)=>{
+  const budgets=JSON.parse(fs.readFileSync(`${ROOT}/config/asset-command-output-budgets.json`,'utf8'));
+  const plan=JSON.parse(fs.readFileSync(`${ROOT}/config/remaining-continent-proposal.json`,'utf8'));
+  plan.productionEnabled=true;plan.readiness={landscapeContractPromotion:'complete',runtimeRegistration:'complete',hazardValidation:'passed'};
+  const stage=structuredClone(plan.stages.find(item=>item.id==='AF01'));
+  stage.selectionStatus='approved';stage.referencesReady=true;stage.referenceFiles=['assets-original/current-generated/NA-assets/NA01_BG_DISTANT_MESAS.png'];
+  const view=commandView(futurePacket('build','stage',stage,[],{approvedRevisions:{}},plan));
+  const largestStageChars=JSON.stringify(view,null,2).length;
+  const recoveryView=commandView({command:'resume',target:'AF03',operation:'resume',generationAllowed:false,
+    plannedJobs:Array.from({length:50},()=>({prompt:'x'.repeat(5000)})),sharedRules:{profile:'x'.repeat(50000)},stageSpec:{notes:'x'.repeat(50000)},
+    activeRunSummary:{runId:'af03-run',target:'AF03',status:'working',authoritativeRef:'refs/remotes/origin/work/assets/af03',completed:['AF03:FAR'],failedQaCleanup:['AF03:MID'],missing:[],pending:['AF03:GROUND'],nextOperation:'continue-pending-job',autoRegenerate:false}});
+  const recoveryChars=JSON.stringify(recoveryView,null,2).length;
+  t.diagnostic(`measuredChars largestStage=${largestStageChars} recovery=${recoveryChars} budget=${budgets.default}`);
+  assert.ok(largestStageChars<=budgets.default);
+  assert.ok(recoveryChars<=budgets.default);
+  for(const value of [view,recoveryView]){
+    const text=JSON.stringify(value);
+    assert.equal(text.includes('plannedJobs'),false);
+    assert.equal(text.includes('sharedRules'),false);
+    assert.equal(text.includes('stageSpec'),false);
+  }
+  assert.deepEqual(recoveryView.activeRun.failedQaCleanup,['AF03:MID']);
+});
+
+test('latest toolchain can operate on a recovered workspace root without mixing its checkpoint with main',()=>{
+  const recovered=fs.mkdtempSync(path.join(os.tmpdir(),'asset-recovered-root-'));
+  try{
+    fs.mkdirSync(path.join(recovered,'config'),{recursive:true});
+    for(const file of ['asset-commands.json','phase8-landscapes.json','remaining-continent-proposal.json']){
+      fs.symlinkSync(path.join(ROOT,'config',file),path.join(recovered,'config',file));
+    }
+    fs.writeFileSync(path.join(recovered,'config/asset-workflow-state.json'),JSON.stringify({schemaVersion:2,revision:0,active:null,activeRunId:null,runs:{},approvedRevisions:{}}));
+    const output=execFileSync(process.execPath,['scripts/assets.mjs','help'],{cwd:ROOT,env:{...process.env,ASSET_WORKSPACE_ROOT:recovered},encoding:'utf8'});
+    const value=JSON.parse(output);
+    assert.equal(value.repository,'claudejones/candcgame');
+    assert.equal(value.next,'In claudejones/candcgame: status AF01.');
+  }finally{fs.rmSync(recovered,{recursive:true,force:true});}
 });

@@ -5,8 +5,8 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {
-  checkpointRun, closeRun, createRun, fileHash, readWorkflowState, recordResult,
-  requeueJob, resumeReport, startJob, updateWorkflowState, verifyRecovery
+  checkpointRun, closeRun, compactWorkflowState, createRun, fileHash, readWorkflowState, recordFailure, recordResult,
+  requeueJob, resumeReport, startJob, updateWorkflowState, verifyRecovery, workerBrief
 } from '../asset-jobs.mjs';
 
 function fixture() {
@@ -42,6 +42,73 @@ test('schema migration preserves approvals and CAS rejects stale writers',()=>{
   assert.equal(changed.state.revision,1);
   assert.throws(()=>updateWorkflowState({statePath:f.statePath,expectedRevision:0,actor:'coordinator',mutate(){}}),/Stale workflow revision/);
   assert.throws(()=>updateWorkflowState({statePath:f.statePath,expectedRevision:1,actor:'worker',mutate(){}}),/Only the coordinator/);
+});
+
+test('state compaction preserves approvals and resumable worker packets outside the checkpoint',()=>{
+  const f=fixture(),started=start(f);
+  let legacy=readWorkflowState(f.statePath);
+  for(const job of Object.values(legacy.runs[started.runId].jobs)){
+    job.workerPacket=workerBrief({statePath:f.statePath,runId:started.runId,jobId:job.id});
+    delete job.workerPacketRef;
+  }
+  const archivedFar=structuredClone(legacy.runs[started.runId].jobs['ZZ01:FAR'].workerPacket);
+  fs.writeFileSync(f.statePath,JSON.stringify(legacy));
+  const before=readWorkflowState(f.statePath),compacted=compactWorkflowState({statePath:f.statePath,expectedRevision:started.revision});
+  const run=compacted.state.runs[started.runId];
+  assert.deepEqual(compacted.state.approvedRevisions,before.approvedRevisions);
+  assert.equal(compacted.result.packets,3);
+  assert.equal(run.jobs['ZZ01:FAR'].workerPacket,undefined);
+  assert.ok(run.jobs['ZZ01:FAR'].workerPacketRef.path);
+  const archivedPath=path.join(path.dirname(f.statePath),run.jobs['ZZ01:FAR'].workerPacketRef.path);
+  assert.deepEqual(JSON.parse(fs.readFileSync(archivedPath,'utf8')),archivedFar);
+  const brief=workerBrief({statePath:f.statePath,runId:started.runId,jobId:'ZZ01:FAR'});
+  assert.equal(brief.prompt,'far');
+  const startedJob=startJob({root:f.root,statePath:f.statePath,expectedRevision:compacted.state.revision,runId:started.runId,jobId:'ZZ01:FAR'});
+  assert.equal(startedJob.result.packet.prompt,'far');
+});
+
+test('worker packets contain only the pertinent profile and keep shared geometry and reference hashes',()=>{
+  const f=fixture();
+  f.packet.sharedRules={profile:{content:'landscape'},hazardProfile:'hazard',viewport:{w:960,h:540},landscapeAnchors:{mid:621}};
+  const started=start(f),state=readWorkflowState(f.statePath);
+  const landscape=workerBrief({statePath:f.statePath,runId:started.runId,jobId:'ZZ01:FAR'});
+  const hazard=workerBrief({statePath:f.statePath,runId:started.runId,jobId:'ZZ01:FLYING'});
+  assert.equal(landscape.sharedRules.profile.content,'landscape');
+  assert.equal(hazard.sharedRules.profile.content,'hazard');
+  assert.equal(JSON.stringify(landscape).includes('hazardProfile'),false);
+  assert.notEqual(hazard.sharedRules.profile.content,'landscape');
+  assert.deepEqual(landscape.sharedRules.viewport,{w:960,h:540});
+  assert.ok(Object.keys(state.runs[started.runId].jobs['ZZ01:FAR'].referenceHashes).length);
+});
+
+test('repeated technical failures require diagnosis or approved finishing without relaxing standards',()=>{
+  const f=fixture(),started=start(f);
+  let mutation=startJob({root:f.root,statePath:f.statePath,expectedRevision:started.revision,runId:started.runId,jobId:'ZZ01:FAR'});
+  mutation=recordFailure({statePath:f.statePath,expectedRevision:mutation.state.revision,runId:started.runId,jobId:'ZZ01:FAR',detail:'alpha background remains opaque'});
+  assert.equal(mutation.result.classification,'alpha');
+  assert.equal(mutation.result.nextAction,'retry-after-correction');
+  mutation=startJob({root:f.root,statePath:f.statePath,expectedRevision:mutation.state.revision,runId:started.runId,jobId:'ZZ01:FAR'});
+  mutation=recordFailure({statePath:f.statePath,expectedRevision:mutation.state.revision,runId:started.runId,jobId:'ZZ01:FAR',detail:'transparent alpha still fails'});
+  assert.equal(mutation.result.count,2);
+  assert.equal(mutation.result.nextAction,'diagnose-or-approved-finishing');
+  assert.equal(mutation.result.autoAccept,false);
+  assert.equal(mutation.result.relaxStandards,false);
+});
+
+test('selected JSON source hashes ignore unrelated status prose but detect effective contract changes',()=>{
+  const f=fixture();
+  fs.writeFileSync(path.join(f.root,'spec/stage.json'),JSON.stringify({stage:{direction:'keep',status:'working'},other:{notes:'a'}}));
+  f.packet.specSources=[{path:'spec/stage.json',select:['stage.direction']}];
+  let started=start(f);
+  fs.writeFileSync(path.join(f.root,'spec/stage.json'),JSON.stringify({stage:{direction:'keep',status:'closed'},other:{notes:'b'}}));
+  let mutation=startJob({root:f.root,statePath:f.statePath,expectedRevision:started.revision,runId:started.runId,jobId:'ZZ01:FAR'});
+  assert.equal(mutation.result.packet.prompt,'far');
+  const g=fixture();
+  fs.writeFileSync(path.join(g.root,'spec/stage.json'),JSON.stringify({stage:{direction:'keep'}}));
+  g.packet.specSources=[{path:'spec/stage.json',select:['stage.direction']}];
+  started=start(g);
+  fs.writeFileSync(path.join(g.root,'spec/stage.json'),JSON.stringify({stage:{direction:'change'}}));
+  assert.throws(()=>startJob({root:g.root,statePath:g.statePath,expectedRevision:started.revision,runId:started.runId,jobId:'ZZ01:FAR'}),/Stale specification/);
 });
 
 test('bounded dispatch permits two owners, serializes landscape, and requeues an interrupted job explicitly',()=>{
