@@ -4,6 +4,7 @@
 import fs from 'node:fs';
 import {imagePrompt} from './asset-prompts.mjs';
 import {finishView} from './asset-finish.mjs';
+import {assetReceipt} from './asset-receipt.mjs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
@@ -34,7 +35,7 @@ const readyValue = value => value === true || ['ready','complete','completed','a
 function handoffSummary(stageId){
   const bundlePath=`config/asset-handoffs/${stageId.toLowerCase()}.json`;
   if(!fs.existsSync(path.join(ROOT,bundlePath)))return null;
-  const bundle=json(bundlePath);validateAssetHandoff(bundle,{expectedPaths:expectedPaths(stageId)});
+  const bundle=json(bundlePath);validateAssetHandoff(bundle,{expectedPaths:expectedPaths(stageId,ROOT)});
   return {stageId:bundle.stageId,readiness:bundle.readiness,bundle:bundlePath,downstream:bundle.downstream,existingAcceptance:bundle.existingAcceptance??null};
 }
 
@@ -255,6 +256,12 @@ function nextStage(prefix,state=workflow()) {
   return entry ? {command:'build landscape', stage:entry[0].toUpperCase()} : null;
 }
 export function handoff(state=workflow()) {
+  const manifestDir=path.join(ROOT,'config/asset-finish');
+  for(const file of arguments.length===0 && fs.existsSync(manifestDir)?proposal().stages.map(s=>s.id.toLowerCase()+'.json').filter(f=>fs.existsSync(path.join(manifestDir,f))).reverse():[]){
+    const stage=file.slice(0,-5).toUpperCase(),receipt=assetReceipt(ROOT,stage);
+    if(receipt)return `In ${catalog.repository}: ${receipt.nextAction}`;
+    return `In ${catalog.repository}: finish ${stage}.`;
+  }
   const next = nextStage(undefined,state);
   if (next) return `In ${catalog.repository}: ${next.command} ${next.stage}.`;
   let stages=[];
@@ -338,6 +345,7 @@ export function commandView(packet) {
       continents:packet.continents&&Object.fromEntries(Object.entries(packet.continents).map(([key,value])=>[key,{stages:value.stages}])),
       layerKeys:packet.layerKeys,stages:packet.stages,families:packet.families,next:packet.next,executionReference:packet.executionReference,note:packet.note};
   }
+  if(packet.stageId && (packet.manifest || packet.branch))return packet;
   const keep=['command','family','target','operation','status','state','generationAllowed','blockers','message','next','nextAction','preparation','selectionStatus','referencesReady','assetHandoff','handoff','publicationScope','direction','recoveryCheck'];
   const result={};for(const key of keep)if(packet[key]!==undefined)result[key]=packet[key];
   if(packet.jobs)result.work=packet.jobs.map(job=>({jobId:`${packet.target}:${job.selector??job.layer}`,selector:job.selector??job.layer,owner:job.owner,output:job.output}));
@@ -385,7 +393,7 @@ export function help(topic = '') {
   if (topic && !prefix && !family && !['keys','stages','commands'].includes(topic.toLowerCase())) throw new Error(`Unknown help topic '${topic}'. Use help keys.`);
   const state=workflow(),recordedTargets=new Set(Object.values(state.runs??{}).map(run=>run.target));
   let nextHint=handoff(state);
-  try{const candidate=proposal().stages?.find(stage=>!recordedTargets.has(stage.id)&&!state.approvedRevisions?.[stage.id.toLowerCase()]);if(candidate)nextHint=`In ${catalog.repository}: status ${candidate.id}.`; }catch{}
+  try{const candidate=proposal().stages?.find(stage=>!recordedTargets.has(stage.id)&&!state.approvedRevisions?.[stage.id.toLowerCase()]);if(candidate && !fs.existsSync(path.join(ROOT,'config/asset-finish/af03.json')))nextHint=`In ${catalog.repository}: status ${candidate.id}.`; }catch{}
   return {repository:catalog.repository, commands:topic==='keys'||topic==='stages' ? undefined : {...catalog.commands,detail:{operation:'read-worker-brief',syntax:'detail <stage> <FAR|MID|GROUND|OBJECT_ATLAS|FLYING>'}},
     continents:Object.fromEntries(Object.entries(catalog.continents).filter(([id]) => !prefix || id===prefix).map(([id,v]) => [id,{...v,stages:catalog.stageNumbers.map(n=>`${id}${n}`)}])),
     layerKeys:catalog.families.landscape.layers,
@@ -402,9 +410,13 @@ function section(text, heading) {
 }
 export function resolve(input, state=null) {
   const checkRemote=state===null;
-  state??=workflow();
   const words = (Array.isArray(input) ? input.join(' ') : input).trim().split(/\s+/);
   const command = (words.shift() || 'help').toLowerCase();
+  if (command==='finish') {
+    if(words.length!==1)throw new Error('Use finish <STAGE>; no worker or layer selector.');
+    const stage=stageKey(words[0]);return assetReceipt(ROOT,stage) || finishView(ROOT,stage);
+  }
+  state??=workflow();
   if (command === 'help') return help(words.join(' '));
   const def = catalog.commands[command];
   if (!def) throw new Error(`Unknown command '${command}'. Use help.`);
@@ -416,6 +428,8 @@ export function resolve(input, state=null) {
   const planned=futureStage(rawTarget);
   if (planned) {
     if (command==='status') {
+      const receipt=assetReceipt(ROOT,planned.id);if(receipt)return receipt;
+      if(fs.existsSync(path.join(ROOT,`config/asset-finish/${planned.id.toLowerCase()}.json`)))return finishView(ROOT,planned.id);
       const result=futureReadiness(planned),handoffPath=`config/asset-handoffs/${planned.id.toLowerCase()}.json`;
       if(fs.existsSync(path.join(ROOT,handoffPath)))result.assetHandoff=handoffSummary(planned.id);
       const discovered=discoverRecovery(planned.id,state,{fetch:checkRemote});
@@ -432,11 +446,12 @@ export function resolve(input, state=null) {
     const effectiveFamily=['resume','publish','approve','rollback','verify','asset-ready'].includes(command)?'stage':family;
     const packet=futurePacket(command,effectiveFamily,planned,selection?[selection]:[],state);
     if(['build','generate','regenerate','revise'].includes(command)&&planned.id==='AS01'){
-      const prior=discoverRecovery('AF03',state,{fetch:checkRemote});
-      if(prior.run&&['working','ready-to-publish','asset-ready','awaiting-approval'].includes(prior.run.status)){
+      const receipt=assetReceipt(ROOT,'AF03');
+      const prior=receipt?{run:receipt.state==='saved-for-calibration'?null:{status:'invalid-asset-receipt'},summary:receipt}:discoverRecovery('AF03',state,{fetch:checkRemote});
+      if(prior.run&&['working','ready-to-publish','asset-ready','awaiting-approval','invalid-asset-receipt'].includes(prior.run.status)){
         packet.operation='resume-prior-stage';packet.generationAllowed=false;delete packet.jobs;
         packet.blockers=[`AF03 has an active ${prior.run.status} recovery checkpoint.`];
-        packet.activeRunSummary=prior.summary;packet.nextAction='resume AF03';
+        packet.activeRunSummary=prior.summary;packet.nextAction='finish AF03';
         packet.message='Resolve and close the AF03 recovery checkpoint before beginning AS01. AS01 remains the requested next-continent stage after AF03.';
       }
     }
@@ -445,12 +460,12 @@ export function resolve(input, state=null) {
     if(command==='asset-ready'){
       if(selection)throw new Error('asset-ready operates on a complete five-file stage; omit the selector.');
       if(!handoffExists)return {...packet,operation:'blocked',generationAllowed:false,state:'handoff-missing',handoff:handoffPath,message:`Build all five assets and write ${handoffPath}, then run asset-ready ${planned.id}.`};
-      const validated=validateBundleFile(handoffPath);
+      const validated=validateBundleFile(handoffPath,{root:ROOT});
       return {...packet,operation:'asset-handoff',generationAllowed:false,state:'asset-ready',handoff:validated,message:'Five validated assets and import metadata are ready for Workbench. Calibration and release remain pending.'};
     }
     const previouslyApproved=planned.status==='approved'||Boolean(state.approvedRevisions?.[planned.id.toLowerCase()]);
-    if(command==='publish'&&handoffExists&&!previouslyApproved)return {...packet,operation:'publish-only',publicationScope:'asset-handoff',generationAllowed:false,state:'asset-ready',handoff:validateBundleFile(handoffPath),message:'Publish only the five assets and handoff bundle. This does not activate gameplay or approve calibration/release.'};
-    if(command==='verify'&&handoffExists)packet.assetHandoff=validateBundleFile(handoffPath);
+    if(command==='publish'&&handoffExists&&!previouslyApproved)return {...packet,operation:'publish-only',publicationScope:'asset-handoff',generationAllowed:false,state:'asset-ready',handoff:validateBundleFile(handoffPath,{root:ROOT}),message:'Publish only the five assets and handoff bundle. This does not activate gameplay or approve calibration/release.'};
+    if(command==='verify'&&handoffExists)packet.assetHandoff=validateBundleFile(handoffPath,{root:ROOT});
     if (direction) packet.direction=direction;
     if (command==='resume') {
       const discovered=discoverRecovery(planned.id,state,{fetch:checkRemote}),matches=Boolean(discovered.run);
@@ -587,7 +602,7 @@ function coordinator(args) {
     let handoffPath=null,recoveryRef=null,handoffRecoveryRef=null;
     if(phase==='asset-ready'){
       if(!extra||!bundleRecoveryRef)throw new Error('Use coordinator checkpoint <runId> asset-ready <expectedRevision> <handoff.json> <fetchedRemoteTrackingRef>.');
-      const validated=validateBundleFile(extra);
+      const validated=validateBundleFile(extra,{root:ROOT});
       const run=workflow().runs?.[runId];
       if(!run||validated.stageId!==run.target.toLowerCase())throw new Error('Asset handoff stage does not match the coordinator run.');
       handoffPath=extra;
@@ -602,7 +617,10 @@ function coordinator(args) {
   throw new Error('Coordinator actions: start, start-job, requeue, failure, result, verify-recovery, checkpoint, close, compact.');
 }
 function main(args) {
-  if (args[0]==='finish') return finishView(ROOT,stageKey(args[1]),{verify:args.includes('--verify')});
+  if (args[0]==='finish') {
+    if(args.length>3 || (args[2] && args[2]!=='--verify'))throw new Error('Use finish <STAGE> [--verify].');
+    return assetReceipt(ROOT,stageKey(args[1])) || finishView(ROOT,stageKey(args[1]),{verify:args.includes('--verify')});
+  }
   if (args[0]==='handoff') return handoff();
   if (args[0]==='detail') return detail(args[1],args[2]);
   if (args[0]==='coordinator') return coordinator(args.slice(1));

@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "snapshot": {
+    "treeSha": "1eb0cfda6fd5de09c42d00419b252a47a0545c4d",
+    "files": [
+      {
+        "path": "config/asset-commands.json",
+        "blobSha": "8cf1322e20cadaebad81deee88922fc5ba4f5207",
+        "reuse": true
+      },
+      {
+        "path": "config/asset-finish/af03.json",
+        "blobSha": "e2ea9edecb48e909c15597dcd000c266ff5504f8",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_COMMAND_WORKFLOW.md",
+        "blobSha": "c2e51ad5e5f52b841afaa0b007fe38863dc225c6",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_EXECUTION_REFERENCE.md",
+        "blobSha": "9c02efa9205bf5c8181c71a9e112e7154e87c6ad",
+        "reuse": true
+      },
+      {
+        "path": "docs/ASSET_FINISH.md",
+        "blobSha": "9cdf7ccdb5e31fa8f026c5a21237eb1a4b854fc8",
+        "reuse": true
+      },
+      {
+        "path": "docs/CURRENT_STATUS.md",
+        "blobSha": "6de602ced2ba79943381860739df82b5dbd97906",
+        "reuse": true
+      },
+      {
+        "path": "docs/DECISION_LOG.md",
+        "blobSha": "5ca2fc1e319239b4e6d2b95cb8309d95aa0a7127",
+        "reuse": true
+      },
+      {
+        "path": "docs/phase8-qa/ASSET_FLOW_AUDIT.md",
+        "blobSha": "f6ad17ac17aedca22a137a9eb742e9e235e64152",
+        "reuse": true
+      },
+      {
+        "path": "scripts/asset-finish.mjs",
+        "blobSha": "180ca9bc11bb371279096e6637e3bc813792b502",
+        "reuse": true
+      },
+      {
+        "path": "scripts/asset-receipt.mjs",
+        "blobSha": "56a7394008687646e9081497ecf61f33f3555d65",
+        "reuse": true
+      },
+      {
+        "path": "scripts/assets.mjs",
+        "blobSha": "4e50d329b568eab5e93422cb66a6fb5e8774564c",
+        "reuse": true
+      },
+      {
+        "path": "scripts/tests/asset-finish.test.mjs",
+        "blobSha": "6cb7890f728bccbecaa51c27f0a7bb6c132a9c12",
+        "reuse": true
+      }
+    ]
+  },
+  "state": {
+    "version": 1,
+    "snapshotTree": "1eb0cfda6fd5de09c42d00419b252a47a0545c4d",
+    "phase": "dev-ref",
+    "blobs": {
+      "config/asset-commands.json": "8cf1322e20cadaebad81deee88922fc5ba4f5207",
+      "config/asset-finish/af03.json": "e2ea9edecb48e909c15597dcd000c266ff5504f8",
+      "docs/ASSET_COMMAND_WORKFLOW.md": "c2e51ad5e5f52b841afaa0b007fe38863dc225c6",
+      "docs/ASSET_EXECUTION_REFERENCE.md": "9c02efa9205bf5c8181c71a9e112e7154e87c6ad",
+      "docs/ASSET_FINISH.md": "9cdf7ccdb5e31fa8f026c5a21237eb1a4b854fc8",
+      "docs/CURRENT_STATUS.md": "6de602ced2ba79943381860739df82b5dbd97906",
+      "docs/DECISION_LOG.md": "5ca2fc1e319239b4e6d2b95cb8309d95aa0a7127",
+      "docs/phase8-qa/ASSET_FLOW_AUDIT.md": "f6ad17ac17aedca22a137a9eb742e9e235e64152",
+      "scripts/asset-finish.mjs": "180ca9bc11bb371279096e6637e3bc813792b502",
+      "scripts/asset-receipt.mjs": "56a7394008687646e9081497ecf61f33f3555d65",
+      "scripts/assets.mjs": "4e50d329b568eab5e93422cb66a6fb5e8774564c",
+      "scripts/tests/asset-finish.test.mjs": "6cb7890f728bccbecaa51c27f0a7bb6c132a9c12"
+    },
+    "initialDevHead": "9697d1c49abb0eadceb1a9648e5c431b1a0ab230",
+    "initialDevTree": "a27942a1207c6afffb492935b29828ecccbeb902",
+    "initialMainHead": "174236438fabe06517461a619ace1de7874fc90b",
+    "remoteTree": "1eb0cfda6fd5de09c42d00419b252a47a0545c4d",
+    "devCommit": "ab6e690d885942258e548f22b81e4c400356b29e"
+  }
+}
