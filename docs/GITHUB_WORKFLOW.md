@@ -70,3 +70,13 @@ CI and deployment success establish artifact integrity and publication only. The
 - Keep tool output concise. Do not print complete unchanged specifications, large API responses or encoded binary content.
 - Report publication results and exceptions; do not narrate routine blob creation, polling or identical-tree promotion step by step.
 - Update `CURRENT_STATUS.md` as a concise operational checkpoint. Do not copy resolved troubleshooting history into every handoff.
+
+## Reusable connected publisher
+
+Use `scripts/connected-publisher.cjs` for normal shared-branch publication. It exports `createFunctionsExecAdapter(tools, {owner, repo})` and `createConnectedPublisher({adapter, checkpoint, verifiedSnapshot, message, pagesUrl})`. Load its source into tool orchestration memory, not the conversation. `verifiedSnapshot` contains the verified local `treeSha` and changed files `{path, blobSha, content, encoding:'utf-8'}`; verified remote PNG blobs use `{path, blobSha, reuse:true}`. Never put PNG bytes in text output. The publisher verifies the created tree and stops on concurrent ref changes.
+
+Call `advance()` once; it advances until an actual CI/Pages gate and returns a small status. On a later check call it again with the same snapshot and checkpoint. It filters push CI by exact SHA **and branch**, creates a main-parented promotion commit with the identical tree, and verifies the exact main-SHA Pages run. A failed gate is not an invitation to regenerate passing assets.
+
+For durable recovery use `createConnectedCheckpoint` from `scripts/connected-publication-checkpoint.cjs` with the same tools/adapter, repository, a dedicated `work/publish/<stage-or-task>` branch, and snapshot. Create that branch from the verified source baseline once. It saves the compact manifest/progress before development and main ref writes and at completion; it does not commit per PNG, poll, or internal phase. Reuse an existing matching checkpoint; never replace a checkpoint for a different snapshot. Its file is `config/asset-publication-checkpoint.json` on the recovery branch only. It records no image content. Before the first publication checkpoint, normal asset recovery protects selected images; not-yet-uploaded files are not falsely described as durable.
+
+On a resumed session, read that checkpoint and reconstruct the snapshot from its file/blob manifest (`reuse:true`); all blobs already exist at the first recorded ref-write phase. Reuse the original message and continue `advance()`. The helper requires existing connected GitHub tools; it does not install credentials, replace the connection or require a new service. Never relay full helper source, API results, binary data or the snapshot contents through model text.

@@ -32,6 +32,12 @@ The import is transactional across preview bytes, handoff metadata, the generate
 
 Existing saved projects migrate from their recorded provenance: prior stages and every calibration/lock field are retained, while the newly imported stage receives defaults and empty calibration certificates. Reimporting identical bytes is idempotent. Differing bytes require a separate explicit artwork-refresh migration.
 
+For an already imported asset-ready stage, use `--refresh` only when a new complete v1 handoff intentionally replaces its artwork or authored metadata:
+
+`node workbench-next/import-asset-handoff.mjs --bundle FILE --source-root REPOSITORY --refresh`
+
+The importer refuses an implicit replacement and refuses refreshes of released stages. Before overwriting, it verifies that all five current destination files still match the hashes in the prior imported handoff. The replacement remains transactional: any catalog or migration failure restores every image and metadata file. The refresh migration retains crops, frame bounds, landscape adjustments, placement transforms, locks, calibration values, unrelated stages and known older migration routes. It clears calibration certificate stamps only for the refreshed stage and marks its artwork for review. Repeating the same successful refresh is an idempotent no-op.
+
 This Workbench increment consumes that shared contract without promoting new art acceptance.
 
 ## Facing rule for future stages

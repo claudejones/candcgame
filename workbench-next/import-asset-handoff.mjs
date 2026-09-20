@@ -49,61 +49,86 @@ export function inspectAssetHandoff({bundle,sourceRoot,targetRoot=defaultRoot}){
     const data=fs.readFileSync(real),actual=createHash('sha256').update(data).digest('hex'),size=pngInfo(data,key);
     if(actual!==item.sha256)throw new Error(`${key} SHA-256 mismatch.`);
     if(size.width!==item.width||size.height!==item.height)throw new Error(`${key} PNG dimensions do not match the handoff.`);
-    validatePng(bundle.stageId,key,{validation:item.path,width:item.width,height:item.height,colorTypes:[2,3,6]},source);
+    validatePng(bundle.stageId,key,{validation:item.path,width:item.width,height:item.height,...(key==='FAR'?{colorTypes:[2,6]}:{colorType:6})},source);
     files[key]={data,size};
   }
   for(const [label,relative] of [['evidence',bundle.evidence],['acceptance evidence',bundle.existingAcceptance?.evidence]])if(relative&&!fs.existsSync(inside(source,relative,label)))throw new Error(`${label} does not exist.`);
   return {root,source,catalog,stage,files};
 }
 
-export function importAssetHandoff({bundle,sourceRoot,targetRoot=defaultRoot}){
+export function importAssetHandoff({bundle,sourceRoot,targetRoot=defaultRoot,refresh=false,buildCatalog=root=>execFileSync(process.execPath,[path.join(root,'workbench-next/build-catalog.cjs')],{cwd:root,stdio:'pipe'})}){
   const checked=inspectAssetHandoff({bundle,sourceRoot,targetRoot}),{root,stage,files}=checked,id=bundle.stageId;
   const stateFile=path.join(root,'workbench-next/imported-handoffs.json'),jsFile=path.join(root,'workbench-next/imported-handoffs.js');
   const migrationsFile=path.join(root,'workbench-next/project-migrations.json'),catalogFile=path.join(root,'workbench-next/asset-catalog.json');
   const state=JSON.parse(fs.readFileSync(stateFile,'utf8'));
   const prior=state[id];
+  if(refresh&&stage.release)throw new Error(`${id.toUpperCase()} is released and cannot use the asset-ready artwork refresh.`);
   if(prior){
-    if(!isDeepStrictEqual(prior,bundle))throw new Error(`${id.toUpperCase()} is already imported with different bytes or metadata. Use an explicit artwork-refresh workflow.`);
-    return {stageId:id,status:'already-imported',calibration:'pending'};
+    if(isDeepStrictEqual(prior,bundle)){
+      for(const key of ASSET_KEYS){const dest=inside(root,prior.assets[key].path,`${key} destination`);if(!fs.existsSync(dest)||createHash('sha256').update(fs.readFileSync(dest)).digest('hex')!==prior.assets[key].sha256)throw new Error(`${key} destination no longer matches the imported handoff.`);}
+      return {stageId:id,status:'already-imported',calibration:'pending'};
+    }
+    if(!refresh)throw new Error(`${id.toUpperCase()} is already imported with different bytes or metadata. Re-run with explicit artwork refresh.`);
   }
+  if(refresh&&!prior)throw new Error(`${id.toUpperCase()} cannot be refreshed before it is imported.`);
   if(stage.release){
     const equal=ASSET_KEYS.every(key=>stage.release.assets?.[key]?.sha256===bundle.assets[key].sha256);
     if(!equal)throw new Error(`${id.toUpperCase()} already has a release with different bytes.`);
     return {stageId:id,status:'compatible-existing-stage',calibration:'preserved'};
   }
   const oldCatalog=JSON.parse(fs.readFileSync(catalogFile,'utf8')),oldMigrations=JSON.parse(fs.readFileSync(migrationsFile,'utf8'));
+  // Refresh migrations need the exact old stage revision. Capture it before any
+  // image or handoff state is replaced; new imports intentionally omit the stage.
+  const beforeLandscapeRevision=currentLandscapeRevision(root);
   const next=clone(bundle);
-  for(const key of ASSET_KEYS){const dest=inside(root,bundle.assets[key].path,`${key} destination`);if(fs.existsSync(dest)){const existing=createHash('sha256').update(fs.readFileSync(dest)).digest('hex');if(existing!==bundle.assets[key].sha256)throw new Error(`${key} destination already exists with different bytes.`);}}
+  for(const key of ASSET_KEYS){
+    const dest=inside(root,bundle.assets[key].path,`${key} destination`);
+    if(refresh){
+      if(!fs.existsSync(dest))throw new Error(`${key} destination is missing; refusing to refresh unknown local state.`);
+      const existing=createHash('sha256').update(fs.readFileSync(dest)).digest('hex');
+      if(existing!==prior.assets[key].sha256)throw new Error(`${key} destination changed since the prior import; refusing to overwrite stale bytes.`);
+    }else if(fs.existsSync(dest)){
+      const existing=createHash('sha256').update(fs.readFileSync(dest)).digest('hex');if(existing!==bundle.assets[key].sha256)throw new Error(`${key} destination already exists with different bytes.`);
+    }
+  }
   const backups=new Map(),created=[];
   const remember=file=>{if(backups.has(file))return;if(fs.existsSync(file))backups.set(file,fs.readFileSync(file));else{backups.set(file,null);created.push(file);}};
   try{
     for(const file of [stateFile,jsFile,migrationsFile,catalogFile])remember(file);
-    for(const key of ASSET_KEYS){const dest=inside(root,next.assets[key].path,`${key} destination`);remember(dest);if(!fs.existsSync(dest))writeAtomic(dest,files[key].data);}
+    for(const key of ASSET_KEYS){const dest=inside(root,next.assets[key].path,`${key} destination`);if(!refresh||prior.assets[key].sha256!==next.assets[key].sha256){remember(dest);if(refresh||!fs.existsSync(dest))writeAtomic(dest,files[key].data);}}
     state[id]=next;writeAtomic(stateFile,JSON.stringify(state,null,2)+'\n');writeAtomic(jsFile,renderedState(state));
-    execFileSync(process.execPath,[path.join(root,'workbench-next/build-catalog.cjs')],{cwd:root,stdio:'pipe'});
+    buildCatalog(root);
     const interim=JSON.parse(fs.readFileSync(catalogFile,'utf8')),from=provenanceFrom(oldMigrations,oldCatalog);
     const to={...clone(from),baseline:interim.baseline,assets:{...clone(from.assets)}};
     const suffix={FAR:'Far',MID:'Mid',GROUND:'Ground',OBJECT_ATLAS:'Hazards',FLYING:'Bird'};
     for(const key of ASSET_KEYS)to.assets[id+suffix[key]]={...files[key].size,sha256:bundle.assets[key].sha256};
     // These describe the current source project accepted by the migration. The
     // new stage is deliberately absent so ProjectDraft adds pending defaults.
-    const landscapeRevision=currentLandscapeRevision(root);delete landscapeRevision[id];
+    const landscapeRevision=refresh?beforeLandscapeRevision:currentLandscapeRevision(root);if(!refresh)delete landscapeRevision[id];
     const atlasDimensions=clone(oldCatalog.dimensions);
-    const migration={id:`asset-ready-${id}-${bundle.assets.FAR.sha256.slice(0,8)}`,note:`Added ${id.toUpperCase()} asset-ready preview; existing edits and calibration are retained. New stage calibration is pending.`,fromProvenance:from,toProvenance:to,landscapeRevision,atlasDimensions};
+    const refreshId=createHash('sha256').update(JSON.stringify(bundle)).digest('hex').slice(0,12);
+    const migration=refresh
+      ? {id:`artwork-refresh-${id}-${refreshId}`,note:`Refreshed ${id.toUpperCase()} artwork; edits, locks and calibration values are retained, while affected certificates require review.`,fromProvenance:from,toProvenance:to,landscapeRevision,atlasDimensions,artworkRefreshStages:[id]}
+      : {id:`asset-ready-${id}-${bundle.assets.FAR.sha256.slice(0,8)}`,note:`Added ${id.toUpperCase()} asset-ready preview; existing edits and calibration are retained. New stage calibration is pending.`,fromProvenance:from,toProvenance:to,landscapeRevision,atlasDimensions};
     // ProjectDraft validates direct, exact provenance routes. Carry known older
     // routes forward as well so skipping a preview update never strands a save.
-    const retained=oldMigrations.map(item=>isDeepStrictEqual(item.toProvenance,from)?{...item,toProvenance:clone(to)}:item);
+    const retained=oldMigrations.map(item=>{
+      if(!isDeepStrictEqual(item.toProvenance,from))return item;
+      const retargeted={...item,toProvenance:clone(to)};
+      if(refresh)retargeted.artworkRefreshStages=[...new Set([...(item.artworkRefreshStages||[]),id])];
+      return retargeted;
+    });
     writeAtomic(migrationsFile,JSON.stringify([...retained,migration],null,2)+'\n');
-    execFileSync(process.execPath,[path.join(root,'workbench-next/build-catalog.cjs')],{cwd:root,stdio:'pipe'});
-    return {stageId:id,status:'imported',assets:ASSET_KEYS.length,calibration:'pending',release:'pending'};
+    buildCatalog(root);
+    return {stageId:id,status:refresh?'refreshed':'imported',assets:ASSET_KEYS.length,calibration:'pending',release:'pending',...(refresh?{artworkReview:'required'}:{})};
   }catch(error){
     for(const [file,data] of [...backups].reverse()){try{if(data===null)fs.rmSync(file,{force:true});else writeAtomic(file,data);}catch{}}
     throw error;
   }
 }
 
-function args(argv){const out={};for(let i=0;i<argv.length;i++){const key=argv[i];if(!key.startsWith('--')||!argv[i+1])throw new Error('Usage: node workbench-next/import-asset-handoff.mjs --bundle FILE [--source-root DIR] [--target-root DIR]');out[key.slice(2)]=argv[++i];}if(!out.bundle)throw new Error('Missing --bundle.');return out;}
+function args(argv){const out={};for(let i=0;i<argv.length;i++){const key=argv[i];if(key==='--refresh'){out.refresh=true;continue;}if(!key.startsWith('--')||!argv[i+1])throw new Error('Usage: node workbench-next/import-asset-handoff.mjs --bundle FILE [--source-root DIR] [--target-root DIR] [--refresh]');out[key.slice(2)]=argv[++i];}if(!out.bundle)throw new Error('Missing --bundle.');return out;}
 if(process.argv[1]&&path.resolve(process.argv[1])===path.resolve(new URL(import.meta.url).pathname)){
-  try{const options=args(process.argv.slice(2)),bundleFile=path.resolve(options.bundle),bundle=JSON.parse(fs.readFileSync(bundleFile,'utf8'));const result=importAssetHandoff({bundle,sourceRoot:options['source-root']||path.dirname(bundleFile),targetRoot:options['target-root']||defaultRoot});console.log(JSON.stringify(result,null,2));}
+  try{const options=args(process.argv.slice(2)),bundleFile=path.resolve(options.bundle),bundle=JSON.parse(fs.readFileSync(bundleFile,'utf8'));const result=importAssetHandoff({bundle,sourceRoot:options['source-root']||path.dirname(bundleFile),targetRoot:options['target-root']||defaultRoot,refresh:options.refresh===true});console.log(JSON.stringify(result,null,2));}
   catch(error){console.error(`Asset handoff import failed: ${error.message}`);process.exitCode=1;}
 }

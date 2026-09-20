@@ -132,6 +132,11 @@ export class ProjectDraft extends FrameDraft {
     // Imports remain whole-project replacements; every addition/reset is reviewable.
     const state={crops:{...clone(this.baseline),...candidate.value},frames:{...clone(this.frameBaseline),...candidate.frames},landscapes:{...clone(this.landscapeBaseline),...candidate.landscapes},placement:clone(this.placementBaseline),calibration:{...clone(candidate.calibration),stages:{...clone(this.calibrationBaseline.stages),...candidate.calibration.stages},hazards:{...clone(this.calibrationBaseline.hazards),...candidate.calibration.hazards}}};
     for(const [id,p] of Object.entries(candidate.placement))state.placement[id]={...state.placement[id],...p};
+    if(migration?.artworkRefreshStages?.length){
+      const refreshed=new Set(migration.artworkRefreshStages);
+      for(const [id,settings] of Object.entries(state.calibration.hazards))if(refreshed.has(id.split(':')[1]))settings.stamp='';
+      notes.push(`Artwork changed for ${migration.artworkRefreshStages.map(id=>id.toUpperCase()).join(' and ')}. Existing edits, locks and calibration values are retained; affected certificates were cleared and the artwork needs review.`);
+    }
     validatePlacement(state.placement,this.placementBaseline);validateCalibration(state.calibration,this.calibrationBaseline,state.placement);
     const check=new FrameDraft(allItems,this.definitions,this.dimensions);check.restore({...check.export(),sprites:{...check.export().sprites,crops:state.crops},frames:state.frames,landscapes:state.landscapes});
     const added=this.definitions.filter(i=>!stageIds.has(i.stage));

@@ -53,3 +53,7 @@ Do not pre-normalize hazard sprite sheets merely because source canvases differ.
 
 ## Transparency
 Use genuine alpha transparency where the asset contract requires it. Never bake a checkerboard transparency pattern into an asset.
+
+## Repeated technical defects
+
+For unapproved new candidates, use `docs/ASSET_TECHNICAL_FINISHING.md` after a repeated diagnosed defect. It authorizes only its bounded content-preserving corrections, records before/after evidence and requires QA on final bytes. Approved artwork and all geometry/visual-acceptance gates remain protected. Do not regenerate passing files or repeat unchanged local checks.
