@@ -2,6 +2,8 @@
 // Chat command resolver and deterministic helpers. Image generation and connected
 // publication are performed by the agent, not simulated by this local CLI.
 import fs from 'node:fs';
+import {imagePrompt} from './asset-prompts.mjs';
+import {finishView} from './asset-finish.mjs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
@@ -185,7 +187,8 @@ export function futurePacket(command, family, stage, words, state, plan=proposal
     if (!refs.length) assetReferenceBlockers.push(`${job.selector} has no actual reference image files`);
     else for (const file of refs) if (!fs.existsSync(path.join(ROOT,file))) assetReferenceBlockers.push(`${job.selector} reference is missing: ${file}`);
     job.references=refs;
-    job.prompt=`${stage.id} ${job.selector}: ${job.direction ?? ''}\n${JSON.stringify(job.task)}`.trim();
+    job.prompt=imagePrompt(stage,job.selector,plan.shared);
+    if(job.preserveSibling) job.prompt+=`\nEdit only ${job.selectedHazards[0]}; attach the current atlas and preserve the ${job.preserveSibling} cell pixels exactly.`;
   }
   const blockers=[...readiness.blockers,...assetReferenceBlockers];
   const generationAllowed=blockers.length===0;
@@ -599,6 +602,7 @@ function coordinator(args) {
   throw new Error('Coordinator actions: start, start-job, requeue, failure, result, verify-recovery, checkpoint, close, compact.');
 }
 function main(args) {
+  if (args[0]==='finish') return finishView(ROOT,stageKey(args[1]),{verify:args.includes('--verify')});
   if (args[0]==='handoff') return handoff();
   if (args[0]==='detail') return detail(args[1],args[2]);
   if (args[0]==='coordinator') return coordinator(args.slice(1));

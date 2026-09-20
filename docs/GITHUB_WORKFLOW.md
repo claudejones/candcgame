@@ -24,7 +24,9 @@ Development-branch CI never deploys Pages. Pull-request CI never deploys Pages. 
 
 ## Asset-only publication from AF02
 
-The same automated branch/CI/Pages publication path applies to durable new-stage PNGs and their versioned asset-ready handoff. A published file is not a playable stage: leave runtime release/activation pending. Verify the five hashes and handoff, then return the Workbench handoff instead of requiring gameplay browser tests or a zero-hit course. Artwork review/calibration occurs after the Workbench agent imports those exact files. Later calibrated playable releases retain the integrated-stage checks above. Source/metadata validation, artwork acceptance, calibration and gameplay release must not share an ambiguous “approved” flag.
+New asset-only handoffs may be saved on `work/asset-ready/<stage>` after targeted image and v1 bundle validation, with pinned source commit and remote hash verification. This branch is the Workbench source; main need not receive the artwork first. Use `scripts/asset-only-publisher.cjs` and ASSET_FINISH.md. No runtime, registry, activation or unrelated settings changes belong in this snapshot. This path does not deploy Pages and does not call the shared-branch publisher.
+
+Workbench imports the bundle from a checkout of the exact reported commit using its existing `--source-root` option. No importer schema change is needed. A published file is not a playable stage; calibration/release stay pending. Any later main/runtime integration retains the development/main CI and Pages gates above. Existing shared-branch publication remains supported when explicitly needed; it is not a prerequisite for asset-only delivery.
 
 ## Manual fallback
 
