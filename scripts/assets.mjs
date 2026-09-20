@@ -8,11 +8,12 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
 import {
-  checkpointRun, closeRun, createRun, hashValue, readWorkflowState, recordResult,
-  requeueJob, resumeReport, startJob, updateWorkflowState, verifyRecovery
+  checkpointRun, closeRun, compactWorkerPacket, compactWorkflowState, createRun, hashValue, readWorkflowState, recordResult,
+  recordFailure, requeueJob, resumeReport, startJob, updateWorkflowState, verifyRecovery, workerBrief
 } from './asset-jobs.mjs';
 
-export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+export const TOOL_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+export const ROOT = path.resolve(process.env.ASSET_WORKSPACE_ROOT || TOOL_ROOT);
 const require=createRequire(import.meta.url);
 const {expectedPaths,validateBundleFile}=require('./validate-asset-handoff.cjs');
 const {validateAssetHandoff}=require('../src/js/asset-handoff-contract.js');
@@ -22,6 +23,7 @@ export const catalog = json('config/asset-commands.json');
 const registry = () => json('config/phase8-landscapes.json');
 const workflowPath = path.join(ROOT,'config/asset-workflow-state.json');
 const workflow = () => readWorkflowState(workflowPath);
+const outputBudgets = () => JSON.parse(fs.readFileSync(path.join(TOOL_ROOT,'config/asset-command-output-budgets.json'),'utf8'));
 const proposal = () => json('config/remaining-continent-proposal.json');
 const fileHash = p => crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, p))).digest('hex');
 const layers = ['FAR', 'MID', 'GROUND'];
@@ -96,6 +98,27 @@ function futureSharedRules(plan) {
     flyingAtlas:shared.proposedFlyingAtlas ?? null,
     artDirection:shared.artDirectionRequirements ?? null
   };
+}
+
+function effectiveStageContract(stage,plan) {
+  const shared=plan.shared??{};
+  return {
+    id:stage.id,theme:stage.theme,palette:stage.palette,landscapes:stage.landscapes,
+    groundAtlas:stage.groundAtlas,hazards:stage.hazards,
+    brief:{farFocalPoint:stage.brief?.farFocalPoint,midLifeDetail:stage.brief?.midLifeDetail,localReference:stage.brief?.localReference,campaignDistinctiveness:stage.brief?.campaignDistinctiveness,intendedRelativeScale:stage.brief?.intendedRelativeScale},
+    styleReferenceStages:stage.styleReferenceStages,styleReferenceRevision:stage.styleReferenceRevision,
+    shared:{landscapeContract:shared.landscapeContract,landscapeSource:shared.landscapeSource,viewport:shared.viewport,surfaceY:shared.surfaceY,landscapeOffsets:shared.landscapeOffsets,landscapeScaleMultipliers:shared.landscapeScaleMultipliers,landscapeAnchors:shared.landscapeAnchors,proposedGroundAtlas:shared.proposedGroundAtlas,proposedFlyingAtlas:shared.proposedFlyingAtlas,artDirectionRequirements:shared.artDirectionRequirements}
+  };
+}
+
+function effectiveProposalSource(stage,plan) {
+  const index=plan.stages.findIndex(item=>item.id===stage.id);
+  return {path:'config/remaining-continent-proposal.json',select:[
+    `stages.${index}.theme`,`stages.${index}.palette`,`stages.${index}.landscapes`,`stages.${index}.groundAtlas`,`stages.${index}.hazards`,
+    `stages.${index}.brief.farFocalPoint`,`stages.${index}.brief.midLifeDetail`,`stages.${index}.brief.localReference`,`stages.${index}.brief.campaignDistinctiveness`,`stages.${index}.brief.intendedRelativeScale`,
+    `stages.${index}.styleReferenceStages`,`stages.${index}.styleReferenceRevision`,
+    'shared.landscapeContract','shared.landscapeSource','shared.viewport','shared.surfaceY','shared.landscapeOffsets','shared.landscapeScaleMultipliers','shared.landscapeAnchors','shared.proposedGroundAtlas','shared.proposedFlyingAtlas','shared.artDirectionRequirements'
+  ]};
 }
 
 function futureFiles(stage) {
@@ -178,9 +201,14 @@ export function futurePacket(command, family, stage, words, state, plan=proposal
     message:generationAllowed?'Prerequisites and actual reference pixels are ready.':'No generation may start while any listed prerequisite is pending.'
   };
   if (productionCommand && !generationAllowed) {
-    const preparationOnly=blockers.length>0&&blockers.every(item=>/reference|referencesReady/.test(item));
+    const preparationOnly=blockers.length>0&&blockers.every(item=>/reference|referencesReady|selectionStatus|FLYING selection/.test(item));
     packet.operation=preparationOnly?'prepare':'blocked';
-    if(preparationOnly){packet.preparationRequired=blockers;packet.message='Prepare and inspect the missing references, record their paths/hashes, then continue this same build command.';}
+    if(preparationOnly){
+      packet.preparation={briefPath:`config/remaining-continent-proposal.json#${stage.id}`,requirements:blockers,
+        selectionReview:stage.selectionReview??[],referenceKeys:stage.factSourceIds??[],sourceRoles:(stage.referenceSources??[]).map(source=>source.role)};
+      packet.nextAction=!readyValue(stage.selectionStatus)?'research-and-propose-selected-stage-choices':'prepare-and-inspect-selected-reference-pixels';
+      packet.message='Complete the selected stage research and reference preparation, record exact paths and hashes, and continue this build command. Proposed choices remain unapproved until reviewed.';
+    }
   }
   if (approvedBuild) {
     packet.operation='read';
@@ -192,8 +220,8 @@ export function futurePacket(command, family, stage, words, state, plan=proposal
     packet.jobs=planned;
     packet.protectedOutputs=Object.values(files).filter(Boolean);
     packet.continuityOutputs=layers.map(layer=>files[layer]).filter(Boolean);
-    packet.specHash=hashValue(stage);
-    packet.specSources=['config/remaining-continent-proposal.json',plan.plan,plan.shared?.landscapeContract,catalog.families.landscape.profile,'docs/asset-profiles/hazard.md'].filter(Boolean);
+    packet.specHash=hashValue(effectiveStageContract(stage,plan));
+    packet.specSources=[effectiveProposalSource(stage,plan),catalog.families.landscape.profile,'docs/asset-profiles/hazard.md'];
     if(!approved)packet.stop='Durable asset-ready handoff for Workbench import; calibration and gameplay release remain pending.';
   }
   return packet;
@@ -226,13 +254,113 @@ function nextStage(prefix,state=workflow()) {
 export function handoff(state=workflow()) {
   const next = nextStage(undefined,state);
   if (next) return `In ${catalog.repository}: ${next.command} ${next.stage}.`;
+  let stages=[];
+  try {stages=proposal().stages??[];} catch {}
+  const recordedTargets=new Set(Object.values(state.runs??{}).map(run=>run.target));
+  const recoveryCandidate=stages.find(stage=>!recordedTargets.has(stage.id)&&!state.approvedRevisions?.[stage.id.toLowerCase()]);
+  if(arguments.length===0&&recoveryCandidate){
+    const recovered=discoverRecovery(recoveryCandidate.id,state);
+    if(recovered.run&&['working','ready-to-publish','asset-ready','awaiting-approval'].includes(recovered.run.status))return `In ${catalog.repository}: resume ${recoveryCandidate.id}.`;
+  }
+  const af03=Object.values(state.runs??{}).find(run=>run.target==='AF03');
+  if(af03&&['ready-for-calibration','approved'].includes(af03.status))return `In ${catalog.repository}: build stage AS01.`;
   const calibrationRun=Object.values(state.runs??{}).filter(run=>run.status==='ready-for-calibration'&&run.handoff).sort((a,b)=>String(b.closedAt).localeCompare(String(a.closedAt)))[0];
   if(calibrationRun&&!state.approvedRevisions?.[calibrationRun.target.toLowerCase()])return `In the candcgame Workbench conversation: import asset handoff ${calibrationRun.handoff.path} for ${calibrationRun.target}.`;
   try {
-    const first=proposal().stages?.find(stage=>stage.status!=='approved'&&!state.approvedRevisions?.[stage.id.toLowerCase()]);
+    const first=stages.find(stage=>stage.status!=='approved'&&!state.approvedRevisions?.[stage.id.toLowerCase()]);
     if (first) return `In ${catalog.repository}: build stage ${first.id}.`;
   } catch {}
   return 'Phase 8 registered landscapes are approved. Complete the required readiness gates before generating other assets.';
+}
+
+function runSummary(root,run,verify=true) {
+  if(!run)return null;
+  const jobs=Object.values(run.jobs??{}),recovery=verify?resumeReport(root,run):{
+    completed:jobs.filter(job=>job.status==='completed').map(job=>job.id),failedQaCleanup:jobs.filter(job=>job.status==='failed-qa-cleanup').map(job=>job.id),
+    missing:[],pending:jobs.filter(job=>!['completed','failed-qa-cleanup'].includes(job.status)).map(job=>job.id),autoRegenerate:false
+  };
+  return {runId:run.runId,target:run.target,status:run.status,authoritativeRef:run.authoritativeRef??run.recoveryRefs?.at(-1)??null,
+    completed:recovery.completed,failedQaCleanup:recovery.failedQaCleanup??[],missing:recovery.missing,pending:recovery.pending,
+    nextOperation:(recovery.failedQaCleanup?.length)?'clean-failed-qa-artifacts':recovery.missing.length?'recover-saved-bytes':recovery.pending.length?'continue-pending-job':run.status==='ready-to-publish'?'publish':run.status==='asset-ready'?'close-asset-ready':'inspect-checkpoint',autoRegenerate:false};
+}
+
+function remoteState(stage,{fetch=true}={}) {
+  const branch=`work/assets/${stage.toLowerCase()}`,remoteRef=`refs/remotes/origin/${branch}`;
+  const ciFetchBlocked=process.env.CI==='true'&&process.env.ASSET_ALLOW_REMOTE_FETCH!=='true';
+  if(fetch&&ciFetchBlocked)return {state:null,run:null,remoteRef,commit:null,verified:false,fetchError:'remote fetch disabled in CI; use a frozen recovery fixture'};
+  let fetched=false,fetchError=null;
+  if(fetch){
+    try {execFileSync('git',['fetch','--no-tags','origin',`refs/heads/${branch}:${remoteRef}`],{cwd:ROOT,stdio:['ignore','ignore','ignore'],timeout:8000});fetched=true;}
+    catch(error) {fetchError=error.code==='ETIMEDOUT'?'fetch timed out':'fetch unavailable';}
+  }else fetchError='fetch not requested';
+  try {
+    const commit=execFileSync('git',['rev-parse','--verify',remoteRef],{cwd:ROOT,encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();
+    const value=JSON.parse(execFileSync('git',['show',`${remoteRef}:config/asset-workflow-state.json`],{cwd:ROOT,encoding:'utf8',stdio:['ignore','pipe','ignore'],maxBuffer:8*1024*1024}));
+    const active=value.activeRunId?value.runs?.[value.activeRunId]:null;
+    if(active?.target===stage){
+      if(fetched)active.authoritativeRef=remoteRef;
+      return {state:value,run:active,remoteRef,commit,verified:fetched,fetchError};
+    }
+  } catch {}
+  return {state:null,run:null,remoteRef,commit:null,verified:false,fetchError:fetchError??'recovery ref not found'};
+}
+
+export function discoverRecovery(stage,state=workflow(),options={}) {
+  const local=state.activeRunId?state.runs?.[state.activeRunId]:null;
+  const remote=remoteState(stage,options);
+  if(remote.run&&remote.verified){
+    const divergence=local?.target===stage&&(local.runId!==remote.run.runId||state.revision!==remote.state.revision)
+      ? {localRunId:local.runId,remoteRunId:remote.run.runId,localRevision:state.revision,remoteRevision:remote.state.revision}:null;
+    const summary=runSummary(ROOT,remote.run,false);
+    summary.refFetched=true;summary.workingTreeBytes='not-restored';summary.nextOperation='recover-checkout-and-verify-saved-files';
+    if(divergence){summary.divergence=divergence;summary.nextOperation='resolve-checkpoint-divergence';}
+    return {source:divergence?'diverged':'remote',remoteRef:remote.remoteRef,commit:remote.commit,run:remote.run,summary,divergence};
+  }
+  if(local?.target===stage){
+    const summary=runSummary(ROOT,local);summary.refFetched=false;summary.remoteVerification='pending';
+    return {source:'local-unverified',run:local,summary,remoteRef:remote.remoteRef,fallback:'Verify the designated remote recovery branch with the agent Git connector before publication or closeout.'};
+  }
+  if(remote.run){
+    const summary=runSummary(ROOT,remote.run,false);summary.refFetched=false;summary.remoteVerification='pending';summary.authoritativeRef=null;summary.nextOperation='verify-remote-recovery';
+    return {source:'remote-unverified',remoteRef:remote.remoteRef,commit:remote.commit,run:remote.run,summary,fallback:'The existing tracking ref may be stale. Verify it with the agent Git connector before using its checkpoint.'};
+  }
+  return {source:'none',run:null,summary:null,remoteRef:remote.remoteRef,fallback:'Use the agent Git connector to inspect the designated recovery branch; do not regenerate or approve while recovery is unresolved.'};
+}
+
+export function commandView(packet) {
+  if(typeof packet==='string')return packet;
+  if(packet.repository){
+    return {repository:packet.repository,
+      commands:packet.commands&&Object.fromEntries(Object.entries(packet.commands).map(([name,value])=>[name,{example:value.example??value.syntax,operation:value.operation}])),
+      continents:packet.continents&&Object.fromEntries(Object.entries(packet.continents).map(([key,value])=>[key,{stages:value.stages}])),
+      layerKeys:packet.layerKeys,stages:packet.stages,families:packet.families,next:packet.next,executionReference:packet.executionReference,note:packet.note};
+  }
+  const keep=['command','family','target','operation','status','state','generationAllowed','blockers','message','next','nextAction','preparation','selectionStatus','referencesReady','assetHandoff','handoff','publicationScope','direction','recoveryCheck'];
+  const result={};for(const key of keep)if(packet[key]!==undefined)result[key]=packet[key];
+  if(packet.jobs)result.work=packet.jobs.map(job=>({jobId:`${packet.target}:${job.selector??job.layer}`,selector:job.selector??job.layer,owner:job.owner,output:job.output}));
+  if(packet.activeRunSummary)result.activeRun=packet.activeRunSummary;
+  else if(packet.recovery&&!Array.isArray(packet.recovery)&&('completed' in packet.recovery))result.recovery=packet.recovery;
+  return result;
+}
+
+export function detail(stageInput,selector,state=workflow()) {
+  const stage=stageKey(stageInput),jobId=`${stage}:${String(selector??'').toUpperCase()}`;
+  if(!selector)throw new Error('detail requires one worker selector.');
+  const discovered=discoverRecovery(stage,state),run=discovered.run;
+  if(run?.jobs?.[jobId]) {
+    if(discovered.source==='local-unverified')return workerBrief({statePath:workflowPath,runId:run.runId,jobId});
+    const job=run.jobs[jobId];
+    if(job.workerPacket)return compactWorkerPacket(job.workerPacket);
+    if(job.workerPacketRef){
+      const bytes=execFileSync('git',['show',`${discovered.remoteRef}:config/${job.workerPacketRef.path}`],{cwd:ROOT,stdio:['ignore','pipe','ignore']});
+      if(crypto.createHash('sha256').update(bytes).digest('hex')!==job.workerPacketRef.sha256)throw new Error(`Remote worker packet changed for ${job.id}.`);
+      return compactWorkerPacket(JSON.parse(bytes.toString('utf8')));
+    }
+  }
+  const packet=resolve(`build stage ${stage}`,state);
+  const job=packet.jobs?.find(item=>(item.selector??item.layer)===String(selector).toUpperCase());
+  if(!job)throw new Error(`No worker brief for ${jobId}.`);
+  return {target:stage,selector:job.selector??job.layer,owner:job.owner,output:job.output,references:job.references??[job.reference].filter(Boolean),profile:job.owner==='hazard-worker'?packet.sharedRules?.hazardProfile:packet.sharedRules?.profile,sharedGeometry:Object.fromEntries(Object.entries(packet.sharedRules??{}).filter(([key])=>!['profile','hazardProfile'].includes(key))),prompt:job.prompt,direction:job.direction??packet.direction??null,task:job.task??null,editingSource:job.editingSource??null};
 }
 function stageSummary(id) {
   const planned=futureStage(id);if(planned)return futureReadiness(planned);
@@ -252,12 +380,15 @@ export function help(topic = '') {
   const prefix = continentKey(topic);
   if (/^[a-z]{2}-?0?[1-3]$/i.test(topic)) return stageSummary(stageKey(topic));
   if (topic && !prefix && !family && !['keys','stages','commands'].includes(topic.toLowerCase())) throw new Error(`Unknown help topic '${topic}'. Use help keys.`);
-  return {repository:catalog.repository, commands:topic==='keys'||topic==='stages' ? undefined : catalog.commands,
+  const state=workflow(),recordedTargets=new Set(Object.values(state.runs??{}).map(run=>run.target));
+  let nextHint=handoff(state);
+  try{const candidate=proposal().stages?.find(stage=>!recordedTargets.has(stage.id)&&!state.approvedRevisions?.[stage.id.toLowerCase()]);if(candidate)nextHint=`In ${catalog.repository}: status ${candidate.id}.`; }catch{}
+  return {repository:catalog.repository, commands:topic==='keys'||topic==='stages' ? undefined : {...catalog.commands,detail:{operation:'read-worker-brief',syntax:'detail <stage> <FAR|MID|GROUND|OBJECT_ATLAS|FLYING>'}},
     continents:Object.fromEntries(Object.entries(catalog.continents).filter(([id]) => !prefix || id===prefix).map(([id,v]) => [id,{...v,stages:catalog.stageNumbers.map(n=>`${id}${n}`)}])),
     layerKeys:catalog.families.landscape.layers,
     stages:Object.keys(registry().stages).filter(id=>!prefix||id.toUpperCase().startsWith(prefix)).map(id=>({stage:id.toUpperCase(),label:registry().stages[id].label,status:registry().stages[id].status})),
     families:!prefix ? Object.fromEntries(Object.entries(catalog.families).map(([k,v])=>[k,v.state])) : undefined,
-    next:handoff(), note:'Reserved continents are discoverable, not authorized for generation. NAXX is notation; use a concrete key such as NA01.'};
+    next:nextHint, executionReference:'docs/ASSET_EXECUTION_REFERENCE.md (load only the section for the current operation)',note:'Reserved continents are discoverable, not authorized for generation. NAXX is notation; use a concrete key such as NA01.'};
 }
 function section(text, heading) {
   const marker = `### ${heading}`;
@@ -266,7 +397,9 @@ function section(text, heading) {
   const end = text.indexOf('\n##', start + marker.length);
   return text.slice(start, end < 0 ? undefined : end).trim();
 }
-export function resolve(input, state=workflow()) {
+export function resolve(input, state=null) {
+  const checkRemote=state===null;
+  state??=workflow();
   const words = (Array.isArray(input) ? input.join(' ') : input).trim().split(/\s+/);
   const command = (words.shift() || 'help').toLowerCase();
   if (command === 'help') return help(words.join(' '));
@@ -282,6 +415,9 @@ export function resolve(input, state=workflow()) {
     if (command==='status') {
       const result=futureReadiness(planned),handoffPath=`config/asset-handoffs/${planned.id.toLowerCase()}.json`;
       if(fs.existsSync(path.join(ROOT,handoffPath)))result.assetHandoff=handoffSummary(planned.id);
+      const discovered=discoverRecovery(planned.id,state,{fetch:checkRemote});
+      if(discovered.summary)result.activeRunSummary=discovered.summary;
+      else result.recoveryCheck={remoteRef:discovered.remoteRef,state:'no-active-run-found',fallback:discovered.fallback};
       return result;
     }
     const tail=words.join(' '), colon=tail.indexOf(':');
@@ -292,6 +428,15 @@ export function resolve(input, state=workflow()) {
     if (!['stage','landscape','hazard'].includes(family)) throw new Error(`${family}: registration required. Use help ${family}.`);
     const effectiveFamily=['resume','publish','approve','rollback','verify','asset-ready'].includes(command)?'stage':family;
     const packet=futurePacket(command,effectiveFamily,planned,selection?[selection]:[],state);
+    if(['build','generate','regenerate','revise'].includes(command)&&planned.id==='AS01'){
+      const prior=discoverRecovery('AF03',state,{fetch:checkRemote});
+      if(prior.run&&['working','ready-to-publish','asset-ready','awaiting-approval'].includes(prior.run.status)){
+        packet.operation='resume-prior-stage';packet.generationAllowed=false;delete packet.jobs;
+        packet.blockers=[`AF03 has an active ${prior.run.status} recovery checkpoint.`];
+        packet.activeRunSummary=prior.summary;packet.nextAction='resume AF03';
+        packet.message='Resolve and close the AF03 recovery checkpoint before beginning AS01. AS01 remains the requested next-continent stage after AF03.';
+      }
+    }
     const handoffPath=`config/asset-handoffs/${planned.id.toLowerCase()}.json`;
     const handoffExists=fs.existsSync(path.join(ROOT,handoffPath));
     if(command==='asset-ready'){
@@ -305,11 +450,13 @@ export function resolve(input, state=workflow()) {
     if(command==='verify'&&handoffExists)packet.assetHandoff=validateBundleFile(handoffPath);
     if (direction) packet.direction=direction;
     if (command==='resume') {
-      const active=state.activeRunId ? state.runs?.[state.activeRunId] : null;
-      const matches=active?.target===planned.id;
-      packet.activeRun=matches ? active.runId : null;
-      packet.recovery=matches ? resumeReport(ROOT,active) : {completed:[],missing:[],pending:[],autoRegenerate:false};
-      packet.message=matches?'Inspect saved results and recovery evidence. Missing or changed completed jobs must be recovered; they are never regenerated silently.':`No active ${planned.id} work exists. Generation remains blocked by the listed readiness prerequisites.`;
+      const discovered=discoverRecovery(planned.id,state,{fetch:checkRemote}),matches=Boolean(discovered.run);
+      packet.activeRun=matches ? discovered.run.runId : null;
+      packet.activeRunSummary=discovered.summary;
+      packet.recovery=matches ? discovered.summary : {completed:[],missing:[],pending:[],autoRegenerate:false};
+      packet.operation=matches?'recover-checkpoint':'resume';
+      if(matches){packet.blockers=[];delete packet.selectionStatus;delete packet.referencesReady;}
+      packet.message=matches?`${discovered.summary.refFetched?`Fetched the designated recovery ref ${discovered.remoteRef}`:'Recovery requires remote-ref verification'}; follow nextOperation and never regenerate, approve, or overwrite saved work automatically.`:`No active ${planned.id} work was found locally or on its designated recovery branch. ${discovered.fallback}`;
     }
     return packet;
   }
@@ -321,7 +468,7 @@ export function resolve(input, state=workflow()) {
     if (!['build','generate'].includes(command)) throw new Error(`${command} requires one stage, not a continent. Use help ${prefix}.`);
     if (!catalog.continents[prefix].phase8) throw new Error(`${prefix}: outside Phase 8; approved specifications and references are required.`);
     const next = nextStage(prefix,state);
-    if (!next) return {state:'approved',message:`${prefix}: all registered stages are approved.`,next:handoff()};
+    if (!next) return {state:'approved',message:`${prefix}: all registered stages are approved.`,next:handoff(state)};
     if (next.command==='resume') return resolve(`resume ${next.stage}`,state);
     id=next.stage;
   } else id=stageKey(rawTarget);
@@ -342,12 +489,12 @@ export function resolve(input, state=workflow()) {
   const packet={command, family, target:id, operation:def.operation, status:stage.status,
     selectedLayers:selected, scope:selected.map(k=>stage.layers[k.toLowerCase()].validation),
     checkpoint, approvedRevision:state.approvedRevisions[id.toLowerCase()]??null,
-    next:handoff(), executor:'agent', instructions:catalog.runbook, generationAllowed:true,
+    next:handoff(state), executor:'agent', instructions:catalog.runbook, generationAllowed:true,
     stageSpec:stage, specHash:hashValue(stage),
     specSources:['config/phase8-landscapes.json','docs/PHASE8_LANDSCAPE_PROMPT_MANIFEST.md',catalog.families.landscape.profile],
     protectedOutputs:Object.values(stage.layers).map(layer=>layer.validation),
     continuityOutputs:Object.values(stage.layers).map(layer=>layer.validation)};
-  if (command==='status') return {...stageSummary(id),checkpoint,next:handoff()};
+  if (command==='status') return {...stageSummary(id),checkpoint,next:handoff(state)};
   if (['build','generate'].includes(command) && stage.status==='approved') return {...packet,operation:'read',message:'Already approved. Explicit regenerate or revise is required to reopen this target.'};
   if (['generate','regenerate','revise','build'].includes(command)) {
     const manifest=read('docs/PHASE8_LANDSCAPE_PROMPT_MANIFEST.md');
@@ -418,6 +565,15 @@ function coordinator(args) {
     const [runId,jobId,revision]=args;
     return mutationResult(requeueJob({root:ROOT,statePath:workflowPath,runId,jobId,expectedRevision:Number(revision)}));
   }
+  if (action==='failure') {
+    const [runId,jobId,revision,classification,...detailWords]=args;
+    if(!detailWords.length)throw new Error('Use coordinator failure <runId> <jobId> <expectedRevision> <classification|auto> <detail>.');
+    return mutationResult(recordFailure({statePath:workflowPath,runId,jobId,expectedRevision:Number(revision),classification:classification==='auto'?null:classification,detail:detailWords.join(' ')}));
+  }
+  if(action==='compact'){
+    const [revision]=args;
+    return mutationResult(compactWorkflowState({statePath:workflowPath,expectedRevision:Number(revision)}));
+  }
   if (action==='verify-recovery') {
     const [runId,jobId,revision,remoteRef]=args;
     if (!remoteRef) throw new Error('Use coordinator verify-recovery <runId> <jobId> <expectedRevision> <fetchedRemoteRef>.');
@@ -440,10 +596,11 @@ function coordinator(args) {
     const [runId,revision]=args;
     return mutationResult(closeRun({statePath:workflowPath,runId,expectedRevision:Number(revision)}));
   }
-  throw new Error('Coordinator actions: start, start-job, requeue, result, verify-recovery, checkpoint, close.');
+  throw new Error('Coordinator actions: start, start-job, requeue, failure, result, verify-recovery, checkpoint, close, compact.');
 }
 function main(args) {
   if (args[0]==='handoff') return handoff();
+  if (args[0]==='detail') return detail(args[1],args[2]);
   if (args[0]==='coordinator') return coordinator(args.slice(1));
   if (args[0]==='checkpoint') return checkpoint(args[1],args[2],args.slice(3).join(' '));
   if (args[0]==='check') {
@@ -456,9 +613,11 @@ function main(args) {
     execFileSync('python',['scripts/phase8-stage-qa.py',stage,'--skip-png',...(layer?['--layer',layer]:[])],{cwd:ROOT,stdio:['ignore','pipe','pipe']});
     return {stage:stage.toUpperCase(),localChecks:'passed',previews:`tmp/phase8-qa/${stage}/`,remaining:'Inspect the composite and repeat previews, then verify the deployed runtime and user acceptance.'};
   }
-  return resolve(args);
+  return commandView(resolve(args));
 }
 if (process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
-  try {const result=main(process.argv.slice(2));console.log(typeof result==='string'?result:JSON.stringify(result,null,2));}
+  try {const result=main(process.argv.slice(2)),rendered=typeof result==='string'?result:JSON.stringify(result,null,2),detailed=process.argv[2]==='detail'||(process.argv[2]==='coordinator'&&process.argv[3]==='start-job'),budget=detailed?outputBudgets().detail:outputBudgets().default;
+    if(rendered.length>budget)throw new Error(`Command output ${rendered.length} characters exceeds its ${budget}-character budget.`);
+    console.log(rendered);}
   catch(error){console.error(error.stderr?.toString().trim()||error.message);process.exitCode=1;}
 }

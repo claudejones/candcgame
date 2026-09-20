@@ -11,3 +11,7 @@ Applies to new AF/AS/OC/AN files. Source: HAZARD_SPEC and REMAINING_CONTINENTS_P
 - End asset production with the versioned asset-ready handoff and exact five-file hashes. The editor-next Workbench agent imports it; the user calibrates and saves. Iterative grounding, flight height, hitbox fairness, Jump/Slide windows, difficulty and spawn-spacing balancing belong there. Repeated zero-hit courses are not an asset handoff gate.
 - Later playable release retains real contact, collision, finish and gameplay validation. Never mark unperformed checks passed. Keep genuine renderer/scheduler bug fixes and regression tests.
 - A GROUND1/GROUND2 revision preserves its sibling's RGBA pixels and metadata exactly. Recover original bytes from Git; never silently regenerate an accepted sibling.
+
+## Repeated technical defects
+
+For unapproved new candidates, use `docs/ASSET_TECHNICAL_FINISHING.md` after a repeated diagnosed defect. It authorizes only its bounded content-preserving corrections, records before/after evidence and requires QA on final bytes. Approved artwork and all geometry/visual-acceptance gates remain protected. Do not regenerate passing files or repeat unchanged local checks.

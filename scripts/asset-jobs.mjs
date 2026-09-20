@@ -4,6 +4,13 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 
 const READY_JOB_STATES = new Set(['completed']);
+const FAILURE_CLASSES = Object.freeze({
+  art:/\b(?:art|style|composition|silhouette|palette|reference|visual)\b/i,
+  canvas:/\b(?:canvas|dimension|size|width|height|resolution|crop)\b/i,
+  alpha:/\b(?:alpha|transparent|transparency|opaque|background)\b/i,
+  anchor:/\b(?:anchor|grounding|baseline|origin|alignment)\b/i,
+  access:/\b(?:access|auth|permission|credential|network|fetch|upload)\b/i
+});
 
 export const sha256 = value => crypto.createHash('sha256').update(value).digest('hex');
 export const hashValue = value => sha256(JSON.stringify(value));
@@ -33,6 +40,64 @@ export function migrateWorkflowState(state) {
 
 export function readWorkflowState(statePath) {
   return migrateWorkflowState(JSON.parse(fs.readFileSync(statePath, 'utf8')));
+}
+
+function packetDirectory(statePath,runId) {
+  return path.join(path.dirname(statePath),'asset-workflow-runs',assertRelative(runId));
+}
+
+function saveWorkerPacket(statePath,runId,jobId,packet) {
+  const bytes=`${JSON.stringify(packet,null,2)}\n`,hash=sha256(bytes);
+  const directory=packetDirectory(statePath,runId);
+  fs.mkdirSync(directory,{recursive:true});
+  const file=path.join(directory,`${jobId.replace(/[^a-z0-9_-]/gi,'_').toLowerCase()}-${hash.slice(0,16)}.json`);
+  if(!fs.existsSync(file))atomicWrite(file,packet);
+  return {path:path.relative(path.dirname(statePath),file).split(path.sep).join('/'),sha256:hash};
+}
+
+function loadWorkerPacket(statePath,job) {
+  if(job.workerPacket)return compactWorkerPacket(job.workerPacket); // schema-v2 compatibility
+  if(!job.workerPacketRef)throw new Error(`Job ${job.id} has no worker packet.`);
+  const file=path.join(path.dirname(statePath),assertRelative(job.workerPacketRef.path));
+  const bytes=fs.readFileSync(file);
+  if(sha256(bytes)!==job.workerPacketRef.sha256)throw new Error(`Worker packet changed for ${job.id}.`);
+  return compactWorkerPacket(JSON.parse(bytes.toString('utf8')));
+}
+
+function selectedProfile(sharedRules,owner) {
+  if(!sharedRules)return null;
+  const profile=owner==='hazard-worker' && sharedRules.hazardProfile!==undefined ? sharedRules.hazardProfile : sharedRules.profile;
+  return profile && typeof profile==='object' ? profile : {content:profile};
+}
+
+function workerRules(sharedRules,owner) {
+  if(!sharedRules)return null;
+  const geometryKeys=['landscapeContract','landscapeSource','viewport','surfaceY','landscapeOffsets','landscapeScaleMultipliers','landscapeAnchors','groundAtlas','flyingAtlas','pixelArt','artDirection'];
+  const rules={profile:selectedProfile(sharedRules,owner)};
+  for(const key of geometryKeys)if(sharedRules[key]!=null)rules[key]=sharedRules[key];
+  return rules;
+}
+
+export function compactWorkerPacket(packet) {
+  const result=structuredClone(packet);
+  result.sharedRules=workerRules(packet.sharedRules,packet.owner);
+  return result;
+}
+
+function sourceKey(source) {
+  return typeof source==='string'?source:`${source.path}#${(source.select??[]).join(',')}`;
+}
+
+function selectJson(value,selector) {
+  return String(selector).split('.').filter(Boolean).reduce((current,key)=>current?.[key],value);
+}
+
+function sourceHash(root,source) {
+  if(typeof source==='string')return fileHash(root,source);
+  const file=assertRelative(source.path);
+  if(!fs.existsSync(path.join(root,file)))return null;
+  const value=JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
+  return hashValue((source.select??[]).map(selector=>[selector,selectJson(value,selector)]));
 }
 
 function atomicWrite(file, value) {
@@ -78,12 +143,27 @@ export function updateWorkflowState({statePath, expectedRevision, actor, mutate}
   }
 }
 
+export function compactWorkflowState({statePath,expectedRevision}) {
+  return updateWorkflowState({statePath,expectedRevision,actor:'coordinator',mutate(state){
+    let packets=0,bytesRemoved=0;
+    for(const run of Object.values(state.runs??{}))for(const job of Object.values(run.jobs??{})){
+      if(!job.workerPacket)continue;
+      const packet=job.workerPacket;
+      bytesRemoved+=JSON.stringify(job.workerPacket).length;
+      job.workerPacketRef=saveWorkerPacket(statePath,run.runId,job.id,packet);
+      delete job.workerPacket;
+      packets++;
+    }
+    return {packets,bytesRemoved,preservedRuns:Object.keys(state.runs??{}).length,preservedApprovals:Object.keys(state.approvedRevisions??{}).length};
+  }});
+}
+
 function normalizedReferences(job) {
   const candidates = [job.reference, ...(job.references ?? [])].filter(Boolean);
   return [...new Set(candidates.map(assertRelative))];
 }
 
-function normalizeJob(root, runId, target, job, allOutputs, continuityOutputs, specHash, specSourceHashes, sharedRules, direction, baseCommit) {
+function normalizeJob(root, statePath, runId, target, job, allOutputs, continuityOutputs, specHash, specSourceHashes, specSources, sharedRules, direction, baseCommit) {
   const output = assertRelative(job.output ?? job.validation ?? job.path);
   const selector = String(job.selector ?? job.layer ?? job.asset ?? path.basename(output)).toUpperCase();
   const id = String(job.id ?? `${target}:${selector}`).toUpperCase();
@@ -96,7 +176,7 @@ function normalizeJob(root, runId, target, job, allOutputs, continuityOutputs, s
   const baseHash = fileHash(root, output);
   const workerPacket = {
     runId, jobId: id, target, selector, owner, output, baseCommit, baseHash, specHash,
-    referenceHashes, sharedRules,
+    referenceHashes, sharedRules:workerRules(sharedRules,owner),
     prompt: job.prompt ?? null,
     direction: job.direction ?? direction ?? null,
     task:job.task ?? null,
@@ -105,11 +185,12 @@ function normalizeJob(root, runId, target, job, allOutputs, continuityOutputs, s
     editingSource:job.editingSource ?? null,
     continuityFiles: owner === 'landscape-worker' ? continuityOutputs.filter(file => file !== output) : []
   };
+  const workerPacketRef=saveWorkerPacket(statePath,runId,id,workerPacket);
   return {
     id, runId, selector, owner, output, baseHash, specHash,
-    specSourceHashes: {...specSourceHashes}, referenceHashes,
+    specSourceHashes: {...specSourceHashes}, specSources:structuredClone(specSources), referenceHashes,
     siblingHashes: Object.fromEntries(allOutputs.filter(file => file !== output).map(file => [file, fileHash(root, file)])),
-    workerPacket,
+    workerPacketRef,
     attempts: 0, dispatches: 0, interruptions: 0, status: 'pending', resultHash: null, recoveryRef: null
   };
 }
@@ -118,8 +199,10 @@ function verifyStaticInputs(root, job) {
   for (const [file, expected] of Object.entries(job.referenceHashes)) {
     if (fileHash(root, file) !== expected) throw new Error(`Stale reference for ${job.id}: ${file}.`);
   }
-  for (const [file, expected] of Object.entries(job.specSourceHashes)) {
-    if (fileHash(root, file) !== expected) throw new Error(`Stale specification for ${job.id}: ${file}.`);
+  const sources=job.specSources??Object.keys(job.specSourceHashes);
+  for (const source of sources) {
+    const key=sourceKey(source),expected=job.specSourceHashes[key];
+    if (sourceHash(root,source) !== expected) throw new Error(`Stale specification for ${job.id}: ${key}.`);
   }
 }
 
@@ -149,15 +232,19 @@ export function createRun({root, statePath, expectedRevision, command, packet, b
   if (new Set(outputs).size !== outputs.length) throw new Error('Each asset job must own one unique output file.');
   const runId = `${packet.target.toLowerCase()}-${now.toISOString().replace(/[-:.TZ]/g, '').slice(0, 14)}-${crypto.randomBytes(3).toString('hex')}`;
   const specHash = packet.specHash ?? hashValue(packet.stageSpec ?? {target: packet.target, selectedLayers: packet.selectedLayers, direction: packet.direction});
-  const specSources = [...new Set(packet.specSources ?? [])].map(assertRelative);
-  const specSourceHashes = Object.fromEntries(specSources.map(file => [file, fileHash(root, file)]));
+  const specSources=[];
+  for(const source of packet.specSources??[]){
+    const normalized=typeof source==='string'?assertRelative(source):{path:assertRelative(source.path),select:[...(source.select??[])]};
+    if(!specSources.some(item=>sourceKey(item)===sourceKey(normalized)))specSources.push(normalized);
+  }
+  const specSourceHashes = Object.fromEntries(specSources.map(source => [sourceKey(source), sourceHash(root,source)]));
   const missingSpec = Object.entries(specSourceHashes).find(([, hash]) => hash === null);
   if (missingSpec) throw new Error(`Missing specification source: ${missingSpec[0]}.`);
   return updateWorkflowState({statePath, expectedRevision, actor: 'coordinator', mutate(state) {
     if (state.activeRunId) throw new Error(`Active coordinator run is ${state.activeRunId}.`);
     if (state.active && state.active.stage !== packet.target) throw new Error(`Legacy active checkpoint is ${state.active.stage}.`);
     const jobs = Object.fromEntries(packet.jobs.map(job => {
-      const normalized = normalizeJob(root, runId, packet.target, job, protectedOutputs, continuityOutputs, specHash, specSourceHashes, packet.sharedRules ?? null, packet.direction, baseCommit);
+      const normalized = normalizeJob(root, statePath, runId, packet.target, job, protectedOutputs, continuityOutputs, specHash, specSourceHashes, specSources, packet.sharedRules ?? null, packet.direction, baseCommit);
       return [normalized.id, normalized];
     }));
     state.runs[runId] = {
@@ -185,7 +272,33 @@ export function startJob({root, statePath, expectedRevision, runId, jobId}) {
     if (currentOutput !== job.baseHash) throw new Error(`Owned output changed before ${job.id} started: ${job.output}.`);
     job.dispatches += 1;
     job.status = 'running';
-    return {runId, jobId: job.id, owner: job.owner, output: job.output, dispatch: job.dispatches, packet: job.workerPacket};
+    return {runId, jobId: job.id, owner: job.owner, output: job.output, dispatch: job.dispatches, packet: loadWorkerPacket(statePath,job)};
+  }});
+}
+
+export function workerBrief({statePath,runId,jobId}) {
+  const state=readWorkflowState(statePath),run=state.runs?.[runId],job=run?.jobs?.[String(jobId).toUpperCase()];
+  if(!run||!job)throw new Error(`Unknown job ${runId}/${jobId}.`);
+  return loadWorkerPacket(statePath,job);
+}
+
+export function classifyFailure(detail='') {
+  return Object.entries(FAILURE_CLASSES).find(([,pattern])=>pattern.test(detail))?.[0]??'technical';
+}
+
+export function recordFailure({statePath,expectedRevision,runId,jobId,detail,classification=null}) {
+  return updateWorkflowState({statePath,expectedRevision,actor:'coordinator',mutate(state){
+    const run=state.runs?.[runId],job=run?.jobs?.[String(jobId).toUpperCase()];
+    if(!run||!job)throw new Error(`Unknown job ${runId}/${jobId}.`);
+    if(job.status!=='running')throw new Error(`${job.id} is ${job.status}; only a running job can record a failure.`);
+    const kind=classification??classifyFailure(detail);
+    if(![...Object.keys(FAILURE_CLASSES),'technical'].includes(kind))throw new Error(`Unknown failure classification '${kind}'.`);
+    job.failures??={};job.failures[kind]=(job.failures[kind]??0)+1;
+    job.lastFailure={classification:kind,detail:String(detail),at:new Date().toISOString()};
+    job.status='pending';
+    const repeated=job.failures[kind]>=2;
+    job.nextAction=repeated?'diagnose-or-approved-finishing':'retry-after-correction';
+    return {runId,jobId:job.id,classification:kind,count:job.failures[kind],repeated,nextAction:job.nextAction,autoAccept:false,relaxStandards:false};
   }});
 }
 
@@ -306,9 +419,10 @@ export function verifyRecovery({root, statePath, expectedRevision, runId, jobId,
 }
 
 export function resumeReport(root, run) {
-  const report = {completed: [], missing: [], pending: [], autoRegenerate: false};
+  const report = {completed: [], failedQaCleanup: [], missing: [], pending: [], autoRegenerate: false};
   if (!run) return report;
   for (const job of Object.values(run.jobs)) {
+    if(job.status==='failed-qa-cleanup'){report.failedQaCleanup.push(job.id);continue;}
     const actual = fileHash(root, job.output);
     let staleInput=null;
     try { verifyStaticInputs(root,job); } catch(error) { staleInput=error.message; }
@@ -341,8 +455,8 @@ export function checkpointRun({root, statePath, expectedRevision, runId, phase, 
     const run = state.runs[runId];
     if (!run) throw new Error(`Unknown run ${runId}.`);
     const report = resumeReport(root, run);
-    if (phase !== 'working' && (report.missing.length || report.pending.length)) {
-      throw new Error(`${phase} requires every saved job: ${report.missing.length} missing/changed, ${report.pending.length} pending.`);
+    if (phase !== 'working' && (report.missing.length || report.pending.length || report.failedQaCleanup.length)) {
+      throw new Error(`${phase} requires every saved job: ${report.missing.length} missing/changed, ${report.pending.length} pending, ${report.failedQaCleanup.length} failed-QA cleanup.`);
     }
     if (phase === 'asset-ready' || phase === 'awaiting-approval') {
       const nonDurable = Object.values(run.jobs).filter(job => !job.durable).map(job => job.id);
