@@ -1,0 +1,169 @@
+{
+  "af02": {
+    "schemaVersion": 1,
+    "stageId": "af02",
+    "readiness": "asset-ready",
+    "downstream": {
+      "calibration": "pending",
+      "release": "pending"
+    },
+    "assets": {
+      "FAR": {
+        "path": "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png",
+        "sha256": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+        "width": 2172,
+        "height": 724
+      },
+      "MID": {
+        "path": "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png",
+        "sha256": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+        "width": 2172,
+        "height": 724
+      },
+      "GROUND": {
+        "path": "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png",
+        "sha256": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+        "width": 2172,
+        "height": 724
+      },
+      "OBJECT_ATLAS": {
+        "path": "assets/worlds/africa/AF02_OBJECT_ATLAS.png",
+        "sha256": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+        "width": 2172,
+        "height": 724
+      },
+      "FLYING": {
+        "path": "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png",
+        "sha256": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+        "width": 2172,
+        "height": 724
+      }
+    },
+    "landscape": {
+      "contractVersion": "phase8-landscape-1",
+      "source": {
+        "width": 2172,
+        "height": 724
+      },
+      "viewport": {
+        "width": 960,
+        "height": 540,
+        "groundSurfaceY": 410
+      },
+      "layers": {
+        "FAR": {
+          "sourceY": 0,
+          "scale": 1.25
+        },
+        "MID": {
+          "sourceAnchorY": 621,
+          "offsetY": 0,
+          "scale": 1
+        },
+        "GROUND": {
+          "sourceAnchorY": 393,
+          "offsetY": 0,
+          "scale": 1
+        }
+      }
+    },
+    "hazards": [
+      {
+        "name": "Curled clay-pan crust plates",
+        "kind": "ground",
+        "atlasKey": "af02Hazards",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 1086,
+          "h": 724
+        },
+        "sourceAnchor": {
+          "x": 543,
+          "y": 620
+        },
+        "groundOffset": 0,
+        "scale": 0.3,
+        "crop": {
+          "l": 345,
+          "r": 186,
+          "t": 469,
+          "b": 103
+        },
+        "cw": 0.918918918918919,
+        "ch": 0.8157894736842105,
+        "cx": 0.0045045045045045045,
+        "cy": 0,
+        "sourceFacing": "none",
+        "gameplayFacing": "none"
+      },
+      {
+        "name": "Forked dead camelthorn snag",
+        "kind": "ground",
+        "atlasKey": "af02Hazards",
+        "rect": {
+          "x": 1086,
+          "y": 0,
+          "w": 1086,
+          "h": 724
+        },
+        "sourceAnchor": {
+          "x": 543,
+          "y": 620
+        },
+        "groundOffset": 0,
+        "scale": 0.28,
+        "crop": {
+          "l": 319,
+          "r": 384,
+          "t": 133,
+          "b": 103
+        },
+        "cw": 0.5744125326370757,
+        "ch": 0.819672131147541,
+        "cx": 0.12924281984334204,
+        "cy": 0,
+        "sourceFacing": "none",
+        "gameplayFacing": "none"
+      },
+      {
+        "name": "Namaqua sandgrouse",
+        "kind": "flying",
+        "atlasKey": "af02Bird",
+        "frameW": 543,
+        "frameH": 724,
+        "frames": 4,
+        "fps": 8,
+        "sourceAnchor": {
+          "x": 271,
+          "y": 362
+        },
+        "scale": 0.22,
+        "crop": {
+          "l": 55,
+          "r": 56,
+          "t": 143,
+          "b": 121
+        },
+        "cw": 0.625,
+        "ch": 0.31956521739130433,
+        "cx": 0.09722222222222222,
+        "cy": 0.020652173913043477,
+        "flightOffsetY": {
+          "high": 0,
+          "low": 0
+        },
+        "flipX": true,
+        "sourceFacing": "right",
+        "gameplayFacing": "left"
+      }
+    ],
+    "checks": {
+      "technical": true,
+      "composition": true,
+      "animation": true,
+      "basicRendering": true
+    },
+    "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+  }
+}
