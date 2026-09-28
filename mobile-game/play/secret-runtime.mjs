@@ -50,7 +50,7 @@ export class SecretRuntime extends PlayRuntime{
   return {early:warning+Math.max(0,muzzle-reach-35)/(speed+v),late:warning+Math.max(0,muzzle-retreat+35)/(speed-v)};
  }
  start(){if(this.status==='paused'&&this.savedMotion){this.motion=this.savedMotion;this.savedMotion=null;this.status='playing';}else super.start();}
- pause(){if(this.status==='playing'){this.savedMotion=this.motion;this.motion=createMotion(this.config,'idle');this.status='paused';}this.carry=0;}
+ pause(){this.holdSlide(false);if(this.status==='playing'){this.savedMotion=this.motion;this.motion=createMotion(this.config,'idle');this.status='paused';}this.carry=0;}
  geometry(){
   const item=this.character,frame=this.motion.frame;
   const character=characterGeometry(this.config,item,frame,this.draft.frames[item.id][frame],this.draft.value[item.id][frame],{...this.draft.placement,groundOffset:this.layout.groundY*SCALE-410-this.draft.placement[`character:${this.who}`].footOffset},this.motion.y);
@@ -83,7 +83,7 @@ export class SecretRuntime extends PlayRuntime{
  }
  tick(){
   if(this.status!=='playing')return;
-  this.steps++;this.beltTime+=RUNTIME_STEP;this.invulnerable=Math.max(0,this.invulnerable-RUNTIME_STEP);this.recovery=Math.max(0,this.recovery-RUNTIME_STEP);this.motion.update(RUNTIME_STEP);this.updateConveyor();
+  this.steps++;this.beltTime+=RUNTIME_STEP;this.invulnerable=Math.max(0,this.invulnerable-RUNTIME_STEP);this.recovery=Math.max(0,this.recovery-RUNTIME_STEP);this.updateMotion(RUNTIME_STEP);this.updateConveyor();
   const phase=this.tuning.phases[this.phase],boundary=phase.end;
   if(this.attack&&!this.attack.released&&this.time>=this.attack.start+this.tuning.attack.releaseOffsetMs/1000)this.release();
   if(this.attack&&this.time-this.attack.start>=(this.tuning.attack.releaseOffsetMs+this.tuning.attack.followThroughMs)/1000)this.attack=null;

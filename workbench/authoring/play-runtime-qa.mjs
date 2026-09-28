@@ -73,3 +73,6 @@ for(const who of ['claude','constance']){
  complete.advance(1/complete.config.state.celebrate.fps);assert.notEqual(complete.motion.frame,frame);assert(complete.cloudTime>cloud);
 }
 console.log('Terminal overlays: both characters keep celebrating/clouds scrolling or stun stars animating; gameplay stays frozen.');
+
+import {checkHeldSlide} from './held-slide-qa.mjs';
+for(const who of ['claude','constance'])checkHeldSlide(()=>new PlayRuntime(snapshot('na01',who),{unlimitedLives:true}));

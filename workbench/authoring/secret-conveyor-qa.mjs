@@ -23,3 +23,6 @@ for(const who of ['claude','constance'])for(const hz of [30,60,120])for(const le
 // Explicit takeoff/reversal fixture: airborne drift follows takeoff, not the reversing belt.
 for(const who of ['claude','constance']){const r=make(who);r.start();r.advance(1);r.beltWarning={start:r.time-.8,at:r.time,direction:-1};r.action('jump');const velocity=r.airVelocity,x=r.config.characterX;r.advance(.1);assert.equal(r.beltDirection,-1);assert.equal(r.airVelocity,velocity);assert(r.config.characterX>x);}
 console.log('Conveyor: 18 full survival runs, warning/arrival envelopes, pause, bounds, airborne momentum and stun exclusion passed.');
+
+import {checkHeldSlide} from './held-slide-qa.mjs';
+for(const who of ['claude','constance'])checkHeldSlide(()=>make(who));

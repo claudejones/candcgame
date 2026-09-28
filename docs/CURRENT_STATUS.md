@@ -9,3 +9,5 @@ Mobile configuration: workbench/authoring/hazard-upgrade/checked-project.json, S
 Recent fixes: phone typography/controls; fresh title hides Continue; title-first loading and prefetched title audio; world asset decode gate; rotate logo; favicon; iOS long-press selection protection. Physical-device visual, heat and battery acceptance remain pending.
 
 Publication is complete only when exact-SHA development CI, main CI and Pages runs pass and both live entry points are checked. See GitHub Actions for the current commit's result rather than treating this document as a deployment receipt.
+
+Mobile control follow-up: double-tap zoom suppressed across the mobile shell, gameplay keeps exclusive touch handling, thumb targets extend beyond button artwork, and held Slide intent survives landing/recovery but clears on release or pause. Both characters and normal/secret runtimes have regression coverage. Physical iPhone touch acceptance still pending.
