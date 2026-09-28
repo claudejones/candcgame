@@ -1,0 +1,80 @@
+name: LAB25Q visual asset comparison page
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["modular-parity-validation"]
+    paths:
+      - '.github/workflows/lab25q-asset-compare.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: modular-parity-validation
+      - name: Build side-by-side comparison page
+        shell: python
+        run: |
+          import re, base64, pathlib, html, hashlib
+          from urllib.parse import quote
+
+          root=pathlib.Path('.')
+          src=(root/'archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html').read_text(errors='replace')
+          uris=re.findall(r'data:image/[^;]+;base64,[A-Za-z0-9+/=]+',src)
+          if len(uris)!=62: raise SystemExit(f'expected 62 embedded images, got {len(uris)}')
+          out=root/'qa/asset-compare'
+          emb=out/'embedded'
+          emb.mkdir(parents=True,exist_ok=True)
+          for i,u in enumerate(uris):
+            mime=u.split(';',1)[0].split(':',1)[1]
+            ext={'image/png':'png','image/jpeg':'jpg','image/webp':'webp'}.get(mime,'bin')
+            (emb/f'IMG-{i:02d}.{ext}').write_bytes(base64.b64decode(u.split(',',1)[1]))
+
+          manifest=(root/'docs/LAB25Q_PHASE2_SEMANTIC_ASSET_MANIFEST.md').read_text()
+          rows=[]
+          pat=re.compile(r'^\| IMG-(\d+) \| (.*?) \| ([^|]+) \| `?([^|`]+)`? \| ([^|]+) \| ([^|]+) \|$',re.M)
+          for m in pat.finditer(manifest):
+            idx=int(m.group(1)); role=m.group(2).strip(); oldgeom=m.group(3).strip(); path=m.group(4).strip(); newgeom=m.group(5).strip(); cls=m.group(6).strip()
+            if idx==48: current=None
+            else: current=path if path!='—' and (root/path).exists() else None
+            rows.append((idx,role,oldgeom,path,newgeom,cls,current))
+          if len(rows)!=62: raise SystemExit(f'expected 62 manifest rows, got {len(rows)}')
+
+          cards=[]
+          for idx,role,oldgeom,path,newgeom,cls,current in rows:
+            oldsrc=f'embedded/IMG-{idx:02d}.png'
+            if current:
+              rel='../../'+current
+              right=f'<img src="{html.escape(rel)}" alt="current">'
+              current_label=html.escape(path)
+            else:
+              right='<div class="missing">NO CURRENT NAMED MATCH</div>'
+              current_label=html.escape(path)
+            status='dead' if idx==48 else ('uncertain' if cls.startswith('C') else ('changed' if cls.startswith('B') else 'same'))
+            cards.append(f'''<section class="card" id="img-{idx:02d}" data-status="{status}">
+              <div class="head"><div><b>IMG-{idx:02d}</b> · {html.escape(role)}</div><span>{html.escape(cls)}</span></div>
+              <div class="compare">
+                <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">{html.escape(oldgeom)}</div><div class="checker"><img src="{oldsrc}" alt="embedded"></div></div>
+                <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">{html.escape(newgeom)}</div><div class="checker">{right}</div><code>{current_label}</code></div>
+              </div>
+              <div class="verify"><label><input type="radio" name="v{idx}" value="same"> Same image / correct update</label><label><input type="radio" name="v{idx}" value="different"> Not the same asset</label><label><input type="radio" name="v{idx}" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+            </section>''')
+
+          page='''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LAB25Q Asset Verification</title><style>
+          :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0d130f;color:#f3ecdf;font:14px ui-monospace,SFMono-Regular,Menlo,monospace}.top{position:sticky;top:0;z-index:10;background:#071827ee;border-bottom:1px solid #d6ad59;padding:14px 18px}.top h1{font-size:18px;margin:0 0 6px}.top p{margin:0;color:#cfc9bd}.filters{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}button{background:#111912;color:#f3ecdf;border:1px solid #d6ad59;padding:7px 10px}.wrap{max-width:1500px;margin:auto;padding:14px}.card{border:1px solid #665936;background:#111713;margin:0 0 16px}.head{display:flex;justify-content:space-between;gap:12px;padding:9px 12px;background:#071827;border-bottom:1px solid #665936}.head span{font-size:11px;color:#ffd75c}.compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#665936}.pane{background:#101510;padding:10px;min-width:0}.pane h3{margin:0;font-size:11px;color:#ffd75c}.geom{font-size:11px;color:#aaa49c;margin:3px 0 8px}.checker{height:360px;display:flex;align-items:center;justify-content:center;overflow:auto;background-color:#202820;background-image:linear-gradient(45deg,#303830 25%,transparent 25%),linear-gradient(-45deg,#303830 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#303830 75%),linear-gradient(-45deg,transparent 75%,#303830 75%);background-size:24px 24px;background-position:0 0,0 12px,12px -12px,-12px 0}.checker img{max-width:100%;max-height:100%;object-fit:contain;image-rendering:pixelated}.missing{color:#ffb4a8;font-weight:bold}code{display:block;white-space:normal;overflow-wrap:anywhere;color:#bbb;margin-top:7px;font-size:11px}.verify{padding:10px 12px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.verify textarea{flex:1;min-width:240px;background:#0d130f;color:#fff;border:1px solid #665936;padding:7px;height:36px}.hidden{display:none}@media(max-width:800px){.compare{grid-template-columns:1fr}.checker{height:260px}.head{flex-direction:column}}
+          </style></head><body><div class="top"><h1>LAB25Q Embedded ↔ Current Asset Verification</h1><p>Left is the exact image extracted from LAB25Q. Right is the current named file in /assets. Use this page to verify semantic identity visually. IMG-48 is intentionally marked dead/shadowed.</p><div class="filters"><button onclick="f('all')">All 62</button><button onclick="f('changed')">Geometry changed</button><button onclick="f('same')">Same geometry</button><button onclick="f('uncertain')">Unresolved</button><button onclick="f('dead')">Dead/shadowed</button></div></div><main class="wrap">'''+''.join(cards)+'''</main><script>function f(x){document.querySelectorAll('.card').forEach(c=>c.classList.toggle('hidden',x!='all'&&c.dataset.status!=x))}</script></body></html>'''
+          (out/'index.html').write_text(page)
+          print('Built comparison page with',len(rows),'rows and',len(uris),'extracted embedded images')
+      - name: Commit generated QA page
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add qa/asset-compare
+          git diff --cached --quiet && exit 0
+          git commit -m "Build LAB25Q side-by-side asset verification page"
+          git push

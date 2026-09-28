@@ -1,0 +1,692 @@
+{
+  "stageId": "af02",
+  "status": "source-validation-complete",
+  "deterministicCleanupAuthorized": true,
+  "evidence": "docs/phase8-qa/AF02_ASSET_QA.md",
+  "results": {
+    "FAR": {
+      "runId": "af02-20260919204119-fb761a",
+      "jobId": "AF02:FAR",
+      "path": "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png",
+      "sha256": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+      "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+      "baseHash": null,
+      "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+      "referenceHashes": {
+        "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+        "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+        "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+        "assets/references/africa/af02/dunes_oryx.jpg": "4868ad095ea62ecaa952d4ec779854103a96fe0f34d90de1b753c54f6fa025a8"
+      },
+      "attempts": 2,
+      "completedAt": "2026-09-19T20:47:48Z",
+      "validation": {
+        "pngIntegrity": "passed",
+        "format": "8-bit RGB non-interlaced",
+        "dimensions": [
+          2172,
+          724
+        ],
+        "opaque": true,
+        "isolatedInspection": "passed",
+        "nativeRepeatInspection": "passed",
+        "runtimeScaleInspection": "passed",
+        "postGenerationDimensionChange": false,
+        "completeStagePreview": "deferred until MID and GROUND exist"
+      },
+      "recovery": {
+        "ref": "af02-landscape-output",
+        "commit": "5983ad83ad96e848a5a712a5ef14cf95e458f87e",
+        "contentHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361"
+      },
+      "attemptDetails": [
+        {
+          "attempt": 1,
+          "mode": "built-in imagegen generation",
+          "durationSeconds": 24.9,
+          "result": "rejected",
+          "generatorDimensions": [
+            2171,
+            724
+          ],
+          "prompt": "Use case: stylized-concept\nAsset type: production FAR/background layer for a side-scrolling pixel-art game\nPrimary request: Create AF02 FAR, Namibia \u2014 Sossusvlei dunes, as one crisp pixel-art panoramic PNG.\nInput images: Images 1-3 are immutable NA01 style references only for pixel-art rendering language, palette discipline, hard-edged clustered pixels, and layer density. Image 4 is the location/subject reference and governs the Sossusvlei dune shapes and color.\nScene/backdrop: A cloudless, fully opaque cool blue sky over pale cool distant dune ridges and sweeping rust-orange Namib dunes.\nSubject: One dominant high dune crest, clearly readable, with a sharp ridge separating a bright terracotta sunlit plane from a deep rust/mauve shadow plane. Keep lower scenery useful behind later transparent MID and GROUND layers.\nStyle/medium: Crisp authored 2D pixel art matching the attached NA01 assets; deliberate blocky pixel clusters, limited game palette, hard clean contours, no antialiasing haze, no painterly or photoreal texture.\nComposition/framing: Exact source canvas 2172 \u00d7 724 pixels, extremely wide panorama. The dominant dune crest must sit well away from both horizontal repeat joins, around the central-right interior, with broad sweeping shoulders. Keep the horizon and focal crest legible after runtime draw at scale 1.25 into a 960\u00d7540 viewport. Edge regions should carry low, unobtrusive distant ridges and compatible sky so horizontal repetition reads naturally, without duplicated landmark peaks at the seam. Dune foundation extends fully to the bottom edge.\nLighting/mood: Strong clear desert sun; sharp sunlit-versus-shadow plane on the main dune; warm and expansive.\nColor palette: Rust, terracotta, burnt orange, pale cream, restrained mauve shadows, cool opaque blue sky.\nConstraints: Exactly 2172\u00d7724. Fully opaque across every pixel, including all corners. One single continuous landscape, no panels, no borders. FAR layer only. Preserve a clear sky with no clouds. No characters or animals, including no oryx. No vegetation, trees, savannah grasses, cacti, mesas, rock towers, buildings, hazards, trail objects, text, UI, logos, or watermark. Do not copy NA01 subject matter. Do not place the dominant crest at either edge. Horizontal left/right edges should be visually compatible for repeating without an obvious cliff or abrupt color discontinuity.",
+          "reason": "Built-in generation returned 2171x724. A deterministic code-side canvas completion was initially tested, then rejected because ASSET_PRODUCTION_SPEC repeat-repair authorization forbids canvas-dimension changes."
+        },
+        {
+          "attempt": 2,
+          "mode": "built-in imagegen targeted edit",
+          "durationSeconds": 22.1,
+          "result": "selected",
+          "dimensions": [
+            2172,
+            724
+          ],
+          "postGenerationDimensionChange": false,
+          "prompt": "Use case: precise-object-edit\nAsset type: production FAR/background layer for a side-scrolling pixel-art game\nPrimary request: Preserve the attached accepted AF02 Sossusvlei FAR artwork and composition exactly, but return it natively on an exact 2172 pixel wide by 724 pixel high canvas.\nInput images: Image 1 is the edit target. It contains the approved dominant central-right dune crest, sharp terracotta sunlit face and deep rust/mauve shadow plane, pale cool distant ridges, clear blue sky, and the approved horizontally compatible low saddle at the wrap edges.\nConstraints: Output must be exactly 2172 \u00d7 724 pixels, as a fully opaque 8-bit-style RGB PNG. Preserve the composition, all landmark positions, pixel-art cluster language, hard edges, palette, clear cloudless sky, edge saddle, and continuous foundation. Do not scale, stretch, crop, shift, blur, soften, recolor, or redesign the existing artwork. Make only the minimal native image edit needed to satisfy the exact canvas geometry while keeping horizontal repeat compatibility.\nAvoid: transparency, clouds, characters, animals, oryx, vegetation, trees, savannah grass, cacti, mesas, rock towers, buildings, hazards, trail objects, text, UI, logos, watermark, borders, or panels."
+        }
+      ]
+    },
+    "MID": {
+      "runId": "af02-20260919204119-fb761a",
+      "jobId": "AF02:MID",
+      "path": "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png",
+      "sha256": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+      "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+      "baseHash": null,
+      "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+      "referenceHashes": {
+        "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+        "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+        "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+        "assets/references/africa/af02/dunes_oryx.jpg": "4868ad095ea62ecaa952d4ec779854103a96fe0f34d90de1b753c54f6fa025a8",
+        "assets/references/africa/af02/camelthorn.jpg": "06927857a3351493caeb0358410c22d885847e67d7c40977fb7c5407b141da25",
+        "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356"
+      },
+      "attempts": 1,
+      "completedAt": "2026-09-19T20:54:31Z",
+      "validation": {
+        "pngIntegrity": "passed",
+        "format": "8-bit RGBA non-interlaced",
+        "dimensions": [
+          2172,
+          724
+        ],
+        "realTransparency": true,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "midAnchor": 621,
+        "anchorRowCoverage": "2172/2172 pixels nonzero",
+        "lowerCoverage": "passed",
+        "isolatedInspection": "passed",
+        "nativeRepeatInspection": "passed after approved 32px horizontal-edge-only repair",
+        "farMidCompositeInspection": "passed",
+        "runtimeScaleInspection": "passed",
+        "postGenerationDimensionChange": false,
+        "farPreservedExactHash": true,
+        "completeStagePreview": "deferred until GROUND exists"
+      },
+      "recovery": {
+        "ref": "af02-landscape-output",
+        "commit": "d9c40c08b55b7b9a4c659a28e188b58b30b7bdcf",
+        "contentHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832"
+      },
+      "attemptDetails": [
+        {
+          "attempt": 1,
+          "mode": "built-in imagegen generation with approved horizontal-edge-only repeat repair",
+          "result": "selected",
+          "dimensions": [
+            2172,
+            724
+          ],
+          "postGenerationDimensionChange": false,
+          "edgeRepair": {
+            "scope": "left/right 32px only",
+            "purpose": "horizontal repeat continuity",
+            "landmarksAnchorsDimensionsPreserved": true
+          },
+          "prompt": "AF02 MID: Crisp transparent pixel-art middle-distance Sossusvlei layer with sparse weathered dead camelthorn silhouettes, dune shoulders and pale clay-pan patches; a single plausibly scaled distant oryx well behind gameplay; enough lower authored coverage through source anchor Y=621; exact 2172x724 RGBA; intentional transparent sky; no people, hazards, HUD, text, shared clouds, or unrelated scenery; match the immutable NA01 pixel-art language and AF02 location references."
+        }
+      ],
+      "qaEvidence": {
+        "isolated": "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png",
+        "repeat": "tmp/af02/mid-edge32-repeat.png",
+        "composite": "tmp/af02/far-mid-composite.png"
+      }
+    },
+    "GROUND": {
+      "runId": "af02-20260919204119-fb761a",
+      "jobId": "AF02:GROUND",
+      "path": "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png",
+      "sha256": "d6e58e046623d036f592ee2b7a0aed13670481cd453f71f1d3d8117a8f607202",
+      "status": "failed-qa-recovery-checkpoint",
+      "eligibleForImport": false,
+      "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+      "baseHash": null,
+      "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+      "referenceHashes": {
+        "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+        "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+        "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+        "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356"
+      },
+      "attempts": 2,
+      "completedAt": null,
+      "validation": {
+        "pngIntegrity": "passed",
+        "format": "8-bit RGBA non-interlaced",
+        "dimensions": [
+          2172,
+          724
+        ],
+        "realTransparency": true,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "groundAnchor": 393,
+        "anchorRowCoverage": {
+          "nonzero": "1525/2172",
+          "alphaAtLeast128": "0/2172",
+          "alpha255": "0/2172"
+        },
+        "firstFullWidthRow": {
+          "nonzero": 396,
+          "alphaAtLeast128": 399,
+          "alphaAtLeast240": 402,
+          "alpha255": null
+        },
+        "bottomRowCoverage": {
+          "nonzero": "2172/2172",
+          "alphaAtLeast240": "2172/2172",
+          "alpha255": "0/2172",
+          "alphaRange": [
+            250,
+            254
+          ]
+        },
+        "surfaceAndDepth": "failed: 677 transparent holes at locked row Y=393; dependable full-width terrain begins 9px low at alpha>=240",
+        "isolatedInspection": "passed visually, blocked technically by anchor/alpha geometry",
+        "nativeRepeatInspection": "passed visually",
+        "threeLayerCompositeInspection": "passed visually, blocked technically by anchor/alpha geometry",
+        "postGenerationDimensionChange": false,
+        "farPreservedExactHash": true,
+        "midPreservedExactHash": true,
+        "aboveAnchorResidue": {
+          "nonzeroPixels": 6162,
+          "alphaRangeForNonzero": [
+            1,
+            8
+          ],
+          "firstRowWithAnyAlpha": 118,
+          "lastRowWithAnyAlpha": 392
+        }
+      },
+      "recovery": {
+        "ref": "af02-landscape-output",
+        "commit": "2820a408e005e6889f7272dc0cfd0f44f6349483",
+        "contentHash": "d6e58e046623d036f592ee2b7a0aed13670481cd453f71f1d3d8117a8f607202"
+      },
+      "attemptDetails": [
+        {
+          "attempt": 1,
+          "mode": "built-in imagegen generation",
+          "result": "rejected",
+          "dimensions": [
+            2172,
+            724
+          ],
+          "residual": "first full-width nonzero row Y=404; alpha>=128 Y=409; locked row393 only 95/2172 tiny-alpha pixels"
+        },
+        {
+          "attempt": 2,
+          "mode": "built-in imagegen targeted edit",
+          "result": "best candidate; failed technical QA",
+          "dimensions": [
+            2172,
+            724
+          ],
+          "residual": "first full-width nonzero row Y=396; alpha>=128 Y=399; alpha>=240 Y=402; locked row393 has 1525/2172 nonzero but zero pixels >=128"
+        }
+      ],
+      "qaEvidence": {
+        "attempt1": "tmp/af02/ground-attempt1.png",
+        "attempt2": "tmp/af02/ground-attempt2.png",
+        "repeat": "tmp/af02/ground-attempt2-repeat.png",
+        "composite": "tmp/af02/af02-source-composite-ground-attempt2.png",
+        "centerComposite": "tmp/af02/af02-ground-attempt2-center.png"
+      },
+      "proposedAuthorizedCleanup": {
+        "approvalRequired": true,
+        "reason": "Current focused profile authorizes horizontal-edge-only repeat repair, not deterministic vertical alignment or alpha normalization.",
+        "exactPixelOperation": [
+          "Set destination rows Y=0..392 to transparent RGBA (0,0,0,0), removing all tiny-alpha residue above the locked surface.",
+          "For every X=0..2171, copy original candidate rows Y=399..723 to destination rows Y=393..717 respectively (exact 6px upward translation; no interpolation or scaling).",
+          "For every X=0..2171, fill destination rows Y=718..723 by copying that X pixel from original row Y=723 (6 vacated bottom overscan rows).",
+          "For every X=0..2171 and Y=393..723, preserve resulting RGB and set alpha to 255, yielding continuous solid terrain ownership at and below the locked anchor."
+        ],
+        "invariants": "Keep canvas 2172x724; no horizontal movement, resizing, interpolation, new imagery, landmark changes, or FAR/MID byte changes."
+      }
+    },
+    "OBJECT_ATLAS": {
+      "runId": "af02-20260919204119-fb761a",
+      "jobId": "AF02:OBJECT_ATLAS",
+      "path": "assets/worlds/africa/AF02_OBJECT_ATLAS.png",
+      "sha256": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+      "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+      "baseHash": null,
+      "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+      "referenceHashes": {
+        "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+        "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+        "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+        "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356",
+        "assets/references/africa/af02/camelthorn.jpg": "06927857a3351493caeb0358410c22d885847e67d7c40977fb7c5407b141da25",
+        "assets/worlds/africa/AF01_OBJECT_ATLAS.png": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569"
+      },
+      "attempts": 8,
+      "recovery": {
+        "ref": "af02-hazard-output",
+        "commit": "454d1e6d10190adf8883c0985a8e57b0b54a9af8",
+        "contentHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816"
+      },
+      "productionStatus": "generated-but-technical-qa-failed",
+      "technicalChecks": {
+        "dimensions": "passed: 2172x724",
+        "mode": "passed: RGBA",
+        "nonInterlaced": "passed",
+        "hazardAtlasQa": "failed",
+        "error": "Cell 0 visible contact 614 differs from source foot 620; cell 1 also has any-alpha bounds extending to local x=25 and y=698, violating the 32px gutter/contact contract.",
+        "assetReady": false
+      },
+      "visualInspection": {
+        "status": "content-direction-passed-technical-placement-failed",
+        "GROUND1": "Low pale curled polygonal crust plates with open cracks; visually distinct from boulder/mound/block.",
+        "GROUND2": "Sparse upright open-Y dead camelthorn snag; no horizontal log, root ball, boulder base, or foliage.",
+        "style": "Crisp warm pixel art consistent with inspected AF01/NA01 references; genuine transparent backdrop, but faint stray alpha remains."
+      },
+      "geometry": {
+        "canvas": [
+          2172,
+          724
+        ],
+        "cellSize": [
+          1086,
+          724
+        ],
+        "sourceContactLocal": [
+          543,
+          620
+        ],
+        "GROUND1": {
+          "sourceRegion": [
+            0,
+            0,
+            1086,
+            724
+          ],
+          "anyAlphaBoundsLocal": [
+            331,
+            329,
+            901,
+            614
+          ],
+          "substantiveAlphaGt1BoundsLocal": [
+            345,
+            462,
+            900,
+            613
+          ],
+          "anchorLocal": [
+            543,
+            620
+          ],
+          "sourceFacing": "none",
+          "intendedGameplayFacing": "none",
+          "flipX": false,
+          "provisionalScale": 0.3,
+          "provisionalRenderedSubstantiveBoundsPx": [
+            78.0,
+            21.2
+          ]
+        },
+        "GROUND2": {
+          "sourceRegion": [
+            1086,
+            0,
+            1086,
+            724
+          ],
+          "anyAlphaBoundsLocal": [
+            25,
+            138,
+            716,
+            698
+          ],
+          "substantiveAlphaGt1BoundsLocal": [
+            319,
+            141,
+            702,
+            628
+          ],
+          "anchorLocal": [
+            543,
+            620
+          ],
+          "sourceFacing": "none",
+          "intendedGameplayFacing": "none",
+          "flipX": false,
+          "provisionalScale": 0.28,
+          "provisionalRenderedSubstantiveBoundsPx": [
+            50.3,
+            63.9
+          ]
+        },
+        "runtimeNormalization": "source pixels * (960/2048) * def.scale; provisional sizes use factor 0.46875 and substantive-alpha bounds.",
+        "characterReferencePx": {
+          "Claude": [
+            57.535,
+            67.34
+          ],
+          "Constance": [
+            56.564,
+            67.304
+          ]
+        }
+      },
+      "generation": {
+        "tool": "built-in imagegen",
+        "elapsedWallSeconds": 390,
+        "repeatedSetupCount": 0,
+        "reportedUsage": null,
+        "finalPromptSummary": "Exact 2172x724 two-cell RGBA atlas; binary alpha; low curled clay crust left and sparse upright Y snag right; no alpha at/below y620; >=32px gutters; crisp established pixel art; no scenery, labels, divider, or extra objects.",
+        "bestExactSource": "/workspace/scratch/266dbadd6235/generated_images/exec-25394ac5-7c05-43cb-b61c-adc077e33927.png",
+        "attemptResults": [
+          "2170x725 initial generation",
+          "2171x724 edit",
+          "2172x724 exact geometry but contact y690",
+          "2172x724 anchor edit with gutter/contact defects",
+          "2171x724 resize/reposition edit",
+          "2172x724 best visual candidate retained; alpha/contact defects remain",
+          "2171x724 alpha cleanup edit",
+          "2171x724 binary-alpha rebuild"
+        ]
+      },
+      "evidence": {
+        "referencePixelsInspected": [
+          "assets/references/africa/af02/clay_pan.jpg",
+          "assets/references/africa/af02/camelthorn.jpg",
+          "assets/worlds/africa/AF01_OBJECT_ATLAS.png",
+          "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png",
+          "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png"
+        ],
+        "qaCommand": "python3 scripts/hazard-atlas-qa.py assets/worlds/africa/AF02_OBJECT_ATLAS.png",
+        "qaExit": 1
+      }
+    },
+    "FLYING": {
+      "runId": "af02-20260919204119-fb761a",
+      "jobId": "AF02:FLYING",
+      "path": "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png",
+      "sha256": "fcb97b5d07bc46f37b514fdd7c83d976fd447333ddbda70bd0b9f7a941823ad3",
+      "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+      "baseHash": null,
+      "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+      "referenceHashes": {
+        "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+        "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+        "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+        "assets/references/africa/af02/sandgrouse_flight.jpg": "16151a3df305578080e8333feed0f3763d1e1e80576334697bf06d2974a97a21",
+        "assets/worlds/africa/AF01_HAZARD_ROLLER.png": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b",
+        "assets/characters/G1A_RUN_CYCLE_ATLAS.png": "b7cb1ca55534f888e4802c7c55892fc4ebfafc5d601ec5e7926d18ffa4322037"
+      },
+      "attempts": 2,
+      "recovery": {
+        "ref": "af02-hazard-output",
+        "commit": "044ab72ecd44cbb4a008777be30625e73621f419",
+        "contentHash": "fcb97b5d07bc46f37b514fdd7c83d976fd447333ddbda70bd0b9f7a941823ad3"
+      },
+      "productionStatus": "generated-but-technical-qa-failed",
+      "technicalChecks": {
+        "dimensions": "passed: 2172x724",
+        "mode": "passed: RGBA",
+        "nonInterlaced": "passed",
+        "distinctFrameBytes": "passed: four unique RGBA frame hashes",
+        "bodyAnchorPixels": "passed: alpha 252-253 at local (271,362) in all four frames",
+        "hazardAtlasQa": "failed",
+        "error": "Faint alpha=1 generation residue enters the 32px cell gutters. Substantive alpha>1 sprite bounds satisfy the gutters, but the validator intentionally uses any nonzero alpha.",
+        "assetReady": false
+      },
+      "visualInspection": {
+        "status": "content-direction-passed-technical-alpha-failed",
+        "anatomy": "Compact right-facing Namaqua sandgrouse identity is stable across all four frames: warm sandy barred plumage, small head, short bill, oval torso and pointed tail.",
+        "poses": "Four distinct readable poses follow the requested loop: upstroke apex, descending wings forward, downstroke apex, rising wings swept back.",
+        "style": "Crisp warm pixel art is compatible with the inspected AF01 roller and run-cycle references.",
+        "scale": "Provisional 0.22 scale keeps the solid body substantially smaller than either player character; runtime integration/calibration was not performed."
+      },
+      "geometry": {
+        "canvas": [
+          2172,
+          724
+        ],
+        "cellSize": [
+          543,
+          724
+        ],
+        "sourceAnchorLocal": [
+          271,
+          362
+        ],
+        "sourceRegions": [
+          [
+            0,
+            0,
+            543,
+            724
+          ],
+          [
+            543,
+            0,
+            543,
+            724
+          ],
+          [
+            1086,
+            0,
+            543,
+            724
+          ],
+          [
+            1629,
+            0,
+            543,
+            724
+          ]
+        ],
+        "frameOrder": [
+          "upstroke apex",
+          "descending wings forward",
+          "downstroke apex",
+          "rising wings swept back"
+        ],
+        "fps": 8,
+        "sourceFacing": "right",
+        "intendedGameplayFacing": "left",
+        "flipX": true,
+        "provisionalScale": 0.22,
+        "provisionalBodyBoundsLocal": {
+          "x": 178,
+          "y": 309,
+          "w": 270,
+          "h": 147,
+          "relativeToAnchor": {
+            "x": -93,
+            "y": -53
+          }
+        },
+        "provisionalRenderedBodyBoundsPx": [
+          27.84,
+          15.16
+        ],
+        "frameCropsFromAlphaGt1": [
+          {
+            "l": 71,
+            "r": 96,
+            "t": 143,
+            "b": 268
+          },
+          {
+            "l": 62,
+            "r": 97,
+            "t": 158,
+            "b": 268
+          },
+          {
+            "l": 55,
+            "r": 103,
+            "t": 323,
+            "b": 121
+          },
+          {
+            "l": 95,
+            "r": 56,
+            "t": 181,
+            "b": 267
+          }
+        ],
+        "alphaGt1BoundsLocal": [
+          [
+            71,
+            143,
+            447,
+            456
+          ],
+          [
+            62,
+            158,
+            446,
+            456
+          ],
+          [
+            55,
+            323,
+            440,
+            603
+          ],
+          [
+            95,
+            181,
+            487,
+            457
+          ]
+        ],
+        "anyAlphaBoundsLocal": [
+          [
+            70,
+            21,
+            543,
+            577
+          ],
+          [
+            53,
+            23,
+            503,
+            666
+          ],
+          [
+            15,
+            248,
+            533,
+            668
+          ],
+          [
+            13,
+            71,
+            487,
+            603
+          ]
+        ],
+        "alpha1ResidueCounts": [
+          3131,
+          2689,
+          2428,
+          2624
+        ],
+        "runtimeNormalization": "source pixels * (960/2048) * def.scale; provisional rendered body size uses scale 0.22.",
+        "provisionalRenderedAlphaGt1BoundsPx": [
+          [
+            38.78,
+            32.28
+          ],
+          [
+            39.6,
+            30.73
+          ],
+          [
+            39.7,
+            28.88
+          ],
+          [
+            40.43,
+            28.46
+          ]
+        ],
+        "characterReferencePx": {
+          "Claude": [
+            57.535,
+            67.34
+          ],
+          "Constance": [
+            56.564,
+            67.304
+          ]
+        }
+      },
+      "generation": {
+        "tool": "built-in imagegen",
+        "elapsedWallSeconds": 61,
+        "repeatedSetupCount": 0,
+        "reportedUsage": null,
+        "finalPromptSummary": "Exact 2172x724 four-cell RGBA atlas; fixed body anchor 271,362; right-facing compact Namaqua sandgrouse; four distinct flight poses; crisp established pixel art; genuine transparency and >=32px cell gutters.",
+        "selectedExactSource": "/workspace/scratch/6eed48fe6006/generated_images/exec-982be403-a43a-4e0f-8165-7d95b3034bd3.png",
+        "attemptResults": [
+          "2172x724 exact visual candidate; alpha=1 residue enters cell gutters",
+          "targeted transparency cleanup preserved visual content but returned 2171x724 and retained alpha=1 residue; rejected"
+        ]
+      },
+      "evidence": {
+        "referencePixelsInspected": [
+          "assets/references/africa/af02/sandgrouse_flight.jpg",
+          "assets/worlds/africa/AF01_HAZARD_ROLLER.png",
+          "assets/characters/G1A_RUN_CYCLE_ATLAS.png"
+        ],
+        "qaCommand": "python3 scripts/hazard-atlas-qa.py assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png --flying",
+        "qaExit": 1,
+        "failedMessage": "Cell 0: content enters 32px gutter"
+      }
+    }
+  },
+  "authorization": "Explicit user yes to documented AF02-only cleanup",
+  "resultsDescription": "Pre-cleanup candidate and generation evidence; current final bytes are identified in cleanupAudit and the asset-ready handoff.",
+  "cleanupAudit": {
+    "AF02_GROUND_SOSSUSVLEI.png": {
+      "beforeSha256": "d6e58e046623d036f592ee2b7a0aed13670481cd453f71f1d3d8117a8f607202",
+      "afterSha256": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+      "size": [
+        2172,
+        724
+      ],
+      "authorizedBy": "User yes to documented cleanup in this conversation",
+      "substantiveRgbPreserved": true
+    },
+    "AF02_OBJECT_ATLAS.png": {
+      "beforeSha256": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+      "afterSha256": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+      "size": [
+        2172,
+        724
+      ],
+      "authorizedBy": "User yes to documented cleanup in this conversation",
+      "substantiveRgbPreserved": true
+    },
+    "AF02_HAZARD_SANDGROUSE.png": {
+      "beforeSha256": "fcb97b5d07bc46f37b514fdd7c83d976fd447333ddbda70bd0b9f7a941823ad3",
+      "afterSha256": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+      "size": [
+        2172,
+        724
+      ],
+      "authorizedBy": "User yes to documented cleanup in this conversation",
+      "substantiveRgbPreserved": true
+    }
+  },
+  "finalHandoff": "config/asset-handoffs/af02.json",
+  "checks": {
+    "technical": true,
+    "composition": true,
+    "animation": true,
+    "basicRendering": true
+  }
+}

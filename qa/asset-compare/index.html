@@ -1,0 +1,437 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LAB25Q Asset Verification</title><style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0d130f;color:#f3ecdf;font:14px ui-monospace,SFMono-Regular,Menlo,monospace}.top{position:sticky;top:0;z-index:10;background:#071827ee;border-bottom:1px solid #d6ad59;padding:14px 18px}.top h1{font-size:18px;margin:0 0 6px}.top p{margin:0;color:#cfc9bd}.filters{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}button{background:#111912;color:#f3ecdf;border:1px solid #d6ad59;padding:7px 10px}.wrap{max-width:1500px;margin:auto;padding:14px}.card{border:1px solid #665936;background:#111713;margin:0 0 16px}.head{display:flex;justify-content:space-between;gap:12px;padding:9px 12px;background:#071827;border-bottom:1px solid #665936}.head span{font-size:11px;color:#ffd75c}.compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#665936}.pane{background:#101510;padding:10px;min-width:0}.pane h3{margin:0;font-size:11px;color:#ffd75c}.geom{font-size:11px;color:#aaa49c;margin:3px 0 8px}.checker{height:360px;display:flex;align-items:center;justify-content:center;overflow:auto;background-color:#202820;background-image:linear-gradient(45deg,#303830 25%,transparent 25%),linear-gradient(-45deg,#303830 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#303830 75%),linear-gradient(-45deg,transparent 75%,#303830 75%);background-size:24px 24px;background-position:0 0,0 12px,12px -12px,-12px 0}.checker img{max-width:100%;max-height:100%;object-fit:contain;image-rendering:pixelated}.missing{color:#ffb4a8;font-weight:bold}code{display:block;white-space:normal;overflow-wrap:anywhere;color:#bbb;margin-top:7px;font-size:11px}.verify{padding:10px 12px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.verify textarea{flex:1;min-width:240px;background:#0d130f;color:#fff;border:1px solid #665936;padding:7px;height:36px}.hidden{display:none}@media(max-width:800px){.compare{grid-template-columns:1fr}.checker{height:260px}.head{flex-direction:column}}
+</style></head><body><div class="top"><h1>LAB25Q Embedded ↔ Current Asset Verification</h1><p>Left is the exact image extracted from LAB25Q. Right is the current named file in /assets. Use this page to verify semantic identity visually. IMG-48 is intentionally marked dead/shadowed.</p><div class="filters"><button onclick="f('all')">All 62</button><button onclick="f('changed')">Geometry changed</button><button onclick="f('same')">Same geometry</button><button onclick="f('uncertain')">Unresolved</button><button onclick="f('dead')">Dead/shadowed</button></div></div><main class="wrap"><section class="card" id="img-00" data-status="same">
+    <div class="head"><div><b>IMG-00</b> · HUD heart</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1774×887</div><div class="checker"><img src="embedded/IMG-00.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1774×887</div><div class="checker"><img src="../../assets/hud/UI_LIFE_HEART.png" alt="current"></div><code>assets/hud/UI_LIFE_HEART.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v0" value="same"> Same image / correct update</label><label><input type="radio" name="v0" value="different"> Not the same asset</label><label><input type="radio" name="v0" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-01" data-status="same">
+    <div class="head"><div><b>IMG-01</b> · HUD progress character</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1774×887</div><div class="checker"><img src="embedded/IMG-01.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1774×887</div><div class="checker"><img src="../../assets/hud/UI_STAGE_PROGRESS_CLAUDE_CONSTANCE.png" alt="current"></div><code>assets/hud/UI_STAGE_PROGRESS_CLAUDE_CONSTANCE.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v1" value="same"> Same image / correct update</label><label><input type="radio" name="v1" value="different"> Not the same asset</label><label><input type="radio" name="v1" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-02" data-status="changed">
+    <div class="head"><div><b>IMG-02</b> · HUD progress path</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×258</div><div class="checker"><img src="embedded/IMG-02.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/hud/UI_STAGE_PROGRESS_PATH.png" alt="current"></div><code>assets/hud/UI_STAGE_PROGRESS_PATH.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v2" value="same"> Same image / correct update</label><label><input type="radio" name="v2" value="different"> Not the same asset</label><label><input type="radio" name="v2" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-03" data-status="same">
+    <div class="head"><div><b>IMG-03</b> · EU01 FAR</div><span>A — direct geometry compatible / artwork bytes differ</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-03.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2048×682</div><div class="checker"><img src="../../assets/worlds/europe/EU01_BG_DISTANT_GREECE.png" alt="current"></div><code>assets/worlds/europe/EU01_BG_DISTANT_GREECE.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v3" value="same"> Same image / correct update</label><label><input type="radio" name="v3" value="different"> Not the same asset</label><label><input type="radio" name="v3" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-04" data-status="same">
+    <div class="head"><div><b>IMG-04</b> · EU01 MID</div><span>A — direct geometry compatible / artwork bytes differ</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-04.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2048×682</div><div class="checker"><img src="../../assets/worlds/europe/EU01_BG_MID_GREECE.png" alt="current"></div><code>assets/worlds/europe/EU01_BG_MID_GREECE.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v4" value="same"> Same image / correct update</label><label><input type="radio" name="v4" value="different"> Not the same asset</label><label><input type="radio" name="v4" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-05" data-status="same">
+    <div class="head"><div><b>IMG-05</b> · EU01 GROUND</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-05.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2048×682</div><div class="checker"><img src="../../assets/worlds/europe/EU01_GROUND_GREECE.png" alt="current"></div><code>assets/worlds/europe/EU01_GROUND_GREECE.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v5" value="same"> Same image / correct update</label><label><input type="radio" name="v5" value="different"> Not the same asset</label><label><input type="radio" name="v5" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-06" data-status="same">
+    <div class="head"><div><b>IMG-06</b> · EU01 objects</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1774×887</div><div class="checker"><img src="embedded/IMG-06.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1774×887</div><div class="checker"><img src="../../assets/worlds/europe/EU01_OBJECT_ATLAS_CRATE.png" alt="current"></div><code>assets/worlds/europe/EU01_OBJECT_ATLAS_CRATE.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v6" value="same"> Same image / correct update</label><label><input type="radio" name="v6" value="different"> Not the same asset</label><label><input type="radio" name="v6" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-07" data-status="same">
+    <div class="head"><div><b>IMG-07</b> · EU01 barrel</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-07.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/europe/EU01_HAZARD_ROLLING_BARREL.png" alt="current"></div><code>assets/worlds/europe/EU01_HAZARD_ROLLING_BARREL.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v7" value="same"> Same image / correct update</label><label><input type="radio" name="v7" value="different"> Not the same asset</label><label><input type="radio" name="v7" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-08" data-status="same">
+    <div class="head"><div><b>IMG-08</b> · EU01 bird</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-08.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/europe/EU01_HAZARD_AEGEAN_GULLS.png" alt="current"></div><code>assets/worlds/europe/EU01_HAZARD_AEGEAN_GULLS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v8" value="same"> Same image / correct update</label><label><input type="radio" name="v8" value="different"> Not the same asset</label><label><input type="radio" name="v8" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-09" data-status="same">
+    <div class="head"><div><b>IMG-09</b> · EU02 FAR</div><span>A — direct geometry compatible / artwork bytes differ</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-09.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2048×682</div><div class="checker"><img src="../../assets/worlds/europe/EU02_BG_DISTANT_PARIS.png" alt="current"></div><code>assets/worlds/europe/EU02_BG_DISTANT_PARIS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v9" value="same"> Same image / correct update</label><label><input type="radio" name="v9" value="different"> Not the same asset</label><label><input type="radio" name="v9" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-10" data-status="same">
+    <div class="head"><div><b>IMG-10</b> · EU02 MID</div><span>A — direct geometry compatible / artwork bytes differ</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-10.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2048×682</div><div class="checker"><img src="../../assets/worlds/europe/EU02_BG_MID_PARIS.png" alt="current"></div><code>assets/worlds/europe/EU02_BG_MID_PARIS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v10" value="same"> Same image / correct update</label><label><input type="radio" name="v10" value="different"> Not the same asset</label><label><input type="radio" name="v10" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-11" data-status="same">
+    <div class="head"><div><b>IMG-11</b> · EU02 GROUND</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-11.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2048×682</div><div class="checker"><img src="../../assets/worlds/europe/EU02_GROUND_PARIS.png" alt="current"></div><code>assets/worlds/europe/EU02_GROUND_PARIS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v11" value="same"> Same image / correct update</label><label><input type="radio" name="v11" value="different"> Not the same asset</label><label><input type="radio" name="v11" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-12" data-status="same">
+    <div class="head"><div><b>IMG-12</b> · EU02 objects</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1536×1024</div><div class="checker"><img src="embedded/IMG-12.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1536×1024</div><div class="checker"><img src="../../assets/worlds/europe/EU02_OBJECT_ATLAS.png" alt="current"></div><code>assets/worlds/europe/EU02_OBJECT_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v12" value="same"> Same image / correct update</label><label><input type="radio" name="v12" value="different"> Not the same asset</label><label><input type="radio" name="v12" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-13" data-status="same">
+    <div class="head"><div><b>IMG-13</b> · EU02 bird</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-13.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/europe/EU02_HAZARD_SWALLOWS.png" alt="current"></div><code>assets/worlds/europe/EU02_HAZARD_SWALLOWS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v13" value="same"> Same image / correct update</label><label><input type="radio" name="v13" value="different"> Not the same asset</label><label><input type="radio" name="v13" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-14" data-status="same">
+    <div class="head"><div><b>IMG-14</b> · EU03 FAR</div><span>A — direct geometry compatible / artwork bytes differ</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-14.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2048×682</div><div class="checker"><img src="../../assets/worlds/europe/EU03_BG_DISTANT_BARCELONA.png" alt="current"></div><code>assets/worlds/europe/EU03_BG_DISTANT_BARCELONA.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v14" value="same"> Same image / correct update</label><label><input type="radio" name="v14" value="different"> Not the same asset</label><label><input type="radio" name="v14" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-15" data-status="changed">
+    <div class="head"><div><b>IMG-15</b> · EU03 MID</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-15.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/europe/EU03_BG_MID_BARCELONA.png" alt="current"></div><code>assets/worlds/europe/EU03_BG_MID_BARCELONA.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v15" value="same"> Same image / correct update</label><label><input type="radio" name="v15" value="different"> Not the same asset</label><label><input type="radio" name="v15" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-16" data-status="same">
+    <div class="head"><div><b>IMG-16</b> · EU03 GROUND</div><span>A — direct geometry compatible / artwork bytes differ</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-16.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2048×682</div><div class="checker"><img src="../../assets/worlds/europe/EU03_GROUND_BARCELONA.png" alt="current"></div><code>assets/worlds/europe/EU03_GROUND_BARCELONA.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v16" value="same"> Same image / correct update</label><label><input type="radio" name="v16" value="different"> Not the same asset</label><label><input type="radio" name="v16" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-17" data-status="same">
+    <div class="head"><div><b>IMG-17</b> · EU03 objects</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-17.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/europe/EU03_OBJECT_ATLAS.png" alt="current"></div><code>assets/worlds/europe/EU03_OBJECT_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v17" value="same"> Same image / correct update</label><label><input type="radio" name="v17" value="different"> Not the same asset</label><label><input type="radio" name="v17" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-18" data-status="same">
+    <div class="head"><div><b>IMG-18</b> · EU03 bird</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1774×887</div><div class="checker"><img src="embedded/IMG-18.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1774×887</div><div class="checker"><img src="../../assets/worlds/europe/EU03_HAZARD_BATS.png" alt="current"></div><code>assets/worlds/europe/EU03_HAZARD_BATS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v18" value="same"> Same image / correct update</label><label><input type="radio" name="v18" value="different"> Not the same asset</label><label><input type="radio" name="v18" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-19" data-status="same">
+    <div class="head"><div><b>IMG-19</b> · SA01 FAR</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-19.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/south-america/SA01_BG_DISTANT_AMAZON.png" alt="current"></div><code>assets/worlds/south-america/SA01_BG_DISTANT_AMAZON.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v19" value="same"> Same image / correct update</label><label><input type="radio" name="v19" value="different"> Not the same asset</label><label><input type="radio" name="v19" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-20" data-status="same">
+    <div class="head"><div><b>IMG-20</b> · SA01 MID</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2171×724</div><div class="checker"><img src="embedded/IMG-20.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2171×724</div><div class="checker"><img src="../../assets/worlds/south-america/SA01_BG_MID_AMAZON.png" alt="current"></div><code>assets/worlds/south-america/SA01_BG_MID_AMAZON.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v20" value="same"> Same image / correct update</label><label><input type="radio" name="v20" value="different"> Not the same asset</label><label><input type="radio" name="v20" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-21" data-status="same">
+    <div class="head"><div><b>IMG-21</b> · SA01 GROUND</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-21.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/south-america/SA01_GROUND_AMAZON.png" alt="current"></div><code>assets/worlds/south-america/SA01_GROUND_AMAZON.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v21" value="same"> Same image / correct update</label><label><input type="radio" name="v21" value="different"> Not the same asset</label><label><input type="radio" name="v21" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-22" data-status="same">
+    <div class="head"><div><b>IMG-22</b> · SA01 objects</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1774×887</div><div class="checker"><img src="embedded/IMG-22.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1774×887</div><div class="checker"><img src="../../assets/worlds/south-america/SA01_OBJECT_ATLAS.png" alt="current"></div><code>assets/worlds/south-america/SA01_OBJECT_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v22" value="same"> Same image / correct update</label><label><input type="radio" name="v22" value="different"> Not the same asset</label><label><input type="radio" name="v22" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-23" data-status="same">
+    <div class="head"><div><b>IMG-23</b> · SA01 bird</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-23.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/south-america/SA01_HAZARD_MACAWS.png" alt="current"></div><code>assets/worlds/south-america/SA01_HAZARD_MACAWS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v23" value="same"> Same image / correct update</label><label><input type="radio" name="v23" value="different"> Not the same asset</label><label><input type="radio" name="v23" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-24" data-status="same">
+    <div class="head"><div><b>IMG-24</b> · SA02 FAR</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2170×725</div><div class="checker"><img src="embedded/IMG-24.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2170×725</div><div class="checker"><img src="../../assets/worlds/south-america/SA02_BG_DISTANT_ANDES.png" alt="current"></div><code>assets/worlds/south-america/SA02_BG_DISTANT_ANDES.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v24" value="same"> Same image / correct update</label><label><input type="radio" name="v24" value="different"> Not the same asset</label><label><input type="radio" name="v24" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-25" data-status="changed">
+    <div class="head"><div><b>IMG-25</b> · SA02 MID</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-25.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/south-america/SA02_BG_MID_ANDES.png" alt="current"></div><code>assets/worlds/south-america/SA02_BG_MID_ANDES.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v25" value="same"> Same image / correct update</label><label><input type="radio" name="v25" value="different"> Not the same asset</label><label><input type="radio" name="v25" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-26" data-status="changed">
+    <div class="head"><div><b>IMG-26</b> · SA02 GROUND</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-26.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/south-america/SA02_GROUND_ANDES.png" alt="current"></div><code>assets/worlds/south-america/SA02_GROUND_ANDES.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v26" value="same"> Same image / correct update</label><label><input type="radio" name="v26" value="different"> Not the same asset</label><label><input type="radio" name="v26" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-27" data-status="same">
+    <div class="head"><div><b>IMG-27</b> · SA02 objects</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-27.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/south-america/SA02_OBJECT_ATLAS.png" alt="current"></div><code>assets/worlds/south-america/SA02_OBJECT_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v27" value="same"> Same image / correct update</label><label><input type="radio" name="v27" value="different"> Not the same asset</label><label><input type="radio" name="v27" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-28" data-status="same">
+    <div class="head"><div><b>IMG-28</b> · SA02 bird</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-28.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/south-america/SA02_HAZARD_ANDEAN_FLAMINGO.png" alt="current"></div><code>assets/worlds/south-america/SA02_HAZARD_ANDEAN_FLAMINGO.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v28" value="same"> Same image / correct update</label><label><input type="radio" name="v28" value="different"> Not the same asset</label><label><input type="radio" name="v28" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-29" data-status="same">
+    <div class="head"><div><b>IMG-29</b> · SA03 FAR</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2079×756</div><div class="checker"><img src="embedded/IMG-29.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2079×756</div><div class="checker"><img src="../../assets/worlds/south-america/SA03_BG_DISTANT_RIO.png" alt="current"></div><code>assets/worlds/south-america/SA03_BG_DISTANT_RIO.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v29" value="same"> Same image / correct update</label><label><input type="radio" name="v29" value="different"> Not the same asset</label><label><input type="radio" name="v29" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-30" data-status="changed">
+    <div class="head"><div><b>IMG-30</b> · SA03 MID</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×744</div><div class="checker"><img src="embedded/IMG-30.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2079×756</div><div class="checker"><img src="../../assets/worlds/south-america/SA03_BG_MID_RIO.png" alt="current"></div><code>assets/worlds/south-america/SA03_BG_MID_RIO.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v30" value="same"> Same image / correct update</label><label><input type="radio" name="v30" value="different"> Not the same asset</label><label><input type="radio" name="v30" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-31" data-status="same">
+    <div class="head"><div><b>IMG-31</b> · SA03 GROUND</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-31.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/south-america/SA03_GROUND_RIO.png" alt="current"></div><code>assets/worlds/south-america/SA03_GROUND_RIO.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v31" value="same"> Same image / correct update</label><label><input type="radio" name="v31" value="different"> Not the same asset</label><label><input type="radio" name="v31" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-32" data-status="same">
+    <div class="head"><div><b>IMG-32</b> · SA03 objects</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1774×887</div><div class="checker"><img src="embedded/IMG-32.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1774×887</div><div class="checker"><img src="../../assets/worlds/south-america/SA03_OBJECT_ATLAS.png" alt="current"></div><code>assets/worlds/south-america/SA03_OBJECT_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v32" value="same"> Same image / correct update</label><label><input type="radio" name="v32" value="different"> Not the same asset</label><label><input type="radio" name="v32" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-33" data-status="same">
+    <div class="head"><div><b>IMG-33</b> · SA03 bird</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2172×724</div><div class="checker"><img src="embedded/IMG-33.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/south-america/SA03_HAZARD_TROPICAL_PARAKEETS.png" alt="current"></div><code>assets/worlds/south-america/SA03_HAZARD_TROPICAL_PARAKEETS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v33" value="same"> Same image / correct update</label><label><input type="radio" name="v33" value="different"> Not the same asset</label><label><input type="radio" name="v33" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-34" data-status="same">
+    <div class="head"><div><b>IMG-34</b> · finish marker</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1211×1299</div><div class="checker"><img src="embedded/IMG-34.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1211×1299</div><div class="checker"><img src="../../assets/shared/NA_STAGE_FINISH_MARKER.png" alt="current"></div><code>assets/shared/NA_STAGE_FINISH_MARKER.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v34" value="same"> Same image / correct update</label><label><input type="radio" name="v34" value="different"> Not the same asset</label><label><input type="radio" name="v34" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-35" data-status="same">
+    <div class="head"><div><b>IMG-35</b> · NA01 hazards</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1774×887</div><div class="checker"><img src="embedded/IMG-35.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1774×887</div><div class="checker"><img src="../../assets/worlds/north-america/NA01_HAZARD_ATLAS.png" alt="current"></div><code>assets/worlds/north-america/NA01_HAZARD_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v35" value="same"> Same image / correct update</label><label><input type="radio" name="v35" value="different"> Not the same asset</label><label><input type="radio" name="v35" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-36" data-status="changed">
+    <div class="head"><div><b>IMG-36</b> · NA01 bird</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-36.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA01_HAZARD_VULTURE.png" alt="current"></div><code>assets/worlds/north-america/NA01_HAZARD_VULTURE.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v36" value="same"> Same image / correct update</label><label><input type="radio" name="v36" value="different"> Not the same asset</label><label><input type="radio" name="v36" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-37" data-status="same">
+    <div class="head"><div><b>IMG-37</b> · NA02 hazards</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1774×887</div><div class="checker"><img src="embedded/IMG-37.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1774×887</div><div class="checker"><img src="../../assets/worlds/north-america/NA02_HAZARD_ATLAS.png" alt="current"></div><code>assets/worlds/north-america/NA02_HAZARD_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v37" value="same"> Same image / correct update</label><label><input type="radio" name="v37" value="different"> Not the same asset</label><label><input type="radio" name="v37" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-38" data-status="changed">
+    <div class="head"><div><b>IMG-38</b> · NA02 bird</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-38.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA02_HAZARD_EAGLE.png" alt="current"></div><code>assets/worlds/north-america/NA02_HAZARD_EAGLE.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v38" value="same"> Same image / correct update</label><label><input type="radio" name="v38" value="different"> Not the same asset</label><label><input type="radio" name="v38" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-39" data-status="same">
+    <div class="head"><div><b>IMG-39</b> · NA03 hazards</div><span>A — direct geometry compatible / exact bytes</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1774×887</div><div class="checker"><img src="embedded/IMG-39.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1774×887</div><div class="checker"><img src="../../assets/worlds/north-america/NA03_HAZARD_ATLAS.png" alt="current"></div><code>assets/worlds/north-america/NA03_HAZARD_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v39" value="same"> Same image / correct update</label><label><input type="radio" name="v39" value="different"> Not the same asset</label><label><input type="radio" name="v39" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-40" data-status="changed">
+    <div class="head"><div><b>IMG-40</b> · NA03 bird</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-40.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA03_HAZARD_PIGEONS.png" alt="current"></div><code>assets/worlds/north-america/NA03_HAZARD_PIGEONS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v40" value="same"> Same image / correct update</label><label><input type="radio" name="v40" value="different"> Not the same asset</label><label><input type="radio" name="v40" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-41" data-status="changed">
+    <div class="head"><div><b>IMG-41</b> · Run</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2800×1400</div><div class="checker"><img src="embedded/IMG-41.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1536×1024</div><div class="checker"><img src="../../assets/characters/G1A_RUN_CYCLE_ATLAS.png" alt="current"></div><code>assets/characters/G1A_RUN_CYCLE_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v41" value="same"> Same image / correct update</label><label><input type="radio" name="v41" value="different"> Not the same asset</label><label><input type="radio" name="v41" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-42" data-status="changed">
+    <div class="head"><div><b>IMG-42</b> · Idle</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1400×1400</div><div class="checker"><img src="embedded/IMG-42.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1536×1024</div><div class="checker"><img src="../../assets/characters/G1B_IDLE_ATLAS.png" alt="current"></div><code>assets/characters/G1B_IDLE_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v42" value="same"> Same image / correct update</label><label><input type="radio" name="v42" value="different"> Not the same asset</label><label><input type="radio" name="v42" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-43" data-status="changed">
+    <div class="head"><div><b>IMG-43</b> · Jump</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2100×1400</div><div class="checker"><img src="embedded/IMG-43.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1536×1024</div><div class="checker"><img src="../../assets/characters/G1C_JUMP_ATLAS.png" alt="current"></div><code>assets/characters/G1C_JUMP_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v43" value="same"> Same image / correct update</label><label><input type="radio" name="v43" value="different"> Not the same asset</label><label><input type="radio" name="v43" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-44" data-status="changed">
+    <div class="head"><div><b>IMG-44</b> · Slide</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">1400×1400</div><div class="checker"><img src="embedded/IMG-44.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1536×1024</div><div class="checker"><img src="../../assets/characters/G1D_SLIDE_ATLAS.png" alt="current"></div><code>assets/characters/G1D_SLIDE_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v44" value="same"> Same image / correct update</label><label><input type="radio" name="v44" value="different"> Not the same asset</label><label><input type="radio" name="v44" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-45" data-status="changed">
+    <div class="head"><div><b>IMG-45</b> · Hit</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2100×1400</div><div class="checker"><img src="embedded/IMG-45.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1536×1024</div><div class="checker"><img src="../../assets/characters/G1E_HIT_ATLAS.png" alt="current"></div><code>assets/characters/G1E_HIT_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v45" value="same"> Same image / correct update</label><label><input type="radio" name="v45" value="different"> Not the same asset</label><label><input type="radio" name="v45" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-46" data-status="changed">
+    <div class="head"><div><b>IMG-46</b> · Celebrate</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2800×1400</div><div class="checker"><img src="embedded/IMG-46.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1536×1024</div><div class="checker"><img src="../../assets/characters/G1F_CELEBRATE_ATLAS.png" alt="current"></div><code>assets/characters/G1F_CELEBRATE_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v46" value="same"> Same image / correct update</label><label><input type="radio" name="v46" value="different"> Not the same asset</label><label><input type="radio" name="v46" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-47" data-status="changed">
+    <div class="head"><div><b>IMG-47</b> · stun stars</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">960×300</div><div class="checker"><img src="embedded/IMG-47.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">1536×1024</div><div class="checker"><img src="../../assets/characters/FX_STUN_STARS_ATLAS.png" alt="current"></div><code>assets/characters/FX_STUN_STARS_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v47" value="same"> Same image / correct update</label><label><input type="radio" name="v47" value="different"> Not the same asset</label><label><input type="radio" name="v47" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-48" data-status="dead">
+    <div class="head"><div><b>IMG-48</b> · shadowed duplicate `far` value</div><span>C — shadowed/dead duplicate property; no runtime substitution</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">900×450</div><div class="checker"><img src="embedded/IMG-48.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">—×—</div><div class="checker"><div class="missing">NO CURRENT NAMED MATCH</div></div><code>—</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v48" value="same"> Same image / correct update</label><label><input type="radio" name="v48" value="different"> Not the same asset</label><label><input type="radio" name="v48" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-49" data-status="changed">
+    <div class="head"><div><b>IMG-49</b> · NA01 MID</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-49.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA01_BG_MID_DESERT.png" alt="current"></div><code>assets/worlds/north-america/NA01_BG_MID_DESERT.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v49" value="same"> Same image / correct update</label><label><input type="radio" name="v49" value="different"> Not the same asset</label><label><input type="radio" name="v49" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-50" data-status="changed">
+    <div class="head"><div><b>IMG-50</b> · NA01 GROUND</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-50.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA01_GROUND_DESERT.png" alt="current"></div><code>assets/worlds/north-america/NA01_GROUND_DESERT.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v50" value="same"> Same image / correct update</label><label><input type="radio" name="v50" value="different"> Not the same asset</label><label><input type="radio" name="v50" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-51" data-status="changed">
+    <div class="head"><div><b>IMG-51</b> · NA02 FAR</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-51.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2171×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA02_BG_DISTANT_MOUNTAINS.png" alt="current"></div><code>assets/worlds/north-america/NA02_BG_DISTANT_MOUNTAINS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v51" value="same"> Same image / correct update</label><label><input type="radio" name="v51" value="different"> Not the same asset</label><label><input type="radio" name="v51" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-52" data-status="changed">
+    <div class="head"><div><b>IMG-52</b> · NA02 MID</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-52.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA02_BG_MID_PINES.png" alt="current"></div><code>assets/worlds/north-america/NA02_BG_MID_PINES.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v52" value="same"> Same image / correct update</label><label><input type="radio" name="v52" value="different"> Not the same asset</label><label><input type="radio" name="v52" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-53" data-status="changed">
+    <div class="head"><div><b>IMG-53</b> · NA02 GROUND</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-53.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA02_GROUND_TRAIL.png" alt="current"></div><code>assets/worlds/north-america/NA02_GROUND_TRAIL.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v53" value="same"> Same image / correct update</label><label><input type="radio" name="v53" value="different"> Not the same asset</label><label><input type="radio" name="v53" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-54" data-status="changed">
+    <div class="head"><div><b>IMG-54</b> · NA03 FAR</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-54.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA03_BG_DISTANT_NYC.png" alt="current"></div><code>assets/worlds/north-america/NA03_BG_DISTANT_NYC.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v54" value="same"> Same image / correct update</label><label><input type="radio" name="v54" value="different"> Not the same asset</label><label><input type="radio" name="v54" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-55" data-status="changed">
+    <div class="head"><div><b>IMG-55</b> · NA03 MID</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-55.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA03_BG_MID_CITY.png" alt="current"></div><code>assets/worlds/north-america/NA03_BG_MID_CITY.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v55" value="same"> Same image / correct update</label><label><input type="radio" name="v55" value="different"> Not the same asset</label><label><input type="radio" name="v55" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-56" data-status="changed">
+    <div class="head"><div><b>IMG-56</b> · NA03 GROUND</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-56.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA03_GROUND_CITY.png" alt="current"></div><code>assets/worlds/north-america/NA03_GROUND_CITY.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v56" value="same"> Same image / correct update</label><label><input type="radio" name="v56" value="different"> Not the same asset</label><label><input type="radio" name="v56" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-57" data-status="changed">
+    <div class="head"><div><b>IMG-57</b> · NA01 FAR (live final `far` property)</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-57.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/worlds/north-america/NA01_BG_DISTANT_MESAS.png" alt="current"></div><code>assets/worlds/north-america/NA01_BG_DISTANT_MESAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v57" value="same"> Same image / correct update</label><label><input type="radio" name="v57" value="different"> Not the same asset</label><label><input type="radio" name="v57" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-58" data-status="changed">
+    <div class="head"><div><b>IMG-58</b> · clouds</div><span>B — geometry changed; integration metadata/review required</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-58.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">2172×724</div><div class="checker"><img src="../../assets/shared/NA_CLOUD_LAYER.png" alt="current"></div><code>assets/shared/NA_CLOUD_LAYER.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v58" value="same"> Same image / correct update</label><label><input type="radio" name="v58" value="different"> Not the same asset</label><label><input type="radio" name="v58" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-59" data-status="uncertain">
+    <div class="head"><div><b>IMG-59</b> · NA01 objects</div><span>C — named asset missing at expected semantic path</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-59.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">?×?</div><div class="checker"><div class="missing">NO CURRENT NAMED MATCH</div></div><code>assets/worlds/north-america/NA01_OBJECT_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v59" value="same"> Same image / correct update</label><label><input type="radio" name="v59" value="different"> Not the same asset</label><label><input type="radio" name="v59" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-60" data-status="uncertain">
+    <div class="head"><div><b>IMG-60</b> · NA02 objects</div><span>C — named asset missing at expected semantic path</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-60.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">?×?</div><div class="checker"><div class="missing">NO CURRENT NAMED MATCH</div></div><code>assets/worlds/north-america/NA02_OBJECT_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v60" value="same"> Same image / correct update</label><label><input type="radio" name="v60" value="different"> Not the same asset</label><label><input type="radio" name="v60" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section><section class="card" id="img-61" data-status="uncertain">
+    <div class="head"><div><b>IMG-61</b> · NA03 objects</div><span>C — named asset missing at expected semantic path</span></div>
+    <div class="compare">
+      <div class="pane"><h3>LAB25Q EMBEDDED</h3><div class="geom">2048×682</div><div class="checker"><img src="embedded/IMG-61.png" alt="embedded"></div></div>
+      <div class="pane"><h3>CURRENT UPLOADED FILE</h3><div class="geom">?×?</div><div class="checker"><div class="missing">NO CURRENT NAMED MATCH</div></div><code>assets/worlds/north-america/NA03_OBJECT_ATLAS.png</code></div>
+    </div>
+    <div class="verify"><label><input type="radio" name="v61" value="same"> Same image / correct update</label><label><input type="radio" name="v61" value="different"> Not the same asset</label><label><input type="radio" name="v61" value="unsure"> Unsure</label><textarea placeholder="Optional note"></textarea></div>
+  </section></main><script>function f(x){document.querySelectorAll('.card').forEach(c=>c.classList.toggle('hidden',x!='all'&&c.dataset.status!=x))}</script></body></html>

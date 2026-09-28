@@ -1,0 +1,381 @@
+{
+  "runId": "af01-20260919172919-679b96",
+  "jobId": "AF01:OBJECT_ATLAS",
+  "status": "blocked-no-passing-candidate",
+  "bestArtCandidate": "/workspace/scratch/b1988fd1efd9/generated_images/exec-c84aefb6-3d24-4dd2-86a3-0a4f893b1da0.png",
+  "originalStrongestCandidate": "/workspace/scratch/b1988fd1efd9/generated_images/exec-9567ea6a-0f9d-4563-b05b-ef7734bd1e3a.png",
+  "reason": "Built-in imagegen did not satisfy strict any-alpha contact without prohibited deterministic pixel edits.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "mode": "fresh",
+      "started": "2026-09-19T17:30:58.773Z",
+      "finished": "2026-09-19T17:31:37.382Z",
+      "path": "/workspace/scratch/b1988fd1efd9/generated_images/exec-9567ea6a-0f9d-4563-b05b-ef7734bd1e3a.png",
+      "prompt": "Exact 2172x724 RGBA two-cell atlas; mound left, low right-facing crested porcupine right; exact contact Y620; >=32px gutters; genuine transparency; approved pixel-art style; no scenery, shadows, labels, or background.",
+      "dimensions": {
+        "width": 2172,
+        "height": 724,
+        "channels": 4
+      },
+      "cells": [
+        {
+          "cell": 0,
+          "anyAlpha": {
+            "minX": 266,
+            "minY": 36,
+            "maxX": 993,
+            "maxY": 688,
+            "pixels": 170687,
+            "contactDelta": 68
+          },
+          "substantiveAlpha": {
+            "minX": 313,
+            "minY": 43,
+            "maxX": 852,
+            "maxY": 681,
+            "pixels": 165231,
+            "contactDelta": 61
+          }
+        },
+        {
+          "cell": 1,
+          "anyAlpha": {
+            "minX": 91,
+            "minY": 174,
+            "maxX": 1049,
+            "maxY": 689,
+            "pixels": 228525,
+            "contactDelta": 69
+          },
+          "substantiveAlpha": {
+            "minX": 170,
+            "minY": 252,
+            "maxX": 914,
+            "maxY": 681,
+            "pixels": 205058,
+            "contactDelta": 61
+          }
+        }
+      ]
+    },
+    {
+      "attempt": 2,
+      "mode": "edit",
+      "started": "2026-09-19T17:32:36.039Z",
+      "finished": "2026-09-19T17:33:07.219Z",
+      "path": "/workspace/scratch/b1988fd1efd9/generated_images/exec-90b226a0-bb1e-40b5-8601-e3fbc0e77c2c.png",
+      "prompt": "Correct only vertical placement of attempt1: move alpha bottoms Y688/Y689 to Y620; preserve exact canvas, silhouettes, scale, horizontal positions, transparency, gutters, and exclusions.",
+      "dimensions": {
+        "width": 2171,
+        "height": 724,
+        "channels": 4
+      },
+      "cells": [
+        {
+          "cell": 0,
+          "anyAlpha": {
+            "minX": 89,
+            "minY": 34,
+            "maxX": 1050,
+            "maxY": 685,
+            "pixels": 164637,
+            "contactDelta": 65
+          },
+          "substantiveAlpha": {
+            "minX": 317,
+            "minY": 38,
+            "maxX": 851,
+            "maxY": 656,
+            "pixels": 159174,
+            "contactDelta": 36
+          }
+        },
+        {
+          "cell": 1,
+          "anyAlpha": {
+            "minX": 23,
+            "minY": 192,
+            "maxX": 1054,
+            "maxY": 699,
+            "pixels": 218583,
+            "contactDelta": 79
+          },
+          "substantiveAlpha": {
+            "minX": 174,
+            "minY": 240,
+            "maxX": 913,
+            "maxY": 657,
+            "pixels": 205910,
+            "contactDelta": 37
+          }
+        }
+      ]
+    },
+    {
+      "attempt": 3,
+      "mode": "fresh",
+      "started": "2026-09-19T17:33:37.088Z",
+      "finished": "2026-09-19T17:34:10.044Z",
+      "path": "/workspace/scratch/b1988fd1efd9/generated_images/exec-ff2c3f4e-324a-464d-aaaf-52e8038dce27.png",
+      "prompt": "Exact atlas; rows621-723 entirely transparent; lowest alpha Y620; mound and porcupine; >=32px gutters; crisp approved pixel art; no scenery, ground, shadows, labels, or background.",
+      "dimensions": {
+        "width": 2172,
+        "height": 724,
+        "channels": 4
+      },
+      "cells": [
+        {
+          "cell": 0,
+          "anyAlpha": {
+            "minX": 162,
+            "minY": 56,
+            "maxX": 958,
+            "maxY": 685,
+            "pixels": 177984,
+            "contactDelta": 65
+          },
+          "substantiveAlpha": {
+            "minX": 298,
+            "minY": 58,
+            "maxX": 842,
+            "maxY": 679,
+            "pixels": 172128,
+            "contactDelta": 59
+          }
+        },
+        {
+          "cell": 1,
+          "anyAlpha": {
+            "minX": 23,
+            "minY": 224,
+            "maxX": 985,
+            "maxY": 699,
+            "pixels": 177806,
+            "contactDelta": 79
+          },
+          "substantiveAlpha": {
+            "minX": 147,
+            "minY": 326,
+            "maxX": 853,
+            "maxY": 682,
+            "pixels": 164763,
+            "contactDelta": 62
+          }
+        }
+      ]
+    },
+    {
+      "attempt": 4,
+      "mode": "fresh",
+      "started": "2026-09-19T17:34:40.721Z",
+      "finished": "2026-09-19T17:35:15.506Z",
+      "path": "/workspace/scratch/b1988fd1efd9/generated_images/exec-965b4ffb-44cb-4e38-ad40-a0a536580884.png",
+      "prompt": "Exact atlas; both sprites visibly above bottom with one-sixth-height transparent band; alpha bottom Y620; mound left; centered right-facing porcupine right with >=48px horizontal gutters; exclusions unchanged.",
+      "dimensions": {
+        "width": 2172,
+        "height": 724,
+        "channels": 4
+      },
+      "cells": [
+        {
+          "cell": 0,
+          "anyAlpha": {
+            "minX": 41,
+            "minY": 36,
+            "maxX": 1043,
+            "maxY": 691,
+            "pixels": 128728,
+            "contactDelta": 71
+          },
+          "substantiveAlpha": {
+            "minX": 310,
+            "minY": 40,
+            "maxX": 779,
+            "maxY": 588,
+            "pixels": 119070,
+            "contactDelta": -32
+          }
+        },
+        {
+          "cell": 1,
+          "anyAlpha": {
+            "minX": 19,
+            "minY": 59,
+            "maxX": 1035,
+            "maxY": 723,
+            "pixels": 251584,
+            "contactDelta": 103
+          },
+          "substantiveAlpha": {
+            "minX": 128,
+            "minY": 183,
+            "maxX": 936,
+            "maxY": 588,
+            "pixels": 217253,
+            "contactDelta": -32
+          }
+        }
+      ]
+    },
+    {
+      "attempt": 5,
+      "mode": "edit",
+      "started": "2026-09-19T17:35:57.256Z",
+      "finished": "2026-09-19T17:36:21.564Z",
+      "path": "/workspace/scratch/b1988fd1efd9/generated_images/exec-c84aefb6-3d24-4dd2-86a3-0a4f893b1da0.png",
+      "prompt": "Preserve attempt4 artwork; move both sprites down 32px; remove stray/ghost/nearly-transparent alpha; alpha bottom Y620; rows621-723 clear; >=32px gutters; no redraw or added scenery.",
+      "dimensions": {
+        "width": 2172,
+        "height": 724,
+        "channels": 4
+      },
+      "cells": [
+        {
+          "cell": 0,
+          "anyAlpha": {
+            "minX": 312,
+            "minY": 112,
+            "maxX": 1053,
+            "maxY": 642,
+            "pixels": 110184,
+            "contactDelta": 22
+          },
+          "substantiveAlpha": {
+            "minX": 315,
+            "minY": 137,
+            "maxX": 775,
+            "maxY": 631,
+            "pixels": 105228,
+            "contactDelta": 11
+          }
+        },
+        {
+          "cell": 1,
+          "anyAlpha": {
+            "minX": 9,
+            "minY": 106,
+            "maxX": 1063,
+            "maxY": 701,
+            "pixels": 236262,
+            "contactDelta": 81
+          },
+          "substantiveAlpha": {
+            "minX": 143,
+            "minY": 224,
+            "maxX": 939,
+            "maxY": 631,
+            "pixels": 221010,
+            "contactDelta": 11
+          }
+        }
+      ]
+    },
+    {
+      "attempt": 6,
+      "mode": "edit",
+      "started": "2026-09-19T17:36:48.019Z",
+      "finished": "2026-09-19T17:37:14.685Z",
+      "path": "/workspace/scratch/b1988fd1efd9/generated_images/exec-8df530cf-27f7-4897-be20-e1b8d48f96d4.png",
+      "prompt": "Preserve attempt5 artwork; move both sprites up 11px; strict binary alpha 0/255; alpha bottom Y620; rows621-723 clear; >=32px gutters; no redraw or added scenery.",
+      "dimensions": {
+        "width": 2172,
+        "height": 724,
+        "channels": 4
+      },
+      "cells": [
+        {
+          "cell": 0,
+          "anyAlpha": {
+            "minX": 313,
+            "minY": 103,
+            "maxX": 989,
+            "maxY": 596,
+            "pixels": 107481,
+            "contactDelta": -24
+          },
+          "substantiveAlpha": {
+            "minX": 318,
+            "minY": 110,
+            "maxX": 774,
+            "maxY": 592,
+            "pixels": 103871,
+            "contactDelta": -28
+          }
+        },
+        {
+          "cell": 1,
+          "anyAlpha": {
+            "minX": 138,
+            "minY": 176,
+            "maxX": 966,
+            "maxY": 723,
+            "pixels": 240645,
+            "contactDelta": 103
+          },
+          "substantiveAlpha": {
+            "minX": 141,
+            "minY": 179,
+            "maxX": 941,
+            "maxY": 588,
+            "pixels": 228396,
+            "contactDelta": -32
+          }
+        }
+      ]
+    },
+    {
+      "attempt": 7,
+      "mode": "fresh",
+      "started": "2026-09-19T17:37:51.262Z",
+      "finished": "2026-09-19T17:38:49.003Z",
+      "path": "/workspace/scratch/b1988fd1efd9/generated_images/exec-950d1e0a-4443-41fb-9d77-ac59b17154f2.png",
+      "prompt": "Exact atlas with fully clean transparency; sprites above bottom with about90px clear lower margin and exact shared contact Y620; >=48px horizontal gutters; hard pixel edges; no residue, scenery, ground, shadows, labels, or background.",
+      "dimensions": {
+        "width": 2172,
+        "height": 724,
+        "channels": 4
+      },
+      "cells": [
+        {
+          "cell": 0,
+          "anyAlpha": {
+            "minX": 57,
+            "minY": 23,
+            "maxX": 1041,
+            "maxY": 676,
+            "pixels": 157488,
+            "contactDelta": 56
+          },
+          "substantiveAlpha": {
+            "minX": 292,
+            "minY": 67,
+            "maxX": 849,
+            "maxY": 667,
+            "pixels": 149649,
+            "contactDelta": 47
+          }
+        },
+        {
+          "cell": 1,
+          "anyAlpha": {
+            "minX": 89,
+            "minY": 68,
+            "maxX": 1063,
+            "maxY": 689,
+            "pixels": 226110,
+            "contactDelta": 69
+          },
+          "substantiveAlpha": {
+            "minX": 122,
+            "minY": 264,
+            "maxX": 884,
+            "maxY": 667,
+            "pixels": 203456,
+            "contactDelta": 47
+          }
+        }
+      ]
+    }
+  ]
+}

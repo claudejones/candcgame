@@ -1,0 +1,941 @@
+{
+  "schemaVersion": 2,
+  "active": null,
+  "approvedRevisions": {
+    "na01": {
+      "commit": "660aa55e35b378e613e07d8315074552620fcb61"
+    },
+    "na02": {
+      "commit": "660aa55e35b378e613e07d8315074552620fcb61"
+    },
+    "na03": {
+      "commit": "660aa55e35b378e613e07d8315074552620fcb61"
+    },
+    "sa01": {
+      "commit": "660aa55e35b378e613e07d8315074552620fcb61"
+    },
+    "sa02": {
+      "commit": "29176df173eeb78cd0436bfa98a13f22317bb07d",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/south-america/SA02_BG_DISTANT_ANDES.png": "f43e5e39890fe666d624952b5bc0164157125ccce79f8c2d4fa3aa2c94f7929c",
+        "assets/phase8-validation/south-america/SA02_BG_MID_ANDES.png": "1d06ee2e304cfb448f961d95335081376ca9c29f7ca9a749d3c3f2f341f96b86",
+        "assets/phase8-validation/south-america/SA02_GROUND_ANDES.png": "0994eb04706f0fc3c58386c4c087d460f8a722f58a1a245744e58be20f172908"
+      },
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35418116771",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35418134078"
+    },
+    "sa03": {
+      "commit": "c1fb39c909d68b87f200c354dc2c966f96a597c1",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/south-america/SA03_BG_DISTANT_RIO.png": "c838eea5a5f4f295651a3f5e9ee45091f5850d9c19f7a965508360b730650e02",
+        "assets/phase8-validation/south-america/SA03_BG_MID_RIO.png": "9c4e9ed444a920d2bea84d21c3d94912c929b111959fe9d5ae435110c0fb8111",
+        "assets/phase8-validation/south-america/SA03_GROUND_RIO.png": "206ed3d821345a852ff5fe3ea873d5c0306cf0f039bdcef07be57202adc9f77a"
+      },
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35420656908",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35420675177"
+    },
+    "eu01": {
+      "commit": "8556e5a0312e53cb3843f1b69c61a35e698383ef",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/europe/EU01_BG_DISTANT_GREECE.png": "213eceb527830fd1bc534654da698b166c264d5a4b49ff5080eaa5597720b694",
+        "assets/phase8-validation/europe/EU01_BG_MID_GREECE.png": "2ea736336cba3e6c3086a069dd5c031234f5ffd6f7bdfad5f4038cf2430bdfdd",
+        "assets/phase8-validation/europe/EU01_GROUND_GREECE.png": "83f9d5b0bc922bf01677736f05ad6307eabdb645540af4a10c74b15d4b4f7619"
+      },
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35422237867",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35422258302"
+    },
+    "eu02": {
+      "commit": "961d3911c756c9084114ab95255a4a06cfe489c0",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/europe/EU02_BG_DISTANT_PARIS.png": "dc76bae1b14faa2878143bad449df64d89a46c1e8c08fdc26447bce79bab39dc",
+        "assets/phase8-validation/europe/EU02_BG_MID_PARIS.png": "9919b9dd8da7fc468b3a3c8552cb58418e752f476844720f59be2bd145570b4e",
+        "assets/phase8-validation/europe/EU02_GROUND_PARIS.png": "52f12eebaee2665dbf418b845a732c05e843c2526e291a6454bc96abfc8ce6b5"
+      },
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35426252658",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35426273472"
+    },
+    "eu03": {
+      "commit": "94f94669bd2773b2ef9881c59e4adb710aeced60",
+      "approvedAt": "2026-09-19",
+      "files": {
+        "assets/phase8-validation/europe/EU03_BG_DISTANT_BARCELONA.png": "fb3ae5964f53f73d761872fad20dee8e98afc4696966f6879dd5ea2845757f09",
+        "assets/phase8-validation/europe/EU03_BG_MID_BARCELONA.png": "0fd183d36bc48ca61a5cabce90c7874e36332c22e4bbcc548a8b3e3fee15421c",
+        "assets/phase8-validation/europe/EU03_GROUND_BARCELONA.png": "45916a46209dd8b5ede78c6e1f41fc9af641ee5155177c7be18296fda37745ff"
+      },
+      "qa": "docs/phase8-qa/EU03_LANDSCAPE_QA.md",
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35428215455",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35428236249"
+    },
+    "af01": {
+      "commit": "a09b176dd8531bfb3425c9af534ff197a05a253e",
+      "approvedAt": "2026-09-19",
+      "scope": "full-stage",
+      "files": {
+        "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
+        "assets/worlds/africa/AF01_BG_MID_SERENGETI.png": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811",
+        "assets/worlds/africa/AF01_GROUND_SERENGETI.png": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527",
+        "assets/worlds/africa/AF01_OBJECT_ATLAS.png": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569",
+        "assets/worlds/africa/AF01_HAZARD_ROLLER.png": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b"
+      },
+      "releaseSpec": "236dfed3777ef28218aabbc7e960bb4edac90819f4ae9cf9d748acd608a5d3d2",
+      "landscapeSpec": "2475010add44afffd94be85fd1713fe2e9dbe5477dd0f4eae6f618c12091f9d2",
+      "qa": "docs/phase8-qa/AF01_STAGE_QA.md",
+      "productionCI": "https://github.com/claudejones/candcgame/actions/runs/35463228007",
+      "pagesDeployment": "https://github.com/claudejones/candcgame/actions/runs/35463262596"
+    }
+  },
+  "continentRegressions": {
+    "sa": {
+      "completedAt": "2026-09-19",
+      "reviewedCommit": "c1fb39c909d68b87f200c354dc2c966f96a597c1",
+      "stages": [
+        "sa01",
+        "sa02",
+        "sa03"
+      ],
+      "result": "passed",
+      "evidence": "docs/phase8-qa/SA03_LANDSCAPE_QA.md"
+    }
+  },
+  "revision": 74,
+  "runs": {
+    "af01-20260919172919-679b96": {
+      "runId": "af01-20260919172919-679b96",
+      "target": "AF01",
+      "command": "build stage AF01",
+      "operation": "produce-and-publish",
+      "status": "approved",
+      "baseCommit": "bafef40d77c7069e819c10689a5ac49efaa7b28b",
+      "specHash": "f6afd7f9943adce8945f6955ab40c0850ac7a31e5e65686cbb746b3eb6366da3",
+      "createdAt": "2026-09-19T17:29:19.211Z",
+      "maxWorkers": 2,
+      "nestedManagers": false,
+      "recoveryRefs": [
+        "work/af01-landscapes",
+        "work/assets/af01",
+        "refs/remotes/origin/work/assets/af01",
+        "refs/remotes/origin/modular-parity-validation",
+        "refs/remotes/origin/main"
+      ],
+      "jobs": {
+        "AF01:FAR": {
+          "id": "AF01:FAR",
+          "runId": "af01-20260919172919-679b96",
+          "selector": "FAR",
+          "owner": "landscape-worker",
+          "output": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
+          "baseHash": null,
+          "specHash": "f6afd7f9943adce8945f6955ab40c0850ac7a31e5e65686cbb746b3eb6366da3",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "6c2b2fe87d28deaaf96a9a3b6b760fd95b62252863bbe59ce9b299e1641b9593",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "32c399ce7c11235026ff4577d2b265ac76210805974d906926d9243171d9c9d5",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "a456e1312cca378e54d10a5347a7430c2c8003914a8cb69f6ef0453ce04e9186"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/references/africa/af01/landscape.jpg": "fd790e26f2006e0b0221b6ab48f76ec683de0bd402187b51b11f542a8f8bb8fc",
+            "assets/references/africa/af01/kopje.jpg": "00d9484077c980afcef6b15d7bc906258dfe6b479dc21208b8a4ed6718a43352"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF01_BG_MID_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_GROUND_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_OBJECT_ATLAS.png": null,
+            "assets/worlds/africa/AF01_HAZARD_ROLLER.png": null
+          },
+          "attempts": 2,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+            "contentHash": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T18:31:33.793Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T17:35:17.536Z",
+          "workerCommit": "d59688a642b5374651266d1c2fa223f64d9ffe79",
+          "workerPacketRef": {
+            "path": "asset-workflow-runs/af01-20260919172919-679b96/af01_far-b5522723f915ccdc.json",
+            "sha256": "b5522723f915ccdca6fb8faf9f23c6a2349fc6c03274a9079051ade8a662b9f0"
+          }
+        },
+        "AF01:MID": {
+          "id": "AF01:MID",
+          "runId": "af01-20260919172919-679b96",
+          "selector": "MID",
+          "owner": "landscape-worker",
+          "output": "assets/worlds/africa/AF01_BG_MID_SERENGETI.png",
+          "baseHash": null,
+          "specHash": "f6afd7f9943adce8945f6955ab40c0850ac7a31e5e65686cbb746b3eb6366da3",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "6c2b2fe87d28deaaf96a9a3b6b760fd95b62252863bbe59ce9b299e1641b9593",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "32c399ce7c11235026ff4577d2b265ac76210805974d906926d9243171d9c9d5",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "a456e1312cca378e54d10a5347a7430c2c8003914a8cb69f6ef0453ce04e9186"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/references/africa/af01/landscape.jpg": "fd790e26f2006e0b0221b6ab48f76ec683de0bd402187b51b11f542a8f8bb8fc",
+            "assets/references/africa/af01/giraffe.jpg": "5440ee0fa67edb3b762e9bfd8ec96e5c0fdaafaf12a473ecb23d98ad499a8640"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_GROUND_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_OBJECT_ATLAS.png": null,
+            "assets/worlds/africa/AF01_HAZARD_ROLLER.png": null
+          },
+          "attempts": 1,
+          "dispatches": 2,
+          "interruptions": 1,
+          "status": "completed",
+          "resultHash": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+            "contentHash": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T18:31:33.872Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T18:08:38.139Z",
+          "technicalRevisions": [
+            {
+              "previousHash": "35994264b5cad1b7760781b859ad436195f1afa016ac5da5fd5baf1476be983c",
+              "reason": "Coordinator visual QA rejected pale matte fringe; authorized deterministic edge decontamination",
+              "replacementHash": "38ecb2d70a587c758e0b6d25e33b4b48835d38d971e24b05dcfe2b0009fb8462",
+              "commit": "c06d46232f741554c0814280ab22ce0aea1568d0"
+            },
+            {
+              "previousHash": "38ecb2d70a587c758e0b6d25e33b4b48835d38d971e24b05dcfe2b0009fb8462",
+              "reason": "Canonical composite QA found 50 uncovered pixels at Y400-401; source-alignment correction moves authored coverage up12px and remaps only opaque lower terrain, preserving zero runtime offsets",
+              "replacementHash": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811",
+              "commit": "84959afee9ef097f85832ca204e38572d943fe1c"
+            }
+          ],
+          "workerCommit": "84959afee9ef097f85832ca204e38572d943fe1c",
+          "workerPacketRef": {
+            "path": "asset-workflow-runs/af01-20260919172919-679b96/af01_mid-996b299d9420da11.json",
+            "sha256": "996b299d9420da1123f36475b88b7305e1982ee83c2c6afc96b6d068ade6a338"
+          }
+        },
+        "AF01:GROUND": {
+          "id": "AF01:GROUND",
+          "runId": "af01-20260919172919-679b96",
+          "selector": "GROUND",
+          "owner": "landscape-worker",
+          "output": "assets/worlds/africa/AF01_GROUND_SERENGETI.png",
+          "baseHash": null,
+          "specHash": "f6afd7f9943adce8945f6955ab40c0850ac7a31e5e65686cbb746b3eb6366da3",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "6c2b2fe87d28deaaf96a9a3b6b760fd95b62252863bbe59ce9b299e1641b9593",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "32c399ce7c11235026ff4577d2b265ac76210805974d906926d9243171d9c9d5",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "a456e1312cca378e54d10a5347a7430c2c8003914a8cb69f6ef0453ce04e9186"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af01/landscape.jpg": "fd790e26f2006e0b0221b6ab48f76ec683de0bd402187b51b11f542a8f8bb8fc"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_BG_MID_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_OBJECT_ATLAS.png": null,
+            "assets/worlds/africa/AF01_HAZARD_ROLLER.png": null
+          },
+          "attempts": 1,
+          "dispatches": 2,
+          "interruptions": 1,
+          "status": "completed",
+          "resultHash": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+            "contentHash": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T18:31:33.951Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T18:14:04.866Z",
+          "workerCommit": "3c0a04c0200a4558099decab87040b1a7478968e",
+          "workerPacketRef": {
+            "path": "asset-workflow-runs/af01-20260919172919-679b96/af01_ground-c9278e13f8cae3c4.json",
+            "sha256": "c9278e13f8cae3c46229ec40ae282a10a336ab19292008ab9e7f5b7fc78c0b1f"
+          }
+        },
+        "AF01:OBJECT_ATLAS": {
+          "id": "AF01:OBJECT_ATLAS",
+          "runId": "af01-20260919172919-679b96",
+          "selector": "OBJECT_ATLAS",
+          "owner": "hazard-worker",
+          "output": "assets/worlds/africa/AF01_OBJECT_ATLAS.png",
+          "baseHash": null,
+          "specHash": "f6afd7f9943adce8945f6955ab40c0850ac7a31e5e65686cbb746b3eb6366da3",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "6c2b2fe87d28deaaf96a9a3b6b760fd95b62252863bbe59ce9b299e1641b9593",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "32c399ce7c11235026ff4577d2b265ac76210805974d906926d9243171d9c9d5",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "a456e1312cca378e54d10a5347a7430c2c8003914a8cb69f6ef0453ce04e9186"
+          },
+          "referenceHashes": {
+            "assets/worlds/north-america/NA01_HAZARD_ATLAS.png": "2411b97f53511de8e6c9b8a22013d47e7a6129fd501417d5cd7e391be5bdaad2",
+            "assets/references/africa/af01/termite_mound.jpg": "32378c544d4349aa009ebad1bc901210df8c18553a3e0ca3222c29efdbfd4ea0",
+            "assets/references/africa/af01/crested_porcupine.jpg": "b0c80b443ce1787049117abea863e43b6e66145e5e43ad9830a6af4a2b4c0136"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_BG_MID_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_GROUND_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_HAZARD_ROLLER.png": null
+          },
+          "attempts": 1,
+          "dispatches": 2,
+          "interruptions": 1,
+          "status": "completed",
+          "resultHash": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+            "contentHash": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T18:31:34.024Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T18:11:05.049Z",
+          "workerCommit": "8dddeae459a2275faf69bb9b26983a86f2013c8d",
+          "workerPacketRef": {
+            "path": "asset-workflow-runs/af01-20260919172919-679b96/af01_object_atlas-1f2405dc82213261.json",
+            "sha256": "1f2405dc8221326139c540a8dd6aeed23014e7782d7f3e3c8d779d91c4b1df26"
+          }
+        },
+        "AF01:FLYING": {
+          "id": "AF01:FLYING",
+          "runId": "af01-20260919172919-679b96",
+          "selector": "FLYING",
+          "owner": "hazard-worker",
+          "output": "assets/worlds/africa/AF01_HAZARD_ROLLER.png",
+          "baseHash": null,
+          "specHash": "f6afd7f9943adce8945f6955ab40c0850ac7a31e5e65686cbb746b3eb6366da3",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "6c2b2fe87d28deaaf96a9a3b6b760fd95b62252863bbe59ce9b299e1641b9593",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "32c399ce7c11235026ff4577d2b265ac76210805974d906926d9243171d9c9d5",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "a456e1312cca378e54d10a5347a7430c2c8003914a8cb69f6ef0453ce04e9186"
+          },
+          "referenceHashes": {
+            "assets/worlds/north-america/NA01_HAZARD_VULTURE.png": "668a1896ad90bc474a6e77edf7c14463185b584505839af09f625be7511ad3c3",
+            "assets/references/africa/af01/lilac_breasted_roller_flight.jpg": "f610793515762b529d9d850586b0fc079ac4425378f81b88b914bf42398c8630"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_BG_MID_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_GROUND_SERENGETI.png": null,
+            "assets/worlds/africa/AF01_OBJECT_ATLAS.png": null
+          },
+          "attempts": 1,
+          "dispatches": 2,
+          "interruptions": 1,
+          "status": "completed",
+          "resultHash": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+            "contentHash": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T18:31:34.097Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T18:16:35.184Z",
+          "workerCommit": "4640e8e845c17f0b30841738dfe52d155d2796b2",
+          "workerPacketRef": {
+            "path": "asset-workflow-runs/af01-20260919172919-679b96/af01_flying-a44999b260e8d8dd.json",
+            "sha256": "a44999b260e8d8ddf2d08926f244b99a695303626d58e543e9ae6dcd40f25e97"
+          }
+        }
+      },
+      "technicalFinishing": {
+        "status": "completed",
+        "report": "docs/phase8-qa/AF01_BUILD_CHECKPOINT.md",
+        "sourceManifest": "docs/phase8-qa/af01-production/SELECTED_SOURCES.json",
+        "selected": {
+          "FAR": {
+            "path": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
+            "sha256": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
+            "productionQualified": true
+          },
+          "MID": {
+            "path": "assets-original/africa/af01/AF01_BG_MID_SERENGETI_SOURCE.png",
+            "sha256": "f5f0b48e1e0970b2da3342ce0f89ba7e417fbe13c2adf309dd09a4c1f3051877",
+            "productionQualified": false
+          },
+          "GROUND": {
+            "path": "assets-original/africa/af01/AF01_GROUND_SERENGETI_SOURCE.png",
+            "sha256": "1e4bc051e26b3e92e2b989b55e837643cfd1c4334ee19c456b63a6304f3e3740",
+            "productionQualified": false
+          },
+          "OBJECT_ATLAS": {
+            "path": "assets-original/africa/af01/AF01_OBJECT_ATLAS_SOURCE.png",
+            "sha256": "02479a308e31a71231881ab88f64f09e1c9f84eb2e3f53ded86f942120c06d8e",
+            "productionQualified": false
+          },
+          "FLYING": {
+            "path": "assets-original/africa/af01/AF01_HAZARD_ROLLER_SOURCE.png",
+            "sha256": "833dd5edffad21729732b5716ceeffda6678cc569bf06cf88cc0df5eddfa221a",
+            "productionQualified": false
+          }
+        },
+        "remoteSources": {
+          "ref": "refs/remotes/origin/work/assets/af01",
+          "commit": "d59688a642b5374651266d1c2fa223f64d9ffe79",
+          "verifiedAt": "2026-09-19T17:56:25.095Z",
+          "sha256Verified": true
+        },
+        "authorization": {
+          "date": "2026-09-19",
+          "userResponse": "yes",
+          "scope": "Code-based transparency cleanup, exact canvas/atlas sizing, ground/sprite anchor alignment of the four saved AF01 sources; then integration, testing and deployment."
+        },
+        "completedAt": "2026-09-19T18:26:20.586Z",
+        "productionAssets": {
+          "FAR": {
+            "path": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
+            "sha256": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868"
+          },
+          "MID": {
+            "path": "assets/worlds/africa/AF01_BG_MID_SERENGETI.png",
+            "sha256": "fc8a729f20d143516b4fa93629b765f6b2c6e7137ec24e8628f8ccd200b4e811"
+          },
+          "GROUND": {
+            "path": "assets/worlds/africa/AF01_GROUND_SERENGETI.png",
+            "sha256": "96986750f424547467efc7f2cd1723899fa93d5cb8253aa5372a24fd3de83527"
+          },
+          "OBJECT_ATLAS": {
+            "path": "assets/worlds/africa/AF01_OBJECT_ATLAS.png",
+            "sha256": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569"
+          },
+          "FLYING": {
+            "path": "assets/worlds/africa/AF01_HAZARD_ROLLER.png",
+            "sha256": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b"
+          }
+        }
+      },
+      "generationAttempts": {
+        "FAR": 2,
+        "MID": 12,
+        "GROUND": 2,
+        "OBJECT_ATLAS": 7,
+        "FLYING": 2
+      },
+      "updatedAt": "2026-09-19T19:08:50.664Z",
+      "deployment": {
+        "commit": "a09b176dd8531bfb3425c9af534ff197a05a253e",
+        "tree": "a56b8c736c3684aaaa29ded928e023b6a1a897da",
+        "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35463173425",
+        "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35463228007",
+        "pages": "https://github.com/claudejones/candcgame/actions/runs/35463262596",
+        "reviewURL": "https://claudejones.github.io/candcgame/src/dev.html",
+        "result": "passed",
+        "deployedRuntimeHashesVerified": true,
+        "assetHashesUnchanged": true,
+        "browserReview": "Porcupine and roller face left toward the player; HIGH/LOW collision bounds follow the mirrored roller body.",
+        "verifiedAt": "2026-09-19T19:08:50.543Z",
+        "evidence": "docs/phase8-qa/AF01_STAGE_QA.md",
+        "userApproval": "approved"
+      },
+      "trial": {
+        "scope": "AF01–AF03",
+        "checkpoint": "AF01",
+        "imageGenerationCalls": 25,
+        "resumeImageGenerationCalls": 0,
+        "startedAt": "2026-09-19T17:29:19.211Z",
+        "deployedReviewAt": "2026-09-19T18:39:36.273Z",
+        "elapsedWallSeconds": 4217,
+        "elapsedNote": "Wall time includes source generation, technical-finishing permission checkpoint, cleanup, integration and CI/deployment waits; not active worker throughput.",
+        "subscriptionUsagePercentage": null,
+        "throughputConclusion": "Deferred until AF01–AF03 trial is complete."
+      },
+      "deploymentHistory": [
+        {
+          "commit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+          "tree": "02c9508754be58aed0188899e01f24a799a86ef2",
+          "developmentCI": "https://github.com/claudejones/candcgame/actions/runs/35461377682",
+          "mainCI": "https://github.com/claudejones/candcgame/actions/runs/35461473998",
+          "pages": "https://github.com/claudejones/candcgame/actions/runs/35461507306",
+          "reviewURL": "https://claudejones.github.io/candcgame/src/dev.html",
+          "result": "passed",
+          "deployedAssetHashesVerified": true,
+          "browserReview": "passed",
+          "verifiedAt": "2026-09-19T18:39:36.273Z",
+          "evidence": "docs/phase8-qa/AF01_STAGE_QA.md",
+          "userApproval": "pending"
+        }
+      ],
+      "facingRevision": {
+        "requestedAt": "2026-09-19T19:02:35.640Z",
+        "request": "Crested porcupine and lilac-breasted roller should face the player.",
+        "baseCommit": "9f0b5e381667c89d714f72a859adc435920bea4a",
+        "method": "Per-hazard flipX renderer and collision reflection; original PNGs unchanged.",
+        "hazards": [
+          "GROUND2",
+          "FLYING"
+        ],
+        "imageGenerationCalls": 0,
+        "checks": {
+          "mirrorAndSavedConfig": true,
+          "timedGameplay": true,
+          "deployedVisual": true
+        },
+        "completedAt": "2026-09-19T19:08:50.543Z"
+      },
+      "approval": {
+        "approvedAt": "2026-09-19",
+        "userCommand": "approve AF01",
+        "reviewedCommit": "a09b176dd8531bfb3425c9af534ff197a05a253e"
+      },
+      "closedAt": "2026-09-19T19:20:15.353Z"
+    },
+    "af02-20260919204119-fb761a": {
+      "runId": "af02-20260919204119-fb761a",
+      "target": "AF02",
+      "command": "build stage AF02",
+      "operation": "produce-only",
+      "status": "ready-for-calibration",
+      "baseCommit": "bf7937af6ede28a11e44b1e1a0ddcaf83ee3126a",
+      "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+      "createdAt": "2026-09-19T20:41:19.697Z",
+      "maxWorkers": 2,
+      "nestedManagers": false,
+      "recoveryRefs": [
+        "af02-landscape-output",
+        "af02-hazard-output",
+        "refs/remotes/origin/work/assets/af02",
+        "work/assets/af02",
+        "refs/remotes/origin/modular-parity-validation"
+      ],
+      "jobs": {
+        "AF02:FAR": {
+          "id": "AF02:FAR",
+          "runId": "af02-20260919204119-fb761a",
+          "selector": "FAR",
+          "owner": "landscape-worker",
+          "output": "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png",
+          "baseHash": null,
+          "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "9e48031675b075d4e9750bb2ea85d853b67d4e8a3d4c8d9602b4e4f767f4ef40",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "f14feb423148f1d79e0d946b9e216b77eb52e216968919ea99e0ad6cdad79d96",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "1fcf95f0ee6d5882838919c91f9a912bd36b1fad01217ab2de6c463c20920540"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af02/dunes_oryx.jpg": "4868ad095ea62ecaa952d4ec779854103a96fe0f34d90de1b753c54f6fa025a8"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_OBJECT_ATLAS.png": null,
+            "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png": null
+          },
+          "attempts": 2,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+            "contentHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:24:00.277Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T20:48:17.500Z",
+          "priorRecoveryEvidence": [
+            {
+              "ref": "af02-landscape-output",
+              "commit": "5983ad83ad96e848a5a712a5ef14cf95e458f87e",
+              "contentHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            },
+            {
+              "ref": "refs/remotes/origin/work/assets/af02",
+              "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+              "contentHash": "4e4e3fb23ab14da5a2155a15ca033125972ba4cfeff60b2b2815a727e34ef361",
+              "localCommitVerified": true,
+              "remoteRefVerified": true,
+              "verifiedAt": "2026-09-19T21:04:10.801Z"
+            }
+          ],
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          },
+          "workerPacketRef": {
+            "path": "asset-workflow-runs/af02-20260919204119-fb761a/af02_far-b8ddc11c2bd6a856.json",
+            "sha256": "b8ddc11c2bd6a85639a5f48f797de90cba13bd7892b2dcd8b5568cc78a4b4f2f"
+          }
+        },
+        "AF02:MID": {
+          "id": "AF02:MID",
+          "runId": "af02-20260919204119-fb761a",
+          "selector": "MID",
+          "owner": "landscape-worker",
+          "output": "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png",
+          "baseHash": null,
+          "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "9e48031675b075d4e9750bb2ea85d853b67d4e8a3d4c8d9602b4e4f767f4ef40",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "f14feb423148f1d79e0d946b9e216b77eb52e216968919ea99e0ad6cdad79d96",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "1fcf95f0ee6d5882838919c91f9a912bd36b1fad01217ab2de6c463c20920540"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af02/dunes_oryx.jpg": "4868ad095ea62ecaa952d4ec779854103a96fe0f34d90de1b753c54f6fa025a8",
+            "assets/references/africa/af02/camelthorn.jpg": "06927857a3351493caeb0358410c22d885847e67d7c40977fb7c5407b141da25",
+            "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_OBJECT_ATLAS.png": null,
+            "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png": null
+          },
+          "attempts": 1,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+            "contentHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:24:00.350Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T21:00:45.738Z",
+          "priorRecoveryEvidence": [
+            {
+              "ref": "af02-landscape-output",
+              "commit": "d9c40c08b55b7b9a4c659a28e188b58b30b7bdcf",
+              "contentHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            },
+            {
+              "ref": "refs/remotes/origin/work/assets/af02",
+              "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+              "contentHash": "f3098c22b9583dffc36bcdee7de88c182c72b3b94a1d5f37b99b64a5c2007832",
+              "localCommitVerified": true,
+              "remoteRefVerified": true,
+              "verifiedAt": "2026-09-19T21:04:10.889Z"
+            }
+          ],
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          },
+          "workerPacketRef": {
+            "path": "asset-workflow-runs/af02-20260919204119-fb761a/af02_mid-5eac0982fbe77cc4.json",
+            "sha256": "5eac0982fbe77cc4c936dad06418b1c4759b11394cf02ac465575ad16bdb95e7"
+          }
+        },
+        "AF02:GROUND": {
+          "id": "AF02:GROUND",
+          "runId": "af02-20260919204119-fb761a",
+          "selector": "GROUND",
+          "owner": "landscape-worker",
+          "output": "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png",
+          "baseHash": null,
+          "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "9e48031675b075d4e9750bb2ea85d853b67d4e8a3d4c8d9602b4e4f767f4ef40",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "f14feb423148f1d79e0d946b9e216b77eb52e216968919ea99e0ad6cdad79d96",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "1fcf95f0ee6d5882838919c91f9a912bd36b1fad01217ab2de6c463c20920540"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_OBJECT_ATLAS.png": null,
+            "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png": null
+          },
+          "attempts": 2,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "candidateRecovery": {
+            "sha256": "d6e58e046623d036f592ee2b7a0aed13670481cd453f71f1d3d8117a8f607202",
+            "commit": "2820a408e005e6889f7272dc0cfd0f44f6349483",
+            "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
+            "technicalQa": "failed",
+            "assetReady": false,
+            "supersededBySha256": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b"
+          },
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+            "contentHash": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:24:00.426Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T21:17:56.265Z",
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          },
+          "priorRecoveryEvidence": [
+            {
+              "ref": "work/assets/af02",
+              "commit": "df639664698d7582d3f500988b03bf2c66b8d8f3",
+              "contentHash": "073c4d0fb661690744843ed91553c639a877ff824c8d86aac794d451b35b8c6b",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ],
+          "workerPacketRef": {
+            "path": "asset-workflow-runs/af02-20260919204119-fb761a/af02_ground-426fc02c8c820af6.json",
+            "sha256": "426fc02c8c820af6bd26e24ed013dea850cc5473d2e7365bebd09691fa96968b"
+          }
+        },
+        "AF02:OBJECT_ATLAS": {
+          "id": "AF02:OBJECT_ATLAS",
+          "runId": "af02-20260919204119-fb761a",
+          "selector": "OBJECT_ATLAS",
+          "owner": "hazard-worker",
+          "output": "assets/worlds/africa/AF02_OBJECT_ATLAS.png",
+          "baseHash": null,
+          "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "9e48031675b075d4e9750bb2ea85d853b67d4e8a3d4c8d9602b4e4f767f4ef40",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "f14feb423148f1d79e0d946b9e216b77eb52e216968919ea99e0ad6cdad79d96",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "1fcf95f0ee6d5882838919c91f9a912bd36b1fad01217ab2de6c463c20920540"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af02/clay_pan.jpg": "127f90df423160b5c32562ef8ff41d4d691e51c236e3903af7c84809a58f0356",
+            "assets/references/africa/af02/camelthorn.jpg": "06927857a3351493caeb0358410c22d885847e67d7c40977fb7c5407b141da25",
+            "assets/worlds/africa/AF01_OBJECT_ATLAS.png": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png": null
+          },
+          "attempts": 8,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+            "contentHash": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:24:00.501Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T20:52:06.397Z",
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          },
+          "priorRecoveryEvidence": [
+            {
+              "ref": "af02-hazard-output",
+              "commit": "454d1e6d10190adf8883c0985a8e57b0b54a9af8",
+              "contentHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            },
+            {
+              "ref": "work/assets/af02",
+              "commit": "731823ba1019b6d99c9d7585215929d387e8b12b",
+              "contentHash": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ],
+          "correctionHistory": [
+            {
+              "priorResultHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+              "priorRecoveryEvidence": {
+                "ref": "refs/remotes/origin/work/assets/af02",
+                "commit": "fac83f9327ab379b373060090e3e547e61ff4ca0",
+                "contentHash": "a07033f27caead5983ec28ea1ec52fb2b23ce371da0680a39074b2e23b629816",
+                "localCommitVerified": true,
+                "remoteRefVerified": true,
+                "verifiedAt": "2026-09-19T21:04:10.975Z"
+              },
+              "priorTechnicalQa": {
+                "status": "failed",
+                "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
+                "reason": "Ground contact outside tolerance and stray alpha in a cell gutter; requires source-image correction before asset-ready."
+              },
+              "authorization": "Explicit user yes to documented AF02 cleanup"
+            }
+          ],
+          "workerPacketRef": {
+            "path": "asset-workflow-runs/af02-20260919204119-fb761a/af02_object_atlas-d0fe63107db70645.json",
+            "sha256": "d0fe63107db706453c14c6bf9fdc15369a8afc5959114cf7ca84f13dbf9fd493"
+          }
+        },
+        "AF02:FLYING": {
+          "id": "AF02:FLYING",
+          "runId": "af02-20260919204119-fb761a",
+          "selector": "FLYING",
+          "owner": "hazard-worker",
+          "output": "assets/worlds/africa/AF02_HAZARD_SANDGROUSE.png",
+          "baseHash": null,
+          "specHash": "442e0c5ae9e269881ad7683b240faa0439319b0744c8bc437d7e3919562d02c1",
+          "specSourceHashes": {
+            "config/remaining-continent-proposal.json": "9e48031675b075d4e9750bb2ea85d853b67d4e8a3d4c8d9602b4e4f767f4ef40",
+            "docs/REMAINING_CONTINENTS_PLAN.md": "f14feb423148f1d79e0d946b9e216b77eb52e216968919ea99e0ad6cdad79d96",
+            "docs/LANDSCAPE_GENERATION_CONTRACT_V1.md": "6fcf63421b3765653580ef637d7aa39d08ffa192f0bb64efd6ef40b016c83ba1",
+            "docs/asset-profiles/landscape.md": "80ec189973766fd4aeee32a8dd6667a2342d01138d0983bc9c2faa9c4da8e36b",
+            "docs/asset-profiles/hazard.md": "1fcf95f0ee6d5882838919c91f9a912bd36b1fad01217ab2de6c463c20920540"
+          },
+          "referenceHashes": {
+            "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+            "assets/phase8-validation/north-america/NA01_BG_MID_DESERT.png": "e00d7b476dd26d4b7cd34f08b470ec4c8b7b9c57d12c70a82fb88da7e82e41d4",
+            "assets/phase8-validation/north-america/NA01_GROUND_DESERT.png": "3199a71ece851b5f491e6d21d5c11b1ac56836e252ad56c2eb32e89a25f3e908",
+            "assets/references/africa/af02/sandgrouse_flight.jpg": "16151a3df305578080e8333feed0f3763d1e1e80576334697bf06d2974a97a21",
+            "assets/worlds/africa/AF01_HAZARD_ROLLER.png": "c9da5f35cdbb7b3b4d14c2ba76708af4895288474c365e0079ff33d51c3f959b",
+            "assets/characters/G1A_RUN_CYCLE_ATLAS.png": "b7cb1ca55534f888e4802c7c55892fc4ebfafc5d601ec5e7926d18ffa4322037"
+          },
+          "siblingHashes": {
+            "assets/worlds/africa/AF02_BG_DISTANT_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_BG_MID_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_GROUND_SOSSUSVLEI.png": null,
+            "assets/worlds/africa/AF02_OBJECT_ATLAS.png": null
+          },
+          "attempts": 2,
+          "dispatches": 1,
+          "interruptions": 0,
+          "status": "completed",
+          "resultHash": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+          "recoveryRef": "refs/remotes/origin/modular-parity-validation",
+          "candidateRecovery": {
+            "sha256": "fcb97b5d07bc46f37b514fdd7c83d976fd447333ddbda70bd0b9f7a941823ad3",
+            "commit": "044ab72ecd44cbb4a008777be30625e73621f419",
+            "evidence": "docs/phase8-qa/AF02_SOURCE_CHECKPOINT.json",
+            "technicalQa": "failed",
+            "assetReady": false,
+            "supersededBySha256": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085"
+          },
+          "recoveryEvidence": {
+            "ref": "refs/remotes/origin/modular-parity-validation",
+            "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+            "contentHash": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+            "localCommitVerified": true,
+            "remoteRefVerified": true,
+            "verifiedAt": "2026-09-19T21:24:00.575Z"
+          },
+          "durable": true,
+          "completedAt": "2026-09-19T21:17:56.423Z",
+          "technicalQa": {
+            "status": "passed",
+            "evidence": "docs/phase8-qa/AF02_ASSET_QA.md"
+          },
+          "priorRecoveryEvidence": [
+            {
+              "ref": "work/assets/af02",
+              "commit": "3d979e61751ff279084fd01a03a41bb9570cfac7",
+              "contentHash": "c40d17b7ed969661048a0ba701fc1c74cac192b059a6e649b946bfa173f32085",
+              "localCommitVerified": true,
+              "remoteRefVerified": false,
+              "verifiedAt": null
+            }
+          ],
+          "workerPacketRef": {
+            "path": "asset-workflow-runs/af02-20260919204119-fb761a/af02_flying-67a6571a2f97ff4e.json",
+            "sha256": "67a6571a2f97ff4ef4eb9b39f3c3321e209e8a598887f231b9c1e7aee4dc78e2"
+          }
+        }
+      },
+      "resumeNote": "Asset-ready handoff published and verified. User notifies Workbench agent to import config/asset-handoffs/af02.json; calibration and release remain pending.",
+      "awaitingDecision": {
+        "type": "deterministic-source-cleanup",
+        "authorized": true,
+        "evidence": "docs/phase8-qa/AF02_ASSET_QA.md",
+        "authorizedBy": "Explicit user yes in conversation",
+        "status": "applied"
+      },
+      "updatedAt": "2026-09-19T21:26:20.848Z",
+      "handoff": {
+        "path": "config/asset-handoffs/af02.json",
+        "sha256": "d32310ff880914b941741cf772b964e44ef94c36635e8f7b39eedaeb3aca48e6",
+        "recoveryRef": "refs/remotes/origin/main",
+        "commit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+        "remoteRefVerified": true
+      },
+      "closedAt": "2026-09-19T21:26:20.916Z",
+      "publication": {
+        "sourceCommit": "b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484",
+        "developmentCi": "https://github.com/claudejones/candcgame/actions/runs/35470261538",
+        "mainCi": "https://github.com/claudejones/candcgame/actions/runs/35470309023",
+        "pages": "https://github.com/claudejones/candcgame/actions/runs/35470339782",
+        "deployedImageHashesVerified": true
+      }
+    }
+  },
+  "activeRunId": null
+}

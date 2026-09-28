@@ -1,0 +1,52 @@
+{
+  "stage": "AF01",
+  "status": "source-checkpoint-finished-production-in-stage-release",
+  "method": "built-in imagegen",
+  "startedAt": "2026-09-19T17:29:19Z",
+  "attempts": {
+    "FAR": 2,
+    "MID": 12,
+    "GROUND": 2,
+    "OBJECT_ATLAS": 7,
+    "FLYING": 2
+  },
+  "selected": {
+    "FAR": {
+      "path": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
+      "sha256": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
+      "productionQualified": true
+    },
+    "MID": {
+      "path": "assets-original/africa/af01/AF01_BG_MID_SERENGETI_SOURCE.png",
+      "sha256": "f5f0b48e1e0970b2da3342ce0f89ba7e417fbe13c2adf309dd09a4c1f3051877",
+      "productionQualified": false
+    },
+    "GROUND": {
+      "path": "assets-original/africa/af01/AF01_GROUND_SERENGETI_SOURCE.png",
+      "sha256": "1e4bc051e26b3e92e2b989b55e837643cfd1c4334ee19c456b63a6304f3e3740",
+      "productionQualified": false
+    },
+    "OBJECT_ATLAS": {
+      "path": "assets-original/africa/af01/AF01_OBJECT_ATLAS_SOURCE.png",
+      "sha256": "02479a308e31a71231881ab88f64f09e1c9f84eb2e3f53ded86f942120c06d8e",
+      "productionQualified": false
+    },
+    "FLYING": {
+      "path": "assets-original/africa/af01/AF01_HAZARD_ROLLER_SOURCE.png",
+      "sha256": "833dd5edffad21729732b5716ceeffda6678cc569bf06cf88cc0df5eddfa221a",
+      "productionQualified": false
+    }
+  },
+  "notPerformed": [
+    "deterministic image edits",
+    "complete-stage integration",
+    "collision calibration",
+    "CI/Pages deployment",
+    "user artwork acceptance"
+  ],
+  "finishing": {
+    "authorized": true,
+    "productionManifest": "config/stage-releases.json",
+    "qa": "docs/phase8-qa/AF01_STAGE_QA.md"
+  }
+}

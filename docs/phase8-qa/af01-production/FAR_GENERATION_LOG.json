@@ -1,0 +1,50 @@
+{
+  "runId": "af01-20260919172919-679b96",
+  "jobId": "AF01:FAR",
+  "path": "assets/worlds/africa/AF01_BG_DISTANT_SERENGETI.png",
+  "sha256": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868",
+  "baseCommit": "bafef40d77c7069e819c10689a5ac49efaa7b28b",
+  "baseHash": null,
+  "specHash": "f6afd7f9943adce8945f6955ab40c0850ac7a31e5e65686cbb746b3eb6366da3",
+  "referenceHashes": {
+    "assets/phase8-validation/north-america/NA01_BG_DISTANT_MESAS.png": "6de84e693faa4e40c039a4ad1b4bdbdb2994ae228dc04ed059abff9042eaf3b1",
+    "assets/references/africa/af01/landscape.jpg": "fd790e26f2006e0b0221b6ab48f76ec683de0bd402187b51b11f542a8f8bb8fc",
+    "assets/references/africa/af01/kopje.jpg": "00d9484077c980afcef6b15d7bc906258dfe6b479dc21208b8a4ed6718a43352"
+  },
+  "attempts": 2,
+  "completedAt": "2026-09-19T17:33:10Z",
+  "validation": {
+    "pngIntegrity": "passed",
+    "format": "8-bit RGB non-interlaced",
+    "opaque": true,
+    "isolatedInspection": "passed",
+    "nativeRepeatInspection": "passed",
+    "completeStagePreview": "deferred until MID and GROUND exist"
+  },
+  "recovery": {
+    "ref": "work/af01-landscapes",
+    "commit": "cf34996a95635e1c94c2ab012c5a37e05677f49b",
+    "contentHash": "9d5b06c67359d8557f9ed3b11e2093fa950a7d8b6102d27dee0aba1a105d1868"
+  },
+  "attemptDetails": [
+    {
+      "attempt": 1,
+      "mode": "built-in imagegen generation",
+      "durationSeconds": 23.4,
+      "result": "rejected",
+      "reason": "generator returned 2171x724 instead of required 2172x724",
+      "prompt": "Use case: stylized-concept\nAsset type: side-scrolling game FAR landscape layer\nPrimary request: Create AF01 FAR, a warm Serengeti landscape in the same crisp, richly shaded pixel-art language as Reference Image 1. Use Reference Images 2 and 3 as subject and location references: broad open savannah and a prominent natural granite kopje.\nInput images: Image 1 is the exact pixel-art style and source-canvas composition reference; Image 2 is the Serengeti plains location reference; Image 3 is the granite kopje identity reference.\nScene/backdrop: broad clear blue sky over warm golden open plains, with low distant kopjes and sparse distant vegetation. No clouds.\nSubject: one prominent stacked granite kopje with a recognizable rounded boulder silhouette and substantial visual mass, rising clearly above the savannah so it will remain visible behind a future middle-distance layer.\nStyle/medium: polished crisp existing-game pixel art, deliberate hard-edged pixel clusters, controlled limited palette, readable silhouettes, detailed without painterly blur, no antialiasing or smooth 3D rendering.\nComposition/framing: exact 2172 x 724 pixel ultra-wide source canvas. Horizon and plains occupy the lower portion; expansive blue sky occupies the upper portion. Place the main stacked kopje near the central region, safely away from both horizontal repeat joins. Continue believable warm plains scenery across the full width and behind future MID openings. Keep both left and right edges visually compatible for horizontal repetition; do not place a landmark touching an edge.\nLighting/mood: clear warm daylight, inviting and adventurous.\nColor palette: saturated blue sky, sunlit gold and ochre grass, granite gray-brown with warm highlights and cool purple-brown shadows, restrained distant blue haze.\nConstraints: fully opaque RGB-style result; exact 2172 x 724 dimensions; one continuous environment; no transparency; no baked clouds; no people; no animals; no hazards; no HUD; no text; no labels; no watermark; no checkerboard. Preserve the wide game-background scale and do not crop the kopje.\nAvoid: photorealism, painterly softness, vector-flat forms, excessive foreground detail, giant acacia focal tree, mesas or American-desert geology, duplicated landmarks at the repeat seam."
+    },
+    {
+      "attempt": 2,
+      "mode": "built-in imagegen targeted edit",
+      "durationSeconds": 28.1,
+      "result": "selected",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "prompt": "Use case: precise-object-edit\nAsset type: side-scrolling game FAR landscape layer\nPrimary request: Preserve the attached AF01 Serengeti FAR artwork and composition exactly, but correct the output canvas to exactly 2172 pixels wide by 724 pixels high.\nInput images: Image 1 is the edit target and must remain visually unchanged except for the one missing horizontal pixel column needed to reach the required width.\nConstraints: output must be an exact 2172 x 724 pixel PNG; fully opaque RGB-style image; add the single missing pixel column at the far right by continuing the adjacent sky and plains pixels in a seam-compatible way; do not scale, crop, stretch, repaint, shift, blur, or otherwise alter the existing artwork; preserve the prominent central stacked granite kopje, clear cloud-free blue sky, warm plains, pixel-art edges, palette, and all landmark positions; no transparency; no clouds; no text; no watermark."
+    }
+  ]
+}

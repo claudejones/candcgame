@@ -1,0 +1,495 @@
+{
+  "generatedAt": "2026-09-19T16:43:39.005Z",
+  "method": {
+    "runtimeClasses": [
+      "CharacterMachine.update/draw",
+      "ObjectQA.characterBox",
+      "GameplayDirector.geom"
+    ],
+    "sampleRatesHz": [
+      60,
+      120
+    ],
+    "flyingSpeeds": [
+      150,
+      170,
+      210
+    ],
+    "animationPhases": "all initial phases",
+    "inputLeadStepSeconds": 0.01,
+    "windowWidthDefinition": "last passing lead minus first passing lead",
+    "simulationRangeSeconds": [
+      -1.9,
+      1.9
+    ],
+    "runtimeOrdering": "character update -> collision using prior draw -> character draw",
+    "minimumWindowSeconds": 0.06
+  },
+  "preserved": {
+    "characterCollision": true,
+    "jump": {
+      "launch": -402,
+      "gravity": 825
+    },
+    "slideDuration": 0.75,
+    "flyingClearance": {
+      "high": 68,
+      "low": 18
+    },
+    "colliderProportions": true,
+    "artwork": true
+  },
+  "groundFootAnchors": {
+    "method": "largest 8-connected alpha component (alpha > 2); preserve its bottom edge under scale change",
+    "baseScale": 0.4419889502762431,
+    "items": {
+      "na02|Fallen Log": {
+        "sourceBottomMargin": 137
+      },
+      "eu01|Market Crates & Baskets": {
+        "sourceBottomMargin": 65
+      },
+      "eu02|Paris Café Table & Chairs": {
+        "sourceBottomMargin": 9
+      },
+      "eu02|Paris Bicycle": {
+        "sourceBottomMargin": 34
+      },
+      "eu03|Gaudí Mosaic Bench": {
+        "sourceBottomMargin": 80
+      }
+    }
+  },
+  "changes": [
+    {
+      "stage": "na02",
+      "name": "Fallen Log",
+      "action": "jump",
+      "mode": null,
+      "before": {
+        "scale": 0.22,
+        "groundOffset": 36,
+        "windows": {
+          "claude": {
+            "start": 0.45,
+            "end": 0.53,
+            "width": 0.08,
+            "gap": 1.51
+          },
+          "constance": {
+            "start": 0.45,
+            "end": 0.51,
+            "width": 0.06,
+            "gap": 0.51
+          }
+        }
+      },
+      "after": {
+        "scale": 0.215,
+        "groundOffset": 35.697238,
+        "windows": {
+          "claude": {
+            "start": 0.45,
+            "end": 0.53,
+            "width": 0.08,
+            "gap": 4.71
+          },
+          "constance": {
+            "start": 0.45,
+            "end": 0.53,
+            "width": 0.08,
+            "gap": 1.18
+          }
+        }
+      }
+    },
+    {
+      "stage": "sa02",
+      "name": "Andean Flamingo",
+      "action": "jump",
+      "mode": "low",
+      "before": {
+        "scale": 0.34,
+        "groundOffset": null,
+        "windows": {
+          "claude": {
+            "start": 0.44,
+            "end": 0.5,
+            "width": 0.06,
+            "gap": 1.12
+          },
+          "constance": {
+            "start": 0.44,
+            "end": 0.49,
+            "width": 0.05,
+            "gap": 0.18
+          }
+        }
+      },
+      "after": {
+        "scale": 0.33,
+        "groundOffset": null,
+        "windows": {
+          "claude": {
+            "start": 0.42,
+            "end": 0.51,
+            "width": 0.09,
+            "gap": 0.11
+          },
+          "constance": {
+            "start": 0.44,
+            "end": 0.5,
+            "width": 0.06,
+            "gap": 0.72
+          }
+        }
+      }
+    },
+    {
+      "stage": "na01",
+      "name": "Vulture",
+      "action": "slide",
+      "mode": "high",
+      "before": {
+        "scale": 0.34,
+        "groundOffset": null,
+        "windows": {
+          "claude": null,
+          "constance": null
+        }
+      },
+      "after": {
+        "scale": 0.285,
+        "groundOffset": null,
+        "windows": {
+          "claude": {
+            "start": 0.34,
+            "end": 0.56,
+            "width": 0.22,
+            "gap": 5.27
+          },
+          "constance": {
+            "start": 0.32,
+            "end": 0.49,
+            "width": 0.17,
+            "gap": 2.46
+          }
+        }
+      }
+    },
+    {
+      "stage": "na02",
+      "name": "Eagle",
+      "action": "slide",
+      "mode": "high",
+      "before": {
+        "scale": 0.34,
+        "groundOffset": null,
+        "windows": {
+          "claude": {
+            "start": 0.35,
+            "end": 0.51,
+            "width": 0.16,
+            "gap": 2
+          },
+          "constance": null
+        }
+      },
+      "after": {
+        "scale": 0.31,
+        "groundOffset": null,
+        "windows": {
+          "claude": {
+            "start": 0.35,
+            "end": 0.53,
+            "width": 0.18,
+            "gap": 4.78
+          },
+          "constance": {
+            "start": 0.34,
+            "end": 0.46,
+            "width": 0.12,
+            "gap": 1.96
+          }
+        }
+      }
+    },
+    {
+      "stage": "na03",
+      "name": "Pigeons",
+      "action": "slide",
+      "mode": "high",
+      "before": {
+        "scale": 0.32,
+        "groundOffset": null,
+        "windows": {
+          "claude": null,
+          "constance": null
+        }
+      },
+      "after": {
+        "scale": 0.265,
+        "groundOffset": null,
+        "windows": {
+          "claude": {
+            "start": 0.32,
+            "end": 0.49,
+            "width": 0.17,
+            "gap": 5.56
+          },
+          "constance": {
+            "start": 0.3,
+            "end": 0.43,
+            "width": 0.13,
+            "gap": 2.75
+          }
+        }
+      }
+    },
+    {
+      "stage": "sa01",
+      "name": "Macaws",
+      "action": "slide",
+      "mode": "high",
+      "before": {
+        "scale": 0.3,
+        "groundOffset": null,
+        "windows": {
+          "claude": {
+            "start": 0.3,
+            "end": 0.51,
+            "width": 0.21,
+            "gap": 0.94
+          },
+          "constance": null
+        }
+      },
+      "after": {
+        "scale": 0.265,
+        "groundOffset": null,
+        "windows": {
+          "claude": {
+            "start": 0.29,
+            "end": 0.53,
+            "width": 0.24,
+            "gap": 4.74
+          },
+          "constance": {
+            "start": 0.27,
+            "end": 0.44,
+            "width": 0.17,
+            "gap": 1.93
+          }
+        }
+      }
+    },
+    {
+      "stage": "eu03",
+      "name": "Mediterranean Bats",
+      "action": "slide",
+      "mode": "high",
+      "before": {
+        "scale": 0.3,
+        "groundOffset": null,
+        "windows": {
+          "claude": null,
+          "constance": null
+        }
+      },
+      "after": {
+        "scale": 0.23,
+        "groundOffset": null,
+        "windows": {
+          "claude": {
+            "start": 0.27,
+            "end": 0.54,
+            "width": 0.27,
+            "gap": 5.78
+          },
+          "constance": {
+            "start": 0.25,
+            "end": 0.48,
+            "width": 0.23,
+            "gap": 2.97
+          }
+        }
+      }
+    },
+    {
+      "stage": "eu01",
+      "name": "Market Crates & Baskets",
+      "action": "jump",
+      "mode": null,
+      "before": {
+        "scale": 0.18,
+        "groundOffset": 34,
+        "windows": {
+          "claude": null,
+          "constance": null
+        }
+      },
+      "after": {
+        "scale": 0.118,
+        "groundOffset": 32.218785,
+        "windows": {
+          "claude": {
+            "start": 0.44,
+            "end": 0.54,
+            "width": 0.1,
+            "gap": 0.04
+          },
+          "constance": {
+            "start": 0.45,
+            "end": 0.53,
+            "width": 0.08,
+            "gap": 2.24
+          }
+        }
+      }
+    },
+    {
+      "stage": "eu02",
+      "name": "Paris Café Table & Chairs",
+      "action": "jump",
+      "mode": null,
+      "before": {
+        "scale": 0.2,
+        "groundOffset": 34,
+        "windows": {
+          "claude": null,
+          "constance": null
+        }
+      },
+      "after": {
+        "scale": 0.14,
+        "groundOffset": 33.761326,
+        "windows": {
+          "claude": {
+            "start": 0.43,
+            "end": 0.54,
+            "width": 0.11,
+            "gap": 0.27
+          },
+          "constance": {
+            "start": 0.44,
+            "end": 0.54,
+            "width": 0.1,
+            "gap": 2.28
+          }
+        }
+      }
+    },
+    {
+      "stage": "eu02",
+      "name": "Paris Bicycle",
+      "action": "jump",
+      "mode": null,
+      "before": {
+        "scale": 0.2,
+        "groundOffset": 34,
+        "windows": {
+          "claude": null,
+          "constance": null
+        }
+      },
+      "after": {
+        "scale": 0.15,
+        "groundOffset": 33.248619,
+        "windows": {
+          "claude": {
+            "start": 0.45,
+            "end": 0.52,
+            "width": 0.07,
+            "gap": 4.08
+          },
+          "constance": {
+            "start": 0.45,
+            "end": 0.52,
+            "width": 0.07,
+            "gap": 0.04
+          }
+        }
+      }
+    },
+    {
+      "stage": "eu03",
+      "name": "Gaudí Mosaic Bench",
+      "action": "jump",
+      "mode": null,
+      "before": {
+        "scale": 0.2,
+        "groundOffset": 34,
+        "windows": {
+          "claude": {
+            "start": 0.49,
+            "end": 0.49,
+            "width": 0,
+            "gap": 0.69
+          },
+          "constance": null
+        }
+      },
+      "after": {
+        "scale": 0.175,
+        "groundOffset": 33.116022,
+        "windows": {
+          "claude": {
+            "start": 0.44,
+            "end": 0.53,
+            "width": 0.09,
+            "gap": 1.57
+          },
+          "constance": {
+            "start": 0.45,
+            "end": 0.53,
+            "width": 0.08,
+            "gap": 0.61
+          }
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "stages": [
+      "na01",
+      "na02",
+      "na03",
+      "sa01",
+      "sa02",
+      "sa03",
+      "eu01",
+      "eu02",
+      "eu03"
+    ],
+    "hazards": 27,
+    "characters": [
+      "claude",
+      "constance"
+    ],
+    "ground": "jump",
+    "flyingHigh": "slide",
+    "flyingLow": "jump"
+  },
+  "tests": {
+    "command": "node --test scripts/tests/*.test.cjs scripts/tests/*.test.mjs",
+    "passed": 32,
+    "failed": 0
+  },
+  "provenance": {
+    "baselineCommit": "57d6ca4e6932cc0ee5f6d05597245c1c17a74e85",
+    "status": "historical-comparison-candidates-not-visually-accepted",
+    "inputLeadRangeSeconds": [
+      0.05,
+      1.6
+    ],
+    "runtimeInputs": {
+      "scripts/landscape-runtime-state.cjs": "5d3bf8bf8f915f205f4518b2ccb9da1c1b9a903915004cc54b6d60de07886bc1",
+      "src/js/game-config.js": "24706e398dd14da5bb742bf0f738e61cbf27d2a39a00bf4479a0f497f7abec1e",
+      "src/js/landscape-registry.js": "14d7a53ca93441241cc8999e71aae25bd7180d792d8a04a2acd0bb83724852e9",
+      "src/js/landscape-contract.js": "1a2955f4c4aef7514fbb51c86c7f3327fa7aaecb19e720f74b2ad8fde0b59e03",
+      "src/js/stage-catalog.js": "b9d2982b818b84a8e893f42eeac88a343374a62dfdf5e81d282269118218ad6c",
+      "src/js/stage-contract.js": "e3ddbaa1ac6510de3d03e119adb4aa8a5d7f1ce0dafa231e3e85d5471ce72b12",
+      "src/js/game-runtime.js": "68f976c9c0bf80adc2c1a388fc99bbc65928b09fbeed831a4c8cbb297a403ac8"
+    }
+  }
+}
