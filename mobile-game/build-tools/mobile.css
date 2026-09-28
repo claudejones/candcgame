@@ -1,0 +1,23 @@
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#04192e;color:#fff2cd}*{box-sizing:border-box}body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);font-family:CandCPixel,monospace;overscroll-behavior:none}[hidden]{display:none!important}button{touch-action:manipulation;font:inherit;min-height:44px;cursor:pointer}#game{height:100%;width:100%;position:relative;overflow:hidden}#game>.global-game:not(.global-result){height:100%;min-height:0;overflow:auto;--map-available-height:100%}#game>.global-map{overflow:hidden}.play-surface{position:relative;container-type:inline-size;width:min(100%,calc((100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom))*16/9));aspect-ratio:16/9;margin:auto;top:50%;transform:translateY(-50%);overflow:hidden;touch-action:none;user-select:none}canvas{display:block;width:100%;height:100%;image-rendering:pixelated;outline:none}#boot,#rotate{position:fixed;inset:0;z-index:2000;background:#04192e;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;gap:20px;font-size:14px;line-height:1.8}#rotate{z-index:3000}#rotate p{font-size:11px}#retry{background:#ffdc54;color:#04192e;border:0;padding:12px 20px}.global-notice{font-size:11px}.global-start-columns{grid-template-columns:1fr 1fr}.global-game .global-footer{flex-wrap:nowrap}.global-game .global-footer button{font-size:9px;min-width:0;padding-inline:4px}.global-guide-body{height:auto;min-height:0;flex:1}.global-game .global-header{flex-shrink:0}.global-run-menu{z-index:10}.global-game.global-about{overflow:hidden!important}.global-guide-tabs{margin:0}.global-game.global-menu>.global-panel{flex-shrink:0}.global-portrait{flex-shrink:0}
+@media(orientation:landscape) and (max-height:500px){.global-start{padding:5px 10px;gap:4px}.global-logo{height:48px;width:190px}.global-start .global-panel{padding:5px;gap:4px}.global-start .global-panel h3{font-size:10px}.global-start .global-portrait{width:min(100%,66px)}.global-start .global-portraits button{font-size:9px}.global-game.global-start .global-start-actions>.global-button{height:44px;min-height:44px}.global-start .global-difficulties{margin:0}.global-start .global-difficulty-help{font-size:8px}.global-start .global-difficulties .global-button{min-height:40px}.global-footer .global-button{border-width:8px}.global-guide-tabs .global-button{font-size:9px;border-width:8px}.global-game .global-header{min-height:44px}.global-game .global-header h2{font-size:12px;order:0;flex-basis:auto}.global-game .global-header .global-button{font-size:8px;border-width:8px}.global-game.global-about{gap:5px}.global-achievements{padding-bottom:4px}.global-guide-pages h3{font-size:10px}}
+
+/* Keep phone text stable and reserve space for every header/control. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+#game .global-header{min-height:56px;box-sizing:border-box;padding:6px 12px;gap:8px}
+#game .global-header .global-button{height:44px;min-height:44px;min-width:60px;border-width:8px;padding:2px 6px;font-size:9px;line-height:1.25;flex:0 0 auto}
+#game .global-header h2{font-size:clamp(12px,2.2vw,22px);margin:0;line-height:1.2}
+#game .global-guide-body{font-size:12px;line-height:1.65}
+#game .global-guide-body p,#game .global-guide-body li{font-size:inherit;line-height:inherit}
+#game .global-guide-body h3{font-size:13px;line-height:1.5}
+#game .gameplay-actions button{bottom:5px;width:82px;min-width:82px;min-height:44px;height:44px;padding:4px;font-size:12px;background:rgba(9,18,15,.65)}
+#game .gameplay-actions button[data-action="pause"]{width:82px}
+#game .play-surface [data-action="slide"]{left:10px}
+#game .play-surface [data-action="jump"]{right:10px}
+#game .global-run-menu{top:8px;right:8px}
+#game .play-surface .gameplay-hud:not(.secret-hud) .hud-panel{left:8px;top:8px;width:calc(100% - 68px);max-width:none;transform:none;transform-origin:top left}
+@container(max-width:800px){
+ #game .play-surface .gameplay-hud:not(.secret-hud) .hud-panel{width:calc((100% - 68px)/.75);transform:scale(.75)}
+}
+
+#rotate .rotate-logo{width:min(76vw,320px);height:auto;max-height:34svh;object-fit:contain;image-rendering:pixelated}
+#rotate h1{font-size:clamp(16px,4vw,24px);line-height:1.6;margin:0}

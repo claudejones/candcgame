@@ -49,6 +49,9 @@ jobs:
             cp -R qa/asset-compare _site/qa/asset-compare
           fi
           cp -R assets _site/assets
+          node mobile-game/verify-package.mjs mobile-game
+          cp -R mobile-game _site/mobile-game
+          rm -rf _site/mobile-game/build-tools
           touch _site/.nojekyll
 
       - name: Setup Pages
