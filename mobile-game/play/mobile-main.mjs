@@ -10,7 +10,7 @@ const loader=new AssetLoader(),limit=24,originalLoad=loader.load.bind(loader);
 loader.load=source=>{const p=originalLoad(source);loader.cache.delete(source);loader.cache.set(source,p);while(loader.cache.size>limit)loader.cache.delete(loader.cache.keys().next().value);return p;};
 let run=null,images={},ui=null,last=null,request=0,generation=0,auto=null;
 function release(){run?.holdSlide?.(false);}
-function pause(){release();run?.pause();last=null;sharedAudio.setPaused(true);}
+function pause(){release();run?.pause();last=null;if(ui?.presenting())sharedAudio.setPaused(true);}
 function interrupt(){pause();sharedAudio.visibility(document.hidden||portrait.matches);}
 function rotation(){ $('rotate').hidden=!portrait.matches;panel.inert=portrait.matches;if(portrait.matches)interrupt();else{sharedAudio.visibility(document.hidden);last=null;} }
 function paint(){
