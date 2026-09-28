@@ -27,8 +27,20 @@ export class PlayRuntime {
   get time(){return this.steps*RUNTIME_STEP;}
   get character(){return this.items.get(`character:${this.who}:${this.motion.state}`);}
   start(){if(this.status==='ready'||this.status==='paused'){this.status='playing';this.motion.setState('run');}}
-  pause(){if(this.status==='playing'){this.status='paused';this.motion.setState('idle');}this.carry=0;}
-  holdSlide(held){if(!held){this.motion.slideHeld=false;return;}if(this.action('slide'))this.motion.slideHeld=true;}
+  pause(){this.holdSlide(false);if(this.status==='playing'){this.status='paused';this.motion.setState('idle');}this.carry=0;}
+  holdSlide(held){
+    this.slideRequested=!!held&&this.status==='playing';
+    if(!this.slideRequested){this.motion.slideHeld=false;return;}
+    if(this.action('slide'))this.motion.slideHeld=true;
+  }
+  updateMotion(dt){
+    this.motion.update(dt);
+    // A held control survives landing/recovery; releasing cancels the intent.
+    if(this.slideRequested&&this.status==='playing'&&this.recovery<=0&&this.motion.state!=='jump'&&this.motion.state!=='hit'){
+      if(this.motion.state!=='slide')this.action('slide');
+      this.motion.slideHeld=true;
+    }
+  }
   action(kind){
     if(this.status!=='playing'||this.recovery>0||this.motion.state==='hit')return false;
     const previous=this.motion.state;
@@ -59,7 +71,7 @@ export class PlayRuntime {
     if(this.status!=='playing'&&!(force&&['ready','paused'].includes(this.status)))return;
     if(this.status==='ready')this.status='paused';
     this.steps++;this.invulnerable=Math.max(0,this.invulnerable-RUNTIME_STEP);this.recovery=Math.max(0,this.recovery-RUNTIME_STEP);
-    this.motion.update(RUNTIME_STEP);
+    this.updateMotion(RUNTIME_STEP);
     const cutoff=this.duration-this.config.spawnDirector.finishRelease;
     const pacing=encounterPacing((this.time+(1080-this.config.characterX)/this.profile.groundSpeed)/this.duration,this.profile,this.config,this.snapshot.difficulty);this.pacingPhase=pacing.phase;
     if(!this.sequence&&this.hazards.length&&this.spawned<this.profile.count*5&&this.time>=this.nextSpawn&&this.time<cutoff&&this.active.length<pacing.maxVisible){
