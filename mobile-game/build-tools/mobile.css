@@ -21,3 +21,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 #rotate .rotate-logo{width:min(76vw,320px);height:auto;max-height:34svh;object-fit:contain;image-rendering:pixelated}
 #rotate h1{font-size:clamp(16px,4vw,24px);line-height:1.6;margin:0}
+/* Prevent iOS long-press selection/callouts without disabling menu scrolling. */
+#game,#game *,#rotate,#rotate *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#game img,#rotate img{-webkit-user-drag:none}
+#game input,#game textarea{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
