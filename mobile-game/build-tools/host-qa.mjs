@@ -1,0 +1,21 @@
+import fs from 'node:fs';import path from 'node:path';import vm from 'node:vm';import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {pathToFileURL} from 'node:url';import {Node,findButton} from '../global-dom-harness.mjs';
+const app=path.resolve(process.argv[2],'play'),{createCanvas,loadImage}=createRequire('/opt/codex/runtimes/codex-primary-runtime/dependencies/node/package.json')('@napi-rs/canvas');
+const ids=new Map([...fs.readFileSync(path.join(app,'index.html'),'utf8').matchAll(/id="([^"]+)"/g)].map(m=>[m[1],new Node()]));
+const panel=ids.get('game'),surface=ids.get('surface');panel.append(surface);const canvas=createCanvas(960,540);canvas.focus=()=>{};ids.set('run-canvas',canvas);
+for(const [id,cls] of [['run-hearts','life-hud'],['run-stage-title','stage-title'],['run-progress','progress-track'],['run-progress-marker','progress-marker'],['run-path','progress-path']]){ids.get(id).className=cls;ids.get('run-hud').append(ids.get(id));}surface.append(ids.get('run-hud'));for(let i=0;i<3;i++){const n=new Node();n.className='life-heart';ids.get('run-hearts').append(n);}
+const actions=new Node();actions.className='gameplay-actions';surface.append(actions);for(const a of ['slide','pause','jump'])actions.append(ids.get('run-'+a));
+const events={},frames=new Map(),portrait={matches:false,addEventListener(t,fn){this.change=fn;}},memory=new Map();let frameId=0;
+globalThis.document={createElement:t=>new Node(t),getElementById:id=>ids.get(id),hidden:false,addEventListener(t,fn){(events[t]??=[]).push(fn);}};globalThis.window=globalThis;globalThis.addEventListener=(t,fn)=>(events[t]??=[]).push(fn);globalThis.matchMedia=q=>q.includes('portrait')?portrait:{matches:false};globalThis.requestAnimationFrame=fn=>{frames.set(++frameId,fn);return frameId;};globalThis.cancelAnimationFrame=id=>frames.delete(id);globalThis.localStorage={getItem:k=>memory.get(k)||null,setItem:(k,v)=>memory.set(k,v)};
+globalThis.fetch=async url=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path.resolve(app,url.split('?')[0])))});
+globalThis.Image=class{get src(){return this.source;}set src(source){this.source=source;loadImage(path.resolve(app,source.split('?')[0])).then(im=>{this.native=im;this.naturalWidth=im.width;this.naturalHeight=im.height;this.onload?.();}).catch(()=>this.onerror?.());}async decode(){}};
+const c=canvas.getContext('2d'),draw=c.drawImage.bind(c);c.drawImage=(im,...args)=>draw(im.native||im,...args);
+vm.runInThisContext(fs.readFileSync(path.join(app,'landscape-contract.js'),'utf8'));
+await (await import(pathToFileURL(path.join(app,'mobile-main.mjs')))).started;
+assert(ids.get('boot').hidden,'boot failed: '+ids.get('boot-text').textContent);const root=panel.querySelector('#global-game');await findButton(root,'New Game').click();await findButton(root,'Stages').click();await findButton(root,'Play').click();
+function tick(t){const calls=[...frames.values()];frames.clear();calls.forEach(fn=>fn(t));}
+tick(0);tick(100);assert.equal(ids.get('run-pause').textContent,'PAUSE');
+ids.get('run-pause').onpointerdown({button:0,preventDefault(){}});tick(200);assert.equal(ids.get('run-pause').textContent,'RESUME');assert(ids.get('run-jump').disabled);
+ids.get('run-pause').onclick({detail:0});tick(300);assert.equal(ids.get('run-pause').textContent,'PAUSE');
+portrait.matches=true;portrait.change();assert.equal(ids.get('rotate').hidden,false);assert.equal(panel.inert,true);portrait.matches=false;portrait.change();tick(400);assert.equal(ids.get('run-pause').textContent,'RESUME');
+ids.get('run-pause').onclick({detail:0});document.hidden=true;events.visibilitychange.forEach(fn=>fn());document.hidden=false;events.visibilitychange.forEach(fn=>fn());tick(500);assert.equal(ids.get('run-pause').textContent,'RESUME');assert([...memory.keys()].every(k=>k.startsWith('candc.mobile-test.')));assert(memory.size>0);
+console.log('Independent mobile host: original asset loading, immediate Play, pause/resume, rotate pause, hidden-tab pause and isolated local saves passed. Physical touch/audio/layout still require devices.');
