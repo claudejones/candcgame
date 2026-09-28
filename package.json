@@ -1,0 +1,10 @@
+{
+  "name": "candc-workbench-and-game",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "0.1.100"
+  }
+}

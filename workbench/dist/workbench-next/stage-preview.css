@@ -1,0 +1,63 @@
+/* Stage playback gives the canvas first claim on space. Single-pass editing
+   retains its original inspector and controls when the stage preview closes. */
+.stage-preview-tools{flex:0 0 auto;padding:.5rem .65rem;border:1px solid var(--line);border-radius:8px;margin:0}
+.stage-preview-bar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.stage-preview-bar label{display:flex;align-items:center;gap:.5rem;margin:0;font-size:.875rem}
+.stage-preview-bar .preview-mode{flex:0 0 auto}
+.stage-preview-bar .preview-mode select{width:auto;min-width:11rem}
+.stage-preview-bar .preview-scrubber{flex:1 1 12rem}
+.stage-preview-bar input[type=range]{width:100%;min-width:8rem}
+#sequence-preview-status{flex:0 1 auto;font-size:.8rem;margin:0}
+#sequence-details{margin-top:.35rem}
+#sequence-details>summary{font-size:.875rem;cursor:pointer}
+.sequence-detail-body{max-height:32dvh;overflow:auto;padding:.7rem 0 .2rem}
+.sequence-detail-body .playback{justify-content:flex-start;flex-wrap:wrap;gap:.8rem}
+.sequence-detail-body .playback>label{display:flex;align-items:center;gap:.5rem}
+.sequence-detail-body select{width:auto;min-width:10rem;max-width:100%}
+.sequence-timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.4rem;margin-top:.6rem}
+.sequence-section{display:flex;flex-direction:column;gap:.35rem;padding:.35rem;border-left:2px solid #677e80}
+.sequence-section button{font-size:.8rem;padding:.4rem;white-space:normal;min-width:0}
+#sequence-list{max-height:12rem;overflow:auto}
+#actor-slide,#run-slide{touch-action:none}
+.workspace:has(#stage-preview-tools:not([hidden])):not(.screens-active){grid-template-columns:218px minmax(0,1fr)}
+.workspace:has(#stage-preview-tools:not([hidden])):not(.screens-active)>.inspector{display:none}
+.workspace:has(#stage-preview-tools:not([hidden])):not(.screens-active)>.studio{overflow:auto}
+.workspace:has(#stage-preview-tools:not([hidden])) .preview-area{min-height:clamp(240px,48dvh,640px);flex:1 0 auto}
+.workspace:has(#stage-preview-tools:not([hidden])) #sprite-views,
+.workspace:has(#stage-preview-tools:not([hidden])) .baseline-card{display:none!important}
+.workspace:has(#stage-preview-tools:not([hidden])) #actor-dock{padding-top:.4rem;margin-top:0}
+.workspace:has(#stage-preview-tools:not([hidden])) #actor-dock .scene-readout,
+.workspace:has(#stage-preview-tools:not([hidden])) #scene-playback-help{display:none}
+.workspace:has(#sequence-details:not([open])):has(#stage-preview-tools:not([hidden])) #actor-dock .contact-row,
+.workspace:has(#sequence-details:not([open])):has(#stage-preview-tools:not([hidden])) #actor-step,
+.workspace:has(#sequence-details:not([open])):has(#stage-preview-tools:not([hidden])) #actor-stop{display:none}
+.workspace:has(#stage-preview-tools:not([hidden])) #actor-jump:disabled,
+.workspace:has(#stage-preview-tools:not([hidden])) #actor-slide:disabled{display:none}
+.workspace.focus-mode:has(#stage-preview-tools:not([hidden])):not(.screens-active){grid-template-columns:minmax(0,1fr)}
+@media(max-width:900px){
+ .workspace:has(#stage-preview-tools:not([hidden])):not(.screens-active){grid-template-columns:170px minmax(0,1fr)}
+ .stage-preview-bar{gap:.5rem}
+ #sequence-preview-status{flex-basis:100%}
+}
+@media(max-width:650px){
+ .workspace:has(#stage-preview-tools:not([hidden])):not(.screens-active){grid-template-columns:minmax(0,1fr)}
+ .workspace:has(#stage-preview-tools:not([hidden])):not(.screens-active)>.studio{grid-column:1/-1}
+ .sequence-timeline{grid-template-columns:1fr}
+ .sequence-section{flex-direction:row;flex-wrap:wrap}
+}
+.workspace:has(#stage-preview-tools:not([hidden])):not(.screens-active) #calibration-panel{display:none}
+
+.sequence-section .sequence-rest{border:1px dashed var(--line);background:transparent;color:var(--muted);font-size:.75rem;padding:.25rem}.sequence-section .long-rest{border-color:#edb76a;color:#edb76a}
+
+/* Finish overrides use the existing Inspector only when explicitly inspecting it. */
+.workspace:has(#stage-preview-tools:not([hidden])):has(#finish-panel[open]):not(.screens-active):not(.focus-mode){grid-template-columns:218px minmax(0,1fr) 280px}
+.workspace:has(#stage-preview-tools:not([hidden])):has(#finish-panel[open]):not(.screens-active):not(.focus-mode)>.inspector{display:block}
+.workspace:has(#stage-preview-tools:not([hidden])):has(#finish-panel[open])>.inspector>:not(.section-label):not(#finish-panel):not(#message){display:none}
+@media(max-width:1100px){
+ .workspace:has(#stage-preview-tools:not([hidden])):has(#finish-panel[open]):not(.screens-active):not(.focus-mode){grid-template-columns:170px minmax(0,1fr)}
+ .workspace:has(#stage-preview-tools:not([hidden])):has(#finish-panel[open]):not(.screens-active)>.inspector{grid-column:2;overflow:visible}
+}
+@media(max-width:650px){
+ .workspace:has(#stage-preview-tools:not([hidden])):has(#finish-panel[open]):not(.screens-active):not(.focus-mode){grid-template-columns:minmax(0,1fr)}
+ .workspace:has(#stage-preview-tools:not([hidden])):has(#finish-panel[open]):not(.screens-active)>.inspector{grid-column:1}
+}

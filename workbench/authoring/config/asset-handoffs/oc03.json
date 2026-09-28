@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "stageId": "oc03",
+  "readiness": "asset-ready",
+  "downstream": {
+    "calibration": "pending",
+    "release": "pending"
+  },
+  "assets": {
+    "FAR": {
+      "path": "assets/worlds/oceania/OC03_BG_DISTANT_FIORDLAND.png",
+      "sha256": "602e1337cf83fb36abb305fc4f5bbb13f952801ad9ccaad2722beeaab817d526",
+      "width": 2172,
+      "height": 724
+    },
+    "MID": {
+      "path": "assets/worlds/oceania/OC03_BG_MID_FIORDLAND.png",
+      "sha256": "881a91f7048e0ddb69c6ff1f8671315f32ee40b9f7b39a1672fa1cae6a262ac3",
+      "width": 2172,
+      "height": 724
+    },
+    "GROUND": {
+      "path": "assets/worlds/oceania/OC03_GROUND_FIORDLAND.png",
+      "sha256": "07d6937e662b5a8d705f1489b09d7f5487707591460835bc35c3496dbd468695",
+      "width": 2172,
+      "height": 724
+    },
+    "OBJECT_ATLAS": {
+      "path": "assets/worlds/oceania/OC03_OBJECT_ATLAS.png",
+      "sha256": "dd4f52ef92f42e1ca586d46334ad45e159b2284a71a44c09f8953d21cf6e5143",
+      "width": 2172,
+      "height": 724
+    },
+    "FLYING": {
+      "path": "assets/worlds/oceania/OC03_HAZARD_KEA.png",
+      "sha256": "c5b378869445acd9c989dd06c7c37b232850b7c1ba89c577d8e8aa708041183a",
+      "width": 2172,
+      "height": 724
+    }
+  },
+  "landscape": {
+    "contractVersion": "phase8-landscape-1",
+    "source": {
+      "width": 2172,
+      "height": 724
+    },
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "groundSurfaceY": 410
+    },
+    "layers": {
+      "FAR": {
+        "sourceY": 0,
+        "scale": 1.25
+      },
+      "MID": {
+        "sourceAnchorY": 621,
+        "offsetY": 0,
+        "scale": 1
+      },
+      "GROUND": {
+        "sourceAnchorY": 393,
+        "offsetY": 0,
+        "scale": 1
+      }
+    }
+  },
+  "hazards": [
+    {
+      "name": "Hiking backpack",
+      "kind": "ground",
+      "atlasKey": "oc03Hazards",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.2,
+      "crop": {
+        "l": 331,
+        "r": 330,
+        "t": 47,
+        "b": 100
+      },
+      "cw": 0.8941176470588236,
+      "ch": 0.8925476603119584,
+      "cx": -0.001176470588235294,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Lidded camping cookpot",
+      "kind": "ground",
+      "atlasKey": "oc03Hazards",
+      "rect": {
+        "x": 1086,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.24,
+      "crop": {
+        "l": 309,
+        "r": 308,
+        "t": 336,
+        "b": 99
+      },
+      "cw": 0.767590618336887,
+      "ch": 0.8823529411764706,
+      "cx": 0.0010660980810234541,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Kea",
+      "kind": "flying",
+      "atlasKey": "oc03Bird",
+      "frameW": 543,
+      "frameH": 724,
+      "frames": 4,
+      "fps": 8,
+      "sourceAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "scale": 0.27,
+      "crop": {
+        "l": 40,
+        "r": 79,
+        "t": 34,
+        "b": 119
+      },
+      "cw": 0.6061320754716981,
+      "ch": 0.2276707530647986,
+      "cx": 0.13797169811320756,
+      "cy": 0.05691768826619965,
+      "flightOffsetY": {
+        "high": 0,
+        "low": 0
+      },
+      "flipX": true,
+      "sourceFacing": "right",
+      "gameplayFacing": "left"
+    }
+  ],
+  "checks": {
+    "technical": true,
+    "composition": true,
+    "animation": true,
+    "basicRendering": true
+  },
+  "evidence": "docs/phase8-qa/OC03_WORKBENCH_IMPORT_QA.md",
+  "knownIssues": [
+    "Starting settings are provisional; artwork review and calibration pending. Kea contrast against forest requires user review."
+  ]
+}

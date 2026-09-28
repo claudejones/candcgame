@@ -1,0 +1,29 @@
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';
+import {descriptors} from '../dist/workbench-next/model.mjs';import {landscapeDescriptors} from '../dist/workbench-next/landscape.mjs';import {ProjectDraft,projectProvenance} from '../dist/workbench-next/project.mjs';import {analyzeProfiles,makeSequence} from '../dist/workbench-next/calibration-engine.mjs';import {runtimeSnapshot,PlayRuntime} from '../dist/workbench-next/play-runtime.mjs';import {finishGeometry,FINISH_BASE_RATIO} from '../dist/workbench-next/stage-settings.mjs';
+const context={window:{}};vm.createContext(context);for(const f of JSON.parse(fs.readFileSync('authoring/workbench-next/source-files.json')))vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),context);
+const w=context.window,config=w.GAME_CONFIG;w.CC_LANDSCAPE_CONTRACT.apply(config,w.CC_LANDSCAPE_REGISTRY);const items=descriptors(config,w.GAME_SCHEMA),stages=landscapeDescriptors(config,w.CC_LANDSCAPE_REGISTRY,w.CC_LANDSCAPE_CONTRACT),catalog=JSON.parse(fs.readFileSync('dist/workbench-next/asset-catalog.json'));
+const makeDraft=()=>new ProjectDraft(items,stages,catalog.dimensions,projectProvenance(catalog,items,stages),catalog.migrations,config),draft=makeDraft();
+const payload=JSON.parse(fs.readFileSync(process.argv[2]||'authoring/fixtures/combination-project-v9.json')),decoded=draft.decode(payload).state;Object.assign(draft,{value:decoded.crops,...decoded});
+const before=JSON.stringify(draft.export());let runs=0;const totals={};
+for(const stage of stages.map(s=>s.stage).filter(s=>!process.env.STAGE_FILTER||s===process.env.STAGE_FILTER))for(const difficulty of ['easy','standard','hard']){
+ const d={...draft,calibration:{...draft.calibration,profile:difficulty}},reports=items.filter(i=>i.type==='hazard'&&i.stage===stage).map(item=>{const reports=analyzeProfiles({config,draft:d,items,item,profiles:[difficulty]})[difficulty];return {id:item.id,stage,reports,ready:reports.every(r=>r.pass)};});
+ const sequence=makeSequence({config,draft:d,items,reports,stage,seed:config.spawnDirector.seed});assert.equal(sequence.duration,90);assert.deepEqual(sequence.pacingBoundaries,[0,18,36,54,72]);assert(sequence.events.every(e=>e.exit<=89.85+1e-8));
+ for(const rest of sequence.breathingRooms)assert(!rest.long,`${stage}/${difficulty}: excessive ${rest.kind} gap ${rest.duration.toFixed(2)}s after ${rest.start.toFixed(2)}s`);
+ for(let i=0;i<sequence.events.length;i++)for(const b of sequence.events.slice(i+1)){const a=sequence.events[i];if(a.kind!=='flying'||b.kind!=='flying'||a.bounds.bottom<=b.bounds.top||b.bounds.bottom<=a.bounds.top)continue;const from=Math.max(0,a.start+a.enter,b.start+b.enter),to=Math.min(90,a.exit,b.exit);if(to<=from)continue;for(const t of [from,to])assert(b.bounds.left-(t-b.start)*b.speed-(a.bounds.right-(t-a.start)*a.speed)>=11.99,`${stage}/${difficulty}: overlapping/overtaking flyers`);}
+ for(const c of sequence.combinations)totals[c.label]=(totals[c.label]??0)+1;
+ for(const character of ['claude','constance']){
+  let consecutiveSlides=0;for(const event of [...sequence.events].sort((a,b)=>(a.start+a.local[character])-(b.start+b.local[character]))){consecutiveSlides=event.action==='slide'?consecutiveSlides+1:0;assert(consecutiveSlides<=2,stage+'/'+difficulty+': three consecutive slides');}
+  const run=new PlayRuntime(runtimeSnapshot({config,draft:d,items,catalog,stage,character,difficulty,sequence}));run.start();let next=0;
+  while(run.status==='playing'&&run.time<91){while(next<sequence.events.length&&run.time+1e-8>=sequence.events[next].start+sequence.events[next].local[character])run.plannedAction(sequence.events[next++]);run.tick();}
+  assert.equal(run.hits,0,`${stage}/${difficulty}/${character}`);assert.equal(run.status,'complete');assert.equal(run.time,90);runs++;
+ }
+ console.log(stage,difficulty,sequence.events.length,sequence.combinations.map(c=>c.label).join(' | '));
+ if(stage==='na01'&&difficulty==='standard')assert.deepEqual(makeSequence({config,draft:d,items,reports,stage,seed:config.spawnDirector.seed}),sequence);
+}
+assert.equal(JSON.stringify(draft.export()),before);
+const ss=structuredClone(draft.stageSettings.na01);ss.finish={groundOffset:17,xOffset:60,scale:.4};ss.combinations={...ss.combinations,length:4,holdSeconds:2,density:1.2};draft.editStageSettings('na01',ss);assert(draft.dirty);draft.undo();assert.equal(JSON.stringify(draft.export()),before);draft.redo();assert.deepEqual(draft.stageSettings.na01,ss);
+const memory=new Map(),storage={getItem:k=>memory.get(k)??null,setItem:(k,v)=>memory.set(k,v)};draft.save(storage);assert(!draft.dirty);const restored=makeDraft();restored.load(storage);assert.deepEqual(restored.export(),draft.export());assert.deepEqual(restored.decode(draft.export()).state.stageSettings,draft.stageSettings);
+const marker={width:150,height:350},g=finishGeometry(config,draft,'na01',90,90,120,marker,new PlayRuntime(runtimeSnapshot({config,draft,items,catalog,stage:'na01',character:'claude'})).geometry().character.foot);assert.equal(g.x+g.w/2,config.characterX);assert.equal(g.y+g.h*FINISH_BASE_RATIO,new PlayRuntime(runtimeSnapshot({config,draft,items,catalog,stage:'na01',character:'claude'})).geometry().character.foot+17);
+for(const character of ['claude','constance']){const run=new PlayRuntime(runtimeSnapshot({config,draft,items,catalog,stage:'na01',character}));run.start();run.holdSlide(true);run.advance(2);assert.equal(run.motion.state,'slide');run.holdSlide(false);run.advance(1);assert.notEqual(run.motion.state,'slide');run.holdSlide(true);run.pause();assert.equal(run.motion.slideHeld,false);}
+assert(totals['Hold slide']>0);assert(Object.keys(totals).some(k=>k.includes('jump → slide')));assert(Object.keys(totals).some(k=>k==='jump → jump → jump'));
+console.log(JSON.stringify({runs,totals,persistence:'round-trip/undo/redo/save/import',duration:90}));

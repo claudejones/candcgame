@@ -1,0 +1,14 @@
+interface:
+  display_name: C&C Stage Images
+  short_description: Generate, correct and deliver five stage PNGs in a ZIP
+  default_prompt: Use $candc-stage-images to generate the five images for AS01 inline
+    from its approved brief.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

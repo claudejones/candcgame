@@ -1,0 +1,1406 @@
+{
+  "version": "1.0",
+  "approval": "All 21 trophies and seven continent passport designs approved",
+  "continent_order": [
+    "NA",
+    "SA",
+    "EU",
+    "AF",
+    "AS",
+    "OC",
+    "AN"
+  ],
+  "passport_atlas": "shared/assets/PASS_STAMPS_ATLAS.png",
+  "passport_frames": [
+    {
+      "id": "PASS_STAMP_NA",
+      "state": "unearned",
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_NA",
+      "state": "earned",
+      "rect": [
+        0,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_SA",
+      "state": "unearned",
+      "rect": [
+        256,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_SA",
+      "state": "earned",
+      "rect": [
+        256,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_EU",
+      "state": "unearned",
+      "rect": [
+        512,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_EU",
+      "state": "earned",
+      "rect": [
+        512,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_AF",
+      "state": "unearned",
+      "rect": [
+        768,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_AF",
+      "state": "earned",
+      "rect": [
+        768,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_AS",
+      "state": "unearned",
+      "rect": [
+        1024,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_AS",
+      "state": "earned",
+      "rect": [
+        1024,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_OC",
+      "state": "unearned",
+      "rect": [
+        1280,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_OC",
+      "state": "earned",
+      "rect": [
+        1280,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_AN",
+      "state": "unearned",
+      "rect": [
+        1536,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "id": "PASS_STAMP_AN",
+      "state": "earned",
+      "rect": [
+        1536,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    }
+  ],
+  "utility_atlas": "shared/assets/UI_REWARD_UTILITIES_ATLAS.png",
+  "utility_frames": {
+    "heart_empty": [
+      0,
+      0,
+      32,
+      32
+    ],
+    "heart_full": [
+      32,
+      0,
+      32,
+      32
+    ],
+    "perfect_star": [
+      64,
+      0,
+      32,
+      32
+    ]
+  },
+  "rect_convention": "[x,y,width,height], exclusive right/bottom",
+  "pngs": [
+    {
+      "file": "continents/AF/assets/PASS_AF_ATLAS.png",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "50d49d2f0eef02ac15c5df8c3a50c0abe3dc9909f85b78b1ccd3f6c366b6a4cc"
+    },
+    {
+      "file": "continents/AF/assets/PASS_STAMP_AF.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "c2c1e128cd875051fafe2de17c61c86522b2a7492f00ed7b220b7acccab08f5e"
+    },
+    {
+      "file": "continents/AF/assets/PASS_STAMP_AF_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "e36063b85c210aaa5cc6a034280986531080a632ee8885370ce4ae2e8b1c26f6"
+    },
+    {
+      "file": "continents/AF/assets/TROPHY_AF01.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "95e43469bd62b13e68fba42f9f997dbf9003b4298107462629e135f23a2f8139"
+    },
+    {
+      "file": "continents/AF/assets/TROPHY_AF01_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "f36df56cb8b617b644e9feb3cb85e4f74f611783cc21c917fd9e7b812a84a1e7"
+    },
+    {
+      "file": "continents/AF/assets/TROPHY_AF02.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "d6f200cbabf459569389b70b3b0ff129140418c7c7c101251bd524888c8dc9c7"
+    },
+    {
+      "file": "continents/AF/assets/TROPHY_AF02_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "f41c5be03300da0047792653c43ba3e3d5e5e32188b64f4753df6f7075b7b00d"
+    },
+    {
+      "file": "continents/AF/assets/TROPHY_AF03.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "de9a83ab2f0c7d87648584acc0d98ddb5d5b894fa19c96f2e91fd49c711f65d2"
+    },
+    {
+      "file": "continents/AF/assets/TROPHY_AF03_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "8825ecd26d9b5bba2c435a05f57f97454440347e023d4cd8178ff0ba1a48c6ff"
+    },
+    {
+      "file": "continents/AF/assets/TROPHY_AF_ATLAS.png",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "9e924615174b1332dba09ed3b11b16daa14df821293a7e9d51c5ca55dfd322b3"
+    },
+    {
+      "file": "continents/AF/originals/PASS_STAMP_AF_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "61582e461f946810f68fb11c39d23e6d2fec9c1883193b371821125080c8e9b7"
+    },
+    {
+      "file": "continents/AF/originals/TROPHY_AF01_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "13f8f7f37588137559177ece490ad87b9550da787c86837a64a1581ed699741a"
+    },
+    {
+      "file": "continents/AF/originals/TROPHY_AF02_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "b5e31cb8df8e2cafabf619def3f968d27a6c18175368cd4a4e02fcbc882c86db"
+    },
+    {
+      "file": "continents/AF/originals/TROPHY_AF03_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "f8491ad6a8837d27b5270279d0131b05b83f340ae5610c1414d026351cbf9ad6"
+    },
+    {
+      "file": "continents/AF/previews/RW_AF_assisted.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "b618a1d0b56f6e2b335d69529bcc1e4f318ec29dc34e7d5514110b940436bb8b"
+    },
+    {
+      "file": "continents/AF/previews/RW_AF_mixed.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "7f284529d2924377f61ffe5369ccecec36a43c5c9ee39cdbf12533a6d6a2c467"
+    },
+    {
+      "file": "continents/AF/previews/RW_AF_perfect.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "0e9c6213eaead9c1b461e93110eeedcbf28be2e15e01fbc5760002d2e53b6010"
+    },
+    {
+      "file": "continents/AF/previews/RW_AF_unearned.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "e7099a294aa233d12adc02d8daacc090a1e90fe5bc6077c1758ba6995ef3285d"
+    },
+    {
+      "file": "continents/AN/assets/PASS_AN_ATLAS.png",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "d091f2fbc94311461746f2281e19c4c4690e0b2f6a1a6fdd351e02bb7a0bd907"
+    },
+    {
+      "file": "continents/AN/assets/PASS_STAMP_AN.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "4a90887b8094983df2c1e62c239b1420ac22a8e42be4b45ecb72cccd70283a90"
+    },
+    {
+      "file": "continents/AN/assets/PASS_STAMP_AN_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "bb25e8a0d2de98ed30e53c638e959b5c559c9c5e2376a615f96930cec4007f56"
+    },
+    {
+      "file": "continents/AN/assets/TROPHY_AN01.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "9e7cfeb5f89cd88f67ac2138f54dccd5eebe6913d4d05239120b2be899b14272"
+    },
+    {
+      "file": "continents/AN/assets/TROPHY_AN01_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "2803b4763d5adae0013424e12d7084f2b9a26acd1a228f37bbbfa28eaabb7b4f"
+    },
+    {
+      "file": "continents/AN/assets/TROPHY_AN02.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "0435f173af04a3e4aab682c4b41e872a222eaaae071f1730fa8f6cbbb540d120"
+    },
+    {
+      "file": "continents/AN/assets/TROPHY_AN02_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "1a8eb3560b82db2719a87f926d9a9bad6c3198fad06c11ea7c601492c522f897"
+    },
+    {
+      "file": "continents/AN/assets/TROPHY_AN03.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "5c41faf677af85a657a4ec07bb4d1c553baf1db7eec3b0292631fdacfd34415a"
+    },
+    {
+      "file": "continents/AN/assets/TROPHY_AN03_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "6939458d75895f322fca5519be5c745659403a20216aabf1aacfd649b92ff1f6"
+    },
+    {
+      "file": "continents/AN/assets/TROPHY_AN_ATLAS.png",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "5f3e25ccadfafa73b9424be3f128be70078d354bd3449586a9500334c8f0c550"
+    },
+    {
+      "file": "continents/AN/originals/PASS_STAMP_AN_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "8b3379fc9685d8c99fd19554cdf748b2de77d1ae56c4fc13f25a7570cddee5dd"
+    },
+    {
+      "file": "continents/AN/originals/TROPHY_AN01_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "13b14b9c8b4081ce1ec15546118864be11967de6a93c22ad5067a9c85bfa3251"
+    },
+    {
+      "file": "continents/AN/originals/TROPHY_AN02_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "ce6073a5c38d05b224537b4f3938ba7e2d95bb304cd72009beed5279c5bc378a"
+    },
+    {
+      "file": "continents/AN/originals/TROPHY_AN03_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "f5bb1d606552732d246c3b1973562e7cea9afaab02347a05a18c67b18564146c"
+    },
+    {
+      "file": "continents/AN/previews/RW_AN_assisted.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "b8e555cad13d6a9b5f49402ae99aeb4b898314f712026f187f2015e4cd51be86"
+    },
+    {
+      "file": "continents/AN/previews/RW_AN_mixed.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "09ee2ce9b98c5dab058afc3298aecb580dcfbaa95a5960a79a3335a1f26e175e"
+    },
+    {
+      "file": "continents/AN/previews/RW_AN_perfect.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "1ecd779d5645de81aa0b1f86e9cbd196856603f7685fd06a8962eb89bdc867ca"
+    },
+    {
+      "file": "continents/AN/previews/RW_AN_unearned.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "68fdde774c64b0d7804fd5d7c6d8ae71f4a9e11849214ef0371c6dbcdb592e71"
+    },
+    {
+      "file": "continents/AS/assets/PASS_AS_ATLAS.png",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "a9139f70ff8556eb6f6892930965a7033c28c54ea7aa53f8803273d335524938"
+    },
+    {
+      "file": "continents/AS/assets/PASS_STAMP_AS.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "46d4cffa819c299d3698565844d10f7a728b0b7e19f96286f49168b1a9346bd7"
+    },
+    {
+      "file": "continents/AS/assets/PASS_STAMP_AS_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "0c904efd598429c1e0c8deb89e7e4ed0bb138d871e5e38a9bae659b66e7f3235"
+    },
+    {
+      "file": "continents/AS/assets/TROPHY_AS01.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "faa200df9c104bdd8a99726b600276951f577cf43e9caddd296a14ecb5eb0e12"
+    },
+    {
+      "file": "continents/AS/assets/TROPHY_AS01_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "c30e134f5bef074ddd7e2b09da9a44696d1a8fb8786fff2b7c0be8ae53d38331"
+    },
+    {
+      "file": "continents/AS/assets/TROPHY_AS02.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "1f6083c14d814452ff8aed6485b364678935c6a8ca24fff109722505fb037314"
+    },
+    {
+      "file": "continents/AS/assets/TROPHY_AS02_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "6c4e183eefd224f30908e22a029c77c7a29f7d1c3bf0565614dfd856e4a0ffcb"
+    },
+    {
+      "file": "continents/AS/assets/TROPHY_AS03.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "c983cc626db48de0bc52ff3915f10de207b61adfe876327a0d9119d166df902d"
+    },
+    {
+      "file": "continents/AS/assets/TROPHY_AS03_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "67682616e102a591df62cce8f0a4f77141233360fe162e1fff95fee3607f9002"
+    },
+    {
+      "file": "continents/AS/assets/TROPHY_AS_ATLAS.png",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "9f89398d4cd140d8ef4c90c8009a95a8c3d6d95ec8695f6b663f4612c5688b2e"
+    },
+    {
+      "file": "continents/AS/originals/PASS_STAMP_AS_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "3dd667eb6094cbc0a25960149ba85f29664dbbbc45a9987ac75a16bbd34bfc62"
+    },
+    {
+      "file": "continents/AS/originals/TROPHY_AS01_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "397ac9b615dd97dbe71526a1885523624e5d21e88810ec466024485e494313c9"
+    },
+    {
+      "file": "continents/AS/originals/TROPHY_AS02_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "b8649e4f7cbd7352ed834fd6a6d4c6403b022a5eaba2f9a3f27525fb9280d13c"
+    },
+    {
+      "file": "continents/AS/originals/TROPHY_AS03_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "2b7075fccc3d76ba03c4e5cedb5f1e6d6407cf0a514e9ee961026146a4729096"
+    },
+    {
+      "file": "continents/AS/previews/RW_AS_assisted.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "1c2482d73f10746e93c02d995a67753601c22239f7891e7836a85831e4ec6ff1"
+    },
+    {
+      "file": "continents/AS/previews/RW_AS_mixed.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "ed8530a0c3dfb9dbb7047ba09e3bc1fb02158bd28a0fe1eb6bb3fa16aedb8ee6"
+    },
+    {
+      "file": "continents/AS/previews/RW_AS_perfect.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "513148e5a053529f94a59da7448616ba4812ad3249f595ed06cf19ca4f7f6850"
+    },
+    {
+      "file": "continents/AS/previews/RW_AS_unearned.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "1615f5d04b1935bb2d4323b7a96c51940d183297b7534e5245cc15bf0c7fb6fd"
+    },
+    {
+      "file": "continents/EU/assets/PASS_EU_ATLAS.png",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "80e1fca3a7d42ed0dc9a645f6440e39176d8b610adf7527b15c8df6d062fe95a"
+    },
+    {
+      "file": "continents/EU/assets/PASS_STAMP_EU.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "1c812f8159c162d3f216e71c1ed2a6a4a0b5b04adb4941969c89a3b1e137ed67"
+    },
+    {
+      "file": "continents/EU/assets/PASS_STAMP_EU_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "e7611581c76f3db0cb8f279955fdb40b9d3f96a6271f40009e56ba324de9e097"
+    },
+    {
+      "file": "continents/EU/assets/TROPHY_EU01.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "ed7c09c577b5e61918932de14cbcc6c3145b7ea339511b457e8cef1295f264b8"
+    },
+    {
+      "file": "continents/EU/assets/TROPHY_EU01_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "2ad6c63b3e2c43f8b713806447905ebb51a28f327a688bb732c749941350aec0"
+    },
+    {
+      "file": "continents/EU/assets/TROPHY_EU02.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "e0835ac97c971a506a3b429377e810f78c8712bfc1ca8f317e8d01832419bbdc"
+    },
+    {
+      "file": "continents/EU/assets/TROPHY_EU02_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "a57ceed8d75fc3eed19fbfbfd87c9d1680f6ece78d79d1f0cf3279330e46b584"
+    },
+    {
+      "file": "continents/EU/assets/TROPHY_EU03.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "8486b5dccdfa3ce4e6a09b037c8edb65fa64788ce867d93fad7552de35cfb236"
+    },
+    {
+      "file": "continents/EU/assets/TROPHY_EU03_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "f79653127a9f80dc44f3c314b23b69121475df8b1724efc1a40836a543427c30"
+    },
+    {
+      "file": "continents/EU/assets/TROPHY_EU_ATLAS.png",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "5d6a0610eba6ef5bd618291bbbbf869aab0c157b48d6148e097a4819c740eac4"
+    },
+    {
+      "file": "continents/EU/originals/PASS_STAMP_EU_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "da2307ca61f83047828db50cc638c37963141aba8d362a2cdd6d2b9f59c131e5"
+    },
+    {
+      "file": "continents/EU/originals/TROPHY_EU01_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "713552a2378e0a0d7cfd6e1eb1ac5c8ee33ca7ca4d743b868a9812554ae0c29d"
+    },
+    {
+      "file": "continents/EU/originals/TROPHY_EU02_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "ce6e8f64f2d9b500e79f9985e064648d3c9eb1b9181344a5183747b0711aec2e"
+    },
+    {
+      "file": "continents/EU/originals/TROPHY_EU03_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "970e16d838fdef88fca5d0ddc5437f1733631b8237490960aad878d011116866"
+    },
+    {
+      "file": "continents/EU/previews/RW_EU_assisted.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "06c1e7e68bdf3fd7f227b838e5daed8e746624394bb67e9c61581bcfd69ad861"
+    },
+    {
+      "file": "continents/EU/previews/RW_EU_mixed.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "bef6660743fc16adb67c09bcd9e3a1abfb84d6950343e1d85bcee774b2a29631"
+    },
+    {
+      "file": "continents/EU/previews/RW_EU_perfect.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "69d51fabaac8de2c10b938bfe1a82069bb79db4fdbc9e77fe7cd6fc4f3f2539d"
+    },
+    {
+      "file": "continents/EU/previews/RW_EU_unearned.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "7360af5373ec1c33ae3929c71cf600392b2a15514a024e27dcf7c8c7228a81b5"
+    },
+    {
+      "file": "continents/NA/assets/PASS_NA_ATLAS.png",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "ff7a931bc4164847973c61e7f16ed85fcd0075d2169d14de19a53fcb6ef173fe"
+    },
+    {
+      "file": "continents/NA/assets/PASS_STAMP_NA.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "da8ebad6377527910bd8f33965c9d96507aa2dd7020a8e4ef92f4f385dcd00ee"
+    },
+    {
+      "file": "continents/NA/assets/PASS_STAMP_NA_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "0fb0d2f545ac704dd19bfe6c5b7667394b8c05665baea2b0134c9eeec0e174f7"
+    },
+    {
+      "file": "continents/NA/assets/TROPHY_NA01.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "245d204658193b9e143b5172ea07f6aa8b0c3ec808fa049355bbc65e48b76429"
+    },
+    {
+      "file": "continents/NA/assets/TROPHY_NA01_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "310f28993321db286c01b6f523ff20823e6ced1351d08c7fe55e3e5ebcc5d6ca"
+    },
+    {
+      "file": "continents/NA/assets/TROPHY_NA02.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "cbf6a255ad7790bf0ce7f24064fecfb80c64f851d4840db667f9d05d87337994"
+    },
+    {
+      "file": "continents/NA/assets/TROPHY_NA02_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "f465025564e18da23eb96cf5562930c39e397fcc38ed4811b181a8b1d10bfab4"
+    },
+    {
+      "file": "continents/NA/assets/TROPHY_NA03.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "c2a167662ca2aafae7781678e5fbf0f96990fdab69882d92cb11ab3b34ea8d9d"
+    },
+    {
+      "file": "continents/NA/assets/TROPHY_NA03_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "292974c2d709b0fc8240760fd884351002396b357e468f54855099e88b1c487f"
+    },
+    {
+      "file": "continents/NA/assets/TROPHY_NA_ATLAS.png",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "a3f090a6f8db4538aa5959a2403ffd43e24f5e6ec0c1f7def93f184116fabe73"
+    },
+    {
+      "file": "continents/NA/originals/PASS_STAMP_NA_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "ad88881f0f466212efdf6520f38bfe920cedaf70d1c725120a996f69152618cc"
+    },
+    {
+      "file": "continents/NA/originals/TROPHY_NA01_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "48989b8ef7fd60325ed0b8ec27856b874244e74b380d2eb0483e94dfa8d148ff"
+    },
+    {
+      "file": "continents/NA/originals/TROPHY_NA02_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "2baf772b01aca3cf39b64b1e2eee3dc3afe86159ad4ebf11b74531cbc39cf019"
+    },
+    {
+      "file": "continents/NA/originals/TROPHY_NA03_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "f15de46126168ebed2f2c777f09bcd97fe0fa3bf684ec0d911cc73e557875963"
+    },
+    {
+      "file": "continents/NA/previews/RW_NA_assisted.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "68f9de2e8d37321831a1c9d25575cbdc53fb4525b1e089bf538933c9a2962eaa"
+    },
+    {
+      "file": "continents/NA/previews/RW_NA_mixed.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "57efe7687c6f637ebe82667763146b3fedebe8fa9d9ef175431ab279db776f92"
+    },
+    {
+      "file": "continents/NA/previews/RW_NA_perfect.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "f18d4ce6eec0b82d77d4e895138c244d4c575159b96cd2a1b79847c4df43946f"
+    },
+    {
+      "file": "continents/NA/previews/RW_NA_unearned.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "00d7e601e9af56a4243b4e8eb849e2771c2a9f4e6fdbb29e5e3e3c6721bbdb24"
+    },
+    {
+      "file": "continents/OC/assets/PASS_OC_ATLAS.png",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "e99b1d5137a743fc1dae6324da40a0bc70c8dc16f61ff5b04c2ac996a98ea3df"
+    },
+    {
+      "file": "continents/OC/assets/PASS_STAMP_OC.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "a9797262c70bcbf58d33c30e8e08e9e88557cd50bf0c0a6dc566999765ff4bdf"
+    },
+    {
+      "file": "continents/OC/assets/PASS_STAMP_OC_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "590047a54833c3321f7bdd680141f6420899d54ea9f84ab698b18d8aa8739994"
+    },
+    {
+      "file": "continents/OC/assets/TROPHY_OC01.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "6c4f23d2aee42d1f3f299c7a10b8ac7aa372f4f834de9f333ade2a072daebdd6"
+    },
+    {
+      "file": "continents/OC/assets/TROPHY_OC01_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "6127cb0f06b45ea081da3fd1b505bfd13dc98fd02bd31165313bc2f67a3624d1"
+    },
+    {
+      "file": "continents/OC/assets/TROPHY_OC02.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "62acd6e7572db458ed77bc4971415e2eae368c5603c0bb36320bf167e3eaef4c"
+    },
+    {
+      "file": "continents/OC/assets/TROPHY_OC02_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "e5692ad17d24724451e862b67fc4f45955e35317812c688d8985a7453173d76b"
+    },
+    {
+      "file": "continents/OC/assets/TROPHY_OC03.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "ddc199f26700f5914f6b95b5e899a39172eb6521733ca9079de7013fa173212a"
+    },
+    {
+      "file": "continents/OC/assets/TROPHY_OC03_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "5886cf6941910b9a791d5e57f950ba1a527ec66f44d0c067d1aba8385e10ce64"
+    },
+    {
+      "file": "continents/OC/assets/TROPHY_OC_ATLAS.png",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "4d26337ee0124373ce20e3458fbdc99cc2ac294cf7d0f798dd9ceabb4aeb7609"
+    },
+    {
+      "file": "continents/OC/originals/PASS_STAMP_OC_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "0470c9f6bd8ba93c68968a160484ec33866cd22ac83fffdb3fc97567d03559a6"
+    },
+    {
+      "file": "continents/OC/originals/TROPHY_OC01_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "d01ca1b00c75ad0f7083d4e54936a659133709822ea47d484e69d84aeffe6b43"
+    },
+    {
+      "file": "continents/OC/originals/TROPHY_OC02_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "0a0a160bd8b143f81d7a1b62277a530bd3880bfa808654a413c10c1b9e45208e"
+    },
+    {
+      "file": "continents/OC/originals/TROPHY_OC03_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "1882fc8ca107003b44d95f3d3dc6904d8cf4688365134d5850cea292dc45d7d1"
+    },
+    {
+      "file": "continents/OC/previews/RW_OC_assisted.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "fec9f68177bcd4ad1f2ad5877d3aef370856bb89ee19f80906e5ed1805a673d8"
+    },
+    {
+      "file": "continents/OC/previews/RW_OC_mixed.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "ff859f145a903e9006069f6924ad4d29b62eca7ad089f8ab1f252d274d8c61a7"
+    },
+    {
+      "file": "continents/OC/previews/RW_OC_perfect.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "61be074f0c53e0c0969bd8abd7e096f1d3d02a43422de0f75aea573f9a61f175"
+    },
+    {
+      "file": "continents/OC/previews/RW_OC_unearned.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "2deea3fb8e0af0c8dab10a3f31c32bfd4952cff9ecc36e9ae7bf4613eba1eb7d"
+    },
+    {
+      "file": "continents/SA/assets/PASS_SA_ATLAS.png",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "b508aca4f02d5ad81f2a35b02b4c2a1b72d657af9e8a1963bda17dce87ae52aa"
+    },
+    {
+      "file": "continents/SA/assets/PASS_STAMP_SA.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "259b6ecc3dd925d3547c78273baee11c0105073189745f1097c14345bf40268f"
+    },
+    {
+      "file": "continents/SA/assets/PASS_STAMP_SA_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "e4954f290ee7f172765f3717246c43135156f73c8fb005eae850bdc1d6f8f55f"
+    },
+    {
+      "file": "continents/SA/assets/TROPHY_SA01.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "17b28b737b987476c5ee8973e87e3accaeaf4ab51fa29e84a4e7b2a947fbfe40"
+    },
+    {
+      "file": "continents/SA/assets/TROPHY_SA01_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "167496f7326d9248c18605cc1a58acf11653f01908924e88049211a51e265bcf"
+    },
+    {
+      "file": "continents/SA/assets/TROPHY_SA02.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "45f875015ed40d67beb4da72026ad3149afcdc2a5020683ab2109fe1a17986c8"
+    },
+    {
+      "file": "continents/SA/assets/TROPHY_SA02_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "dd8db7a1d447f2805e5f6df3ee7b96faf890c876340d948ec5191ef1d1fd81a5"
+    },
+    {
+      "file": "continents/SA/assets/TROPHY_SA03.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "3f00c9a2cc16f56ae08be1d658ee0d25c9a92ae8e7606746c62c147f3d170ff8"
+    },
+    {
+      "file": "continents/SA/assets/TROPHY_SA03_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "da5366a7e1de98e19880f6973aad5a07e8a57b8e57344f4fa552f3312a297d6d"
+    },
+    {
+      "file": "continents/SA/assets/TROPHY_SA_ATLAS.png",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "9a7ec7f7d4bfa9720a2b5b8db021e3ec8660db050af002bd6b3211b43901c21f"
+    },
+    {
+      "file": "continents/SA/originals/PASS_STAMP_SA_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "70cd15d5a029547ca25e0b6666c84a370ea65e09744fb24298328591ac6cae4b"
+    },
+    {
+      "file": "continents/SA/originals/TROPHY_SA01_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "84d51270087fbbb51fffc77e662f3b349f78a11d16c174585e62ba5c237ebd3d"
+    },
+    {
+      "file": "continents/SA/originals/TROPHY_SA02_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "e12d600542a8ca1125dd20152a786193992ac1cab849aa44ce3ea4ec58bf4e2b"
+    },
+    {
+      "file": "continents/SA/originals/TROPHY_SA03_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "5e98d94efa0d74899cb5bd538aab3c3ba9c4921bf97871e0a1ce0da4f792d2f2"
+    },
+    {
+      "file": "continents/SA/previews/RW_SA_assisted.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "27d48b67cf65e5daada30617a61add843da823ff7871393b0d0750afe7f27c94"
+    },
+    {
+      "file": "continents/SA/previews/RW_SA_mixed.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "7976431b452b4c353f582fe41f858cfc0e13f12d0f3a069f8347b0dfa2fd85ab"
+    },
+    {
+      "file": "continents/SA/previews/RW_SA_perfect.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "d1e5f5c7ca27366cc9b575dd487f3396d087ed64e85f478db5a29d265739453b"
+    },
+    {
+      "file": "continents/SA/previews/RW_SA_unearned.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "60cea44f59a248dda1411118c35571c3bada4ef88cdeaa799d20523374ce9688"
+    },
+    {
+      "file": "previews/All_Passports.png",
+      "size": [
+        1120,
+        420
+      ],
+      "mode": "RGB",
+      "sha256": "0d53fc332a07c16ab0887a5a07bfef640cad0a75b8f8c0ae0c0787e12cff0df6"
+    },
+    {
+      "file": "shared/assets/PASS_STAMPS_ATLAS.png",
+      "size": [
+        1792,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "fd70776d66c29c477741d7683b98cac8c31cc83eb6e97d93e53678b83c31a300"
+    },
+    {
+      "file": "shared/assets/UI_REWARD_UTILITIES_ATLAS.png",
+      "size": [
+        96,
+        32
+      ],
+      "mode": "RGBA",
+      "sha256": "afcea16a2aa1858d2fd8c71dc415a3297073465d8d92114b1306b166d6de05c9"
+    },
+    {
+      "file": "shared/previews/Shared_Utilities_Preview.png",
+      "size": [
+        600,
+        170
+      ],
+      "mode": "RGB",
+      "sha256": "af3833f5ed54160fe501f4b16d71a887ba683b806e2750e47a3fedbc9b73e8ea"
+    }
+  ]
+}

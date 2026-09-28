@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "stageId": "as02",
+  "readiness": "asset-ready",
+  "downstream": {
+    "calibration": "pending",
+    "release": "pending"
+  },
+  "assets": {
+    "FAR": {
+      "path": "assets/worlds/asia/AS02_BG_DISTANT_ZHANGJIAJIE.png",
+      "sha256": "866bb6297464df8b8d61b72a9be8d0567076a60b01d170f8165b0a36b07563f4",
+      "width": 2172,
+      "height": 724
+    },
+    "MID": {
+      "path": "assets/worlds/asia/AS02_BG_MID_ZHANGJIAJIE.png",
+      "sha256": "81467e2069df77673d4dd8242deb200df7ab041ee0566a9436fb727f5e4baf13",
+      "width": 2172,
+      "height": 724
+    },
+    "GROUND": {
+      "path": "assets/worlds/asia/AS02_GROUND_ZHANGJIAJIE.png",
+      "sha256": "014d79116f8d9cdc6c84314974fcf3a56f0f6a353f9181e91334be8261b2c978",
+      "width": 2172,
+      "height": 724
+    },
+    "OBJECT_ATLAS": {
+      "path": "assets/worlds/asia/AS02_OBJECT_ATLAS.png",
+      "sha256": "f5fd996c2cbecc8a0bc18d562a3bb1cc39d35345ed5b1f535b5f7823ab20f139",
+      "width": 2172,
+      "height": 724
+    },
+    "FLYING": {
+      "path": "assets/worlds/asia/AS02_HAZARD_BLUE_MAGPIE.png",
+      "sha256": "7648aa13f5dfb70f22cc4d68cd524148cb1566cf22be7555dfe385ab0f4f10f8",
+      "width": 2172,
+      "height": 724
+    }
+  },
+  "landscape": {
+    "contractVersion": "phase8-landscape-1",
+    "source": {
+      "width": 2172,
+      "height": 724
+    },
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "groundSurfaceY": 410
+    },
+    "layers": {
+      "FAR": {
+        "sourceY": 0,
+        "scale": 1.25
+      },
+      "MID": {
+        "sourceAnchorY": 621,
+        "offsetY": 0,
+        "scale": 1
+      },
+      "GROUND": {
+        "sourceAnchorY": 393,
+        "offsetY": 0,
+        "scale": 1
+      }
+    }
+  },
+  "hazards": [
+    {
+      "name": "Woven carrying basket",
+      "kind": "ground",
+      "atlasKey": "as02Hazards",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.22,
+      "crop": {
+        "l": 280,
+        "r": 274,
+        "t": 121,
+        "b": 100
+      },
+      "cw": 0.8364661654135338,
+      "ch": 0.8946322067594433,
+      "cx": 0.002819548872180451,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Fallen timber trail barrier",
+      "kind": "ground",
+      "atlasKey": "as02Hazards",
+      "rect": {
+        "x": 1086,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.25,
+      "crop": {
+        "l": 90,
+        "r": 108,
+        "t": 347,
+        "b": 100
+      },
+      "cw": 0.954954954954955,
+      "ch": 0.927797833935018,
+      "cx": 0.0,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Red-billed blue magpie",
+      "kind": "flying",
+      "atlasKey": "as02Bird",
+      "frameW": 543,
+      "frameH": 724,
+      "frames": 4,
+      "fps": 8,
+      "sourceAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "scale": 0.26,
+      "crop": {
+        "l": 31,
+        "r": 81,
+        "t": 77,
+        "b": 171
+      },
+      "cw": 0.39443155452436196,
+      "ch": 0.23109243697478993,
+      "cx": 0.24013921113689096,
+      "cy": 0.07352941176470588,
+      "flightOffsetY": {
+        "high": 0,
+        "low": 0
+      },
+      "flipX": true,
+      "sourceFacing": "right",
+      "gameplayFacing": "left"
+    }
+  ],
+  "checks": {
+    "technical": true,
+    "composition": true,
+    "animation": true,
+    "basicRendering": true
+  },
+  "evidence": "docs/phase8-qa/AS02_WORKBENCH_IMPORT_QA.md",
+  "knownIssues": [
+    "Starting scale, body bounds, grounding, flight clearance and timing are provisional and require Workbench calibration. Calibration and gameplay release remain pending."
+  ]
+}

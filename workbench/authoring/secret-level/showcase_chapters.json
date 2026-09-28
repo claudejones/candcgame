@@ -1,0 +1,27 @@
+[
+  {
+    "label": "Attacks",
+    "encounter_start": 0,
+    "encounter_end": 10
+  },
+  {
+    "label": "First pulse",
+    "encounter_start": 58.5,
+    "encounter_end": 62
+  },
+  {
+    "label": "Second pulse",
+    "encounter_start": 118.5,
+    "encounter_end": 122
+  },
+  {
+    "label": "Capture",
+    "encounter_start": 178.5,
+    "encounter_end": 182
+  },
+  {
+    "label": "Reward",
+    "encounter_start": 182,
+    "encounter_end": 185
+  }
+]

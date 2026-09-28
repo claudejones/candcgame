@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "stageId": "an01",
+  "readiness": "asset-ready",
+  "downstream": {
+    "calibration": "pending",
+    "release": "pending"
+  },
+  "assets": {
+    "FAR": {
+      "path": "assets/worlds/antarctica/AN01_BG_DISTANT_PENINSULA.png",
+      "sha256": "d50e99c15d3ab61c967de14c82930e9cd5766d9e4887eda4b7aa45f2776b90d1",
+      "width": 2172,
+      "height": 724
+    },
+    "MID": {
+      "path": "assets/worlds/antarctica/AN01_BG_MID_PENINSULA.png",
+      "sha256": "92209220d934c14967a815468a0741289fdce3ee4340e7cb1175edd850bb201d",
+      "width": 2172,
+      "height": 724
+    },
+    "GROUND": {
+      "path": "assets/worlds/antarctica/AN01_GROUND_PENINSULA.png",
+      "sha256": "c9fbcf884255315dd71f4dc5d4cc23cc752fec162d0a545556344e15f03a57e8",
+      "width": 2172,
+      "height": 724
+    },
+    "OBJECT_ATLAS": {
+      "path": "assets/worlds/antarctica/AN01_OBJECT_ATLAS.png",
+      "sha256": "8eee4a22eabf7e16523d0a510aaa8effe1e2c74ec7fefd2adc464e0e1544a9ba",
+      "width": 2172,
+      "height": 724
+    },
+    "FLYING": {
+      "path": "assets/worlds/antarctica/AN01_HAZARD_ANTARCTIC_TERN.png",
+      "sha256": "505eb081e8f0d98e91517e17a24439a7e20ce6f769971c9c91228fb20ec1320c",
+      "width": 2172,
+      "height": 724
+    }
+  },
+  "landscape": {
+    "contractVersion": "phase8-landscape-1",
+    "source": {
+      "width": 2172,
+      "height": 724
+    },
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "groundSurfaceY": 410
+    },
+    "layers": {
+      "FAR": {
+        "sourceY": 0,
+        "scale": 1.25
+      },
+      "MID": {
+        "sourceAnchorY": 621,
+        "offsetY": 0,
+        "scale": 1
+      },
+      "GROUND": {
+        "sourceAnchorY": 393,
+        "offsetY": 0,
+        "scale": 1
+      }
+    }
+  },
+  "hazards": [
+    {
+      "name": "Angular blue-ice chunk",
+      "kind": "ground",
+      "atlasKey": "an01Hazards",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.2,
+      "crop": {
+        "l": 320,
+        "r": 327,
+        "t": 41,
+        "b": 99
+      },
+      "cw": 0.876993166287016,
+      "ch": 0.8047945205479452,
+      "cx": -0.004555808656036446,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Orange expedition-rope coil",
+      "kind": "ground",
+      "atlasKey": "an01Hazards",
+      "rect": {
+        "x": 1086,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.24,
+      "crop": {
+        "l": 213,
+        "r": 212,
+        "t": 331,
+        "b": 93
+      },
+      "cw": 0.9258698940998488,
+      "ch": 0.8833333333333333,
+      "cx": -0.0007564296520423601,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Antarctic tern",
+      "kind": "flying",
+      "atlasKey": "an01Bird",
+      "frameW": 543,
+      "frameH": 724,
+      "frames": 4,
+      "fps": 8,
+      "sourceAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "scale": 0.27,
+      "crop": {
+        "l": 51,
+        "r": 58,
+        "t": 33,
+        "b": 91
+      },
+      "cw": 0.5875576036866359,
+      "ch": 0.13,
+      "cx": 0.11405529953917051,
+      "cy": 0.03,
+      "flightOffsetY": {
+        "high": 0,
+        "low": 0
+      },
+      "flipX": true,
+      "sourceFacing": "right",
+      "gameplayFacing": "left"
+    }
+  ],
+  "checks": {
+    "technical": true,
+    "composition": true,
+    "animation": true,
+    "basicRendering": true
+  },
+  "evidence": "docs/phase8-qa/AN01_WORKBENCH_IMPORT_QA.md",
+  "knownIssues": [
+    "Starting settings are provisional; artwork acceptance and user calibration remain pending."
+  ]
+}

@@ -1,0 +1,339 @@
+{
+  "batch": "RW-NA",
+  "approval": "All final continent reward artwork approved by user; not integrated",
+  "rect_convention": "[x,y,width,height], source pixels; right/bottom exclusive",
+  "trophy_frames": [
+    {
+      "id": "TROPHY_NA01",
+      "state": "unearned",
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_NA02",
+      "state": "unearned",
+      "rect": [
+        256,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_NA03",
+      "state": "unearned",
+      "rect": [
+        512,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_NA01",
+      "state": "earned",
+      "rect": [
+        0,
+        256,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_NA02",
+      "state": "earned",
+      "rect": [
+        256,
+        256,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_NA03",
+      "state": "earned",
+      "rect": [
+        512,
+        256,
+        256,
+        256
+      ]
+    }
+  ],
+  "passport_frames": [
+    {
+      "state": "unearned",
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "state": "earned",
+      "rect": [
+        0,
+        256,
+        256,
+        256
+      ]
+    }
+  ],
+  "passport_consolidation": "Use ../../shared/assets/PASS_STAMPS_ATLAS.png column 0",
+  "finishing": "Alpha threshold128; largest connected component removes detached speckles, hard alpha. Trophy proportional nearest-neighbor fit to192x208, baseline232. Passport bounded silhouette normalized224x224 at16,16 to correct slight oval. Unearned BT.601 grayscale with identical alpha.",
+  "placement": [
+    {
+      "id": "TROPHY_NA01",
+      "source_bbox": [
+        245,
+        124,
+        1042,
+        1144
+      ],
+      "content_bbox": [
+        46,
+        24,
+        209,
+        232
+      ],
+      "anchor": [
+        128,
+        232
+      ]
+    },
+    {
+      "id": "TROPHY_NA02",
+      "source_bbox": [
+        245,
+        169,
+        1010,
+        1132
+      ],
+      "content_bbox": [
+        45,
+        24,
+        210,
+        232
+      ],
+      "anchor": [
+        128,
+        232
+      ]
+    },
+    {
+      "id": "TROPHY_NA03",
+      "source_bbox": [
+        241,
+        139,
+        1014,
+        1130
+      ],
+      "content_bbox": [
+        47,
+        24,
+        209,
+        232
+      ],
+      "anchor": [
+        128,
+        232
+      ]
+    },
+    {
+      "id": "PASS_STAMP_NA",
+      "source_bbox": [
+        75,
+        80,
+        1179,
+        1171
+      ],
+      "content_bbox": [
+        16,
+        16,
+        240,
+        240
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/PASS_NA_ATLAS.png",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "ff7a931bc4164847973c61e7f16ed85fcd0075d2169d14de19a53fcb6ef173fe"
+    },
+    {
+      "file": "assets/PASS_STAMP_NA.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "da8ebad6377527910bd8f33965c9d96507aa2dd7020a8e4ef92f4f385dcd00ee"
+    },
+    {
+      "file": "assets/PASS_STAMP_NA_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "0fb0d2f545ac704dd19bfe6c5b7667394b8c05665baea2b0134c9eeec0e174f7"
+    },
+    {
+      "file": "assets/TROPHY_NA01.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "245d204658193b9e143b5172ea07f6aa8b0c3ec808fa049355bbc65e48b76429"
+    },
+    {
+      "file": "assets/TROPHY_NA01_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "310f28993321db286c01b6f523ff20823e6ced1351d08c7fe55e3e5ebcc5d6ca"
+    },
+    {
+      "file": "assets/TROPHY_NA02.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "cbf6a255ad7790bf0ce7f24064fecfb80c64f851d4840db667f9d05d87337994"
+    },
+    {
+      "file": "assets/TROPHY_NA02_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "f465025564e18da23eb96cf5562930c39e397fcc38ed4811b181a8b1d10bfab4"
+    },
+    {
+      "file": "assets/TROPHY_NA03.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "c2a167662ca2aafae7781678e5fbf0f96990fdab69882d92cb11ab3b34ea8d9d"
+    },
+    {
+      "file": "assets/TROPHY_NA03_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "292974c2d709b0fc8240760fd884351002396b357e468f54855099e88b1c487f"
+    },
+    {
+      "file": "assets/TROPHY_NA_ATLAS.png",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "a3f090a6f8db4538aa5959a2403ffd43e24f5e6ec0c1f7def93f184116fabe73"
+    },
+    {
+      "file": "originals/PASS_STAMP_NA_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "ad88881f0f466212efdf6520f38bfe920cedaf70d1c725120a996f69152618cc"
+    },
+    {
+      "file": "originals/TROPHY_NA01_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "48989b8ef7fd60325ed0b8ec27856b874244e74b380d2eb0483e94dfa8d148ff"
+    },
+    {
+      "file": "originals/TROPHY_NA02_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "2baf772b01aca3cf39b64b1e2eee3dc3afe86159ad4ebf11b74531cbc39cf019"
+    },
+    {
+      "file": "originals/TROPHY_NA03_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "f15de46126168ebed2f2c777f09bcd97fe0fa3bf684ec0d911cc73e557875963"
+    },
+    {
+      "file": "previews/RW_NA_assisted.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "68f9de2e8d37321831a1c9d25575cbdc53fb4525b1e089bf538933c9a2962eaa"
+    },
+    {
+      "file": "previews/RW_NA_mixed.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "57efe7687c6f637ebe82667763146b3fedebe8fa9d9ef175431ab279db776f92"
+    },
+    {
+      "file": "previews/RW_NA_perfect.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "f18d4ce6eec0b82d77d4e895138c244d4c575159b96cd2a1b79847c4df43946f"
+    },
+    {
+      "file": "previews/RW_NA_unearned.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "00d7e601e9af56a4243b4e8eb849e2771c2a9f4e6fdbb29e5e3e3c6721bbdb24"
+    }
+  ],
+  "version": "2",
+  "dependencies": [
+    {
+      "package": "RW_Shared_Utilities.zip",
+      "version": "1.0",
+      "manifest": "shared-utilities-manifest.json"
+    }
+  ]
+}

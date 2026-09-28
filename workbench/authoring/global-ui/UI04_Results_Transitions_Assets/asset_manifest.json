@@ -1,0 +1,271 @@
+{
+  "batch": "UI04",
+  "version": 1,
+  "rect_convention": "x,y,width,height; right/bottom exclusive",
+  "assets": {
+    "UI04_RESULT_PANEL": {
+      "file": "assets/UI04_RESULT_PANEL.png",
+      "source": "originals/UI04_RESULT_PANEL.svg",
+      "size": [
+        890,
+        550
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI04_TRANSITION_PANEL": {
+      "file": "assets/UI04_TRANSITION_PANEL.png",
+      "source": "originals/UI04_TRANSITION_PANEL.svg",
+      "size": [
+        1000,
+        230
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI04_BUTTON_PRIMARY_NORMAL": {
+      "file": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+      "source": "originals/UI04_BUTTON_PRIMARY_NORMAL.svg",
+      "size": [
+        320,
+        96
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI04_BUTTON_PRIMARY_FOCUS": {
+      "file": "assets/UI04_BUTTON_PRIMARY_FOCUS.png",
+      "source": "originals/UI04_BUTTON_PRIMARY_FOCUS.svg",
+      "size": [
+        320,
+        96
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI04_BUTTON_PRIMARY_PRESSED": {
+      "file": "assets/UI04_BUTTON_PRIMARY_PRESSED.png",
+      "source": "originals/UI04_BUTTON_PRIMARY_PRESSED.svg",
+      "size": [
+        320,
+        96
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI04_BUTTON_PRIMARY_DISABLED": {
+      "file": "assets/UI04_BUTTON_PRIMARY_DISABLED.png",
+      "source": "originals/UI04_BUTTON_PRIMARY_DISABLED.svg",
+      "size": [
+        320,
+        96
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI04_BUTTON_SECONDARY_NORMAL": {
+      "file": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+      "source": "originals/UI04_BUTTON_SECONDARY_NORMAL.svg",
+      "size": [
+        320,
+        96
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI04_BUTTON_SECONDARY_FOCUS": {
+      "file": "assets/UI04_BUTTON_SECONDARY_FOCUS.png",
+      "source": "originals/UI04_BUTTON_SECONDARY_FOCUS.svg",
+      "size": [
+        320,
+        96
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI04_BUTTON_SECONDARY_PRESSED": {
+      "file": "assets/UI04_BUTTON_SECONDARY_PRESSED.png",
+      "source": "originals/UI04_BUTTON_SECONDARY_PRESSED.svg",
+      "size": [
+        320,
+        96
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI04_BUTTON_SECONDARY_DISABLED": {
+      "file": "assets/UI04_BUTTON_SECONDARY_DISABLED.png",
+      "source": "originals/UI04_BUTTON_SECONDARY_DISABLED.svg",
+      "size": [
+        320,
+        96
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    }
+  },
+  "atlases": {
+    "UI04_BUTTONS_ATLAS": {
+      "file": "assets/UI04_BUTTONS_ATLAS.png",
+      "cell": [
+        320,
+        96
+      ],
+      "frames": {
+        "UI04_BUTTON_PRIMARY_NORMAL": {
+          "rect": [
+            0,
+            0,
+            320,
+            96
+          ],
+          "anchor": [
+            160,
+            48
+          ]
+        },
+        "UI04_BUTTON_PRIMARY_FOCUS": {
+          "rect": [
+            320,
+            0,
+            320,
+            96
+          ],
+          "anchor": [
+            160,
+            48
+          ]
+        },
+        "UI04_BUTTON_PRIMARY_PRESSED": {
+          "rect": [
+            640,
+            0,
+            320,
+            96
+          ],
+          "anchor": [
+            160,
+            48
+          ]
+        },
+        "UI04_BUTTON_PRIMARY_DISABLED": {
+          "rect": [
+            960,
+            0,
+            320,
+            96
+          ],
+          "anchor": [
+            160,
+            48
+          ]
+        },
+        "UI04_BUTTON_SECONDARY_NORMAL": {
+          "rect": [
+            0,
+            96,
+            320,
+            96
+          ],
+          "anchor": [
+            160,
+            48
+          ]
+        },
+        "UI04_BUTTON_SECONDARY_FOCUS": {
+          "rect": [
+            320,
+            96,
+            320,
+            96
+          ],
+          "anchor": [
+            160,
+            48
+          ]
+        },
+        "UI04_BUTTON_SECONDARY_PRESSED": {
+          "rect": [
+            640,
+            96,
+            320,
+            96
+          ],
+          "anchor": [
+            160,
+            48
+          ]
+        },
+        "UI04_BUTTON_SECONDARY_DISABLED": {
+          "rect": [
+            960,
+            96,
+            320,
+            96
+          ],
+          "anchor": [
+            160,
+            48
+          ]
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "rewards": "Shared snapshot of all21 trophies/seven stamps and original reward art; deduplicate by hash against RW_All_Continents_Rewards_Assets.zip. No reward redesign.",
+    "characters": "Byte-preserved celebrate/hit/stars extracted from supplied LAB25Q HTML; existing runtime calibration takes precedence. 700x700 character cells, Claude row0, Constance row1; celebrate4cols, hit3cols; stars240x150 cells, top-row4frames used in preview. Stage-entry previews use the two-frame IDLE source from the same reference.",
+    "worldmap": "Byte-identical UI03 geography, ocean, pins and icon snapshots; travel uses existing approved coordinates.",
+    "font": "Press Start 2P with OFL license"
+  },
+  "runtime_verified": false
+}

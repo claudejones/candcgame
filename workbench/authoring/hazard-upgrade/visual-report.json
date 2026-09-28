@@ -1,0 +1,171 @@
+{
+  "scenes": 162,
+  "canvas": [
+    960,
+    540
+  ],
+  "report": [
+    {
+      "id": "hazard:af01:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.18
+    },
+    {
+      "id": "hazard:af02:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.3
+    },
+    {
+      "id": "hazard:af02:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.28
+    },
+    {
+      "id": "hazard:af03:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.2
+    },
+    {
+      "id": "hazard:an02:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.2
+    },
+    {
+      "id": "hazard:an02:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.24
+    },
+    {
+      "id": "hazard:an03:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.2
+    },
+    {
+      "id": "hazard:as01:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.28
+    },
+    {
+      "id": "hazard:as01:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.22
+    },
+    {
+      "id": "hazard:as02:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.25
+    },
+    {
+      "id": "hazard:eu01:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.12
+    },
+    {
+      "id": "hazard:eu02:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.2
+    },
+    {
+      "id": "hazard:eu02:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.2
+    },
+    {
+      "id": "hazard:eu03:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.2
+    },
+    {
+      "id": "hazard:eu03:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.2
+    },
+    {
+      "id": "hazard:na01:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.22
+    },
+    {
+      "id": "hazard:na01:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.26
+    },
+    {
+      "id": "hazard:na02:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.22
+    },
+    {
+      "id": "hazard:na02:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.2
+    },
+    {
+      "id": "hazard:oc01:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.2
+    },
+    {
+      "id": "hazard:oc01:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.19
+    },
+    {
+      "id": "hazard:oc02:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.28
+    },
+    {
+      "id": "hazard:oc03:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.24
+    },
+    {
+      "id": "hazard:sa01:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.17
+    },
+    {
+      "id": "hazard:sa01:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.2
+    },
+    {
+      "id": "hazard:sa02:0",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.22
+    },
+    {
+      "id": "hazard:sa03:1",
+      "scenes": 6,
+      "contact": "shared pathway",
+      "scale": 0.22
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "continents": {
+    "NA": {
+      "label": "NORTH AMERICA",
+      "label_center": [
+        0.18,
+        0.11
+      ],
+      "stage_centers": [
+        [
+          0.15,
+          0.29
+        ],
+        [
+          0.18,
+          0.29
+        ],
+        [
+          0.21,
+          0.29
+        ]
+      ],
+      "phone_label_center": [
+        0.18,
+        0.08
+      ],
+      "phone_stage_centers": [
+        [
+          0.15,
+          0.32
+        ],
+        [
+          0.18,
+          0.32
+        ],
+        [
+          0.21,
+          0.32
+        ]
+      ]
+    },
+    "SA": {
+      "label": "SOUTH AMERICA",
+      "label_center": [
+        0.265,
+        0.4
+      ],
+      "stage_centers": [
+        [
+          0.24,
+          0.69
+        ],
+        [
+          0.265,
+          0.7
+        ],
+        [
+          0.29,
+          0.62
+        ]
+      ],
+      "phone_label_center": [
+        0.265,
+        0.37
+      ],
+      "phone_stage_centers": [
+        [
+          0.24,
+          0.69
+        ],
+        [
+          0.265,
+          0.7
+        ],
+        [
+          0.29,
+          0.62
+        ]
+      ]
+    },
+    "EU": {
+      "label": "EUROPE",
+      "label_center": [
+        0.405,
+        0.13
+      ],
+      "stage_centers": [
+        [
+          0.47,
+          0.23
+        ],
+        [
+          0.505,
+          0.23
+        ],
+        [
+          0.54,
+          0.23
+        ]
+      ],
+      "phone_label_center": [
+        0.37,
+        0.13
+      ],
+      "phone_stage_centers": [
+        [
+          0.47,
+          0.23
+        ],
+        [
+          0.505,
+          0.23
+        ],
+        [
+          0.54,
+          0.23
+        ]
+      ]
+    },
+    "AF": {
+      "label": "AFRICA",
+      "label_center": [
+        0.46,
+        0.42
+      ],
+      "stage_centers": [
+        [
+          0.445,
+          0.63
+        ],
+        [
+          0.48,
+          0.63
+        ],
+        [
+          0.515,
+          0.63
+        ]
+      ],
+      "phone_label_center": [
+        0.46,
+        0.42
+      ],
+      "phone_stage_centers": [
+        [
+          0.445,
+          0.63
+        ],
+        [
+          0.48,
+          0.63
+        ],
+        [
+          0.515,
+          0.63
+        ]
+      ]
+    },
+    "AS": {
+      "label": "ASIA",
+      "label_center": [
+        0.755,
+        0.13
+      ],
+      "stage_centers": [
+        [
+          0.71,
+          0.37
+        ],
+        [
+          0.755,
+          0.37
+        ],
+        [
+          0.8,
+          0.37
+        ]
+      ],
+      "phone_label_center": [
+        0.755,
+        0.13
+      ],
+      "phone_stage_centers": [
+        [
+          0.71,
+          0.37
+        ],
+        [
+          0.755,
+          0.37
+        ],
+        [
+          0.8,
+          0.37
+        ]
+      ]
+    },
+    "OC": {
+      "label": "OCEANIA",
+      "label_center": [
+        0.835,
+        0.56
+      ],
+      "stage_centers": [
+        [
+          0.805,
+          0.73
+        ],
+        [
+          0.835,
+          0.73
+        ],
+        [
+          0.865,
+          0.73
+        ]
+      ],
+      "phone_label_center": [
+        0.835,
+        0.51
+      ],
+      "phone_stage_centers": [
+        [
+          0.805,
+          0.73
+        ],
+        [
+          0.835,
+          0.73
+        ],
+        [
+          0.865,
+          0.73
+        ]
+      ]
+    },
+    "AN": {
+      "label": "ANTARCTICA",
+      "label_center": [
+        0.5,
+        0.79
+      ],
+      "stage_centers": [
+        [
+          0.465,
+          0.94
+        ],
+        [
+          0.5,
+          0.94
+        ],
+        [
+          0.535,
+          0.94
+        ]
+      ],
+      "phone_label_center": [
+        0.5,
+        0.73
+      ],
+      "phone_stage_centers": [
+        [
+          0.465,
+          0.94
+        ],
+        [
+          0.5,
+          0.94
+        ],
+        [
+          0.535,
+          0.94
+        ]
+      ]
+    }
+  },
+  "runtime_revision": "2026-09-21: land-centered markers and geographically adjacent labels; source contract retained in authoring."
+}

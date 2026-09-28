@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';import {PlayerStore,freshPlayer,STAGES,PLAYER_KEY} from '../dist/workbench-next/player-state.mjs';
+const memory=new Map(),storage={getItem:k=>memory.get(k)||null,setItem:(k,v)=>memory.set(k,v)};
+const old=freshPlayer();delete old.secret;delete old.resumeTarget;old.journey={character:'claude',difficulty:'easy',stage:'SA02',visited:['SA02']};old.ratings.easy.NA01={claude:2};storage.setItem(PLAYER_KEY,JSON.stringify(old));
+const store=new PlayerStore(storage);assert(!store.blocked);assert.equal(store.state.secret.earned,false);assert.deepEqual(store.state.journey,old.journey);assert.deepEqual(store.state.ratings,old.ratings);assert.throws(()=>store.beginSecret('claude'));
+for(const stage of STAGES)store.state.ratings.standard[stage]={claude:3};store.state.ratings.standard.AN03.claude=2;assert.throws(()=>store.beginSecret('claude'));store.state.ratings.standard.AN03.claude=3;
+const ordinary=JSON.stringify({journey:store.state.journey,ratings:store.state.ratings,attempt:store.state.attempt,pending:store.state.pending});
+let a=store.beginSecret('constance');assert.equal(store.state.resumeTarget,'secret');let result=store.finishSecret(a.id,{complete:false,hearts:0});assert(!result.earned);
+a=store.beginSecret('constance');store.setOption('unlimited',true);store.setOption('unlimited',false);result=store.finishSecret(a.id,{complete:true,hearts:3});assert(!result.eligible&&!result.earned);
+a=store.beginSecret('claude');result=store.finishSecret(a.id,{complete:true,hearts:1});assert(result.newlyEarned&&result.earned);assert.deepEqual(store.finishSecret(a.id,{complete:true,hearts:3}),result);
+a=store.beginSecret('constance');result=store.finishSecret(a.id,{complete:true,hearts:3});assert(result.earned&&!result.newlyEarned);assert.equal(store.state.secret.character,'claude');
+assert.equal(JSON.stringify({journey:store.state.journey,ratings:store.state.ratings,attempt:store.state.attempt,pending:store.state.pending}),ordinary);
+const restored=new PlayerStore(storage);assert(restored.state.secret.earned);assert.equal(restored.state.resumeTarget,'secret');const previous=restored.state.secret.attempt.id;restored.beginSecret(restored.state.secret.attempt.character);assert.notEqual(restored.state.secret.attempt.id,previous);
+store.setOption('unlimited',true);a=store.beginSecret('claude');assert(store.finishSecret(a.id,{complete:true,hearts:3}).earned,'assistance cannot erase an earned passport');
+console.log('Secret saves passed: additive migration, seven-perfect-Standard gate, failure, sticky assistance, single shared award, idempotency, resume cursor and preserved ordinary journey/rewards.');

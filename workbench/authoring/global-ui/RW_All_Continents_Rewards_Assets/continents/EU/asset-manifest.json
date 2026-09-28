@@ -1,0 +1,362 @@
+{
+  "batch": "RW-EU",
+  "approval": "All final continent reward artwork approved by user; not integrated",
+  "rect_convention": "[x,y,width,height], source pixels; right/bottom exclusive",
+  "trophy_frames": [
+    {
+      "id": "TROPHY_EU01",
+      "state": "unearned",
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_EU02",
+      "state": "unearned",
+      "rect": [
+        256,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_EU03",
+      "state": "unearned",
+      "rect": [
+        512,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_EU01",
+      "state": "earned",
+      "rect": [
+        0,
+        256,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_EU02",
+      "state": "earned",
+      "rect": [
+        256,
+        256,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_EU03",
+      "state": "earned",
+      "rect": [
+        512,
+        256,
+        256,
+        256
+      ]
+    }
+  ],
+  "passport_frames": [
+    {
+      "state": "unearned",
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "state": "earned",
+      "rect": [
+        0,
+        256,
+        256,
+        256
+      ]
+    }
+  ],
+  "passport_consolidation": "Use ../../shared/assets/PASS_STAMPS_ATLAS.png column 2",
+  "dependencies": [
+    {
+      "package": "RW_Shared_Utilities.zip",
+      "version": "1.0",
+      "frames": {
+        "heart_empty": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "heart_full": [
+          32,
+          0,
+          32,
+          32
+        ],
+        "perfect_star": [
+          64,
+          0,
+          32,
+          32
+        ]
+      }
+    }
+  ],
+  "finishing": "Alpha threshold128; largest connected component removes detached speckles, hard alpha. Trophy proportional nearest-neighbor fit to192x208, baseline232. Passport bounded silhouette normalized224x224 at16,16 to correct slight oval. Unearned BT.601 grayscale with identical alpha.",
+  "placement": [
+    {
+      "id": "TROPHY_EU01",
+      "source_bbox": [
+        212,
+        178,
+        1105,
+        1123
+      ],
+      "content_bbox": [
+        32,
+        29,
+        224,
+        232
+      ],
+      "anchor": [
+        128,
+        232
+      ]
+    },
+    {
+      "id": "TROPHY_EU02",
+      "source_bbox": [
+        240,
+        65,
+        1014,
+        1149
+      ],
+      "content_bbox": [
+        53,
+        24,
+        202,
+        232
+      ],
+      "anchor": [
+        128,
+        232
+      ]
+    },
+    {
+      "id": "TROPHY_EU03",
+      "source_bbox": [
+        183,
+        74,
+        1071,
+        1168
+      ],
+      "content_bbox": [
+        43,
+        24,
+        212,
+        232
+      ],
+      "anchor": [
+        128,
+        232
+      ]
+    },
+    {
+      "id": "PASS_STAMP_EU",
+      "source_bbox": [
+        70,
+        71,
+        1184,
+        1183
+      ],
+      "content_bbox": [
+        16,
+        16,
+        240,
+        240
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/PASS_EU_ATLAS.png",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "80e1fca3a7d42ed0dc9a645f6440e39176d8b610adf7527b15c8df6d062fe95a"
+    },
+    {
+      "file": "assets/PASS_STAMP_EU.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "1c812f8159c162d3f216e71c1ed2a6a4a0b5b04adb4941969c89a3b1e137ed67"
+    },
+    {
+      "file": "assets/PASS_STAMP_EU_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "e7611581c76f3db0cb8f279955fdb40b9d3f96a6271f40009e56ba324de9e097"
+    },
+    {
+      "file": "assets/TROPHY_EU01.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "ed7c09c577b5e61918932de14cbcc6c3145b7ea339511b457e8cef1295f264b8"
+    },
+    {
+      "file": "assets/TROPHY_EU01_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "2ad6c63b3e2c43f8b713806447905ebb51a28f327a688bb732c749941350aec0"
+    },
+    {
+      "file": "assets/TROPHY_EU02.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "e0835ac97c971a506a3b429377e810f78c8712bfc1ca8f317e8d01832419bbdc"
+    },
+    {
+      "file": "assets/TROPHY_EU02_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "a57ceed8d75fc3eed19fbfbfd87c9d1680f6ece78d79d1f0cf3279330e46b584"
+    },
+    {
+      "file": "assets/TROPHY_EU03.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "8486b5dccdfa3ce4e6a09b037c8edb65fa64788ce867d93fad7552de35cfb236"
+    },
+    {
+      "file": "assets/TROPHY_EU03_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "f79653127a9f80dc44f3c314b23b69121475df8b1724efc1a40836a543427c30"
+    },
+    {
+      "file": "assets/TROPHY_EU_ATLAS.png",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "5d6a0610eba6ef5bd618291bbbbf869aab0c157b48d6148e097a4819c740eac4"
+    },
+    {
+      "file": "originals/PASS_STAMP_EU_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "da2307ca61f83047828db50cc638c37963141aba8d362a2cdd6d2b9f59c131e5"
+    },
+    {
+      "file": "originals/TROPHY_EU01_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "713552a2378e0a0d7cfd6e1eb1ac5c8ee33ca7ca4d743b868a9812554ae0c29d"
+    },
+    {
+      "file": "originals/TROPHY_EU02_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "ce6e8f64f2d9b500e79f9985e064648d3c9eb1b9181344a5183747b0711aec2e"
+    },
+    {
+      "file": "originals/TROPHY_EU03_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "970e16d838fdef88fca5d0ddc5437f1733631b8237490960aad878d011116866"
+    },
+    {
+      "file": "previews/RW_EU_assisted.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "06c1e7e68bdf3fd7f227b838e5daed8e746624394bb67e9c61581bcfd69ad861"
+    },
+    {
+      "file": "previews/RW_EU_mixed.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "bef6660743fc16adb67c09bcd9e3a1abfb84d6950343e1d85bcee774b2a29631"
+    },
+    {
+      "file": "previews/RW_EU_perfect.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "69d51fabaac8de2c10b938bfe1a82069bb79db4fdbc9e77fe7cd6fc4f3f2539d"
+    },
+    {
+      "file": "previews/RW_EU_unearned.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "7360af5373ec1c33ae3929c71cf600392b2a15514a024e27dcf7c8c7228a81b5"
+    }
+  ],
+  "stage_labels": {
+    "EU01": "Santorini",
+    "EU02": "Paris",
+    "EU03": "Barcelona"
+  }
+}

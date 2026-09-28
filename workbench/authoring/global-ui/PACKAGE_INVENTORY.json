@@ -1,0 +1,79 @@
+{
+  "date": "2026-09-21",
+  "packages": [
+    {
+      "filename": "UI01_Brand_Assets.zip",
+      "bytes": 5693379,
+      "sha256": "662fef36d408d1c35b53bf8dc9ef4535e1d727785c36d07608aa847e858deb54",
+      "members": 11,
+      "notes": [
+        "UI01_Workbench_Notes.md"
+      ]
+    },
+    {
+      "filename": "UI02_Start_Screen_Assets.zip",
+      "bytes": 7565500,
+      "sha256": "b75a6f12a0e5b2e40c9ef1245cf3f16d6233437f4ff20668001e4504a81f4c1f",
+      "members": 9,
+      "notes": [
+        "UI02_Workbench_Notes.md"
+      ]
+    },
+    {
+      "filename": "RW_All_Continents_Rewards_Assets.zip",
+      "bytes": 31611655,
+      "sha256": "7842e67a03863aff9696cf9dbff35ee69dc723075a63b951f3e0747544c55896",
+      "members": 154,
+      "notes": [
+        "Workbench_Handoff.md",
+        "continents/AF/QA_Report.md",
+        "continents/AF/RW_AF_Workbench_Notes.md",
+        "continents/AN/QA_Report.md",
+        "continents/AN/RW_AN_Workbench_Notes.md",
+        "continents/AS/QA_Report.md",
+        "continents/AS/RW_AS_Workbench_Notes.md",
+        "continents/EU/QA_Report.md",
+        "continents/EU/RW_EU_Workbench_Notes.md",
+        "continents/NA/RW_NA_Workbench_Notes.md",
+        "continents/OC/QA_Report.md",
+        "continents/OC/RW_OC_Workbench_Notes.md",
+        "continents/SA/QA_Report.md",
+        "continents/SA/RW_SA_Workbench_Notes.md",
+        "shared/Workbench_Notes.md"
+      ]
+    },
+    {
+      "filename": "UI03_World_Map_Assets.zip",
+      "bytes": 87251793,
+      "sha256": "3b28c45640f826496c61ce5ba1df08306850c991e2434734474a35466049404f",
+      "members": 152,
+      "notes": [
+        "Asset_Coverage.md",
+        "Verification.md",
+        "Workbench_Handoff.md"
+      ]
+    },
+    {
+      "filename": "UI04_Results_Transitions_Assets.zip",
+      "bytes": 76234938,
+      "sha256": "385d464d2fbcdc20f98178e845c9a7d70b857262802f03f8d1e498299755b3d3",
+      "members": 260,
+      "notes": [
+        "Asset_Coverage.md",
+        "Verification.md",
+        "Workbench_Handoff.md"
+      ]
+    },
+    {
+      "filename": "UI05_Menus_Achievements_Assets.zip",
+      "bytes": 46998629,
+      "sha256": "1772a2f01cf6e7489df04830e47a8efb1a38830fe316055f9c176aee9759faf4",
+      "members": 321,
+      "notes": [
+        "Asset_Coverage.md",
+        "Verification.md",
+        "Workbench_Handoff.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1174 @@
+{
+  "applied": false,
+  "reports": [
+    {
+      "id": "hazard:as03:0",
+      "stage": "as03",
+      "name": "Tall ceramic water jar",
+      "before": {
+        "scale": 0.2,
+        "xOffset": 0,
+        "flipX": false,
+        "groundOffset": 0,
+        "cw": 0.8560157790927022,
+        "ch": 0.8621848739495799,
+        "cx": 0.0009861932938856016,
+        "cy": 0
+      },
+      "placement": {
+        "scale": 0.2,
+        "xOffset": 0,
+        "flipX": false,
+        "groundOffset": 19.3125,
+        "cw": 0.75896449704142,
+        "ch": 0.7547142857142858,
+        "cx": 0,
+        "cy": -0.006722689075630228
+      },
+      "beforeProfiles": {
+        "easy": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 120,
+            "characters": {
+              "claude": {
+                "windows": [],
+                "best": null,
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [],
+                "best": null,
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": false,
+            "minimumMs": 150,
+            "phases": 4,
+            "score": 0
+          }
+        ],
+        "standard": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 120,
+            "characters": {
+              "claude": {
+                "windows": [],
+                "best": null,
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [],
+                "best": null,
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": false,
+            "minimumMs": 120,
+            "phases": 4,
+            "score": 0
+          }
+        ],
+        "hard": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 144,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 2.4833333333333334,
+                    "end": 2.5166666666666666,
+                    "width": 0.05
+                  }
+                ],
+                "best": {
+                  "start": 2.4833333333333334,
+                  "end": 2.5166666666666666,
+                  "width": 0.05
+                },
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 2.4833333333333334,
+                    "end": 2.5166666666666666,
+                    "width": 0.05
+                  }
+                ],
+                "best": {
+                  "start": 2.4833333333333334,
+                  "end": 2.5166666666666666,
+                  "width": 0.05
+                },
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": false,
+            "minimumMs": 80,
+            "phases": 4,
+            "score": 0.05
+          }
+        ]
+      },
+      "profiles": {
+        "easy": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 120,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 3,
+                    "end": 3.183333333333333,
+                    "width": 0.2
+                  }
+                ],
+                "best": {
+                  "start": 3,
+                  "end": 3.183333333333333,
+                  "width": 0.2
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 3.033333333333333,
+                    "end": 3.183333333333333,
+                    "width": 0.16666666666666666
+                  }
+                ],
+                "best": {
+                  "start": 3.033333333333333,
+                  "end": 3.183333333333333,
+                  "width": 0.16666666666666666
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 150,
+            "phases": 4,
+            "score": 0.16666666666666666
+          }
+        ],
+        "standard": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 120,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 3,
+                    "end": 3.183333333333333,
+                    "width": 0.2
+                  }
+                ],
+                "best": {
+                  "start": 3,
+                  "end": 3.183333333333333,
+                  "width": 0.2
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 3.033333333333333,
+                    "end": 3.183333333333333,
+                    "width": 0.16666666666666666
+                  }
+                ],
+                "best": {
+                  "start": 3.033333333333333,
+                  "end": 3.183333333333333,
+                  "width": 0.16666666666666666
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 120,
+            "phases": 4,
+            "score": 0.16666666666666666
+          }
+        ],
+        "hard": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 144,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 2.3666666666666667,
+                    "end": 2.6333333333333333,
+                    "width": 0.2833333333333333
+                  }
+                ],
+                "best": {
+                  "start": 2.3666666666666667,
+                  "end": 2.6333333333333333,
+                  "width": 0.2833333333333333
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 2.3833333333333333,
+                    "end": 2.6333333333333333,
+                    "width": 0.26666666666666666
+                  }
+                ],
+                "best": {
+                  "start": 2.3833333333333333,
+                  "end": 2.6333333333333333,
+                  "width": 0.26666666666666666
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 80,
+            "phases": 4,
+            "score": 0.26666666666666666
+          }
+        ]
+      },
+      "profileStamps": {
+        "easy": "cal4-5f8dbf94",
+        "standard": "cal4-84ae8129",
+        "hard": "cal4-a007988e"
+      },
+      "changes": [
+        {
+          "field": "groundOffset",
+          "before": 0,
+          "after": 19.3125
+        },
+        {
+          "field": "cw",
+          "before": 0.8560157790927022,
+          "after": 0.75896449704142
+        },
+        {
+          "field": "ch",
+          "before": 0.8621848739495799,
+          "after": 0.7547142857142858
+        },
+        {
+          "field": "cx",
+          "before": 0.0009861932938856016,
+          "after": 0
+        },
+        {
+          "field": "cy",
+          "before": 0,
+          "after": -0.006722689075630228
+        }
+      ],
+      "warnings": [],
+      "anchor": 0.9932773109243698,
+      "stamp": "cal4-3d726bf4",
+      "ready": true,
+      "reviewed": false
+    },
+    {
+      "id": "hazard:as03:1",
+      "stage": "as03",
+      "name": "Mooring bollard with coiled rope",
+      "before": {
+        "scale": 0.26,
+        "xOffset": 0,
+        "flipX": false,
+        "groundOffset": 0,
+        "cw": 0.9162210338680927,
+        "ch": 0.9336870026525199,
+        "cx": 0.00089126559714795,
+        "cy": 0
+      },
+      "placement": {
+        "scale": 0.26,
+        "xOffset": 0,
+        "flipX": false,
+        "groundOffset": 19.256249999999966,
+        "cw": 0.6751515151515153,
+        "ch": 0.6673740053050398,
+        "cx": 0,
+        "cy": -0.010610079575596787
+      },
+      "beforeProfiles": {
+        "easy": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 120,
+            "characters": {
+              "claude": {
+                "windows": [],
+                "best": null,
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [],
+                "best": null,
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": false,
+            "minimumMs": 150,
+            "phases": 4,
+            "score": 0
+          }
+        ],
+        "standard": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 120,
+            "characters": {
+              "claude": {
+                "windows": [],
+                "best": null,
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [],
+                "best": null,
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": false,
+            "minimumMs": 120,
+            "phases": 4,
+            "score": 0
+          }
+        ],
+        "hard": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 144,
+            "characters": {
+              "claude": {
+                "windows": [],
+                "best": null,
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [],
+                "best": null,
+                "threat": true,
+                "pass": false,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": false,
+            "minimumMs": 80,
+            "phases": 4,
+            "score": 0
+          }
+        ]
+      },
+      "profiles": {
+        "easy": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 120,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 3.0166666666666666,
+                    "end": 3.183333333333333,
+                    "width": 0.18333333333333332
+                  }
+                ],
+                "best": {
+                  "start": 3.0166666666666666,
+                  "end": 3.183333333333333,
+                  "width": 0.18333333333333332
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 3.0166666666666666,
+                    "end": 3.183333333333333,
+                    "width": 0.18333333333333332
+                  }
+                ],
+                "best": {
+                  "start": 3.0166666666666666,
+                  "end": 3.183333333333333,
+                  "width": 0.18333333333333332
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 150,
+            "phases": 4,
+            "score": 0.18333333333333332
+          }
+        ],
+        "standard": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 120,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 3.0166666666666666,
+                    "end": 3.183333333333333,
+                    "width": 0.18333333333333332
+                  }
+                ],
+                "best": {
+                  "start": 3.0166666666666666,
+                  "end": 3.183333333333333,
+                  "width": 0.18333333333333332
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 3.0166666666666666,
+                    "end": 3.183333333333333,
+                    "width": 0.18333333333333332
+                  }
+                ],
+                "best": {
+                  "start": 3.0166666666666666,
+                  "end": 3.183333333333333,
+                  "width": 0.18333333333333332
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 120,
+            "phases": 4,
+            "score": 0.18333333333333332
+          }
+        ],
+        "hard": [
+          {
+            "flight": "high",
+            "action": "jump",
+            "speed": 144,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 2.3666666666666667,
+                    "end": 2.6333333333333333,
+                    "width": 0.2833333333333333
+                  }
+                ],
+                "best": {
+                  "start": 2.3666666666666667,
+                  "end": 2.6333333333333333,
+                  "width": 0.2833333333333333
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 2.3666666666666667,
+                    "end": 2.6333333333333333,
+                    "width": 0.2833333333333333
+                  }
+                ],
+                "best": {
+                  "start": 2.3666666666666667,
+                  "end": 2.6333333333333333,
+                  "width": 0.2833333333333333
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 80,
+            "phases": 4,
+            "score": 0.2833333333333333
+          }
+        ]
+      },
+      "profileStamps": {
+        "easy": "cal4-5f8dbf94",
+        "standard": "cal4-84ae8129",
+        "hard": "cal4-a007988e"
+      },
+      "changes": [
+        {
+          "field": "groundOffset",
+          "before": 0,
+          "after": 19.256249999999966
+        },
+        {
+          "field": "cw",
+          "before": 0.9162210338680927,
+          "after": 0.6751515151515153
+        },
+        {
+          "field": "ch",
+          "before": 0.9336870026525199,
+          "after": 0.6673740053050398
+        },
+        {
+          "field": "cx",
+          "before": 0.00089126559714795,
+          "after": 0
+        },
+        {
+          "field": "cy",
+          "before": 0,
+          "after": -0.010610079575596787
+        }
+      ],
+      "warnings": [],
+      "anchor": 0.9893899204244032,
+      "stamp": "cal4-e08147de",
+      "ready": true,
+      "reviewed": false
+    },
+    {
+      "id": "hazard:as03:2",
+      "stage": "as03",
+      "name": "House swift",
+      "before": {
+        "scale": 0.24,
+        "xOffset": 0,
+        "flipX": true,
+        "highClearance": 68,
+        "lowClearance": 18,
+        "highOffsetY": 0,
+        "lowOffsetY": 0,
+        "fps": 8,
+        "cw": 0.7020648967551623,
+        "ch": 0.15593220338983052,
+        "cx": 0.09587020648967552,
+        "cy": 0.04745762711864407
+      },
+      "placement": {
+        "scale": 0.24,
+        "xOffset": 0,
+        "flipX": true,
+        "highClearance": 58.90655600000002,
+        "lowClearance": 1.1106250000000273,
+        "highOffsetY": 0,
+        "lowOffsetY": 0,
+        "fps": 8,
+        "cw": 0.787315634218289,
+        "ch": 0.31406779661016954,
+        "cx": 0.028023598820059004,
+        "cy": 0.1508474576271186
+      },
+      "beforeProfiles": {
+        "easy": [
+          {
+            "flight": "high",
+            "action": "slide",
+            "speed": 170,
+            "characters": {
+              "claude": {
+                "windows": [],
+                "best": null,
+                "threat": false,
+                "pass": false,
+                "duration": 0.75
+              },
+              "constance": {
+                "windows": [],
+                "best": null,
+                "threat": false,
+                "pass": false,
+                "duration": 0.75
+              }
+            },
+            "pass": false,
+            "minimumMs": 150,
+            "phases": 16,
+            "score": 0
+          },
+          {
+            "flight": "low",
+            "action": "jump",
+            "speed": 170,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 1.8499999999999999,
+                    "end": 2.25,
+                    "width": 0.4166666666666667
+                  }
+                ],
+                "best": {
+                  "start": 1.8499999999999999,
+                  "end": 2.25,
+                  "width": 0.4166666666666667
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 1.8666666666666667,
+                    "end": 2.25,
+                    "width": 0.4
+                  }
+                ],
+                "best": {
+                  "start": 1.8666666666666667,
+                  "end": 2.25,
+                  "width": 0.4
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 150,
+            "phases": 16,
+            "score": 0.4
+          }
+        ],
+        "standard": [
+          {
+            "flight": "high",
+            "action": "slide",
+            "speed": 170,
+            "characters": {
+              "claude": {
+                "windows": [],
+                "best": null,
+                "threat": false,
+                "pass": false,
+                "duration": 0.75
+              },
+              "constance": {
+                "windows": [],
+                "best": null,
+                "threat": false,
+                "pass": false,
+                "duration": 0.75
+              }
+            },
+            "pass": false,
+            "minimumMs": 120,
+            "phases": 16,
+            "score": 0
+          },
+          {
+            "flight": "low",
+            "action": "jump",
+            "speed": 170,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 1.8499999999999999,
+                    "end": 2.25,
+                    "width": 0.4166666666666667
+                  }
+                ],
+                "best": {
+                  "start": 1.8499999999999999,
+                  "end": 2.25,
+                  "width": 0.4166666666666667
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 1.8666666666666667,
+                    "end": 2.25,
+                    "width": 0.4
+                  }
+                ],
+                "best": {
+                  "start": 1.8666666666666667,
+                  "end": 2.25,
+                  "width": 0.4
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 120,
+            "phases": 16,
+            "score": 0.4
+          }
+        ],
+        "hard": [
+          {
+            "flight": "high",
+            "action": "slide",
+            "speed": 204,
+            "characters": {
+              "claude": {
+                "windows": [],
+                "best": null,
+                "threat": false,
+                "pass": false,
+                "duration": 0.75
+              },
+              "constance": {
+                "windows": [],
+                "best": null,
+                "threat": false,
+                "pass": false,
+                "duration": 0.75
+              }
+            },
+            "pass": false,
+            "minimumMs": 80,
+            "phases": 16,
+            "score": 0
+          },
+          {
+            "flight": "low",
+            "action": "jump",
+            "speed": 204,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 1.4,
+                    "end": 1.8499999999999999,
+                    "width": 0.4666666666666667
+                  }
+                ],
+                "best": {
+                  "start": 1.4,
+                  "end": 1.8499999999999999,
+                  "width": 0.4666666666666667
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 1.4166666666666667,
+                    "end": 1.8499999999999999,
+                    "width": 0.45
+                  }
+                ],
+                "best": {
+                  "start": 1.4166666666666667,
+                  "end": 1.8499999999999999,
+                  "width": 0.45
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 80,
+            "phases": 16,
+            "score": 0.45
+          }
+        ]
+      },
+      "profiles": {
+        "easy": [
+          {
+            "flight": "high",
+            "action": "slide",
+            "speed": 170,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 1.9833333333333334,
+                    "end": 2.3666666666666667,
+                    "width": 0.4
+                  }
+                ],
+                "best": {
+                  "start": 1.9833333333333334,
+                  "end": 2.3666666666666667,
+                  "width": 0.4
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.75
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 1.9833333333333334,
+                    "end": 2.3666666666666667,
+                    "width": 0.4
+                  }
+                ],
+                "best": {
+                  "start": 1.9833333333333334,
+                  "end": 2.3666666666666667,
+                  "width": 0.4
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.75
+              }
+            },
+            "pass": true,
+            "minimumMs": 150,
+            "phases": 16,
+            "score": 0.4
+          },
+          {
+            "flight": "low",
+            "action": "jump",
+            "speed": 170,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 1.8333333333333333,
+                    "end": 2.3166666666666664,
+                    "width": 0.5
+                  }
+                ],
+                "best": {
+                  "start": 1.8333333333333333,
+                  "end": 2.3166666666666664,
+                  "width": 0.5
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 1.8333333333333333,
+                    "end": 2.3,
+                    "width": 0.48333333333333334
+                  }
+                ],
+                "best": {
+                  "start": 1.8333333333333333,
+                  "end": 2.3,
+                  "width": 0.48333333333333334
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 150,
+            "phases": 16,
+            "score": 0.48333333333333334
+          }
+        ],
+        "standard": [
+          {
+            "flight": "high",
+            "action": "slide",
+            "speed": 170,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 1.9833333333333334,
+                    "end": 2.3666666666666667,
+                    "width": 0.4
+                  }
+                ],
+                "best": {
+                  "start": 1.9833333333333334,
+                  "end": 2.3666666666666667,
+                  "width": 0.4
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.75
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 1.9833333333333334,
+                    "end": 2.3666666666666667,
+                    "width": 0.4
+                  }
+                ],
+                "best": {
+                  "start": 1.9833333333333334,
+                  "end": 2.3666666666666667,
+                  "width": 0.4
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.75
+              }
+            },
+            "pass": true,
+            "minimumMs": 120,
+            "phases": 16,
+            "score": 0.4
+          },
+          {
+            "flight": "low",
+            "action": "jump",
+            "speed": 170,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 1.8333333333333333,
+                    "end": 2.3166666666666664,
+                    "width": 0.5
+                  }
+                ],
+                "best": {
+                  "start": 1.8333333333333333,
+                  "end": 2.3166666666666664,
+                  "width": 0.5
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 1.8333333333333333,
+                    "end": 2.3,
+                    "width": 0.48333333333333334
+                  }
+                ],
+                "best": {
+                  "start": 1.8333333333333333,
+                  "end": 2.3,
+                  "width": 0.48333333333333334
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 120,
+            "phases": 16,
+            "score": 0.48333333333333334
+          }
+        ],
+        "hard": [
+          {
+            "flight": "high",
+            "action": "slide",
+            "speed": 204,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 1.5333333333333332,
+                    "end": 1.9666666666666666,
+                    "width": 0.45
+                  }
+                ],
+                "best": {
+                  "start": 1.5333333333333332,
+                  "end": 1.9666666666666666,
+                  "width": 0.45
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.75
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 1.5333333333333332,
+                    "end": 1.9833333333333334,
+                    "width": 0.4666666666666667
+                  }
+                ],
+                "best": {
+                  "start": 1.5333333333333332,
+                  "end": 1.9833333333333334,
+                  "width": 0.4666666666666667
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.75
+              }
+            },
+            "pass": true,
+            "minimumMs": 80,
+            "phases": 16,
+            "score": 0.45
+          },
+          {
+            "flight": "low",
+            "action": "jump",
+            "speed": 204,
+            "characters": {
+              "claude": {
+                "windows": [
+                  {
+                    "start": 1.3666666666666667,
+                    "end": 1.9166666666666667,
+                    "width": 0.5666666666666667
+                  }
+                ],
+                "best": {
+                  "start": 1.3666666666666667,
+                  "end": 1.9166666666666667,
+                  "width": 0.5666666666666667
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              },
+              "constance": {
+                "windows": [
+                  {
+                    "start": 1.3833333333333333,
+                    "end": 1.9,
+                    "width": 0.5333333333333333
+                  }
+                ],
+                "best": {
+                  "start": 1.3833333333333333,
+                  "end": 1.9,
+                  "width": 0.5333333333333333
+                },
+                "threat": true,
+                "pass": true,
+                "duration": 0.9666666666666667
+              }
+            },
+            "pass": true,
+            "minimumMs": 80,
+            "phases": 16,
+            "score": 0.5333333333333333
+          }
+        ]
+      },
+      "profileStamps": {
+        "easy": "cal4-6c2adc7f",
+        "standard": "cal4-2a79ccfe",
+        "hard": "cal4-593598d7"
+      },
+      "changes": [
+        {
+          "field": "highClearance",
+          "before": 68,
+          "after": 58.90655600000002
+        },
+        {
+          "field": "lowClearance",
+          "before": 18,
+          "after": 1.1106250000000273
+        },
+        {
+          "field": "cw",
+          "before": 0.7020648967551623,
+          "after": 0.787315634218289
+        },
+        {
+          "field": "ch",
+          "before": 0.15593220338983052,
+          "after": 0.31406779661016954
+        },
+        {
+          "field": "cx",
+          "before": 0.09587020648967552,
+          "after": 0.028023598820059004
+        },
+        {
+          "field": "cy",
+          "before": 0.04745762711864407,
+          "after": 0.1508474576271186
+        }
+      ],
+      "warnings": [
+        "Animation base varies by more than 4 scene pixels; inspect each frame."
+      ],
+      "anchor": 0.8355932203389831,
+      "stamp": "cal4-36c5040d",
+      "ready": true,
+      "reviewed": false
+    }
+  ]
+}

@@ -1,0 +1,1561 @@
+{
+  "version": 3,
+  "atlases": {
+    "MAP_HEAD_PINS_ATLAS": {
+      "file": "assets/MAP_HEAD_PINS_ATLAS.png",
+      "cell": [
+        96,
+        96
+      ],
+      "frames": {
+        "MAP_PIN_CLAUDE": {
+          "rect_xywh": [
+            0,
+            0,
+            96,
+            96
+          ],
+          "source_cell_ltrb": [
+            0,
+            0,
+            887,
+            887
+          ],
+          "source_ink_bbox": [
+            273,
+            122,
+            836,
+            770
+          ],
+          "anchor": [
+            48,
+            88
+          ]
+        },
+        "MAP_PIN_CONSTANCE": {
+          "rect_xywh": [
+            96,
+            0,
+            96,
+            96
+          ],
+          "source_cell_ltrb": [
+            887,
+            0,
+            1774,
+            887
+          ],
+          "source_ink_bbox": [
+            51,
+            120,
+            615,
+            770
+          ],
+          "anchor": [
+            48,
+            88
+          ]
+        }
+      }
+    },
+    "UI_NAV_ICONS_ATLAS": {
+      "file": "assets/UI_NAV_ICONS_ATLAS.png",
+      "cell": [
+        64,
+        64
+      ],
+      "frames": {
+        "UI_ICON_MENU": {
+          "rect_xywh": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "source_cell_ltrb": [
+            0,
+            0,
+            418,
+            418
+          ],
+          "source_ink_bbox": [
+            89,
+            124,
+            359,
+            387
+          ],
+          "anchor": [
+            32,
+            32
+          ]
+        },
+        "UI_ICON_GLOBE": {
+          "rect_xywh": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "source_cell_ltrb": [
+            418,
+            0,
+            836,
+            418
+          ],
+          "source_ink_bbox": [
+            54,
+            89,
+            364,
+            404
+          ],
+          "anchor": [
+            32,
+            32
+          ]
+        },
+        "UI_ICON_TROPHY": {
+          "rect_xywh": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "source_cell_ltrb": [
+            836,
+            0,
+            1254,
+            418
+          ],
+          "source_ink_bbox": [
+            43,
+            101,
+            350,
+            404
+          ],
+          "anchor": [
+            32,
+            32
+          ]
+        },
+        "UI_ICON_OPTIONS": {
+          "rect_xywh": [
+            0,
+            64,
+            64,
+            64
+          ],
+          "source_cell_ltrb": [
+            0,
+            418,
+            418,
+            836
+          ],
+          "source_ink_bbox": [
+            68,
+            66,
+            382,
+            377
+          ],
+          "anchor": [
+            32,
+            32
+          ]
+        },
+        "UI_ICON_SAVE": {
+          "rect_xywh": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "source_cell_ltrb": [
+            418,
+            418,
+            836,
+            836
+          ],
+          "source_ink_bbox": [
+            74,
+            79,
+            345,
+            363
+          ],
+          "anchor": [
+            32,
+            32
+          ]
+        },
+        "UI_ICON_PLAY": {
+          "rect_xywh": [
+            128,
+            64,
+            64,
+            64
+          ],
+          "source_cell_ltrb": [
+            836,
+            418,
+            1254,
+            836
+          ],
+          "source_ink_bbox": [
+            77,
+            79,
+            318,
+            355
+          ],
+          "anchor": [
+            32,
+            32
+          ]
+        },
+        "UI_ICON_REPLAY": {
+          "rect_xywh": [
+            0,
+            128,
+            64,
+            64
+          ],
+          "source_cell_ltrb": [
+            0,
+            836,
+            418,
+            1254
+          ],
+          "source_ink_bbox": [
+            82,
+            47,
+            363,
+            326
+          ],
+          "anchor": [
+            32,
+            32
+          ]
+        },
+        "UI_ICON_LOCK": {
+          "rect_xywh": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "source_cell_ltrb": [
+            418,
+            836,
+            836,
+            1254
+          ],
+          "source_ink_bbox": [
+            85,
+            29,
+            333,
+            333
+          ],
+          "anchor": [
+            32,
+            32
+          ]
+        },
+        "UI_ICON_CHECK": {
+          "rect_xywh": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "source_cell_ltrb": [
+            836,
+            836,
+            1254,
+            1254
+          ],
+          "source_ink_bbox": [
+            56,
+            73,
+            351,
+            316
+          ],
+          "anchor": [
+            32,
+            32
+          ]
+        }
+      }
+    },
+    "MAP_NODE_STATES_ATLAS": {
+      "file": "assets/MAP_NODE_STATES_ATLAS.png",
+      "cell": [
+        48,
+        48
+      ],
+      "frames": {
+        "MAP_NODE_LOCKED": {
+          "rect_xywh": [
+            0,
+            0,
+            48,
+            48
+          ]
+        },
+        "MAP_NODE_AVAILABLE": {
+          "rect_xywh": [
+            48,
+            0,
+            48,
+            48
+          ]
+        },
+        "MAP_NODE_COMPLETED": {
+          "rect_xywh": [
+            96,
+            0,
+            48,
+            48
+          ]
+        },
+        "MAP_NODE_VISITED": {
+          "rect_xywh": [
+            144,
+            0,
+            48,
+            48
+          ]
+        },
+        "MAP_CURRENT_RING": {
+          "rect_xywh": [
+            192,
+            0,
+            48,
+            48
+          ]
+        }
+      }
+    },
+    "UI_STAGE_CARDS_ATLAS": {
+      "file": "assets/UI_STAGE_CARDS_ATLAS.png",
+      "cell": [
+        512,
+        176
+      ],
+      "frames": {
+        "UI_STAGE_CARD_NORMAL": {
+          "rect_xywh": [
+            0,
+            0,
+            512,
+            176
+          ]
+        },
+        "UI_STAGE_CARD_CURRENT": {
+          "rect_xywh": [
+            512,
+            0,
+            512,
+            176
+          ]
+        },
+        "UI_STAGE_CARD_LOCKED": {
+          "rect_xywh": [
+            1024,
+            0,
+            512,
+            176
+          ]
+        },
+        "UI_STAGE_CARD_COMPLETE": {
+          "rect_xywh": [
+            1536,
+            0,
+            512,
+            176
+          ]
+        }
+      }
+    },
+    "UI_CONTINENT_PLATES_ATLAS": {
+      "file": "assets/UI_CONTINENT_PLATES_ATLAS.png",
+      "cell": [
+        280,
+        48
+      ],
+      "frames": {
+        "UI_CONTINENT_PLATE_NORMAL": {
+          "rect_xywh": [
+            0,
+            0,
+            280,
+            48
+          ]
+        },
+        "UI_CONTINENT_PLATE_CURRENT": {
+          "rect_xywh": [
+            280,
+            0,
+            280,
+            48
+          ]
+        },
+        "UI_CONTINENT_PLATE_LOCKED": {
+          "rect_xywh": [
+            560,
+            0,
+            280,
+            48
+          ]
+        },
+        "UI_CONTINENT_PLATE_COMPLETE": {
+          "rect_xywh": [
+            840,
+            0,
+            280,
+            48
+          ]
+        }
+      }
+    },
+    "UI_BUTTONS_ATLAS": {
+      "file": "assets/UI_BUTTONS_ATLAS.png",
+      "cell": [
+        320,
+        56
+      ],
+      "frames": {
+        "UI_BUTTON_NORMAL": {
+          "rect_xywh": [
+            0,
+            0,
+            320,
+            56
+          ]
+        },
+        "UI_BUTTON_FOCUS": {
+          "rect_xywh": [
+            320,
+            0,
+            320,
+            56
+          ]
+        },
+        "UI_BUTTON_PRESSED": {
+          "rect_xywh": [
+            640,
+            0,
+            320,
+            56
+          ]
+        },
+        "UI_BUTTON_DISABLED": {
+          "rect_xywh": [
+            960,
+            0,
+            320,
+            56
+          ]
+        }
+      }
+    },
+    "MAP_STAGE_THUMBNAILS_ATLAS": {
+      "file": "assets/MAP_STAGE_THUMBNAILS_ATLAS.png",
+      "cell": [
+        320,
+        240
+      ],
+      "frames": {
+        "NA01": {
+          "rect_xywh": [
+            0,
+            0,
+            320,
+            240
+          ],
+          "label": "Desert",
+          "source": "originals/NA01_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            682,
+            170,
+            1365,
+            682
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "NA02": {
+          "rect_xywh": [
+            320,
+            0,
+            320,
+            240
+          ],
+          "label": "Pines / Mountains",
+          "source": "originals/NA02_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            467,
+            0,
+            1376,
+            682
+          ],
+          "mid_source": "originals/NA02_THUMB_MID_SOURCE.png",
+          "kind": "existing_environment_crop"
+        },
+        "NA03": {
+          "rect_xywh": [
+            640,
+            0,
+            320,
+            240
+          ],
+          "label": "New York City",
+          "source": "originals/NA03_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            877,
+            0,
+            1786,
+            682
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "SA01": {
+          "rect_xywh": [
+            0,
+            240,
+            320,
+            240
+          ],
+          "label": "Amazon Rainforest",
+          "source": "originals/SA01_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            560,
+            0,
+            1525,
+            724
+          ],
+          "mid_source": "originals/SA01_THUMB_MID_SOURCE.png",
+          "kind": "existing_environment_crop"
+        },
+        "SA02": {
+          "rect_xywh": [
+            320,
+            240,
+            320,
+            240
+          ],
+          "label": "Andes Mountains",
+          "source": "originals/SA02_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            384,
+            0,
+            1351,
+            725
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "SA03": {
+          "rect_xywh": [
+            640,
+            240,
+            320,
+            240
+          ],
+          "label": "Rio de Janeiro",
+          "source": "originals/SA03_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            1071,
+            0,
+            2079,
+            756
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "EU01": {
+          "rect_xywh": [
+            0,
+            480,
+            320,
+            240
+          ],
+          "label": "Santorini",
+          "source": "originals/EU01_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            1139,
+            0,
+            2048,
+            682
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "EU02": {
+          "rect_xywh": [
+            320,
+            480,
+            320,
+            240
+          ],
+          "label": "Paris",
+          "source": "originals/EU02_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            1139,
+            0,
+            2048,
+            682
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "EU03": {
+          "rect_xywh": [
+            640,
+            480,
+            320,
+            240
+          ],
+          "label": "Barcelona",
+          "source": "originals/EU03_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            283,
+            0,
+            1192,
+            682
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "AF01": {
+          "rect_xywh": [
+            0,
+            720,
+            320,
+            240
+          ],
+          "label": "Savannah",
+          "source": "originals/AF01_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            0,
+            0,
+            1448,
+            1086
+          ],
+          "mid_source": null,
+          "kind": "new_menu_art"
+        },
+        "AF02": {
+          "rect_xywh": [
+            320,
+            720,
+            320,
+            240
+          ],
+          "label": "Sossusvlei",
+          "source": "originals/AF02_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            0,
+            0,
+            1448,
+            1086
+          ],
+          "mid_source": null,
+          "kind": "new_menu_art"
+        },
+        "AF03": {
+          "rect_xywh": [
+            640,
+            720,
+            320,
+            240
+          ],
+          "label": "Marrakesh",
+          "source": "originals/AF03_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            941,
+            181,
+            1665,
+            724
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "AS01": {
+          "rect_xywh": [
+            0,
+            960,
+            320,
+            240
+          ],
+          "label": "Kyoto",
+          "source": "originals/AS01_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            1016,
+            0,
+            1981,
+            724
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "AS02": {
+          "rect_xywh": [
+            320,
+            960,
+            320,
+            240
+          ],
+          "label": "Zhangjiajie",
+          "source": "originals/AS02_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            647,
+            0,
+            1612,
+            724
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "AS03": {
+          "rect_xywh": [
+            640,
+            960,
+            320,
+            240
+          ],
+          "label": "Bangkok",
+          "source": "originals/AS03_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            365,
+            0,
+            1330,
+            724
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "OC01": {
+          "rect_xywh": [
+            0,
+            1200,
+            320,
+            240
+          ],
+          "label": "Uluru",
+          "source": "originals/OC01_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            560,
+            0,
+            1525,
+            724
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "OC02": {
+          "rect_xywh": [
+            320,
+            1200,
+            320,
+            240
+          ],
+          "label": "Queensland",
+          "source": "originals/OC02_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            604,
+            0,
+            1569,
+            724
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "OC03": {
+          "rect_xywh": [
+            640,
+            1200,
+            320,
+            240
+          ],
+          "label": "Fiordland",
+          "source": "originals/OC03_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            604,
+            0,
+            1569,
+            724
+          ],
+          "mid_source": null,
+          "kind": "existing_environment_crop"
+        },
+        "AN01": {
+          "rect_xywh": [
+            0,
+            1440,
+            320,
+            240
+          ],
+          "label": "Antarctic Peninsula",
+          "source": "originals/AN01_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            604,
+            0,
+            1569,
+            724
+          ],
+          "mid_source": "originals/AN01_THUMB_MID_SOURCE.png",
+          "kind": "existing_environment_crop"
+        },
+        "AN02": {
+          "rect_xywh": [
+            320,
+            1440,
+            320,
+            240
+          ],
+          "label": "Ross Island",
+          "source": "originals/AN02_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            604,
+            0,
+            1569,
+            724
+          ],
+          "mid_source": "originals/AN02_THUMB_MID_SOURCE.png",
+          "kind": "existing_environment_crop"
+        },
+        "AN03": {
+          "rect_xywh": [
+            640,
+            1440,
+            320,
+            240
+          ],
+          "label": "Research Outpost",
+          "source": "originals/AN03_THUMB_SOURCE.png",
+          "crop_ltrb": [
+            604,
+            0,
+            1569,
+            724
+          ],
+          "mid_source": "originals/AN03_THUMB_MID_SOURCE.png",
+          "kind": "existing_environment_crop"
+        }
+      },
+      "order": "rows NA SA EU AF AS OC AN; columns01 02 03"
+    },
+    "MAP_CLOUDS_ATLAS": {
+      "file": "assets/MAP_CLOUDS_ATLAS.png",
+      "cell": [
+        128,
+        80
+      ],
+      "frames": {
+        "MAP_CLOUD_1": {
+          "rect_xywh": [
+            0,
+            0,
+            128,
+            80
+          ],
+          "anchor": [
+            64,
+            72
+          ],
+          "source_cell_ltrb": [
+            0,
+            0,
+            724,
+            724
+          ],
+          "source_ink_bbox": [
+            98,
+            350,
+            679,
+            544
+          ]
+        },
+        "MAP_CLOUD_2": {
+          "rect_xywh": [
+            128,
+            0,
+            128,
+            80
+          ],
+          "anchor": [
+            64,
+            72
+          ],
+          "source_cell_ltrb": [
+            724,
+            0,
+            1448,
+            724
+          ],
+          "source_ink_bbox": [
+            91,
+            272,
+            635,
+            544
+          ]
+        },
+        "MAP_CLOUD_3": {
+          "rect_xywh": [
+            256,
+            0,
+            128,
+            80
+          ],
+          "anchor": [
+            64,
+            72
+          ],
+          "source_cell_ltrb": [
+            1448,
+            0,
+            2172,
+            724
+          ],
+          "source_ink_bbox": [
+            46,
+            212,
+            635,
+            544
+          ]
+        }
+      }
+    }
+  },
+  "thumbnails": {
+    "NA01": {
+      "rect_xywh": [
+        0,
+        0,
+        320,
+        240
+      ],
+      "label": "Desert",
+      "source": "originals/NA01_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        682,
+        170,
+        1365,
+        682
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "NA02": {
+      "rect_xywh": [
+        320,
+        0,
+        320,
+        240
+      ],
+      "label": "Pines / Mountains",
+      "source": "originals/NA02_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        467,
+        0,
+        1376,
+        682
+      ],
+      "mid_source": "originals/NA02_THUMB_MID_SOURCE.png",
+      "kind": "existing_environment_crop"
+    },
+    "NA03": {
+      "rect_xywh": [
+        640,
+        0,
+        320,
+        240
+      ],
+      "label": "New York City",
+      "source": "originals/NA03_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        877,
+        0,
+        1786,
+        682
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "SA01": {
+      "rect_xywh": [
+        0,
+        240,
+        320,
+        240
+      ],
+      "label": "Amazon Rainforest",
+      "source": "originals/SA01_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        560,
+        0,
+        1525,
+        724
+      ],
+      "mid_source": "originals/SA01_THUMB_MID_SOURCE.png",
+      "kind": "existing_environment_crop"
+    },
+    "SA02": {
+      "rect_xywh": [
+        320,
+        240,
+        320,
+        240
+      ],
+      "label": "Andes Mountains",
+      "source": "originals/SA02_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        384,
+        0,
+        1351,
+        725
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "SA03": {
+      "rect_xywh": [
+        640,
+        240,
+        320,
+        240
+      ],
+      "label": "Rio de Janeiro",
+      "source": "originals/SA03_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        1071,
+        0,
+        2079,
+        756
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "EU01": {
+      "rect_xywh": [
+        0,
+        480,
+        320,
+        240
+      ],
+      "label": "Santorini",
+      "source": "originals/EU01_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        1139,
+        0,
+        2048,
+        682
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "EU02": {
+      "rect_xywh": [
+        320,
+        480,
+        320,
+        240
+      ],
+      "label": "Paris",
+      "source": "originals/EU02_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        1139,
+        0,
+        2048,
+        682
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "EU03": {
+      "rect_xywh": [
+        640,
+        480,
+        320,
+        240
+      ],
+      "label": "Barcelona",
+      "source": "originals/EU03_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        283,
+        0,
+        1192,
+        682
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "AF01": {
+      "rect_xywh": [
+        0,
+        720,
+        320,
+        240
+      ],
+      "label": "Savannah",
+      "source": "originals/AF01_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        0,
+        0,
+        1448,
+        1086
+      ],
+      "mid_source": null,
+      "kind": "new_menu_art"
+    },
+    "AF02": {
+      "rect_xywh": [
+        320,
+        720,
+        320,
+        240
+      ],
+      "label": "Sossusvlei",
+      "source": "originals/AF02_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        0,
+        0,
+        1448,
+        1086
+      ],
+      "mid_source": null,
+      "kind": "new_menu_art"
+    },
+    "AF03": {
+      "rect_xywh": [
+        640,
+        720,
+        320,
+        240
+      ],
+      "label": "Marrakesh",
+      "source": "originals/AF03_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        941,
+        181,
+        1665,
+        724
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "AS01": {
+      "rect_xywh": [
+        0,
+        960,
+        320,
+        240
+      ],
+      "label": "Kyoto",
+      "source": "originals/AS01_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        1016,
+        0,
+        1981,
+        724
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "AS02": {
+      "rect_xywh": [
+        320,
+        960,
+        320,
+        240
+      ],
+      "label": "Zhangjiajie",
+      "source": "originals/AS02_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        647,
+        0,
+        1612,
+        724
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "AS03": {
+      "rect_xywh": [
+        640,
+        960,
+        320,
+        240
+      ],
+      "label": "Bangkok",
+      "source": "originals/AS03_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        365,
+        0,
+        1330,
+        724
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "OC01": {
+      "rect_xywh": [
+        0,
+        1200,
+        320,
+        240
+      ],
+      "label": "Uluru",
+      "source": "originals/OC01_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        560,
+        0,
+        1525,
+        724
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "OC02": {
+      "rect_xywh": [
+        320,
+        1200,
+        320,
+        240
+      ],
+      "label": "Queensland",
+      "source": "originals/OC02_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        604,
+        0,
+        1569,
+        724
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "OC03": {
+      "rect_xywh": [
+        640,
+        1200,
+        320,
+        240
+      ],
+      "label": "Fiordland",
+      "source": "originals/OC03_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        604,
+        0,
+        1569,
+        724
+      ],
+      "mid_source": null,
+      "kind": "existing_environment_crop"
+    },
+    "AN01": {
+      "rect_xywh": [
+        0,
+        1440,
+        320,
+        240
+      ],
+      "label": "Antarctic Peninsula",
+      "source": "originals/AN01_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        604,
+        0,
+        1569,
+        724
+      ],
+      "mid_source": "originals/AN01_THUMB_MID_SOURCE.png",
+      "kind": "existing_environment_crop"
+    },
+    "AN02": {
+      "rect_xywh": [
+        320,
+        1440,
+        320,
+        240
+      ],
+      "label": "Ross Island",
+      "source": "originals/AN02_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        604,
+        0,
+        1569,
+        724
+      ],
+      "mid_source": "originals/AN02_THUMB_MID_SOURCE.png",
+      "kind": "existing_environment_crop"
+    },
+    "AN03": {
+      "rect_xywh": [
+        640,
+        1440,
+        320,
+        240
+      ],
+      "label": "Research Outpost",
+      "source": "originals/AN03_THUMB_SOURCE.png",
+      "crop_ltrb": [
+        604,
+        0,
+        1569,
+        724
+      ],
+      "mid_source": "originals/AN03_THUMB_MID_SOURCE.png",
+      "kind": "existing_environment_crop"
+    }
+  },
+  "authored_ui": {
+    "UI_STAGE_CARD_NORMAL": {
+      "file": "assets/UI_STAGE_CARD_NORMAL.png",
+      "size": [
+        512,
+        176
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_STAGE_CARD_NORMAL.svg"
+    },
+    "UI_CONTINENT_PLATE_NORMAL": {
+      "file": "assets/UI_CONTINENT_PLATE_NORMAL.png",
+      "size": [
+        280,
+        48
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_CONTINENT_PLATE_NORMAL.svg"
+    },
+    "UI_STAGE_CARD_CURRENT": {
+      "file": "assets/UI_STAGE_CARD_CURRENT.png",
+      "size": [
+        512,
+        176
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_STAGE_CARD_CURRENT.svg"
+    },
+    "UI_CONTINENT_PLATE_CURRENT": {
+      "file": "assets/UI_CONTINENT_PLATE_CURRENT.png",
+      "size": [
+        280,
+        48
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_CONTINENT_PLATE_CURRENT.svg"
+    },
+    "UI_STAGE_CARD_LOCKED": {
+      "file": "assets/UI_STAGE_CARD_LOCKED.png",
+      "size": [
+        512,
+        176
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_STAGE_CARD_LOCKED.svg"
+    },
+    "UI_CONTINENT_PLATE_LOCKED": {
+      "file": "assets/UI_CONTINENT_PLATE_LOCKED.png",
+      "size": [
+        280,
+        48
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_CONTINENT_PLATE_LOCKED.svg"
+    },
+    "UI_STAGE_CARD_COMPLETE": {
+      "file": "assets/UI_STAGE_CARD_COMPLETE.png",
+      "size": [
+        512,
+        176
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_STAGE_CARD_COMPLETE.svg"
+    },
+    "UI_CONTINENT_PLATE_COMPLETE": {
+      "file": "assets/UI_CONTINENT_PLATE_COMPLETE.png",
+      "size": [
+        280,
+        48
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_CONTINENT_PLATE_COMPLETE.svg"
+    },
+    "UI_BUTTON_NORMAL": {
+      "file": "assets/UI_BUTTON_NORMAL.png",
+      "size": [
+        320,
+        56
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_BUTTON_NORMAL.svg"
+    },
+    "UI_BUTTON_FOCUS": {
+      "file": "assets/UI_BUTTON_FOCUS.png",
+      "size": [
+        320,
+        56
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_BUTTON_FOCUS.svg"
+    },
+    "UI_BUTTON_PRESSED": {
+      "file": "assets/UI_BUTTON_PRESSED.png",
+      "size": [
+        320,
+        56
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_BUTTON_PRESSED.svg"
+    },
+    "UI_BUTTON_DISABLED": {
+      "file": "assets/UI_BUTTON_DISABLED.png",
+      "size": [
+        320,
+        56
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_BUTTON_DISABLED.svg"
+    },
+    "UI_NAV_BAR": {
+      "file": "assets/UI_NAV_BAR.png",
+      "size": [
+        1600,
+        72
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_NAV_BAR.svg"
+    },
+    "UI_STAGE_PANEL": {
+      "file": "assets/UI_STAGE_PANEL.png",
+      "size": [
+        1600,
+        270
+      ],
+      "nine_slice_ltrb": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "safe_inset": 14,
+      "source": "originals/UI_STAGE_PANEL.svg"
+    }
+  },
+  "shared": {
+    "UI_REWARD_UTILITIES_ATLAS": {
+      "file": "shared/UI_REWARD_UTILITIES_ATLAS.png",
+      "size": [
+        96,
+        32
+      ],
+      "states": {
+        "empty": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "full": [
+          32,
+          0,
+          32,
+          32
+        ],
+        "perfect": [
+          64,
+          0,
+          32,
+          32
+        ]
+      },
+      "reuse_existing": true,
+      "note": "Byte-identical canonical dependency, one copy in this complete screen package; deduplicate at import."
+    }
+  },
+  "ocean_backdrop": {
+    "file": "assets/MAP_OCEAN_BACKDROP.png",
+    "size": [
+      1774,
+      887
+    ],
+    "opaque": true,
+    "original": "originals/MAP_OCEAN_BACKDROP_ORIGINAL.png",
+    "usage": "Viewport-filling cover background behind proportionally fitted map. Mask only outer 1.5% left/right of geography when horizontal spare space exists. Overlay coordinates and original map pixels unchanged."
+  }
+}

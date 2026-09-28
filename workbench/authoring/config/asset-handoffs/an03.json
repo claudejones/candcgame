@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "stageId": "an03",
+  "readiness": "asset-ready",
+  "downstream": {
+    "calibration": "pending",
+    "release": "pending"
+  },
+  "assets": {
+    "FAR": {
+      "path": "assets/worlds/antarctica/AN03_BG_DISTANT_RESEARCH_OUTPOST.png",
+      "sha256": "00a98c0630b1e0e348873814535056464499deef34a436c98311cb70c18a9efd",
+      "width": 2172,
+      "height": 724
+    },
+    "MID": {
+      "path": "assets/worlds/antarctica/AN03_BG_MID_RESEARCH_OUTPOST.png",
+      "sha256": "8a6a482104bd305e0c6f3e21898b22db34f29606a95a9c192f805a05382e4323",
+      "width": 2172,
+      "height": 724
+    },
+    "GROUND": {
+      "path": "assets/worlds/antarctica/AN03_GROUND_RESEARCH_OUTPOST.png",
+      "sha256": "8c26ebffde9af4186859514785fbe4171cf8c24a5faf1da283ba7abae9583a44",
+      "width": 2172,
+      "height": 724
+    },
+    "OBJECT_ATLAS": {
+      "path": "assets/worlds/antarctica/AN03_OBJECT_ATLAS.png",
+      "sha256": "322de0483965bea30277addd45ad341fc8924946e68d4b510ad7492d92902a8b",
+      "width": 2172,
+      "height": 724
+    },
+    "FLYING": {
+      "path": "assets/worlds/antarctica/AN03_HAZARD_SNOW_PETREL.png",
+      "sha256": "16ebcafae348cc078e7a6a68e1a734b0739eb9c6f262c33fe0cd0e86d5c1200f",
+      "width": 2172,
+      "height": 724
+    }
+  },
+  "landscape": {
+    "contractVersion": "phase8-landscape-1",
+    "source": {
+      "width": 2172,
+      "height": 724
+    },
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "groundSurfaceY": 410
+    },
+    "layers": {
+      "FAR": {
+        "sourceY": 0,
+        "scale": 1.25
+      },
+      "MID": {
+        "sourceAnchorY": 621,
+        "offsetY": 0,
+        "scale": 1
+      },
+      "GROUND": {
+        "sourceAnchorY": 393,
+        "offsetY": 0,
+        "scale": 1
+      }
+    }
+  },
+  "hazards": [
+    {
+      "name": "Survey instrument on tripod",
+      "kind": "ground",
+      "atlasKey": "an03Hazards",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.2,
+      "crop": {
+        "l": 311,
+        "r": 310,
+        "t": 47,
+        "b": 101
+      },
+      "cw": 0.8064516129032258,
+      "ch": 0.9635416666666666,
+      "cx": -0.002150537634408602,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Equipment sled",
+      "kind": "ground",
+      "atlasKey": "an03Hazards",
+      "rect": {
+        "x": 1086,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.2,
+      "crop": {
+        "l": 174,
+        "r": 174,
+        "t": 319,
+        "b": 101
+      },
+      "cw": 0.8333333333333334,
+      "ch": 0.9210526315789473,
+      "cx": 0.012872628726287264,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Snow petrel",
+      "kind": "flying",
+      "atlasKey": "an03Bird",
+      "frameW": 543,
+      "frameH": 724,
+      "frames": 4,
+      "fps": 8,
+      "sourceAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "scale": 0.27,
+      "crop": {
+        "l": 70,
+        "r": 107,
+        "t": 34,
+        "b": 126
+      },
+      "cw": 0.6939890710382514,
+      "ch": 0.16843971631205673,
+      "cx": 0.06830601092896176,
+      "cy": 0.0700354609929078,
+      "flightOffsetY": {
+        "high": 0,
+        "low": 0
+      },
+      "flipX": true,
+      "sourceFacing": "right",
+      "gameplayFacing": "left"
+    }
+  ],
+  "checks": {
+    "technical": true,
+    "composition": true,
+    "animation": true,
+    "basicRendering": true
+  },
+  "evidence": "docs/phase8-qa/AN03_WORKBENCH_IMPORT_QA.md",
+  "knownIssues": [
+    "Starting settings are provisional; artwork acceptance and gameplay calibration remain pending. Review snow petrel contrast against snow at final gameplay size."
+  ]
+}

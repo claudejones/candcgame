@@ -1,0 +1,143 @@
+{
+  "approved_count": 27,
+  "unchanged_hazards": 15,
+  "final_artwork": "approved",
+  "integration": "not performed",
+  "hazards": [
+    {
+      "id": "hazard:af01:0",
+      "name": "Termite mound",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:af02:0",
+      "name": "Raised clay-pan slabs",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:af02:1",
+      "name": "Broken camelthorn limb",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:af03:0",
+      "name": "Terracotta storage jar",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:an02:0",
+      "name": "Expedition equipment case",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:an02:1",
+      "name": "Anchor with short chain",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:an03:0",
+      "name": "Survey instrument tripod",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:as01:0",
+      "name": "Bamboo bundle",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:as01:1",
+      "name": "Stone lantern",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:as02:1",
+      "name": "Timber trail barrier",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:eu01:0",
+      "name": "Simplified market crates",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:eu02:0",
+      "name": "Bookseller box and books",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:eu02:1",
+      "name": "Simplified Paris bicycle",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:eu03:0",
+      "name": "Festival Drum",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:eu03:1",
+      "name": "Chestnut-roasting Stand",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:na01:0",
+      "name": "Prickly-pear cactus",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:na01:1",
+      "name": "Simplified cattle bones",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:na02:0",
+      "name": "Fallen log with pale broken end",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:na02:1",
+      "name": "Beaver",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:oc01:0",
+      "name": "Perentie",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:oc01:1",
+      "name": "Kangaroo-crossing sign",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:oc02:1",
+      "name": "Folded beach chair",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:oc03:1",
+      "name": "Hiking boots",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:sa01:0",
+      "name": "Snapped hardwood stump",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:sa01:1",
+      "name": "Yellow-footed Tortoise",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:sa02:0",
+      "name": "Andean Vizcacha",
+      "status": "approved"
+    },
+    {
+      "id": "hazard:sa03:1",
+      "name": "Boogie boards",
+      "status": "approved"
+    }
+  ]
+}

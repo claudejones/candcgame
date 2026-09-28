@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "stageId": "an02",
+  "readiness": "asset-ready",
+  "downstream": {
+    "calibration": "pending",
+    "release": "pending"
+  },
+  "assets": {
+    "FAR": {
+      "path": "assets/worlds/antarctica/AN02_BG_DISTANT_ROSS_ISLAND.png",
+      "sha256": "372594065a325b2b3060f066308aea9e72ee377e45f818266734e5b89d06737e",
+      "width": 2172,
+      "height": 724
+    },
+    "MID": {
+      "path": "assets/worlds/antarctica/AN02_BG_MID_ROSS_ISLAND.png",
+      "sha256": "3cf7042641e9c070be1149a683bb9dadf76b8b0b06bb0cc6ba241e24795cb5ed",
+      "width": 2172,
+      "height": 724
+    },
+    "GROUND": {
+      "path": "assets/worlds/antarctica/AN02_GROUND_ROSS_ISLAND.png",
+      "sha256": "4e81d02e2eef6558b93fc4f440efe7884dea7514e532a3ad3a4cfe9a617b9743",
+      "width": 2172,
+      "height": 724
+    },
+    "OBJECT_ATLAS": {
+      "path": "assets/worlds/antarctica/AN02_OBJECT_ATLAS.png",
+      "sha256": "0587ef88efd2f89fc5cee2f456384d59c6f0f6a16bb7806df030dbe0bea417c6",
+      "width": 2172,
+      "height": 724
+    },
+    "FLYING": {
+      "path": "assets/worlds/antarctica/AN02_HAZARD_POLAR_SKUA.png",
+      "sha256": "d7b31c39595de47c4955ffd633308048d52bb29d9387f2ec0ec7b6c89c838e18",
+      "width": 2172,
+      "height": 724
+    }
+  },
+  "landscape": {
+    "contractVersion": "phase8-landscape-1",
+    "source": {
+      "width": 2172,
+      "height": 724
+    },
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "groundSurfaceY": 410
+    },
+    "layers": {
+      "FAR": {
+        "sourceY": 0,
+        "scale": 1.25
+      },
+      "MID": {
+        "sourceAnchorY": 621,
+        "offsetY": 0,
+        "scale": 1
+      },
+      "GROUND": {
+        "sourceAnchorY": 393,
+        "offsetY": 0,
+        "scale": 1
+      }
+    }
+  },
+  "hazards": [
+    {
+      "name": "Hand ice auger",
+      "kind": "ground",
+      "atlasKey": "an02Hazards",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.2,
+      "crop": {
+        "l": 463,
+        "r": 481,
+        "t": 38,
+        "b": 99
+      },
+      "cw": 0.8028169014084507,
+      "ch": 0.9284497444633731,
+      "cx": 0.0,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Small anchor with short chain",
+      "kind": "ground",
+      "atlasKey": "an02Hazards",
+      "rect": {
+        "x": 1086,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.24,
+      "crop": {
+        "l": 405,
+        "r": 96,
+        "t": 347,
+        "b": 99
+      },
+      "cw": 0.5230769230769231,
+      "ch": 0.9064748201438849,
+      "cx": -0.2094017094017094,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "South polar skua",
+      "kind": "flying",
+      "atlasKey": "an02Bird",
+      "frameW": 543,
+      "frameH": 724,
+      "frames": 4,
+      "fps": 8,
+      "sourceAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "scale": 0.27,
+      "crop": {
+        "l": 31,
+        "r": 75,
+        "t": 31,
+        "b": 140
+      },
+      "cw": 0.6064073226544623,
+      "ch": 0.22965641952983726,
+      "cx": 0.14416475972540047,
+      "cy": 0.0922242314647378,
+      "flightOffsetY": {
+        "high": 0,
+        "low": 0
+      },
+      "flipX": true,
+      "sourceFacing": "right",
+      "gameplayFacing": "left"
+    }
+  ],
+  "checks": {
+    "technical": true,
+    "composition": true,
+    "animation": true,
+    "basicRendering": true
+  },
+  "evidence": "docs/phase8-qa/AN02_WORKBENCH_IMPORT_QA.md",
+  "knownIssues": [
+    "Starting settings are provisional; artwork review and user calibration remain pending. Slender auger visibility requires review at final gameplay size."
+  ]
+}

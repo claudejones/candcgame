@@ -1,0 +1,8886 @@
+{
+  "new_trophy": {
+    "label": "New Trophy",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA02 \u00b7 Andes Mountains",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_SA02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "TROPHY EARNED!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Your first clear of this stage.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_trophy",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "new_best": {
+    "label": "New Best",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA02 \u00b7 Andes Mountains",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_SA02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "lower_replay": {
+    "label": "Lower Replay",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA02 \u00b7 Andes Mountains",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_SA02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Your best stays at 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "lower_replay",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "equal_replay": {
+    "label": "Equal Replay",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA02 \u00b7 Andes Mountains",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_SA02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Best rating unchanged.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "equal_replay",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "assisted": {
+    "label": "Assisted",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA02 \u00b7 Andes Mountains",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "UNLIMITED HEALTH",
+        "x": 386,
+        "y": 310,
+        "w": 818,
+        "h": 36,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "Rewards disabled for this attempt.",
+        "x": 386,
+        "y": 371,
+        "w": 818,
+        "h": 32,
+        "size": 19,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "Your earned records are unchanged.",
+        "x": 386,
+        "y": 420,
+        "w": 818,
+        "h": 32,
+        "size": 17,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "assisted",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "game_over": {
+    "label": "Game Over",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_hit_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/stars_1.png",
+        "x": 107,
+        "y": 330,
+        "w": 130,
+        "h": 81,
+        "role": "stars"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "GAME OVER",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA02 \u00b7 Andes Mountains",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 644,
+        "y": 290,
+        "w": 84,
+        "h": 84,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 736,
+        "y": 290,
+        "w": 84,
+        "h": 84,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 828,
+        "y": 290,
+        "w": 84,
+        "h": 84,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Ready to try again?",
+        "x": 386,
+        "y": 409,
+        "w": 818,
+        "h": 40,
+        "size": 24,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "Retry starts with 3 hearts.",
+        "x": 386,
+        "y": 456,
+        "w": 818,
+        "h": 32,
+        "size": 18,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "button",
+        "label": "RETRY",
+        "action": "retry",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "MAIN MENU",
+        "action": "menu",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "game_over",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "continent": {
+    "label": "Continent",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "CONTINENT COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SOUTH AMERICA",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_SA.png",
+        "x": 405,
+        "y": 263,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "PASSPORT EARNED!",
+        "x": 680,
+        "y": 286,
+        "w": 500,
+        "h": 40,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "All 3 stages completed.",
+        "x": 680,
+        "y": 353,
+        "w": 500,
+        "h": 32,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Best ratings saved.",
+        "x": 680,
+        "y": 413,
+        "w": 500,
+        "h": 32,
+        "size": 17,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "CONTINUE",
+        "action": "continue",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "continent",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "perfect": {
+    "label": "Perfect",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT CONTINENT",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SOUTH AMERICA",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_SA.png",
+        "x": 405,
+        "y": 263,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PERFECT_STAR.png",
+        "x": 588,
+        "y": 443,
+        "w": 48,
+        "h": 48,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT PASSPORT!",
+        "x": 680,
+        "y": 286,
+        "w": 500,
+        "h": 40,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "3 / 3 perfect stage trophies",
+        "x": 680,
+        "y": 353,
+        "w": 500,
+        "h": 32,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Best ratings saved.",
+        "x": 680,
+        "y": 413,
+        "w": 500,
+        "h": 32,
+        "size": 17,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "CONTINUE",
+        "action": "continue",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "perfect",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "world": {
+    "label": "World",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "WORLD COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AROUND THE WORLD",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_NA.png",
+        "x": 400,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_SA.png",
+        "x": 511,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_EU.png",
+        "x": 622,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AF.png",
+        "x": 733,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AS.png",
+        "x": 844,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_OC.png",
+        "x": 955,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AN.png",
+        "x": 1066,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "21 / 21 stages completed",
+        "x": 386,
+        "y": 382,
+        "w": 818,
+        "h": 34,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "Hard + Level Select unlocked",
+        "x": 386,
+        "y": 432,
+        "w": 818,
+        "h": 32,
+        "size": 20,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "MAIN MENU",
+        "action": "menu",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "world",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "mystery": {
+    "label": "Mystery",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "MYSTERY LEVEL UNLOCKED",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 30,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AROUND THE WORLD",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/UI_ICON_CHECK.png",
+        "x": 442,
+        "y": 294,
+        "w": 120,
+        "h": 120,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "7 / 7 perfect Standard stamps",
+        "x": 645,
+        "y": 314,
+        "w": 545,
+        "h": 40,
+        "size": 17,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Special-level entry unlocked.",
+        "x": 645,
+        "y": 374,
+        "w": 545,
+        "h": 32,
+        "size": 17,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Its passport is not earned yet.",
+        "x": 645,
+        "y": 428,
+        "w": 545,
+        "h": 32,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "mystery",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "intro": {
+    "label": "Intro",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_idle_0.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_TRANSITION_PANEL.png",
+        "x": 140,
+        "y": 405,
+        "w": 1000,
+        "h": 230,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "SA02 \u00b7 Andes Mountains",
+        "x": 174,
+        "y": 435,
+        "w": 932,
+        "h": 40,
+        "size": 27,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "Start with 3 hearts \u00b7 Best: 2/3",
+        "x": 174,
+        "y": 484,
+        "w": 932,
+        "h": 35,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "button",
+        "label": "START STAGE",
+        "action": "start",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 430,
+        "y": 540,
+        "w": 300,
+        "h": 72,
+        "size": 17
+      }
+    ],
+    "state": "intro",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "loading": {
+    "label": "Loading",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_idle_0.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_TRANSITION_PANEL.png",
+        "x": 140,
+        "y": 405,
+        "w": 1000,
+        "h": 230,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "LOADING STAGE",
+        "x": 174,
+        "y": 435,
+        "w": 932,
+        "h": 40,
+        "size": 27,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "Please wait...",
+        "x": 174,
+        "y": 484,
+        "w": 932,
+        "h": 35,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 430,
+        "y": 540,
+        "w": 300,
+        "h": 72,
+        "size": 17
+      }
+    ],
+    "state": "loading",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "load_error": {
+    "label": "Load Error",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_idle_0.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_TRANSITION_PANEL.png",
+        "x": 140,
+        "y": 405,
+        "w": 1000,
+        "h": 230,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "COULD NOT LOAD STAGE",
+        "x": 174,
+        "y": 435,
+        "w": 932,
+        "h": 40,
+        "size": 27,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "Please try again.",
+        "x": 174,
+        "y": 484,
+        "w": 932,
+        "h": 35,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "button",
+        "label": "RETRY",
+        "action": "reload",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 320,
+        "y": 540,
+        "w": 300,
+        "h": 72,
+        "size": 17
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 670,
+        "y": 540,
+        "w": 300,
+        "h": 72,
+        "size": 17
+      }
+    ],
+    "state": "load_error",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "travel": {
+    "label": "Travel",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "shared/MAP_OCEAN_BACKDROP.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_WORLD_BASE.png",
+        "x": 0,
+        "y": 100,
+        "w": 1280,
+        "h": 427,
+        "role": ""
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_TRANSITION_PANEL.png",
+        "x": 140,
+        "y": 405,
+        "w": 1000,
+        "h": 230,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "TRAVELLING TO EUROPE",
+        "x": 174,
+        "y": 435,
+        "w": 932,
+        "h": 40,
+        "size": 27,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "South America \u2192 Europe",
+        "x": 174,
+        "y": 484,
+        "w": 932,
+        "h": 35,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "button",
+        "label": "SKIP",
+        "action": "skip",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 430,
+        "y": 540,
+        "w": 300,
+        "h": 72,
+        "size": 17
+      },
+      {
+        "kind": "route",
+        "x": 360,
+        "y": 215,
+        "w": 240,
+        "h": 100
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_PIN_CLAUDE.png",
+        "x": 430,
+        "y": 195,
+        "w": 64,
+        "h": 64,
+        "role": "travel-pin"
+      }
+    ],
+    "state": "travel",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "game_over_constance": {
+    "label": "Game Over \u00b7 Constance",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CONSTANCE_hit_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/stars_1.png",
+        "x": 107,
+        "y": 330,
+        "w": 130,
+        "h": 81,
+        "role": "stars"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "GAME OVER",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA02 \u00b7 Andes Mountains",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 644,
+        "y": 290,
+        "w": 84,
+        "h": 84,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 736,
+        "y": 290,
+        "w": 84,
+        "h": 84,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_EMPTY.png",
+        "x": 828,
+        "y": 290,
+        "w": 84,
+        "h": 84,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Ready to try again?",
+        "x": 386,
+        "y": 409,
+        "w": 818,
+        "h": 40,
+        "size": 24,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "Retry starts with 3 hearts.",
+        "x": 386,
+        "y": 456,
+        "w": 818,
+        "h": 32,
+        "size": 18,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "button",
+        "label": "RETRY",
+        "action": "retry",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "MAIN MENU",
+        "action": "menu",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "game_over",
+    "character": "CONSTANCE"
+  },
+  "complete_constance": {
+    "label": "Complete \u00b7 Constance",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CONSTANCE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA02 \u00b7 Andes Mountains",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_SA02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "character": "CONSTANCE"
+  },
+  "stage_NA01": {
+    "label": "NA01 \u00b7 Desert",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "NA01 \u00b7 Desert",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_NA01.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "NA01",
+    "character": "CLAUDE"
+  },
+  "stage_NA02": {
+    "label": "NA02 \u00b7 Pines / Mountains",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "NA02 \u00b7 Pines / Mountains",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_NA02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "NA02",
+    "character": "CLAUDE"
+  },
+  "stage_NA03": {
+    "label": "NA03 \u00b7 New York City",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "NA03 \u00b7 New York City",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_NA03.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT CONTINENT",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "NA03",
+    "character": "CLAUDE"
+  },
+  "stage_SA01": {
+    "label": "SA01 \u00b7 Amazon Rainforest",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA01 \u00b7 Amazon Rainforest",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_SA01.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "SA01",
+    "character": "CLAUDE"
+  },
+  "stage_SA02": {
+    "label": "SA02 \u00b7 Andes Mountains",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA02 \u00b7 Andes Mountains",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_SA02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "SA02",
+    "character": "CLAUDE"
+  },
+  "stage_SA03": {
+    "label": "SA03 \u00b7 Rio de Janeiro",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SA03 \u00b7 Rio de Janeiro",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_SA03.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT CONTINENT",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "SA03",
+    "character": "CLAUDE"
+  },
+  "stage_EU01": {
+    "label": "EU01 \u00b7 Santorini",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "EU01 \u00b7 Santorini",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_EU01.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "EU01",
+    "character": "CLAUDE"
+  },
+  "stage_EU02": {
+    "label": "EU02 \u00b7 Paris",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "EU02 \u00b7 Paris",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_EU02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "EU02",
+    "character": "CLAUDE"
+  },
+  "stage_EU03": {
+    "label": "EU03 \u00b7 Barcelona",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "EU03 \u00b7 Barcelona",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_EU03.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT CONTINENT",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "EU03",
+    "character": "CLAUDE"
+  },
+  "stage_AF01": {
+    "label": "AF01 \u00b7 Savannah",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AF01 \u00b7 Savannah",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_AF01.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "AF01",
+    "character": "CLAUDE"
+  },
+  "stage_AF02": {
+    "label": "AF02 \u00b7 Sossusvlei",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AF02 \u00b7 Sossusvlei",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_AF02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "AF02",
+    "character": "CLAUDE"
+  },
+  "stage_AF03": {
+    "label": "AF03 \u00b7 Marrakesh",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AF03 \u00b7 Marrakesh",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_AF03.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT CONTINENT",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "AF03",
+    "character": "CLAUDE"
+  },
+  "stage_AS01": {
+    "label": "AS01 \u00b7 Kyoto",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AS01 \u00b7 Kyoto",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_AS01.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "AS01",
+    "character": "CLAUDE"
+  },
+  "stage_AS02": {
+    "label": "AS02 \u00b7 Zhangjiajie",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AS02 \u00b7 Zhangjiajie",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_AS02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "AS02",
+    "character": "CLAUDE"
+  },
+  "stage_AS03": {
+    "label": "AS03 \u00b7 Bangkok",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AS03 \u00b7 Bangkok",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_AS03.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT CONTINENT",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "AS03",
+    "character": "CLAUDE"
+  },
+  "stage_OC01": {
+    "label": "OC01 \u00b7 Uluru",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "OC01 \u00b7 Uluru",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_OC01.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "OC01",
+    "character": "CLAUDE"
+  },
+  "stage_OC02": {
+    "label": "OC02 \u00b7 Queensland",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "OC02 \u00b7 Queensland",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_OC02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "OC02",
+    "character": "CLAUDE"
+  },
+  "stage_OC03": {
+    "label": "OC03 \u00b7 Fiordland",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "OC03 \u00b7 Fiordland",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_OC03.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT CONTINENT",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "OC03",
+    "character": "CLAUDE"
+  },
+  "stage_AN01": {
+    "label": "AN01 \u00b7 Antarctic Peninsula",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AN01 \u00b7 Antarctic Peninsula",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_AN01.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "AN01",
+    "character": "CLAUDE"
+  },
+  "stage_AN02": {
+    "label": "AN02 \u00b7 Ross Island",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AN02 \u00b7 Ross Island",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_AN02.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "NEXT STAGE",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "AN02",
+    "character": "CLAUDE"
+  },
+  "stage_AN03": {
+    "label": "AN03 \u00b7 Research Outpost",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "STAGE COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AN03 \u00b7 Research Outpost",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/TROPHY_AN03.png",
+        "x": 410,
+        "y": 267,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "text",
+        "text": "NEW BEST!",
+        "x": 688,
+        "y": 283,
+        "w": 500,
+        "h": 40,
+        "size": 25,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "This run",
+        "x": 688,
+        "y": 352,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 341,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Saved best",
+        "x": 688,
+        "y": 411,
+        "w": 220,
+        "h": 35,
+        "size": 18,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 997,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1051,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/HEART_FULL.png",
+        "x": 1105,
+        "y": 400,
+        "w": 46,
+        "h": 46,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "Improved from 2 to 3 hearts.",
+        "x": 688,
+        "y": 470,
+        "w": 510,
+        "h": 32,
+        "size": 14,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "WORLD RESULTS",
+        "action": "next",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "REPLAY",
+        "action": "replay",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "new_best",
+    "stage": "AN03",
+    "character": "CLAUDE"
+  },
+  "passport_NA": {
+    "label": "NORTH AMERICA \u00b7 Perfect passport",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT CONTINENT",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "NORTH AMERICA",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_NA.png",
+        "x": 405,
+        "y": 263,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PERFECT_STAR.png",
+        "x": 588,
+        "y": 443,
+        "w": 48,
+        "h": 48,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT PASSPORT!",
+        "x": 680,
+        "y": 286,
+        "w": 500,
+        "h": 40,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "3 / 3 perfect stage trophies",
+        "x": 680,
+        "y": 353,
+        "w": 500,
+        "h": 32,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Best ratings saved.",
+        "x": 680,
+        "y": 413,
+        "w": 500,
+        "h": 32,
+        "size": 17,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "CONTINUE",
+        "action": "continue",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "perfect",
+    "character": "CLAUDE"
+  },
+  "passport_SA": {
+    "label": "SOUTH AMERICA \u00b7 Perfect passport",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT CONTINENT",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "SOUTH AMERICA",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_SA.png",
+        "x": 405,
+        "y": 263,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PERFECT_STAR.png",
+        "x": 588,
+        "y": 443,
+        "w": 48,
+        "h": 48,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT PASSPORT!",
+        "x": 680,
+        "y": 286,
+        "w": 500,
+        "h": 40,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "3 / 3 perfect stage trophies",
+        "x": 680,
+        "y": 353,
+        "w": 500,
+        "h": 32,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Best ratings saved.",
+        "x": 680,
+        "y": 413,
+        "w": 500,
+        "h": 32,
+        "size": 17,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "CONTINUE",
+        "action": "continue",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "perfect",
+    "character": "CLAUDE"
+  },
+  "passport_EU": {
+    "label": "EUROPE \u00b7 Perfect passport",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT CONTINENT",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "EUROPE",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_EU.png",
+        "x": 405,
+        "y": 263,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PERFECT_STAR.png",
+        "x": 588,
+        "y": 443,
+        "w": 48,
+        "h": 48,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT PASSPORT!",
+        "x": 680,
+        "y": 286,
+        "w": 500,
+        "h": 40,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "3 / 3 perfect stage trophies",
+        "x": 680,
+        "y": 353,
+        "w": 500,
+        "h": 32,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Best ratings saved.",
+        "x": 680,
+        "y": 413,
+        "w": 500,
+        "h": 32,
+        "size": 17,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "CONTINUE",
+        "action": "continue",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "perfect",
+    "character": "CLAUDE"
+  },
+  "passport_AF": {
+    "label": "AFRICA \u00b7 Perfect passport",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT CONTINENT",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AFRICA",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AF.png",
+        "x": 405,
+        "y": 263,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PERFECT_STAR.png",
+        "x": 588,
+        "y": 443,
+        "w": 48,
+        "h": 48,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT PASSPORT!",
+        "x": 680,
+        "y": 286,
+        "w": 500,
+        "h": 40,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "3 / 3 perfect stage trophies",
+        "x": 680,
+        "y": 353,
+        "w": 500,
+        "h": 32,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Best ratings saved.",
+        "x": 680,
+        "y": 413,
+        "w": 500,
+        "h": 32,
+        "size": 17,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "CONTINUE",
+        "action": "continue",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "perfect",
+    "character": "CLAUDE"
+  },
+  "passport_AS": {
+    "label": "ASIA \u00b7 Perfect passport",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT CONTINENT",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "ASIA",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AS.png",
+        "x": 405,
+        "y": 263,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PERFECT_STAR.png",
+        "x": 588,
+        "y": 443,
+        "w": 48,
+        "h": 48,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT PASSPORT!",
+        "x": 680,
+        "y": 286,
+        "w": 500,
+        "h": 40,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "3 / 3 perfect stage trophies",
+        "x": 680,
+        "y": 353,
+        "w": 500,
+        "h": 32,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Best ratings saved.",
+        "x": 680,
+        "y": 413,
+        "w": 500,
+        "h": 32,
+        "size": 17,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "CONTINUE",
+        "action": "continue",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "perfect",
+    "character": "CLAUDE"
+  },
+  "passport_OC": {
+    "label": "OCEANIA \u00b7 Perfect passport",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT CONTINENT",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "OCEANIA",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_OC.png",
+        "x": 405,
+        "y": 263,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PERFECT_STAR.png",
+        "x": 588,
+        "y": 443,
+        "w": 48,
+        "h": 48,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT PASSPORT!",
+        "x": 680,
+        "y": 286,
+        "w": 500,
+        "h": 40,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "3 / 3 perfect stage trophies",
+        "x": 680,
+        "y": 353,
+        "w": 500,
+        "h": 32,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Best ratings saved.",
+        "x": 680,
+        "y": 413,
+        "w": 500,
+        "h": 32,
+        "size": 17,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "CONTINUE",
+        "action": "continue",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "perfect",
+    "character": "CLAUDE"
+  },
+  "passport_AN": {
+    "label": "ANTARCTICA \u00b7 Perfect passport",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT CONTINENT",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "ANTARCTICA",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "STANDARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AN.png",
+        "x": 405,
+        "y": 263,
+        "w": 230,
+        "h": 230,
+        "role": "reward"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PERFECT_STAR.png",
+        "x": 588,
+        "y": 443,
+        "w": 48,
+        "h": 48,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "PERFECT PASSPORT!",
+        "x": 680,
+        "y": 286,
+        "w": 500,
+        "h": 40,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "3 / 3 perfect stage trophies",
+        "x": 680,
+        "y": 353,
+        "w": 500,
+        "h": 32,
+        "size": 16,
+        "color": "#fff2cd",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Best ratings saved.",
+        "x": 680,
+        "y": 413,
+        "w": 500,
+        "h": 32,
+        "size": 17,
+        "color": "#acbfd6",
+        "align": "left"
+      },
+      {
+        "kind": "button",
+        "label": "CONTINUE",
+        "action": "continue",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 803.0,
+        "y": 535,
+        "w": 401.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "perfect",
+    "character": "CLAUDE"
+  },
+  "world_easy": {
+    "label": "EASY \u00b7 World complete",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "WORLD COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AROUND THE WORLD",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "EASY",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_NA.png",
+        "x": 400,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_SA.png",
+        "x": 511,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_EU.png",
+        "x": 622,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AF.png",
+        "x": 733,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AS.png",
+        "x": 844,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_OC.png",
+        "x": 955,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AN.png",
+        "x": 1066,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "21 / 21 stages completed",
+        "x": 386,
+        "y": 382,
+        "w": 818,
+        "h": 34,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "Easy journey completed",
+        "x": 386,
+        "y": 432,
+        "w": 818,
+        "h": 32,
+        "size": 20,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "MAIN MENU",
+        "action": "menu",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "world",
+    "character": "CLAUDE"
+  },
+  "world_hard": {
+    "label": "HARD \u00b7 World complete",
+    "nodes": [
+      {
+        "kind": "image",
+        "src": "preview-only/SA02_STAGE_COMPOSITE.png",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/MAP_CLOUD_1.png",
+        "x": 90,
+        "y": 100,
+        "w": 160,
+        "h": 100,
+        "role": "cloud"
+      },
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720,
+        "fill": "#03182e",
+        "opacity": 0.22
+      },
+      {
+        "kind": "image",
+        "src": "preview-only/CLAUDE_celebrate_1.png",
+        "x": -25,
+        "y": 225,
+        "w": 405,
+        "h": 405,
+        "role": "hero"
+      },
+      {
+        "kind": "image",
+        "src": "assets/UI04_RESULT_PANEL.png",
+        "x": 350,
+        "y": 85,
+        "w": 890,
+        "h": 550,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "WORLD COMPLETE",
+        "x": 382,
+        "y": 121,
+        "w": 826,
+        "h": 52,
+        "size": 36,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "AROUND THE WORLD",
+        "x": 386,
+        "y": 183,
+        "w": 818,
+        "h": 36,
+        "size": 22,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "HARD",
+        "x": 386,
+        "y": 223,
+        "w": 818,
+        "h": 28,
+        "size": 16,
+        "color": "#acbfd6",
+        "align": "center"
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_NA.png",
+        "x": 400,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_SA.png",
+        "x": 511,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_EU.png",
+        "x": 622,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AF.png",
+        "x": 733,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AS.png",
+        "x": 844,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_OC.png",
+        "x": 955,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "image",
+        "src": "shared/PASS_STAMP_AN.png",
+        "x": 1066,
+        "y": 267,
+        "w": 96,
+        "h": 96,
+        "role": ""
+      },
+      {
+        "kind": "text",
+        "text": "21 / 21 stages completed",
+        "x": 386,
+        "y": 382,
+        "w": 818,
+        "h": 34,
+        "size": 23,
+        "color": "#ffdc54",
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "Hard journey completed",
+        "x": 386,
+        "y": 432,
+        "w": 818,
+        "h": 32,
+        "size": 20,
+        "color": "#fff2cd",
+        "align": "center"
+      },
+      {
+        "kind": "button",
+        "label": "WORLD MAP",
+        "action": "map",
+        "src": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+        "x": 386.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "ACHIEVEMENTS",
+        "action": "achievements",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 664.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      },
+      {
+        "kind": "button",
+        "label": "MAIN MENU",
+        "action": "menu",
+        "src": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+        "x": 942.0,
+        "y": 535,
+        "w": 262.0,
+        "h": 76,
+        "size": 18
+      }
+    ],
+    "state": "world",
+    "character": "CLAUDE"
+  }
+}

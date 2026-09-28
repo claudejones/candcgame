@@ -1,0 +1,9 @@
+# UI05 verification
+
+Passed: 93 screen/state scene graphs; all21 exact stage IDs, trophies and thumbnails;21 trophy and7 passport detail fixtures; all7 continent pages across difficulty examples; Secret Level is8/8 with no mystery footer. All referenced assets exist. All text/control boxes fit1280×720; measured font widths fit; interactive targets preserve44px minimum at844×475. 20 new atlas frames match standalone PNGs byte-for-byte; UI glyphs have4px transparent edge clearance; the256×256 secret placeholder has at least16px transparent clearance. All PNGs decode;28 original reward masters and canonical shared utilities unchanged. JavaScript syntax checked.
+
+Visually inspected phone assemblies of Achievements, Secret Level locked, Options, Pause and About. Corrected back-arrow placement, replaced textual lock markers with actual supplied lock icons, increased short buttons to preserve phone touch size, and connected reward inspection to the displayed sample heart rating. Native controls sheet included. All progress shown is illustrative, not player data.
+
+Achievements direction and dedicated eighth page approved. Expanded menu screens and final component delivery await user visual review. The unlocked/earned secret page reserves clearly labeled review-only slots: final secret stamp art and level content remain deferred. No claim is made that these slots constitute finished secret artwork.
+
+Static previews are built directly from delivered PNG components and live-text specifications, not AI screenshots or browser captures. Live browser, focus traps, touch/device safe areas, save policy, audio/game integration and unlock behavior still require Workbench validation. No game code, calibration or deployment changed. ZIP CRC and each archive member are checked against delivery files.

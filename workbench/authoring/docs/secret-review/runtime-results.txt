@@ -1,0 +1,73 @@
+[
+  {
+    who: 'claude',
+    hz: 30,
+    status: 'complete',
+    time: 180,
+    hits: 0,
+    shots: 35
+  },
+  {
+    who: 'claude',
+    hz: 60,
+    status: 'complete',
+    time: 180,
+    hits: 0,
+    shots: 35
+  },
+  {
+    who: 'claude',
+    hz: 120,
+    status: 'complete',
+    time: 180,
+    hits: 0,
+    shots: 35
+  },
+  {
+    who: 'constance',
+    hz: 30,
+    status: 'complete',
+    time: 180,
+    hits: 0,
+    shots: 35
+  },
+  {
+    who: 'constance',
+    hz: 60,
+    status: 'complete',
+    time: 180,
+    hits: 0,
+    shots: 35
+  },
+  {
+    who: 'constance',
+    hz: 120,
+    status: 'complete',
+    time: 180,
+    hits: 0,
+    shots: 35
+  }
+]
+Passed: 180-second avoidance both characters at 30/60/120Hz; once-only releases/pulses, capture, fatal deadline priority, pause, failure stars and unchanged Design draft. Rendered original PNGs.
+Reaction windows [
+  {
+    who: 'claude',
+    lane: 'high',
+    passingLeadSeconds: [ 0.12, 0.18, 0.24, 0.3, 0.36, 0.42 ]
+  },
+  {
+    who: 'claude',
+    lane: 'low',
+    passingLeadSeconds: [ 0.18, 0.24, 0.3, 0.36, 0.42 ]
+  },
+  {
+    who: 'constance',
+    lane: 'high',
+    passingLeadSeconds: [ 0.12, 0.18, 0.24, 0.3, 0.36, 0.42 ]
+  },
+  {
+    who: 'constance',
+    lane: 'low',
+    passingLeadSeconds: [ 0.18, 0.24, 0.3, 0.36, 0.42 ]
+  }
+]

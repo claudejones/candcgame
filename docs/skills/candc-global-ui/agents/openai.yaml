@@ -1,0 +1,14 @@
+interface:
+  display_name: C&C Global UI & Rewards
+  short_description: Plan and produce C&C screens, maps and reward assets
+  default_prompt: Use $candc-global-ui to continue the screen, progression and reward
+    asset plan for Claude & Constance.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

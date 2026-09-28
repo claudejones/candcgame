@@ -1,0 +1,340 @@
+{
+  "native_map_size": [
+    2048,
+    683
+  ],
+  "coordinate_space": "normalized to contained map image, excluding letterboxing/header/cards",
+  "fit": "contain",
+  "continents": {
+    "NA": {
+      "label": "NORTH AMERICA",
+      "label_center": [
+        0.18,
+        0.07
+      ],
+      "stage_centers": [
+        [
+          0.153,
+          0.27
+        ],
+        [
+          0.18,
+          0.27
+        ],
+        [
+          0.207,
+          0.27
+        ]
+      ],
+      "phone_label_center": [
+        0.18,
+        0.07
+      ],
+      "phone_stage_centers": [
+        [
+          0.143,
+          0.31
+        ],
+        [
+          0.18,
+          0.31
+        ],
+        [
+          0.217,
+          0.31
+        ]
+      ]
+    },
+    "SA": {
+      "label": "SOUTH AMERICA",
+      "label_center": [
+        0.265,
+        0.53
+      ],
+      "stage_centers": [
+        [
+          0.23800000000000002,
+          0.76
+        ],
+        [
+          0.265,
+          0.76
+        ],
+        [
+          0.29200000000000004,
+          0.76
+        ]
+      ],
+      "phone_label_center": [
+        0.265,
+        0.46
+      ],
+      "phone_stage_centers": [
+        [
+          0.228,
+          0.76
+        ],
+        [
+          0.265,
+          0.76
+        ],
+        [
+          0.302,
+          0.76
+        ]
+      ]
+    },
+    "EU": {
+      "label": "EUROPE",
+      "label_center": [
+        0.47,
+        0.025
+      ],
+      "stage_centers": [
+        [
+          0.44299999999999995,
+          0.23
+        ],
+        [
+          0.47,
+          0.23
+        ],
+        [
+          0.497,
+          0.23
+        ]
+      ],
+      "phone_label_center": [
+        0.47,
+        0.07
+      ],
+      "phone_stage_centers": [
+        [
+          0.433,
+          0.31
+        ],
+        [
+          0.47,
+          0.31
+        ],
+        [
+          0.507,
+          0.31
+        ]
+      ]
+    },
+    "AF": {
+      "label": "AFRICA",
+      "label_center": [
+        0.46,
+        0.4
+      ],
+      "stage_centers": [
+        [
+          0.433,
+          0.6
+        ],
+        [
+          0.46,
+          0.6
+        ],
+        [
+          0.48700000000000004,
+          0.6
+        ]
+      ],
+      "phone_label_center": [
+        0.59,
+        0.45
+      ],
+      "phone_stage_centers": [
+        [
+          0.42300000000000004,
+          0.61
+        ],
+        [
+          0.46,
+          0.61
+        ],
+        [
+          0.497,
+          0.61
+        ]
+      ]
+    },
+    "AS": {
+      "label": "ASIA",
+      "label_center": [
+        0.755,
+        0.1
+      ],
+      "stage_centers": [
+        [
+          0.728,
+          0.3
+        ],
+        [
+          0.755,
+          0.3
+        ],
+        [
+          0.782,
+          0.3
+        ]
+      ],
+      "phone_label_center": [
+        0.755,
+        0.07
+      ],
+      "phone_stage_centers": [
+        [
+          0.718,
+          0.31
+        ],
+        [
+          0.755,
+          0.31
+        ],
+        [
+          0.792,
+          0.31
+        ]
+      ]
+    },
+    "OC": {
+      "label": "OCEANIA",
+      "label_center": [
+        0.835,
+        0.56
+      ],
+      "stage_centers": [
+        [
+          0.8079999999999999,
+          0.77
+        ],
+        [
+          0.835,
+          0.77
+        ],
+        [
+          0.862,
+          0.77
+        ]
+      ],
+      "phone_label_center": [
+        0.835,
+        0.5
+      ],
+      "phone_stage_centers": [
+        [
+          0.7979999999999999,
+          0.78
+        ],
+        [
+          0.835,
+          0.78
+        ],
+        [
+          0.872,
+          0.78
+        ]
+      ]
+    },
+    "AN": {
+      "label": "ANTARCTICA",
+      "label_center": [
+        0.5,
+        0.75
+      ],
+      "stage_centers": [
+        [
+          0.473,
+          0.94
+        ],
+        [
+          0.5,
+          0.94
+        ],
+        [
+          0.527,
+          0.94
+        ]
+      ],
+      "phone_label_center": [
+        0.68,
+        0.85
+      ],
+      "phone_stage_centers": [
+        [
+          0.463,
+          0.92
+        ],
+        [
+          0.5,
+          0.92
+        ],
+        [
+          0.537,
+          0.92
+        ]
+      ]
+    }
+  },
+  "journey_order": [
+    "NA",
+    "SA",
+    "EU",
+    "AF",
+    "AS",
+    "OC",
+    "AN"
+  ],
+  "current_pin": "MAP_PIN_CLAUDE or MAP_PIN_CONSTANCE, tip above current node; never substitute runner",
+  "current_pin_display": [
+    56,
+    56
+  ],
+  "phone_pin_display": [
+    32,
+    32
+  ],
+  "pin_tip_gap_px": 8,
+  "cloud_centers": [
+    [
+      0.04,
+      0.42
+    ],
+    [
+      0.12,
+      0.74
+    ],
+    [
+      0.35,
+      0.26
+    ],
+    [
+      0.65,
+      0.82
+    ],
+    [
+      0.97,
+      0.32
+    ],
+    [
+      0.97,
+      0.61
+    ]
+  ],
+  "reference_screen": [
+    1600,
+    900
+  ],
+  "reference_header_height": 72,
+  "reference_cards_panel_height": 270,
+  "phone_reference": [
+    844,
+    475
+  ],
+  "phone_header_height": 48,
+  "phone_cards_panel_height": 190
+}

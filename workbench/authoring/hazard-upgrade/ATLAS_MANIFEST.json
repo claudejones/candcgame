@@ -1,0 +1,203 @@
+{
+  "source_commit": "96fc87cbeee130d281c6ce8a711fd552aa428182",
+  "atlases": [
+    {
+      "path": "assets/worlds/south-america/SA01_OBJECT_ATLAS.png",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "original_sha256": "42d8d4716c300193f9de2e005f177f50b9c462eca99f7f944b12dd55283cd118",
+      "replacement_sha256": "f0314cce83ef088b90614a1e92d68b458b95a8208cba32518b64ed6bc8ceeed0",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/south-america/SA02_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "6cb36aa6b0064e91ea0062d93687f5b936499764ef0462eb067cb3ef21699c75",
+      "replacement_sha256": "f21dfafdf0f743e8193cd331ccec87eaa2330d182a6e5824410b4f24f96d96b0",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/europe/EU03_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "4b4f2339135cc5ce4f3f47c0c4450837a60c792e8a16ecc5e91311cac9628fab",
+      "replacement_sha256": "16214b76193c74a33cd08fb318299375a7d0397eb584c930f13ab88870f0291f",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/north-america/NA02_HAZARD_ATLAS.png",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "original_sha256": "6ecb5b5056efe14cbc4905ad006be75295a6f860f65a64bcbff2eddb49087f61",
+      "replacement_sha256": "92e5f673f22f39bb3c450aa28dfc1e7f5a21d2de4e10c860154d623c672b9c66",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/south-america/SA03_OBJECT_ATLAS.png",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "original_sha256": "e105981782bbc1b475a0c821f8397d46ce9f77029c9f99ca8bbd8b0daa017579",
+      "replacement_sha256": "ae3668b5d1902b3ba6afff48d847558227ffea9723fe4b83cb567245e7f613d2",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/europe/EU02_OBJECT_ATLAS.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original_sha256": "dacff4c9f563fcc8827f976eb5b48df1e4d7165f5aa3b20b1efe0de2609ac14f",
+      "replacement_sha256": "6652533438aa05e55c742e32b5e070d577bbc5514491681cde16c4e0a6c5c077",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/north-america/NA01_HAZARD_ATLAS.png",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "original_sha256": "2411b97f53511de8e6c9b8a22013d47e7a6129fd501417d5cd7e391be5bdaad2",
+      "replacement_sha256": "b6a4c37b643b921393b60ff58304331aa540bf1b4ed5aec09b391745fd670aaa",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/europe/EU01_OBJECT_ATLAS_CRATE.png",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "original_sha256": "adf7bcbb77269f589b04792e75064baedb8e058687961e3e9cf173163fcaed77",
+      "replacement_sha256": "d7427546afad1ad789dfb8be7a33cbe66b77be161128f790eb018f89c4a213bc",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/africa/AF01_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "562a90ac93a9f79470cbf0c948d1250ce73e761c086e0419869edbf9bf603569",
+      "replacement_sha256": "0d35b07c5c6105dbfc0fc8e01fccee85407b00eaa8464815158dcf56f35a3b83",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/africa/AF02_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "aafdac8b0f9749e1f6c8225b32d09758bb1ea5e5c4b8c43d4a3854e4705c2cca",
+      "replacement_sha256": "6e49b92e6b36b24256f756e0f38c0d8087975b5934466c2a54acb4a01c26048a",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/africa/AF03_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "ec12d2ffa4fb29c8e694ceb852b7a420fd82cd1206c78dd5ef2ccfb29f407641",
+      "replacement_sha256": "7808b22233fdf758ee20c55b613a79837aa945bbd40bb8174ca1c2c064550a47",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/asia/AS01_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "ac3500be722fe92e8482caa22a0fb1ef7cfe364fa8cfe23efff2b811c80817c9",
+      "replacement_sha256": "ce5bc2327b6e9d76879f06e08c6614787959660f12cd869dbf66d7fbda22d08c",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/asia/AS02_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "de3222bfb1eef9f10e0e8bee86977a64e99793d8178317874ec1da51ac34cefd",
+      "replacement_sha256": "f5fd996c2cbecc8a0bc18d562a3bb1cc39d35345ed5b1f535b5f7823ab20f139",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/oceania/OC01_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "d21f8eececb1e69431d14068366627a8aba5961b5504215a0d7fc316c8557a49",
+      "replacement_sha256": "525de46b80c119bee33d7d17b09917d95bf71f75699d5bce11b0b7a2e891d86e",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/oceania/OC02_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "67f58c64cb132b69bd8c7e0142d055ef9255042df620c53a88b91ee630bc6503",
+      "replacement_sha256": "705feedacd75263a7bfcfdbdca12408efd7f12c4ddc8a1d92bf21525a9aaf21d",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/oceania/OC03_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "7d7b171ea0a4c42bf22b841ce646064e7cc76b3c71bfca26d4cb036cb9836eaf",
+      "replacement_sha256": "dd4f52ef92f42e1ca586d46334ad45e159b2284a71a44c09f8953d21cf6e5143",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/antarctica/AN02_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "ee2c47cbc6ef72f93a7a98b75dc10d1a2d1b7eaf56aa4e10e716eb42cadd2c10",
+      "replacement_sha256": "0587ef88efd2f89fc5cee2f456384d59c6f0f6a16bb7806df030dbe0bea417c6",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    },
+    {
+      "path": "assets/worlds/antarctica/AN03_OBJECT_ATLAS.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "original_sha256": "81f7afe606ad44fe480a1743109b1b970332ae7d08d1d3408e06355929753a7d",
+      "replacement_sha256": "322de0483965bea30277addd45ad341fc8924946e68d4b510ad7492d92902a8b",
+      "unchanged_pixels": "identical",
+      "approved_slots": "identical to approved review artwork"
+    }
+  ]
+}

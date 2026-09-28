@@ -1,34 +1,18 @@
-# Claude & Constance — operating contract
+# C&C current operating contract
 
-GitHub (`claudejones/candcgame`) is authoritative. Before changes read this file and `docs/CURRENT_STATUS.md` once. Preserve concurrent work and distinguish specifications, implementation and decision history. Explicit user directions govern scope; identify conflicts with locked requirements before modifying production.
+Read docs/CURRENT_STATUS.md before work. GitHub claudejones/candcgame is authoritative.
 
-## Asset production
+## Sources
+- workbench/dist/workbench-next is the current Design/Game editor and shared runtime source. workbench/dist/src contains its configuration contracts; workbench/authoring contains imports, build tools, tests and configuration snapshots.
+- mobile-game is a fixed, independently deployable game package. Preserve its URL and player storage key. Rebuild deliberately from an exported Workbench configuration; editing the editor must not silently change the released game.
+- docs/skills contains portable snapshots of the four C&C skill instructions; installed personal skills remain separate. Current status overrides dated checkpoint paths in those snapshots.
 
-For new stage artwork and the explicitly authorized fresh AF03 run, use `docs/ASSET_COMMAND_WORKFLOW.md`. One agent generates five images sequentially and saves each completed image to Git. Review and refine every image prompt before using it. No worker dispatch, coordinator reconstruction, old-output recovery, gameplay calibration or shared-branch deployment belongs in this flow.
+## Invariants
+Preserve approved original asset bytes, character/hazard state machines, calibration, saved overrides, progression and reward rules. Keep Design and Game as the two editor modes. Avoid Base64 asset embedding. Save all project settings together; separate authoring data from player saves. Do not claim a simulation establishes real-device performance or visual acceptance.
 
-`generate AF03 fresh` is a natural-language agent instruction defined in that document, not a shell subcommand. Start from current main on a new branch; preserve the old AF03 branches and artwork. A fresh run may use the approved brief and reference photographs, never old AF03 generated outputs. If this new run is interrupted, continue its own saved files only; do not restart its completed images.
+## Verification and release
+Use Node 22+, npm ci, and node scripts/check.mjs. CI validates the current Workbench, both characters, normal/secret gameplay, source paths, original asset hashes, mobile plans and menu flows. Development CI must pass before promoting the identical tree to main. Main CI must pass before Pages deploys that exact SHA. Verify the live URLs and relevant file hashes. Never bypass failed checks.
 
-Existing CLI helpers are utilities, not a mandatory orchestration pipeline. `finish`/legacy recovery is used only when explicitly requested for an old run. For new production, this section and ASSET_COMMAND_WORKFLOW.md take precedence over historical worker/recovery procedures. Status reports must name the branch inspected; old manifest status does not describe the fresh run.
-
-## Scope and safeguards
-
-- `archive/` and `assets-original/` are immutable, including `archive/LAB25Q/CHARACTER_STATE_LAB_25Q_WORLD_VISUAL_OWNERSHIP_QA.html`. Never commit `tmp/` or `assets/phase8-candidates/`.
-- Never alter approved images for convenience. Approved-art revisions require explicit scope. Correct configuration defects in configuration. Preserve known-good behavior and incremental migration.
-- Internal generation/technical QA for eligible locked briefs needs no separate candidate/prompt approval. Final deployed artwork approval remains explicit. Preserve CI/Pages, release and contract gates; never report unperformed checks as passed.
-- From AF02, asset production ends at validated PNGs plus the versioned asset-ready handoff. Anchors, source regions, facing, animation, crops and provisional metadata belong here. Character-relative grounding, flight height, hitbox fairness, timing, difficulty and spawn balancing belong to editor-next. The user notifies the Workbench agent, imports, calibrates and saves. Artwork acceptance, calibration and playable release remain distinct.
-- Retain genuine renderer/scheduler fixes and regression tests. Pause independent legacy hazard tuning. Preserve the eleven comparison candidates and calibration evidence; no silent promotion, overwrite or rollback. Coordinate handoff contract changes with the actual importer.
-- Update concise CURRENT_STATUS when baseline/next action changes; append durable decisions to DECISION_LOG. Do not erase history or duplicate it in startup packets.
-
-## Execution and output
-
-Asset production uses one agent, one image at a time, without subagents. Keep outputs bounded: concise results, paths and failures; no full state/catalog/API/binary dumps. Read unchanged material once. Each saved image has a path, hash and actual check result. Diagnose a failed image and revise its prompt before one focused retry; if that fails, save progress and report the specific blocker. Never loop or regenerate passing images. Narrowly scoped finishing follows `docs/ASSET_TECHNICAL_FINISHING.md`.
-
-## System changes or concrete rule conflicts
-
-Read applicable full specifications only when changing that system/contract or resolving a conflict:
-- World/landscape: WORLD_RENDERING_SPEC, ASSET_PRODUCTION_SPEC, STAGE_MANIFEST; Phase 8 gates: PHASE8_LANDSCAPE_EXECUTION_PLAN.
-- Character: CHARACTER_SPEC, GAMEPLAY_SPEC, ASSET_PRODUCTION_SPEC.
-- Hazards: HAZARD_SPEC, GAMEPLAY_SPEC, QA_SPEC, ASSET_PRODUCTION_SPEC.
-- Gameplay: GAMEPLAY_SPEC, QA_SPEC. UI: UI_UX_SPEC, GAMEPLAY_SPEC.
-
-All are under `docs/`. Focused profiles and their source specs must remain consistent. Temporary QA implementation is not a new production requirement.
+## Publication and cleanup
+Use connected GitHub tools without probing shell authentication. Reuse verified binary blobs; do not relay binaries through text. For text changes, verify returned object IDs and the complete resulting tree. Explicitly construct preserved subtrees if a connector fails to apply a base tree. Recheck refs before non-force updates. Preserve concurrent work.
+Legacy source, duplicate imports and prototype builds were removed from the active tree with user authorization. They remain in history at 505b764fe73bc505f708d5d026614945b32d3820. Do not restore them to active source merely to satisfy obsolete legacy CI. Do not rewrite history or delete historical branches without separate authorization.

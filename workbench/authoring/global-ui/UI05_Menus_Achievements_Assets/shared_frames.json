@@ -1,0 +1,652 @@
+{
+  "TROPHY_NA_ATLAS": {
+    "file": "shared/TROPHY_NA_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "NA01_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "NA02_unearned": [
+        256,
+        0,
+        256,
+        256
+      ],
+      "NA03_unearned": [
+        512,
+        0,
+        256,
+        256
+      ],
+      "NA01_earned": [
+        0,
+        256,
+        256,
+        256
+      ],
+      "NA02_earned": [
+        256,
+        256,
+        256,
+        256
+      ],
+      "NA03_earned": [
+        512,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      232
+    ]
+  },
+  "PASS_NA_ATLAS": {
+    "file": "shared/PASS_NA_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "NA_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "NA_earned": [
+        0,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      128
+    ]
+  },
+  "TROPHY_SA_ATLAS": {
+    "file": "shared/TROPHY_SA_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "SA01_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "SA02_unearned": [
+        256,
+        0,
+        256,
+        256
+      ],
+      "SA03_unearned": [
+        512,
+        0,
+        256,
+        256
+      ],
+      "SA01_earned": [
+        0,
+        256,
+        256,
+        256
+      ],
+      "SA02_earned": [
+        256,
+        256,
+        256,
+        256
+      ],
+      "SA03_earned": [
+        512,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      232
+    ]
+  },
+  "PASS_SA_ATLAS": {
+    "file": "shared/PASS_SA_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "SA_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "SA_earned": [
+        0,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      128
+    ]
+  },
+  "TROPHY_EU_ATLAS": {
+    "file": "shared/TROPHY_EU_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "EU01_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "EU02_unearned": [
+        256,
+        0,
+        256,
+        256
+      ],
+      "EU03_unearned": [
+        512,
+        0,
+        256,
+        256
+      ],
+      "EU01_earned": [
+        0,
+        256,
+        256,
+        256
+      ],
+      "EU02_earned": [
+        256,
+        256,
+        256,
+        256
+      ],
+      "EU03_earned": [
+        512,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      232
+    ]
+  },
+  "PASS_EU_ATLAS": {
+    "file": "shared/PASS_EU_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "EU_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "EU_earned": [
+        0,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      128
+    ]
+  },
+  "TROPHY_AF_ATLAS": {
+    "file": "shared/TROPHY_AF_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "AF01_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "AF02_unearned": [
+        256,
+        0,
+        256,
+        256
+      ],
+      "AF03_unearned": [
+        512,
+        0,
+        256,
+        256
+      ],
+      "AF01_earned": [
+        0,
+        256,
+        256,
+        256
+      ],
+      "AF02_earned": [
+        256,
+        256,
+        256,
+        256
+      ],
+      "AF03_earned": [
+        512,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      232
+    ]
+  },
+  "PASS_AF_ATLAS": {
+    "file": "shared/PASS_AF_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "AF_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "AF_earned": [
+        0,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      128
+    ]
+  },
+  "TROPHY_AS_ATLAS": {
+    "file": "shared/TROPHY_AS_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "AS01_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "AS02_unearned": [
+        256,
+        0,
+        256,
+        256
+      ],
+      "AS03_unearned": [
+        512,
+        0,
+        256,
+        256
+      ],
+      "AS01_earned": [
+        0,
+        256,
+        256,
+        256
+      ],
+      "AS02_earned": [
+        256,
+        256,
+        256,
+        256
+      ],
+      "AS03_earned": [
+        512,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      232
+    ]
+  },
+  "PASS_AS_ATLAS": {
+    "file": "shared/PASS_AS_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "AS_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "AS_earned": [
+        0,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      128
+    ]
+  },
+  "TROPHY_OC_ATLAS": {
+    "file": "shared/TROPHY_OC_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "OC01_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "OC02_unearned": [
+        256,
+        0,
+        256,
+        256
+      ],
+      "OC03_unearned": [
+        512,
+        0,
+        256,
+        256
+      ],
+      "OC01_earned": [
+        0,
+        256,
+        256,
+        256
+      ],
+      "OC02_earned": [
+        256,
+        256,
+        256,
+        256
+      ],
+      "OC03_earned": [
+        512,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      232
+    ]
+  },
+  "PASS_OC_ATLAS": {
+    "file": "shared/PASS_OC_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "OC_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "OC_earned": [
+        0,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      128
+    ]
+  },
+  "TROPHY_AN_ATLAS": {
+    "file": "shared/TROPHY_AN_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "AN01_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "AN02_unearned": [
+        256,
+        0,
+        256,
+        256
+      ],
+      "AN03_unearned": [
+        512,
+        0,
+        256,
+        256
+      ],
+      "AN01_earned": [
+        0,
+        256,
+        256,
+        256
+      ],
+      "AN02_earned": [
+        256,
+        256,
+        256,
+        256
+      ],
+      "AN03_earned": [
+        512,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      232
+    ]
+  },
+  "PASS_AN_ATLAS": {
+    "file": "shared/PASS_AN_ATLAS.png",
+    "cell": [
+      256,
+      256
+    ],
+    "frames": {
+      "AN_unearned": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "AN_earned": [
+        0,
+        256,
+        256,
+        256
+      ]
+    },
+    "anchor": [
+      128,
+      128
+    ]
+  },
+  "UI_REWARD_UTILITIES_ATLAS": {
+    "file": "shared/UI_REWARD_UTILITIES_ATLAS.png",
+    "cell": [
+      32,
+      32
+    ],
+    "frames": {
+      "HEART_EMPTY": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "HEART_FULL": [
+        32,
+        0,
+        32,
+        32
+      ],
+      "PERFECT_STAR": [
+        64,
+        0,
+        32,
+        32
+      ]
+    }
+  },
+  "UI04_BUTTONS_ATLAS": {
+    "file": "shared/UI04_BUTTONS_ATLAS.png",
+    "cell": [
+      320,
+      96
+    ],
+    "frames": {
+      "UI04_BUTTON_PRIMARY_NORMAL": {
+        "rect": [
+          0,
+          0,
+          320,
+          96
+        ],
+        "anchor": [
+          160,
+          48
+        ]
+      },
+      "UI04_BUTTON_PRIMARY_FOCUS": {
+        "rect": [
+          320,
+          0,
+          320,
+          96
+        ],
+        "anchor": [
+          160,
+          48
+        ]
+      },
+      "UI04_BUTTON_PRIMARY_PRESSED": {
+        "rect": [
+          640,
+          0,
+          320,
+          96
+        ],
+        "anchor": [
+          160,
+          48
+        ]
+      },
+      "UI04_BUTTON_PRIMARY_DISABLED": {
+        "rect": [
+          960,
+          0,
+          320,
+          96
+        ],
+        "anchor": [
+          160,
+          48
+        ]
+      },
+      "UI04_BUTTON_SECONDARY_NORMAL": {
+        "rect": [
+          0,
+          96,
+          320,
+          96
+        ],
+        "anchor": [
+          160,
+          48
+        ]
+      },
+      "UI04_BUTTON_SECONDARY_FOCUS": {
+        "rect": [
+          320,
+          96,
+          320,
+          96
+        ],
+        "anchor": [
+          160,
+          48
+        ]
+      },
+      "UI04_BUTTON_SECONDARY_PRESSED": {
+        "rect": [
+          640,
+          96,
+          320,
+          96
+        ],
+        "anchor": [
+          160,
+          48
+        ]
+      },
+      "UI04_BUTTON_SECONDARY_DISABLED": {
+        "rect": [
+          960,
+          96,
+          320,
+          96
+        ],
+        "anchor": [
+          160,
+          48
+        ]
+      }
+    }
+  }
+}
