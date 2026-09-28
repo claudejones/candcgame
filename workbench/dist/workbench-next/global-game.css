@@ -30,7 +30,7 @@ body[data-mode=game] .play-surface{width:100%;max-width:min(960px,calc((100dvh -
 .global-game .global-button:active:not(:disabled){--button-art:url('../assets/global-ui/UI04_BUTTON_SECONDARY_PRESSED.png')}
 .global-game .global-button:is(.primary,.selected):active:not(:disabled){--button-art:url('../assets/global-ui/UI04_BUTTON_PRIMARY_PRESSED.png')}
 .global-game .global-portraits .global-button:is(button,:hover,:focus-visible,:active,[aria-pressed]){background:#10283f;border:2px solid #6289a1;color:#fff2cd}
-.global-game .global-portraits .global-button[aria-pressed=true]{border-color:#ffdc54}
+.global-game .global-portraits .global-button[aria-pressed=true]{border-color:#ffdc54;background:#ffdc54!important;color:#041a34}
 .global-game .global-portraits .global-button:hover:not(:disabled){border-color:#22d1e6}
 .global-game .global-continent:is(button,:hover,:focus-visible,:active,[aria-pressed]){background-color:transparent;background-position:center;background-size:100% 70%;background-repeat:no-repeat;color:#fff2cd;border:0}
 .global-game .global-continent:hover:not(:disabled){filter:brightness(1.16)}
@@ -72,7 +72,7 @@ body[data-mode=game] .play-surface{width:100%;max-width:min(960px,calc((100dvh -
 .global-game .global-button:not(.global-continent){border:12px solid transparent;border-image:var(--button-art) 20 fill stretch;background:none!important;padding:2px 10px;width:fit-content;max-width:100%;min-height:44px;white-space:normal;}
 .global-menu>.global-panel>.global-button{align-self:center;min-width:170px;max-width:320px;}
 .global-game .global-portraits .global-button{border-image:none;width:100%;min-width:0;border:2px solid #6289a1;background:#10283f!important;padding:4px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;overflow:hidden;}
-.global-game .global-portraits .global-button[aria-pressed=true]{border-color:#ffdc54}
+.global-game .global-portraits .global-button[aria-pressed=true]{border-color:#ffdc54;background:#ffdc54!important;color:#041a34}
 .global-game .global-difficulties .global-button{width:auto;min-width:0;padding:2px 4px;}
 .global-game .global-start .global-panel>.global-button{width:min(100%,320px);align-self:center;}
 .global-game .global-stage-body>.global-button{width:100%;}
