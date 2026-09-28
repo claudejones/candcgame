@@ -1,0 +1,552 @@
+{
+  "PASS_AF_ATLAS.png": {
+    "file": "PASS_AF_ATLAS.png",
+    "sha256": "50d49d2f0eef02ac15c5df8c3a50c0abe3dc9909f85b78b1ccd3f6c366b6a4cc",
+    "source": "RW_All_Continents_Rewards_Assets/continents/AF/assets/PASS_AF_ATLAS.png"
+  },
+  "TROPHY_AF_ATLAS.png": {
+    "file": "TROPHY_AF_ATLAS.png",
+    "sha256": "9e924615174b1332dba09ed3b11b16daa14df821293a7e9d51c5ca55dfd322b3",
+    "source": "RW_All_Continents_Rewards_Assets/continents/AF/assets/TROPHY_AF_ATLAS.png"
+  },
+  "PASS_AN_ATLAS.png": {
+    "file": "PASS_AN_ATLAS.png",
+    "sha256": "d091f2fbc94311461746f2281e19c4c4690e0b2f6a1a6fdd351e02bb7a0bd907",
+    "source": "RW_All_Continents_Rewards_Assets/continents/AN/assets/PASS_AN_ATLAS.png"
+  },
+  "TROPHY_AN_ATLAS.png": {
+    "file": "TROPHY_AN_ATLAS.png",
+    "sha256": "5f3e25ccadfafa73b9424be3f128be70078d354bd3449586a9500334c8f0c550",
+    "source": "RW_All_Continents_Rewards_Assets/continents/AN/assets/TROPHY_AN_ATLAS.png"
+  },
+  "PASS_AS_ATLAS.png": {
+    "file": "PASS_AS_ATLAS.png",
+    "sha256": "a9139f70ff8556eb6f6892930965a7033c28c54ea7aa53f8803273d335524938",
+    "source": "RW_All_Continents_Rewards_Assets/continents/AS/assets/PASS_AS_ATLAS.png"
+  },
+  "TROPHY_AS_ATLAS.png": {
+    "file": "TROPHY_AS_ATLAS.png",
+    "sha256": "9f89398d4cd140d8ef4c90c8009a95a8c3d6d95ec8695f6b663f4612c5688b2e",
+    "source": "RW_All_Continents_Rewards_Assets/continents/AS/assets/TROPHY_AS_ATLAS.png"
+  },
+  "PASS_EU_ATLAS.png": {
+    "file": "PASS_EU_ATLAS.png",
+    "sha256": "80e1fca3a7d42ed0dc9a645f6440e39176d8b610adf7527b15c8df6d062fe95a",
+    "source": "RW_All_Continents_Rewards_Assets/continents/EU/assets/PASS_EU_ATLAS.png"
+  },
+  "TROPHY_EU_ATLAS.png": {
+    "file": "TROPHY_EU_ATLAS.png",
+    "sha256": "5d6a0610eba6ef5bd618291bbbbf869aab0c157b48d6148e097a4819c740eac4",
+    "source": "RW_All_Continents_Rewards_Assets/continents/EU/assets/TROPHY_EU_ATLAS.png"
+  },
+  "PASS_NA_ATLAS.png": {
+    "file": "PASS_NA_ATLAS.png",
+    "sha256": "ff7a931bc4164847973c61e7f16ed85fcd0075d2169d14de19a53fcb6ef173fe",
+    "source": "RW_All_Continents_Rewards_Assets/continents/NA/assets/PASS_NA_ATLAS.png"
+  },
+  "TROPHY_NA_ATLAS.png": {
+    "file": "TROPHY_NA_ATLAS.png",
+    "sha256": "a3f090a6f8db4538aa5959a2403ffd43e24f5e6ec0c1f7def93f184116fabe73",
+    "source": "RW_All_Continents_Rewards_Assets/continents/NA/assets/TROPHY_NA_ATLAS.png"
+  },
+  "PASS_OC_ATLAS.png": {
+    "file": "PASS_OC_ATLAS.png",
+    "sha256": "e99b1d5137a743fc1dae6324da40a0bc70c8dc16f61ff5b04c2ac996a98ea3df",
+    "source": "RW_All_Continents_Rewards_Assets/continents/OC/assets/PASS_OC_ATLAS.png"
+  },
+  "TROPHY_OC_ATLAS.png": {
+    "file": "TROPHY_OC_ATLAS.png",
+    "sha256": "4d26337ee0124373ce20e3458fbdc99cc2ac294cf7d0f798dd9ceabb4aeb7609",
+    "source": "RW_All_Continents_Rewards_Assets/continents/OC/assets/TROPHY_OC_ATLAS.png"
+  },
+  "PASS_SA_ATLAS.png": {
+    "file": "PASS_SA_ATLAS.png",
+    "sha256": "b508aca4f02d5ad81f2a35b02b4c2a1b72d657af9e8a1963bda17dce87ae52aa",
+    "source": "RW_All_Continents_Rewards_Assets/continents/SA/assets/PASS_SA_ATLAS.png"
+  },
+  "TROPHY_SA_ATLAS.png": {
+    "file": "TROPHY_SA_ATLAS.png",
+    "sha256": "9a7ec7f7d4bfa9720a2b5b8db021e3ec8660db050af002bd6b3211b43901c21f",
+    "source": "RW_All_Continents_Rewards_Assets/continents/SA/assets/TROPHY_SA_ATLAS.png"
+  },
+  "PASS_STAMPS_ATLAS.png": {
+    "file": "PASS_STAMPS_ATLAS.png",
+    "sha256": "fd70776d66c29c477741d7683b98cac8c31cc83eb6e97d93e53678b83c31a300",
+    "source": "RW_All_Continents_Rewards_Assets/shared/assets/PASS_STAMPS_ATLAS.png"
+  },
+  "UI_REWARD_UTILITIES_ATLAS.png": {
+    "file": "UI_REWARD_UTILITIES_ATLAS.png",
+    "sha256": "afcea16a2aa1858d2fd8c71dc415a3297073465d8d92114b1306b166d6de05c9",
+    "source": "RW_All_Continents_Rewards_Assets/shared/assets/UI_REWARD_UTILITIES_ATLAS.png"
+  },
+  "BRAND_APPLE_TOUCH_ICON.png": {
+    "file": "BRAND_APPLE_TOUCH_ICON.png",
+    "sha256": "d8b464aecb783fa907f8d6d4bd5f691ab49684a67cbad12791fda5f9ea25f124",
+    "source": "UI01_Brand_Assets/assets/BRAND_APPLE_TOUCH_ICON.png"
+  },
+  "BRAND_APP_ICON_MASTER.png": {
+    "file": "BRAND_APP_ICON_MASTER.png",
+    "sha256": "48675b8eb5a8f4ec1a1408be1bd41b10afb80a959daea1e9fcfd4cdd3fec5b80",
+    "source": "UI01_Brand_Assets/assets/BRAND_APP_ICON_MASTER.png"
+  },
+  "BRAND_FAVICON_16.png": {
+    "file": "BRAND_FAVICON_16.png",
+    "sha256": "5e92d3b9b8a95c4d6211b96e4cb3fb25afc6edd92d70c94146ceaca214824efb",
+    "source": "UI01_Brand_Assets/assets/BRAND_FAVICON_16.png"
+  },
+  "BRAND_FAVICON_32.png": {
+    "file": "BRAND_FAVICON_32.png",
+    "sha256": "b9438bff34d049bbc8e8f2d2476c5edc2ee37a60ae5ab5d930f0753b2de0f5ee",
+    "source": "UI01_Brand_Assets/assets/BRAND_FAVICON_32.png"
+  },
+  "BRAND_GAME_LOGO.png": {
+    "file": "BRAND_GAME_LOGO.png",
+    "sha256": "090200ec6ea5f063a39d0fd8dfde869a0419ed6948dc4beb01e19d7f34147a68",
+    "source": "UI01_Brand_Assets/assets/BRAND_GAME_LOGO.png"
+  },
+  "BRAND_PWA_ICON_192.png": {
+    "file": "BRAND_PWA_ICON_192.png",
+    "sha256": "1dbb561232de94dad2a6ba3c9cf55dfb09e33bd6988ccf01b4262e937b8db5a7",
+    "source": "UI01_Brand_Assets/assets/BRAND_PWA_ICON_192.png"
+  },
+  "BRAND_PWA_ICON_512.png": {
+    "file": "BRAND_PWA_ICON_512.png",
+    "sha256": "8e03dbfb5bbcaf98dc63c4056fcd46aac21266903aee6a6c32d291e1a8cfbcbc",
+    "source": "UI01_Brand_Assets/assets/BRAND_PWA_ICON_512.png"
+  },
+  "UI_OPENING_BACKGROUND.png": {
+    "file": "UI_OPENING_BACKGROUND.png",
+    "sha256": "8f1c7d7ab9df66f3a48638757e805042a2ba5db38144b1a4626a28736bc4fc85",
+    "source": "UI02_Start_Screen_Assets/assets/UI_OPENING_BACKGROUND.png"
+  },
+  "G1B_CHARACTER_SELECT_ATLAS.png": {
+    "file": "G1B_CHARACTER_SELECT_ATLAS.png",
+    "sha256": "5dbd9e12045a19b5d5eb9fb32c87029bdf0ba3f8e9a7ef1e6dd6bc2e2bec054c",
+    "source": "UI02_Start_Screen_Assets/references/G1B_CHARACTER_SELECT_ATLAS.png"
+  },
+  "MAP_CLOUDS_ATLAS.png": {
+    "file": "MAP_CLOUDS_ATLAS.png",
+    "sha256": "0029976cae756e4f89094b76ade78020d5717236af327e36fa07b82459f2467d",
+    "source": "UI03_World_Map_Assets/assets/MAP_CLOUDS_ATLAS.png"
+  },
+  "MAP_CLOUD_1.png": {
+    "file": "MAP_CLOUD_1.png",
+    "sha256": "e4b75331a2f7755f1411d0ee6f30041bc6cf3085c5f4c5b17f15b8aeee4d9620",
+    "source": "UI03_World_Map_Assets/assets/MAP_CLOUD_1.png"
+  },
+  "MAP_CLOUD_2.png": {
+    "file": "MAP_CLOUD_2.png",
+    "sha256": "5964ba6d8267a438917d53b8104059cc5faecd38f373850c4050b60161e6e044",
+    "source": "UI03_World_Map_Assets/assets/MAP_CLOUD_2.png"
+  },
+  "MAP_CLOUD_3.png": {
+    "file": "MAP_CLOUD_3.png",
+    "sha256": "0ccd4ebd7ad28013799c71bf144b2b7c610c27bb742a17c9fe8a3e484b9af378",
+    "source": "UI03_World_Map_Assets/assets/MAP_CLOUD_3.png"
+  },
+  "MAP_CURRENT_RING.png": {
+    "file": "MAP_CURRENT_RING.png",
+    "sha256": "aeffd57e770098e7e4b5a3c8fdabeca3080398c56a864ace3fba60ef95bceac7",
+    "source": "UI03_World_Map_Assets/assets/MAP_CURRENT_RING.png"
+  },
+  "MAP_HEAD_PINS_ATLAS.png": {
+    "file": "MAP_HEAD_PINS_ATLAS.png",
+    "sha256": "cb33de33148757f7846d45afee30a2c5fd526fa0657c7ad1e46f424374f785f4",
+    "source": "UI03_World_Map_Assets/assets/MAP_HEAD_PINS_ATLAS.png"
+  },
+  "MAP_NODE_AVAILABLE.png": {
+    "file": "MAP_NODE_AVAILABLE.png",
+    "sha256": "4fbfbcbe939c2dad10c9d1a7e68ce310e6b51fbfb363ea8f83353da96f93c1ba",
+    "source": "UI03_World_Map_Assets/assets/MAP_NODE_AVAILABLE.png"
+  },
+  "MAP_NODE_COMPLETED.png": {
+    "file": "MAP_NODE_COMPLETED.png",
+    "sha256": "f8d98993c3335b4e7c870e08b12d7e48c15a8026b1ffacc5fc3c7e971a16bf9f",
+    "source": "UI03_World_Map_Assets/assets/MAP_NODE_COMPLETED.png"
+  },
+  "MAP_NODE_LOCKED.png": {
+    "file": "MAP_NODE_LOCKED.png",
+    "sha256": "44780666bb51faa6ce3c70b8547ae9b93d4a15309dc2193f91bced7aa1690034",
+    "source": "UI03_World_Map_Assets/assets/MAP_NODE_LOCKED.png"
+  },
+  "MAP_NODE_STATES_ATLAS.png": {
+    "file": "MAP_NODE_STATES_ATLAS.png",
+    "sha256": "59b67e1d56fd55ae8b607bf65283cbef8bdd2917c8962022495141d25bb95dc9",
+    "source": "UI03_World_Map_Assets/assets/MAP_NODE_STATES_ATLAS.png"
+  },
+  "MAP_NODE_VISITED.png": {
+    "file": "MAP_NODE_VISITED.png",
+    "sha256": "fe6cee7417d84bd6b9134be4a2c632bcbc38b06a01f9af7e5793b8f8618a7e9c",
+    "source": "UI03_World_Map_Assets/assets/MAP_NODE_VISITED.png"
+  },
+  "MAP_OCEAN_BACKDROP.png": {
+    "file": "MAP_OCEAN_BACKDROP.png",
+    "sha256": "f1d8566e9d5a65293760a4fac2be7fa30e5d42873895913e765b24c42bda56fd",
+    "source": "UI03_World_Map_Assets/assets/MAP_OCEAN_BACKDROP.png"
+  },
+  "MAP_PIN_CLAUDE.png": {
+    "file": "MAP_PIN_CLAUDE.png",
+    "sha256": "05dab4586bdc85db6a7938be72e4490fdb7f35e18af7508a89bc13c2788fec80",
+    "source": "UI03_World_Map_Assets/assets/MAP_PIN_CLAUDE.png"
+  },
+  "MAP_PIN_CONSTANCE.png": {
+    "file": "MAP_PIN_CONSTANCE.png",
+    "sha256": "88bb50f8349ed4a19e70cd114129f6efcf05770ee71502c6f495b27459ec2ba1",
+    "source": "UI03_World_Map_Assets/assets/MAP_PIN_CONSTANCE.png"
+  },
+  "MAP_STAGE_THUMBNAILS_ATLAS.png": {
+    "file": "MAP_STAGE_THUMBNAILS_ATLAS.png",
+    "sha256": "d8ae0ca17453aa6290e2530a5760c633a43f75830ee9dea00559082e86dd22e8",
+    "source": "UI03_World_Map_Assets/assets/MAP_STAGE_THUMBNAILS_ATLAS.png"
+  },
+  "MAP_WORLD_BASE.png": {
+    "file": "MAP_WORLD_BASE.png",
+    "sha256": "ed307c6455724548a87bf1bd9d1b6ca9e48afa61724111fb7b3b5c31a0443d7e",
+    "source": "UI03_World_Map_Assets/assets/MAP_WORLD_BASE.png"
+  },
+  "UI_BUTTONS_ATLAS.png": {
+    "file": "UI_BUTTONS_ATLAS.png",
+    "sha256": "2da2c2a5c102158be74f5f85231665323b10182802be24ae6af8ececffac82fe",
+    "source": "UI03_World_Map_Assets/assets/UI_BUTTONS_ATLAS.png"
+  },
+  "UI_BUTTON_DISABLED.png": {
+    "file": "UI_BUTTON_DISABLED.png",
+    "sha256": "7385f4d4a18ed8bae231eef6dbd40e49cf43dd97ce9f7f8869d31f2c51c84c40",
+    "source": "UI03_World_Map_Assets/assets/UI_BUTTON_DISABLED.png"
+  },
+  "UI_BUTTON_FOCUS.png": {
+    "file": "UI_BUTTON_FOCUS.png",
+    "sha256": "3affd4a1bf70a086000cf7d7854b4ca91b60739ccdbb73758b7c835485abbeaf",
+    "source": "UI03_World_Map_Assets/assets/UI_BUTTON_FOCUS.png"
+  },
+  "UI_BUTTON_NORMAL.png": {
+    "file": "UI_BUTTON_NORMAL.png",
+    "sha256": "a579bb904bc8a309734173e18e71b9e9875aeb4b7092928518e1d6a0209dabfb",
+    "source": "UI03_World_Map_Assets/assets/UI_BUTTON_NORMAL.png"
+  },
+  "UI_BUTTON_PRESSED.png": {
+    "file": "UI_BUTTON_PRESSED.png",
+    "sha256": "5cd408bd0af74910692802b77dfbf9a012691a23f92f2cf9d89ab9679438b0ad",
+    "source": "UI03_World_Map_Assets/assets/UI_BUTTON_PRESSED.png"
+  },
+  "UI_CONTINENT_PLATES_ATLAS.png": {
+    "file": "UI_CONTINENT_PLATES_ATLAS.png",
+    "sha256": "8cc4c5b4f390d0cdc975722ebe315a8d6496a9f208bb4e64dc3115718a9cfd9c",
+    "source": "UI03_World_Map_Assets/assets/UI_CONTINENT_PLATES_ATLAS.png"
+  },
+  "UI_CONTINENT_PLATE_COMPLETE.png": {
+    "file": "UI_CONTINENT_PLATE_COMPLETE.png",
+    "sha256": "2712d659d5917d1eb1e018fd31f450a70aa5888b7ac27f23c951051dafb0f620",
+    "source": "UI03_World_Map_Assets/assets/UI_CONTINENT_PLATE_COMPLETE.png"
+  },
+  "UI_CONTINENT_PLATE_CURRENT.png": {
+    "file": "UI_CONTINENT_PLATE_CURRENT.png",
+    "sha256": "f99881378556ddada2815282b66c3cafc110f624756e28966e8e0e0da860c7e4",
+    "source": "UI03_World_Map_Assets/assets/UI_CONTINENT_PLATE_CURRENT.png"
+  },
+  "UI_CONTINENT_PLATE_LOCKED.png": {
+    "file": "UI_CONTINENT_PLATE_LOCKED.png",
+    "sha256": "24e1f9b4d469e8d5223663f3d96ae6a4153140fc5b53181f292a48150a327811",
+    "source": "UI03_World_Map_Assets/assets/UI_CONTINENT_PLATE_LOCKED.png"
+  },
+  "UI_CONTINENT_PLATE_NORMAL.png": {
+    "file": "UI_CONTINENT_PLATE_NORMAL.png",
+    "sha256": "8bef36748ab136d5cc1e40d047e6ae2f6c82a5a64d22cfca237de7b2b3099f67",
+    "source": "UI03_World_Map_Assets/assets/UI_CONTINENT_PLATE_NORMAL.png"
+  },
+  "UI_ICON_CHECK.png": {
+    "file": "UI_ICON_CHECK.png",
+    "sha256": "f82aa337a07bde6b30d4c93ef5ec2e2ce25e3d7dfc2ce6d9ed1fce48d77d69bc",
+    "source": "UI03_World_Map_Assets/assets/UI_ICON_CHECK.png"
+  },
+  "UI_ICON_GLOBE.png": {
+    "file": "UI_ICON_GLOBE.png",
+    "sha256": "7fc86acedb50b90f4b6086fa66ae2242923ab278fae8e8d467b076295983e542",
+    "source": "UI03_World_Map_Assets/assets/UI_ICON_GLOBE.png"
+  },
+  "UI_ICON_LOCK.png": {
+    "file": "UI_ICON_LOCK.png",
+    "sha256": "3b6fec5d02933a014b3c948b00e173a240f27be8c50f0d7f5e2c44b7e79896df",
+    "source": "UI03_World_Map_Assets/assets/UI_ICON_LOCK.png"
+  },
+  "UI_ICON_MENU.png": {
+    "file": "UI_ICON_MENU.png",
+    "sha256": "f2e1755b123ec92b51d015920dcb792c7666a17fc4c12f6cafecb3c3d520a2d6",
+    "source": "UI03_World_Map_Assets/assets/UI_ICON_MENU.png"
+  },
+  "UI_ICON_OPTIONS.png": {
+    "file": "UI_ICON_OPTIONS.png",
+    "sha256": "dccf6a8b0d69b152f099ff4a862ccf6be350d0405848b9888a5444adc15b3a75",
+    "source": "UI03_World_Map_Assets/assets/UI_ICON_OPTIONS.png"
+  },
+  "UI_ICON_PLAY.png": {
+    "file": "UI_ICON_PLAY.png",
+    "sha256": "f19c5a037beaf3ffd74eb7b500c399ac9ddc089976ec33f0b21df08ed4ffd628",
+    "source": "UI03_World_Map_Assets/assets/UI_ICON_PLAY.png"
+  },
+  "UI_ICON_REPLAY.png": {
+    "file": "UI_ICON_REPLAY.png",
+    "sha256": "8516ea8205b253cd49c7ef9c53185ec658784fde0ee9166ce03b6eba5dea8584",
+    "source": "UI03_World_Map_Assets/assets/UI_ICON_REPLAY.png"
+  },
+  "UI_ICON_SAVE.png": {
+    "file": "UI_ICON_SAVE.png",
+    "sha256": "9a2d054b2a1c3c09eae2e9f4f8ac14779ba92f94fa4617433ca24abf10b26768",
+    "source": "UI03_World_Map_Assets/assets/UI_ICON_SAVE.png"
+  },
+  "UI_ICON_TROPHY.png": {
+    "file": "UI_ICON_TROPHY.png",
+    "sha256": "9052cd7bb712a63080380d83a81d9254ca98af5880fd87ae8fc414baabd85312",
+    "source": "UI03_World_Map_Assets/assets/UI_ICON_TROPHY.png"
+  },
+  "UI_NAV_BAR.png": {
+    "file": "UI_NAV_BAR.png",
+    "sha256": "7ad2ff346ca2c07b729fb2990d96a682891c791ead3080c12c776088f7fdd318",
+    "source": "UI03_World_Map_Assets/assets/UI_NAV_BAR.png"
+  },
+  "UI_NAV_ICONS_ATLAS.png": {
+    "file": "UI_NAV_ICONS_ATLAS.png",
+    "sha256": "b05fda9267c0ab186afdb5d6e6b6c99cea543dfe4e07d10a56ed9ba9f033f486",
+    "source": "UI03_World_Map_Assets/assets/UI_NAV_ICONS_ATLAS.png"
+  },
+  "UI_STAGE_CARDS_ATLAS.png": {
+    "file": "UI_STAGE_CARDS_ATLAS.png",
+    "sha256": "7297d6e4de6ee5268acced3292cfccf7ffa8222fa79cbf51f50de72125de0665",
+    "source": "UI03_World_Map_Assets/assets/UI_STAGE_CARDS_ATLAS.png"
+  },
+  "UI_STAGE_CARD_COMPLETE.png": {
+    "file": "UI_STAGE_CARD_COMPLETE.png",
+    "sha256": "686b2fa9ed3a1b48b5d0ac9154abd45fb93fcfdfda1180352025681e9eb4a9b2",
+    "source": "UI03_World_Map_Assets/assets/UI_STAGE_CARD_COMPLETE.png"
+  },
+  "UI_STAGE_CARD_CURRENT.png": {
+    "file": "UI_STAGE_CARD_CURRENT.png",
+    "sha256": "436fa8c34011ca1990aa94c8054fbdbcf8e7fad7d8d8631be9edcf9821011828",
+    "source": "UI03_World_Map_Assets/assets/UI_STAGE_CARD_CURRENT.png"
+  },
+  "UI_STAGE_CARD_LOCKED.png": {
+    "file": "UI_STAGE_CARD_LOCKED.png",
+    "sha256": "8f91dcced09a2597d2a756da19e7aa55e7801e37c27a9a44077e3459cd09badc",
+    "source": "UI03_World_Map_Assets/assets/UI_STAGE_CARD_LOCKED.png"
+  },
+  "UI_STAGE_CARD_NORMAL.png": {
+    "file": "UI_STAGE_CARD_NORMAL.png",
+    "sha256": "1b7b2decaeaaf31b0780ef33be49e318e8885bb769a60313708ec55f2f30abd8",
+    "source": "UI03_World_Map_Assets/assets/UI_STAGE_CARD_NORMAL.png"
+  },
+  "UI_STAGE_PANEL.png": {
+    "file": "UI_STAGE_PANEL.png",
+    "sha256": "baebe282abf295d37d090493cbf14e2287dc9de6c4d5e55ab6c222e85f2e5098",
+    "source": "UI03_World_Map_Assets/assets/UI_STAGE_PANEL.png"
+  },
+  "OFL.txt": {
+    "file": "OFL.txt",
+    "sha256": "705960c3281a5765ecc0b59bd4ed7ca59eed165748076bc2fc3e8fdbfeb944b0",
+    "source": "UI05_Menus_Achievements_Assets/fonts/OFL.txt"
+  },
+  "PressStart2P-Regular.ttf": {
+    "file": "PressStart2P-Regular.ttf",
+    "sha256": "034c77f1f05ec89421e4a63f0e3a4ca1ecf852cc6d2bf611f126f275728e017d",
+    "source": "UI05_Menus_Achievements_Assets/fonts/PressStart2P-Regular.ttf"
+  },
+  "UI04_BUTTONS_ATLAS.png": {
+    "file": "UI04_BUTTONS_ATLAS.png",
+    "sha256": "2ffea7688aecf4af7781c7da6f0dc48825f4c60c4e8e12d9e765121ea31369bd",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_BUTTONS_ATLAS.png"
+  },
+  "UI04_BUTTON_PRIMARY_DISABLED.png": {
+    "file": "UI04_BUTTON_PRIMARY_DISABLED.png",
+    "sha256": "4115af1f9163a465a6b4af233b025a1fe6e7bcefecbd8679cf704953c6db6d30",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_BUTTON_PRIMARY_DISABLED.png"
+  },
+  "UI04_BUTTON_PRIMARY_FOCUS.png": {
+    "file": "UI04_BUTTON_PRIMARY_FOCUS.png",
+    "sha256": "479136f863a3e5cd0a665e590d9f4598523375b0ac8c856ddba44057c65a2bc9",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_BUTTON_PRIMARY_FOCUS.png"
+  },
+  "UI04_BUTTON_PRIMARY_NORMAL.png": {
+    "file": "UI04_BUTTON_PRIMARY_NORMAL.png",
+    "sha256": "c78208b4fc86030f49cb9a888c0cf90779794f56042564ae9f24fc85536804db",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_BUTTON_PRIMARY_NORMAL.png"
+  },
+  "UI04_BUTTON_PRIMARY_PRESSED.png": {
+    "file": "UI04_BUTTON_PRIMARY_PRESSED.png",
+    "sha256": "35647ff0951604cf4b5ede7437787b3ad634f286f1867df9f8bda57b20aeb917",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_BUTTON_PRIMARY_PRESSED.png"
+  },
+  "UI04_BUTTON_SECONDARY_DISABLED.png": {
+    "file": "UI04_BUTTON_SECONDARY_DISABLED.png",
+    "sha256": "4a5eb3c1980ae7d5509a61be1918431f9b89e47cee80dad77202dbe684ff60a6",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_BUTTON_SECONDARY_DISABLED.png"
+  },
+  "UI04_BUTTON_SECONDARY_FOCUS.png": {
+    "file": "UI04_BUTTON_SECONDARY_FOCUS.png",
+    "sha256": "6423d7e8dd2043e039fc7add81be9ebe3e5277354ab6b2282f5dee7af01e15c4",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_BUTTON_SECONDARY_FOCUS.png"
+  },
+  "UI04_BUTTON_SECONDARY_NORMAL.png": {
+    "file": "UI04_BUTTON_SECONDARY_NORMAL.png",
+    "sha256": "9be6675b83c9668285c4fda0fbd3749d32a77b4c5044076b05383753c329cd80",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_BUTTON_SECONDARY_NORMAL.png"
+  },
+  "UI04_BUTTON_SECONDARY_PRESSED.png": {
+    "file": "UI04_BUTTON_SECONDARY_PRESSED.png",
+    "sha256": "c3ccd082db16e76a558299bd58cf205ac04ccf061a70ae52855d0eca1adc2eac",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_BUTTON_SECONDARY_PRESSED.png"
+  },
+  "UI04_RESULT_PANEL.png": {
+    "file": "UI04_RESULT_PANEL.png",
+    "sha256": "545b2f58c61270372cfd86a7f6ffec94f248af5806f200b81ecac317e14f54be",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_RESULT_PANEL.png"
+  },
+  "UI04_TRANSITION_PANEL.png": {
+    "file": "UI04_TRANSITION_PANEL.png",
+    "sha256": "8c85bb5ce7743762b7152c224cd1ae959b730f413b0dbfc7b7d997cdce37e824",
+    "source": "UI04_Results_Transitions_Assets/assets/UI04_TRANSITION_PANEL.png"
+  },
+  "UI05_DIALOG.png": {
+    "file": "UI05_DIALOG.png",
+    "sha256": "286f4a5fd8cbf305a7b3e329f1a7de845e9d94e7a618cbb90017358e9d452d00",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_DIALOG.png"
+  },
+  "UI05_HEADER.png": {
+    "file": "UI05_HEADER.png",
+    "sha256": "331b5e07bc6f82899af4137a2dd7320d0186b51060d7ef64af110a0a306391ae",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_HEADER.png"
+  },
+  "UI05_ICONS_ATLAS.png": {
+    "file": "UI05_ICONS_ATLAS.png",
+    "sha256": "814c76eee6add4d80a50358290483b1f8964e88ad709e1074df2f6c038814bec",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_ICONS_ATLAS.png"
+  },
+  "UI05_ICON_BACK.png": {
+    "file": "UI05_ICON_BACK.png",
+    "sha256": "b62ed3d75e62ecfbc6ee66fa43f60707d19049bbfcf0ed73055580dd50114b08",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_ICON_BACK.png"
+  },
+  "UI05_ICON_CLOSE.png": {
+    "file": "UI05_ICON_CLOSE.png",
+    "sha256": "b64a7628b2df9826c2fc7e71c179d4a960dc68c36c148fea413813c85e372e9d",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_ICON_CLOSE.png"
+  },
+  "UI05_ICON_INFO.png": {
+    "file": "UI05_ICON_INFO.png",
+    "sha256": "1934184b71ade53642d8e0676ea131c09037c4980bf5d844c5ba48722726c490",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_ICON_INFO.png"
+  },
+  "UI05_ICON_MUSIC.png": {
+    "file": "UI05_ICON_MUSIC.png",
+    "sha256": "00a956bea6c7256688096964f76c5f70737722aa9d1a0dade294a7b4c30aedd8",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_ICON_MUSIC.png"
+  },
+  "UI05_ICON_NEXT.png": {
+    "file": "UI05_ICON_NEXT.png",
+    "sha256": "3f4e4010196f8b567efb09c579bb66b8c700d5d83ea030cda0ee7fa20c6823b9",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_ICON_NEXT.png"
+  },
+  "UI05_ICON_PAUSE.png": {
+    "file": "UI05_ICON_PAUSE.png",
+    "sha256": "0946b88c19c95aaf279a35c993f4148481f9f84ff4490f73489c9a08e528fd6f",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_ICON_PAUSE.png"
+  },
+  "UI05_ICON_PREVIOUS.png": {
+    "file": "UI05_ICON_PREVIOUS.png",
+    "sha256": "13ef75ba1cf019dad5e4409329e7df415a865a3d07b155405b5e22feff3aa60a",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_ICON_PREVIOUS.png"
+  },
+  "UI05_ICON_SOUND.png": {
+    "file": "UI05_ICON_SOUND.png",
+    "sha256": "bc0bdec178f3d86edb87bcc9875d8c38574447293d4e34eaf56a0ba16c39c60b",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_ICON_SOUND.png"
+  },
+  "UI05_PANEL.png": {
+    "file": "UI05_PANEL.png",
+    "sha256": "7658da20155725c2bba026595a3e0a13cc4796047a8b055be424468fb68db842",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_PANEL.png"
+  },
+  "UI05_REWARD_CARDS_ATLAS.png": {
+    "file": "UI05_REWARD_CARDS_ATLAS.png",
+    "sha256": "7524f858418d10fd70cf0cfc2db010a86ec37f3405c6ca845f5f5af52067a367",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_REWARD_CARDS_ATLAS.png"
+  },
+  "UI05_REWARD_CARD_DISABLED.png": {
+    "file": "UI05_REWARD_CARD_DISABLED.png",
+    "sha256": "5d54b81dbee2aed3e55dc137504dae7695ace051f8f060d346d8924cb9e945e7",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_REWARD_CARD_DISABLED.png"
+  },
+  "UI05_REWARD_CARD_NORMAL.png": {
+    "file": "UI05_REWARD_CARD_NORMAL.png",
+    "sha256": "c2eca2d064a630d0bbf727f4eebb7bb7e137ef3d30b26a92f71a35864be15386",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_REWARD_CARD_NORMAL.png"
+  },
+  "UI05_REWARD_CARD_PRESSED.png": {
+    "file": "UI05_REWARD_CARD_PRESSED.png",
+    "sha256": "97a31d347793d5a71408d9ca70ab641b2e8ef0aa63de3c6fd88d9695310d673d",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_REWARD_CARD_PRESSED.png"
+  },
+  "UI05_REWARD_CARD_SELECTED.png": {
+    "file": "UI05_REWARD_CARD_SELECTED.png",
+    "sha256": "459881560e5ec8891b70c460a73a6d9c82d7dd658d9d7d219ee582610fc3031f",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_REWARD_CARD_SELECTED.png"
+  },
+  "UI05_ROW.png": {
+    "file": "UI05_ROW.png",
+    "sha256": "1ca0256a38c6f01a4e5ed22a25a578ea9b0a63c2e6703e39dc3b80db6b1c325b",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_ROW.png"
+  },
+  "UI05_SECRET_PASSPORT_LOCKED.png": {
+    "file": "UI05_SECRET_PASSPORT_LOCKED.png",
+    "sha256": "fad2f8a53ce03aa7b935cb341d3a40d9cd135e586c74496c93a57b29f976ff17",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_SECRET_PASSPORT_LOCKED.png"
+  },
+  "UI05_SWITCHES_ATLAS.png": {
+    "file": "UI05_SWITCHES_ATLAS.png",
+    "sha256": "5a6cc7c23911fa2d1fb10dc9f1d6f4a38c9d6248b034b337d21d4b4dfce9eed5",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_SWITCHES_ATLAS.png"
+  },
+  "UI05_SWITCH_OFF_DISABLED.png": {
+    "file": "UI05_SWITCH_OFF_DISABLED.png",
+    "sha256": "c49af310c5fd6b1e578d7d0befc112ef6b4a639bdd3b0338ca1ab4520cea7e2a",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_SWITCH_OFF_DISABLED.png"
+  },
+  "UI05_SWITCH_OFF_FOCUS.png": {
+    "file": "UI05_SWITCH_OFF_FOCUS.png",
+    "sha256": "135e93966d507da293cba470d08cfbb13c3cde9b136b5cf380cf5728a900f0bb",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_SWITCH_OFF_FOCUS.png"
+  },
+  "UI05_SWITCH_OFF_NORMAL.png": {
+    "file": "UI05_SWITCH_OFF_NORMAL.png",
+    "sha256": "c52ed992c7dfdc21b4e067413a46418f712ae350018d1d6eb01060bcc57bbdc1",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_SWITCH_OFF_NORMAL.png"
+  },
+  "UI05_SWITCH_OFF_PRESSED.png": {
+    "file": "UI05_SWITCH_OFF_PRESSED.png",
+    "sha256": "27dc9f19faf59e0eacb351ea21b2676481b9171bc7162132c1698ec54b4bce13",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_SWITCH_OFF_PRESSED.png"
+  },
+  "UI05_SWITCH_ON_DISABLED.png": {
+    "file": "UI05_SWITCH_ON_DISABLED.png",
+    "sha256": "9a05fc9a320139a24cb43c93ce4dd044f2dd690a2d2d8503415a0d7b84837730",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_SWITCH_ON_DISABLED.png"
+  },
+  "UI05_SWITCH_ON_FOCUS.png": {
+    "file": "UI05_SWITCH_ON_FOCUS.png",
+    "sha256": "7e55450c5e0931bd66fb99ece3f2848df63b0eb981d5139186c24143204dafa6",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_SWITCH_ON_FOCUS.png"
+  },
+  "UI05_SWITCH_ON_NORMAL.png": {
+    "file": "UI05_SWITCH_ON_NORMAL.png",
+    "sha256": "3227240cea329556c194cce442e5a509cfec52b4c0c01a108571506116c6e8a9",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_SWITCH_ON_NORMAL.png"
+  },
+  "UI05_SWITCH_ON_PRESSED.png": {
+    "file": "UI05_SWITCH_ON_PRESSED.png",
+    "sha256": "67b565af6e5bcbcf139ca4d8d9e3f33934f4f29aa0831fec06ddb47a76db1e4e",
+    "source": "UI05_Menus_Achievements_Assets/assets/UI05_SWITCH_ON_PRESSED.png"
+  },
+  "MAP_TRAVEL_PLANE_ATLAS.png": {
+    "file": "MAP_TRAVEL_PLANE_ATLAS.png",
+    "sha256": "4a7bc1eb6048739ded799309fe6c9416e46fbdbc03db5ec2690a8fadd8baf2cb",
+    "source": "World_Map_Travel_Plane_Handoff.zip / MAP_TRAVEL_PLANE_SOURCE.png; canonical body, original propeller variants; 2 x 660px cells"
+  }
+}
