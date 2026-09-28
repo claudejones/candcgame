@@ -1,0 +1,64 @@
+{
+  "batch": "UI02",
+  "direction": "A Coastal Departure \u2014 approved",
+  "final_art_approval": "pending user review",
+  "transform": "Source to 1280x720 nearest-neighbor, full image; RGB opaque. Reference assets copied unchanged. Previews are composited review-only, not runtime UI.",
+  "assets": [
+    {
+      "file": "assets/UI_OPENING_BACKGROUND.png",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGB",
+      "sha256": "8f1c7d7ab9df66f3a48638757e805042a2ba5db38144b1a4626a28736bc4fc85",
+      "role": "integration background"
+    },
+    {
+      "file": "originals/UI_OPENING_BACKGROUND_SOURCE.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "sha256": "ccaccc50de5ce4c9768b6ed6ad09f7982d74b4bb92b592fa5f6304a1111a6b05",
+      "role": "originals"
+    },
+    {
+      "file": "previews/UI02_empty_667x375.png",
+      "width": 667,
+      "height": 375,
+      "mode": "RGB",
+      "sha256": "20f4f494a699daf06b58f41d592c715d7f7f6d07aa0ea17807498573d110f2e7",
+      "role": "previews"
+    },
+    {
+      "file": "previews/UI02_saved_844x390.png",
+      "width": 844,
+      "height": 390,
+      "mode": "RGB",
+      "sha256": "08347a76f4e088530bbe0716431e322d2d423be3946a18e632cc2cb8f7bd0886",
+      "role": "previews"
+    },
+    {
+      "file": "previews/UI02_unlocked_960x432.png",
+      "width": 960,
+      "height": 432,
+      "mode": "RGB",
+      "sha256": "da8ec9e960b28b0880386945b48f9985fdcd58fbd813ef35dc74e528cf017374",
+      "role": "previews"
+    },
+    {
+      "file": "references/BRAND_GAME_LOGO.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "sha256": "090200ec6ea5f063a39d0fd8dfde869a0419ed6948dc4beb01e19d7f34147a68",
+      "role": "references"
+    },
+    {
+      "file": "references/G1B_CHARACTER_SELECT_ATLAS.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "sha256": "5dbd9e12045a19b5d5eb9fb32c87029bdf0ba3f8e9a7ef1e6dd6bc2e2bec054c",
+      "role": "references"
+    }
+  ]
+}

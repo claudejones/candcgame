@@ -1,0 +1,128 @@
+[
+  {
+    "id": "NA01",
+    "name": "Desert",
+    "continent": "NA",
+    "thumbnail": "assets/MAP_THUMB_NA01.png"
+  },
+  {
+    "id": "NA02",
+    "name": "Pines / Mountains",
+    "continent": "NA",
+    "thumbnail": "assets/MAP_THUMB_NA02.png"
+  },
+  {
+    "id": "NA03",
+    "name": "New York City",
+    "continent": "NA",
+    "thumbnail": "assets/MAP_THUMB_NA03.png"
+  },
+  {
+    "id": "SA01",
+    "name": "Amazon Rainforest",
+    "continent": "SA",
+    "thumbnail": "assets/MAP_THUMB_SA01.png"
+  },
+  {
+    "id": "SA02",
+    "name": "Andes Mountains",
+    "continent": "SA",
+    "thumbnail": "assets/MAP_THUMB_SA02.png"
+  },
+  {
+    "id": "SA03",
+    "name": "Rio de Janeiro",
+    "continent": "SA",
+    "thumbnail": "assets/MAP_THUMB_SA03.png"
+  },
+  {
+    "id": "EU01",
+    "name": "Santorini",
+    "continent": "EU",
+    "thumbnail": "assets/MAP_THUMB_EU01.png"
+  },
+  {
+    "id": "EU02",
+    "name": "Paris",
+    "continent": "EU",
+    "thumbnail": "assets/MAP_THUMB_EU02.png"
+  },
+  {
+    "id": "EU03",
+    "name": "Barcelona",
+    "continent": "EU",
+    "thumbnail": "assets/MAP_THUMB_EU03.png"
+  },
+  {
+    "id": "AF01",
+    "name": "Savannah",
+    "continent": "AF",
+    "thumbnail": "assets/MAP_THUMB_AF01.png"
+  },
+  {
+    "id": "AF02",
+    "name": "Sossusvlei",
+    "continent": "AF",
+    "thumbnail": "assets/MAP_THUMB_AF02.png"
+  },
+  {
+    "id": "AF03",
+    "name": "Marrakesh",
+    "continent": "AF",
+    "thumbnail": "assets/MAP_THUMB_AF03.png"
+  },
+  {
+    "id": "AS01",
+    "name": "Kyoto",
+    "continent": "AS",
+    "thumbnail": "assets/MAP_THUMB_AS01.png"
+  },
+  {
+    "id": "AS02",
+    "name": "Zhangjiajie",
+    "continent": "AS",
+    "thumbnail": "assets/MAP_THUMB_AS02.png"
+  },
+  {
+    "id": "AS03",
+    "name": "Bangkok",
+    "continent": "AS",
+    "thumbnail": "assets/MAP_THUMB_AS03.png"
+  },
+  {
+    "id": "OC01",
+    "name": "Uluru",
+    "continent": "OC",
+    "thumbnail": "assets/MAP_THUMB_OC01.png"
+  },
+  {
+    "id": "OC02",
+    "name": "Queensland",
+    "continent": "OC",
+    "thumbnail": "assets/MAP_THUMB_OC02.png"
+  },
+  {
+    "id": "OC03",
+    "name": "Fiordland",
+    "continent": "OC",
+    "thumbnail": "assets/MAP_THUMB_OC03.png"
+  },
+  {
+    "id": "AN01",
+    "name": "Antarctic Peninsula",
+    "continent": "AN",
+    "thumbnail": "assets/MAP_THUMB_AN01.png"
+  },
+  {
+    "id": "AN02",
+    "name": "Ross Island",
+    "continent": "AN",
+    "thumbnail": "assets/MAP_THUMB_AN02.png"
+  },
+  {
+    "id": "AN03",
+    "name": "Research Outpost",
+    "continent": "AN",
+    "thumbnail": "assets/MAP_THUMB_AN03.png"
+  }
+]

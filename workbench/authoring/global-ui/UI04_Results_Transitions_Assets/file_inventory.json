@@ -1,0 +1,2472 @@
+{
+  "files": [
+    {
+      "file": "Asset_Coverage.md",
+      "bytes": 2760,
+      "sha256": "cab7fa8e17985be8e4fba5d55c7de5c9e7edf80c1cd40a5e71b6fa20f3c4b2ec"
+    },
+    {
+      "file": "Workbench_Handoff.md",
+      "bytes": 12392,
+      "sha256": "a767692e0a5cb6fdf08baf5800f63a4f9a0b87d37ca20a78d29bf298fc0f0984"
+    },
+    {
+      "file": "asset_manifest.json",
+      "bytes": 5895,
+      "sha256": "550c828086bbf38afd063de5c60333426e0436b60fd4559474a8f76297a16224"
+    },
+    {
+      "file": "assets/UI04_BUTTONS_ATLAS.png",
+      "bytes": 4592,
+      "sha256": "2ffea7688aecf4af7781c7da6f0dc48825f4c60c4e8e12d9e765121ea31369bd",
+      "size": [
+        1280,
+        192
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/UI04_BUTTON_PRIMARY_DISABLED.png",
+      "bytes": 897,
+      "sha256": "4115af1f9163a465a6b4af233b025a1fe6e7bcefecbd8679cf704953c6db6d30",
+      "size": [
+        320,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/UI04_BUTTON_PRIMARY_FOCUS.png",
+      "bytes": 909,
+      "sha256": "479136f863a3e5cd0a665e590d9f4598523375b0ac8c856ddba44057c65a2bc9",
+      "size": [
+        320,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/UI04_BUTTON_PRIMARY_NORMAL.png",
+      "bytes": 901,
+      "sha256": "c78208b4fc86030f49cb9a888c0cf90779794f56042564ae9f24fc85536804db",
+      "size": [
+        320,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/UI04_BUTTON_PRIMARY_PRESSED.png",
+      "bytes": 909,
+      "sha256": "35647ff0951604cf4b5ede7437787b3ad634f286f1867df9f8bda57b20aeb917",
+      "size": [
+        320,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/UI04_BUTTON_SECONDARY_DISABLED.png",
+      "bytes": 905,
+      "sha256": "4a5eb3c1980ae7d5509a61be1918431f9b89e47cee80dad77202dbe684ff60a6",
+      "size": [
+        320,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/UI04_BUTTON_SECONDARY_FOCUS.png",
+      "bytes": 901,
+      "sha256": "6423d7e8dd2043e039fc7add81be9ebe3e5277354ab6b2282f5dee7af01e15c4",
+      "size": [
+        320,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/UI04_BUTTON_SECONDARY_NORMAL.png",
+      "bytes": 904,
+      "sha256": "9be6675b83c9668285c4fda0fbd3749d32a77b4c5044076b05383753c329cd80",
+      "size": [
+        320,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/UI04_BUTTON_SECONDARY_PRESSED.png",
+      "bytes": 930,
+      "sha256": "c3ccd082db16e76a558299bd58cf205ac04ccf061a70ae52855d0eca1adc2eac",
+      "size": [
+        320,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/UI04_RESULT_PANEL.png",
+      "bytes": 3853,
+      "sha256": "545b2f58c61270372cfd86a7f6ffec94f248af5806f200b81ecac317e14f54be",
+      "size": [
+        890,
+        550
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/UI04_TRANSITION_PANEL.png",
+      "bytes": 2054,
+      "sha256": "8c85bb5ce7743762b7152c224cd1ae959b730f413b0dbfc7b7d997cdce37e824",
+      "size": [
+        1000,
+        230
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "fonts/OFL.txt",
+      "bytes": 4413,
+      "sha256": "705960c3281a5765ecc0b59bd4ed7ca59eed165748076bc2fc3e8fdbfeb944b0"
+    },
+    {
+      "file": "fonts/PressStart2P-Regular.ttf",
+      "bytes": 118204,
+      "sha256": "034c77f1f05ec89421e4a63f0e3a4ca1ecf852cc6d2bf611f126f275728e017d"
+    },
+    {
+      "file": "map_layout.json",
+      "bytes": 4983,
+      "sha256": "4dd8d710141b39e6dcf7006fd163c70c7e6fa6272a4e85f2899f17690efe3640"
+    },
+    {
+      "file": "originals/PASS_STAMP_AF_SOURCE.png",
+      "bytes": 971957,
+      "sha256": "61582e461f946810f68fb11c39d23e6d2fec9c1883193b371821125080c8e9b7",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/PASS_STAMP_AN_SOURCE.png",
+      "bytes": 1084754,
+      "sha256": "8b3379fc9685d8c99fd19554cdf748b2de77d1ae56c4fc13f25a7570cddee5dd",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/PASS_STAMP_AS_SOURCE.png",
+      "bytes": 1041125,
+      "sha256": "3dd667eb6094cbc0a25960149ba85f29664dbbbc45a9987ac75a16bbd34bfc62",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/PASS_STAMP_EU_SOURCE.png",
+      "bytes": 1169453,
+      "sha256": "da2307ca61f83047828db50cc638c37963141aba8d362a2cdd6d2b9f59c131e5",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/PASS_STAMP_NA_SOURCE.png",
+      "bytes": 1055815,
+      "sha256": "ad88881f0f466212efdf6520f38bfe920cedaf70d1c725120a996f69152618cc",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/PASS_STAMP_OC_SOURCE.png",
+      "bytes": 904658,
+      "sha256": "0470c9f6bd8ba93c68968a160484ec33866cd22ac83fffdb3fc97567d03559a6",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/PASS_STAMP_SA_SOURCE.png",
+      "bytes": 1033120,
+      "sha256": "70cd15d5a029547ca25e0b6666c84a370ea65e09744fb24298328591ac6cae4b",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_AF01_SOURCE.png",
+      "bytes": 855544,
+      "sha256": "13f8f7f37588137559177ece490ad87b9550da787c86837a64a1581ed699741a",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_AF02_SOURCE.png",
+      "bytes": 883337,
+      "sha256": "b5e31cb8df8e2cafabf619def3f968d27a6c18175368cd4a4e02fcbc882c86db",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_AF03_SOURCE.png",
+      "bytes": 699534,
+      "sha256": "f8491ad6a8837d27b5270279d0131b05b83f340ae5610c1414d026351cbf9ad6",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_AN01_SOURCE.png",
+      "bytes": 1061483,
+      "sha256": "13b14b9c8b4081ce1ec15546118864be11967de6a93c22ad5067a9c85bfa3251",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_AN02_SOURCE.png",
+      "bytes": 885293,
+      "sha256": "ce6073a5c38d05b224537b4f3938ba7e2d95bb304cd72009beed5279c5bc378a",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_AN03_SOURCE.png",
+      "bytes": 827670,
+      "sha256": "f5bb1d606552732d246c3b1973562e7cea9afaab02347a05a18c67b18564146c",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_AS01_SOURCE.png",
+      "bytes": 827776,
+      "sha256": "397ac9b615dd97dbe71526a1885523624e5d21e88810ec466024485e494313c9",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_AS02_SOURCE.png",
+      "bytes": 915601,
+      "sha256": "b8649e4f7cbd7352ed834fd6a6d4c6403b022a5eaba2f9a3f27525fb9280d13c",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_AS03_SOURCE.png",
+      "bytes": 751914,
+      "sha256": "2b7075fccc3d76ba03c4e5cedb5f1e6d6407cf0a514e9ee961026146a4729096",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_EU01_SOURCE.png",
+      "bytes": 751701,
+      "sha256": "713552a2378e0a0d7cfd6e1eb1ac5c8ee33ca7ca4d743b868a9812554ae0c29d",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_EU02_SOURCE.png",
+      "bytes": 551741,
+      "sha256": "ce6e8f64f2d9b500e79f9985e064648d3c9eb1b9181344a5183747b0711aec2e",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_EU03_SOURCE.png",
+      "bytes": 840418,
+      "sha256": "970e16d838fdef88fca5d0ddc5437f1733631b8237490960aad878d011116866",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_NA01_SOURCE.png",
+      "bytes": 512266,
+      "sha256": "48989b8ef7fd60325ed0b8ec27856b874244e74b380d2eb0483e94dfa8d148ff",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_NA02_SOURCE.png",
+      "bytes": 550646,
+      "sha256": "2baf772b01aca3cf39b64b1e2eee3dc3afe86159ad4ebf11b74531cbc39cf019",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_NA03_SOURCE.png",
+      "bytes": 458474,
+      "sha256": "f15de46126168ebed2f2c777f09bcd97fe0fa3bf684ec0d911cc73e557875963",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_OC01_SOURCE.png",
+      "bytes": 742648,
+      "sha256": "d01ca1b00c75ad0f7083d4e54936a659133709822ea47d484e69d84aeffe6b43",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_OC02_SOURCE.png",
+      "bytes": 1099727,
+      "sha256": "0a0a160bd8b143f81d7a1b62277a530bd3880bfa808654a413c10c1b9e45208e",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_OC03_SOURCE.png",
+      "bytes": 1085413,
+      "sha256": "1882fc8ca107003b44d95f3d3dc6904d8cf4688365134d5850cea292dc45d7d1",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_SA01_SOURCE.png",
+      "bytes": 789636,
+      "sha256": "84d51270087fbbb51fffc77e662f3b349f78a11d16c174585e62ba5c237ebd3d",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_SA02_SOURCE.png",
+      "bytes": 899928,
+      "sha256": "e12d600542a8ca1125dd20152a786193992ac1cab849aa44ce3ea4ec58bf4e2b",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/TROPHY_SA03_SOURCE.png",
+      "bytes": 784201,
+      "sha256": "5e98d94efa0d74899cb5bd538aab3c3ba9c4921bf97871e0a1ce0da4f792d2f2",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "originals/UI04_BUTTON_PRIMARY_DISABLED.svg",
+      "bytes": 1006,
+      "sha256": "4465adb67e6cad669871279bfc07ce155efedbd77949467b9736138b0f538275"
+    },
+    {
+      "file": "originals/UI04_BUTTON_PRIMARY_FOCUS.svg",
+      "bytes": 1006,
+      "sha256": "d1052df1d6f9ee7b3d1f5c5f96b5ef3be11b05285fd50c04f54b10d747d35ce3"
+    },
+    {
+      "file": "originals/UI04_BUTTON_PRIMARY_NORMAL.svg",
+      "bytes": 1006,
+      "sha256": "d3c0c6384fc54a7b9b6141acb93f8fb383c92afd701915933b1921e0674ce259"
+    },
+    {
+      "file": "originals/UI04_BUTTON_PRIMARY_PRESSED.svg",
+      "bytes": 1006,
+      "sha256": "78a4beffff694c6dc5dcb64f0d3db128b03c0c915f3c1d4dfd2daa159ce767c3"
+    },
+    {
+      "file": "originals/UI04_BUTTON_SECONDARY_DISABLED.svg",
+      "bytes": 1006,
+      "sha256": "872f1e4b0b8e96b495362aa618cb983ab3ad0f418af89985da790721cbb455e3"
+    },
+    {
+      "file": "originals/UI04_BUTTON_SECONDARY_FOCUS.svg",
+      "bytes": 1006,
+      "sha256": "91d8d2e837a4944d9eae0cf28bada4f31fdc8febfc0c787cff514e9a46ca610f"
+    },
+    {
+      "file": "originals/UI04_BUTTON_SECONDARY_NORMAL.svg",
+      "bytes": 1006,
+      "sha256": "bf2b56407da47967b0ce1cb324d8806c102397a78d799b125e3dc26bd83861f9"
+    },
+    {
+      "file": "originals/UI04_BUTTON_SECONDARY_PRESSED.svg",
+      "bytes": 1006,
+      "sha256": "4c058bcc897dad458a2299cc141069ec56d7a2081fe44838fab2eebb1eb5f96e"
+    },
+    {
+      "file": "originals/UI04_RESULT_PANEL.svg",
+      "bytes": 1057,
+      "sha256": "545e56051b82934603833ffefb08b046058e7a67c9b9842c336b8fa40c3d088f"
+    },
+    {
+      "file": "originals/UI04_TRANSITION_PANEL.svg",
+      "bytes": 1060,
+      "sha256": "03dd0dae71620e069092caeefa687a8491d0bd1a40ef589591fdf1649b0343c2"
+    },
+    {
+      "file": "originals/reference-concepts/Game_Over_Approved.png",
+      "bytes": 1720146,
+      "sha256": "e1a4a9a907295fb8ddc55ff94c5d41521dbefe8d2d25521323150718fca40580",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "originals/reference-concepts/Stage_Complete_Approved.png",
+      "bytes": 1902355,
+      "sha256": "ba87f791e1c54710c214af00d078c1d8de3674e21c998a4c415f5ee73b206b72",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "preview-only/CLAUDE_celebrate_0.png",
+      "bytes": 136237,
+      "sha256": "7bc4b2df1a8b427298dc72881d362f765ac8bbd149d9b880c738010335b40ff8",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CLAUDE_celebrate_1.png",
+      "bytes": 154982,
+      "sha256": "806b0020e5f39c60240ab045c699fb5eb9f208c382af0aaad517e1127ef8467f",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CLAUDE_celebrate_2.png",
+      "bytes": 136450,
+      "sha256": "16bcd966ec881f6e09a5074e4eab3415185cd0ebf8ee4154bdd16cc2ed518534",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CLAUDE_celebrate_3.png",
+      "bytes": 137531,
+      "sha256": "0b32fc55ccf658031ef8bdebbbc5226fa426f2b325d6f3ae806695fd34bc75b4",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CLAUDE_hit_0.png",
+      "bytes": 180753,
+      "sha256": "39e6f0dcaf241063f088d33b8c0a9c8418ec6f5a3c9bf487d65543be4292af6d",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CLAUDE_hit_1.png",
+      "bytes": 147517,
+      "sha256": "b139dbf28fcefb5c2f9b137b3d9bc13ae527c2e158531a7dc00fcb0ad1ad6e86",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CLAUDE_hit_2.png",
+      "bytes": 150632,
+      "sha256": "a82e61bd113e6889f552a650a35e911dbfa13142ee8d53e04dda2d8771f1d573",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CLAUDE_idle_0.png",
+      "bytes": 148584,
+      "sha256": "4044557f5b80c94d247ae94c3db02ae3e1480d6e5c2211cf7b021e6d6d004e35",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CLAUDE_idle_1.png",
+      "bytes": 149746,
+      "sha256": "cbd5e173d4e83bb45138b62c3ca9b8cedfc81d8ed4027db247845ace704f21c2",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CONSTANCE_celebrate_0.png",
+      "bytes": 154300,
+      "sha256": "2e8ffd70451b40a2abc45a8db952cfd0e9bfb980052a4d9578db614616c06c42",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CONSTANCE_celebrate_1.png",
+      "bytes": 161945,
+      "sha256": "48b49b522f72f408df3c8773fb66de1a43413eb05989606b6063e9f682266c3d",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CONSTANCE_celebrate_2.png",
+      "bytes": 138744,
+      "sha256": "1dc11f104decfdf394d5918fba52c3b391a11906a74be9b94958ea093775372f",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CONSTANCE_celebrate_3.png",
+      "bytes": 154034,
+      "sha256": "4301d94f36c79e81d5dcb088271534f3729058021abc23a6e5bfdfb1b37a1e90",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CONSTANCE_hit_0.png",
+      "bytes": 194456,
+      "sha256": "858171fadf5f8f83a40b2f8aa5b8bceac0ae86b741e8130a666ec7af368d4b13",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CONSTANCE_hit_1.png",
+      "bytes": 156046,
+      "sha256": "78bb0a1d32cd13597ed3b2d150c19a0b92e119d1f3be1113de9ddc51ccbfd07a",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CONSTANCE_hit_2.png",
+      "bytes": 162426,
+      "sha256": "3232fc6e369ad2c4f9d4c7b1494b6929efe69852d76bb305b31ab5636329dbb1",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CONSTANCE_idle_0.png",
+      "bytes": 160323,
+      "sha256": "202c32d234b6812a1e1487bddb735ec22ab2249dde9c3166ba8e0f8c855ea9cf",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/CONSTANCE_idle_1.png",
+      "bytes": 161834,
+      "sha256": "ae825521f689d0c94143dc86fed98e84811ab952cdc7467b51c6220e7834366d",
+      "size": [
+        700,
+        700
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/SA02_STAGE_COMPOSITE.png",
+      "bytes": 1107748,
+      "sha256": "cc48e96f6ab155b01d2cd4d946ad2f9ceb0e33d39528ae43210c9ccd9bddaf26",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/sa02Far.png",
+      "bytes": 1549663,
+      "sha256": "2e8a0575bb264941fdc4a722d231fdee363a074aa9631158f063088f0f1ae4a9",
+      "size": [
+        2170,
+        725
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "preview-only/sa02Ground.png",
+      "bytes": 864814,
+      "sha256": "685e95d468087d08739b4f4cddf775f879b88b4c59938920e7529ffc6b8ebee4",
+      "size": [
+        2048,
+        682
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/sa02Mid.png",
+      "bytes": 1148034,
+      "sha256": "57f7c0a08635b456ee480c3d9eaaeca53c7a4c58d6d685b080a8df2d0755c814",
+      "size": [
+        2048,
+        682
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/stars_0.png",
+      "bytes": 11120,
+      "sha256": "c134126d100318dc6b3a37038817857273455146158efa4e50d7a09c3c2df620",
+      "size": [
+        240,
+        150
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/stars_1.png",
+      "bytes": 14084,
+      "sha256": "dfa261be4f8fc73d97c3f9a679b12423ef11d008e3c2dfd67603c95f5c62bf95",
+      "size": [
+        240,
+        150
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/stars_2.png",
+      "bytes": 15298,
+      "sha256": "f27a94ac973145bc3630855df5b061789651f2a98cae1db491e12ed78c910afe",
+      "size": [
+        240,
+        150
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "preview-only/stars_3.png",
+      "bytes": 15072,
+      "sha256": "8dc9740e232a068235a03fd6b6dc71108f06059625e07332ac2dbe1eea1ead00",
+      "size": [
+        240,
+        150
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "previews/Frames_CLAUDE.png",
+      "bytes": 106234,
+      "sha256": "36239e84367c5028b8bfe10eaad8569d475b2278ad874c4fe78bcfcff4690d4d",
+      "size": [
+        1120,
+        280
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/Frames_CONSTANCE.png",
+      "bytes": 115658,
+      "sha256": "34b1bd63c6501de727277ff5201b55ff8d40cf47ab5ca6d470600060f57f64de",
+      "size": [
+        1120,
+        280
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/Motion_complete_constance.gif",
+      "bytes": 365345,
+      "sha256": "3303236b44ec0a0c17986b9e9f4f28b2fd845595029b4637b17bd98e4311e0ee",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "P"
+    },
+    {
+      "file": "previews/Motion_game_over.gif",
+      "bytes": 350180,
+      "sha256": "61dc1af1bc2352b4f84049725f03b9ad1e83454643573b02dd76740fd7243b68",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "P"
+    },
+    {
+      "file": "previews/Motion_game_over_constance.gif",
+      "bytes": 347165,
+      "sha256": "9250327f56b5b29345fd259e676be9894633dd663616df3d5ef3038cc31d77b9",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "P"
+    },
+    {
+      "file": "previews/Motion_new_best.gif",
+      "bytes": 364383,
+      "sha256": "f3d282f8af5da64f7ab58c4f3f99c0576b39b00c031f131a267e74d6e070d0f7",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "P"
+    },
+    {
+      "file": "previews/UI04_Button_States.png",
+      "bytes": 4152,
+      "sha256": "cf54cb850cf294a33e1aabe4241d6566239f9a9b886efdfeb30bc9ff18b8f131",
+      "size": [
+        1280,
+        192
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_State_Review.jpg",
+      "bytes": 996297,
+      "sha256": "d7633ad0af21cab05a9be778773cb705cea5560ffb7f514154a4793f7f187804",
+      "size": [
+        1280,
+        3120
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_assisted.png",
+      "bytes": 437612,
+      "sha256": "ae52fc4fee931af384ef25998c4b5332af1f3714685e76f991ef3d5f5b536f6d",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_assisted_phone.png",
+      "bytes": 222554,
+      "sha256": "5f5800824f4e8e73e7f5af87949e4b1ed70cce3844f0bc024de55c0aabbe090e",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_complete_constance.png",
+      "bytes": 476591,
+      "sha256": "d200677a2e04fc0d764bf70c9bbc080a59748e4665bf145076a448e8af68d341",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_continent.png",
+      "bytes": 486243,
+      "sha256": "c255908f0706f2943ddce4df873c40a6a7bfd435b6100e1d17f285ffd3cd099e",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_equal_replay.png",
+      "bytes": 475646,
+      "sha256": "3578fa85c879382c5252b59204255ba8af3d7be12ad98f2b3034a27a825e0a5c",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_game_over.png",
+      "bytes": 436081,
+      "sha256": "b1b7f6e88c6318143892c56e09b4f3258eeffa808b20cc3fe76a77fd58050500",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_game_over_constance.png",
+      "bytes": 436324,
+      "sha256": "c21103b2e213f651bd37fdc8a8e822b16c76266529c991068a58bc450820044d",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_game_over_phone.png",
+      "bytes": 221306,
+      "sha256": "461b277d3fc1497464d479eb38e476985b4e28b7b7bdff49e8e947064d0c0944",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_intro.png",
+      "bytes": 604448,
+      "sha256": "972cb48e47e1071f6fad477a772f6ca0ef30257253b88ac2f74016e47f40936a",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_intro_phone.png",
+      "bytes": 302491,
+      "sha256": "5600f66c457251c1ee95da3efe0bfcc2f09af04ded7cbb8eacd09c409513698e",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_load_error.png",
+      "bytes": 604777,
+      "sha256": "ceb8dd0808f0e153e9978c3405f1f72d4955d0ca32947fe1fb3f9ba3ca30f474",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_loading.png",
+      "bytes": 603672,
+      "sha256": "61eaa2b3665e7c81fba37aa558c3d306441baac5e78e258aeb74878367e364fa",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_lower_replay.png",
+      "bytes": 475564,
+      "sha256": "328349343fe6682074bcb344b3167c557934d9202e3fbc81f4aa414969aaa7b3",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_mystery.png",
+      "bytes": 440727,
+      "sha256": "7924b27973865420ba068eef7cc204befa800ccb502c7aa2e4fb0fbfe8ae710b",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_new_best.png",
+      "bytes": 475309,
+      "sha256": "3e8833247bc29e77857957a6f99c2104b9db8d60a3159234bdbfd0ac026c448e",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_new_best_phone.png",
+      "bytes": 242016,
+      "sha256": "9ff020050144ffe1438a304ba7c673520db92fba9b5d9fb56707d70e4864473a",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_new_trophy.png",
+      "bytes": 475919,
+      "sha256": "f2ea3b5ddcafa69a1250aa99c4ed7c3fa08c70b70a39f5e69d48d9148faf8211",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_passport_AF.png",
+      "bytes": 480577,
+      "sha256": "560131879b405c0a13bb2fc816edb6f6dd8b0bff8a8871608347761a0524fd09",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_passport_AN.png",
+      "bytes": 485959,
+      "sha256": "3836d4c131c38ba14f1b8c49184714c37c75be8d9b2ef75714d35a3df12bed6b",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_passport_AS.png",
+      "bytes": 484061,
+      "sha256": "ad8353076e30640cb37eb6a0fb6b8e9c83b5bffced7430eace489cd60cbd70ad",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_passport_EU.png",
+      "bytes": 489669,
+      "sha256": "16dc7ad1992b9bb023cd93c24d9a5b3eae923b48c0211a87992f519937334e8d",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_passport_NA.png",
+      "bytes": 488160,
+      "sha256": "827925ef277d8233070ee4145f7ce62dd4bd2a6137b9b5ebaed9944c7be2c6d2",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_passport_OC.png",
+      "bytes": 486733,
+      "sha256": "56c50db2399b7356e02c250fe0d86c6733575bb83f1654e3f389f4aaa05d8247",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_passport_SA.png",
+      "bytes": 486415,
+      "sha256": "4d280330ba3a79edd732fe0194199fccdfd96e5e441d8d0a76b05c8de3e00c7b",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_perfect.png",
+      "bytes": 486415,
+      "sha256": "4d280330ba3a79edd732fe0194199fccdfd96e5e441d8d0a76b05c8de3e00c7b",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_perfect_phone.png",
+      "bytes": 245791,
+      "sha256": "48da190026f234c2d92f44617c93942088396771b7f0e7eed73e855f13ec64df",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_AF01.png",
+      "bytes": 472652,
+      "sha256": "4f57f188b00b0cd14ea696fab3c395bea52541b0f61bd94db15367a62c9fa940",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_AF02.png",
+      "bytes": 476091,
+      "sha256": "c63b20c33c7d016fbf6b31e950865e10a31c99edb21e2aecd07caf7546c86712",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_AF03.png",
+      "bytes": 469259,
+      "sha256": "06d25ae5da9114dd1209a29bdea1cf241cbaf124f50ab1fc2fb7ab9e0ba5d329",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_AN01.png",
+      "bytes": 477620,
+      "sha256": "f2ee3ca06cfdbc4e25fe4c913338d2da06f478b39da9dbe48062f210d70b7241",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_AN02.png",
+      "bytes": 469376,
+      "sha256": "6153abf74324a422ea7510e00e35eda76d28adaee580e7beec73dbd9c0d4acc5",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_AN03.png",
+      "bytes": 468210,
+      "sha256": "9637a37a8deccfe81d3b239c07c752281f131e26a4c6fb63cb596cc22868c0f1",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_AS01.png",
+      "bytes": 476491,
+      "sha256": "9cbff72ef4fcc1a68d199e965bbf109e18368296dd2698ecb7beede0eba6e886",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_AS02.png",
+      "bytes": 480020,
+      "sha256": "c7b5b31cf1732a058fe86e3c1170ffb21e1d649e1736ead0ee2a16268d420cd4",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_AS03.png",
+      "bytes": 471034,
+      "sha256": "8a89866c141da84a5ab68bc7e98ffc6731d682646fb7f387262f85f09a624405",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_EU01.png",
+      "bytes": 478214,
+      "sha256": "ca340bf477cda37eb6159f93ba14510d64cbb2f1f26f8273be5a9001a1a217a4",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_EU02.png",
+      "bytes": 461501,
+      "sha256": "c7cd7f4cc33464a319b53a147ce132727e5b86db70149e3148e192a096fbf4c1",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_EU03.png",
+      "bytes": 474097,
+      "sha256": "01477492e483f0400d238139bfa1a6eee33c47490fa9cc363a7d2cf5f5e7d9da",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_NA01.png",
+      "bytes": 462342,
+      "sha256": "b218bfbaba56fc05aa592bc80f0188c4e29b89758ae4dbb9b9241f0071150f8d",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_NA02.png",
+      "bytes": 467381,
+      "sha256": "ad8ae4e8ed5b90281a517251c5ffbba98929e236fcb529dd09d4543b7576a3b3",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_NA03.png",
+      "bytes": 460887,
+      "sha256": "62712c1fd67175a79cb578961c52ce680b6ce1eaaadefff00079f88ef244cd98",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_OC01.png",
+      "bytes": 466573,
+      "sha256": "a61267dd1c1edeb9daa6d981cd11bff9d30285e239e718df741adccf376b9d79",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_OC02.png",
+      "bytes": 480504,
+      "sha256": "141d18329cbf9cda2c6707a20e6b62d68c3796481d46ee049c20967874e9bb58",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_OC03.png",
+      "bytes": 481704,
+      "sha256": "684932cb16b1740d71c37f2fd3b286592ab9accb146745ae0aedded9eb905eb2",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_SA01.png",
+      "bytes": 479856,
+      "sha256": "e754503d5b11284105961d9e91ce59c2fa7f711f7ee682ebb2c54a8ef6a429be",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_SA02.png",
+      "bytes": 475309,
+      "sha256": "3e8833247bc29e77857957a6f99c2104b9db8d60a3159234bdbfd0ac026c448e",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_stage_SA03.png",
+      "bytes": 474894,
+      "sha256": "01d62ca0b54bbbe932c19725f81867c15788c24ca2e7939ab72accccfcfc62f1",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_travel.png",
+      "bytes": 1023823,
+      "sha256": "0d1376c215944cc8823188f21e97aed950b572ebcc1c399d49f49385c1ad243a",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_travel_phone.png",
+      "bytes": 488909,
+      "sha256": "6d9a00dc8a860ccd0fe46f6b62b07d08b2027814948b1053235546dfc11845a9",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_world.png",
+      "bytes": 512884,
+      "sha256": "b24bcb05f7c6d401468a1297ff08047f17a333a1f06b6ee7b3c4ff9d56e16fb3",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_world_easy.png",
+      "bytes": 512857,
+      "sha256": "2c7784ca76878a4e20797467b8206d8af8fba5f4b8f30c179f6ac41d931f9abe",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_world_hard.png",
+      "bytes": 512810,
+      "sha256": "b89d2064df22256a083b541bc4dcc399d6a4dca5392e384b53f0b0a30780346f",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "previews/UI04_world_phone.png",
+      "bytes": 258076,
+      "sha256": "a48cff56ade46e468e11fc7000fc6305243cf1d9a43101d1f74696e2ce83f403",
+      "size": [
+        844,
+        475
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "results-preview.html",
+      "bytes": 653,
+      "sha256": "9555a4038c16496d3eac999d26d1100fee1ff11e8a2c50f26ab9a4c685c0b8e1"
+    },
+    {
+      "file": "results-preview.js",
+      "bytes": 3336,
+      "sha256": "d52d68c45357c14629a1ab6c24edf80171b6dee1db2c3c76f74c3a643e19571a"
+    },
+    {
+      "file": "results-ui.css",
+      "bytes": 1962,
+      "sha256": "38e7f3515f7c8b87929f3df6d28baf26f48265b6ab7f04ccee8f7ea2b925a2d2"
+    },
+    {
+      "file": "scenes.js",
+      "bytes": 111538,
+      "sha256": "21437ec05bc691dd9490063286f0fa88e56353c2b1ac35d7a4e7225864131520"
+    },
+    {
+      "file": "scenes.json",
+      "bytes": 179446,
+      "sha256": "f511aa2738fcf4e0e891d574c2cd3157663b0de0a56e35058f84aefdb6878e1f"
+    },
+    {
+      "file": "shared/CHARACTER_CELEBRATE_SOURCE.png",
+      "bytes": 1162232,
+      "sha256": "e47dc17a1576c86ecf45ed71ff4c6900b90a6159918bb70e38c0db807f7d8673",
+      "size": [
+        2800,
+        1400
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/CHARACTER_HIT_SOURCE.png",
+      "bytes": 984793,
+      "sha256": "35aff27ddc45fce6ab2b2d99fc79fd93ac54226d29a26bf70310c8d5876b7f8a",
+      "size": [
+        2100,
+        1400
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/CHARACTER_IDLE_SOURCE.png",
+      "bytes": 614824,
+      "sha256": "e5474445e4972ee5f22603653782fcbef23e96ca0da847a9de59ca20a74c411d",
+      "size": [
+        1400,
+        1400
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/CHARACTER_STARS_SOURCE.png",
+      "bytes": 115527,
+      "sha256": "58f02c3044c1dc4b7098bfc5a3f8d053c45ed6722262d85419bacf173e1a3cf0",
+      "size": [
+        960,
+        300
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/HEART_EMPTY.png",
+      "bytes": 187,
+      "sha256": "6f602b22411ea42abc8a4e9995bc3ecff5fcde5320dc388a014822983bfe3631",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/HEART_FULL.png",
+      "bytes": 171,
+      "sha256": "70666b4166a4b3e592954639b890de6f808829514af8f479ecc4d58113ddcb7d",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/MAP_CLOUD_1.png",
+      "bytes": 4010,
+      "sha256": "e4b75331a2f7755f1411d0ee6f30041bc6cf3085c5f4c5b17f15b8aeee4d9620",
+      "size": [
+        128,
+        80
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/MAP_OCEAN_BACKDROP.png",
+      "bytes": 2035811,
+      "sha256": "f1d8566e9d5a65293760a4fac2be7fa30e5d42873895913e765b24c42bda56fd",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_PIN_CLAUDE.png",
+      "bytes": 9414,
+      "sha256": "05dab4586bdc85db6a7938be72e4490fdb7f35e18af7508a89bc13c2788fec80",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/MAP_PIN_CONSTANCE.png",
+      "bytes": 10337,
+      "sha256": "88bb50f8349ed4a19e70cd114129f6efcf05770ee71502c6f495b27459ec2ba1",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/MAP_THUMB_AF01.png",
+      "bytes": 116032,
+      "sha256": "e849b466541b9f0a96cc586fffc402110d172e70b77deccae83d4611a1352aaf",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_AF02.png",
+      "bytes": 121600,
+      "sha256": "3a94ddd6a690a50a1af0199a09c6951908b227e463f15b70384eaceab9a798af",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_AF03.png",
+      "bytes": 74826,
+      "sha256": "84e882ab52a905792d6fbdfac0ae398defe96320611a6ada33a0227a43f845db",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_AN01.png",
+      "bytes": 118049,
+      "sha256": "ed78968a9d40bc487bdf22e4b132ab6bbee7552e96ec8371ec711f8b279944c6",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_AN02.png",
+      "bytes": 114814,
+      "sha256": "3f5c873e38e89a7e5d1dcf538fd314a9548177d232115056e33657c2f5f08670",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_AN03.png",
+      "bytes": 105707,
+      "sha256": "bc1cf6c37076c22eff46a8003091cd136b815cb80831aafad3334542cb1f9b16",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_AS01.png",
+      "bytes": 121497,
+      "sha256": "7d3c2c1526e3babecbacfbf66b5fe0e02d1835b90f79d9865e94e2d59071d170",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_AS02.png",
+      "bytes": 94072,
+      "sha256": "7eac1ac3b45a803a71276ad8748467d65519d0a2cbbc75dd85b088297298d135",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_AS03.png",
+      "bytes": 81539,
+      "sha256": "d46ad4d7de22ac588eebae9cca75e324d4898d6febe84815ceafafea0a4173d7",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_EU01.png",
+      "bytes": 124188,
+      "sha256": "1b785fc3f5613c2151705ed1ba7252ad81ab411ec1111bc3d24dae5b3b8331a5",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_EU02.png",
+      "bytes": 122956,
+      "sha256": "ebec8b15a67d496c0d06743b7368ff6bfdc86cd512f7b566d549ec65360e1677",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_EU03.png",
+      "bytes": 128361,
+      "sha256": "332255f5b9ba93605c306e2f1c3f183eb2ad962d176a66456538f57b9ef1ab22",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_NA01.png",
+      "bytes": 90887,
+      "sha256": "aed38c64b03e7cc480e55aba0a185311bdc2fbc1a06466a6f435aea42720f903",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_NA02.png",
+      "bytes": 111111,
+      "sha256": "7c2caa83da9b720ad17d42ccb38467a60144c945b4469891035d99b0961a505c",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_NA03.png",
+      "bytes": 110436,
+      "sha256": "fd645f4b92cbc2c3dcf660df09d73160873806e03eacd04d7b37b1ca5fddfc24",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_OC01.png",
+      "bytes": 99629,
+      "sha256": "dc9e64bd205e3f2e36dba3304029bd87453993aeb77f94b4263068f3602488b2",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_OC02.png",
+      "bytes": 92839,
+      "sha256": "e72d322e2642cd246d76a673151876f80511050b1a06b1bf511b7e42f9bb2feb",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_OC03.png",
+      "bytes": 99177,
+      "sha256": "f708b5c943f8ccf5860d7f8df685f382e78ac7c772236fd2b5c8629e16336db9",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_SA01.png",
+      "bytes": 115391,
+      "sha256": "4b3ef3bdc863c7f567baa4e2fdb170c9df061290565a64504a2aa99f5f118e85",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_SA02.png",
+      "bytes": 111804,
+      "sha256": "5c9caf299a9d637d3d9a8ead268cbead1108a8448f7366d9544d9591f72627b3",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_THUMB_SA03.png",
+      "bytes": 95697,
+      "sha256": "88460fe82df12319c43856bad1f6852327978c46756c455ed964f304b12de15f",
+      "size": [
+        320,
+        240
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/MAP_WORLD_BASE.png",
+      "bytes": 2436488,
+      "sha256": "ed307c6455724548a87bf1bd9d1b6ca9e48afa61724111fb7b3b5c31a0443d7e",
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "shared/PASS_AF_ATLAS.png",
+      "bytes": 94971,
+      "sha256": "50d49d2f0eef02ac15c5df8c3a50c0abe3dc9909f85b78b1ccd3f6c366b6a4cc",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_AN_ATLAS.png",
+      "bytes": 106251,
+      "sha256": "d091f2fbc94311461746f2281e19c4c4690e0b2f6a1a6fdd351e02bb7a0bd907",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_AS_ATLAS.png",
+      "bytes": 103389,
+      "sha256": "a9139f70ff8556eb6f6892930965a7033c28c54ea7aa53f8803273d335524938",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_EU_ATLAS.png",
+      "bytes": 117430,
+      "sha256": "80e1fca3a7d42ed0dc9a645f6440e39176d8b610adf7527b15c8df6d062fe95a",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_NA_ATLAS.png",
+      "bytes": 110670,
+      "sha256": "ff7a931bc4164847973c61e7f16ed85fcd0075d2169d14de19a53fcb6ef173fe",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_OC_ATLAS.png",
+      "bytes": 108951,
+      "sha256": "e99b1d5137a743fc1dae6324da40a0bc70c8dc16f61ff5b04c2ac996a98ea3df",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_SA_ATLAS.png",
+      "bytes": 106958,
+      "sha256": "b508aca4f02d5ad81f2a35b02b4c2a1b72d657af9e8a1963bda17dce87ae52aa",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_AF.png",
+      "bytes": 60308,
+      "sha256": "c2c1e128cd875051fafe2de17c61c86522b2a7492f00ed7b220b7acccab08f5e",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_AF_UNEARNED.png",
+      "bytes": 33592,
+      "sha256": "e36063b85c210aaa5cc6a034280986531080a632ee8885370ce4ae2e8b1c26f6",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_AN.png",
+      "bytes": 67017,
+      "sha256": "4a90887b8094983df2c1e62c239b1420ac22a8e42be4b45ecb72cccd70283a90",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_AN_UNEARNED.png",
+      "bytes": 38784,
+      "sha256": "bb25e8a0d2de98ed30e53c638e959b5c559c9c5e2376a615f96930cec4007f56",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_AS.png",
+      "bytes": 65377,
+      "sha256": "46d4cffa819c299d3698565844d10f7a728b0b7e19f96286f49168b1a9346bd7",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_AS_UNEARNED.png",
+      "bytes": 37396,
+      "sha256": "0c904efd598429c1e0c8deb89e7e4ed0bb138d871e5e38a9bae659b66e7f3235",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_EU.png",
+      "bytes": 72551,
+      "sha256": "1c812f8159c162d3f216e71c1ed2a6a4a0b5b04adb4941969c89a3b1e137ed67",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_EU_UNEARNED.png",
+      "bytes": 44889,
+      "sha256": "e7611581c76f3db0cb8f279955fdb40b9d3f96a6271f40009e56ba324de9e097",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_NA.png",
+      "bytes": 69374,
+      "sha256": "da8ebad6377527910bd8f33965c9d96507aa2dd7020a8e4ef92f4f385dcd00ee",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_NA_UNEARNED.png",
+      "bytes": 40799,
+      "sha256": "0fb0d2f545ac704dd19bfe6c5b7667394b8c05665baea2b0134c9eeec0e174f7",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_OC.png",
+      "bytes": 67983,
+      "sha256": "a9797262c70bcbf58d33c30e8e08e9e88557cd50bf0c0a6dc566999765ff4bdf",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_OC_UNEARNED.png",
+      "bytes": 40544,
+      "sha256": "590047a54833c3321f7bdd680141f6420899d54ea9f84ab698b18d8aa8739994",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_SA.png",
+      "bytes": 67092,
+      "sha256": "259b6ecc3dd925d3547c78273baee11c0105073189745f1097c14345bf40268f",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PASS_STAMP_SA_UNEARNED.png",
+      "bytes": 39517,
+      "sha256": "e4954f290ee7f172765f3717246c43135156f73c8fb005eae850bdc1d6f8f55f",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/PERFECT_STAR.png",
+      "bytes": 184,
+      "sha256": "207599ab78aee10f6a134f9a04346d58eab80dee1b66ff455a1b535793d0e284",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AF01.png",
+      "bytes": 46930,
+      "sha256": "95e43469bd62b13e68fba42f9f997dbf9003b4298107462629e135f23a2f8139",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AF01_UNEARNED.png",
+      "bytes": 34357,
+      "sha256": "f36df56cb8b617b644e9feb3cb85e4f74f611783cc21c917fd9e7b812a84a1e7",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AF02.png",
+      "bytes": 52518,
+      "sha256": "d6f200cbabf459569389b70b3b0ff129140418c7c7c101251bd524888c8dc9c7",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AF02_UNEARNED.png",
+      "bytes": 35156,
+      "sha256": "f41c5be03300da0047792653c43ba3e3d5e5e32188b64f4753df6f7075b7b00d",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AF03.png",
+      "bytes": 43269,
+      "sha256": "de9a83ab2f0c7d87648584acc0d98ddb5d5b894fa19c96f2e91fd49c711f65d2",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AF03_UNEARNED.png",
+      "bytes": 30691,
+      "sha256": "8825ecd26d9b5bba2c435a05f57f97454440347e023d4cd8178ff0ba1a48c6ff",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AF_ATLAS.png",
+      "bytes": 241315,
+      "sha256": "9e924615174b1332dba09ed3b11b16daa14df821293a7e9d51c5ca55dfd322b3",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AN01.png",
+      "bytes": 53754,
+      "sha256": "9e7cfeb5f89cd88f67ac2138f54dccd5eebe6913d4d05239120b2be899b14272",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AN01_UNEARNED.png",
+      "bytes": 36831,
+      "sha256": "2803b4763d5adae0013424e12d7084f2b9a26acd1a228f37bbbfa28eaabb7b4f",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AN02.png",
+      "bytes": 41001,
+      "sha256": "0435f173af04a3e4aab682c4b41e872a222eaaae071f1730fa8f6cbbb540d120",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AN02_UNEARNED.png",
+      "bytes": 30625,
+      "sha256": "1a8eb3560b82db2719a87f926d9a9bad6c3198fad06c11ea7c601492c522f897",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AN03.png",
+      "bytes": 40583,
+      "sha256": "5c41faf677af85a657a4ec07bb4d1c553baf1db7eec3b0292631fdacfd34415a",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AN03_UNEARNED.png",
+      "bytes": 28919,
+      "sha256": "6939458d75895f322fca5519be5c745659403a20216aabf1aacfd649b92ff1f6",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AN_ATLAS.png",
+      "bytes": 232056,
+      "sha256": "5f3e25ccadfafa73b9424be3f128be70078d354bd3449586a9500334c8f0c550",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AS01.png",
+      "bytes": 51899,
+      "sha256": "faa200df9c104bdd8a99726b600276951f577cf43e9caddd296a14ecb5eb0e12",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AS01_UNEARNED.png",
+      "bytes": 37583,
+      "sha256": "c30e134f5bef074ddd7e2b09da9a44696d1a8fb8786fff2b7c0be8ae53d38331",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AS02.png",
+      "bytes": 56219,
+      "sha256": "1f6083c14d814452ff8aed6485b364678935c6a8ca24fff109722505fb037314",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AS02_UNEARNED.png",
+      "bytes": 40565,
+      "sha256": "6c4e183eefd224f30908e22a029c77c7a29f7d1c3bf0565614dfd856e4a0ffcb",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AS03.png",
+      "bytes": 45754,
+      "sha256": "c983cc626db48de0bc52ff3915f10de207b61adfe876327a0d9119d166df902d",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AS03_UNEARNED.png",
+      "bytes": 34239,
+      "sha256": "67682616e102a591df62cce8f0a4f77141233360fe162e1fff95fee3607f9002",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_AS_ATLAS.png",
+      "bytes": 263687,
+      "sha256": "9f89398d4cd140d8ef4c90c8009a95a8c3d6d95ec8695f6b663f4612c5688b2e",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_EU01.png",
+      "bytes": 56104,
+      "sha256": "ed7c09c577b5e61918932de14cbcc6c3145b7ea339511b457e8cef1295f264b8",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_EU01_UNEARNED.png",
+      "bytes": 35726,
+      "sha256": "2ad6c63b3e2c43f8b713806447905ebb51a28f327a688bb732c749941350aec0",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_EU02.png",
+      "bytes": 31776,
+      "sha256": "e0835ac97c971a506a3b429377e810f78c8712bfc1ca8f317e8d01832419bbdc",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_EU02_UNEARNED.png",
+      "bytes": 23461,
+      "sha256": "a57ceed8d75fc3eed19fbfbfd87c9d1680f6ece78d79d1f0cf3279330e46b584",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_EU03.png",
+      "bytes": 49764,
+      "sha256": "8486b5dccdfa3ce4e6a09b037c8edb65fa64788ce867d93fad7552de35cfb236",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_EU03_UNEARNED.png",
+      "bytes": 34748,
+      "sha256": "f79653127a9f80dc44f3c314b23b69121475df8b1724efc1a40836a543427c30",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_EU_ATLAS.png",
+      "bytes": 229681,
+      "sha256": "5d6a0610eba6ef5bd618291bbbbf869aab0c157b48d6148e097a4819c740eac4",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_NA01.png",
+      "bytes": 34000,
+      "sha256": "245d204658193b9e143b5172ea07f6aa8b0c3ec808fa049355bbc65e48b76429",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_NA01_UNEARNED.png",
+      "bytes": 18627,
+      "sha256": "310f28993321db286c01b6f523ff20823e6ced1351d08c7fe55e3e5ebcc5d6ca",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_NA02.png",
+      "bytes": 40635,
+      "sha256": "cbf6a255ad7790bf0ce7f24064fecfb80c64f851d4840db667f9d05d87337994",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_NA02_UNEARNED.png",
+      "bytes": 22691,
+      "sha256": "f465025564e18da23eb96cf5562930c39e397fcc38ed4811b181a8b1d10bfab4",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_NA03.png",
+      "bytes": 31313,
+      "sha256": "c2a167662ca2aafae7781678e5fbf0f96990fdab69882d92cb11ab3b34ea8d9d",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_NA03_UNEARNED.png",
+      "bytes": 16511,
+      "sha256": "292974c2d709b0fc8240760fd884351002396b357e468f54855099e88b1c487f",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_NA_ATLAS.png",
+      "bytes": 162437,
+      "sha256": "a3f090a6f8db4538aa5959a2403ffd43e24f5e6ec0c1f7def93f184116fabe73",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_OC01.png",
+      "bytes": 39768,
+      "sha256": "6c4f23d2aee42d1f3f299c7a10b8ac7aa372f4f834de9f333ade2a072daebdd6",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_OC01_UNEARNED.png",
+      "bytes": 27960,
+      "sha256": "6127cb0f06b45ea081da3fd1b505bfd13dc98fd02bd31165313bc2f67a3624d1",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_OC02.png",
+      "bytes": 57244,
+      "sha256": "62acd6e7572db458ed77bc4971415e2eae368c5603c0bb36320bf167e3eaef4c",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_OC02_UNEARNED.png",
+      "bytes": 41086,
+      "sha256": "e5692ad17d24724451e862b67fc4f45955e35317812c688d8985a7453173d76b",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_OC03.png",
+      "bytes": 57107,
+      "sha256": "ddc199f26700f5914f6b95b5e899a39172eb6521733ca9079de7013fa173212a",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_OC03_UNEARNED.png",
+      "bytes": 42231,
+      "sha256": "5886cf6941910b9a791d5e57f950ba1a527ec66f44d0c067d1aba8385e10ce64",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_OC_ATLAS.png",
+      "bytes": 267016,
+      "sha256": "4d26337ee0124373ce20e3458fbdc99cc2ac294cf7d0f798dd9ceabb4aeb7609",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_SA01.png",
+      "bytes": 57153,
+      "sha256": "17b28b737b987476c5ee8973e87e3accaeaf4ab51fa29e84a4e7b2a947fbfe40",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_SA01_UNEARNED.png",
+      "bytes": 36289,
+      "sha256": "167496f7326d9248c18605cc1a58acf11653f01908924e88049211a51e265bcf",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_SA02.png",
+      "bytes": 51935,
+      "sha256": "45f875015ed40d67beb4da72026ad3149afcdc2a5020683ab2109fe1a17986c8",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_SA02_UNEARNED.png",
+      "bytes": 30453,
+      "sha256": "dd8db7a1d447f2805e5f6df3ee7b96faf890c876340d948ec5191ef1d1fd81a5",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_SA03.png",
+      "bytes": 51125,
+      "sha256": "3f00c9a2cc16f56ae08be1d658ee0d25c9a92ae8e7606746c62c147f3d170ff8",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_SA03_UNEARNED.png",
+      "bytes": 31224,
+      "sha256": "da5366a7e1de98e19880f6973aad5a07e8a57b8e57344f4fa552f3312a297d6d",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/TROPHY_SA_ATLAS.png",
+      "bytes": 255678,
+      "sha256": "9a7ec7f7d4bfa9720a2b5b8db021e3ec8660db050af002bd6b3211b43901c21f",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/UI_ICON_CHECK.png",
+      "bytes": 2595,
+      "sha256": "f82aa337a07bde6b30d4c93ef5ec2e2ce25e3d7dfc2ce6d9ed1fce48d77d69bc",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/UI_ICON_GLOBE.png",
+      "bytes": 4469,
+      "sha256": "7fc86acedb50b90f4b6086fa66ae2242923ab278fae8e8d467b076295983e542",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/UI_ICON_LOCK.png",
+      "bytes": 3106,
+      "sha256": "3b6fec5d02933a014b3c948b00e173a240f27be8c50f0d7f5e2c44b7e79896df",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared/UI_REWARD_UTILITIES_ATLAS.png",
+      "bytes": 356,
+      "sha256": "afcea16a2aa1858d2fd8c71dc415a3297073465d8d92114b1306b166d6de05c9",
+      "size": [
+        96,
+        32
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "shared_frames.json",
+      "bytes": 10042,
+      "sha256": "f153d2828e4753ceb9247f243dac6c9de87b119d136b12013f8c45aba3aaddd6"
+    },
+    {
+      "file": "stages.json",
+      "bytes": 2558,
+      "sha256": "784c9634edebedc100507d259c5abf47115efbf4bccf23c8623558f0120a1e70"
+    }
+  ],
+  "stage_count": 21,
+  "passport_count": 7,
+  "scene_count": 46
+}

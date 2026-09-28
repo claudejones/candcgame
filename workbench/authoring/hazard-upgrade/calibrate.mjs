@@ -1,0 +1,14 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createRequire} from 'node:module';
+import {makeDraft,items,catalog,config} from './context.mjs';import {prepareOptimization,applyOptimization} from '../../dist/workbench-next/auto-optimization.mjs';import {measureArtwork} from '../../dist/workbench-next/calibration-engine.mjs';
+const {createCanvas,loadImage}=createRequire(import.meta.url)('@napi-rs/canvas');
+import {PROJECT_STORAGE_KEY,ARTWORK_RECOVERY_KEY} from '../../dist/workbench-next/project.mjs';
+import {calibrationStamp} from '../../dist/workbench-next/calibration-settings.mjs';
+const old=JSON.parse(fs.readFileSync('authoring/hazard-upgrade/before-project.json')),draft=makeDraft();const raw=JSON.stringify(old),memory=new Map([[PROJECT_STORAGE_KEY,raw]]),storage={getItem:k=>memory.get(k)??null,setItem:(k,v)=>memory.set(k,v)};draft.load(storage);assert(draft.pendingArtworkOptimization);
+const ids=new Set(JSON.parse(fs.readFileSync('authoring/hazard-upgrade/HAZARD_MAPPING.json')).map(h=>h.id));
+for(const [id,p] of Object.entries(old.placement))if(!ids.has(id))assert.deepEqual(draft.placement[id],p,id);
+assert.deepEqual(draft.landscapes,old.design.landscapes);assert.deepEqual(draft.calibration.stages,old.calibration.stages);assert.deepEqual(draft.calibration.profiles,old.calibration.profiles);
+const images=new Map();const measure=async(item,d)=>{if(!images.has(item.asset))images.set(item.asset,await loadImage('dist/'+catalog.assets[item.asset].split('?')[0].replace('../','')));return measureArtwork(images.get(item.asset),item,d,()=>createCanvas(1,1));};
+const plan=await prepareOptimization({config,draft,items,measure,yieldTask:()=>Promise.resolve(),onProgress:({item,index,total})=>{if(item)console.log(index+1,total,item.id);}});
+console.log('RESULT',JSON.stringify(plan.rows.map(r=>({id:r.id,ready:r.ready,issue:r.issue,before:r.before,after:r.placement})),null,2));
+fs.writeFileSync('authoring/hazard-upgrade/calibration-report.json',JSON.stringify(plan.rows,null,2));assert(plan.rows.every(r=>r.ready),'Unresolved timing');applyOptimization(draft,plan,storage);assert.equal(memory.get(ARTWORK_RECOVERY_KEY),raw);const restored=makeDraft();restored.load(storage);assert(!restored.pendingArtworkOptimization);assert.deepEqual(restored.export(),draft.export());for(const item of items.filter(i=>i.type==='hazard'))assert.equal(restored.calibration.hazards[item.id].stamp,calibrationStamp(restored,item,config),item.id);for(const [id,p] of Object.entries(old.placement))if(!ids.has(id))assert.deepEqual(draft.placement[id],p,id);fs.writeFileSync('authoring/hazard-upgrade/checked-project.json',JSON.stringify(draft.export(),null,2));
+console.log('All profiles solved; unrelated placement, stage pathways, landscapes and difficulty retained.');

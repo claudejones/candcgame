@@ -1,0 +1,191 @@
+@font-face{font-family:CandCPixel;src:url('../assets/global-ui/PressStart2P-Regular.ttf') format('truetype');font-display:swap}
+.global-game{--cream:#fff2cd;--gold:#ffdc54;box-sizing:border-box;font-family:CandCPixel,monospace;color:var(--cream);background:#04192e;line-height:1.7;font-size:12px;image-rendering:pixelated;min-width:0}
+.global-game *{box-sizing:border-box}.global-game[hidden],.global-notice[hidden],.global-run-menu[hidden]{display:none!important}.global-game img{image-rendering:pixelated}.global-game h2,.global-game h3,.global-game h4,.global-game p{margin:0}.global-game h2{font-size:clamp(14px,2.2vw,24px)}.global-game h3{font-size:clamp(11px,1.5vw,16px);color:var(--gold)}.global-game h4{font-size:12px}.global-game p{margin:10px 0}.global-game button{font:inherit;cursor:pointer;color:inherit;min-height:44px;border-radius:0}.global-game button:focus-visible{outline:3px solid #fff2cd;outline-offset:3px}.global-game button:disabled{opacity:.55;cursor:default}.global-button{border:0;background:transparent url('../assets/global-ui/UI04_BUTTON_SECONDARY_NORMAL.png') center/100% 100%;padding:12px 18px;line-height:1.6;min-height:44px;color:#fff2cd}.global-button:hover,.global-button:focus-visible{background-image:url('../assets/global-ui/UI04_BUTTON_SECONDARY_FOCUS.png')}.global-button:active{background-image:url('../assets/global-ui/UI04_BUTTON_SECONDARY_PRESSED.png')}.global-button.primary,.global-button.selected{color:#041a34;background-image:url('../assets/global-ui/UI04_BUTTON_PRIMARY_NORMAL.png')}.global-button.primary:hover,.global-button.selected:hover{background-image:url('../assets/global-ui/UI04_BUTTON_PRIMARY_FOCUS.png')}.global-button.primary:active{background-image:url('../assets/global-ui/UI04_BUTTON_PRIMARY_PRESSED.png')}.global-header{display:flex;align-items:center;gap:10px;padding:8px 14px;background:url('../assets/global-ui/UI05_HEADER.png') center/100% 100%;min-height:64px;flex-wrap:wrap}.global-header h2{flex:1;text-align:center}.global-header button{font-size:10px;padding:8px 12px}.global-panel{border:20px solid transparent;border-image:url('../assets/global-ui/UI05_PANEL.png') 28 fill stretch;padding:12px;min-width:0}.global-panel>button{margin:8px 5px}.global-menu{min-height:540px;padding-bottom:24px}.global-menu>.global-panel{max-width:850px;margin:24px auto;display:flex;flex-direction:column;gap:12px}.global-menu h3{text-align:center}.global-start{background:url('../assets/global-ui/UI_OPENING_BACKGROUND.png') center/cover;padding:12px max(14px,env(safe-area-inset-right)) 14px max(14px,env(safe-area-inset-left));min-height:540px;display:flex;flex-direction:column;align-items:center;gap:10px}.global-logo{width:300px;height:155px;object-fit:contain}.global-start-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(100%,820px)}.global-start .global-panel{background:#10283fdc;border:2px solid #6289a1;padding:12px;text-align:center;display:flex;flex-direction:column;gap:10px}.global-start .global-panel>button{margin:0}.global-portraits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.global-portraits .global-button{background:#10283f;border:2px solid #6289a1;color:#fff2cd;padding:4px}.global-portraits .selected{border-color:#ffdc54}.global-sprite{display:inline-block;background-repeat:no-repeat;image-rendering:pixelated;flex-shrink:0}.global-portrait{display:block;width:min(100%,157.5px);height:auto;aspect-ratio:3/4;margin-inline:auto;transform:translateX(var(--portrait-offset,0%))}.global-difficulties{display:flex;justify-content:center;gap:8px;margin:8px 0}.global-difficulties button{flex:1;max-width:250px}.global-footer{display:flex;gap:10px;width:min(100%,820px)}.global-footer button{flex:1}.global-icon{width:22px;height:22px;vertical-align:middle;margin-left:6px}.global-help{font-size:10px;color:#b9cce0;text-align:center}.global-assistance{font-size:10px;color:var(--gold);text-align:center;padding:5px}.global-notice{background:#04192e;border:2px solid #ffdc54;padding:12px;color:#fff2cd;position:relative;z-index:20;max-width:960px;margin:8px auto}.global-notice button{margin:6px}.global-map-region{background:url('../assets/global-ui/MAP_OCEAN_BACKDROP.png') center/cover;display:grid;place-items:center;min-height:220px}.global-map-art{position:relative;width:100%;aspect-ratio:2048/683}.global-geography{position:absolute;inset:0;width:100%;height:100%;mask-image:linear-gradient(to right,transparent,#000 1.5%,#000 98.5%,transparent)}.global-continent{position:absolute;transform:translate(-50%,-50%);background:transparent center/100% 70% no-repeat;border:0;font-size:8px!important;padding:4px 8px;white-space:nowrap;line-height:1}.global-continent .global-icon{width:15px;height:15px;margin:0 4px 0 0}.global-node,.global-ring{position:absolute;width:24px;height:24px;transform:translate(-50%,-50%);pointer-events:none}.global-ring{width:31px;height:31px;animation:global-pulse 1.2s ease-in-out infinite}.global-pin{position:absolute;width:32px;height:32px;transform:translate(-50%,calc(-100% - 8px));pointer-events:none}.global-stage-panel{background:url('../assets/global-ui/UI_STAGE_PANEL.png') center/100% 100%;padding:12px}.global-stage-panel h3{margin-bottom:10px}.global-stage-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.global-stage-card{display:grid;grid-template-columns:34% 1fr;background:center/100% 100%;gap:8px;padding:9px;min-width:0}.global-thumb{width:100%;aspect-ratio:4/3;align-self:stretch;height:100%}.global-stage-body{min-width:0;display:flex;flex-direction:column;gap:4px}.global-stage-body h4{font-size:9px}.global-stage-body p{font-size:9px;margin:0}.global-stage-body button{font-size:10px;padding:8px; margin-top:auto}.global-stage-card.locked{color:#aabbd0}.global-hearts{display:inline-flex;gap:4px;align-items:center}.global-heart{width:24px;height:24px}.global-pages{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 18px}.global-pages h3{text-align:center}.global-pages button{font-size:10px}.global-achievements{min-height:540px;padding-bottom:16px}.global-reward-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:12px}.global-reward-card{border:16px solid transparent;border-image:url('../assets/global-ui/UI05_REWARD_CARD_NORMAL.png') 28 fill stretch;min-width:0;padding:0 4px;display:flex;align-items:center;flex-direction:column;gap:10px;color:#fff2cd;background:transparent}.global-reward-card:hover{border-image-source:url('../assets/global-ui/UI05_REWARD_CARD_SELECTED.png')}.global-reward-card p{font-size:11px}.global-reward-art{width:100%;max-width:230px;aspect-ratio:1}.global-menu .global-reward-art{width:200px;align-self:center}.global-secret-art{width:180px;align-self:center}.global-reward-cards>.global-panel{grid-column:1/-1;display:flex;flex-direction:column;align-items:center}.global-option-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:url('../assets/global-ui/UI05_ROW.png') center/100% 100%;padding:10px 18px}.global-switch{border:0;background:none;padding:0;width:120px}.global-switch .global-sprite{width:120px;height:48px;display:block}.global-result{position:absolute;inset:0;z-index:8;background:#03182e38;display:flex;align-items:center;justify-content:flex-end;padding:3%}.global-result-panel{width:73%;max-height:100%;overflow:auto;border:18px solid transparent;border-image:url('../assets/global-ui/UI04_RESULT_PANEL.png') 28 fill stretch;padding:10px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}.global-result-panel h2{font-size:clamp(13px,2vw,23px);color:#ffdc54}.global-result-panel p{font-size:10px;margin:3px}.global-result-reward{display:flex;align-items:center;gap:20px;width:100%;justify-content:center}.global-result-reward>.global-reward-art{width:35%;max-width:175px}.global-result-panel>.global-reward-art{width:125px}.global-result-reward h3{font-size:12px}.global-result-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:5px}.global-result-actions button{font-size:9px;padding:8px 12px;min-height:44px}.global-run-menu{position:absolute;right:10px;top:100px;z-index:4}.global-run-menu button{font:12px CandCPixel;min-height:44px}.global-skip{position:absolute;bottom:20px;right:20px;z-index:10}.global-game~.play-setup{display:none}body[data-mode=game] .play-setup,body[data-mode=game] #play-workspace>p.muted{display:none}body[data-mode=game] .play-workspace{max-width:1280px;margin:auto}body[data-mode=game] .play-heading{max-width:none}body[data-mode=game] .play-surface{max-width:960px;margin:auto}body[data-mode=game] .savebar{display:none}
+@keyframes global-pulse{50%{opacity:.55}}@media(prefers-reduced-motion:reduce){.global-game *{animation:none!important;transition:none!important}}.global-motion-hidden *{animation-play-state:paused!important}
+@media(max-width:700px){.global-header h2{font-size:12px;order:-1;flex-basis:100%}.global-start-columns{grid-template-columns:1fr}.global-logo{height:110px}.global-portrait{width:min(100%,108.75px)}.global-reward-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.global-stage-cards{grid-template-columns:1fr}.global-map-region{min-height:0;overflow:auto}.global-map-art{min-width:600px}.global-footer{flex-wrap:wrap}.global-result-panel{width:77%;padding:3px;border-width:10px}.global-result-reward{gap:5px}.global-result-actions button{font-size:8px;padding:5px}.global-result-panel h2{font-size:12px}.global-result-reward h3{font-size:9px}.global-result-panel p{font-size:8px}}
+@media(max-height:550px) and (min-width:600px){body[data-mode=game] .play-heading{margin-bottom:5px}body[data-mode=game] .play-heading h1{font-size:16px}.global-start{min-height:0;padding-top:0;gap:6px}.global-logo{height:85px;width:210px}.global-start-columns{max-width:820px}.global-start .global-panel{padding:6px;gap:5px}.global-portrait{width:min(100%,87px)}.global-portraits button{font-size:10px}.global-footer button{font-size:10px}.global-header{min-height:48px;padding:2px 8px;gap:6px}.global-header h2{font-size:14px}.global-header button{font-size:8px;padding:4px 7px}.global-map-region{min-height:0}.global-map-art{width:min(100%,calc((100svh - 250px)*3));min-width:590px}.global-stage-panel{padding:8px}.global-stage-panel h3{font-size:11px;margin-bottom:6px}.global-stage-card{padding:8px}.global-stage-body p{font-size:8px}.global-stage-body button{font-size:9px}.global-heart{width:18px;height:18px}.global-achievements{min-height:0}.global-reward-cards{padding:5px 12px;gap:8px}.global-reward-art{max-width:135px}.global-reward-card{border-width:10px;gap:4px}.global-reward-card p{font-size:9px;margin:4px 0}.global-pages{padding:4px 12px}.global-difficulties{margin:4px}.global-menu{min-height:0}.global-menu>.global-panel{margin:8px auto;padding:5px;gap:4px}.global-run-menu{top:75px}.global-result-panel{gap:4px;padding:5px}.global-result-panel>.global-reward-art{width:90px}}
+.global-map-clouds{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.global-cloud{position:absolute;pointer-events:none;width:80px;height:50px;transform:translate(-50%,-50%)}
+.global-cloud-flow{position:absolute;inset:0;animation:global-cloud-flow 90s linear infinite}
+@keyframes global-cloud-flow{to{transform:translateX(-100%)}}
+body[data-mode=game] .run-dialog{border:18px solid transparent;border-image:url('../assets/global-ui/UI04_TRANSITION_PANEL.png') 28 fill stretch;background:transparent;color:#fff2cd;border-radius:0}
+body[data-mode=game] .run-dialog button{min-height:44px}
+body[data-mode=game]{grid-template-rows:auto minmax(0,1fr)}
+body[data-mode=game] .play-workspace{padding-bottom:max(8px,env(safe-area-inset-bottom))}
+body[data-mode=game] .play-surface{width:100%;max-width:min(960px,calc((100dvh - 180px)*1.77778))}
+@media(max-height:600px){body[data-mode=game] .topbar{min-height:48px;padding:4px 12px}body[data-mode=game] .brand small{display:none}body[data-mode=game] .play-surface{max-width:min(960px,calc((100dvh - 66px)*1.77778))}body[data-mode=game] .play-workspace{padding:4px max(8px,env(safe-area-inset-right)) 4px max(8px,env(safe-area-inset-left))}}
+
+/* Game controls own their complete backgrounds. Workbench's aria-pressed and
+   hover shorthand must not reset sprite sizing, position or repeat behavior. */
+.global-game .global-button,
+.global-game .global-button:disabled{
+ --button-art:url('../assets/global-ui/UI04_BUTTON_SECONDARY_NORMAL.png');
+ background:transparent var(--button-art) center/100% 100% no-repeat;
+ color:#fff2cd;border:0;
+}
+.global-game .global-button:is(.primary,.selected){--button-art:url('../assets/global-ui/UI04_BUTTON_PRIMARY_NORMAL.png');color:#041a34}
+.global-game .global-button:hover:not(:disabled),
+.global-game .global-button:focus-visible{background:transparent var(--button-art) center/100% 100% no-repeat;--button-art:url('../assets/global-ui/UI04_BUTTON_SECONDARY_FOCUS.png')}
+.global-game .global-button:is(.primary,.selected):is(:hover,:focus-visible){--button-art:url('../assets/global-ui/UI04_BUTTON_PRIMARY_FOCUS.png');color:#041a34}
+.global-game .global-button:active:not(:disabled){--button-art:url('../assets/global-ui/UI04_BUTTON_SECONDARY_PRESSED.png')}
+.global-game .global-button:is(.primary,.selected):active:not(:disabled){--button-art:url('../assets/global-ui/UI04_BUTTON_PRIMARY_PRESSED.png')}
+.global-game .global-portraits .global-button:is(button,:hover,:focus-visible,:active,[aria-pressed]){background:#10283f;border:2px solid #6289a1;color:#fff2cd}
+.global-game .global-portraits .global-button[aria-pressed=true]{border-color:#ffdc54}
+.global-game .global-portraits .global-button:hover:not(:disabled){border-color:#22d1e6}
+.global-game .global-continent:is(button,:hover,:focus-visible,:active,[aria-pressed]){background-color:transparent;background-position:center;background-size:100% 70%;background-repeat:no-repeat;color:#fff2cd;border:0}
+.global-game .global-continent:hover:not(:disabled){filter:brightness(1.16)}
+.global-game .global-continent[aria-pressed=true]{color:#ffdc54}
+.global-game .global-reward-card:is(:hover,:active){background:transparent}
+.global-game .global-switch:is(:hover,:active){background:transparent}
+.global-game .global-button:disabled{opacity:.5}
+.global-game .global-node{width:18px;height:18px}
+.global-game .global-ring{width:25px;height:25px}
+.global-game .global-pin{width:28px;height:28px}
+.global-game.global-result{justify-content:center;z-index:12}
+.global-game .global-result-panel{margin-inline:auto}
+.play-surface[data-global-screen=result] .gameplay-actions{visibility:hidden}
+.global-run-menu{top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));z-index:10}
+.global-run-menu .global-button{width:44px;height:44px;min-height:44px;padding:8px;background:#041a34;border:2px solid #d8a83f;border-radius:8px}
+.global-run-menu .global-button:hover:not(:disabled){background:#163650}
+.global-run-menu .global-button:focus-visible{outline:3px solid #fff2cd;outline-offset:2px}
+.global-menu-icon{display:block;width:24px;height:24px;image-rendering:pixelated}
+@container(max-width:800px){.play-surface .hud-panel{width:calc(100% - 124px);left:calc(50% - 10px)} }
+@container(max-width:560px){.play-surface .hud-panel{width:calc((100% - 74px)/.7);left:calc(50% - 26px)}.global-run-menu{top:5px;right:5px}}
+@media(max-width:900px),(max-height:550px){.global-game .global-node{width:14px;height:14px}.global-game .global-ring{width:21px;height:21px}.global-game .global-pin{width:24px;height:24px}}
+.global-game.global-menu{display:flex;flex-direction:column;gap:20px}
+.global-menu>.global-panel{width:min(100%,850px);margin:auto}
+.global-menu>.global-header{width:100%}
+.global-game .global-thumb{height:auto;align-self:center}
+@media(max-width:900px),(max-height:550px){.global-game .global-pin{width:20px;height:20px}.global-game .global-continent:is(button,:hover,:focus-visible,:active,[aria-pressed]){background-size:100% 55%}}
+.global-game .global-continue{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;white-space:normal}
+.global-continue-detail{font:inherit;font-size:.72em;line-height:1.6;max-width:100%}
+.global-map-region{padding-top:36px;padding-bottom:10px}
+.global-continent-order{position:absolute;right:6px;bottom:calc(100% - 6px);min-width:22px;height:18px;padding:3px 6px;border:1px solid #d8a83f;border-radius:9px;background:#041a34;color:#ffdc54;font-size:9px;line-height:10px;text-align:center;pointer-events:none}
+.global-stage-route{position:absolute;height:0;border-top:2px dotted #ffe18a;transform-origin:left center;pointer-events:none;opacity:.85}
+
+/* A light center plus dark outline remains readable across land and ice. */
+.global-stage-route {height:8px;border:0;opacity:1;margin-top:-4px;background:radial-gradient(circle at 4px 4px,#fff3cc 0 1.8px,#041a34 2px 3.3px,transparent 3.5px) left center/12px 8px repeat-x;}
+.screen-motion-paused .global-cloud-flow {animation-play-state:paused!important;}
+
+/* Keep original pixel artwork at its corners; let button centers extend without
+   stretching the entire frame. Menus size to their content, not panel width. */
+.global-game .global-button:not(.global-continent){border:12px solid transparent;border-image:var(--button-art) 20 fill stretch;background:none!important;padding:2px 10px;width:fit-content;max-width:100%;min-height:44px;white-space:normal;}
+.global-menu>.global-panel>.global-button{align-self:center;min-width:170px;max-width:320px;}
+.global-game .global-portraits .global-button{border-image:none;width:100%;min-width:0;border:2px solid #6289a1;background:#10283f!important;padding:4px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;overflow:hidden;}
+.global-game .global-portraits .global-button[aria-pressed=true]{border-color:#ffdc54}
+.global-game .global-difficulties .global-button{width:auto;min-width:0;padding:2px 4px;}
+.global-game .global-start .global-panel>.global-button{width:min(100%,320px);align-self:center;}
+.global-game .global-stage-body>.global-button{width:100%;}
+.global-game .global-header .global-button{width:auto;}
+.global-game .global-run-menu .global-button,.global-run-menu .global-button{border-image:none;}
+body[data-mode=game] .play-heading{display:none;}
+.global-game .global-continent[aria-pressed=true]{color:#ffdc54;}
+.global-game .global-continent{cursor:pointer;}
+.global-game .global-stage-card.locked .global-thumb{filter:grayscale(1);opacity:.55;}
+.global-map-help,.global-stage-requirement{margin:0;padding:7px 12px;font-size:9px;text-align:center;color:#c8dbe8;}
+.global-stage-requirement{color:#fff2cd;}
+.global-difficulty-help{min-height:3.4em;}
+.global-about>.global-panel{max-width:850px;gap:18px;text-align:left;}
+.global-about-section{border-top:1px solid #45667f;padding-top:12px;}
+.global-about-section h4{color:#ffdc54;line-height:1.8;}
+.global-about-section p{line-height:1.9;}
+.global-notice{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;margin:0;max-width:none;padding:24px;background:#031426bb;border:0;font:12px CandCPixel,monospace;line-height:1.8;}
+.global-message-panel{width:min(100%,600px);max-height:90dvh;overflow:auto;text-align:center;background:#06213a;color:#fff2cd;}
+.global-message-panel button{font:inherit;padding:10px 16px;margin:8px;min-height:44px;background:#0b2c48;border:2px solid #ffdc54;color:#fff2cd;}
+.global-message-panel p{margin:14px 0;}
+
+.global-game.global-confirm{min-height:min(540px,calc(100svh - 100px));}
+
+/* Stable mode controls: equal tracks, centered labels and reserved help space. */
+.global-game .global-difficulties{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;}
+.global-game .global-difficulties .global-button{display:flex;align-items:center;justify-content:center;position:relative;text-align:center;white-space:nowrap;width:100%;max-width:none;min-height:48px;line-height:1.5;}
+.global-start-actions{container-type:inline-size;}
+.global-game.global-start .global-difficulties .global-button{font-size:clamp(8px,2.7cqw,10px);border-width:8px;padding:4px 2px;}
+.global-start .global-difficulties .global-icon{width:12px;height:12px;margin-left:4px;}
+.global-game.global-start .global-start-actions>.global-button{display:flex;align-items:center;justify-content:center;align-self:center;width:100%;max-width:320px;height:52px;min-height:52px;text-align:center;}
+.global-game .global-difficulty-help,.global-game .global-reward-mode-help{box-sizing:border-box;height:6.8em;min-height:6.8em;max-height:6.8em;margin:0;line-height:1.7;overflow:auto;display:flex;align-items:center;justify-content:center;padding:0 8px;scrollbar-gutter:stable both-edges;}
+.global-game .global-reward-mode-help{height:5.1em;min-height:5.1em;max-height:5.1em;}
+.global-achievements .global-reward-card{min-width:0;}
+.global-achievements .global-reward-card>p{min-height:3.4em;display:flex;align-items:center;justify-content:center;text-align:center;}
+.global-game .global-continent:focus-visible{outline:2px solid #fff2cd;outline-offset:1px;}
+/* The map keeps its size; only the overlaid stage drawer scrolls. */
+.global-game.global-map{height:var(--map-available-height,calc(100dvh - 100px));min-height:0;overflow:hidden;display:flex;flex-direction:column;}
+.screen-preview-host .global-game.global-map{height:540px;}
+.global-map>.global-header,.global-map>.global-map-help{flex:none;}
+.global-map-body{position:relative;flex:1;min-height:0;overflow:hidden;}
+.global-map .global-map-region{position:absolute;inset:0;min-height:0;overflow:hidden;padding:24px 0 12px;container-type:size;}
+.global-map .global-map-art{width:min(100cqw,calc(100cqh * 2048 / 683));min-width:0;max-width:100%;flex:none;}
+.global-game .global-stage-drawer{position:absolute;inset:0 0 0 auto;width:min(360px,48%);min-width:250px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-gutter:stable;background:#06213af5;border-left:2px solid #54809b;padding:12px;z-index:3;}
+.global-stage-drawer[hidden]{display:none!important;}
+.global-drawer-header{position:sticky;top:-12px;background:#06213a;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;}
+.global-stage-drawer .global-drawer-header h3{font-size:10px;line-height:1.8;margin:0;}
+.global-stage-drawer .global-drawer-header .global-button{font-size:8px;flex:none;}
+.global-stage-drawer .global-stage-cards{grid-template-columns:minmax(0,1fr);gap:12px;}
+.global-stage-drawer .global-stage-card{min-height:136px;grid-template-columns:34% minmax(0,1fr);}
+.global-stage-drawer .global-stage-body{gap:8px;}
+@media(max-height:550px){.global-map>.global-header{flex-wrap:nowrap;}.global-map>.global-header h2{order:0;flex-basis:auto;font-size:12px;}.global-map>.global-header .global-button{font-size:8px;padding:2px 4px;border-width:8px;}.global-map>.global-map-help{font-size:8px;padding:4px;}}
+
+@media(max-width:700px) and (max-height:550px){.global-map>.global-header{gap:3px;padding-inline:6px;}.global-map>.global-header h2{font-size:10px;}.global-map>.global-header .global-button{font-size:7px;border-width:6px;padding:2px;}}
+
+/* Map navigation and actual travel share the same normalized geometry. */
+.global-continent-order{left:50%;right:auto;transform:translateX(-50%)}
+.global-game .global-map-help{padding:8px 12px;color:#fff2cd;background:#0b2943;border-top:2px solid #d8a83f;font-size:10px;line-height:1.5}
+.global-game .global-stage-target{position:absolute;width:30px;height:30px;min-height:30px;padding:0;transform:translate(-50%,-50%);background:transparent!important;border:0;z-index:3;border-radius:50%}
+.global-game .global-stage-target:hover{outline:2px solid #ffdc54;outline-offset:0}
+.global-continent{z-index:4}.global-node,.global-ring,.global-pin{z-index:2}
+.global-continent-route-dot{position:absolute;width:4px;height:4px;background:#fff2cd;box-shadow:0 0 0 1px #041a34;transform:translate(-50%,-50%);border-radius:50%;opacity:.7;pointer-events:none}
+.global-game .global-pin.antarctica-pin{transform:translate(calc(-100% - 10px),-50%)}
+.global-travel-plane{position:absolute;width:44px;height:44px;z-index:5;pointer-events:none;filter:drop-shadow(0 2px 1px #03182e)}
+.global-game .global-travel-plane[hidden],.global-game .global-pin[hidden],.global-game .global-ring[hidden]{display:none}
+.global-passport-art{position:relative;display:block}
+.global-passport-stamp{display:block;width:100%;height:100%;aspect-ratio:1}
+.global-passport-star{position:absolute;left:50%;bottom:0;width:29%;aspect-ratio:1;transform:translateX(-50%);filter:drop-shadow(0 1px 1px #041a34)}
+.global-game .global-result-panel{width:54%;max-width:540px}
+.global-game .global-secret-result-panel{width:73%;max-width:none}
+.global-achievements .global-reward-art{max-width:150px}
+.global-achievements .global-reward-card{gap:5px;border-width:10px}
+.global-achievements .global-reward-card>p{margin:3px 0;min-height:2.7em;font-size:9px;line-height:1.35}
+.global-loading>.global-panel{min-height:180px;justify-content:center;text-align:center}
+@media(max-height:550px){.global-achievements .global-reward-art{max-width:clamp(55px,18svh,90px)}.global-achievements .global-reward-card{gap:2px}.global-achievements .global-reward-card>p{margin:0}.global-achievements .global-pages{padding-block:0}.global-achievements .global-reward-mode-help{height:3.4em;min-height:3.4em;max-height:3.4em}}
+
+/* Flight routes remain distinct; original stage dots and paths are unchanged. */
+.global-continent-route-dot{width:6px;height:2px;border-radius:0;background:#83d6eb;box-shadow:0 0 0 1px #041a34;opacity:.8;transform:translate(-50%,-50%)}
+@media(max-width:900px),(max-height:550px){.global-continent-route-dot{width:4px}}
+
+/* Isolate the entire map below the drawer; labels/plane cannot escape above it. */
+.global-map .global-map-region{z-index:0;isolation:isolate}
+.global-game .global-stage-drawer{z-index:10;background:#06213a}
+.global-game .global-continent{isolation:isolate;background-image:none!important}
+.global-game .global-continent::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--continent-plate) center/100% 70% no-repeat;opacity:.85}
+@media(max-width:900px),(max-height:550px){.global-game .global-continent::before{background-size:100% 55%}}
+
+[data-global-screen=demo] .gameplay-actions{visibility:hidden;pointer-events:none}
+
+.global-demo-hint{position:absolute;bottom:2%;left:50%;transform:translateX(-50%);z-index:5;max-width:90%;margin:0;padding:.5rem .75rem;color:#fff4cf;background:rgba(4,20,34,.88);border-radius:.35rem;text-align:center;font-size:clamp(.8rem,1.5vw,1rem);pointer-events:none}
+
+/* Center the visible silhouettes, not the asymmetric transparent atlas cells.
+   Each source cell is 768×1024; opaque X bounds are 215–723 and 57–520. */
+.global-portrait-claude{--portrait-offset:-11.0677083333%}
+.global-portrait-constance{--portrait-offset:12.4348958333%}
+
+/* Both help tabs keep the same frame; only their content scrolls. */
+.global-game.global-about{gap:12px;min-height:0;}
+.global-guide-tabs{display:flex;justify-content:center;gap:10px;flex-shrink:0;}
+.global-guide-body{width:min(100%,960px);height: min(65svh,580px);min-height:230px;overflow:auto;overscroll-behavior:contain;align-self:center;padding:8px 16px 20px;scrollbar-gutter:stable;}
+.global-guide-body>.global-panel{margin:0 auto;width:100%;}
+.global-hazard-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+.global-hazard-card{min-width:0;background:#10283f;border:2px solid #6289a1;padding:12px;}
+.global-hazard-art{height:128px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.global-hazard-crop{position:relative;display:block;max-width:100%;overflow:hidden;flex-shrink:0;}
+.global-hazard-crop img{position:absolute;height:auto;image-rendering:pixelated;}
+.global-hazard-card h4{font-size:11px;text-align:center;line-height:1.8;}
+.global-hazard-card p{font-size:10px;line-height:1.9;}
+.global-hazard-card .global-hazard-action{color:#ffdc54;text-align:center;}
+@media(max-width:600px){.global-hazard-cards{grid-template-columns:1fr;}.global-guide-tabs .global-button{font-size:10px;}.global-guide-body{padding-inline:8px;}}
+@media(max-height:550px) and (min-width:600px){.global-guide-body{height:calc(100svh - 190px);min-height:170px;}}
+
+.global-guide-pages{position:sticky;top:-8px;z-index:2;background:#04192e;padding:8px 0 12px;gap:10px;border-bottom:1px solid #45667f;}
+.global-guide-pages h3{flex:1;min-width:0;font-size:clamp(9px,1.3vw,13px);}
+.global-hazard-stage{margin-top:24px;}
+.global-hazard-stage>h3{font-size:12px;margin-bottom:12px;line-height:1.8;}
+@media(max-width:600px){.global-guide-pages{flex-wrap:wrap;}.global-guide-pages h3{order:-1;flex-basis:100%;}.global-guide-pages button{flex:0 0 auto;}}

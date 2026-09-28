@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "stageId": "oc01",
+  "readiness": "asset-ready",
+  "downstream": {
+    "calibration": "pending",
+    "release": "pending"
+  },
+  "assets": {
+    "FAR": {
+      "path": "assets/worlds/oceania/OC01_BG_DISTANT_ULURU.png",
+      "sha256": "d26834c2415cda255e0f882ddf5c51f7073bf9b7626fd5b65210050b94fcdef0",
+      "width": 2172,
+      "height": 724
+    },
+    "MID": {
+      "path": "assets/worlds/oceania/OC01_BG_MID_ULURU.png",
+      "sha256": "3d3394a9923f35ed5443dc7445f6e5b44d60586ebcfc21369efc60b64de4e1e2",
+      "width": 2172,
+      "height": 724
+    },
+    "GROUND": {
+      "path": "assets/worlds/oceania/OC01_GROUND_ULURU.png",
+      "sha256": "5139cf35cad82f5a61d50852196da4667637cad2b98f518a1640742c1da1151e",
+      "width": 2172,
+      "height": 724
+    },
+    "OBJECT_ATLAS": {
+      "path": "assets/worlds/oceania/OC01_OBJECT_ATLAS.png",
+      "sha256": "525de46b80c119bee33d7d17b09917d95bf71f75699d5bce11b0b7a2e891d86e",
+      "width": 2172,
+      "height": 724
+    },
+    "FLYING": {
+      "path": "assets/worlds/oceania/OC01_HAZARD_GALAH.png",
+      "sha256": "bb011e351071ab479796b049082cc0f621b3bb0424d0c6e6321a44b19ca6fd07",
+      "width": 2172,
+      "height": 724
+    }
+  },
+  "landscape": {
+    "contractVersion": "phase8-landscape-1",
+    "source": {
+      "width": 2172,
+      "height": 724
+    },
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "groundSurfaceY": 410
+    },
+    "layers": {
+      "FAR": {
+        "sourceY": 0,
+        "scale": 1.25
+      },
+      "MID": {
+        "sourceAnchorY": 621,
+        "offsetY": 0,
+        "scale": 1
+      },
+      "GROUND": {
+        "sourceAnchorY": 393,
+        "offsetY": 0,
+        "scale": 1
+      }
+    }
+  },
+  "hazards": [
+    {
+      "name": "Spinifex tussock",
+      "kind": "ground",
+      "atlasKey": "oc01Hazards",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.2,
+      "crop": {
+        "l": 68,
+        "r": 64,
+        "t": 181,
+        "b": 78
+      },
+      "cw": 0.6289308176100629,
+      "ch": 0.6236559139784946,
+      "cx": 0.005241090146750524,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Weathered timber trail-marker post",
+      "kind": "ground",
+      "atlasKey": "oc01Hazards",
+      "rect": {
+        "x": 1086,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.19,
+      "crop": {
+        "l": 467,
+        "r": 468,
+        "t": 36,
+        "b": 99
+      },
+      "cw": 0.8344370860927153,
+      "ch": 0.933786078098472,
+      "cx": 0.0033112582781456954,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Galah",
+      "kind": "flying",
+      "atlasKey": "oc01Bird",
+      "frameW": 543,
+      "frameH": 724,
+      "frames": 4,
+      "fps": 8,
+      "sourceAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "scale": 0.22,
+      "crop": {
+        "l": 36,
+        "r": 78,
+        "t": 33,
+        "b": 136
+      },
+      "cw": 0.6177156177156177,
+      "ch": 0.24324324324324326,
+      "cx": 0.07459207459207459,
+      "cy": 0.04864864864864865,
+      "flightOffsetY": {
+        "high": 0,
+        "low": 0
+      },
+      "flipX": true,
+      "sourceFacing": "right",
+      "gameplayFacing": "left"
+    }
+  ],
+  "checks": {
+    "technical": true,
+    "composition": true,
+    "animation": true,
+    "basicRendering": true
+  },
+  "evidence": "docs/phase8-qa/OC01_WORKBENCH_IMPORT_QA.md",
+  "knownIssues": [
+    "Starting settings are provisional. Artwork acceptance and user Workbench calibration remain pending."
+  ]
+}

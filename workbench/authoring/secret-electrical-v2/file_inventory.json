@@ -1,0 +1,142 @@
+[
+  {
+    "path": "START_HERE.md",
+    "bytes": 631,
+    "sha256": "d0d79a4bbfbdb9f01bf6898fafd5dd8c9351f31627988b5641e3490c226a7d5c"
+  },
+  {
+    "path": "Verification_Report.md",
+    "bytes": 880,
+    "sha256": "4b125b98995f28bae5394dd4f359005621419aa71f307a48def9f284c393ceba"
+  },
+  {
+    "path": "WORKBENCH_REQUEST.txt",
+    "bytes": 1333,
+    "sha256": "936d6c81a71c68ebaacf9a8562b24ea3644a439f60d932068a54d44b2365fdbd"
+  },
+  {
+    "path": "Workbench_Handoff.md",
+    "bytes": 9105,
+    "sha256": "9d9e59ce38e151a12970263ad5487740e10c73cb6118d9a128db118e5cd37ea7"
+  },
+  {
+    "path": "assets/SECRET_CONTAINMENT_BEAM_V2_ATLAS.png",
+    "bytes": 4090,
+    "sha256": "2c8f9f6efc534508f585709d9b50035e44798eba6e91ed0a76c5e6799b230687"
+  },
+  {
+    "path": "assets/SECRET_ELECTRIC_IMPACT_V2_ATLAS.png",
+    "bytes": 232352,
+    "sha256": "61e2f5b1c33f74e65cc4df9575fe5134cc871d137198e137f15afc57e44bdba6"
+  },
+  {
+    "path": "assets/SECRET_ELECTRIC_OVERLOAD_V2_ATLAS.png",
+    "bytes": 257332,
+    "sha256": "ec890677798c74ca7fd9d4d0e43ddcc5ac39a6a844bba86a907b9a603b3e68b5"
+  },
+  {
+    "path": "assets/SECRET_EMITTER_CHARGE_V2_ATLAS.png",
+    "bytes": 681,
+    "sha256": "e21420399499fb25b453b9384bf9a70c4d7ba7e17a7ce4f8b471cfb26ff489e2"
+  },
+  {
+    "path": "fx-preview.html",
+    "bytes": 1053,
+    "sha256": "05a81e19aaa2aab86b1f5dfb1525099d048979f856054a143d9e3e62e8a9374f"
+  },
+  {
+    "path": "fx_manifest.json",
+    "bytes": 5023,
+    "sha256": "ae764c05229b4cd6193f93bc9f5bc4a65605ee24217c33ec2440524a793a57bf"
+  },
+  {
+    "path": "originals/BEAM_V2_0.svg",
+    "bytes": 799,
+    "sha256": "03b9fe919795de669e6fc1ba352d69507544e1d8a3910c0027e6769eb6bb1ba6"
+  },
+  {
+    "path": "originals/BEAM_V2_1.svg",
+    "bytes": 799,
+    "sha256": "2993f4341af915c995fe3d66f33f844a0cc1dd93e360033dda029683b35d743f"
+  },
+  {
+    "path": "originals/BEAM_V2_2.svg",
+    "bytes": 799,
+    "sha256": "61cbd642292c5bb1c18ac68e54c2bf6401c63e812fcdf96cdc93a4c27799537f"
+  },
+  {
+    "path": "originals/BEAM_V2_3.svg",
+    "bytes": 799,
+    "sha256": "4921dc0fe5a5e0c9e4ea23978568eae6514396b450c1b413ce68a305552e721a"
+  },
+  {
+    "path": "originals/ELECTRICAL_FX_SOURCE.png",
+    "bytes": 1861927,
+    "sha256": "e34018c3bd961e66eb5f3f248e67e4e4187872b81da91f4310e02a92f5c60c74"
+  },
+  {
+    "path": "originals/EMITTER_V2_0.svg",
+    "bytes": 215,
+    "sha256": "1a0d9b33bb385ac33b22fbf8c4d308e8e6949ad4bde0c1e1f409ceca92bf132a"
+  },
+  {
+    "path": "originals/EMITTER_V2_1.svg",
+    "bytes": 272,
+    "sha256": "194929296cc002ccfd68d126babfe26af33dcc2d11303470b489988a0a4d6d3a"
+  },
+  {
+    "path": "originals/EMITTER_V2_2.svg",
+    "bytes": 329,
+    "sha256": "cd657829907fb403474989744b112c1745b738fe6bd1f85640b5a4f26a614ee4"
+  },
+  {
+    "path": "originals/EMITTER_V2_3.svg",
+    "bytes": 483,
+    "sha256": "5404d24e18c36658890379e8ddae1323ffa3dd8d9a62e2c6881e229aa6b28c87"
+  },
+  {
+    "path": "originals/EMITTER_V2_4.svg",
+    "bytes": 483,
+    "sha256": "303a662f85f6f800caa5b0f8574e6497da959f14c8f95d7e3fd4445b88629021"
+  },
+  {
+    "path": "originals/EMITTER_V2_5.svg",
+    "bytes": 386,
+    "sha256": "f05f87df1017892877839db0f64b88430bff425ca9e1af8811ddde6f1747a955"
+  },
+  {
+    "path": "originals/Production_Notes.md",
+    "bytes": 688,
+    "sha256": "8bf8e71a10fc90f8fce3c680f65026ad8a06cb38c2f34ae95bfc734feecea4f5"
+  },
+  {
+    "path": "previews/BEAM_IMPACT.png",
+    "bytes": 955398,
+    "sha256": "dd2ac1d66afceffa79ad6d529f9ab39c6e63e566dd45a5b7934e88ce1fc12642"
+  },
+  {
+    "path": "previews/Boss_Electrical_Hit_V2.mp4",
+    "bytes": 1064380,
+    "sha256": "558fbb7a8244e88fa2aaf02d38cda8266d5f3f922056aea3adb07b6068bc5229"
+  },
+  {
+    "path": "previews/CANNON_CHARGE.png",
+    "bytes": 959942,
+    "sha256": "5a70168e63ad342ba1a11aa971c42f934a2e58a373d9135564a62d17dac51f2a"
+  },
+  {
+    "path": "previews/ELECTRIC_STUN.png",
+    "bytes": 957969,
+    "sha256": "17c219731646067dd5544624fdce6dc28b11a02dd1fbb1d6baec5b222f5d2f75"
+  },
+  {
+    "path": "previews/RECOVERY.png",
+    "bytes": 960982,
+    "sha256": "126b095a9327d0e28dfe00a3f3e1bd6c97693172ab4ce74862f46a6ac26eeef8"
+  },
+  {
+    "path": "qa_geometry.json",
+    "bytes": 3034,
+    "sha256": "b2a4771783bf94a6feb3d328f8269d00aabfae1085d8bc365b7a104e86659cca"
+  }
+]

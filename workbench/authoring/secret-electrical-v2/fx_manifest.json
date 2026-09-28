@@ -1,0 +1,294 @@
+{
+  "version": "2.0",
+  "scope": "supplement to Secret_Level_Beneath_The_Ice_Assets.zip",
+  "assets": {
+    "SECRET_ELECTRIC_OVERLOAD_V2_ATLAS.png": {
+      "size": [
+        1536,
+        512
+      ],
+      "sha256": "ec890677798c74ca7fd9d4d0e43ddcc5ac39a6a844bba86a907b9a603b3e68b5"
+    },
+    "SECRET_ELECTRIC_IMPACT_V2_ATLAS.png": {
+      "size": [
+        1536,
+        512
+      ],
+      "sha256": "61e2f5b1c33f74e65cc4df9575fe5134cc871d137198e137f15afc57e44bdba6"
+    },
+    "SECRET_CONTAINMENT_BEAM_V2_ATLAS.png": {
+      "size": [
+        640,
+        512
+      ],
+      "sha256": "2c8f9f6efc534508f585709d9b50035e44798eba6e91ed0a76c5e6799b230687"
+    },
+    "SECRET_EMITTER_CHARGE_V2_ATLAS.png": {
+      "size": [
+        768,
+        64
+      ],
+      "sha256": "e21420399499fb25b453b9384bf9a70c4d7ba7e17a7ce4f8b471cfb26ff489e2"
+    }
+  },
+  "animations": {
+    "SECRET_ELECTRIC_OVERLOAD_V2_ATLAS.png": {
+      "rects": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          512,
+          512
+        ],
+        [
+          1024,
+          0,
+          512,
+          512
+        ]
+      ],
+      "anchor": [
+        256,
+        256
+      ],
+      "frameMs": [
+        150,
+        150,
+        150
+      ],
+      "loop": true
+    },
+    "SECRET_ELECTRIC_IMPACT_V2_ATLAS.png": {
+      "rects": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          512,
+          512
+        ],
+        [
+          1024,
+          0,
+          512,
+          512
+        ]
+      ],
+      "anchor": [
+        256,
+        256
+      ],
+      "frameMs": [
+        160,
+        180,
+        160
+      ],
+      "loop": false
+    },
+    "SECRET_CONTAINMENT_BEAM_V2_ATLAS.png": {
+      "rects": [
+        [
+          0,
+          0,
+          160,
+          512
+        ],
+        [
+          160,
+          0,
+          160,
+          512
+        ],
+        [
+          320,
+          0,
+          160,
+          512
+        ],
+        [
+          480,
+          0,
+          160,
+          512
+        ]
+      ],
+      "anchor": [
+        80,
+        0
+      ],
+      "frameMs": [
+        125,
+        125,
+        125,
+        125
+      ],
+      "loop": true
+    },
+    "SECRET_EMITTER_CHARGE_V2_ATLAS.png": {
+      "rects": [
+        [
+          0,
+          0,
+          128,
+          64
+        ],
+        [
+          128,
+          0,
+          128,
+          64
+        ],
+        [
+          256,
+          0,
+          128,
+          64
+        ],
+        [
+          384,
+          0,
+          128,
+          64
+        ],
+        [
+          512,
+          0,
+          128,
+          64
+        ],
+        [
+          640,
+          0,
+          128,
+          64
+        ]
+      ],
+      "anchor": [
+        64,
+        40
+      ],
+      "frameMs": [
+        1000,
+        600,
+        600,
+        800,
+        500,
+        500
+      ],
+      "loop": false
+    }
+  },
+  "timingMs": {
+    "chargeBeforeMilestone": 2000,
+    "beam": [
+      0,
+      500
+    ],
+    "impact": [
+      0,
+      500
+    ],
+    "recoil": [
+      0,
+      800
+    ],
+    "overload": [
+      500,
+      2800
+    ],
+    "fullStun": [
+      800,
+      2800
+    ],
+    "recover": [
+      2800,
+      3300
+    ],
+    "idleBreathingSpace": [
+      3300,
+      3800
+    ],
+    "nextAttackWarningEarliest": 3800
+  },
+  "hud": {
+    "referenceCanvas": [
+      1280,
+      720
+    ],
+    "panel": [
+      320,
+      10,
+      610,
+      74
+    ],
+    "fill": "#071d32",
+    "opacity": 0.82,
+    "border": "#4a7d94",
+    "borderWidth": 2,
+    "bottomAccent": "#e9bd51",
+    "healthCenterX": 414,
+    "timerCenterX": 625,
+    "shieldCenterX": 826,
+    "labels": [
+      "HEALTH",
+      "TIME",
+      "BOSS SHIELD"
+    ],
+    "labelY": 64,
+    "labelFontSize": 16,
+    "iconSize": 28,
+    "timerFontSize": 28,
+    "emitterClearancePx": 16,
+    "minimumMenuTouchTargetCssPx": 44,
+    "notes": "Example coordinates only. Reflow groups to avoid actual emitter bounds and safe areas. Preserve current menu/pause and gameplay controls."
+  },
+  "placement": {
+    "referenceOnly": true,
+    "bossCellSize": [
+      512,
+      512
+    ],
+    "bossFeetAnchor": [
+      256,
+      464
+    ],
+    "overloadCenterInBossCell": [
+      256,
+      344
+    ],
+    "overloadDisplaySizeInBossUnits": [
+      420,
+      300
+    ],
+    "impactCenterInBossCell": [
+      256,
+      310
+    ],
+    "impactDisplaySizeInBossUnits": [
+      240,
+      240
+    ],
+    "beamDisplayWidthInBossUnits": 96,
+    "beamStart": "visible emitter nozzle in world space",
+    "beamEnd": "impactCenterInBossCell transformed through current boss placement",
+    "zOrder": [
+      "boss",
+      "beam",
+      "overload",
+      "impact",
+      "HUD"
+    ],
+    "notes": "Transform all boss-local points through current calibrated boss transform. Do not paste preview world coordinates into engine. Clip to arena, not boss alpha. Keep below HUD."
+  }
+}

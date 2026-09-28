@@ -1,0 +1,106 @@
+/* Approved LAB25Q HUD, scoped to the Game surface. Original PNG assets loaded by AssetLoader. */
+.play-surface .gameplay-hud{position:absolute;inset:0;z-index:8;pointer-events:none;font-family:ui-monospace,monospace}.play-surface .gameplay-hud.hidden{display:none}
+.play-surface .hud-panel{
+position:absolute;left:50%;top:max(10px,env(safe-area-inset-top));transform:translateX(-50%);
+width:min(73%,700px);height:98px;
+display:grid;grid-template-columns:158px 1fr;gap:16px;
+padding:10px 16px 12px;
+background:rgba(4,18,31,.88);
+border:2px solid #d8a83f;
+box-shadow:0 4px 0 rgba(0,0,0,.34),inset 0 0 0 2px rgba(255,218,99,.14);
+border-radius:8px;
+}
+.play-surface .health-block{
+display:flex;flex-direction:column;justify-content:center;align-items:center;
+padding-right:16px;border-right:2px solid rgba(216,168,63,.48);
+}
+.play-surface .hud-kicker{
+font:900 11px ui-monospace,monospace;letter-spacing:1.5px;color:#ffd45a;
+text-shadow:0 2px 0 rgba(0,0,0,.72);
+margin:0 0 8px;
+padding:3px 14px 4px;
+border-top:1px solid rgba(255,212,90,.72);
+border-bottom:1px solid rgba(255,212,90,.72);
+}
+.play-surface .life-hud{display:flex;gap:7px;align-items:center;justify-content:center;height:40px}
+.play-surface .life-heart{
+width:34px;height:34px;
+background-image:var(--heart-sprite);background-repeat:no-repeat;background-size:200% 100%;
+image-rendering:pixelated;
+filter:drop-shadow(0 2px 1px rgba(0,0,0,.58));
+transform-origin:50% 62%;
+}
+.play-surface .life-heart.full{background-position:0 0}
+.play-surface .life-heart.empty{background-position:100% 0;opacity:.72;animation:none!important}.play-surface .life-heart.active{animation:gameHeartBeat var(--pulse-speed,1.35s) steps(1,end) infinite}
+
+
+@keyframes gameHeartBeat{
+0%,22%,48%,100%{transform:scale(1)}
+10%{transform:scale(1.12)}
+16%{transform:scale(1.035)}
+34%{transform:scale(1.075)}
+}
+.play-surface .progress-hud{
+position:relative;min-width:0;height:76px;
+display:flex;flex-direction:column;justify-content:flex-start;
+}
+.play-surface .stage-title{
+height:22px;line-height:20px;text-align:center;
+font:900 11px ui-monospace,monospace;letter-spacing:1.15px;
+color:#f5ead6;text-shadow:0 2px 0 rgba(0,0,0,.72);
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+border-bottom:1px solid rgba(216,168,63,.55);
+margin:0 18px 2px;
+}
+.play-surface .progress-track{position:relative;flex:1;min-height:52px;margin:0 8px;overflow:visible;transform:translateY(-18px)}
+.play-surface .progress-path{position:absolute;left:50%;top:10px;width:96%;height:auto;transform:translateX(-50%);object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 2px 1px rgba(0,0,0,.55))}
+.play-surface .progress-marker{position:absolute;top:27px;width:38px;height:38px;transform:translateX(-50%);background-image:var(--character-sprite);background-repeat:no-repeat;background-size:200% 100%;image-rendering:pixelated;filter:drop-shadow(0 2px 1px rgba(0,0,0,.72));will-change:left}
+.play-surface .progress-marker.claude{background-position:0 0}
+.play-surface .progress-marker.constance{background-position:100% 0;transform:translateX(-41.66%)}
+.play-surface .gameplay-actions{position:absolute;inset:0;z-index:9;display:none;pointer-events:none}.play-surface .gameplay-actions.show{display:block}.play-surface .gameplay-actions button{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));min-width:112px;min-height:58px;border:2px solid #ffd75c;background:rgba(9,18,15,.82);color:#f6f1dc;font:900 15px ui-monospace,monospace;letter-spacing:.5px;border-radius:8px;box-shadow:0 3px 0 rgba(0,0,0,.35);touch-action:manipulation;pointer-events:auto;-webkit-tap-highlight-color:transparent;transition:transform .05s,background .05s,box-shadow .05s}.play-surface .gameplay-actions button:active,.play-surface .gameplay-actions button.key-active{transform:translateY(2px) scale(.98);background:rgba(120,69,34,.94);box-shadow:0 1px 0 rgba(0,0,0,.35)}.play-surface [data-action="slide"]{left:max(22px,env(safe-area-inset-left))}.play-surface [data-action="pause"]{left:50%;transform:translateX(-50%)}.play-surface [data-action="pause"]:active,.play-surface [data-action="pause"].key-active{transform:translateX(-50%) translateY(2px) scale(.98)}.play-surface [data-action="jump"]{right:max(22px,env(safe-area-inset-right))}.play-surface .gameplay-actions button:disabled{opacity:.42;cursor:default;transform:none!important}
+.play-surface .run-fail{position:absolute;inset:0;z-index:11;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.38);pointer-events:none}.play-surface .run-fail.show{display:flex;pointer-events:auto}.play-surface .run-fail-card{padding:18px 24px;border:2px solid #ffd75c;background:rgba(9,18,15,.94);font:900 22px ui-monospace,monospace;color:#fff;text-align:center;min-width:360px}.play-surface .run-fail-card small{display:block;margin-top:8px;font-size:11px;color:#c7d0ca;font-weight:700}.play-surface .run-fail-actions{display:flex;justify-content:center;gap:10px;margin-top:16px}.play-surface .run-fail-actions button{min-width:130px}.play-surface .run-fail-actions .secondary{border-color:#9da7a1;color:#d8dedb}@container (max-width:800px){
+.play-surface .hud-panel{width:min(86%,650px);height:88px;grid-template-columns:138px 1fr;gap:12px;padding:8px 12px 10px}
+.play-surface .health-block{padding-right:12px}
+.play-surface .hud-kicker,.play-surface .stage-title{font-size:9px}
+.play-surface .hud-kicker{margin-bottom:5px;padding:2px 10px 3px}
+.play-surface .life-hud{gap:5px;height:34px}
+.play-surface .life-heart{width:29px;height:29px}
+.play-surface .progress-hud{height:68px}
+.play-surface .stage-title{height:19px;line-height:17px;margin:0 10px 1px}
+.play-surface .progress-track{min-height:46px;margin:0 4px;transform:translateY(-14px)}
+.play-surface .progress-path{width:100%;height:42px;top:7px}
+.play-surface .progress-marker{width:33px;height:33px;top:16px}
+.play-surface .gameplay-actions button{min-width:104px;min-height:54px}
+.play-surface .run-fail-card{min-width:0;width:min(86%,420px)}
+}
+
+.play-surface{container-type:inline-size;isolation:isolate}
+.play-surface .gameplay-hud{--heart-sprite:none;--character-sprite:none}
+.play-surface .run-overlay{z-index:11;pointer-events:auto}.play-surface .run-overlay[hidden]{display:none}
+.play-surface .run-dialog{border:2px solid #ffd75c;background:rgba(9,18,15,.94);border-radius:0;color:#fff;font-family:ui-monospace,monospace}
+.play-surface .run-dialog button{border:2px solid #ffd75c;background:rgba(9,18,15,.94);color:#f6f1dc;border-radius:8px}
+.play-surface #run-loading{z-index:12}
+@container(max-width:560px){.play-surface .hud-panel{transform:translateX(-50%) scale(.7);transform-origin:top center;width:120%;max-width:650px;top:5px}.play-surface .gameplay-actions button{min-width:82px;min-height:44px;bottom:8px}.play-surface [data-action="slide"]{left:10px}.play-surface [data-action="jump"]{right:10px}}
+
+.play-surface [data-action="pause"]:disabled{transform:translateX(-50%)!important}
+/* Compact secret HUD leaves the complete cannon (right side) unobscured. */
+.play-surface .secret-status{display:none}
+.play-surface .secret-hud .progress-hud{display:none}
+.play-surface .secret-hud .hud-panel{box-sizing:border-box;left:48.83%;top:1.39%;transform:translateX(-50%);width:47.66%;max-width:none;height:10.28%;min-height:44px;display:grid;grid-template-columns:31% 69%;gap:0;padding:3px 4px;background:rgba(7,29,50,.82);border:2px solid #4a7d94;border-bottom:2px solid #e9bd51;border-radius:0;box-shadow:none;color:#fff2cd;font-family:CandCPixel,monospace}
+.play-surface .secret-hud .health-block{padding:0;border:0;gap:3px;flex-direction:column-reverse;justify-content:center}
+.play-surface .secret-hud .hud-kicker{display:block;font:inherit;font-size:clamp(10px,1.25cqw,16px);line-height:1;letter-spacing:0;border:0;padding:0;margin:0;color:#fff2cd;text-shadow:none}
+.play-surface .secret-hud .life-hud{height:auto;gap:3px}
+.play-surface .secret-hud .life-heart{width:clamp(14px,2.19cqw,28px);height:clamp(14px,2.19cqw,28px)}
+.play-surface .secret-hud .secret-status{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3px;min-width:0}
+.play-surface .secret-hud .secret-timer{position:static;transform:none;text-align:center;display:flex;flex-direction:column;gap:3px;font-size:clamp(16px,2.19cqw,28px);line-height:1;font-variant-numeric:tabular-nums}
+.play-surface .secret-hud .secret-timer::after{content:'TIME';font-size:clamp(10px,1.25cqw,16px)}
+.play-surface .secret-hud .secret-shields{position:relative;display:flex;align-items:center;justify-content:center;gap:3px;padding-bottom:calc(clamp(10px,1.25cqw,16px) + 3px)}
+.play-surface .secret-hud .secret-shields::after{content:'BOSS SHIELD';position:absolute;bottom:0;left:50%;transform:translateX(-50%);font-size:clamp(10px,1.25cqw,16px);line-height:1;white-space:nowrap}
+.secret-shield{position:relative;display:block;width:clamp(14px,2.19cqw,28px);height:clamp(14px,2.19cqw,28px);background:url('../assets/secret-level/SECRET_SHIELD_UI_ATLAS.png') 0 0/400% 100% no-repeat;image-rendering:pixelated}
+.secret-shield.breaking::after{content:'';position:absolute;inset:-50%;background:url('../assets/secret-level/SECRET_SHIELD_BREAK_ATLAS.png') var(--break-frame) 0/400% 100% no-repeat;pointer-events:none}
+@container(max-width:600px){.play-surface .secret-hud .hud-panel{left:43%;width:64%;height:46px;top:4px}.play-surface .secret-hud .secret-status{grid-template-columns:.8fr 1.2fr}}
+
+/* Keep the pause control anchored through pointer, keyboard and disabled states. */
+.play-surface .gameplay-actions button[data-action="pause"]{width:112px;transform:translateX(-50%)}
+.play-surface .gameplay-actions button[data-action="pause"]:active,.play-surface .gameplay-actions button[data-action="pause"].key-active{transform:translate(-50%,2px) scale(.98)}
+.play-surface .gameplay-actions button[data-action="pause"]:disabled{transform:translateX(-50%)!important}

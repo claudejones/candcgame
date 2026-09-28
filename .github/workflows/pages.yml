@@ -1,67 +1,44 @@
 name: Deploy QA site to GitHub Pages
-
-# Development branches do not deploy automatically. An approved snapshot first
-# lands on main, Production CI validates that exact push SHA, and only a
-# successful main push is then deployed. Manual dispatch remains an emergency
-# fallback and never replaces the approval/CI gate.
 on:
   workflow_run:
-    workflows: ["Production CI"]
+    workflows: ['Production CI']
     types: [completed]
-  workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
-
 jobs:
   deploy:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.event == 'push' &&
-       github.event.workflow_run.head_branch == 'main' &&
-       github.event.workflow_run.conclusion == 'success')
+    if: github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          # workflow_run executes in the default-branch workflow context, so
-          # pin checkout explicitly to the SHA that Production CI validated.
-          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
-
-      - name: Build lightweight Pages bundle
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build current apps only
         run: |
           set -euo pipefail
-          rm -rf _site
-          mkdir -p _site
-          cp -R src _site/src
-          if [ -d qa/asset-compare ]; then
-            mkdir -p _site/qa
-            cp -R qa/asset-compare _site/qa/asset-compare
-          fi
-          cp -R assets _site/assets
+          node scripts/check-workbench.mjs
           node mobile-game/verify-package.mjs mobile-game
+          mkdir -p _site/workbench
+          cp -R workbench/dist/. _site/workbench/
           cp -R mobile-game _site/mobile-game
-          rm -rf _site/mobile-game/build-tools
+          cp mobile-game/index.html _site/index.html
+          sed -i 's|./play/|./mobile-game/play/|g' _site/index.html
           touch _site/.nojekyll
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload lightweight Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: '_site'
-
-      - name: Deploy to GitHub Pages
+          path: _site
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

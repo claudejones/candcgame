@@ -1,0 +1,29 @@
+{
+  "sourceGitBlob": "fe4da6ab86218ed363e81f8dbd9a8d9d53482ee9",
+  "assets": {
+    "hudHearts": {
+      "file": "HUD_HEARTS.png",
+      "width": 1774,
+      "height": 887,
+      "sha256": "d939cac48f688dc37a9bcaa5b87af21fcfa24375182c6bb2e70334a6fd47094f"
+    },
+    "hudCharacters": {
+      "file": "HUD_CHARACTERS.png",
+      "width": 1774,
+      "height": 887,
+      "sha256": "af71848d5a51c1a68bb2641c977c76d73a0888b70506bc066f1bd51ddff01497"
+    },
+    "hudPath": {
+      "file": "HUD_PROGRESS_PATH.png",
+      "width": 2048,
+      "height": 258,
+      "sha256": "b79fe64f8aab88e6d478edfa8f2351eda44b2916b92576f505b1e578d7903831"
+    },
+    "finishMarker": {
+      "file": "NA_STAGE_FINISH_MARKER.png",
+      "width": 1211,
+      "height": 1299,
+      "sha256": "e4f9ff9c57bd72d8c7cbf13b264febe319e6fd504dc30db121afbd732f6c5792"
+    }
+  }
+}

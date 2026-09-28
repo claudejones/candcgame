@@ -1,0 +1,37 @@
+# Current status
+
+Updated 2026-09-20. GitHub is authoritative; resolve live heads before writes. Commands: `node scripts/assets.mjs help`. Workflow: ASSET_COMMAND_WORKFLOW.md. Historical decisions/QA are not startup reading.
+
+## Current production and recovery
+
+- NA01–03, SA01–03 and EU01–03 landscapes are approved (27 layers). AF01 is approved, including facing corrections. Exact reviewed revisions/hashes remain in workflow state. Preserve SA01 MID snake/no monkey and NA03 GROUND's 2170×725 exception.
+- AF02: five assets plus `config/asset-handoffs/af02.json` published and ready for calibration (source `b5250bfa1f86734d7ed8aef6bb68ddd3eb3f8484`). Imported into editor-next review12. This is not gameplay release or calibration acceptance.
+- **AF03 Workbench:** user-supplied completed ZIP on main `3d6c78b`, `incoming/AF03_Workbench_PNGs.zip`, imported unchanged into editor-next Review 13. Initial five hashes matched the attached report; Review 13.1 replaces only MID with the user-supplied revision `ba6613f88d8e`. Calibration and artwork acceptance are pending. This import leaves the older recovery branch below untouched.
+- **AF03 is already in progress on `work/assets/af03`.** Last inspected head `9b02feb184016f57cfcd05de0e5e9505f6eb7f3b`: durable FAR, other jobs unfinished. Main's inactive checkpoint does not cancel that run. Use `resume AF03`, fetch its current recovery head and inspect available bytes before requeue. Do not overwrite that branch or start AF03 from scratch.
+- After AF03 asset handoff and the user's advance, Asia begins with `build stage AS01`. Its selections/references require agent preparation; it is not generation-ready merely because the command exists. Themes and uniqueness/scale requirements: `config/remaining-continent-proposal.json` and `docs/REMAINING_CONTINENTS_PLAN.md`.
+
+## AS01 Workbench import
+
+AS01 user ZIP imported unchanged for Review 14 under Asia. Five hashes match AS01_verification.json. Bamboo bundle, stone lantern and mirrored Japanese white-eye use provisional metadata in config/asset-handoffs/as01.json. Initial Design analysis offers passing all-profile proposals for lantern/bird; bamboo still needs review. No proposals applied, and calibration/artwork acceptance/release remain pending. Existing AF03 MID revision and saved calibration are preserved. GitHub synchronization remains pending; publication targets the separate Workbench Site.
+
+## Fixed boundaries
+
+Canonical landscape geometry: source width 2172, viewport 960×540, surface Y410, FAR/MID/GROUND offsets 0, multipliers 1.25/1/1, MID/GROUND source anchors 621/393. Registry drives host and renderer. Preserve accepted exceptions and saved unrelated edits. Pending stages stay inactive.
+
+From AF02, asset production delivers five PNGs and a validated v1 handoff; editor-next owns iterative gameplay calibration. The user notifies the Workbench agent, imports, calibrates and saves. Asset readiness, artwork acceptance, calibration and release are distinct. Preserve AF01 settings, genuine runtime fixes, eleven comparison candidates and DEPENDENT_CALIBRATION_QA evidence/tests. Independent legacy tuning is paused.
+
+Workflow optimization: compact operation/worker packets, durable recovery lookup, archived completed-run details, local validation reuse and resumable connected publication. Exact-SHA dev CI → identical-tree main → main CI → Pages and explicit artwork/release acceptance remain. No fixed context/usage percentage is promised. Detailed measurements: `docs/phase8-qa/WORKFLOW_OPTIMIZATION_QA.md`.
+
+Preserve Phase 6 gameplay constants, production/development separation, archive/ and assets-original/. Never commit tmp/ or assets/phase8-candidates/. This workflow change does not generate artwork, activate new stages or approve calibration.
+
+## AS02 Workbench import
+
+Review 15 imports five original AS02 Zhangjiajie PNGs from the supplied ZIP, unchanged at 2172×724. Metadata and provisional settings are in config/asset-handoffs/as02.json. Basket and magpie have passing Design proposals; timber barrier timing and bird animation require review. No proposals applied. Existing save migration verified. Calibration/release and GitHub synchronization remain pending; separate Workbench Site is the publication target.
+
+## AS03 Workbench import
+
+Review 16 imports five original AS03 Bangkok PNGs unchanged from the supplied ZIP. Metadata and provisional settings in config/asset-handoffs/as03.json. All three hazards have passing all-profile Design proposals; none applied. Swift animation requires visual review. Existing placement migration verified. Artwork acceptance, calibration, release and GitHub synchronization remain pending; separate Workbench Site is the publication target.
+
+## OC01 Workbench import
+
+Review 17 imports five unchanged original PNGs from corrected OC01_Workbench_PNGs.zip. MID coverage fixed in source art, verified opaque from row580; canonical zero offsets retained. Metadata and provisional settings prepared; no calibration optimization applied. Prior placement values migrate to 16 stages. Artwork acceptance and calibration remain user tasks. Separate Workbench Site publication; GitHub synchronization pending.

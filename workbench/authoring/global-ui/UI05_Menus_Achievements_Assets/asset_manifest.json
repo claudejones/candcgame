@@ -1,0 +1,455 @@
+{
+  "batch": "UI05",
+  "version": 1,
+  "assets": {
+    "UI05_HEADER": {
+      "file": "assets/UI05_HEADER.png",
+      "source": "originals/UI05_HEADER.svg",
+      "size": [
+        1280,
+        80
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI05_PANEL": {
+      "file": "assets/UI05_PANEL.png",
+      "source": "originals/UI05_PANEL.svg",
+      "size": [
+        1000,
+        560
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI05_DIALOG": {
+      "file": "assets/UI05_DIALOG.png",
+      "source": "originals/UI05_DIALOG.svg",
+      "size": [
+        850,
+        420
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI05_ROW": {
+      "file": "assets/UI05_ROW.png",
+      "source": "originals/UI05_ROW.svg",
+      "size": [
+        950,
+        96
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI05_REWARD_CARD_NORMAL": {
+      "file": "assets/UI05_REWARD_CARD_NORMAL.png",
+      "source": "originals/UI05_REWARD_CARD_NORMAL.svg",
+      "size": [
+        296,
+        400
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI05_REWARD_CARD_SELECTED": {
+      "file": "assets/UI05_REWARD_CARD_SELECTED.png",
+      "source": "originals/UI05_REWARD_CARD_SELECTED.svg",
+      "size": [
+        296,
+        400
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI05_REWARD_CARD_PRESSED": {
+      "file": "assets/UI05_REWARD_CARD_PRESSED.png",
+      "source": "originals/UI05_REWARD_CARD_PRESSED.svg",
+      "size": [
+        296,
+        400
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI05_REWARD_CARD_DISABLED": {
+      "file": "assets/UI05_REWARD_CARD_DISABLED.png",
+      "source": "originals/UI05_REWARD_CARD_DISABLED.svg",
+      "size": [
+        296,
+        400
+      ],
+      "nine_slice_ltrb": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "safe_inset": 32
+    },
+    "UI05_ICON_BACK": {
+      "file": "assets/UI05_ICON_BACK.png",
+      "source": "originals/UI05_ICON_BACK.svg",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "UI05_ICON_PREVIOUS": {
+      "file": "assets/UI05_ICON_PREVIOUS.png",
+      "source": "originals/UI05_ICON_PREVIOUS.svg",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "UI05_ICON_NEXT": {
+      "file": "assets/UI05_ICON_NEXT.png",
+      "source": "originals/UI05_ICON_NEXT.svg",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "UI05_ICON_CLOSE": {
+      "file": "assets/UI05_ICON_CLOSE.png",
+      "source": "originals/UI05_ICON_CLOSE.svg",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "UI05_ICON_PAUSE": {
+      "file": "assets/UI05_ICON_PAUSE.png",
+      "source": "originals/UI05_ICON_PAUSE.svg",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "UI05_ICON_MUSIC": {
+      "file": "assets/UI05_ICON_MUSIC.png",
+      "source": "originals/UI05_ICON_MUSIC.svg",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "UI05_ICON_SOUND": {
+      "file": "assets/UI05_ICON_SOUND.png",
+      "source": "originals/UI05_ICON_SOUND.svg",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "UI05_ICON_INFO": {
+      "file": "assets/UI05_ICON_INFO.png",
+      "source": "originals/UI05_ICON_INFO.svg",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "UI05_SECRET_PASSPORT_LOCKED": {
+      "file": "assets/UI05_SECRET_PASSPORT_LOCKED.png",
+      "source": "originals/UI05_SECRET_PASSPORT_LOCKED.svg",
+      "size": [
+        256,
+        256
+      ]
+    },
+    "UI05_SWITCH_OFF_NORMAL": {
+      "file": "assets/UI05_SWITCH_OFF_NORMAL.png",
+      "source": "originals/UI05_SWITCH_OFF_NORMAL.svg",
+      "size": [
+        160,
+        64
+      ]
+    },
+    "UI05_SWITCH_OFF_FOCUS": {
+      "file": "assets/UI05_SWITCH_OFF_FOCUS.png",
+      "source": "originals/UI05_SWITCH_OFF_FOCUS.svg",
+      "size": [
+        160,
+        64
+      ]
+    },
+    "UI05_SWITCH_OFF_PRESSED": {
+      "file": "assets/UI05_SWITCH_OFF_PRESSED.png",
+      "source": "originals/UI05_SWITCH_OFF_PRESSED.svg",
+      "size": [
+        160,
+        64
+      ]
+    },
+    "UI05_SWITCH_OFF_DISABLED": {
+      "file": "assets/UI05_SWITCH_OFF_DISABLED.png",
+      "source": "originals/UI05_SWITCH_OFF_DISABLED.svg",
+      "size": [
+        160,
+        64
+      ]
+    },
+    "UI05_SWITCH_ON_NORMAL": {
+      "file": "assets/UI05_SWITCH_ON_NORMAL.png",
+      "source": "originals/UI05_SWITCH_ON_NORMAL.svg",
+      "size": [
+        160,
+        64
+      ]
+    },
+    "UI05_SWITCH_ON_FOCUS": {
+      "file": "assets/UI05_SWITCH_ON_FOCUS.png",
+      "source": "originals/UI05_SWITCH_ON_FOCUS.svg",
+      "size": [
+        160,
+        64
+      ]
+    },
+    "UI05_SWITCH_ON_PRESSED": {
+      "file": "assets/UI05_SWITCH_ON_PRESSED.png",
+      "source": "originals/UI05_SWITCH_ON_PRESSED.svg",
+      "size": [
+        160,
+        64
+      ]
+    },
+    "UI05_SWITCH_ON_DISABLED": {
+      "file": "assets/UI05_SWITCH_ON_DISABLED.png",
+      "source": "originals/UI05_SWITCH_ON_DISABLED.svg",
+      "size": [
+        160,
+        64
+      ]
+    }
+  },
+  "atlases": {
+    "UI05_SWITCHES_ATLAS": {
+      "file": "assets/UI05_SWITCHES_ATLAS.png",
+      "cell": [
+        160,
+        64
+      ],
+      "frames": {
+        "UI05_SWITCH_OFF_NORMAL": {
+          "rect": [
+            0,
+            0,
+            160,
+            64
+          ]
+        },
+        "UI05_SWITCH_OFF_FOCUS": {
+          "rect": [
+            160,
+            0,
+            160,
+            64
+          ]
+        },
+        "UI05_SWITCH_OFF_PRESSED": {
+          "rect": [
+            320,
+            0,
+            160,
+            64
+          ]
+        },
+        "UI05_SWITCH_OFF_DISABLED": {
+          "rect": [
+            480,
+            0,
+            160,
+            64
+          ]
+        },
+        "UI05_SWITCH_ON_NORMAL": {
+          "rect": [
+            0,
+            64,
+            160,
+            64
+          ]
+        },
+        "UI05_SWITCH_ON_FOCUS": {
+          "rect": [
+            160,
+            64,
+            160,
+            64
+          ]
+        },
+        "UI05_SWITCH_ON_PRESSED": {
+          "rect": [
+            320,
+            64,
+            160,
+            64
+          ]
+        },
+        "UI05_SWITCH_ON_DISABLED": {
+          "rect": [
+            480,
+            64,
+            160,
+            64
+          ]
+        }
+      }
+    },
+    "UI05_ICONS_ATLAS": {
+      "file": "assets/UI05_ICONS_ATLAS.png",
+      "cell": [
+        64,
+        64
+      ],
+      "frames": {
+        "UI05_ICON_BACK": {
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ]
+        },
+        "UI05_ICON_PREVIOUS": {
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ]
+        },
+        "UI05_ICON_NEXT": {
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ]
+        },
+        "UI05_ICON_CLOSE": {
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ]
+        },
+        "UI05_ICON_PAUSE": {
+          "rect": [
+            0,
+            64,
+            64,
+            64
+          ]
+        },
+        "UI05_ICON_MUSIC": {
+          "rect": [
+            64,
+            64,
+            64,
+            64
+          ]
+        },
+        "UI05_ICON_SOUND": {
+          "rect": [
+            128,
+            64,
+            64,
+            64
+          ]
+        },
+        "UI05_ICON_INFO": {
+          "rect": [
+            192,
+            64,
+            64,
+            64
+          ]
+        }
+      }
+    },
+    "UI05_REWARD_CARDS_ATLAS": {
+      "file": "assets/UI05_REWARD_CARDS_ATLAS.png",
+      "cell": [
+        296,
+        400
+      ],
+      "frames": {
+        "UI05_REWARD_CARD_NORMAL": {
+          "rect": [
+            0,
+            0,
+            296,
+            400
+          ]
+        },
+        "UI05_REWARD_CARD_SELECTED": {
+          "rect": [
+            296,
+            0,
+            296,
+            400
+          ]
+        },
+        "UI05_REWARD_CARD_PRESSED": {
+          "rect": [
+            592,
+            0,
+            296,
+            400
+          ]
+        },
+        "UI05_REWARD_CARD_DISABLED": {
+          "rect": [
+            888,
+            0,
+            296,
+            400
+          ]
+        }
+      }
+    }
+  },
+  "rect_convention": "x,y,width,height; right/bottom exclusive",
+  "deferred": [
+    "Final secret passport motif: future RW-MYSTERY batch; no fake earned art delivered."
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "stageId": "as03",
+  "readiness": "asset-ready",
+  "downstream": {
+    "calibration": "pending",
+    "release": "pending"
+  },
+  "assets": {
+    "FAR": {
+      "path": "assets/worlds/asia/AS03_BG_DISTANT_BANGKOK.png",
+      "sha256": "57ebd307af1938627f751f57fcb0b56d3fdce0a616e6ac53894bf1738b02511a",
+      "width": 2172,
+      "height": 724
+    },
+    "MID": {
+      "path": "assets/worlds/asia/AS03_BG_MID_BANGKOK.png",
+      "sha256": "26c7e100af28602e1f069159ce322918c65d8583361c9945776bd28246ef1d7c",
+      "width": 2172,
+      "height": 724
+    },
+    "GROUND": {
+      "path": "assets/worlds/asia/AS03_GROUND_BANGKOK.png",
+      "sha256": "95445b7dd56783f4da2a771b8183080a35fe0d589f81ccea500fa6ba0f2f6ec0",
+      "width": 2172,
+      "height": 724
+    },
+    "OBJECT_ATLAS": {
+      "path": "assets/worlds/asia/AS03_OBJECT_ATLAS.png",
+      "sha256": "d0ed0b3454adc0794b43a9bd416244431a9d4f3649dc1964329377114bec9b65",
+      "width": 2172,
+      "height": 724
+    },
+    "FLYING": {
+      "path": "assets/worlds/asia/AS03_HAZARD_SWIFT.png",
+      "sha256": "e3e9691d88b2ceb766c002ac8164d8e4f2dba336a8bbc48860a9a84001e36e97",
+      "width": 2172,
+      "height": 724
+    }
+  },
+  "landscape": {
+    "contractVersion": "phase8-landscape-1",
+    "source": {
+      "width": 2172,
+      "height": 724
+    },
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "groundSurfaceY": 410
+    },
+    "layers": {
+      "FAR": {
+        "sourceY": 0,
+        "scale": 1.25
+      },
+      "MID": {
+        "sourceAnchorY": 621,
+        "offsetY": 0,
+        "scale": 1
+      },
+      "GROUND": {
+        "sourceAnchorY": 393,
+        "offsetY": 0,
+        "scale": 1
+      }
+    }
+  },
+  "hazards": [
+    {
+      "name": "Tall ceramic water jar",
+      "kind": "ground",
+      "atlasKey": "as03Hazards",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.2,
+      "crop": {
+        "l": 289,
+        "r": 290,
+        "t": 31,
+        "b": 98
+      },
+      "cw": 0.8560157790927022,
+      "ch": 0.8621848739495799,
+      "cx": 0.0009861932938856016,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Mooring bollard with coiled rope",
+      "kind": "ground",
+      "atlasKey": "as03Hazards",
+      "rect": {
+        "x": 1086,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.26,
+      "crop": {
+        "l": 262,
+        "r": 263,
+        "t": 249,
+        "b": 98
+      },
+      "cw": 0.9162210338680927,
+      "ch": 0.9336870026525199,
+      "cx": 0.00089126559714795,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "House swift",
+      "kind": "flying",
+      "atlasKey": "as03Bird",
+      "frameW": 543,
+      "frameH": 724,
+      "frames": 4,
+      "fps": 8,
+      "sourceAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "scale": 0.24,
+      "crop": {
+        "l": 62,
+        "r": 142,
+        "t": 33,
+        "b": 101
+      },
+      "cw": 0.7020648967551623,
+      "ch": 0.15593220338983052,
+      "cx": 0.09587020648967552,
+      "cy": 0.04745762711864407,
+      "flightOffsetY": {
+        "high": 0,
+        "low": 0
+      },
+      "flipX": true,
+      "sourceFacing": "right",
+      "gameplayFacing": "left"
+    }
+  ],
+  "checks": {
+    "technical": true,
+    "composition": true,
+    "animation": true,
+    "basicRendering": true
+  },
+  "evidence": "docs/phase8-qa/AS03_WORKBENCH_IMPORT_QA.md",
+  "knownIssues": [
+    "Artwork acceptance, calibration and release remain pending. Scale, solid-body hitboxes, grounding, flight clearance and timing are provisional."
+  ]
+}

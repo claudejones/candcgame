@@ -1,0 +1,70 @@
+{
+  "batch": "UI01",
+  "assets": [
+    {
+      "file": "assets/BRAND_APPLE_TOUCH_ICON.png",
+      "width": 180,
+      "height": 180,
+      "mode": "RGB",
+      "sha256": "d8b464aecb783fa907f8d6d4bd5f691ab49684a67cbad12791fda5f9ea25f124"
+    },
+    {
+      "file": "assets/BRAND_APP_ICON_MASTER.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB",
+      "sha256": "48675b8eb5a8f4ec1a1408be1bd41b10afb80a959daea1e9fcfd4cdd3fec5b80"
+    },
+    {
+      "file": "assets/BRAND_FAVICON_16.png",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB",
+      "sha256": "5e92d3b9b8a95c4d6211b96e4cb3fb25afc6edd92d70c94146ceaca214824efb"
+    },
+    {
+      "file": "assets/BRAND_FAVICON_32.png",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB",
+      "sha256": "b9438bff34d049bbc8e8f2d2476c5edc2ee37a60ae5ab5d930f0753b2de0f5ee"
+    },
+    {
+      "file": "assets/BRAND_GAME_LOGO.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "sha256": "090200ec6ea5f063a39d0fd8dfde869a0419ed6948dc4beb01e19d7f34147a68"
+    },
+    {
+      "file": "assets/BRAND_PWA_ICON_192.png",
+      "width": 192,
+      "height": 192,
+      "mode": "RGB",
+      "sha256": "1dbb561232de94dad2a6ba3c9cf55dfb09e33bd6988ccf01b4262e937b8db5a7"
+    },
+    {
+      "file": "assets/BRAND_PWA_ICON_512.png",
+      "width": 512,
+      "height": 512,
+      "mode": "RGB",
+      "sha256": "8e03dbfb5bbcaf98dc63c4056fcd46aac21266903aee6a6c32d291e1a8cfbcbc"
+    },
+    {
+      "file": "originals/BRAND_APP_ICON_SOURCE.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "sha256": "469c068d2cbc40a3c1ff6c55bc625c1883a2d5568d2fc5a1232d4a05770b13bf"
+    },
+    {
+      "file": "originals/BRAND_GAME_LOGO_SOURCE.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "sha256": "090200ec6ea5f063a39d0fd8dfde869a0419ed6948dc4beb01e19d7f34147a68"
+    }
+  ],
+  "icon_derivation": "Direct uniform nearest-neighbor resize from preserved square source; no per-size generative artwork.",
+  "logo_derivation": "Corrected original PNG copied byte-for-byte."
+}

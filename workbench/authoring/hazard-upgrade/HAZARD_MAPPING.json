@@ -1,0 +1,2202 @@
+[
+  {
+    "id": "hazard:af01:0",
+    "old": "Termite mound",
+    "new": "Termite mound",
+    "atlas": "africa/AF01_OBJECT_ATLAS.png",
+    "source": "hazard_af01_0_original.png",
+    "erase": [
+      0,
+      0,
+      1086,
+      724
+    ],
+    "center_x": 544,
+    "contact_y": 621,
+    "max_w": 453,
+    "max_h": 495,
+    "contact": "Grounded base/feet, retained original contact row.",
+    "source_sha256": "65483e4d026f2ed41379ed491d3b6848c91071581d06200f7a5d61b947c35e72",
+    "source_dimensions": [
+      1176,
+      1338
+    ],
+    "source_visible_crop": [
+      112,
+      141,
+      1087,
+      1201
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 7821,
+    "uniform_scale": 0.4646153846153846,
+    "packed_dimensions": [
+      453,
+      492
+    ],
+    "packed_box": [
+      318,
+      130,
+      771,
+      622
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "AF01_OBJECT_ATLAS.png",
+    "approved_group": "batch-03",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 313,
+      "r": 312,
+      "t": 127,
+      "b": 100
+    },
+    "target_crop": {
+      "l": 313,
+      "r": 312,
+      "t": 127,
+      "b": 100
+    },
+    "placement_reference": {
+      "scale": 0.18,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.415625000000034,
+      "cw": 0.8481561822125814,
+      "ch": 0.843158953722334,
+      "cx": -0.0010845986984815426,
+      "cy": -0.006036217303822977
+    },
+    "package_path": "assets/worlds/africa/AF01_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "0d35b07c5c6105dbfc0fc8e01fccee85407b00eaa8464815158dcf56f35a3b83"
+  },
+  {
+    "id": "hazard:af02:0",
+    "old": "Curled clay-pan crust plates",
+    "new": "Raised clay-pan slabs",
+    "atlas": "africa/AF02_OBJECT_ATLAS.png",
+    "source": "hazard_af02_0_original.png",
+    "erase": [
+      0,
+      0,
+      1086,
+      724
+    ],
+    "center_x": 622,
+    "contact_y": 617,
+    "max_w": 547,
+    "max_h": 149,
+    "contact": "Grounded base/feet, retained original contact row.",
+    "source_sha256": "91fdd8176820b14234dc1aa72bba48bae53a4f1de5bb04b967eb2e6626e5ba29",
+    "source_dimensions": [
+      1855,
+      848
+    ],
+    "source_visible_crop": [
+      362,
+      361,
+      1576,
+      731
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 6252,
+    "uniform_scale": 0.4027027027027027,
+    "packed_dimensions": [
+      489,
+      149
+    ],
+    "packed_box": [
+      378,
+      469,
+      867,
+      618
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "AF02_OBJECT_ATLAS.png",
+    "approved_group": "batch-03",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 345,
+      "r": 186,
+      "t": 469,
+      "b": 103
+    },
+    "target_crop": {
+      "l": 345,
+      "r": 186,
+      "t": 469,
+      "b": 103
+    },
+    "placement_reference": {
+      "scale": 0.3,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.78125,
+      "cw": 0.7594864864864865,
+      "ch": 0.7398355263157894,
+      "cx": 0,
+      "cy": -0.019736842105263164
+    },
+    "package_path": "assets/worlds/africa/AF02_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "6e49b92e6b36b24256f756e0f38c0d8087975b5934466c2a54acb4a01c26048a"
+  },
+  {
+    "id": "hazard:af02:1",
+    "old": "Forked dead camelthorn snag",
+    "new": "Broken camelthorn limb",
+    "atlas": "africa/AF02_OBJECT_ATLAS.png",
+    "source": "hazard_af02_1_original.png",
+    "erase": [
+      1086,
+      0,
+      2172,
+      724
+    ],
+    "center_x": 1596,
+    "contact_y": 616,
+    "max_w": 375,
+    "max_h": 484,
+    "contact": "Grounded base/feet, retained original contact row.",
+    "source_sha256": "471832d3bcba8642e90f2144c56c1e5fb335e28c0d660114472c3d9d218b6741",
+    "source_dimensions": [
+      1157,
+      1360
+    ],
+    "source_visible_crop": [
+      160,
+      188,
+      1060,
+      1254
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 9919,
+    "uniform_scale": 0.4166666666666667,
+    "packed_dimensions": [
+      375,
+      444
+    ],
+    "packed_box": [
+      1408,
+      173,
+      1783,
+      617
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "AF02_OBJECT_ATLAS.png",
+    "approved_group": "batch-03",
+    "original_frame": {
+      "x": 1086,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 319,
+      "r": 384,
+      "t": 133,
+      "b": 103
+    },
+    "target_crop": {
+      "l": 319,
+      "r": 384,
+      "t": 133,
+      "b": 103
+    },
+    "placement_reference": {
+      "scale": 0.28,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.89375000000001,
+      "cw": 0.6693472584856397,
+      "ch": 0.6744262295081968,
+      "cx": 0,
+      "cy": -0.008196721311475419
+    },
+    "package_path": "assets/worlds/africa/AF02_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "6e49b92e6b36b24256f756e0f38c0d8087975b5934466c2a54acb4a01c26048a"
+  },
+  {
+    "id": "hazard:af03:0",
+    "old": "Terracotta storage jar",
+    "new": "Terracotta storage jar",
+    "atlas": "africa/AF03_OBJECT_ATLAS.png",
+    "source": "hazard_af03_0_original.png",
+    "erase": [
+      0,
+      0,
+      1086,
+      724
+    ],
+    "center_x": 622,
+    "contact_y": 621,
+    "max_w": 524,
+    "max_h": 538,
+    "contact": "Grounded base/feet, retained original contact row.",
+    "source_sha256": "f84be538111bc23e677d6a46907e75185d4abc7b7383a653b9076b6bd0eb3050",
+    "source_dimensions": [
+      1107,
+      1421
+    ],
+    "source_visible_crop": [
+      193,
+      179,
+      944,
+      1251
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 5953,
+    "uniform_scale": 0.5018656716417911,
+    "packed_dimensions": [
+      377,
+      538
+    ],
+    "packed_box": [
+      434,
+      84,
+      811,
+      622
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "AF03_OBJECT_ATLAS.png",
+    "approved_group": "batch-03",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 356,
+      "r": 198,
+      "t": 84,
+      "b": 94
+    },
+    "target_crop": {
+      "l": 356,
+      "r": 198,
+      "t": 84,
+      "b": 94
+    },
+    "placement_reference": {
+      "scale": 0.2,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.3125,
+      "cw": 0.5831766917293234,
+      "ch": 0.8297619047619048,
+      "cx": -0.14943609022556392,
+      "cy": -0.0146520146520146
+    },
+    "package_path": "assets/worlds/africa/AF03_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "7808b22233fdf758ee20c55b613a79837aa945bbd40bb8174ca1c2c064550a47"
+  },
+  {
+    "id": "hazard:an02:0",
+    "old": "Hand ice auger",
+    "new": "Expedition equipment case",
+    "atlas": "antarctica/AN02_OBJECT_ATLAS.png",
+    "source": "hazard_an02_0_original.png",
+    "erase": [
+      0,
+      0,
+      1086,
+      724
+    ],
+    "center_x": 534,
+    "contact_y": 622,
+    "max_w": 470,
+    "max_h": 280,
+    "contact": "Lowest visible pixel aligned to original artwork contact row; review semantic foot contact in scene.",
+    "proposed_crop": {
+      "l": 295,
+      "r": 313,
+      "t": 339,
+      "b": 99
+    },
+    "source_sha256": "6ca4f1d64a601d560e33b87b1c885f45b801a3cb0b640fe31445853c82900278",
+    "source_dimensions": [
+      1536,
+      1024
+    ],
+    "source_visible_crop": [
+      116,
+      192,
+      1441,
+      888
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 12026,
+    "uniform_scale": 0.35471698113207545,
+    "packed_dimensions": [
+      470,
+      247
+    ],
+    "packed_box": [
+      299,
+      376,
+      769,
+      623
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "AN02_OBJECT_ATLAS.png",
+    "approved_group": "batch-04-revised",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 463,
+      "r": 481,
+      "t": 38,
+      "b": 99
+    },
+    "target_crop": {
+      "l": 295,
+      "r": 313,
+      "t": 339,
+      "b": 99
+    },
+    "placement_reference": {
+      "scale": 0.2,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.21875,
+      "cw": 0.8200704225352113,
+      "ch": 0.8442078364565587,
+      "cx": 0.0035211267605633756,
+      "cy": -0.0034071550255536653
+    },
+    "package_path": "assets/worlds/antarctica/AN02_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "0587ef88efd2f89fc5cee2f456384d59c6f0f6a16bb7806df030dbe0bea417c6"
+  },
+  {
+    "id": "hazard:an02:1",
+    "old": "Small anchor with short chain",
+    "new": "Anchor with short chain",
+    "atlas": "antarctica/AN02_OBJECT_ATLAS.png",
+    "source": "hazard_an02_1_original.png",
+    "erase": [
+      1086,
+      0,
+      2172,
+      724
+    ],
+    "center_x": 1784,
+    "contact_y": 622,
+    "max_w": 577,
+    "max_h": 276,
+    "contact": "Lowest visible pixel aligned to original artwork contact row; review semantic foot contact in scene.",
+    "source_sha256": "112c581506f146227a3615182c534e68dd7574cfc8d02facc934a9156f3cf65c",
+    "source_dimensions": [
+      1983,
+      793
+    ],
+    "source_visible_crop": [
+      357,
+      109,
+      1857,
+      743
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 24477,
+    "uniform_scale": 0.38466666666666666,
+    "packed_dimensions": [
+      577,
+      244
+    ],
+    "packed_box": [
+      1496,
+      379,
+      2073,
+      623
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "AN02_OBJECT_ATLAS.png",
+    "approved_group": "batch-04",
+    "original_frame": {
+      "x": 1086,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 405,
+      "r": 96,
+      "t": 347,
+      "b": 99
+    },
+    "target_crop": {
+      "l": 405,
+      "r": 96,
+      "t": 347,
+      "b": 99
+    },
+    "placement_reference": {
+      "scale": 0.24,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 20,
+      "cw": 0.5230769230769231,
+      "ch": 0.9064748201438849,
+      "cx": -0.2094017094017094,
+      "cy": 0
+    },
+    "package_path": "assets/worlds/antarctica/AN02_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "0587ef88efd2f89fc5cee2f456384d59c6f0f6a16bb7806df030dbe0bea417c6"
+  },
+  {
+    "id": "hazard:an03:0",
+    "old": "Survey instrument on tripod",
+    "new": "Survey instrument tripod",
+    "atlas": "antarctica/AN03_OBJECT_ATLAS.png",
+    "source": "hazard_an03_0_original.png",
+    "erase": [
+      0,
+      0,
+      1086,
+      724
+    ],
+    "center_x": 544,
+    "contact_y": 620,
+    "max_w": 457,
+    "max_h": 574,
+    "contact": "Lowest visible pixel aligned to original artwork contact row; review semantic foot contact in scene.",
+    "source_sha256": "d5bf4ac7089232fda208b4350a2c2a68c522b706bfe39fd3f47fe598ce8aaeab",
+    "source_dimensions": [
+      1106,
+      1422
+    ],
+    "source_visible_crop": [
+      47,
+      73,
+      1057,
+      1377
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 19234,
+    "uniform_scale": 0.4401840490797546,
+    "packed_dimensions": [
+      445,
+      574
+    ],
+    "packed_box": [
+      322,
+      47,
+      767,
+      621
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "AN03_OBJECT_ATLAS.png",
+    "approved_group": "batch-04",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 311,
+      "r": 310,
+      "t": 47,
+      "b": 101
+    },
+    "target_crop": {
+      "l": 311,
+      "r": 310,
+      "t": 47,
+      "b": 101
+    },
+    "placement_reference": {
+      "scale": 0.2,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.40625,
+      "cw": 0.8408602150537634,
+      "ch": 0.8426215277777778,
+      "cx": -0.0010752688172043223,
+      "cy": -0.00347222222222221
+    },
+    "package_path": "assets/worlds/antarctica/AN03_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "322de0483965bea30277addd45ad341fc8924946e68d4b510ad7492d92902a8b"
+  },
+  {
+    "id": "hazard:as01:0",
+    "old": "Bamboo bundle",
+    "new": "Bamboo bundle",
+    "atlas": "asia/AS01_OBJECT_ATLAS.png",
+    "source": "hazard_as01_0_original.png",
+    "erase": [
+      0,
+      0,
+      1086,
+      724
+    ],
+    "center_x": 544,
+    "contact_y": 621,
+    "max_w": 699,
+    "max_h": 246,
+    "contact": "Grounded base/feet, retained original contact row.",
+    "source_sha256": "19160c7d380e3ecb80870c5fb971facd27db8767ae854df87cbd77b58eda04f5",
+    "source_dimensions": [
+      1983,
+      793
+    ],
+    "source_visible_crop": [
+      258,
+      183,
+      1738,
+      685
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 10902,
+    "uniform_scale": 0.4722972972972973,
+    "packed_dimensions": [
+      699,
+      237
+    ],
+    "packed_box": [
+      194,
+      385,
+      893,
+      622
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "AS01_OBJECT_ATLAS.png",
+    "approved_group": "batch-03",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 190,
+      "r": 189,
+      "t": 376,
+      "b": 100
+    },
+    "target_crop": {
+      "l": 190,
+      "r": 189,
+      "t": 376,
+      "b": 100
+    },
+    "placement_reference": {
+      "scale": 0.28,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.237499999999955,
+      "cw": 0.6761527581329562,
+      "ch": 0.6635483870967742,
+      "cx": 0,
+      "cy": -0.008064516129032251
+    },
+    "package_path": "assets/worlds/asia/AS01_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "ce5bc2327b6e9d76879f06e08c6614787959660f12cd869dbf66d7fbda22d08c"
+  },
+  {
+    "id": "hazard:as01:1",
+    "old": "Stone lantern",
+    "new": "Stone lantern",
+    "atlas": "asia/AS01_OBJECT_ATLAS.png",
+    "source": "hazard_as01_1_original.png",
+    "erase": [
+      1086,
+      0,
+      2172,
+      724
+    ],
+    "center_x": 1630,
+    "contact_y": 622,
+    "max_w": 458,
+    "max_h": 549,
+    "contact": "Grounded base/feet, retained original contact row.",
+    "source_sha256": "a8eb655aabc956bb748c7656b1066d3a08c61bf4997b38bd46f1e1f4aa9381e5",
+    "source_dimensions": [
+      1145,
+      1374
+    ],
+    "source_visible_crop": [
+      142,
+      215,
+      1003,
+      1257
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 5775,
+    "uniform_scale": 0.5268714011516314,
+    "packed_dimensions": [
+      454,
+      549
+    ],
+    "packed_box": [
+      1403,
+      74,
+      1857,
+      623
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "AS01_OBJECT_ATLAS.png",
+    "approved_group": "batch-03",
+    "original_frame": {
+      "x": 1086,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 311,
+      "r": 309,
+      "t": 74,
+      "b": 99
+    },
+    "target_crop": {
+      "l": 311,
+      "r": 309,
+      "t": 74,
+      "b": 99
+    },
+    "placement_reference": {
+      "scale": 0.22,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.29374999999999,
+      "cw": 0.7584334763948498,
+      "ch": 0.7580580762250454,
+      "cx": 0,
+      "cy": -0.005444646098003658
+    },
+    "package_path": "assets/worlds/asia/AS01_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "ce5bc2327b6e9d76879f06e08c6614787959660f12cd869dbf66d7fbda22d08c"
+  },
+  {
+    "id": "hazard:as02:1",
+    "old": "Fallen timber trail barrier",
+    "new": "Timber trail barrier",
+    "atlas": "asia/AS02_OBJECT_ATLAS.png",
+    "source": "hazard_as02_1_original.png",
+    "erase": [
+      1086,
+      0,
+      2172,
+      724
+    ],
+    "center_x": 1620,
+    "contact_y": 621,
+    "max_w": 880,
+    "max_h": 275,
+    "contact": "Grounded base/feet, retained original contact row.",
+    "source_sha256": "d2245a54b709c94c79bcc093def2de3bf9201bab44d9ede9e5a04e63f3fe68e7",
+    "source_dimensions": [
+      2172,
+      724
+    ],
+    "source_visible_crop": [
+      350,
+      160,
+      1823,
+      575
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 8884,
+    "uniform_scale": 0.5974202308214528,
+    "packed_dimensions": [
+      880,
+      248
+    ],
+    "packed_box": [
+      1180,
+      374,
+      2060,
+      622
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "AS02_OBJECT_ATLAS.png",
+    "approved_group": "batch-03",
+    "original_frame": {
+      "x": 1086,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 90,
+      "r": 108,
+      "t": 347,
+      "b": 100
+    },
+    "target_crop": {
+      "l": 90,
+      "r": 108,
+      "t": 347,
+      "b": 100
+    },
+    "placement_reference": {
+      "scale": 0.25,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.265625,
+      "cw": 0.6761711711711712,
+      "ch": 0.6701805054151625,
+      "cx": -0.0005630630630630851,
+      "cy": -0.0072202166064981865
+    },
+    "package_path": "assets/worlds/asia/AS02_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "f5fd996c2cbecc8a0bc18d562a3bb1cc39d35345ed5b1f535b5f7823ab20f139"
+  },
+  {
+    "id": "hazard:eu01:0",
+    "old": "Market crates and baskets",
+    "new": "Simplified market crates",
+    "atlas": "europe/EU01_OBJECT_ATLAS_CRATE.png",
+    "source": "EU01_CRATES_original.png",
+    "erase": [
+      0,
+      0,
+      1774,
+      887
+    ],
+    "center_x": 891,
+    "contact_y": 818,
+    "max_w": 1600,
+    "max_h": 720,
+    "contact": "Grounded base; for bicycle bottom tangent of equal wheels.",
+    "source_sha256": "ed11514903d15d607532b3b8cd093008e6c0a983e59e997c411e6effcfda2ee4",
+    "source_dimensions": [
+      1586,
+      992
+    ],
+    "source_visible_crop": [
+      362,
+      243,
+      1233,
+      817
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 7575,
+    "uniform_scale": 1.254355400696864,
+    "packed_dimensions": [
+      1093,
+      720
+    ],
+    "packed_box": [
+      344,
+      99,
+      1437,
+      819
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      1774,
+      887
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "EU01_OBJECT_ATLAS_CRATE.png",
+    "approved_group": "batch-02b",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1774,
+      "h": 887
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.12,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 22,
+      "cw": 0.61,
+      "ch": 0.5519729425028185,
+      "cx": 0.002818489289740711,
+      "cy": -0.07891770011273957
+    },
+    "package_path": "assets/worlds/europe/EU01_OBJECT_ATLAS_CRATE.png",
+    "final_atlas_sha256": "d7427546afad1ad789dfb8be7a33cbe66b77be161128f790eb018f89c4a213bc"
+  },
+  {
+    "id": "hazard:eu02:0",
+    "old": "Cafe furniture",
+    "new": "Bookseller box and books",
+    "atlas": "europe/EU02_OBJECT_ATLAS.png",
+    "source": "EU02_BOOKS_original.png",
+    "erase": [
+      0,
+      0,
+      1536,
+      512
+    ],
+    "center_x": 760,
+    "contact_y": 501,
+    "max_w": 850,
+    "max_h": 450,
+    "contact": "Flat box base and lowest book cover",
+    "source_sha256": "f12b3494169d04ce0757e64f2854baa04b67ea0ad63a9f7a9812a8b74e35f41a",
+    "source_dimensions": [
+      1619,
+      971
+    ],
+    "source_visible_crop": [
+      213,
+      201,
+      1465,
+      862
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 8050,
+    "uniform_scale": 0.6789137380191693,
+    "packed_dimensions": [
+      850,
+      449
+    ],
+    "packed_box": [
+      335,
+      53,
+      1185,
+      502
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      1536,
+      1024
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "EU02_OBJECT_ATLAS.png",
+    "approved_group": "batch-02a",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1536,
+      "h": 512
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.2,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 20.53125,
+      "cw": 0.37497395833333336,
+      "ch": 0.6149218750000001,
+      "cx": -0.0048828125,
+      "cy": -0.021484375
+    },
+    "package_path": "assets/worlds/europe/EU02_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "6652533438aa05e55c742e32b5e070d577bbc5514491681cde16c4e0a6c5c077"
+  },
+  {
+    "id": "hazard:eu02:1",
+    "old": "Paris bicycle",
+    "new": "Simplified Paris bicycle",
+    "atlas": "europe/EU02_OBJECT_ATLAS.png",
+    "source": "EU02_BICYCLE_original.png",
+    "erase": [
+      0,
+      512,
+      1536,
+      1024
+    ],
+    "center_x": 771,
+    "contact_y": 987,
+    "max_w": 750,
+    "max_h": 458,
+    "contact": "Grounded base; for bicycle bottom tangent of equal wheels.",
+    "source_sha256": "6be78e6464a6836a862fa7c069af1714e6590346019a67af72ea44d0793b7a55",
+    "source_dimensions": [
+      1657,
+      949
+    ],
+    "source_visible_crop": [
+      142,
+      77,
+      1520,
+      888
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 50873,
+    "uniform_scale": 0.5442670537010159,
+    "packed_dimensions": [
+      750,
+      441
+    ],
+    "packed_box": [
+      396,
+      547,
+      1146,
+      988
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      1536,
+      1024
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "EU02_OBJECT_ATLAS.png",
+    "approved_group": "batch-02b",
+    "original_frame": {
+      "x": 0,
+      "y": 512,
+      "w": 1536,
+      "h": 512
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.2,
+      "xOffset": 0,
+      "flipX": true,
+      "groundOffset": 23.0625,
+      "cw": 0.32406250000000003,
+      "ch": 0.60296875,
+      "cx": 0.001953125,
+      "cy": -0.07421875
+    },
+    "package_path": "assets/worlds/europe/EU02_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "6652533438aa05e55c742e32b5e070d577bbc5514491681cde16c4e0a6c5c077"
+  },
+  {
+    "id": "hazard:eu03:0",
+    "old": "Gaud\u00ed Mosaic Bench",
+    "new": "Festival Drum",
+    "atlas": "europe/EU03_OBJECT_ATLAS.png",
+    "source": "EU03_DRUM_original.png",
+    "erase": [
+      0,
+      0,
+      1500,
+      724
+    ],
+    "center_x": 726,
+    "contact_y": 643,
+    "max_w": 1150,
+    "max_h": 450,
+    "contact": "Bottom tangent of the drum rim.",
+    "source_sha256": "3739e7d086442bc56f3a08dc3345fa09da96b6d1d912b575ad1b2331c88b22b8",
+    "source_dimensions": [
+      1536,
+      1024
+    ],
+    "source_visible_crop": [
+      269,
+      168,
+      1271,
+      882
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 8362,
+    "uniform_scale": 0.6302521008403361,
+    "packed_dimensions": [
+      632,
+      450
+    ],
+    "packed_box": [
+      410,
+      194,
+      1042,
+      644
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "EU03_OBJECT_ATLAS.png",
+    "approved_group": "batch-01-revised",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1412,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 41,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 41,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.2,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 27,
+      "cw": 0.8357403355215172,
+      "ch": 0.5447513812154695,
+      "cx": -0.0003646973012399468,
+      "cy": -0.11049723756906082
+    },
+    "package_path": "assets/worlds/europe/EU03_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "16214b76193c74a33cd08fb318299375a7d0397eb584c930f13ab88870f0291f"
+  },
+  {
+    "id": "hazard:eu03:1",
+    "old": "Barcelona Drinking Fountain",
+    "new": "Chestnut-roasting Stand",
+    "atlas": "europe/EU03_OBJECT_ATLAS.png",
+    "source": "EU03_CHESTNUT_original.png",
+    "erase": [
+      1500,
+      0,
+      2172,
+      724
+    ],
+    "center_x": 1792,
+    "contact_y": 669,
+    "max_w": 340,
+    "max_h": 610,
+    "contact": "Bottom edges of stove feet.",
+    "source_sha256": "6a1da3d09a9b51a79a50aa643f82826e6df0a1e2ca885bbaa9d7b9c4aa5f6f67",
+    "source_dimensions": [
+      937,
+      1679
+    ],
+    "source_visible_crop": [
+      129,
+      223,
+      814,
+      1497
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 12982,
+    "uniform_scale": 0.478806907378336,
+    "packed_dimensions": [
+      328,
+      610
+    ],
+    "packed_box": [
+      1628,
+      60,
+      1956,
+      670
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "EU03_OBJECT_ATLAS.png",
+    "approved_group": "batch-01-revised",
+    "original_frame": {
+      "x": 1084.5,
+      "y": 0,
+      "w": 1084.5,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 500,
+      "r": 170,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 500,
+      "r": 170,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.2,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 24.5625,
+      "cw": 0.716867469879518,
+      "ch": 0.7502071823204419,
+      "cx": 0.00120481927710836,
+      "cy": -0.074585635359116
+    },
+    "package_path": "assets/worlds/europe/EU03_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "16214b76193c74a33cd08fb318299375a7d0397eb584c930f13ab88870f0291f"
+  },
+  {
+    "id": "hazard:na01:0",
+    "old": "Cactus",
+    "new": "Prickly-pear cactus",
+    "atlas": "north-america/NA01_HAZARD_ATLAS.png",
+    "source": "NA01_CACTUS_original.png",
+    "erase": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "center_x": 453,
+    "contact_y": 819,
+    "max_w": 480,
+    "max_h": 700,
+    "contact": "Grounded base; for bicycle bottom tangent of equal wheels.",
+    "source_sha256": "ac2118eafbefc7b6411f55f1ebc439fa3c2957c3001bb230766e06516bb4fb27",
+    "source_dimensions": [
+      1095,
+      1437
+    ],
+    "source_visible_crop": [
+      128,
+      158,
+      999,
+      1293
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 18926,
+    "uniform_scale": 0.5510907003444316,
+    "packed_dimensions": [
+      480,
+      625
+    ],
+    "packed_box": [
+      213,
+      195,
+      693,
+      820
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      1774,
+      887
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "NA01_HAZARD_ATLAS.png",
+    "approved_group": "batch-02b",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 887,
+      "h": 887
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.22,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 26.512500000000045,
+      "cw": 0.3235174746335964,
+      "ch": 0.5542728297632469,
+      "cx": 0.010710259301014657,
+      "cy": -0.07666290868094705
+    },
+    "package_path": "assets/worlds/north-america/NA01_HAZARD_ATLAS.png",
+    "final_atlas_sha256": "b6a4c37b643b921393b60ff58304331aa540bf1b4ed5aec09b391745fd670aaa"
+  },
+  {
+    "id": "hazard:na01:1",
+    "old": "Cattle bones",
+    "new": "Simplified cattle bones",
+    "atlas": "north-america/NA01_HAZARD_ATLAS.png",
+    "source": "NA01_BONES_original.png",
+    "erase": [
+      887,
+      0,
+      1774,
+      887
+    ],
+    "center_x": 1317,
+    "contact_y": 818,
+    "max_w": 748,
+    "max_h": 300,
+    "contact": "Grounded base; for bicycle bottom tangent of equal wheels.",
+    "source_sha256": "98377a23a108213c66ffbe3710eed1d18eef4bb2f547675d62a494ca215697a3",
+    "source_dimensions": [
+      1855,
+      848
+    ],
+    "source_visible_crop": [
+      304,
+      196,
+      1687,
+      738
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 14534,
+    "uniform_scale": 0.5408532176428055,
+    "packed_dimensions": [
+      748,
+      293
+    ],
+    "packed_box": [
+      943,
+      526,
+      1691,
+      819
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      1774,
+      887
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "NA01_HAZARD_ATLAS.png",
+    "approved_group": "batch-02b",
+    "original_frame": {
+      "x": 887,
+      "y": 0,
+      "w": 887,
+      "h": 887
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.26,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 28.03125,
+      "cw": 0.5719052987598647,
+      "ch": 0.20085682074408118,
+      "cx": -0.015219842164599762,
+      "cy": -0.07891770011273957
+    },
+    "package_path": "assets/worlds/north-america/NA01_HAZARD_ATLAS.png",
+    "final_atlas_sha256": "b6a4c37b643b921393b60ff58304331aa540bf1b4ed5aec09b391745fd670aaa"
+  },
+  {
+    "id": "hazard:na02:0",
+    "old": "Fallen log",
+    "new": "Fallen log with pale broken end",
+    "atlas": "north-america/NA02_HAZARD_ATLAS.png",
+    "source": "NA02_LOG_original.png",
+    "erase": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "center_x": 480,
+    "contact_y": 747,
+    "max_w": 790,
+    "max_h": 320,
+    "contact": "Grounded base; for bicycle bottom tangent of equal wheels.",
+    "source_sha256": "c6d94cb8954df0876138f71a4f7250fb6793bd989294c070dab134057b7203fe",
+    "source_dimensions": [
+      1983,
+      793
+    ],
+    "source_visible_crop": [
+      422,
+      223,
+      1564,
+      689
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 6777,
+    "uniform_scale": 0.6866952789699571,
+    "packed_dimensions": [
+      784,
+      320
+    ],
+    "packed_box": [
+      88,
+      428,
+      872,
+      748
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      1774,
+      887
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "NA02_HAZARD_ATLAS.png",
+    "approved_group": "batch-02b",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 887,
+      "h": 887
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.22,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 33.83437500000002,
+      "cw": 0.6140698985343856,
+      "ch": 0.23228861330326944,
+      "cx": 0.045095828635851154,
+      "cy": -0.1567080045095829
+    },
+    "package_path": "assets/worlds/north-america/NA02_HAZARD_ATLAS.png",
+    "final_atlas_sha256": "92e5f673f22f39bb3c450aa28dfc1e7f5a21d2de4e10c860154d623c672b9c66"
+  },
+  {
+    "id": "hazard:na02:1",
+    "old": "Boulder",
+    "new": "Beaver",
+    "atlas": "north-america/NA02_HAZARD_ATLAS.png",
+    "source": "NA02_BEAVER_original.png",
+    "erase": [
+      887,
+      0,
+      1774,
+      887
+    ],
+    "center_x": 1361,
+    "contact_y": 750,
+    "max_w": 750,
+    "max_h": 450,
+    "contact": "Grounded paws and flat tail underside",
+    "source_sha256": "8f457b7ea7681e3d567361ae220c1530b2ae29e0a81033ee7a9a8e2014db7d2f",
+    "source_dimensions": [
+      1682,
+      935
+    ],
+    "source_visible_crop": [
+      120,
+      233,
+      1593,
+      776
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 8003,
+    "uniform_scale": 0.5091649694501018,
+    "packed_dimensions": [
+      750,
+      276
+    ],
+    "packed_box": [
+      986,
+      475,
+      1736,
+      751
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      1774,
+      887
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "NA02_HAZARD_ATLAS.png",
+    "approved_group": "batch-02a",
+    "original_frame": {
+      "x": 887,
+      "y": 0,
+      "w": 887,
+      "h": 887
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.2,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 36,
+      "cw": 0.52,
+      "ch": 0.52,
+      "cx": 0.04,
+      "cy": -0.12
+    },
+    "package_path": "assets/worlds/north-america/NA02_HAZARD_ATLAS.png",
+    "final_atlas_sha256": "92e5f673f22f39bb3c450aa28dfc1e7f5a21d2de4e10c860154d623c672b9c66"
+  },
+  {
+    "id": "hazard:oc01:0",
+    "old": "Spinifex tussock",
+    "new": "Perentie",
+    "atlas": "oceania/OC01_OBJECT_ATLAS.png",
+    "source": "hazard_oc01_0_original.png",
+    "erase": [
+      0,
+      0,
+      1086,
+      724
+    ],
+    "center_x": 545,
+    "contact_y": 643,
+    "max_w": 946,
+    "max_h": 463,
+    "contact": "Lowest visible pixel aligned to original artwork contact row; review semantic foot contact in scene.",
+    "source_sha256": "daba646286d8a582771517bed86c30869e8d25815bd92590844103e1f8cb55b3",
+    "source_dimensions": [
+      1981,
+      793
+    ],
+    "source_visible_crop": [
+      99,
+      162,
+      1889,
+      715
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 16663,
+    "uniform_scale": 0.5284916201117319,
+    "packed_dimensions": [
+      946,
+      292
+    ],
+    "packed_box": [
+      72,
+      352,
+      1018,
+      644
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "OC01_OBJECT_ATLAS.png",
+    "approved_group": "batch-04",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 68,
+      "r": 64,
+      "t": 181,
+      "b": 78
+    },
+    "target_crop": {
+      "l": 68,
+      "r": 64,
+      "t": 181,
+      "b": 78
+    },
+    "placement_reference": {
+      "scale": 0.2,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 17.4375,
+      "cw": 0.6771488469601676,
+      "ch": 0.671225806451613,
+      "cx": 0,
+      "cy": -0.008602150537634357
+    },
+    "package_path": "assets/worlds/oceania/OC01_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "525de46b80c119bee33d7d17b09917d95bf71f75699d5bce11b0b7a2e891d86e"
+  },
+  {
+    "id": "hazard:oc01:1",
+    "old": "Weathered timber trail-marker post",
+    "new": "Kangaroo-crossing sign",
+    "atlas": "oceania/OC01_OBJECT_ATLAS.png",
+    "source": "hazard_oc01_1_original.png",
+    "erase": [
+      1086,
+      0,
+      2172,
+      724
+    ],
+    "center_x": 1628,
+    "contact_y": 622,
+    "max_w": 390,
+    "max_h": 587,
+    "contact": "Lowest visible pixel aligned to original artwork contact row; review semantic foot contact in scene.",
+    "proposed_crop": {
+      "l": 342,
+      "r": 342,
+      "t": 36,
+      "b": 99
+    },
+    "source_sha256": "0b3087595f4eb906ed186a0201048f5bb1eb57f8ad9514b38963fa39bf69f732",
+    "source_dimensions": [
+      1030,
+      1526
+    ],
+    "source_visible_crop": [
+      32,
+      42,
+      997,
+      1491
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 7169,
+    "uniform_scale": 0.40414507772020725,
+    "packed_dimensions": [
+      390,
+      586
+    ],
+    "packed_box": [
+      1433,
+      37,
+      1823,
+      623
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "OC01_OBJECT_ATLAS.png",
+    "approved_group": "batch-04-revised",
+    "original_frame": {
+      "x": 1086,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 467,
+      "r": 468,
+      "t": 36,
+      "b": 99
+    },
+    "target_crop": {
+      "l": 342,
+      "r": 342,
+      "t": 36,
+      "b": 99
+    },
+    "placement_reference": {
+      "scale": 0.19,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.232812499999966,
+      "cw": 0.8218543046357616,
+      "ch": 0.8427843803056027,
+      "cx": -0.0033112582781457123,
+      "cy": -0.00339558573853993
+    },
+    "package_path": "assets/worlds/oceania/OC01_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "525de46b80c119bee33d7d17b09917d95bf71f75699d5bce11b0b7a2e891d86e"
+  },
+  {
+    "id": "hazard:oc02:1",
+    "old": "Low folded beach chair",
+    "new": "Folded beach chair",
+    "atlas": "oceania/OC02_OBJECT_ATLAS.png",
+    "source": "hazard_oc02_1_original.png",
+    "erase": [
+      1086,
+      0,
+      2172,
+      724
+    ],
+    "center_x": 1641,
+    "contact_y": 630,
+    "max_w": 618,
+    "max_h": 219,
+    "contact": "Lowest visible pixel aligned to original artwork contact row; review semantic foot contact in scene.",
+    "source_sha256": "2ba495b7666db7c32e75b256000af28040ae7665c50a040a4fbac48140811f56",
+    "source_dimensions": [
+      2172,
+      724
+    ],
+    "source_visible_crop": [
+      353,
+      131,
+      1849,
+      636
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 6524,
+    "uniform_scale": 0.41310160427807485,
+    "packed_dimensions": [
+      618,
+      209
+    ],
+    "packed_box": [
+      1332,
+      422,
+      1950,
+      631
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "OC02_OBJECT_ATLAS.png",
+    "approved_group": "batch-04",
+    "original_frame": {
+      "x": 1086,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 242,
+      "r": 218,
+      "t": 412,
+      "b": 91
+    },
+    "target_crop": {
+      "l": 242,
+      "r": 218,
+      "t": 412,
+      "b": 91
+    },
+    "placement_reference": {
+      "scale": 0.28,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 18.1875,
+      "cw": 0.673482428115016,
+      "ch": 0.6584615384615384,
+      "cx": -0.0015974440894568342,
+      "cy": -0.013574660633484115
+    },
+    "package_path": "assets/worlds/oceania/OC02_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "705feedacd75263a7bfcfdbdca12408efd7f12c4ddc8a1d92bf21525a9aaf21d"
+  },
+  {
+    "id": "hazard:oc03:1",
+    "old": "Lidded camping cookpot",
+    "new": "Hiking boots",
+    "atlas": "oceania/OC03_OBJECT_ATLAS.png",
+    "source": "hazard_oc03_1_original.png",
+    "erase": [
+      1086,
+      0,
+      2172,
+      724
+    ],
+    "center_x": 1630,
+    "contact_y": 622,
+    "max_w": 461,
+    "max_h": 287,
+    "contact": "Lowest visible pixel aligned to original artwork contact row; review semantic foot contact in scene.",
+    "proposed_crop": null,
+    "source_sha256": "815a5f829b9301e09d4cee06e4ee7a1e19b57ad0913f2ed93f15dc17f7bf8357",
+    "source_dimensions": [
+      1536,
+      1024
+    ],
+    "source_visible_crop": [
+      31,
+      129,
+      1516,
+      939
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 14531,
+    "uniform_scale": 0.31043771043771046,
+    "packed_dimensions": [
+      461,
+      251
+    ],
+    "packed_box": [
+      1400,
+      372,
+      1861,
+      623
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "OC03_OBJECT_ATLAS.png",
+    "approved_group": "batch-04-revised",
+    "original_frame": {
+      "x": 1086,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 309,
+      "r": 308,
+      "t": 336,
+      "b": 99
+    },
+    "target_crop": {
+      "l": 309,
+      "r": 308,
+      "t": 336,
+      "b": 99
+    },
+    "placement_reference": {
+      "scale": 0.24,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 19.38749999999999,
+      "cw": 0.8391257995735607,
+      "ch": 0.8294117647058823,
+      "cx": 0.002132196162046962,
+      "cy": -0.01384083044982698
+    },
+    "package_path": "assets/worlds/oceania/OC03_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "dd4f52ef92f42e1ca586d46334ad45e159b2284a71a44c09f8953d21cf6e5143"
+  },
+  {
+    "id": "hazard:sa01:0",
+    "old": "Giant root / stump",
+    "new": "Snapped hardwood stump",
+    "atlas": "south-america/SA01_OBJECT_ATLAS.png",
+    "source": "SA01_STUMP_original.png",
+    "erase": [
+      0,
+      0,
+      910,
+      887
+    ],
+    "center_x": 451,
+    "contact_y": 817,
+    "max_w": 840,
+    "max_h": 700,
+    "contact": "Grounded base; for bicycle bottom tangent of equal wheels.",
+    "source_sha256": "8de4d461e180dfb87b80284adf813632ff601d0dc095a1ff51ed800321210efa",
+    "source_dimensions": [
+      1295,
+      1214
+    ],
+    "source_visible_crop": [
+      50,
+      174,
+      1245,
+      1111
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 7009,
+    "uniform_scale": 0.702928870292887,
+    "packed_dimensions": [
+      840,
+      659
+    ],
+    "packed_box": [
+      31,
+      159,
+      871,
+      818
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      1774,
+      887
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "SA01_OBJECT_ATLAS.png",
+    "approved_group": "batch-02b",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 887,
+      "h": 887
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.17,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 27,
+      "cw": 0.58,
+      "ch": 0.64,
+      "cx": 0,
+      "cy": -0.08
+    },
+    "package_path": "assets/worlds/south-america/SA01_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "f0314cce83ef088b90614a1e92d68b458b95a8208cba32518b64ed6bc8ceeed0"
+  },
+  {
+    "id": "hazard:sa01:1",
+    "old": "Tropical Plant Cluster",
+    "new": "Yellow-footed Tortoise",
+    "atlas": "south-america/SA01_OBJECT_ATLAS.png",
+    "source": "SA01_TORTOISE_original.png",
+    "erase": [
+      910,
+      0,
+      1774,
+      887
+    ],
+    "center_x": 1343,
+    "contact_y": 823,
+    "max_w": 800,
+    "max_h": 430,
+    "contact": "Lowest planted toe/claw tips; no detached floor shadow.",
+    "source_sha256": "45dc288b0cf6daa1019421f37873b1c5f2242ae03f1e2cb293060b05a5bd3e33",
+    "source_dimensions": [
+      1536,
+      1024
+    ],
+    "source_visible_crop": [
+      64,
+      160,
+      1503,
+      910
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 17070,
+    "uniform_scale": 0.5559416261292565,
+    "packed_dimensions": [
+      800,
+      417
+    ],
+    "packed_box": [
+      943,
+      407,
+      1743,
+      824
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      1774,
+      887
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "SA01_OBJECT_ATLAS.png",
+    "approved_group": "batch-01-revised",
+    "original_frame": {
+      "x": 887,
+      "y": 0,
+      "w": 887,
+      "h": 887
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.2,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 25.5,
+      "cw": 0.6738669673055243,
+      "ch": 0.34804960541149943,
+      "cx": -0.004509582863585104,
+      "cy": -0.07215332581736189
+    },
+    "package_path": "assets/worlds/south-america/SA01_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "f0314cce83ef088b90614a1e92d68b458b95a8208cba32518b64ed6bc8ceeed0"
+  },
+  {
+    "id": "hazard:sa02:0",
+    "old": "Rock Outcrop",
+    "new": "Andean Vizcacha",
+    "atlas": "south-america/SA02_OBJECT_ATLAS.png",
+    "source": "SA02_VIZCACHA_original.png",
+    "erase": [
+      0,
+      0,
+      1200,
+      724
+    ],
+    "center_x": 688,
+    "contact_y": 632,
+    "max_w": 750,
+    "max_h": 400,
+    "contact": "Grounded paws.",
+    "source_sha256": "5bc190a4074e377cc3c47ec4be339f02bab40bb52517044424f47ac3b4c58c5a",
+    "source_dimensions": [
+      1491,
+      1055
+    ],
+    "source_visible_crop": [
+      249,
+      205,
+      1337,
+      937
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 8370,
+    "uniform_scale": 0.546448087431694,
+    "packed_dimensions": [
+      595,
+      400
+    ],
+    "packed_box": [
+      390,
+      233,
+      985,
+      633
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      2172,
+      724
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "SA02_OBJECT_ATLAS.png",
+    "approved_group": "batch-01-revised",
+    "original_frame": {
+      "x": 0,
+      "y": 0,
+      "w": 1086,
+      "h": 724
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.22,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 28.884375000000034,
+      "cw": 0.5027992633517496,
+      "ch": 0.4038674033149171,
+      "cx": 0.13029465930018413,
+      "cy": -0.12569060773480667
+    },
+    "package_path": "assets/worlds/south-america/SA02_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "f21dfafdf0f743e8193cd331ccec87eaa2330d182a6e5824410b4f24f96d96b0"
+  },
+  {
+    "id": "hazard:sa03:1",
+    "old": "Beach barrier",
+    "new": "Boogie boards",
+    "atlas": "south-america/SA03_OBJECT_ATLAS.png",
+    "source": "SA03_BOARDS_original.png",
+    "erase": [
+      875,
+      0,
+      1774,
+      887
+    ],
+    "center_x": 1304,
+    "contact_y": 793,
+    "max_w": 800,
+    "max_h": 350,
+    "contact": "Lowest board tail corners",
+    "source_sha256": "2ff0238b7e88b66cd96088a2e5c3e49128abc8a4a68b81fc35fc944f39b41f39",
+    "source_dimensions": [
+      1619,
+      972
+    ],
+    "source_visible_crop": [
+      336,
+      212,
+      1296,
+      864
+    ],
+    "alpha_cleanup_threshold": 8,
+    "cleared_faint_pixels": 6428,
+    "uniform_scale": 0.5368098159509203,
+    "packed_dimensions": [
+      515,
+      350
+    ],
+    "packed_box": [
+      1046,
+      444,
+      1561,
+      794
+    ],
+    "artwork_status": "approved",
+    "collision_status": "not validated; Workbench must update and test affected bounds",
+    "atlas_dimensions": [
+      1774,
+      887
+    ],
+    "unmodified_region_pixel_comparison": "identical",
+    "filename": "SA03_OBJECT_ATLAS.png",
+    "approved_group": "batch-02a",
+    "original_frame": {
+      "x": 887,
+      "y": 0,
+      "w": 887,
+      "h": 887
+    },
+    "original_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "target_crop": {
+      "l": 0,
+      "r": 0,
+      "t": 0,
+      "b": 0
+    },
+    "placement_reference": {
+      "scale": 0.22,
+      "xOffset": 0,
+      "flipX": false,
+      "groundOffset": 30,
+      "cw": 0.6432018038331454,
+      "ch": 0.22462232243517477,
+      "cx": -0.027057497181510737,
+      "cy": -0.10597519729425031
+    },
+    "package_path": "assets/worlds/south-america/SA03_OBJECT_ATLAS.png",
+    "final_atlas_sha256": "ae3668b5d1902b3ba6afff48d847558227ffea9723fe4b83cb567245e7f613d2"
+  }
+]

@@ -1,0 +1,362 @@
+{
+  "batch": "RW-AF",
+  "approval": "All final continent reward artwork approved by user; not integrated",
+  "rect_convention": "[x,y,width,height], source pixels; right/bottom exclusive",
+  "trophy_frames": [
+    {
+      "id": "TROPHY_AF01",
+      "state": "unearned",
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_AF02",
+      "state": "unearned",
+      "rect": [
+        256,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_AF03",
+      "state": "unearned",
+      "rect": [
+        512,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_AF01",
+      "state": "earned",
+      "rect": [
+        0,
+        256,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_AF02",
+      "state": "earned",
+      "rect": [
+        256,
+        256,
+        256,
+        256
+      ]
+    },
+    {
+      "id": "TROPHY_AF03",
+      "state": "earned",
+      "rect": [
+        512,
+        256,
+        256,
+        256
+      ]
+    }
+  ],
+  "passport_frames": [
+    {
+      "state": "unearned",
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "state": "earned",
+      "rect": [
+        0,
+        256,
+        256,
+        256
+      ]
+    }
+  ],
+  "passport_consolidation": "Use ../../shared/assets/PASS_STAMPS_ATLAS.png column 3",
+  "dependencies": [
+    {
+      "package": "RW_Shared_Utilities.zip",
+      "version": "1.0",
+      "frames": {
+        "heart_empty": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "heart_full": [
+          32,
+          0,
+          32,
+          32
+        ],
+        "perfect_star": [
+          64,
+          0,
+          32,
+          32
+        ]
+      }
+    }
+  ],
+  "finishing": "Alpha threshold128; largest connected component removes detached speckles, hard alpha. Trophy proportional nearest-neighbor fit to192x208, baseline232. Passport bounded silhouette normalized224x224 at16,16 to correct slight oval. Unearned BT.601 grayscale with identical alpha.",
+  "placement": [
+    {
+      "id": "TROPHY_AF01",
+      "source_bbox": [
+        99,
+        181,
+        1153,
+        1101
+      ],
+      "content_bbox": [
+        32,
+        64,
+        224,
+        232
+      ],
+      "anchor": [
+        128,
+        232
+      ]
+    },
+    {
+      "id": "TROPHY_AF02",
+      "source_bbox": [
+        116,
+        175,
+        1140,
+        1083
+      ],
+      "content_bbox": [
+        32,
+        62,
+        224,
+        232
+      ],
+      "anchor": [
+        128,
+        232
+      ]
+    },
+    {
+      "id": "TROPHY_AF03",
+      "source_bbox": [
+        235,
+        87,
+        1046,
+        1139
+      ],
+      "content_bbox": [
+        48,
+        24,
+        208,
+        232
+      ],
+      "anchor": [
+        128,
+        232
+      ]
+    },
+    {
+      "id": "PASS_STAMP_AF",
+      "source_bbox": [
+        35,
+        73,
+        1219,
+        1187
+      ],
+      "content_bbox": [
+        16,
+        16,
+        240,
+        240
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/PASS_AF_ATLAS.png",
+      "size": [
+        256,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "50d49d2f0eef02ac15c5df8c3a50c0abe3dc9909f85b78b1ccd3f6c366b6a4cc"
+    },
+    {
+      "file": "assets/PASS_STAMP_AF.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "c2c1e128cd875051fafe2de17c61c86522b2a7492f00ed7b220b7acccab08f5e"
+    },
+    {
+      "file": "assets/PASS_STAMP_AF_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "e36063b85c210aaa5cc6a034280986531080a632ee8885370ce4ae2e8b1c26f6"
+    },
+    {
+      "file": "assets/TROPHY_AF01.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "95e43469bd62b13e68fba42f9f997dbf9003b4298107462629e135f23a2f8139"
+    },
+    {
+      "file": "assets/TROPHY_AF01_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "f36df56cb8b617b644e9feb3cb85e4f74f611783cc21c917fd9e7b812a84a1e7"
+    },
+    {
+      "file": "assets/TROPHY_AF02.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "d6f200cbabf459569389b70b3b0ff129140418c7c7c101251bd524888c8dc9c7"
+    },
+    {
+      "file": "assets/TROPHY_AF02_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "f41c5be03300da0047792653c43ba3e3d5e5e32188b64f4753df6f7075b7b00d"
+    },
+    {
+      "file": "assets/TROPHY_AF03.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "de9a83ab2f0c7d87648584acc0d98ddb5d5b894fa19c96f2e91fd49c711f65d2"
+    },
+    {
+      "file": "assets/TROPHY_AF03_UNEARNED.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "8825ecd26d9b5bba2c435a05f57f97454440347e023d4cd8178ff0ba1a48c6ff"
+    },
+    {
+      "file": "assets/TROPHY_AF_ATLAS.png",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "9e924615174b1332dba09ed3b11b16daa14df821293a7e9d51c5ca55dfd322b3"
+    },
+    {
+      "file": "originals/PASS_STAMP_AF_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "61582e461f946810f68fb11c39d23e6d2fec9c1883193b371821125080c8e9b7"
+    },
+    {
+      "file": "originals/TROPHY_AF01_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "13f8f7f37588137559177ece490ad87b9550da787c86837a64a1581ed699741a"
+    },
+    {
+      "file": "originals/TROPHY_AF02_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "b5e31cb8df8e2cafabf619def3f968d27a6c18175368cd4a4e02fcbc882c86db"
+    },
+    {
+      "file": "originals/TROPHY_AF03_SOURCE.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "f8491ad6a8837d27b5270279d0131b05b83f340ae5610c1414d026351cbf9ad6"
+    },
+    {
+      "file": "previews/RW_AF_assisted.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "b618a1d0b56f6e2b335d69529bcc1e4f318ec29dc34e7d5514110b940436bb8b"
+    },
+    {
+      "file": "previews/RW_AF_mixed.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "7f284529d2924377f61ffe5369ccecec36a43c5c9ee39cdbf12533a6d6a2c467"
+    },
+    {
+      "file": "previews/RW_AF_perfect.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "0e9c6213eaead9c1b461e93110eeedcbf28be2e15e01fbc5760002d2e53b6010"
+    },
+    {
+      "file": "previews/RW_AF_unearned.png",
+      "size": [
+        844,
+        390
+      ],
+      "mode": "RGB",
+      "sha256": "e7099a294aa233d12adc02d8daacc090a1e90fe5bc6077c1758ba6995ef3285d"
+    }
+  ],
+  "stage_labels": {
+    "AF01": "Savannah",
+    "AF02": "Sossusvlei",
+    "AF03": "Marrakesh"
+  }
+}

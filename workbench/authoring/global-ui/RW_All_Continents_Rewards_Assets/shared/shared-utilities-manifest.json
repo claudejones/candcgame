@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "atlas": "assets/UI_REWARD_UTILITIES_ATLAS.png",
+  "size": [
+    96,
+    32
+  ],
+  "rect_convention": "[x,y,width,height] exclusive right/bottom",
+  "frames": [
+    {
+      "id": "heart_empty",
+      "rect": [
+        0,
+        0,
+        32,
+        32
+      ]
+    },
+    {
+      "id": "heart_full",
+      "rect": [
+        32,
+        0,
+        32,
+        32
+      ]
+    },
+    {
+      "id": "perfect_star",
+      "rect": [
+        64,
+        0,
+        32,
+        32
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/UI_REWARD_UTILITIES_ATLAS.png",
+      "size": [
+        96,
+        32
+      ],
+      "mode": "RGBA",
+      "sha256": "afcea16a2aa1858d2fd8c71dc415a3297073465d8d92114b1306b166d6de05c9"
+    },
+    {
+      "file": "originals/UI_REWARD_UTILITIES_AUTHORED.png",
+      "size": [
+        96,
+        32
+      ],
+      "mode": "RGBA",
+      "sha256": "afcea16a2aa1858d2fd8c71dc415a3297073465d8d92114b1306b166d6de05c9"
+    },
+    {
+      "file": "previews/Shared_Utilities_Preview.png",
+      "size": [
+        600,
+        170
+      ],
+      "mode": "RGB",
+      "sha256": "af3833f5ed54160fe501f4b16d71a887ba683b806e2750e47a3fedbc9b73e8ea"
+    }
+  ]
+}

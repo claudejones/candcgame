@@ -1,0 +1,16 @@
+{
+  "source_sha256": "a9785e122c97e6db78764cbbfd3d5b6a5c76370251845121c0a20bf19608bc27",
+  "runtime_sha256": "4a7bc1eb6048739ded799309fe6c9416e46fbdbc03db5ec2690a8fadd8baf2cb",
+  "cell": [
+    660,
+    660
+  ],
+  "canonical_body_identical": true,
+  "propeller_period_ms": 120,
+  "display_cell_css_px": 52,
+  "visible_frame_width_css_px": [
+    48.14,
+    50.35
+  ],
+  "alpha_cutoff": 128
+}

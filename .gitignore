@@ -1,4 +1,9 @@
-/assets/phase8-candidates/
-/tmp/
-__pycache__/
-*.py[cod]
+node_modules/
+_site/
+.DS_Store
+workbench/*-check.png
+workbench/*-review.png
+workbench/map-layout-*.png
+/*-check.png
+
+node_modules

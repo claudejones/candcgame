@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "stageId": "oc02",
+  "readiness": "asset-ready",
+  "downstream": {
+    "calibration": "pending",
+    "release": "pending"
+  },
+  "assets": {
+    "FAR": {
+      "path": "assets/worlds/oceania/OC02_BG_DISTANT_QUEENSLAND.png",
+      "sha256": "efb61ce7e19464cba33a6bca343b456536f5255e8f3bbcb6279840eb95b72e7c",
+      "width": 2172,
+      "height": 724
+    },
+    "MID": {
+      "path": "assets/worlds/oceania/OC02_BG_MID_QUEENSLAND.png",
+      "sha256": "11bf9f59e9836d40ce31bc6d3bd7484d9a4953c0e4a277f82e23c0aedbda168a",
+      "width": 2172,
+      "height": 724
+    },
+    "GROUND": {
+      "path": "assets/worlds/oceania/OC02_GROUND_QUEENSLAND.png",
+      "sha256": "71b9185aa75049d9792f5f36bc6a0bf27dd32c7167bcbecae20ee8b40f05e4a0",
+      "width": 2172,
+      "height": 724
+    },
+    "OBJECT_ATLAS": {
+      "path": "assets/worlds/oceania/OC02_OBJECT_ATLAS.png",
+      "sha256": "705feedacd75263a7bfcfdbdca12408efd7f12c4ddc8a1d92bf21525a9aaf21d",
+      "width": 2172,
+      "height": 724
+    },
+    "FLYING": {
+      "path": "assets/worlds/oceania/OC02_HAZARD_LORIKEET.png",
+      "sha256": "188f443121d376b2a72e5e5f8bce84049d196a326b3c27f09995278636ae0b71",
+      "width": 2172,
+      "height": 724
+    }
+  },
+  "landscape": {
+    "contractVersion": "phase8-landscape-1",
+    "source": {
+      "width": 2172,
+      "height": 724
+    },
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "groundSurfaceY": 410
+    },
+    "layers": {
+      "FAR": {
+        "sourceY": 0,
+        "scale": 1.25
+      },
+      "MID": {
+        "sourceAnchorY": 621,
+        "offsetY": 0,
+        "scale": 1
+      },
+      "GROUND": {
+        "sourceAnchorY": 393,
+        "offsetY": 0,
+        "scale": 1
+      }
+    }
+  },
+  "hazards": [
+    {
+      "name": "Life ring on wooden stand",
+      "kind": "ground",
+      "atlasKey": "oc02Hazards",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.2,
+      "crop": {
+        "l": 319,
+        "r": 320,
+        "t": 38,
+        "b": 100
+      },
+      "cw": 0.9038031319910514,
+      "ch": 0.8873720136518771,
+      "cx": -0.0011185682326621924,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Low folded beach chair",
+      "kind": "ground",
+      "atlasKey": "oc02Hazards",
+      "rect": {
+        "x": 1086,
+        "y": 0,
+        "w": 1086,
+        "h": 724
+      },
+      "sourceAnchor": {
+        "x": 543,
+        "y": 620
+      },
+      "groundOffset": 0,
+      "scale": 0.28,
+      "crop": {
+        "l": 242,
+        "r": 218,
+        "t": 412,
+        "b": 91
+      },
+      "cw": 0.9185303514376997,
+      "ch": 0.8144796380090498,
+      "cx": -0.003993610223642172,
+      "cy": 0,
+      "sourceFacing": "none",
+      "gameplayFacing": "none"
+    },
+    {
+      "name": "Rainbow lorikeet",
+      "kind": "flying",
+      "atlasKey": "oc02Bird",
+      "frameW": 543,
+      "frameH": 724,
+      "frames": 4,
+      "fps": 8,
+      "sourceAnchor": {
+        "x": 271,
+        "y": 362
+      },
+      "scale": 0.23,
+      "crop": {
+        "l": 32,
+        "r": 126,
+        "t": 44,
+        "b": 152
+      },
+      "cw": 0.5662337662337662,
+      "ch": 0.2518939393939394,
+      "cx": 0.18051948051948052,
+      "cy": 0.07291666666666667,
+      "flightOffsetY": {
+        "high": 0,
+        "low": 0
+      },
+      "flipX": true,
+      "sourceFacing": "right",
+      "gameplayFacing": "left"
+    }
+  ],
+  "checks": {
+    "technical": true,
+    "composition": true,
+    "animation": true,
+    "basicRendering": true
+  },
+  "evidence": "docs/phase8-qa/OC02_WORKBENCH_IMPORT_QA.md",
+  "knownIssues": [
+    "Starting settings are provisional; user artwork review and calibration remain pending."
+  ]
+}

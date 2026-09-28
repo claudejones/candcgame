@@ -1,0 +1,14 @@
+interface:
+  display_name: candc game audio
+  short_description: Audio production workflow for the Claude & Constance Around the
+    World 8-bit game. Use for Suno music/SFX prompting, audio planning, naming, QA,
+    tracking, and game-integration handoff.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

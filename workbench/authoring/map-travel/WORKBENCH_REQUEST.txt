@@ -1,0 +1,19 @@
+Use $candc-workbench to integrate MAP_TRAVEL_PLANE_SOURCE.png into the world map.
+
+TRAVEL BEHAVIOR
+Use the plane only for travel between continents. Keep the selected character marker for movement between stages within a continent. During continent travel, temporarily hide the character marker, animate the plane along the route, then remove the plane and show the character marker at the destination. Trigger this through the existing progression/travel flow; browsing continent details should not launch a flight.
+
+SPRITE PREPARATION
+The supplied PNG is the original generated two-frame source, not a calibrated runtime atlas. It contains two propeller positions side by side. Inspect its actual geometry and prepare consistent crops with transparent padding. Align fuselage, wings and nose hub so the body stays steady as the propeller changes. Verify actual alpha and remove residual edge haze if needed. Do not assume generated frame bodies are pixel-identical. If body differences cause visible wobble, retain one canonical body and use only the changing propeller region from the second frame. Preserve the original file and save finished runtime derivatives separately. Report an art issue if that cannot be done cleanly.
+
+APPEARANCE
+Start with a visible airplane width of48 CSS pixels on a landscape phone, adjusting within40–56 pixels. Size refers to visible art, not transparent cell width. Preserve proportions and crisp pixel rendering. Alternate propeller frames every120ms during flight. The source faces right; mirror horizontally for leftward travel, keeping the plane upright.
+
+MOTION
+Animate along a gentle curved route over approximately2seconds with smooth departure/arrival. Render above map/route and below navigation controls. Avoid continent labels where practical. Use the existing route geometry and map coordinate transform so alignment survives resizing.
+
+INTEGRATION
+Preserve existing unlocks, stage access, saves and destination selection. Commit arrival exactly once; repeated taps must not create duplicate flights. Respect current pause behavior. Under reduced motion use a brief departure-to-arrival transition without continuous flight. If the travel animation is interrupted, reconcile to a valid existing progression state rather than losing an unlock or duplicating arrival.
+
+VALIDATION
+Provide a preview of one flight in each direction. Check both propeller frames at phone size for body wobble, clipped wings, edge haze and correct direction. Verify the selected character marker returns at the destination and ordinary stage-to-stage movement still uses that marker. No automatic publication is requested.

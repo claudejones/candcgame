@@ -1,0 +1,3 @@
+Give this entire ZIP to the Workbench agent and ask it to follow WORKBENCH_REQUEST.txt.
+
+Included: original revised two-frame plane PNG and complete integration instructions. This is an asset handoff; the plane has not been integrated or calibrated in the game by this delivery.

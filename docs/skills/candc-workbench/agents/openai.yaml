@@ -1,0 +1,14 @@
+interface:
+  display_name: C&C Workbench
+  short_description: Continue Workbench, runtime, and game release work
+  default_prompt: Use $candc-workbench to resume the current C&C Workbench milestone,
+    preserving existing artwork and configuration.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
