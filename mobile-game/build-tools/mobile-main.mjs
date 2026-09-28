@@ -30,23 +30,27 @@ addEventListener('keyup',e=>{if(['ArrowDown','KeyS'].includes(e.code))release();
 document.addEventListener('pointerdown',()=>{if(!portrait.matches)ui?.audio.unlock();},{capture:true});
 // Hold decoded map/UI artwork through the session so navigation cannot reveal partial art.
 const screenArtwork=[];
-async function prepareScreens(){
- const response=await fetch('../assets/global-ui/manifest.json');
+let screenManifest=null,worldAssets=null;
+async function prepareScreens(world=false){
+ if(worldAssets&&world)return worldAssets;
+ if(!screenManifest){const response=await fetch('../assets/global-ui/manifest.json');
  if(!response.ok)throw Error('Map artwork could not load. Check your connection and retry.');
- const manifest=await response.json();
- await Promise.all(Object.entries(manifest).filter(([name])=>/^(MAP_|UI_|BRAND_|G1B_)/.test(name)&&/\.png$/.test(name)).map(async([name,record])=>{
+ screenManifest=await response.json();}
+ const work=Promise.all(Object.entries(screenManifest).filter(([name])=>/\.png$/.test(name)&&(world?/^MAP_|^UI_CONTINENT/.test(name):/^(UI_|BRAND_GAME_LOGO|G1B_)/.test(name)&&!name.startsWith('UI_CONTINENT'))).map(async([name,record])=>{
   const img=new Image();
   await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(Error('Map artwork could not load. Check your connection and retry.'));img.src='../assets/global-ui/'+record.file+'?v='+record.sha256.slice(0,12);});
   if(img.decode)await img.decode();screenArtwork.push(img);
  }));
- await document.fonts?.ready;
+ if(world)worldAssets=work.catch(e=>{worldAssets=null;throw e;});
+ await (world?worldAssets:work);await document.fonts?.ready;
 }
 async function boot(){
+ void sharedAudio.prefetch('C_AND_C_TITLE');
  await prepareScreens();
  const response=await fetch('./release.json');if(!response.ok)throw Error('The game could not load. Check your connection and retry.');const data=await response.json();
  const {config,draft,items,catalog}=data;
  const playerStorage={getItem:key=>localStorage.getItem('candc.mobile-test.'+key),setItem:(key,value)=>localStorage.setItem('candc.mobile-test.'+key,value)};
- ui=await setupGlobalGame({panel,surface,playerStorage,isVisible:()=>!document.hidden&&!portrait.matches,guideData:{items,catalog,draft},getRun:()=>run,pause,cancelDemo:()=>{generation++;if(auto){run=null;images={};auto=null;}},launch:async selection=>{
+ ui=await setupGlobalGame({panel,surface,playerStorage,prepareWorld:()=>prepareScreens(true),isVisible:()=>!document.hidden&&!portrait.matches,guideData:{items,catalog,draft},getRun:()=>run,pause,cancelDemo:()=>{generation++;if(auto){run=null;images={};auto=null;}},launch:async selection=>{
   const token=++generation;pause();run=null;images={};auto=null;
   const options={config,draft,items,catalog,...selection},stage=selection.stage;let loaded;
   if(stage==='secret01')loaded=await loadLevel(options,loader,{unlimitedLives:selection.unlimited});

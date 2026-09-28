@@ -8,7 +8,7 @@ const BASE='../assets/global-ui/';
 const el=(tag,className,text)=>{const n=document.createElement(tag);if(className)n.className=className;if(text!==undefined)n.textContent=text;return n;};
 function positionMapPin(pin,layout,fromId,toId,phone,f){if(!pin)return;const p=travelPoint(layout,fromId,toId,phone,f);pin.style.left=p.x*100+'%';pin.style.top=p.y*100+'%';pin.classList.toggle('antarctica-pin',toId.startsWith('AN')&&f===1);}
 const title=s=>s[0].toUpperCase()+s.slice(1);
-export async function setupGlobalGame({panel,surface,launch,pause,resume,restart,getRun,backDesign,cancelDemo=()=>{},previewStore=null,playerStorage=null,guideData=null,isVisible=()=>!document.hidden,audio=new GameAudio()}){
+export async function setupGlobalGame({panel,surface,launch,pause,resume,restart,getRun,backDesign,cancelDemo=()=>{},previewStore=null,playerStorage=null,guideData=null,prepareWorld=null,isVisible=()=>!document.hidden,audio=new GameAudio()}){
  const [manifest,stages,layout]=await Promise.all(['manifest.json','stages.json','map_layout.json'].map(async file=>{const r=await fetch(BASE+file);if(!r.ok)throw Error(`Could not load ${file}`);return r.json();}));
  const [secretManifest]=await loadSecretData();
  let storage;try{storage=playerStorage||(previewStore?previewStore.storage:localStorage);}catch{storage={getItem(){throw Error('Browser storage is unavailable.');},setItem(){throw Error('Browser storage is unavailable.');}};}
@@ -19,6 +19,7 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
  const notice=el('div','global-notice');notice.setAttribute('role','dialog');notice.setAttribute('aria-modal','true');notice.setAttribute('aria-label','Game message');panel.append(notice);notice.hidden=true;
  let attract=null,attractFrame=0,attractLast=null,opened=false;
  let activeRun=null,loading=false,resultDestination=null,entryToken=0,previewTravel=null,previewTravelDuration=0;
+ let worldReady=!prepareWorld,worldRequest=0;
  let screen='start',character='claude',difficulty='standard',continent='NA',page=0,rewardDifficulty='standard',attempt=null,shownOutcome=null,committedResult=null,travelTimer=0,travelTarget=null,optionsBack=null;
  const stageName=id=>stages.find(s=>s.id===id)?.name||'Stage';
  const stageLabel=id=>`Stage ${Number(id.slice(2))} · ${stageName(id)}`;
@@ -47,7 +48,7 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
   for(const c of ['claude','constance']){const b=button('',()=>{character=c;start();});b.classList.toggle('selected',c===character);b.setAttribute('aria-pressed',String(c===character));b.append(sprite('G1B_CHARACTER_SELECT_ATLAS.png',c==='claude'?0:1,0,2,1,'global-portrait global-portrait-'+c),el('span','',title(c)+(c===character?' ✓':'')));portraits.append(b);}chars.append(portraits);
   const actions=frame('Difficulty'),diff=el('div','global-difficulties'),difficultyHelp=el('p','global-help global-difficulty-help',{easy:'Easy gives you more time to react and wider gaps.',standard:'Standard balances reaction time and challenge.',hard:'Hard brings faster, denser encounters.'}[difficulty]);actions.classList.add('global-start-actions');difficultyHelp.setAttribute('role','status');for(const d of DIFFICULTIES){const b=button(title(d),()=>{if(d==='hard'&&!unlocks(store.state).hard){difficultyHelp.textContent='Complete all 21 stages on Standard without Unlimited Health to unlock Hard.';return;}difficulty=d;start();});b.classList.toggle('selected',d===difficulty);b.setAttribute('aria-pressed',String(d===difficulty));if(d==='hard'&&!unlocks(store.state).hard)b.append(picture('UI_ICON_LOCK.png','Locked','global-icon'));diff.append(b);}actions.append(diff,difficultyHelp);
   const j=store.state.journey,secretContinue=store.state.resumeTarget==='secret'&&store.state.secret?.attempt,cont=button('',continueJourney,true);cont.classList.add('global-continue');cont.textContent='Continue';cont.disabled=!j&&!secretContinue;
-  if(j||secretContinue)actions.append(cont);actions.append(button('New Game',()=>{const go=()=>{store.newJourney(character,difficulty);attempt=null;activeRun=null;continent='NA';map();saved();};if(j)confirm('Start a new journey?','Your earned trophies, passports and unlocks will be kept.',go,start);else go();}));
+  if(j||secretContinue)actions.append(cont);actions.append(button('New Game',()=>{const go=()=>{store.newJourney(character,difficulty);attempt=null;activeRun=null;continent='NA';const ready=map();saved();return ready;};if(j)confirm('Start a new journey?','Your earned trophies, passports and unlocks will be kept.',go,start);else return go();}));
   if(store.state.settings.unlimited)actions.append(el('p','global-assistance','Assisted play · Unlimited Health'));
   if(unlocks(store.state).secret)actions.append(button('Beneath the Ice',()=>enterSecret(character)));
   content.append(chars,actions);root.append(content,footer());if(store.status==='error')saved();
@@ -61,7 +62,7 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
  function trophy(stage,n){return sprite(`TROPHY_${stage.slice(0,2)}_ATLAS.png`,Number(stage.slice(2))-1,n?1:0,3,2,'global-reward-art');}
  function stamp(c,n){const wrap=el('span','global-reward-art global-passport-art');wrap.append(sprite('PASS_STAMPS_ATLAS.png',CONTINENTS.indexOf(c),n?1:0,7,2,'global-passport-stamp'));if(n===2)wrap.append(sprite('UI_REWARD_UTILITIES_ATLAS.png',2,0,3,1,'global-passport-star'));return wrap;}
  function allowed(stage){const j=store.state.journey;return j&&(available(store.state,j.difficulty,stage)||j.visited.includes(stage));}
- function map(drawerOpen=false){drawerOpen=drawerOpen===true;if(!store.state.journey){start();return;}show('map');root.className='global-game global-map';const j=store.state.journey;
+ function map(drawerOpen=false){if(!worldReady)return waitWorld(()=>map(drawerOpen));drawerOpen=drawerOpen===true;if(!store.state.journey){start();return;}show('map');root.className='global-game global-map';const j=store.state.journey;
   const nav=header('WORLD MAP',start),drawerToggle=button('Stages',()=>setDrawer(section.hidden));drawerToggle.setAttribute('aria-expanded',String(Boolean(drawerOpen)));nav.append(drawerToggle,button('Achievements',()=>achievements(map)),button('Options',()=>options(map)),saveButton());root.append(nav);
   const region=el('div','global-map-region'),art=el('div','global-map-art');art.append(picture('MAP_WORLD_BASE.png','','global-geography'));
   const phone=(previewStore?Number(panel.dataset.previewWidth||960)<=900:matchMedia('(max-height:550px), (max-width:900px)').matches);
@@ -92,7 +93,11 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
    if(locked){const lock=button('Locked',()=>{const text=`Finish ${stageLabel(STAGES[STAGES.indexOf(id)-1])} to unlock this stage.`;let help=section.querySelector('.global-stage-requirement');if(!help){help=el('p','global-stage-requirement');help.setAttribute('role','status');section.append(help);}help.textContent=text;});lock.prepend(picture('UI_ICON_LOCK.png','','global-icon'));lock.setAttribute('aria-label',`${stageLabel(id)} locked. Show unlock requirement`);body.append(lock);}else{body.append(hearts(n),button(n?'Replay':'Play',()=>enter(id),true));}card.append(thumb,body);cards.append(card);
   }section.append(cards);mapBody.append(section);root.append(el('p','global-map-help',store.state.settings.unlimited?'Assisted play · No new rewards. Select a continent to view its stages.':'Select a continent to view its stages.'));
  }
- function showLoading(){show('loading');root.className='global-game global-menu global-loading';const f=frame('Loading stage…');f.setAttribute('role','status');f.append(el('p','','Preparing your adventure'));root.append(f);}
+ function waitWorld(ready){
+  const token=++worldRequest;showLoading('Loading world…');
+  return prepareWorld().then(()=>{worldReady=true;if(token===worldRequest&&screen==='loading')ready();}).catch(()=>{if(token!==worldRequest||screen!=='loading')return;root.replaceChildren();const f=frame('World could not load');f.append(el('p','','Check your connection and try again.'),button('Retry',()=>waitWorld(ready),true),button('Main Menu',start));root.append(f);});
+ }
+ function showLoading(title='Loading stage…'){show('loading');root.className='global-game global-menu global-loading';const f=frame(title);f.setAttribute('role','status');f.append(el('p','','Preparing your adventure'));root.append(f);}
  async function enter(id){if(loading||!allowed(id))return;await enterLevel(id);}
  async function enterSecret(who=character){if(loading)return;await enterLevel('SECRET01',who);}
  async function enterLevel(id,who){
@@ -164,7 +169,7 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
    return state;
   };
  }
- function travel(next){const origin=store.state.journey.stage;map(false);screen='travel';travelTarget=next;root.inert=true;
+ function travel(next){if(!worldReady)return waitWorld(()=>travel(next));const origin=store.state.journey.stage;map(false);screen='travel';travelTarget=next;root.inert=true;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,phone=(previewStore?Number(panel.dataset.previewWidth||960)<=900:matchMedia('(max-height:550px), (max-width:900px)').matches),render=travelVisual(origin,next,phone);
   const skip=button('Skip travel',finishTravel);skip.className+=' global-skip';root.after(skip);const done=()=>{skip.remove();root.inert=false;};
   function finishTravel(){if(!travelTarget)return;const id=travelTarget;travelTarget=null;done();enter(id);}
