@@ -28,7 +28,21 @@ addEventListener('keydown',e=>{if(['INPUT','SELECT','TEXTAREA','BUTTON'].include
 addEventListener('keyup',e=>{if(['ArrowDown','KeyS'].includes(e.code))release();});addEventListener('blur',interrupt);addEventListener('pagehide',interrupt);document.addEventListener('visibilitychange',()=>{if(document.hidden)interrupt();else{sharedAudio.visibility(portrait.matches);last=null;}});portrait.addEventListener('change',rotation);
 // Gesture unlock is repeatable after OS audio interruptions. No extra Ready dialog.
 document.addEventListener('pointerdown',()=>{if(!portrait.matches)ui?.audio.unlock();},{capture:true});
+// Hold decoded map/UI artwork through the session so navigation cannot reveal partial art.
+const screenArtwork=[];
+async function prepareScreens(){
+ const response=await fetch('../assets/global-ui/manifest.json');
+ if(!response.ok)throw Error('Map artwork could not load. Check your connection and retry.');
+ const manifest=await response.json();
+ await Promise.all(Object.entries(manifest).filter(([name])=>/^(MAP_|UI_|BRAND_|G1B_)/.test(name)&&/\.png$/.test(name)).map(async([name,record])=>{
+  const img=new Image();
+  await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(Error('Map artwork could not load. Check your connection and retry.'));img.src='../assets/global-ui/'+record.file+'?v='+record.sha256.slice(0,12);});
+  if(img.decode)await img.decode();screenArtwork.push(img);
+ }));
+ await document.fonts?.ready;
+}
 async function boot(){
+ await prepareScreens();
  const response=await fetch('./release.json');if(!response.ok)throw Error('The game could not load. Check your connection and retry.');const data=await response.json();
  const {config,draft,items,catalog}=data;
  const playerStorage={getItem:key=>localStorage.getItem('candc.mobile-test.'+key),setItem:(key,value)=>localStorage.setItem('candc.mobile-test.'+key,value)};

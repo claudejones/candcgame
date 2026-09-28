@@ -11,7 +11,7 @@ globalThis.Image=class{get src(){return this.source;}set src(source){this.source
 const c=canvas.getContext('2d'),draw=c.drawImage.bind(c);c.drawImage=(im,...args)=>draw(im.native||im,...args);
 vm.runInThisContext(fs.readFileSync(path.join(app,'landscape-contract.js'),'utf8'));
 await (await import(pathToFileURL(path.join(app,'mobile-main.mjs')))).started;
-assert(ids.get('boot').hidden,'boot failed: '+ids.get('boot-text').textContent);const root=panel.querySelector('#global-game');await findButton(root,'New Game').click();await findButton(root,'Stages').click();await findButton(root,'Play').click();
+assert(ids.get('boot').hidden,'boot failed: '+ids.get('boot-text').textContent);const root=panel.querySelector('#global-game');assert(!root.querySelectorAll('button').some(b=>b.textContent==='Continue'),'fresh game must not show Continue');await findButton(root,'New Game').click();await findButton(root,'Stages').click();await findButton(root,'Play').click();
 function tick(t){const calls=[...frames.values()];frames.clear();calls.forEach(fn=>fn(t));}
 tick(0);tick(100);assert.equal(ids.get('run-pause').textContent,'PAUSE');
 ids.get('run-pause').onpointerdown({button:0,preventDefault(){}});tick(200);assert.equal(ids.get('run-pause').textContent,'RESUME');assert(ids.get('run-jump').disabled);
