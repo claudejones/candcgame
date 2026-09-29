@@ -37,3 +37,5 @@ summary={'png_count':count,'original_png_bytes':orig,'optimized_png_bytes':png,'
 json.dump(summary,open(os.path.join(out,'summary.json'),'w'),indent=2)
 print(json.dumps({k:v for k,v in summary.items() if k!='mp3_inventory'},indent=2))
 PY
+
+# Measurement-only lab; never writes into the source asset tree.
