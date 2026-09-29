@@ -104,3 +104,10 @@ margin:0 18px 2px;
 .play-surface .gameplay-actions button[data-action="pause"]{width:112px;transform:translateX(-50%)}
 .play-surface .gameplay-actions button[data-action="pause"]:active,.play-surface .gameplay-actions button[data-action="pause"].key-active{transform:translate(-50%,2px) scale(.98)}
 .play-surface .gameplay-actions button[data-action="pause"]:disabled{transform:translateX(-50%)!important}
+
+/* Path and portrait share the original 2048×258 artwork coordinate system. */
+.play-surface .progress-track{flex:none;align-self:center;width:min(100%,400px);height:auto;min-height:0;aspect-ratio:2048/258;margin:0;transform:none}
+.play-surface .progress-path{inset:0;width:100%;height:100%;transform:none;object-fit:fill}
+.play-surface .progress-marker{top:64.341%;transform:translate(-50%,-50%)}
+.play-surface .progress-marker.constance{transform:translate(-41.66%,-50%)}
+.play-surface .gameplay-hud:not(.secret-hud) .hud-panel{width:min(78%,620px)}
