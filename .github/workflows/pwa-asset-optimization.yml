@@ -18,13 +18,14 @@ jobs:
       - name: Cancel superseded optimization runs
         env:
           GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+          CURRENT_RUN_ID: ${{ github.run_id }}
         shell: bash
         run: |
-          branch="${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}"
-          mapfile -t old_runs < <(gh run list --workflow pwa-asset-optimization.yml --branch "$branch" --limit 100 --json databaseId,status --jq '.[] | select(.databaseId != (env.GITHUB_RUN_ID | tonumber)) | select(.status == "in_progress" or .status == "queued") | .databaseId')
+          mapfile -t old_runs < <(gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100" --jq '.workflow_runs[] | select(.name == "PWA asset optimization lab") | select(.head_branch == env.BRANCH_NAME) | select(.id != (env.CURRENT_RUN_ID | tonumber)) | select(.status == "in_progress" or .status == "queued") | .id')
           for run_id in "${old_runs[@]}"; do
             echo "Cancelling superseded optimization run $run_id"
-            gh run cancel "$run_id" || true
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/runs/$run_id/cancel" || true
           done
       - name: Install bounded benchmark tools
         run: |
