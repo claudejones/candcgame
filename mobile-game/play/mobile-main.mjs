@@ -21,13 +21,14 @@ function paint(){
 }
 function tick(now){request=0;if(!document.hidden&&!portrait.matches&&run&&ui?.presenting()){if(last!==null){const dt=Math.min(.1,(now-last)/1000);if(auto)auto.advance(dt);else run.advance(dt);}paint();}last=now;request=requestAnimationFrame(tick);}
 function toggle(){if(ui?.blocked()||!run||portrait.matches)return;ui.audio.unlock();if(run.status==='playing')pause();else if(run.status==='paused'){release();run.start();sharedAudio.setPaused(false);last=null;}paint();}
-function action(a,held=false){if(ui?.blocked()||run?.status!=='playing'||portrait.matches)return;ui.audio.unlock();if(a==='slide'&&held)run.holdSlide(true);else run.action(a);}
+function action(a,held=false){if(ui?.blocked()||run?.status!=='playing'||portrait.matches)return;ui.audio.unlock();if(a==='slide'&&held&&ui.store.state.settings.continuousSlide)run.holdSlide(true);else run.action(a);}
 for(const a of ['jump','slide']){const b=$('run-'+a);b.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();if(a==='slide')slidePointers.add(e.pointerId);action(a,a==='slide');try{b.setPointerCapture?.(e.pointerId);}catch{}paint();};b.onclick=e=>{if(e.detail===0)action(a);};}
 for(const event of ['pointerup','pointercancel','lostpointercapture'])$('run-slide').addEventListener(event,e=>{slidePointers.delete(e.pointerId);if(!slidePointers.size)run?.holdSlide?.(false);});
 $('run-pause').onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();toggle();};$('run-pause').onclick=e=>{if(e.detail===0)toggle();};
 addEventListener('keydown',e=>{if(['INPUT','SELECT','TEXTAREA','BUTTON'].includes(e.target.tagName)||e.repeat)return;const a=['ArrowDown','KeyS'].includes(e.code)?'slide':['Space','ArrowUp','KeyW'].includes(e.code)?'jump':null;if(a||e.code==='KeyP'){e.preventDefault();if(a)action(a,a==='slide');else toggle();}});
 addEventListener('keyup',e=>{if(['ArrowDown','KeyS'].includes(e.code))release();});addEventListener('blur',interrupt);addEventListener('pagehide',interrupt);document.addEventListener('visibilitychange',()=>{if(document.hidden)interrupt();else{sharedAudio.visibility(portrait.matches);last=null;}});portrait.addEventListener('change',rotation);
 panel.addEventListener('dblclick',e=>e.preventDefault());
+panel.addEventListener('gesturestart',e=>{if(panel.querySelector('.global-confirm,.global-result:not([hidden]),.global-notice:not([hidden])'))e.preventDefault();},{passive:false});
 // Gesture unlock is repeatable after OS audio interruptions. No extra Ready dialog.
 document.addEventListener('pointerdown',()=>{if(!portrait.matches)ui?.audio.unlock();},{capture:true});
 // Hold decoded map/UI artwork through the session so navigation cannot reveal partial art.

@@ -189,3 +189,5 @@ body[data-mode=game] .play-heading{display:none;}
 .global-hazard-stage{margin-top:24px;}
 .global-hazard-stage>h3{font-size:12px;margin-bottom:12px;line-height:1.8;}
 @media(max-width:600px){.global-guide-pages{flex-wrap:wrap;}.global-guide-pages h3{order:-1;flex-basis:100%;}.global-guide-pages button{flex:0 0 auto;}}
+
+.global-reward-continent{padding:6px 12px 12px;border-top:2px solid #45647b}.global-reward-continent>h3{text-align:left;padding:6px 4px}.global-continent-rewards{grid-template-columns:repeat(4,minmax(0,1fr));padding:6px 0}.global-reward-stage,.global-reward-passport{min-width:0}.global-soundtrack-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.global-soundtrack-controls button{font-size:10px;padding:8px}.global-soundtrack-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px}.global-soundtrack-track button{width:100%;min-height:44px;text-align:left;padding:8px 12px;font-size:10px}.global-soundtrack-track.selected button{color:var(--gold);outline:2px solid var(--gold)}.global-soundtrack-status{min-height:2em;text-align:center}.global-soundtrack-help{padding:8px}
