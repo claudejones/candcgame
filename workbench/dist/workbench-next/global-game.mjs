@@ -27,7 +27,7 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
  function asset(name){const record=manifest[name]||secretManifest.assets[name];if(!manifest[name]&&record)return '../assets/secret-level/'+name+'?v='+record.sha256.slice(0,12);if(!record)throw Error(`Missing global asset ${name}`);return BASE+record.file+'?v='+record.sha256.slice(0,12);}
  function picture(name,alt='',className=''){const n=el('img',className);n.src=asset(name);n.alt=alt;n.onerror=()=>tell('An image could not load. Refresh to retry.');return n;}
  function sprite(name,col,row,cols,rows,className=''){const n=el('span','global-sprite '+className);n.style.backgroundImage=`url("${asset(name)}")`;n.style.backgroundSize=`${cols*100}% ${rows*100}%`;n.style.backgroundPosition=`${cols===1?0:col/(cols-1)*100}% ${rows===1?0:row/(rows-1)*100}%`;n.setAttribute('aria-hidden','true');return n;}
- function button(text,fn,primary=false){const n=el('button','global-button'+(primary?' primary':''),text);n.type='button';n.onclick=e=>{if(n.disabled)return;audio.configure(store.state.settings);const launchCue=/^(Start|Continue|Play|Replay|New Game|Beneath)|^Retry$/.test(n.textContent);audio.unlock();const result=fn(e);audio.button(launchCue);return result;};return n;}
+ function button(text,fn,primary=false){const n=el('button','global-button'+(primary?' primary':''),text);n.type='button';n.onclick=e=>{if(n.disabled)return;audio.configure(screen==='soundtrack'?{...store.state.settings,music:true}:store.state.settings);const launchCue=/^(Start|Continue|Play|Replay|New Game|Beneath)|^Retry$/.test(n.textContent);audio.unlock();const result=fn(e);audio.button(launchCue);return result;};return n;}
  let messageFocus=null;
  function tell(text){
   if(!text){notice.hidden=true;notice.replaceChildren();messageFocus?.focus();messageFocus=null;return;}
@@ -151,7 +151,7 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
   ];for(const [heading,text] of sections){const section=el('section','global-about-section');section.append(el('h4','',heading),el('p','',text));f.append(section);}body.append(f);
  }
    function soundtrack(back){
-    show('soundtrack');root.className='global-game global-menu global-soundtrack';
+    show('soundtrack');root.className='global-game global-menu global-soundtrack';audio.track(null);audio.configure({...store.state.settings,music:true});
     let index=0,playing=false,generation=0,progressTimer=0;
     const tracks=STAGES.map((id,i)=>({id,track:id+'_THEME',label:stageLabel(id),continent:layout.continents[id.slice(0,2)].label,number:i+1}));
     const leave=()=>{if(progressTimer)clearInterval(progressTimer);progressTimer=0;playing=false;generation++;audio.track(null);back();};
@@ -197,7 +197,7 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
      rows.forEach((entry,i)=>{const selected=i===index;entry.row.classList.toggle('selected',selected);entry.button.setAttribute('aria-current',String(selected));});updateProgress();
     }
     function playSelected(){
-     if(!store.state.settings.music){playing=false;stopProgress();render('Music is off. Turn Music on in Options to listen.');return;}
+     
      index=(index+tracks.length)%tracks.length;const track=tracks[index],token=++generation;playing=true;audio.engine.setPaused(false);
      audio.track(track.track,{loop:false,force:true,onended:()=>{if(generation!==token||!playing)return;select((index+1)%tracks.length,true);}});
      render();startProgress();
@@ -205,7 +205,7 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
     function select(nextIndex,autoplay=false){index=(nextIndex+tracks.length)%tracks.length;if(autoplay)playSelected();else render();}
     function togglePlayback(){
      if(playing){updateProgress();playing=false;generation++;audio.engine.setPaused(true);stopProgress();render();return;}
-     if(!store.state.settings.music){render('Music is off. Turn Music on in Options to listen.');return;}
+     
      const id=tracks[index].track;
      if(audio.engine.track?.id===id&&!audio.engine.track.ended){playing=true;generation++;audio.engine.setPaused(false);render();startProgress();}
      else playSelected();
