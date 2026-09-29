@@ -2,6 +2,10 @@ name: PWA asset optimization lab
 on:
   pull_request:
     branches: [ main ]
+    paths:
+      - '.github/workflows/pwa-asset-optimization.yml'
+      - 'tools/pwa-optimize-assets.py'
+      - 'mobile-game/assets/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -43,5 +47,6 @@ jobs:
           name: pwa-optimization-report
           path: |
             pwa-optimization-report/summary.json
-            pwa-optimization-report/image-results.csv\n            pwa-optimization-report/audio-samples/
+            pwa-optimization-report/image-results.csv
+            pwa-optimization-report/audio-samples/
           retention-days: 14
