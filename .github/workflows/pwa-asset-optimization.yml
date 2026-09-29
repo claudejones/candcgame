@@ -22,10 +22,12 @@ jobs:
           CURRENT_RUN_ID: ${{ github.run_id }}
         shell: bash
         run: |
-          mapfile -t old_runs < <(gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100" --jq '.workflow_runs[] | select(.name == "PWA asset optimization lab") | select(.head_branch == env.BRANCH_NAME) | select(.id != (env.CURRENT_RUN_ID | tonumber)) | select(.status == "in_progress" or .status == "queued") | .id')
+          response=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100")
+          mapfile -t old_runs < <(jq -r --arg branch "$BRANCH_NAME" --argjson current "$CURRENT_RUN_ID" '.workflow_runs[] | select(.name == "PWA asset optimization lab") | select(.head_branch == $branch) | select(.id != $current) | select(.status == "in_progress" or .status == "queued") | .id' <<< "$response")
+          echo "Found ${#old_runs[@]} superseded optimization run(s) on $BRANCH_NAME"
           for run_id in "${old_runs[@]}"; do
             echo "Cancelling superseded optimization run $run_id"
-            gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/runs/$run_id/cancel" || true
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/runs/$run_id/cancel"
           done
       - name: Install bounded benchmark tools
         run: |
