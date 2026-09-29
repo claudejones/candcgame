@@ -50,12 +50,13 @@ self.addEventListener("fetch",event=>{
   }
   if(request.mode==="navigate"||logical.pathname.endsWith("/current-release.json")) {
     event.respondWith((async()=>{
-      const cached=await caches.match(request);
+      const cacheKey=new Request(request.url,{method:"GET"});
+      const cached=await caches.match(cacheKey);
       try {
         const response=await fetch(request);
         if(response.ok) {
           const shell=await caches.open(SHELL_CACHE);
-          await shell.put(request,response.clone());
+          await shell.put(cacheKey,response.clone());
         }
         return response;
       } catch { return cached||new Response("Reconnect to load the game launch page.",{status:503}); }

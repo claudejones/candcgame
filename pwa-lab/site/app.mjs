@@ -66,21 +66,27 @@ function showInstallGuidance() {
   }
 }
 async function waitForController() {
-  if(!("serviceWorker" in navigator)) return;
+  if(!("serviceWorker" in navigator)) throw new Error("This browser cannot start the offline game runtime.");
   await navigator.serviceWorker.ready;
   if(navigator.serviceWorker.controller) return;
   await Promise.race([
     new Promise(resolve=>navigator.serviceWorker.addEventListener("controllerchange",resolve,{once:true})),
-    new Promise(resolve=>setTimeout(resolve,1200))
+    new Promise(resolve=>setTimeout(resolve,8000))
   ]);
+  if(!navigator.serviceWorker.controller) throw new Error("The game is still preparing. Wait a moment and try PLAY NOW again.");
 }
 $("play-now").addEventListener("click",async event=>{
   event.preventDefault();
   $("play-now").setAttribute("aria-busy","true");
-  await waitForController();
-  const playUrl=releasePointer?.playUrl||PLAY_URL;
-  if(releasePointer) localStorage.setItem("candc-pwa-last-played-release",releasePointer.releaseId);
-  location.assign(playUrl);
+  try {
+    await waitForController();
+    const playUrl=releasePointer?.playUrl||PLAY_URL;
+    if(releasePointer) localStorage.setItem("candc-pwa-last-played-release",releasePointer.releaseId);
+    location.assign(playUrl);
+  } catch(error) {
+    $("play-now").removeAttribute("aria-busy");
+    $("offline-status").textContent=error.message;
+  }
 });
 window.addEventListener("beforeinstallprompt",event=>{
   event.preventDefault(); deferredInstallPrompt=event; showInstallGuidance();
