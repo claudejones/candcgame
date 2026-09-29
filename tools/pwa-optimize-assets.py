@@ -76,7 +76,8 @@ def one(source):
         "width": original_info[0], "height": original_info[1],
         "original_has_alpha": original_info[2], "optimized_png_has_alpha": optimized_info[2],
         "webp_has_alpha": webp_info[2],
-        "png_rgba_identical": png_identical, "webp_rgba_identical": webp_identical,\n        "png_alpha_values_identical": png_alpha_identical, "webp_alpha_values_identical": webp_alpha_identical, "optipng_seconds": round(png_seconds, 4),
+        "png_rgba_identical": png_identical, "webp_rgba_identical": webp_identical,
+        "png_alpha_values_identical": png_alpha_identical, "webp_alpha_values_identical": webp_alpha_identical, "optipng_seconds": round(png_seconds, 4),
         "webp_seconds": round(webp_seconds, 4), "decode_check_seconds": round(check_seconds, 4)
     }
 
