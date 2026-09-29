@@ -1,0 +1,30 @@
+name: PWA lab build and verification
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'pwa-lab/**'
+      - 'tools/build-pwa-lab.mjs'
+      - 'tools/verify-pwa-lab.mjs'
+      - 'mobile-game/**'
+      - '.github/workflows/pwa-lab-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install lossless image tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y webp imagemagick
+      - name: Build versioned PWA test package outside the repository
+        run: node tools/build-pwa-lab.mjs "$RUNNER_TEMP/candc-pwa-lab"
+      - name: Verify package, artwork, geometry and save compatibility
+        run: node tools/verify-pwa-lab.mjs "$RUNNER_TEMP/candc-pwa-lab"
