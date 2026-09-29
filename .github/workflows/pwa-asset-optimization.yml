@@ -15,6 +15,17 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+      - name: Cancel superseded optimization runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          branch="${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}"
+          mapfile -t old_runs < <(gh run list --workflow pwa-asset-optimization.yml --branch "$branch" --limit 100 --json databaseId,status --jq '.[] | select(.databaseId != (env.GITHUB_RUN_ID | tonumber)) | select(.status == "in_progress" or .status == "queued") | .databaseId')
+          for run_id in "${old_runs[@]}"; do
+            echo "Cancelling superseded optimization run $run_id"
+            gh run cancel "$run_id" || true
+          done
       - name: Install bounded benchmark tools
         run: |
           sudo apt-get update
