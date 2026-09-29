@@ -1,0 +1,210 @@
+#!/usr/bin/env python3
+"""Reversible, time-bounded PNG/WebP benchmark. Source assets are read-only."""
+import concurrent.futures
+import csv
+import json
+import os
+import pathlib
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+
+root = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "mobile-game")
+out = pathlib.Path(sys.argv[2] if len(sys.argv) > 2 else "pwa-optimization-report")
+workers = max(1, min(int(os.environ.get("PWA_BENCH_WORKERS", "4")), os.cpu_count() or 1))
+package_baseline = 189_015_121
+out.mkdir(parents=True, exist_ok=True)
+png_root, webp_root = out / "png", out / "webp"
+shutil.rmtree(png_root, ignore_errors=True)
+shutil.rmtree(webp_root, ignore_errors=True)
+png_root.mkdir(parents=True)
+webp_root.mkdir(parents=True)
+
+def command(args):
+    return subprocess.run(args, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+def image_info(path):
+    value = command(["identify", "-format", "%w,%h,%[channels]", str(path)]).stdout.strip()
+    width, height, channels = value.split(",", 2)
+    return int(width), int(height), bool(re.search(r"a|alpha", channels, re.I))
+
+def one(source):
+    rel = source.relative_to(root / "assets")
+    png_dest = png_root / rel
+    webp_dest = (webp_root / rel).with_suffix(".webp")
+    png_dest.parent.mkdir(parents=True, exist_ok=True)
+    webp_dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, png_dest)
+
+    t = time.perf_counter()
+    command(["optipng", "-quiet", "-o2", str(png_dest)])
+    png_seconds = time.perf_counter() - t
+
+    t = time.perf_counter()
+    command(["cwebp", "-quiet", "-lossless", "-z", "6", "-mt", "-exact", "-metadata", "all",
+             str(source), "-o", str(webp_dest)])
+    webp_seconds = time.perf_counter() - t
+
+    original_info = image_info(source)
+    optimized_info = image_info(png_dest)
+    webp_info = image_info(webp_dest)
+    if original_info[:2] != optimized_info[:2] or original_info[:2] != webp_info[:2]:
+        raise RuntimeError(f"dimension mismatch: {rel}: {original_info}, {optimized_info}, {webp_info}")
+
+    t = time.perf_counter()
+    with tempfile.TemporaryDirectory() as temp:
+        a, p, b = (pathlib.Path(temp) / name for name in ("original.rgba", "optimized.png.rgba", "webp.rgba"))
+        aa, pa, ba = (pathlib.Path(temp) / name for name in ("original.alpha", "optimized.png.alpha", "webp.alpha"))
+        command(["convert", str(source), "-alpha", "on", "-depth", "8", "RGBA:" + str(a)])
+        command(["convert", str(png_dest), "-alpha", "on", "-depth", "8", "RGBA:" + str(p)])
+        command(["convert", str(webp_dest), "-alpha", "on", "-depth", "8", "RGBA:" + str(b)])
+        command(["convert", str(source), "-alpha", "on", "-alpha", "extract", "-depth", "8", "GRAY:" + str(aa)])
+        command(["convert", str(png_dest), "-alpha", "on", "-alpha", "extract", "-depth", "8", "GRAY:" + str(pa)])
+        command(["convert", str(webp_dest), "-alpha", "on", "-alpha", "extract", "-depth", "8", "GRAY:" + str(ba)])
+        png_identical = a.stat().st_size == p.stat().st_size and a.read_bytes() == p.read_bytes()
+        webp_identical = a.stat().st_size == b.stat().st_size and a.read_bytes() == b.read_bytes()
+        png_alpha_identical = aa.stat().st_size == pa.stat().st_size and aa.read_bytes() == pa.read_bytes()
+        webp_alpha_identical = aa.stat().st_size == ba.stat().st_size and aa.read_bytes() == ba.read_bytes()
+    check_seconds = time.perf_counter() - t
+
+    return {
+        "path": rel.as_posix(), "original_bytes": source.stat().st_size,
+        "optimized_png_bytes": png_dest.stat().st_size, "lossless_webp_bytes": webp_dest.stat().st_size,
+        "width": original_info[0], "height": original_info[1],
+        "original_has_alpha": original_info[2], "optimized_png_has_alpha": optimized_info[2],
+        "webp_has_alpha": webp_info[2],
+        "png_rgba_identical": png_identical, "webp_rgba_identical": webp_identical,
+        "png_alpha_values_identical": png_alpha_identical, "webp_alpha_values_identical": webp_alpha_identical, "optipng_seconds": round(png_seconds, 4),
+        "webp_seconds": round(webp_seconds, 4), "decode_check_seconds": round(check_seconds, 4)
+    }
+
+files = sorted((root / "assets").rglob("*.png"))
+files += sorted((root / "assets").rglob("*.PNG"))
+files = sorted(set(files))
+start = time.perf_counter()
+with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
+    rows = list(pool.map(one, files))
+processing_seconds = time.perf_counter() - start
+
+fields = list(rows[0].keys()) if rows else []
+with (out / "image-results.csv").open("w", newline="") as f:
+    writer = csv.DictWriter(f, fieldnames=fields)
+    writer.writeheader()
+    writer.writerows(rows)
+
+mp3_inventory = []
+audio_start = time.perf_counter()
+for source in sorted((root / "assets").rglob("*")):
+    if source.is_file() and source.suffix.lower() == ".mp3":
+        result = {"path": source.relative_to(root).as_posix(), "bytes": source.stat().st_size}
+        probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
+                                "format=duration,bit_rate:stream=channels,sample_rate,codec_name", "-of", "json", str(source)],
+                               check=True, capture_output=True, text=True)
+        fmt = json.loads(probe.stdout)["format"]
+        result["duration_seconds"] = float(fmt.get("duration", 0))
+        result["bit_rate"] = int(fmt.get("bit_rate", 0) or 0)
+        streams = json.loads(probe.stdout).get("streams", [])
+        audio_stream = streams[0] if streams else {}
+        result["channels"] = int(audio_stream.get("channels", 0) or 0)
+        result["sample_rate"] = int(audio_stream.get("sample_rate", 0) or 0)
+        result["codec"] = audio_stream.get("codec_name", "")
+        mp3_inventory.append(result)
+audio_inventory_seconds = time.perf_counter() - audio_start
+
+music_inventory = [x for x in mp3_inventory if "/music/" in x["path"]]
+music_duration = sum(x["duration_seconds"] for x in music_inventory)
+music_bytes = sum(x["bytes"] for x in music_inventory)
+music_average_bitrate = music_bytes * 8 / max(1, music_duration) / 1000
+audio_samples_dir = out / "audio-samples"
+audio_samples_dir.mkdir(parents=True, exist_ok=True)
+audio_samples = []
+audio_sample_seconds = 0.0
+if music_average_bitrate > 144:
+    sample_paths = [
+        "assets/audio/music/title/C_AND_C_TITLE.mp3",
+        "assets/audio/music/stages/NA01_THEME.mp3",
+        "assets/audio/music/boss/SECRET_BOSS_THEME.mp3"
+    ]
+    sample_start = time.perf_counter()
+    for relative in sample_paths:
+        source = root / relative
+        dest = audio_samples_dir / source.name.replace(".mp3", "_128kbps_stereo.mp3")
+        command(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(source),
+                 "-map_metadata", "0", "-codec:a", "libmp3lame", "-b:a", "128k",
+                 "-ac", "2", "-ar", "44100", str(dest)])
+        probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
+                                "format=duration,bit_rate:stream=channels,sample_rate,codec_name",
+                                "-of", "json", str(dest)], check=True, capture_output=True, text=True)
+        info = json.loads(probe.stdout)
+        stream = info.get("streams", [{}])[0]
+        audio_samples.append({
+            "source": relative, "file": dest.name, "original_bytes": source.stat().st_size,
+            "sample_bytes": dest.stat().st_size,
+            "duration_seconds": float(info["format"].get("duration", 0)),
+            "bit_rate": int(info["format"].get("bit_rate", 0) or 0),
+            "channels": int(stream.get("channels", 0) or 0),
+            "sample_rate": int(stream.get("sample_rate", 0) or 0),
+            "codec": stream.get("codec_name", "")
+        })
+    audio_sample_seconds = time.perf_counter() - sample_start
+    (audio_samples_dir / "LISTENING_TEST.txt").write_text(
+        "Listening-test derivatives only. Source masters were not changed. "
+        "Each sample was encoded as MP3, 128 kbps, stereo, 44.1 kHz. "
+        "Compare against the original files listed in summary.json before any adoption.\\n"
+    )
+else:
+    (audio_samples_dir / "NOT_GENERATED.txt").write_text(
+        "Music bitrate did not exceed the 144 kbps sample gate. No audio derivatives were generated.\\n"
+    )
+
+original = sum(r["original_bytes"] for r in rows)
+png_total = sum(r["optimized_png_bytes"] for r in rows)
+webp_total = sum(r["lossless_webp_bytes"] for r in rows)
+png_mismatch_paths = [r["path"] for r in rows if not r["png_rgba_identical"]]
+mismatch_paths = [r["path"] for r in rows if not r["webp_rgba_identical"]]
+png_alpha_mismatch_paths = [r["path"] for r in rows if not r["png_alpha_values_identical"]]
+bad_alpha = [r["path"] for r in rows if not r["webp_alpha_values_identical"]]
+png_alpha_channel_changed = [r["path"] for r in rows if r["original_has_alpha"] != r["optimized_png_has_alpha"]]
+webp_alpha_channel_changed = [r["path"] for r in rows if r["original_has_alpha"] != r["webp_has_alpha"]]
+png_projection = package_baseline - original + png_total
+webp_projection = package_baseline - original + webp_total
+summary = {
+    "png_count": len(rows), "workers": workers,
+    "original_png_bytes": original, "optimized_png_bytes": png_total,
+    "optimized_png_saving_pct": round(100 * (original - png_total) / original, 2) if original else 0,
+    "lossless_webp_bytes": webp_total,
+    "lossless_webp_saving_pct": round(100 * (original - webp_total) / original, 2) if original else 0,
+    "optimized_png_pixel_mismatch_count": len(png_mismatch_paths), "optimized_png_pixel_mismatch_paths": png_mismatch_paths,
+    "webp_pixel_mismatch_count": len(mismatch_paths), "webp_pixel_mismatch_paths": mismatch_paths,
+    "optimized_png_alpha_value_mismatch_count": len(png_alpha_mismatch_paths),
+    "optimized_png_alpha_value_mismatch_paths": png_alpha_mismatch_paths,
+    "webp_alpha_value_mismatch_count": len(bad_alpha), "webp_alpha_value_mismatch_paths": bad_alpha,
+    "optimized_png_alpha_channel_presence_changed_count": len(png_alpha_channel_changed),
+    "webp_alpha_channel_presence_changed_count": len(webp_alpha_channel_changed),
+    "dimensions_checked": len(rows), "dimensions_mismatch_count": 0,
+    "processing_seconds": round(processing_seconds, 2),
+    "optipng_seconds_total": round(sum(r["optipng_seconds"] for r in rows), 2),
+    "webp_seconds_total": round(sum(r["webp_seconds"] for r in rows), 2),
+    "decode_validation_seconds_total": round(sum(r["decode_check_seconds"] for r in rows), 2),
+    "mp3_count": len(mp3_inventory), "mp3_bytes": sum(x["bytes"] for x in mp3_inventory),
+    "mp3_total_duration_seconds": round(sum(x["duration_seconds"] for x in mp3_inventory), 2),
+    "mp3_average_bitrate_kbps": round(sum(x["bit_rate"] for x in mp3_inventory) / max(1, len(mp3_inventory)) / 1000, 1),
+    "music_average_bitrate_kbps": round(music_average_bitrate, 1),
+    "music_total_bytes": music_bytes, "music_total_duration_seconds": round(music_duration, 2),
+    "audio_samples": audio_samples, "audio_sample_seconds": round(audio_sample_seconds, 2),
+    "mp3_inventory_seconds": round(audio_inventory_seconds, 2), "mp3_inventory": mp3_inventory,
+    "package_baseline_bytes": package_baseline,
+    "package_with_optimized_png_bytes": png_projection,
+    "package_with_optimized_png_mib": round(png_projection / 1048576, 2),
+    "package_png_savings_bytes": package_baseline - png_projection,
+    "package_png_savings_pct": round(100 * (package_baseline - png_projection) / package_baseline, 2),
+    "package_with_lossless_webp_bytes": webp_projection,
+    "package_with_lossless_webp_mib": round(webp_projection / 1048576, 2),
+    "package_webp_savings_bytes": package_baseline - webp_projection,
+    "package_webp_savings_pct": round(100 * (package_baseline - webp_projection) / package_baseline, 2)
+}
+(out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+print(json.dumps({k:v for k,v in summary.items() if k != "mp3_inventory" and not k.endswith("_paths")}, indent=2))

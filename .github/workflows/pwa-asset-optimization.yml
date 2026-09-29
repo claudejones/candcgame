@@ -1,0 +1,52 @@
+name: PWA asset optimization lab
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/pwa-asset-optimization.yml'
+      - 'tools/pwa-optimize-assets.py'
+      - 'mobile-game/assets/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: pwa-asset-optimization-${{ github.run_id }}
+  cancel-in-progress: true
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cancel superseded optimization runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+          CURRENT_RUN_ID: ${{ github.run_id }}
+        shell: bash
+        run: |
+          response=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100")
+          mapfile -t old_runs < <(jq -r --arg branch "$BRANCH_NAME" --argjson current "$CURRENT_RUN_ID" '.workflow_runs[] | select(.name == "PWA asset optimization lab") | select(.head_branch == $branch) | select(.id != $current) | select(.status == "in_progress" or .status == "queued") | .id' <<< "$response")
+          echo "Found ${#old_runs[@]} superseded optimization run(s) on $BRANCH_NAME"
+          for run_id in "${old_runs[@]}"; do
+            echo "Cancelling superseded optimization run $run_id"
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/runs/$run_id/cancel"
+          done
+      - name: Install bounded benchmark tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y optipng webp imagemagick ffmpeg
+      - name: Benchmark lossless image options and inventory audio
+        env:
+          PWA_BENCH_WORKERS: 4
+        run: python3 tools/pwa-optimize-assets.py mobile-game pwa-optimization-report
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pwa-optimization-report
+          path: |
+            pwa-optimization-report/summary.json
+            pwa-optimization-report/image-results.csv
+            pwa-optimization-report/audio-samples/
+          retention-days: 14

@@ -1,0 +1,46 @@
+name: PWA lab build and verification
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'pwa-lab/**'
+      - 'tools/build-pwa-lab.mjs'
+      - 'tools/verify-pwa-lab.mjs'
+      - 'mobile-game/**'
+      - '.github/workflows/pwa-lab-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: pwa-lab-${{ github.run_id }}
+  cancel-in-progress: true
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Cancel superseded PWA lab runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+          CURRENT_RUN_ID: ${{ github.run_id }}
+        shell: bash
+        run: |
+          response=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100")
+          mapfile -t old_runs < <(jq -r --arg branch "$BRANCH_NAME" --argjson current "$CURRENT_RUN_ID" '.workflow_runs[] | select(.name == "PWA lab build and verification") | select(.head_branch == $branch) | select(.id != $current) | select(.status == "in_progress" or .status == "queued") | .id' <<< "$response")
+          for run_id in "${old_runs[@]}"; do
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/runs/$run_id/cancel"
+          done
+      - name: Install lossless image tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y webp imagemagick
+      - name: Build versioned PWA test package outside the repository
+        run: node tools/build-pwa-lab.mjs "$RUNNER_TEMP/candc-pwa-lab"
+      - name: Verify package, artwork, geometry and save compatibility
+        run: node tools/verify-pwa-lab.mjs "$RUNNER_TEMP/candc-pwa-lab"
