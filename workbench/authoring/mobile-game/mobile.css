@@ -14,9 +14,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #game .play-surface [data-action="slide"]{left:10px}
 #game .play-surface [data-action="jump"]{right:10px}
 #game .global-run-menu{top:8px;right:8px}
-#game .play-surface .gameplay-hud:not(.secret-hud) .hud-panel{left:8px;top:8px;width:calc(100% - 68px);max-width:none;transform:none;transform-origin:top left}
+#game .play-surface .gameplay-hud:not(.secret-hud) .hud-panel{left:calc(50% - 30px);top:8px;width:min(calc(100% - 80px),620px);max-width:none;transform:translateX(-50%);transform-origin:top center}
 @container(max-width:800px){
- #game .play-surface .gameplay-hud:not(.secret-hud) .hud-panel{width:calc((100% - 68px)/.75);transform:scale(.75)}
+ #game .play-surface .gameplay-hud:not(.secret-hud) .hud-panel{width:min(calc((100% - 80px)/.75),620px);transform:translateX(-50%) scale(.75)}
 }
 
 #rotate .rotate-logo{width:min(76vw,320px);height:auto;max-height:34svh;object-fit:contain;image-rendering:pixelated}

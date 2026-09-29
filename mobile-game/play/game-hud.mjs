@@ -9,7 +9,7 @@ export function paintGameHud(hud,run,images){
  hud.querySelector('.stage-title').textContent=run.kind==='secret'?'Beneath the Ice':`${CONTINENTS[run.stage.slice(0,2)]} • STAGE ${Number(run.stage.slice(2))}`;
  hud.querySelector('.progress-track').setAttribute('aria-valuetext',`Difficulty section ${Math.min(5,Math.floor(progress*5)+1)} of 5`);
  hud.querySelector('.progress-track').setAttribute('aria-valuenow',String(Math.round(progress*100)));
- const marker=hud.querySelector('.progress-marker');marker.style.left=`${4.8+progress*86.95}%`;marker.classList.toggle('claude',run.who==='claude');marker.classList.toggle('constance',run.who==='constance');
+ const marker=hud.querySelector('.progress-marker');marker.style.left=`${(88+Math.max(0,Math.min(1,progress))*1840)/2048*100}%`;marker.classList.toggle('claude',run.who==='claude');marker.classList.toggle('constance',run.who==='constance');
  if(images){hud.style.setProperty('--heart-sprite',`url("${images.hudHearts.src}")`);hud.style.setProperty('--character-sprite',`url("${images.hudCharacters.src}")`);hud.querySelector('.progress-path').src=images.hudPath.src;}
 }
 function paintSecretStatus(hud,run){
