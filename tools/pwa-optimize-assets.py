@@ -53,18 +53,21 @@ def one(source):
     webp_info = image_info(webp_dest)
     if original_info[:2] != optimized_info[:2] or original_info[:2] != webp_info[:2]:
         raise RuntimeError(f"dimension mismatch: {rel}: {original_info}, {optimized_info}, {webp_info}")
-    alpha_ok = original_info[2] == optimized_info[2] == webp_info[2]
 
     t = time.perf_counter()
     with tempfile.TemporaryDirectory() as temp:
-        a, b = pathlib.Path(temp) / "original.rgba", pathlib.Path(temp) / "webp.rgba"
-        aa, ba = pathlib.Path(temp) / "original.alpha", pathlib.Path(temp) / "webp.alpha"
+        a, p, b = (pathlib.Path(temp) / name for name in ("original.rgba", "optimized.png.rgba", "webp.rgba"))
+        aa, pa, ba = (pathlib.Path(temp) / name for name in ("original.alpha", "optimized.png.alpha", "webp.alpha"))
         command(["convert", str(source), "-alpha", "on", "-depth", "8", "RGBA:" + str(a)])
+        command(["convert", str(png_dest), "-alpha", "on", "-depth", "8", "RGBA:" + str(p)])
         command(["convert", str(webp_dest), "-alpha", "on", "-depth", "8", "RGBA:" + str(b)])
         command(["convert", str(source), "-alpha", "on", "-alpha", "extract", "-depth", "8", "GRAY:" + str(aa)])
+        command(["convert", str(png_dest), "-alpha", "on", "-alpha", "extract", "-depth", "8", "GRAY:" + str(pa)])
         command(["convert", str(webp_dest), "-alpha", "on", "-alpha", "extract", "-depth", "8", "GRAY:" + str(ba)])
-        identical = a.stat().st_size == b.stat().st_size and a.read_bytes() == b.read_bytes()
-        alpha_identical = aa.stat().st_size == ba.stat().st_size and aa.read_bytes() == ba.read_bytes()
+        png_identical = a.stat().st_size == p.stat().st_size and a.read_bytes() == p.read_bytes()
+        webp_identical = a.stat().st_size == b.stat().st_size and a.read_bytes() == b.read_bytes()
+        png_alpha_identical = aa.stat().st_size == pa.stat().st_size and aa.read_bytes() == pa.read_bytes()
+        webp_alpha_identical = aa.stat().st_size == ba.stat().st_size and aa.read_bytes() == ba.read_bytes()
     check_seconds = time.perf_counter() - t
 
     return {
@@ -72,8 +75,8 @@ def one(source):
         "optimized_png_bytes": png_dest.stat().st_size, "lossless_webp_bytes": webp_dest.stat().st_size,
         "width": original_info[0], "height": original_info[1],
         "original_has_alpha": original_info[2], "optimized_png_has_alpha": optimized_info[2],
-        "webp_has_alpha": webp_info[2], "alpha_preserved": alpha_ok,
-        "webp_rgba_identical": identical, "webp_alpha_values_identical": alpha_identical, "optipng_seconds": round(png_seconds, 4),
+        "webp_has_alpha": webp_info[2],
+        "png_rgba_identical": png_identical, "webp_rgba_identical": webp_identical,\n        "png_alpha_values_identical": png_alpha_identical, "webp_alpha_values_identical": webp_alpha_identical, "optipng_seconds": round(png_seconds, 4),
         "webp_seconds": round(webp_seconds, 4), "decode_check_seconds": round(check_seconds, 4)
     }
 
@@ -159,8 +162,12 @@ else:
 original = sum(r["original_bytes"] for r in rows)
 png_total = sum(r["optimized_png_bytes"] for r in rows)
 webp_total = sum(r["lossless_webp_bytes"] for r in rows)
+png_mismatch_paths = [r["path"] for r in rows if not r["png_rgba_identical"]]
 mismatch_paths = [r["path"] for r in rows if not r["webp_rgba_identical"]]
-bad_alpha = [r["path"] for r in rows if not r["alpha_preserved"]]
+png_alpha_mismatch_paths = [r["path"] for r in rows if not r["png_alpha_values_identical"]]
+bad_alpha = [r["path"] for r in rows if not r["webp_alpha_values_identical"]]
+png_alpha_channel_changed = [r["path"] for r in rows if r["original_has_alpha"] != r["optimized_png_has_alpha"]]
+webp_alpha_channel_changed = [r["path"] for r in rows if r["original_has_alpha"] != r["webp_has_alpha"]]
 png_projection = package_baseline - original + png_total
 webp_projection = package_baseline - original + webp_total
 summary = {
@@ -169,8 +176,13 @@ summary = {
     "optimized_png_saving_pct": round(100 * (original - png_total) / original, 2) if original else 0,
     "lossless_webp_bytes": webp_total,
     "lossless_webp_saving_pct": round(100 * (original - webp_total) / original, 2) if original else 0,
+    "optimized_png_pixel_mismatch_count": len(png_mismatch_paths), "optimized_png_pixel_mismatch_paths": png_mismatch_paths,
     "webp_pixel_mismatch_count": len(mismatch_paths), "webp_pixel_mismatch_paths": mismatch_paths,
-    "alpha_mismatch_count": len(bad_alpha), "alpha_mismatch_paths": bad_alpha,
+    "optimized_png_alpha_value_mismatch_count": len(png_alpha_mismatch_paths),
+    "optimized_png_alpha_value_mismatch_paths": png_alpha_mismatch_paths,
+    "webp_alpha_value_mismatch_count": len(bad_alpha), "webp_alpha_value_mismatch_paths": bad_alpha,
+    "optimized_png_alpha_channel_presence_changed_count": len(png_alpha_channel_changed),
+    "webp_alpha_channel_presence_changed_count": len(webp_alpha_channel_changed),
     "dimensions_checked": len(rows), "dimensions_mismatch_count": 0,
     "processing_seconds": round(processing_seconds, 2),
     "optipng_seconds_total": round(sum(r["optipng_seconds"] for r in rows), 2),
