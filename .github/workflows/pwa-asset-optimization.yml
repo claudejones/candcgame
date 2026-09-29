@@ -3,15 +3,26 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: pwa-asset-optimization-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   optimize:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Install lossless optimization tools
-        run: sudo apt-get update && sudo apt-get install -y optipng webp imagemagick ffmpeg
-      - name: Analyze lossless image optimization
-        run: bash tools/pwa-optimize-assets.sh mobile-game pwa-optimization-report
+      - name: Install bounded benchmark tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y optipng webp imagemagick ffmpeg
+      - name: Benchmark lossless image options and inventory audio
+        env:
+          PWA_BENCH_WORKERS: 4
+        run: python3 tools/pwa-optimize-assets.py mobile-game pwa-optimization-report
       - name: Upload report
         uses: actions/upload-artifact@v4
         with:
