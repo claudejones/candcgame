@@ -3,7 +3,7 @@ export class Node{
  constructor(tag='div'){this.tagName=tag.toUpperCase();this.children=[];this.attributes={};this.dataset={};this.style={setProperty(k,v){this[k]=v;}};this.hidden=false;this.disabled=false;this.value='';this.className='';this.text='';this.classList={toggle:(c,on)=>{let a=this.className.split(' ').filter(Boolean);const yes=on??!a.includes(c);a=a.filter(x=>x!==c);if(yes)a.push(c);this.className=a.join(' ');},add:c=>this.classList.toggle(c,true)};}
  set textContent(v){this.text=String(v);this.children=[];}get textContent(){return this.text+this.children.map(x=>typeof x==='string'?x:x.textContent).join('');}
  addEventListener(type,listener){(this.listeners??={})[type]=listener;}
- setAttribute(k,v){this.attributes[k]=String(v);}getAttribute(k){return this.attributes[k];}
+ setAttribute(k,v){this.attributes[k]=String(v);}getAttribute(k){return this.attributes[k];}removeAttribute(k){delete this.attributes[k];}
  append(...nodes){for(const n of nodes){this.children.push(n);if(typeof n!=='string')n.parentElement=this;}}
  prepend(...nodes){this.children.unshift(...nodes);for(const n of nodes)n.parentElement=this;}
  after(n){this.parentElement?.append(n);}remove(){if(this.parentElement)this.parentElement.children=this.parentElement.children.filter(n=>n!==this);}

@@ -6,7 +6,7 @@ export const DIFFICULTIES=['easy','standard','hard'];
 // Stage-start Continue is confirmed; ownership/reset/assistance remain review defaults.
 export const PLAYER_POLICY=Object.freeze({rewards:'shared',checkpoint:'stage-start',newGame:'journey-only',assistance:'sticky-attempt'});
 export const freshSecret=()=>({earned:false,character:null,attempt:null,outcomes:{}});
-export const freshPlayer=()=>({version:1,ratings:{easy:{},standard:{},hard:{}},journey:null,attempt:null,settings:{music:true,sound:true,unlimited:false},outcomes:{},pending:[],secret:freshSecret(),resumeTarget:'journey'});
+export const freshPlayer=()=>({version:1,ratings:{easy:{},standard:{},hard:{}},journey:null,attempt:null,settings:{music:true,sound:true,continuousSlide:false,unlimited:false},outcomes:{},pending:[],secret:freshSecret(),resumeTarget:'journey'});
 export function best(state,difficulty,stage,character){const r=state.ratings[difficulty]?.[stage]||{};return character?r[character]||0:Math.max(0,...Object.values(r));}
 export function passport(state,difficulty,continent){const scores=STAGES.filter(s=>s.startsWith(continent)).map(s=>best(state,difficulty,s));return scores.every(n=>n===3)?2:scores.every(n=>n>0)?1:0;}
 export function unlocks(state){return {hard:STAGES.every(s=>best(state,'standard',s)>0),levelSelect:STAGES.every(s=>best(state,'standard',s)>0),secret:CONTINENTS.every(c=>passport(state,'standard',c)===2)};}
@@ -16,6 +16,7 @@ function validate(s){
  for(const d of DIFFICULTIES){if(!s.ratings[d])throw Error('Incomplete player save.');for(const [stage,r] of Object.entries(s.ratings[d])){if(!STAGES.includes(stage)||Object.entries(r).some(([c,n])=>!['claude','constance'].includes(c)||!Number.isInteger(n)||n<1||n>3))throw Error('Invalid reward record.');}}
  if(s.journey&&(!STAGES.includes(s.journey.stage)||!DIFFICULTIES.includes(s.journey.difficulty)||!['claude','constance'].includes(s.journey.character)))throw Error('Invalid journey record.');
  // Additive migration retains ordinary progress and never manufactures entitlement.
+ if(s.settings.continuousSlide===undefined)s.settings.continuousSlide=false;
  if(s.secret===undefined)s.secret=freshSecret();
  if(!s.secret||typeof s.secret.earned!=='boolean'||!s.secret.outcomes||Array.isArray(s.secret.outcomes))throw Error('Invalid secret progress.');
  if(s.secret.attempt&&(!['claude','constance'].includes(s.secret.attempt.character)||s.secret.attempt.stage!=='SECRET01'||typeof s.secret.attempt.id!=='string'||typeof s.secret.attempt.assisted!=='boolean'))throw Error('Invalid secret attempt.');
@@ -32,7 +33,7 @@ export class PlayerStore{
  begin(stage){const j=this.state.journey;if(!j||!STAGES.includes(stage)||!(available(this.state,j.difficulty,stage)||j.visited.includes(stage)))throw Error('Complete the preceding stage first.');j.stage=stage;this.state.resumeTarget='journey';
   this.state.attempt={id:globalThis.crypto.randomUUID(),stage,character:j.character,difficulty:j.difficulty,assisted:this.state.settings.unlimited,eligible:available(this.state,j.difficulty,stage)};this.state.pending=[];this.save();return structuredClone(this.state.attempt);
  }
- setOption(key,value){if(!['music','sound','unlimited'].includes(key))throw Error('Unknown option.');this.state.settings[key]=!!value;if(key==='unlimited'&&value){const a=this.state.resumeTarget==='secret'?this.state.secret?.attempt:this.state.attempt;if(a)a.assisted=true;}this.save();}
+ setOption(key,value){if(!['music','sound','continuousSlide','unlimited'].includes(key))throw Error('Unknown option.');this.state.settings[key]=!!value;if(key==='unlimited'&&value){const a=this.state.resumeTarget==='secret'?this.state.secret?.attempt:this.state.attempt;if(a)a.assisted=true;}this.save();}
  finish(id,{complete,hearts}){
   if(this.state.outcomes[id])return structuredClone(this.state.outcomes[id]);
   const a=this.state.attempt;if(!a||a.id!==id)throw Error('Unknown attempt.');

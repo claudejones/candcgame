@@ -41,7 +41,7 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
  function saveButton(){let b;b=button('Save',()=>{store.save();saved(b);});return b;}
  function header(text,back){const h=el('header','global-header');if(back)h.append(button('Back',back));h.append(el('h2','',text));return h;}
  function frame(text){const f=el('div','global-panel');if(text)f.append(el('h3','',text));return f;}
- function show(next){previewTravel=null;previewTravelDuration=0;screen=next;audio.configure(store.state.settings);audio.screen(next);surface.dataset.globalScreen=next;demoHint.hidden=next!=='demo';queueMicrotask(()=>{if(previewStore)return;const target=next==='result'?results:root;target.querySelector('button')?.focus({preventScroll:true});});clearTimeout(travelTimer);travelTarget=null;root.hidden=next==='game'||next==='demo'||next==='result';surface.hidden=!root.hidden;results.hidden=next!=='result';for(const control of surface.querySelectorAll('.gameplay-actions'))control.inert=next!=='game';bar.hidden=next!=='game';root.replaceChildren();tell('');}
+ function show(next){previewTravel=null;previewTravelDuration=0;screen=next;audio.configure(store.state.settings);audio.screen(next);surface.dataset.globalScreen=next;demoHint.hidden=next!=='demo';queueMicrotask(()=>{if(previewStore)return;const target=next==='result'?results:root;target.querySelector('button')?.focus({preventScroll:true});});clearTimeout(travelTimer);travelTarget=null;root.hidden=next==='game'||next==='demo'||next==='result';surface.hidden=!root.hidden;results.hidden=next!=='result';for(const control of surface.querySelectorAll('.gameplay-actions'))control.inert=next!=='game';bar.hidden=next!=='game';root.replaceChildren();root.removeAttribute('role');root.removeAttribute('aria-modal');tell('');}
  function footer(){const n=el('nav','global-footer');n.append(button('Achievements',()=>achievements(start)),button('Options',()=>options(start)),button('How to Play',()=>about(start)));return n;}
  function start(){show('start');root.className='global-game global-start';root.append(picture('BRAND_GAME_LOGO.png','Claude & Constance — Around the World','global-logo'));
   const content=el('div','global-start-columns'),chars=frame('Choose your character'),portraits=el('div','global-portraits');
@@ -108,10 +108,10 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
   }catch(e){if(current===entryToken){id==='SECRET01'?start():map();tell(e.message);}}finally{if(current===entryToken)loading=false;}
  }
  function restartCurrent(){return attempt?.stage==='SECRET01'?enterSecret(attempt.character):enter(store.state.journey.stage);}
- function confirm(heading,description,yes,no){show('confirm');root.className='global-game global-menu global-confirm';const f=frame(heading);f.append(el('p','',description),button('Confirm',yes,true),button('Cancel',no));root.append(f);f.querySelector('button').focus();}
+ function confirm(heading,description,yes,no){show('confirm');root.className='global-game global-menu global-confirm';root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');const f=frame(heading);f.append(el('p','',description),button('Confirm',yes,true),button('Cancel',no));root.append(f);f.querySelector('button').focus();}
  function options(back){optionsBack=back;show('options');root.className='global-game global-menu';root.append(header('OPTIONS',back));const f=frame();
-  for(const [key,label] of [['music','Music'],['sound','Sound Effects'],['unlimited','Unlimited Health']]){const row=el('div','global-option-row'),on=store.state.settings[key],b=button('',()=>{const change=()=>{store.setOption(key,!on);audio.configure(store.state.settings);const run=getRun();if(run)run.unlimitedLives=store.state.settings.unlimited;options(back);saved();};if(key==='unlimited'&&!on)confirm('Enable Unlimited Health?','This attempt cannot earn or improve trophies, passports or permanent unlocks. Existing rewards are kept.',change,()=>options(back));else change();});b.className='global-switch';b.setAttribute('role','switch');b.setAttribute('aria-checked',String(on));b.setAttribute('aria-label',label);b.append(sprite('UI05_SWITCHES_ATLAS.png',0,on?1:0,4,2));row.append(el('span','',label),b);f.append(row);}
-  const unlocked=unlocks(store.state).levelSelect,help=el('p','global-help global-level-select-help',unlocked?'Choose any stage from the world map.':'Complete all 21 stages on Standard without Unlimited Health to unlock Level Select.');help.setAttribute('role','status');const select=button('Level Select',()=>{if(unlocks(store.state).levelSelect){if(!store.state.journey)store.newJourney(character,difficulty);map();}else help.textContent='Level Select is locked. Complete all 21 Standard stages without Unlimited Health.';});if(!unlocked)select.append(picture('UI_ICON_LOCK.png','Locked','global-icon'));select.setAttribute('aria-describedby','level-select-help'+(previewStore?'-preview':''));help.id='level-select-help'+(previewStore?'-preview':'');f.append(el('p','global-help','Unlimited Health disables new achievements and permanent unlocks for this attempt.'),select,help);root.append(f);
+  for(const [key,label] of [['music','Music'],['sound','Sound Effects'],['continuousSlide','Continuous Slide'],['unlimited','Unlimited Health']]){const row=el('div','global-option-row'),on=store.state.settings[key],b=button('',()=>{const change=()=>{store.setOption(key,!on);audio.configure(store.state.settings);const run=getRun();if(run)run.unlimitedLives=store.state.settings.unlimited;options(back);saved();};if(key==='unlimited'&&!on)confirm('Enable Unlimited Health?','This attempt cannot earn or improve trophies, passports or permanent unlocks. Existing rewards are kept.',change,()=>options(back));else change();});b.className='global-switch';b.setAttribute('role','switch');b.setAttribute('aria-checked',String(on));b.setAttribute('aria-label',label);b.append(sprite('UI05_SWITCHES_ATLAS.png',0,on?1:0,4,2));row.append(el('span','',label),b);f.append(row);}
+  f.append(button('Game Soundtrack',()=>soundtrack(()=>options(back))));const unlocked=unlocks(store.state).levelSelect,help=el('p','global-help global-level-select-help',unlocked?'Choose any stage from the world map.':'Complete all 21 stages on Standard without Unlimited Health to unlock Level Select.');help.setAttribute('role','status');const select=button('Level Select',()=>{if(unlocks(store.state).levelSelect){if(!store.state.journey)store.newJourney(character,difficulty);map();}else help.textContent='Level Select is locked. Complete all 21 Standard stages without Unlimited Health.';});if(!unlocked)select.append(picture('UI_ICON_LOCK.png','Locked','global-icon'));select.setAttribute('aria-describedby','level-select-help'+(previewStore?'-preview':''));help.id='level-select-help'+(previewStore?'-preview':'');f.append(el('p','global-help','Unlimited Health disables new achievements and permanent unlocks for this attempt.'),select,help);root.append(f);
  }
  let guideStage='NA01';
  function about(back,tab='game'){
@@ -149,13 +149,66 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
    ['Saving and assisted play','Progress is saved automatically in this browser on this device. Continue restarts an unfinished stage with three hearts. Unlimited Health is useful for practice, but that attempt cannot earn trophies, passports or unlocks. Previously earned rewards are kept.']
   ];for(const [heading,text] of sections){const section=el('section','global-about-section');section.append(el('h4','',heading),el('p','',text));f.append(section);}body.append(f);
  }
- function achievements(back){show('achievements');root.className='global-game global-achievements';root.append(header('ACHIEVEMENTS',back));const tabs=el('nav','global-difficulties');for(const d of DIFFICULTIES){const b=button(title(d),()=>{rewardDifficulty=d;achievements(back);});b.classList.toggle('selected',d===rewardDifficulty);b.setAttribute('aria-pressed',String(d===rewardDifficulty));tabs.append(b);}root.append(tabs,el('p','global-help global-reward-mode-help',rewardDifficulty==='hard'&&!unlocks(store.state).hard?'Hard unlocks after completing all 21 Standard stages without Unlimited Health.':`${title(rewardDifficulty)} trophies and passports · Your best results are kept.`));
-  const c=CONTINENTS[page],nav=el('nav','global-pages');nav.append(button('Previous',()=>{page=(page+7)%8;achievements(back);}),el('h3','',`${c?layout.continents[c].label:'SECRET LEVEL'} · ${page+1}/8`),button('Next',()=>{page=(page+1)%8;achievements(back);}));root.append(nav);const cards=el('div','global-reward-cards');
-  if(c){for(const id of STAGES.filter(s=>s.startsWith(c))){const n=best(store.state,rewardDifficulty,id),b=button('',()=>detail(id,n,()=>achievements(back)));b.className='global-reward-card';b.append(trophy(id,n),el('h4','',`Stage ${Number(id.slice(2))}`),el('p','',stageName(id)),hearts(n),el('p','',n===3?'Perfect':n?`Best: ${n}/3`:'Not earned'));cards.append(b);}
-   const n=passport(store.state,rewardDifficulty,c),b=button('',()=>detail(c,n,()=>achievements(back)));b.className='global-reward-card';b.append(stamp(c,n),el('h4','','Continent Passport'),el('p','',n===2?'Perfect':n?'Earned':'Not earned'));cards.append(b);
-  }else{const f=frame('Beneath the Ice'),unlocked=unlocks(store.state).secret,earned=store.state.secret?.earned===true;
-   f.append(picture(earned?'PASS_SECRET_EARNED.png':unlocked?'PASS_SECRET_UNEARNED.png':'PASS_SECRET_LOCKED.png',earned?'Secret passport earned':unlocked?'Secret passport not earned':'Secret passport locked','global-secret-art'),el('p','',earned?'Secret passport earned.':unlocked?'Survive the three-minute encounter without assistance to earn this passport.':'Earn seven perfect Standard passports to unlock entry.'),el('p','',`${CONTINENTS.filter(x=>passport(store.state,'standard',x)===2).length}/7 perfect Standard passports`));cards.append(f);}root.append(cards,el('p','global-help','Select a reward to see its requirements and progress.'));
- }
+   function soundtrack(back){
+   show('soundtrack');root.className='global-game global-menu global-soundtrack';
+   let index=0,playing=false,generation=0;
+   const tracks=STAGES.map(id=>({id,track:id+'_THEME',label:stageLabel(id)}));
+   const leave=()=>{playing=false;generation++;audio.track(null);back();};
+   root.append(header('GAME SOUNDTRACK',leave));
+   const f=frame('Claude & Constance · Stage Themes');
+   const status=el('p','global-soundtrack-status','Choose a track to begin.');status.setAttribute('aria-live','polite');
+   const controls=el('div','global-soundtrack-controls');
+   const previous=button('Previous',()=>select(index-1,playing));
+   const toggle=button('Play',togglePlayback,true);
+   const next=button('Next',()=>select(index+1,playing));
+   controls.append(previous,toggle,next);f.append(status,controls);
+   const list=el('ol','global-soundtrack-list');
+   const rows=tracks.map((track,i)=>{
+    const row=el('li','global-soundtrack-track'),b=button(`${String(i+1).padStart(2,'0')} · ${track.label}`,()=>select(i,true));
+    b.setAttribute('aria-current','false');row.append(b);list.append(row);return {row,button:b};
+   });
+   function render(message=''){
+    const track=tracks[index];status.textContent=message||`${playing?'Now playing':'Selected'} · ${track.label}`;
+    toggle.textContent=playing?'Pause':'Play';toggle.setAttribute('aria-label',playing?'Pause soundtrack':'Play selected track');
+    rows.forEach((entry,i)=>{const selected=i===index;entry.row.classList.toggle('selected',selected);entry.button.setAttribute('aria-current',String(selected));});
+   }
+   function playSelected(){
+    if(!store.state.settings.music){playing=false;render('Music is off. Turn Music on in Options to listen.');return;}
+    index=(index+tracks.length)%tracks.length;const track=tracks[index],token=++generation;playing=true;audio.engine.setPaused(false);
+    audio.track(track.track,{loop:false,force:true,onended:()=>{if(generation!==token||!playing)return;select((index+1)%tracks.length,true);}});
+    render();
+   }
+   function select(next,autoplay=false){index=(next+tracks.length)%tracks.length;if(autoplay)playSelected();else render();}
+   function togglePlayback(){
+    if(playing){playing=false;generation++;audio.engine.setPaused(true);render();return;}
+    if(!store.state.settings.music){render('Music is off. Turn Music on in Options to listen.');return;}
+    const id=tracks[index].track;
+    if(audio.engine.track?.id===id&&!audio.engine.track.ended){playing=true;generation++;audio.engine.setPaused(false);render();}
+    else playSelected();
+   }
+   render();root.append(f,list,el('p','global-help global-soundtrack-help','Tracks play in order and repeat from the beginning after the final stage.'));
+  }
+  function achievements(back){
+   show('achievements');root.className='global-game global-achievements';root.append(header('ACHIEVEMENTS',back));
+   const tabs=el('nav','global-difficulties');
+   for(const d of DIFFICULTIES){const b=button(title(d),()=>{rewardDifficulty=d;achievements(back);});b.classList.toggle('selected',d===rewardDifficulty);b.setAttribute('aria-pressed',String(d===rewardDifficulty));tabs.append(b);}
+   root.append(tabs,el('p','global-help global-reward-mode-help',rewardDifficulty==='hard'&&!unlocks(store.state).hard?'Hard unlocks after completing all 21 Standard stages without Unlimited Health.':`${title(rewardDifficulty)} trophies and passports · Your best results are kept.`),el('p','global-help global-scroll-help','Scroll down to see your achievements.'));
+   for(const c of CONTINENTS){
+    const group=el('section','global-reward-continent');group.append(el('h3','',layout.continents[c].label));
+    const cards=el('div','global-reward-cards global-continent-rewards');
+    for(const id of STAGES.filter(s=>s.startsWith(c))){
+     const n=best(store.state,rewardDifficulty,id),b=button('',()=>detail(id,n,()=>achievements(back)));
+     b.className='global-reward-card global-reward-stage';b.setAttribute('aria-label',`${stageLabel(id)} achievement. ${n===3?'Perfect':n?`Best: ${n} of 3 hearts`:'Not earned'}`);
+     b.append(trophy(id,n),el('h4','',`Stage ${Number(id.slice(2))}`),el('p','',stageName(id)),hearts(n),el('p','',n===3?'Perfect':n?`Best: ${n}/3`:'Not earned'));cards.append(b);
+    }
+    const n=passport(store.state,rewardDifficulty,c),b=button('',()=>detail(c,n,()=>achievements(back)));
+    b.className='global-reward-card global-reward-passport';b.append(stamp(c,n),el('h4','','Continent Passport'),el('p','',n===2?'Perfect':n?'Earned':'Not earned'));cards.append(b);
+    group.append(cards);root.append(group);
+   }
+   const secret=el('section','global-reward-continent global-secret-rewards'),f=frame('Beneath the Ice'),unlocked=unlocks(store.state).secret,earned=store.state.secret?.earned===true;
+   secret.append(el('h3','','Secret Level'));f.append(picture(earned?'PASS_SECRET_EARNED.png':unlocked?'PASS_SECRET_UNEARNED.png':'PASS_SECRET_LOCKED.png',earned?'Secret passport earned':unlocked?'Secret passport not earned':'Secret passport locked','global-secret-art'),el('p','',earned?'Secret passport earned.':unlocked?'Survive the three-minute encounter without assistance to earn this passport.':'Earn seven perfect Standard passports to unlock entry.'),el('p','',`${CONTINENTS.filter(x=>passport(store.state,'standard',x)===2).length}/7 perfect Standard passports`));
+   secret.append(f);root.append(secret,el('p','global-help','Select a reward to see its requirements and progress.'));
+  }
  function detail(id,n,back){show('detail');root.className='global-game global-menu';root.append(header(id.length===4?stageLabel(id):layout.continents[id].label,back));const f=frame(id.length===4?'Stage Trophy':'Continent Passport');f.append(id.length===4?trophy(id,n):stamp(id,n),el('p','',id.length===4?'Finish this stage without assistance. Remaining hearts set your best rating.':'Complete all three stages without assistance. Earn three hearts on every stage for a perfect passport.'),el('p','',id.length===4?`Best: ${n}/3`:n===2?'Perfect passport earned':n?'Passport earned':'Not earned'));root.append(f);}
  function openMenu(){show('menu');root.className='global-game global-menu';root.append(header('GAME MENU',returnRun));const f=frame();f.append(button('Back to Game',returnRun,true),button('Back to map',()=>confirm('Return to the map?','This unfinished stage will restart from the beginning. Your earned rewards are kept.',()=>{continent=(attempt?.stage==='SECRET01'?store.state.journey?.stage:attempt?.stage)?.slice(0,2)||'NA';map();},openMenu)),button('Restart Stage',()=>confirm('Restart stage?','Start this stage again with three hearts.',restartCurrent,openMenu)),button('Achievements',()=>achievements(openMenu)),button('Options',()=>options(openMenu)),saveButton(),button('Main Menu',()=>confirm('Leave this stage?','Continue will restart this unfinished stage. Your earned rewards are kept.',start,openMenu)));root.append(f);}
  function returnRun(){show('game');}
@@ -176,7 +229,7 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
   let elapsed=0,last=null;render(0,reduced);
   function animate(now){if(travelTarget!==next){done();return;}if(last!==null&&!document.hidden)elapsed+=Math.min(100,now-last);last=now;const state=render(elapsed,reduced);if(state.done)finishTravel();else requestAnimationFrame(animate);}requestAnimationFrame(animate);
  }
- function renderResult(result,queueIndex=0){show('result');results.setAttribute('role','dialog');results.setAttribute('aria-label','Stage results');results.replaceChildren();if(result.secret){renderSecretResult(result);return;}const box=el('div','global-result-panel'),entry=queueIndex?result.queue[queueIndex-1]:null;audio.result(result,entry,{preview:!!previewStore});
+ function renderResult(result,queueIndex=0){show('result');results.setAttribute('role','dialog');results.setAttribute('aria-modal','true');results.setAttribute('aria-label','Stage results');results.replaceChildren();if(result.secret){renderSecretResult(result);return;}const box=el('div','global-result-panel'),entry=queueIndex?result.queue[queueIndex-1]:null;audio.result(result,entry,{preview:!!previewStore});
   box.append(el('h2','',entry?entry.kind==='passport'?(entry.perfect?'PERFECT PASSPORT':'PASSPORT EARNED'):entry.kind==='world'?'WORLD COMPLETE':'SECRET LEVEL UNLOCKED':result.complete?'STAGE COMPLETE':'GAME OVER'));
   if(!entry){box.append(el('p','',`${stageLabel(result.stage)} · ${title(result.difficulty)}`));if(result.complete&&result.eligible){const row=el('div','global-result-reward');row.append(trophy(result.stage,result.best));const scores=el('div','');scores.append(el('h3','',result.hearts===3?'Perfect Stage Run!':result.best>result.before?'New Personal Best!':'Stage Complete!'),el('p','','This run'),hearts(result.hearts),el('p','',`Best: ${result.best}/3`));row.append(scores);box.append(row);}else box.append(el('p','',result.complete?'Assisted or practice completion · No new rewards or unlocks.':'Give it another go.'));
   }else if(entry.kind==='passport'){box.append(stamp(entry.continent,entry.perfect?2:1),el('p','',layout.continents[entry.continent].label));}
