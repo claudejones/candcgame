@@ -4,6 +4,7 @@ import {GameAudio} from './game-audio.mjs';
 import {travelPoint,travelState,flightRouteMarks} from './map-travel.mjs';
 import {loadSecretData} from './level-runtime.mjs';
 import {PlayerStore,CONTINENTS,STAGES,DIFFICULTIES,best,passport,unlocks,available} from './player-state.mjs';
+import {AUDIO_ASSETS} from './audio-manifest.mjs';
 const BASE='../assets/global-ui/';
 const el=(tag,className,text)=>{const n=document.createElement(tag);if(className)n.className=className;if(text!==undefined)n.textContent=text;return n;};
 function positionMapPin(pin,layout,fromId,toId,phone,f){if(!pin)return;const p=travelPoint(layout,fromId,toId,phone,f);pin.style.left=p.x*100+'%';pin.style.top=p.y*100+'%';pin.classList.toggle('antarctica-pin',toId.startsWith('AN')&&f===1);}
@@ -150,45 +151,68 @@ export async function setupGlobalGame({panel,surface,launch,pause,resume,restart
   ];for(const [heading,text] of sections){const section=el('section','global-about-section');section.append(el('h4','',heading),el('p','',text));f.append(section);}body.append(f);
  }
    function soundtrack(back){
-   show('soundtrack');root.className='global-game global-menu global-soundtrack';
-   let index=0,playing=false,generation=0;
-   const tracks=STAGES.map(id=>({id,track:id+'_THEME',label:stageLabel(id)}));
-   const leave=()=>{playing=false;generation++;audio.track(null);back();};
-   root.append(header('GAME SOUNDTRACK',leave));
-   const f=frame('Claude & Constance · Stage Themes');
-   const status=el('p','global-soundtrack-status','Choose a track to begin.');status.setAttribute('aria-live','polite');
-   const controls=el('div','global-soundtrack-controls');
-   const previous=button('Previous',()=>select(index-1,playing));
-   const toggle=button('Play',togglePlayback,true);
-   const next=button('Next',()=>select(index+1,playing));
-   controls.append(previous,toggle,next);f.append(status,controls);
-   const list=el('ol','global-soundtrack-list');
-   const rows=tracks.map((track,i)=>{
-    const row=el('li','global-soundtrack-track'),b=button(`${String(i+1).padStart(2,'0')} · ${track.label}`,()=>select(i,true));
-    b.setAttribute('aria-current','false');row.append(b);list.append(row);return {row,button:b};
-   });
-   function render(message=''){
-    const track=tracks[index];status.textContent=message||`${playing?'Now playing':'Selected'} · ${track.label}`;
-    toggle.textContent=playing?'Pause':'Play';toggle.setAttribute('aria-label',playing?'Pause soundtrack':'Play selected track');
-    rows.forEach((entry,i)=>{const selected=i===index;entry.row.classList.toggle('selected',selected);entry.button.setAttribute('aria-current',String(selected));});
+    show('soundtrack');root.className='global-game global-menu global-soundtrack';
+    let index=0,playing=false,generation=0,progressTimer=0;
+    const tracks=STAGES.map((id,i)=>({id,track:id+'_THEME',label:stageLabel(id),continent:layout.continents[id.slice(0,2)].label,number:i+1}));
+    const leave=()=>{if(progressTimer)clearInterval(progressTimer);progressTimer=0;playing=false;generation++;audio.track(null);back();};
+    root.append(header('GAME SOUNDTRACK',leave));
+    const content=el('div','global-soundtrack-layout'),player=frame();
+    player.classList.add('global-soundtrack-player');
+    const nowHeading=el('p','global-soundtrack-kicker','NOW PLAYING');
+    const currentTitle=el('h3','global-soundtrack-current-title');
+    const currentLocation=el('p','global-soundtrack-current-location');
+    const status=el('p','global-soundtrack-status','Choose a track to begin.');status.setAttribute('aria-live','polite');
+    const progress=el('progress','global-soundtrack-progress');progress.max=1;progress.value=0;progress.setAttribute('aria-label','Track progress');
+    const timing=el('div','global-soundtrack-timing'),elapsedLabel=el('span','global-soundtrack-elapsed','0:00'),durationLabel=el('span','global-soundtrack-duration','0:00');
+    timing.append(elapsedLabel,durationLabel);
+    const controls=el('div','global-soundtrack-controls');
+    const previous=button('Previous',()=>select(index-1,playing));
+    const toggle=button('Play',togglePlayback,true);
+    const next=button('Next',()=>select(index+1,playing));
+    controls.append(previous,toggle,next);
+    player.append(nowHeading,currentTitle,currentLocation,status,progress,timing,controls,el('p','global-help global-soundtrack-help','Choose a song or use the player controls. Tracks advance in order and wrap back to the first song.'));
+    const playlist=el('nav','global-soundtrack-playlist');playlist.setAttribute('aria-label','Stage themes by continent');
+    const rows=[];
+    for(const c of CONTINENTS){
+     const group=el('section','global-soundtrack-continent'),list=el('ol','global-soundtrack-list');
+     group.append(el('h3','',layout.continents[c].label));
+     for(const [i,track] of tracks.entries()){
+      if(!track.id.startsWith(c))continue;
+      const row=el('li','global-soundtrack-track'),b=button(String(track.number).padStart(2,'0')+' · '+track.label,()=>select(i,true));
+      b.setAttribute('aria-current','false');row.append(b);list.append(row);rows.push({row,button:b});}
+     group.append(list);playlist.append(group);}
+    function formatTime(seconds){const safe=Math.max(0,Math.floor(seconds||0));return Math.floor(safe/60)+':'+String(safe%60).padStart(2,'0');}
+    function updateProgress(){
+     const track=tracks[index],duration=AUDIO_ASSETS[track.track]?.duration||0,active=audio.engine.track;
+     const voice=active?.id===track.track?active.voice:null;
+     const elapsed=voice&&audio.engine.ctx?.state!=='suspended'?voice.offset+audio.engine.ctx.currentTime-voice.started:active?.id===track.track?(active.offset||0):0;
+     progress.max=duration||1;progress.value=Math.max(0,Math.min(duration,elapsed));elapsedLabel.textContent=formatTime(elapsed);durationLabel.textContent=formatTime(duration);
+    }
+    function stopProgress(){if(progressTimer)clearInterval(progressTimer);progressTimer=0;}
+    function startProgress(){stopProgress();updateProgress();progressTimer=setInterval(updateProgress,250);}
+    function render(message=''){
+     const track=tracks[index];currentTitle.textContent=track.label;currentLocation.textContent=track.continent+' · Track '+track.number+' of '+tracks.length;
+     status.textContent=message||(playing?'Now playing · ':'Selected · ')+track.label;
+     toggle.textContent=playing?'Pause':'Play';toggle.setAttribute('aria-label',playing?'Pause soundtrack':'Play selected track');
+     rows.forEach((entry,i)=>{const selected=i===index;entry.row.classList.toggle('selected',selected);entry.button.setAttribute('aria-current',String(selected));});updateProgress();
+    }
+    function playSelected(){
+     if(!store.state.settings.music){playing=false;stopProgress();render('Music is off. Turn Music on in Options to listen.');return;}
+     index=(index+tracks.length)%tracks.length;const track=tracks[index],token=++generation;playing=true;audio.engine.setPaused(false);
+     audio.track(track.track,{loop:false,force:true,onended:()=>{if(generation!==token||!playing)return;select((index+1)%tracks.length,true);}});
+     render();startProgress();
+    }
+    function select(nextIndex,autoplay=false){index=(nextIndex+tracks.length)%tracks.length;if(autoplay)playSelected();else render();}
+    function togglePlayback(){
+     if(playing){updateProgress();playing=false;generation++;audio.engine.setPaused(true);stopProgress();render();return;}
+     if(!store.state.settings.music){render('Music is off. Turn Music on in Options to listen.');return;}
+     const id=tracks[index].track;
+     if(audio.engine.track?.id===id&&!audio.engine.track.ended){playing=true;generation++;audio.engine.setPaused(false);render();startProgress();}
+     else playSelected();
+    }
+    render();content.append(player,playlist);root.append(content);
    }
-   function playSelected(){
-    if(!store.state.settings.music){playing=false;render('Music is off. Turn Music on in Options to listen.');return;}
-    index=(index+tracks.length)%tracks.length;const track=tracks[index],token=++generation;playing=true;audio.engine.setPaused(false);
-    audio.track(track.track,{loop:false,force:true,onended:()=>{if(generation!==token||!playing)return;select((index+1)%tracks.length,true);}});
-    render();
-   }
-   function select(next,autoplay=false){index=(next+tracks.length)%tracks.length;if(autoplay)playSelected();else render();}
-   function togglePlayback(){
-    if(playing){playing=false;generation++;audio.engine.setPaused(true);render();return;}
-    if(!store.state.settings.music){render('Music is off. Turn Music on in Options to listen.');return;}
-    const id=tracks[index].track;
-    if(audio.engine.track?.id===id&&!audio.engine.track.ended){playing=true;generation++;audio.engine.setPaused(false);render();}
-    else playSelected();
-   }
-   render();root.append(f,list,el('p','global-help global-soundtrack-help','Tracks play in order and repeat from the beginning after the final stage.'));
-  }
-  function achievements(back){
+    function achievements(back){
    show('achievements');root.className='global-game global-achievements';root.append(header('ACHIEVEMENTS',back));
    const tabs=el('nav','global-difficulties');
    for(const d of DIFFICULTIES){const b=button(title(d),()=>{rewardDifficulty=d;achievements(back);});b.classList.toggle('selected',d===rewardDifficulty);b.setAttribute('aria-pressed',String(d===rewardDifficulty));tabs.append(b);}

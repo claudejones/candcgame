@@ -191,3 +191,37 @@ body[data-mode=game] .play-heading{display:none;}
 @media(max-width:600px){.global-guide-pages{flex-wrap:wrap;}.global-guide-pages h3{order:-1;flex-basis:100%;}.global-guide-pages button{flex:0 0 auto;}}
 
 .global-reward-continent{padding:6px 12px 12px;border-top:2px solid #45647b}.global-reward-continent>h3{text-align:left;padding:6px 4px}.global-continent-rewards{grid-template-columns:repeat(4,minmax(0,1fr));padding:6px 0}.global-reward-stage,.global-reward-passport{min-width:0}.global-soundtrack-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.global-soundtrack-controls button{font-size:10px;padding:8px}.global-soundtrack-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px}.global-soundtrack-track button{width:100%;min-height:44px;text-align:left;padding:8px 12px;font-size:10px}.global-soundtrack-track.selected button{color:var(--gold);outline:2px solid var(--gold)}.global-soundtrack-status{min-height:2em;text-align:center}.global-soundtrack-help{padding:8px}
+
+
+/* Landscape soundtrack player */
+.global-game.global-soundtrack{min-height:0;padding-bottom:12px}
+.global-soundtrack-layout{display:grid;grid-template-columns:1fr;grid-template-areas:"player" "playlist";gap:10px;width:min(100%,1080px);margin:4px auto;align-items:start}
+.global-soundtrack-player{grid-area:player;width:100%;max-width:none;margin:0!important;min-height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center}
+.global-soundtrack-kicker{color:var(--gold);font-size:10px;letter-spacing:.12em}
+.global-soundtrack-current-title{font-size:clamp(14px,2.5vw,22px);color:#fff2cd}
+.global-soundtrack-current-location{font-size:10px;color:#b9cce0;margin:0}
+.global-soundtrack-status{min-height:1.5em;text-align:center;font-size:10px;color:#b9cce0}
+.global-soundtrack-progress{display:block;width:min(100%,400px);height:12px;accent-color:var(--gold);margin:3px 0}
+.global-soundtrack-timing{width:min(100%,400px);display:flex;justify-content:space-between;font-size:9px;color:#b9cce0}
+.global-soundtrack-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:min(100%,400px)}
+.global-soundtrack-controls button{font-size:11px;padding:8px 10px;min-height:48px}
+.global-soundtrack-playlist{grid-area:playlist;max-height:min(42svh,250px);overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;background:#071b30;border:2px solid #45647b;padding:6px 10px}
+.global-soundtrack-continent{padding:4px 0 8px;border-bottom:1px solid #45647b}
+.global-soundtrack-continent:last-child{border-bottom:0}
+.global-soundtrack-continent>h3{text-align:left;padding:4px 5px;font-size:10px}
+.global-soundtrack-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px}
+.global-soundtrack-track button{width:100%;min-height:42px;text-align:left;padding:7px 10px;font-size:9px;line-height:1.25}
+.global-soundtrack-track.selected button{color:var(--gold);outline:2px solid var(--gold)}
+.global-soundtrack-player .global-soundtrack-help{padding:0;margin:0}
+@media(min-width:600px){
+ .global-soundtrack-layout{grid-template-columns:minmax(0,1.15fr) minmax(250px,.9fr);grid-template-areas:"playlist player";gap:12px}
+ .global-soundtrack-player{min-height:min(58svh,390px);padding:16px}
+ .global-soundtrack-playlist{max-height:min(67svh,440px)}
+ .global-soundtrack-continent>h3{font-size:11px}
+}
+@media(max-height:550px) and (min-width:600px){
+ .global-soundtrack-player{min-height:min(68svh,340px);gap:5px;padding:8px}
+ .global-soundtrack-layout{margin-top:0}
+ .global-soundtrack-playlist{max-height:min(76svh,390px)}
+ .global-soundtrack-controls button{min-height:44px}
+}
