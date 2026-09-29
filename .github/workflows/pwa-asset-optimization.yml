@@ -43,5 +43,5 @@ jobs:
           name: pwa-optimization-report
           path: |
             pwa-optimization-report/summary.json
-            pwa-optimization-report/image-results.csv
+            pwa-optimization-report/image-results.csv\n            pwa-optimization-report/audio-samples/
           retention-days: 14

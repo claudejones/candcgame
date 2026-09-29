@@ -44,7 +44,7 @@ def one(source):
     png_seconds = time.perf_counter() - t
 
     t = time.perf_counter()
-    command(["cwebp", "-quiet", "-lossless", "-z", "6", "-mt", "-metadata", "all",
+    command(["cwebp", "-quiet", "-lossless", "-z", "6", "-mt", "-exact", "-metadata", "all",
              str(source), "-o", str(webp_dest)])
     webp_seconds = time.perf_counter() - t
 
@@ -58,9 +58,13 @@ def one(source):
     t = time.perf_counter()
     with tempfile.TemporaryDirectory() as temp:
         a, b = pathlib.Path(temp) / "original.rgba", pathlib.Path(temp) / "webp.rgba"
+        aa, ba = pathlib.Path(temp) / "original.alpha", pathlib.Path(temp) / "webp.alpha"
         command(["convert", str(source), "-alpha", "on", "-depth", "8", "RGBA:" + str(a)])
         command(["convert", str(webp_dest), "-alpha", "on", "-depth", "8", "RGBA:" + str(b)])
+        command(["convert", str(source), "-alpha", "on", "-alpha", "extract", "-depth", "8", "GRAY:" + str(aa)])
+        command(["convert", str(webp_dest), "-alpha", "on", "-alpha", "extract", "-depth", "8", "GRAY:" + str(ba)])
         identical = a.stat().st_size == b.stat().st_size and a.read_bytes() == b.read_bytes()
+        alpha_identical = aa.stat().st_size == ba.stat().st_size and aa.read_bytes() == ba.read_bytes()
     check_seconds = time.perf_counter() - t
 
     return {
@@ -69,7 +73,7 @@ def one(source):
         "width": original_info[0], "height": original_info[1],
         "original_has_alpha": original_info[2], "optimized_png_has_alpha": optimized_info[2],
         "webp_has_alpha": webp_info[2], "alpha_preserved": alpha_ok,
-        "webp_rgba_identical": identical, "optipng_seconds": round(png_seconds, 4),
+        "webp_rgba_identical": identical, "webp_alpha_values_identical": alpha_identical, "optipng_seconds": round(png_seconds, 4),
         "webp_seconds": round(webp_seconds, 4), "decode_check_seconds": round(check_seconds, 4)
     }
 
@@ -93,13 +97,64 @@ for source in sorted((root / "assets").rglob("*")):
     if source.is_file() and source.suffix.lower() == ".mp3":
         result = {"path": source.relative_to(root).as_posix(), "bytes": source.stat().st_size}
         probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
-                                "format=duration,bit_rate", "-of", "json", str(source)],
+                                "format=duration,bit_rate:stream=channels,sample_rate,codec_name", "-of", "json", str(source)],
                                check=True, capture_output=True, text=True)
         fmt = json.loads(probe.stdout)["format"]
         result["duration_seconds"] = float(fmt.get("duration", 0))
         result["bit_rate"] = int(fmt.get("bit_rate", 0) or 0)
+        streams = json.loads(probe.stdout).get("streams", [])
+        audio_stream = streams[0] if streams else {}
+        result["channels"] = int(audio_stream.get("channels", 0) or 0)
+        result["sample_rate"] = int(audio_stream.get("sample_rate", 0) or 0)
+        result["codec"] = audio_stream.get("codec_name", "")
         mp3_inventory.append(result)
 audio_inventory_seconds = time.perf_counter() - audio_start
+
+music_inventory = [x for x in mp3_inventory if "/music/" in x["path"]]
+music_duration = sum(x["duration_seconds"] for x in music_inventory)
+music_bytes = sum(x["bytes"] for x in music_inventory)
+music_average_bitrate = music_bytes * 8 / max(1, music_duration) / 1000
+audio_samples_dir = out / "audio-samples"
+audio_samples_dir.mkdir(parents=True, exist_ok=True)
+audio_samples = []
+audio_sample_seconds = 0.0
+if music_average_bitrate > 144:
+    sample_paths = [
+        "assets/audio/music/title/C_AND_C_TITLE.mp3",
+        "assets/audio/music/stages/NA01_THEME.mp3",
+        "assets/audio/music/boss/SECRET_BOSS_THEME.mp3"
+    ]
+    sample_start = time.perf_counter()
+    for relative in sample_paths:
+        source = root / relative
+        dest = audio_samples_dir / source.name.replace(".mp3", "_128kbps_stereo.mp3")
+        command(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(source),
+                 "-map_metadata", "0", "-codec:a", "libmp3lame", "-b:a", "128k",
+                 "-ac", "2", "-ar", "44100", str(dest)])
+        probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
+                                "format=duration,bit_rate:stream=channels,sample_rate,codec_name",
+                                "-of", "json", str(dest)], check=True, capture_output=True, text=True)
+        info = json.loads(probe.stdout)
+        stream = info.get("streams", [{}])[0]
+        audio_samples.append({
+            "source": relative, "file": dest.name, "original_bytes": source.stat().st_size,
+            "sample_bytes": dest.stat().st_size,
+            "duration_seconds": float(info["format"].get("duration", 0)),
+            "bit_rate": int(info["format"].get("bit_rate", 0) or 0),
+            "channels": int(stream.get("channels", 0) or 0),
+            "sample_rate": int(stream.get("sample_rate", 0) or 0),
+            "codec": stream.get("codec_name", "")
+        })
+    audio_sample_seconds = time.perf_counter() - sample_start
+    (audio_samples_dir / "LISTENING_TEST.txt").write_text(
+        "Listening-test derivatives only. Source masters were not changed. "
+        "Each sample was encoded as MP3, 128 kbps, stereo, 44.1 kHz. "
+        "Compare against the original files listed in summary.json before any adoption.\\n"
+    )
+else:
+    (audio_samples_dir / "NOT_GENERATED.txt").write_text(
+        "Music bitrate did not exceed the 144 kbps sample gate. No audio derivatives were generated.\\n"
+    )
 
 original = sum(r["original_bytes"] for r in rows)
 png_total = sum(r["optimized_png_bytes"] for r in rows)
@@ -124,6 +179,9 @@ summary = {
     "mp3_count": len(mp3_inventory), "mp3_bytes": sum(x["bytes"] for x in mp3_inventory),
     "mp3_total_duration_seconds": round(sum(x["duration_seconds"] for x in mp3_inventory), 2),
     "mp3_average_bitrate_kbps": round(sum(x["bit_rate"] for x in mp3_inventory) / max(1, len(mp3_inventory)) / 1000, 1),
+    "music_average_bitrate_kbps": round(music_average_bitrate, 1),
+    "music_total_bytes": music_bytes, "music_total_duration_seconds": round(music_duration, 2),
+    "audio_samples": audio_samples, "audio_sample_seconds": round(audio_sample_seconds, 2),
     "mp3_inventory_seconds": round(audio_inventory_seconds, 2), "mp3_inventory": mp3_inventory,
     "package_baseline_bytes": package_baseline,
     "package_with_optimized_png_bytes": png_projection,
